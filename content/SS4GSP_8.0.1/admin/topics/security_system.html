@@ -1,0 +1,200 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="Set the server configuration permissions to define what users can do with the IBM DevOps Deploy (Deploy) server security, also referred to as system security. Typically, these permissions are granted to administrative roles."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_roles.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_system"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Setting server configuration security</title></head><body id="security_system"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Setting server configuration security</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ab7cc6ff-b9ee-4656-ad78-549f57eccd73">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">Set the server configuration permissions to define what users can do with the <span class="ph">IBM DevOps Deploy (Deploy)</span> server
+		security, also referred to as system security. Typically, these permissions are granted to
+		administrative roles.</p>
+<div class="p">The following server configuration permissions are available:<table class="table" id="security_system__server_config_permissions"><caption><span class="table--title-label">Table 1. </span><span class="title">Server configuration permissions</span></caption><colgroup><col style="width:30.959752321981426%"><col style="width:69.04024767801857%"></colgroup><thead class="thead">
+						<tr class="row">
+							<th class="entry align-left" id="security_system__server_config_permissions__entry__1">Permission</th>
+							<th class="entry align-left" id="security_system__server_config_permissions__entry__2">Description</th>
+						</tr>
+					</thead><tbody class="tbody">
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Add Team Members</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Add users to roles that have the same
+								or fewer permissions than those of the granting user.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Bulk Manage Cleanup</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Allows users to view, and edit the
+								cleanup settings of multiple components and environments from the
+									<span class="ph uicontrol">Cleanup Configuration</span> page.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Create with Team Assignment</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the ability to add any additional team and
+								type combination to an object if they have the Create permission on
+								atleast one team/type mapping.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Edit Basic System Settings</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Enables users to edit the options on
+								the <span class="keyword wintitle">System Settings</span> page. See, <a class="xref" href="settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>. This activity is written to the
+								audit log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Edit Network Settings</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to access
+								the <span class="keyword wintitle">Network</span> page and manage servers in a server
+								cluster.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Audit Log</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to
+								manually cleanup the audit log, and configure automatic cleanup
+								settings. If you have this permission but not the edit basic
+								settings permission, you can edit the audit cleanup settings from
+								the <span class="keyword wintitle">Audit Log</span> page. This activity is written to
+								the audit log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Auth Token
+								Restrictions</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Create, modify and delete token
+								restrictions. See, <a class="xref" href="security_token_restrict.html" title="Limit authentication token actions by applying token restrictions to process plug-in steps.">Restricting authentication tokens</a></td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Diagnostics </td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Enable users to access the diagnostics information
+								including the Rest Call Log, Java Thread dumps, and Metadata
+								indexing. This activity is written to the audit log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Java Packages</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Allows users to add and delete Java
+								packages.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Logging Settings</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to view
+								the <span class="keyword wintitle">Logging</span> page and edit the log4j
+								configuration. This activity is written to the audit log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Maintenance Mode</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Allows users to enable maintenance
+								mode.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Notifications Schemes</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Enable users to manage notification
+								schemes used for notification emails. See, <a class="xref" href="../../user/topics/notify_create.html" title="Notifications are defined in a notification scheme. The notification scheme is assigned to an application and the notifications are sent during the deployment of that application.">Creating Notifications in a Notification Scheme</a>. This activity is
+								written to the audit log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Plugins</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to
+								install new plug-ins; see <a class="xref" href="settings_plugins.html" title="Plug-ins can be installed at any time. You do not need to restart the server after you install a plug-in.">Installing plug-ins</a>.
+								Install and delete activities are written to the audit log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Resource Roles</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to create
+								and delete resource roles, which are created by some plug-ins. In
+								most cases, you do not need to add or change resource roles because
+								they are used internally.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Security</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to manage
+								security configuration, including roles, authentication realms,
+								authorization realms, and tokens. Users without this permission
+								cannot access or change the security functions. This activity is
+								written to the audit log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Statuses</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to create
+								and edit version, inventory, and snapshot statuses.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage System Properties</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to create
+								and edit system properties. This activity is written to the audit
+								log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Manage Tags</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to create
+								and edit tags. Users can apply tags only if they have the Edit Basic
+								System Settings permission enabled.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Read Artifact Set List</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Enables agent relays to use component
+								version replication by status. Assign a user with this permission to
+								an authentication token intended for an agent relay.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Read Z Inventory</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to
+								perform z/OS inventory search filter.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Release Locks</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Enables users to manually release any
+								locks currently held. See, <a class="xref" href="settings_locks_managing.html" title="A lock ensures that processes do not interfere with one another. Normally, locks are released after they are no longer needed. Sometimes, a lock is not released, and its associated process is unable to complete.">Managing locks</a>. This action is written to the audit log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Run Deployment Triggers</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users permission to run the
+								deployment from deployment triggers. The user will need to have the
+								required permissions and roles as if they were executing the
+								deployment manually.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">Run Processes in Maintenance
+								Mode</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Allows users to execute a new
+								deployment while the maintenance mode is enabled.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">View Audit Log</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to view
+								the <span class="keyword wintitle">Audit Log</span> page and download log files. This
+								activity is written to the audit log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">View Basic System Settings</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Enables users to view the options on
+								the <span class="keyword wintitle">System Settings</span> page. See, <a class="xref" href="settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">View Bulk Reports</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Enables users to view bulk
+								reports.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">View Locks</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Enables users to view any locks
+								currently held. See, <a class="xref" href="settings_locks_managing.html" title="A lock ensures that processes do not interfere with one another. Normally, locks are released after they are no longer needed. Sometimes, a lock is not released, and its associated process is unable to complete.">Managing locks</a>.
+								This action is written to the audit log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">View Network Settings</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to access
+								the <span class="keyword wintitle">Network</span> page.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">View Output Log</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Grants users the permission to view
+								the <span class="keyword wintitle">Output Log</span> page and download log files.
+								This activity is written to the audit log.</td>
+						</tr>
+						<tr class="row">
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__1">View Users</td>
+							<td class="entry align-left" headers="security_system__server_config_permissions__entry__2">Enables users to view users
+								activity.</td>
+						</tr>
+					</tbody></table></div>
+<div class="p">To add system security permissions to roles:<ol class="ol">
+<li class="li">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Role Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected role</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Server Configuration</span></span> to open the <span class="keyword wintitle">Permissions Granted to Role Members</span> page for the
+target role. </li>
+<li class="li">Use the toggle button <img class="image" id="security_system__image_pzd_wbr_5xb" src="../images/toggle_button.jpg" height="24" width="22"> to add appropriate permissions to the role.</li>
+</ol></div>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_roles.html" title="A role is a list of permissions that users have on the IBM DevOps Deploy (Deploy) server. These permissions include the ability to create, edit, and delete objects, such as applications, environments, and components. The permission also includes the parts of the server interface that users can access.">Roles and permissions</a></div></div></nav></article></main></body></html>

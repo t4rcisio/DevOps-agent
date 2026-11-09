@@ -1,0 +1,50 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="List statuses"><meta name="DC.subject" content="udclient commands, getStatuses, udclient command, command-line commands"><meta name="keywords" content="udclient commands, getStatuses, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_getstatuses"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>getStatuses</title></head><body id="udclient_getstatuses"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">getStatuses</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-79bb9aac-0fec-404a-a933-1553c95f91b4">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">List statuses</p>
+<section class="section">
+This command lists all the statuses that are associated with a specified status type.
+</section>
+<section class="section"><h2 id="udclient_getstatuses__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  getStatuses [parameters]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_getstatuses__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_getstatuses__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_getstatuses__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_getstatuses__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_getstatuses__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_getstatuses__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_getstatuses__composite_params__entry__1"><span class="keyword parmname">type</span></td>
+<td class="entry" headers="udclient_getstatuses__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getstatuses__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_getstatuses__composite_params__entry__4">Status type (inventory, version, or snapshot)</td>
+</tr>
+</tbody></table>
+
+</section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_getstatuses__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  getStatuses
+  -type inventory</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_getstatuses__title__6" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>[
+  {
+    "id": "061056cc-9433-4036-ac11-b3c0b84e7018",
+    "type": "INVENTORY",
+    "name": "Active",
+    "active": true,
+    "description": "Currently Deployed",
+    "color": "#B3D66D",
+    "unique": true
+  }
+]</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_status_getstatuses_get.html" title="This command lists all the statuses that are associated with a specified status type.">List statuses</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

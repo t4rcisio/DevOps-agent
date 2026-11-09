@@ -1,0 +1,77 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Resource groups organize resources into logical groupings."><meta name="DC.relation" scheme="URI" content="../../user/topics/resource_tree_modify.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="resources_createGroup"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating groups</title></head><body id="resources_createGroup"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating groups</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-aa1dbe87-3bac-45aa-9dcf-7df78fb3198b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Resource groups organize resources into logical groupings. </p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_createGroup__context__1">About this task</h2></div>Resources are created on the <span class="keyword wintitle">Resource Tree</span> page. The
+<span class="keyword wintitle">Resource Tree</span> page displays resources in a hierarchical tree structure. Each
+row represents a resource and has a context-sensitive <span class="ph uicontrol">Action</span> menu that is
+associated with it. The available actions depend on whether the resource represents an agent, agent
+pool, component, or organizational group.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_createGroup__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" id="resources_createGroup__display">
+<span class="ph cmd">Open the <span class="keyword wintitle">Resource Tree</span> page.</span>
+<div class="itemgroup info">In addition to the <span class="keyword wintitle">Resource Tree</span> page, resources might be displayed in
+     several ways, such as by adding resources to an environment.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Perform one of the following steps:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">To create a top-level group, click <span class="ph uicontrol">Create Top-Level Group</span>.</span>
+<div class="itemgroup info">The top-level groups are ordered alphabetically.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">To create a resource group beneath an existing resource, display the
+<span class="ph uicontrol">Action</span> menu for the resource, and then use the <span class="ph uicontrol">Add
+Group</span> command.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">The <span class="keyword wintitle">Create Resource</span> dialog box is displayed.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Enter a name and an optional description.</span></li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">To specify criteria that are used to automatically populate the resource, select the
+<span class="ph uicontrol">Include Agents Automatically</span> check box.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> To automatically include agents, you must be a member of either the agent's team or the system
+team, such as the admin user. You must specify the team that will access the group, and that group
+must have access to the agent that you describe. You cannot assign the system team to the group.
+Existing agents matching the criteria are automatically included upon saving. The default interval
+for including new agents matching the criteria is every 5 minutes. </div>
+</div>
+<div class="itemgroup info">Select <span class="ph uicontrol">Name</span> or <span class="ph uicontrol">Property</span>, and then select a
+filter criterion from the list. The available criteria are listed: <ul class="ul">
+<li class="li"><span class="ph uicontrol">Equals</span>
+</li>
+<li class="li"><span class="ph uicontrol">Doesn't Equal</span>
+</li>
+<li class="li"><span class="ph uicontrol">Contains</span>
+</li>
+<li class="li"><span class="ph uicontrol">Doesn't Contain</span>
+</li>
+<li class="li"><span class="ph uicontrol">Matches Regex</span> (match a regular expression) </li>
+</ul>You can set more than one condition.</div>
+<div class="itemgroup info">If any agent-type resource in the filtered group satisfies the condition, it is preserved,
+otherwise it is removed. If agents that satisfy the condition exist, but they are not in the group,
+agent-type resources are created and added to the group.</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If you added the group beneath an existing resource, perform one of the following steps:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">If you want the team that manages the resource's parent to manage this resource, select the
+<span class="ph uicontrol">Inherit Teams From Parent</span> check box.</span>
+<div class="itemgroup info">The <span class="ph uicontrol">Inherit Teams From Parent</span> check box is selected by default.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">If you do not want the parent team to manage this resource, clear the <span class="ph uicontrol">Inherit Teams
+From Parent</span> check box.</span>
+<div class="itemgroup info">You can add a team by using the <span class="ph uicontrol">Teams</span> action, then selecting a
+team.</div>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong><span class="ph cmd">If you added the resource below an
+agent, agent pool, or a component, the option to define default user
+impersonation credentials is available. See <a class="xref" href="resources_impersonation.html#resources_impersonation" title="You can define default user impersonation credentials for a resource.">Defining default user impersonation credentials</a> for
+information about setting impersonation credentials.</span></li><li class="li step stepexpand"><span class="ph cmd">Save your work.</span></li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_createGroup__postreq__1">What to do next</h2></div>For information about using resources in applications, see <a class="xref" href="app_environment_mapping.html#app_environment_mapping" title="You can specify where components are deployed by adding a resource or resource group to the environment. Then, map the components to those resources.">Mapping resources and components to environments</a>.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/resource_tree_modify.html" title="You can create, delete, and modify the contents of the resource tree.">Modifying the resource tree</a></div></div></nav></article></main></body></html>

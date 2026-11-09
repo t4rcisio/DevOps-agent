@@ -1,0 +1,59 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="For successful server and web agent communication, you must have configurations on the server and agent sides."><meta name="DC.subject" content="agentcomm.uri, wss, agentcomm.server.uri, WebSocket"><meta name="keywords" content="agentcomm.uri, wss, agentcomm.server.uri, WebSocket"><meta name="DC.relation" scheme="URI" content="../../user/topics/web_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="web_agents_comm"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Web agent communication</title></head><body id="web_agents_comm"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Web agent communication</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d29fc678-08ad-43ab-b639-8a84a3733616">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">For successful server and web agent communication, you must have configurations on the
+server and agent sides.</p>
+<p class="p">In most cases, the installer configures the properties that are mentioned later. This section
+provides the additional information that you must consider if issues arise in server and agent
+communication.</p>
+<section class="section"><h2 id="web_agents_comm__title__2" class="title sectiontitle">Server configuration</h2>
+
+<div class="p">During the server installation, you specify a secure WebSocket connection. The connection
+information has the following format:  <code class="ph codeph">agentcomm.uri=wss://physical-host:port</code>. The
+information is stored in the <code class="ph codeph">server/conf/server/installed.properties</code> file. The
+default port is 7919. This port serves WebSocket endpoints that servers and web agents use and a
+REST API that only web agents use. While setting the <code class="ph codeph">agentcomm.uri</code> property, make
+sure it meets these requirements:<ul class="ul">
+<li class="li">The URL is in this format: <code class="ph codeph">wss://physical-host-or-ip:port</code>. The
+<code class="ph codeph">wss</code> URL scheme is required and is the only supported scheme. The port must be
+explicit.</li>
+<li class="li">The URL port must not conflict with ports for the UI.</li>
+<li class="li">Each server must have a unique URL. URLs that refer to <code class="ph codeph">localhost</code>, a loopback
+address, or a load balancer only work for a single server configuration.</li>
+<li class="li">Every server in an HA cluster must be able to connect directly to this server with the URL.</li>
+<li class="li">Agents and relays must be able to connect to one or more servers at the servers' URL ports. They
+can optionally be configured to use a common URL that all servers share, for example, one provided
+by a load balancer. However, servers must be configured with direct URLs.</li>
+                    <li class="li">Relays support proxying HTTPS requests only. Any request through the relay
+                        that try to do HTTP are rejected with 501 error code. However, the relay
+                        itself listens on an HTTP protocol.</li>
+</ul></div>
+<p class="p">When you use web agents, each server in a cluster has a distinct URI and each server establishes
+a direct connection to every other server, which results in two connections between each server. The
+server-to-server connections advertise connected web agents to the cluster and exchange messages for
+them.</p>
+<p class="p">When a new server is added to a Web agent-enabled cluster, it connects to the previously defined
+servers. The other servers respond by connecting back to the new one. In normal operation, each
+server has two connections to each of its peers.</p>
+</section>
+<section class="section"><h2 id="web_agents_comm__title__3" class="title sectiontitle">Web agent configuration</h2>
+
+<p class="p">When you install a web agent, you specify the <code class="ph codeph">agentcomm.server.uri</code> property. If
+there is one server or if all servers share a URL, it can be configured directly, for example,
+<code class="ph codeph">agentcomm.server.uri=wss://examplehost.org:7919</code>. Configure multiple servers as a
+comma-separated list that is embedded in a random scheme, for example,
+<code class="ph codeph">agentcomm.server.uri=random:(wss://examplehost1.org:7919,wss://examplehost2.org:7919)</code>. </p>
+<div class="p">Agents and relays connect to one or more servers at their respective URL ports. They can be
+                configured to use a common URL, for example, a load balancer. However, servers must
+                be configured with direct URLs. The <code class="ph codeph">agentcomm.proxy.uri</code> property
+                can define a single HTTP proxy URL or define a list in a random scheme. The property
+                is optional if the agent connects directly to servers.<div class="note note note_note" id="web_agents_comm__note_ds2_d42_tsb"><span class="note__title">Note:</span> </div></div>
+<div class="p" id="web_agents_comm__agent_port_diagram">The following diagram shows the default ports that are involved in
+communication between web agents, web agent relays, and servers.<br><img class="image" src="../images/web-agent-topology2.png" alt="A diagram of the ports that agents, agent relays, and servers use to communicate"><br></div>
+</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/web_agents.html" title="Web agents use WebSocket and HTTPS connections for communication. Web agents do not use JMS.">Web agent configuration</a></div></div></nav></article></main></body></html>

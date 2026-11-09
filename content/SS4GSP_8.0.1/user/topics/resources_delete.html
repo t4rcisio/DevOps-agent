@@ -1,0 +1,73 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="When you no longer require the resources, you can them from the Resource Tree page and restore the deleted resources from the Recycle Bin page."><meta name="DC.subject" content="deleting resource, restore resource"><meta name="keywords" content="deleting resource, restore resource"><meta name="DC.relation" scheme="URI" content="../../user/topics/resource_tree_modify.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="resources_delete"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Deleting and restoring resources</title></head><body id="resources_delete"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+ <h1 class="title topictitle1" id="ariaid-title1">Deleting and restoring resources</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5d89096a-4262-4957-8b08-d6b1bd542184">Edit online</a></span></div>
+ 
+ 
+ 
+ <div class="body taskbody"><p class="shortdesc">When you no longer require the resources, you can them from the <span class="keyword wintitle">Resource
+   Tree</span> page and restore the deleted resources from the <span class="ph uicontrol">Recycle
+   Bin</span> page.</p>
+  <section class="section prereq" id="resources_delete__prereq_a25_h34_ydc"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_delete__prereq_a25_h34_ydc">Before you begin</h2></div>You must be logged in as an administrator or must have the
+   permissions to Execute on Resources and Manage Children.</section>
+  <section class="section context" id="resources_delete__context_zks_fqz_q1c"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_delete__context_zks_fqz_q1c">About this task</h2></div>A deleted resource is removed from but not from the system. The
+   deleted resources are moved to the <span class="ph uicontrol">Recycle Bin</span> page. The deleted resources
+   remain in the <span class="ph uicontrol">Recycle Bin</span> for 14 days, after which they are deleted
+   permanently from the system. For the resource to get permanently deleted from the
+    <span class="ph uicontrol">Recycle Bin</span>, you must follow these steps:<ol class="ol" id="resources_delete__ol_ksq_1h4_ydc">
+    <li class="li">Go to <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"> System Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"> Process History Cleanup</span></span> pane.</li>
+    <li class="li">Turn on <span class="ph uicontrol">Enable Deployment History Cleanup</span>.</li>
+    <li class="li">Set up the time and duration in <span class="ph uicontrol">Daily Cleanup Start Time</span> and
+      <span class="ph uicontrol">Daily Cleanup Duration</span> fields.</li>
+   </ol><p class="p">You can restore the resources to their previous locations in the resource tree. However,
+    after resources are deleted from the <span class="ph uicontrol">Recycle Bin</span>, they cannot be
+    restored. When restored, the resources are restored as a child resource of the original parent
+    resource. If the parent was moved, the resource is restored to the parent's new
+    location.</p><p class="p">If the deleted resource is mapped to an environment, the resource is deleted
+    from the environment also. In case you still require the deleted resource, you must restore the
+    resource, and map it to the environment again.</p></section>
+ </div>
+ <nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/resource_tree_modify.html" title="You can create, delete, and modify the contents of the resource tree.">Modifying the resource tree</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_vlp_htz_q1c">
+  <h2 class="title topictitle2" id="ariaid-title2">Deleting resources</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5d89096a-4262-4957-8b08-d6b1bd542184">Edit online</a></span></div>
+  <div class="body taskbody">
+   <section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="tasktask_vlp_htz_q1c__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the <span class="keyword wintitle">Resource Tree</span> page.</span>
+<div class="itemgroup info">In addition to the <span class="keyword wintitle">Resource Tree</span> page, resources might be displayed in
+     several ways, such as by adding resources to an environment.</div>
+</li><li class="li step stepexpand">
+     <span class="ph cmd">Select the check box that is associated with the resource to delete.</span>
+     <div class="itemgroup info">You can select multiple resources.</div>
+    </li><li class="li step stepexpand">
+     <span class="ph cmd">From the <span class="ph uicontrol">Actions</span> list, click <span class="ph uicontrol">Delete</span>.</span>
+     <div class="itemgroup info">Subresources that are associated with the selected resources are deleted also.</div>
+    </li></ol></section>
+   <section class="section result" id="task_vlp_htz_q1c__result_qpg_wcb_r1c"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="tasktask_vlp_htz_q1c__result_qpg_wcb_r1c">Results</h3></div>The deleted resources are sent to the recycle bin.</section>
+  </div>
+ </article>
+ <article class="topic task nested1" aria-labelledby="ariaid-title3" id="task_dwl_jtz_q1c">
+  <h2 class="title topictitle2" id="ariaid-title3">Restoring binned resources</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5d89096a-4262-4957-8b08-d6b1bd542184">Edit online</a></span></div>
+  <div class="body taskbody">
+   <section class="section context" id="task_dwl_jtz_q1c__context_smx_5x1_r1c"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="tasktask_dwl_jtz_q1c__context_smx_5x1_r1c">About this task</h3></div>The <span class="ph uicontrol">Recycle Bin</span> page lists retained
+    resources after you delete them. The recycle bin contains information such as the user who
+    binned the resource, the binned date, and the original path. You can sort and filter the
+    resources by using this information and restore multiple retained resources at once. <div class="note note note_note" id="task_dwl_jtz_q1c__note_txp_rcb_r1c"><span class="note__title">Note:</span> 
+     <ul class="ul" id="task_dwl_jtz_q1c__ul_gmk_x2b_r1c">
+      <li class="li">You cannot restore a resource if the parent is also deleted. In this case, restore the
+       parent resource along with the child resource.</li>
+      <li class="li">Resources that are part of resource template and dynamic resources, if deleted, are not
+       binned.</li>
+     </ul>
+    </div></section>
+   <section id="task_dwl_jtz_q1c__steps_qsp_ktz_q1c"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="tasktask_dwl_jtz_q1c__steps_qsp_ktz_q1c">Procedure</h3></div><ol class="ol steps" id="task_dwl_jtz_q1c__steps_qsp_ktz_q1c"><li class="li step stepexpand">
+     <span class="ph cmd">Open the <span class="ph uicontrol">Recycle Bin</span> page.</span>
+    </li><li class="li step stepexpand">
+     <span class="ph cmd">Select the check box that is associated with the resource to restore.</span>
+     <div class="itemgroup info">You can select multiple resources.</div>
+    </li><li class="li step stepexpand">
+     <span class="ph cmd">From the <span class="ph uicontrol">Actions</span> list, click <span class="ph uicontrol">Restore</span>.</span>
+    </li></ol></section>
+   <section class="section result" id="task_dwl_jtz_q1c__result_qnm_qgb_r1c"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="tasktask_dwl_jtz_q1c__result_qnm_qgb_r1c">Results</h3></div>The resources are restored and available on the
+     <span class="ph uicontrol">Resource Tree</span> page.</section>
+  </div>
+ </article>
+</article></main></body></html>

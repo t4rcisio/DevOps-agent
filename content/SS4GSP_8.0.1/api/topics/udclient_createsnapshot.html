@@ -1,0 +1,68 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Create a snapshot"><meta name="DC.subject" content="udclient commands, createSnapshot, udclient command, command-line commands"><meta name="keywords" content="udclient commands, createSnapshot, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_createsnapshot"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>createSnapshot</title></head><body id="udclient_createsnapshot"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">createSnapshot</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a2afe03c-3b66-4127-a56c-69b3643de355">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Create a snapshot</p>
+<section class="section">
+This command creates a snapshot by specifying the components (optional, by IDs and/or names) for the snapshot, rather than taking a snapshot of an environment.
+</section>
+<section class="section"><h2 id="udclient_createsnapshot__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  createSnapshot [JSON file]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_createsnapshot__title__3" class="title sectiontitle">Parameters</h2>
+None.</section>
+<section class="section"><h2 id="udclient_createsnapshot__title__4" class="title sectiontitle">Template</h2>
+<div class="p">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "application": "Application name or ID",
+  "description": "Description",
+  "name": "Snapshot name",
+  "versions": "JSON array of mappings from components by 
+  name or ID to versions by name or ID, such as [{\"
+  JPetStore-APP\": \"latest\"}, {\"JPetStore-DB\": \"1.0\"}, 
+  {\"3d6cd2fd-3381-4b95-b851-1aa7f83e225e\":\"c2c61215-c20a-
+  4bc9-8f34-7f9f41de385b\"}]"
+}
+</code></pre></div></section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_createsnapshot__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  createSnapshot newSnapshot.json
+</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_createsnapshot__title__6" class="title sectiontitle">Example JSON request</h2><pre class="pre codeblock language-json"><code>{
+  "name": "My snapshot",
+  "application": "JPetStore",
+  "description": "JPetStore snapshot",
+  "versions": [
+    {"JPetStore-APP": "1.1"}, 
+    {"JPetStore-DB": "1.0"}, 
+    {"JPetStore-WEB": "1.1"}
+  ]
+}</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_createsnapshot__title__7" class="title sectiontitle">Example JSON request</h2>You can
+also use the keywords <code class="ph codeph">latest</code>, <code class="ph codeph">latestVersion</code>,
+and <code class="ph codeph">newest</code> in place of component version names. In
+this case, the process uses the most recently created component version.
+The following example shows how you can use these keywords in the
+JSON request.<pre class="pre codeblock language-json"><code>{
+  "name": "My snapshot",
+  "application": "JPetStore",
+  "description": "Snapshots of most recently created component versions",
+  "versions": [
+    {"JPetStore-APP": "latest"}, 
+    {"JPetStore-DB": "latestVersion"}, 
+    {"JPetStore-WEB": "newest"}
+  ]
+}</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_createsnapshot__title__8" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "id": "ff9274d4-bc3d-493c-90aa-5020e2fda56d",
+  "name": "My snapshot",
+  "description": "JPetStore snapshot",
+  "created": 1391451659050,
+  "active": true,
+  "locked": false
+}</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_snapshot_createsnapshot_put.html" title="This command creates a snapshot by specifying the components (optional, by IDs and/or names) for the snapshot, rather than taking a snapshot of an environment.">Create a snapshot</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

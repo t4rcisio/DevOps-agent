@@ -1,0 +1,54 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="You can use an authentication realm to import user accounts from an IBM DevOps Deploy (Deploy) server. Then, users can log in to the blueprint design server with the same accounts as the Deploy server."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_realms_ucd"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Importing user accounts from DevOps Deploy to the blueprint design server</title></head><body id="security_realms_ucd"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Importing user accounts from <span class="ph">DevOps Deploy</span> to the blueprint design
+  server</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d9ac7fe0-b6cf-47b3-993e-7f23acb40717">Edit online</a></span></div>
+ 
+
+<div class="body taskbody"><p class="shortdesc">You can use an authentication realm to import user accounts from an <span class="ph">IBM DevOps Deploy (Deploy)</span> server. Then, users
+    can log in to the blueprint design server with the same accounts as the <span class="ph">Deploy</span> server.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_realms_ucd__prereq__1">Before you begin</h2></div><ul class="ul">
+<li class="li">Importing accounts in this way requires <span class="ph">Deploy</span> version
+6.1.1.2 or later.</li>
+<li class="li">Obtain either a token or a user name and password for the <span class="ph">Deploy</span> server. </li>
+<li class="li">On the <span class="ph">Deploy</span> server,
+set permissions for the users, including giving the users access to components.<div class="note note note_note"><span class="note__title">Note:</span> When a user
+logs in to the blueprint designer with an account from <span class="ph">Deploy</span>, that
+user sees only the components that they could see if they logged in to the <span class="ph">Deploy</span> server.
+If a user logs in with account from a different authentication realm, that user sees the components
+that are associated with the token or user account that is on the <span class="ph uicontrol">System
+Settings</span> page.</div></li>
+</ul></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_realms_ucd__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Log in to the blueprint designer as a user with the following <span class="ph uicontrol">System</span>
+permissions:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">Configure Security</li>
+<li class="li">Manage Users &amp; Groups</li>
+</ul>
+</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Users</span></span>.</span></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Create New Realm</span>.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Specify a name and description for
+the new authentication realm.</span></li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Allowed Login Attempts</span> list,
+specify the number of times that a user can attempt to log in before
+the account is locked.</span><div class="itemgroup info">A blank value means that an unlimited
+number of attempts are allowed. </div></li><li class="li step stepexpand">
+        <span class="ph cmd">In the <span class="ph uicontrol">Type</span> list, select <span class="ph">Deploy</span>.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">In the <span class="ph">Deploy</span>
+          Server URL field, specify the full URL of the server, such as
+            <code class="ph codeph">https://deployserver.example.com:8443</code>.</span>
+      </li><li class="li step stepexpand"><span class="ph cmd">To authenticate with a token, select <span class="ph uicontrol">Token Based
+Authentication</span> and specify the token in the <span class="ph uicontrol">Token</span> field.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">To authenticate with a user name and password, clear <span class="ph uicontrol">Token
+Based Authentication</span> and specify the user name and password.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span><div class="itemgroup stepresult">The
+new realm opens, showing the table of users.</div></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Import Users</span>, and then click <span class="ph uicontrol">Import</span> to
+import users from the authentication realm.</span></li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_realms_ucd__result__1">Results</h2></div>Now users can use the same credentials on the <span class="ph">Deploy</span> server
+and on the blueprint design server.</section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_realms_ucd__postreq__1">What to do next</h2></div><span class="ph">Add the users to groups and teams. You must add users to teams to
+give the users permission to work with blueprints and cloud resources.</span></section>
+</div>
+</article></main></body></html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="You can view audit logs, diagnostic logs, and server output logs from the Settings &gt; System page."><meta name="DC.relation" scheme="URI" content="../../user/topics/log_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="log_audit"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Viewing logs</title></head><body id="log_audit"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Viewing logs</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-1fe0b8f2-4730-45d9-bff1-7a14cd9b2bfc">Edit online</a></span></div>
+  
+  <div class="body conbody"><p class="shortdesc">You can view audit logs, diagnostic logs, and server output logs from the <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span> page.</p>
+    <section class="section" id="log_audit__section_dlv_kc3_cfc"><h2 id="log_audit__section_dlv_kc3_cfc__title__1" class="title sectiontitle">Installation and upgrade logs</h2>
+      
+      <p class="p">After you install the server, agent, and agent relay, a log file is added to the
+          <code class="ph codeph">var/log</code> of the installation folder. For example, you can find the:</p>
+      <ul class="ul" id="log_audit__log_audit_ul_ycs_gxp_w2c">
+        <li class="li">Server installation log file in the
+            <code class="ph codeph">server_installation_directory/var/log/install-&lt;date&gt;-&lt;time&gt;.log</code>
+          directory.</li>
+        <li class="li">Agent installation log file in the
+            <code class="ph codeph">agent_installation_directory/var/log/agent-install-&lt;date&gt;-&lt;time&gt;.log</code>
+          directory.</li>
+        <li class="li">Agent relay installation log file in the
+            <code class="ph codeph">relay_installation_directory/var/log/agentrelay-install.log</code>
+          directory.</li>
+      </ul>
+    </section>
+    <section class="section" id="log_audit__section_pls_r3g_rwb"><h2 id="log_audit__section_pls_r3g_rwb__title__1" class="title sectiontitle">Audit Logs</h2><p class="p">The audit log contains entries of
+        user activity. An entry is created whenever a user does one of the following activities:
+        </p><ul class="ul" id="log_audit__ul_rrp_yhg_rwb">
+        <li class="li">Performs an activity that is granted by a security permission, such as creating a
+          component, or creating an application. These activities include permissions granted by the
+          server configuration security type, such as managing plug-ins, system properties, and
+          statuses. Permissions are based on the team roles that are assigned to the user.<div class="note note note_note" id="log_audit__note_srp_yhg_rwb"><span class="note__title">Note:</span> The audit log shows the installation, upgrade, and deletion of
+            plug-ins as well. </div></li>
+        <li class="li">Modifies security settings, such as creating a role, or assigning a user to a role.</li>
+        <li class="li">Performs an authentication activity, such as logging on to the Web UI, or accessing the
+          REST API.</li>
+      </ul>To view audit logs, you must be in an administration role, specifically a role with the
+      Web UI <span class="ph uicontrol">Settings Tab</span> permission. You can perform the folowing actions on
+      the audit logs:<div class="p">
+        <ul class="ul" id="log_audit__ul_vxy_nkg_rwb">
+          <li class="li">Review the audit log files by logging in as an administrator and click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Audit Log</span></span>. </li>
+          <li class="li">Filter the log by typing in the fields at the top of each column. For example, to view
+            the admin user's activities, select <span class="ph uicontrol">admin</span> in the <span class="ph uicontrol">User
+              Name</span> filter field. </li>
+          <li class="li">View only actions in which an element was created by specifying
+              <kbd class="ph userinput">CREATE</kbd> in the <span class="ph uicontrol">Event Type</span> filter
+            field.</li>
+          <li class="li">Remove old entries from the audit log, click <span class="ph uicontrol">Cleanup Log</span>,
+            specify the date and time, and click <span class="ph uicontrol">Submit</span>. All log entries
+            prior to that date and time are permanently deleted. Deleting audit logs creates a log
+            entry of event type <span class="keyword cmdname">Audit Log Cleanup</span> that are non-deletable.</li>
+        </ul>
+      </div><div class="p">
+        <div class="note note note_note" id="log_audit__note_qts_v3g_rwb"><span class="note__title">Note:</span> The activities of the built-in administrator user (with the user
+          name admin) generate entries in the Audit Log page.</div>
+      </div></section>
+    <section class="section" id="log_audit__section_yzq_gjg_rwb"><h2 id="log_audit__section_yzq_gjg_rwb__title__1" class="title sectiontitle">Diagnostics</h2>
+      
+      <div class="p">To view the diagnostic logs, <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Diagnostics</span></span>. The tabs on this page show diagnostic information:<dl class="dl" id="log_audit__dl_lzq_kjg_rwb">
+          
+            <dt class="dt dlterm"><span class="ph uicontrol">Diagnostics Bundle</span></dt>
+            <dd class="dd">The diagnostics bundle contains information about the recent state of the <span class="ph">Deploy</span> server and
+              system settings information. To download a Diagnostics Bundle zip file that contains
+              the diagnostics information, click <span class="ph uicontrol">Download Diagnostics Bundle</span>
+              from the <span class="ph uicontrol">Diagnostics</span> page.</dd>
+            <dd class="dd ddexpand">A diagnostics-(date)-(time).zip file is downloaded to your system. The
+              diagnostics-(date)-(time).zip file contains the following folders:<table class="table" id="log_audit__log_audit_table_o4w_3bx_v2c"><caption></caption><colgroup><col style="width:21.978021978021978%"><col style="width:78.02197802197803%"></colgroup><thead class="thead">
+                    <tr class="row">
+                      <th class="entry" id="log_audit__log_audit_table_o4w_3bx_v2c_stentry_1">Directory</th>
+                      <th class="entry" id="log_audit__log_audit_table_o4w_3bx_v2c_stentry_2">Contents</th>
+                    </tr>
+                  </thead><tbody class="tbody">
+                    <tr class="row">
+                      <td class="entry" headers="log_audit__log_audit_table_o4w_3bx_v2c_stentry_1">bin</td>
+                      <td class="entry" headers="log_audit__log_audit_table_o4w_3bx_v2c_stentry_2">The classpath.conf and set_env files from the server's bin
+                        directory.</td>
+                    </tr>
+                    <tr class="row">
+                      <td class="entry" headers="log_audit__log_audit_table_o4w_3bx_v2c_stentry_1">conf</td>
+                      <td class="entry" headers="log_audit__log_audit_table_o4w_3bx_v2c_stentry_2">Various configuration details from the server's conf directory.</td>
+                    </tr>
+                    <tr class="row">
+                      <td class="entry" headers="log_audit__log_audit_table_o4w_3bx_v2c_stentry_1">diagnostics</td>
+                      <td class="entry" headers="log_audit__log_audit_table_o4w_3bx_v2c_stentry_2">JSON files related to performance of the server.</td>
+                    </tr>
+                    <tr class="row">
+                      <td class="entry" headers="log_audit__log_audit_table_o4w_3bx_v2c_stentry_1">opt</td>
+                      <td class="entry" headers="log_audit__log_audit_table_o4w_3bx_v2c_stentry_2">Tomcat settings from the server's opt directory.</td>
+                    </tr>
+                    <tr class="row">
+                      <td class="entry" headers="log_audit__log_audit_table_o4w_3bx_v2c_stentry_1">patches</td>
+                      <td class="entry" headers="log_audit__log_audit_table_o4w_3bx_v2c_stentry_2">A collection of patches applied to the server.The patches folder
+                        appears only if the patches are applied.</td>
+                    </tr>
+                  </tbody></table></dd>
+          
+          
+            <dt class="dt dlterm"><span class="ph uicontrol">REST Call Log</span></dt>
+            <dd class="dd">This log shows all the requests that the server receives, including requests from
+              the web interface, the REST API, and the command-line client. You can filter this
+              table by typing values in the fields at the top and then pressing Enter.</dd>
+          
+          
+            <dt class="dt dlterm"><span class="ph uicontrol">Metadata Indexing</span></dt>
+            <dd class="dd">This page shows the state of the server indexes, which stores information about
+              elements such as components and processes. If indexing is not complete, you might not
+              be able to use certain filters or to open certain processes. Indexing happens after
+              certain server upgrades.</dd>
+          
+          
+            <dt class="dt dlterm"><span class="ph uicontrol">Database</span></dt>
+            <dd class="dd">On this page, you can analyze database query performance by clicking <span class="ph uicontrol">Test
+                Database Latency</span>. The test result gives you the following
+                information:<ul class="ul" id="log_audit__ul_p1l_cnh_rwb">
+                <li class="li">Number of queries that were completed.</li>
+                <li class="li">Total time to complete all of the queries.</li>
+                <li class="li">Total number of failed queries.</li>
+                <li class="li">Minimum latency for any single query.</li>
+                <li class="li">Maximum latency for any single query.</li>
+                <li class="li">Average latency for all of the queries that were completed.</li>
+              </ul><p class="p">Note that a maximum of 50 queries are run at a time. From the <span class="keyword wintitle">Test
+                  Results</span> window, use the <span class="ph uicontrol">show as
+                  text</span>/<span class="ph uicontrol">show as table</span> option to send the result in
+                desired format. The result is available in the diagnostics bundle as well.</p></dd>
+          
+        </dl></div>
+    </section>
+    <section class="section" id="log_audit__section_ftd_mjg_rwb"><h2 id="log_audit__section_ftd_mjg_rwb__title__1" class="title sectiontitle">Output Logs</h2><p class="p">You can get detailed logs for
+        processes, including the all of the information and logs from each step. To troubleshoot a
+        step, click <span class="ph uicontrol">View Output Log</span> from the options column. The
+          <span class="keyword wintitle">Output Log</span> window opens and displays the output along with the
+        timestamp. To download these logs, open the process request, and click <span class="ph uicontrol">Download
+          All Logs</span>.</p>To open the server output log file directly from UI, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Output Log</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Download</span></span>. In an HA cluster, logs of all servers are downloaded in a zip format.<p class="p">The
+          <span class="ph">Deploy</span> server
+        log file is also located in the following directory:
+            <span class="ph filepath"><var class="keyword varname">server_installation_directory</var>/var/log/deployserver.out</span>.
+        </p><p class="p">The information that is written to the log file is determined by the settings in the
+          <span class="ph uicontrol">Logging</span> tab. You can modify the configuration by clicking
+          <span class="ph uicontrol">Add Logger</span> from <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Logging</span></span>. See <a class="xref" href="log_log4j.html" title="You can add loggers to the root log and set their logging level to keep track of errors and some activities.">Managing loggers</a> for more information.</p><div class="p">The <span class="ph filepath">deployserver.out</span> log displays the output as
+        below:<pre class="pre codeblock" id="log_audit__codeblock_hpj_cj3_35b"><code>{"ts_utc":"2022-07-07T12:13:44.849Z","ts_loc":"2022-07-07T08:13:44.849-0400","lvl":"INFO","thr":"main","log":"com.urbancode.ds.UDeployServer","msg":"License Server URL: "}
+{"ts_utc":"2022-07-07T12:13:44.884Z","ts_loc":"2022-07-07T08:13:44.884-0400","lvl":"INFO","thr":"main","log":"com.urbancode.ds.UDeployServer","msg":"Database User name: <var class="keyword varname">dbUser</var>"}</code></pre></div><div class="p">Using
+        the JQ tool, you can see the <span class="ph filepath">deployserver.out</span> log output in the
+        following
+        format:<pre class="pre codeblock" id="log_audit__codeblock_ett_nq4_35b"><code>2022-07-21 17:31:37,274 IST INFO  main com.urbancode.ds.UDeployServer - Cleaning up temp directory
+2022-07-21 17:31:37,290 IST INFO  main com.urbancode.ds.persistence.database.DerbyHelper - Starting Derby...
+2022-07-21 17:31:37,507 IST INFO  main com.urbancode.ds.persistence.database.DerbyHelper - Waiting for Derby to start...
+2022-07-21 17:31:38,060 IST INFO  main com.urbancode.ds.persistence.database.DerbyHelper - The Derby instance on localhost:11377 is started
+2022-07-21 17:31:42,585 IST INFO  main com.urbancode.ds.UDeployServer - Starting HA Lock Manager...</code></pre></div><div class="p">For
+        more information about the JQ tool, see <a class="xref" href="https://stedolan.github.io/jq/" target="_blank">https://stedolan.github.io/jq/</a>. An example usage of
+        JQ command in a Unix or Linux shell
+          is:<pre class="pre codeblock" id="log_audit__codeblock_psl_xq4_35b"><code>jq -r '.ts_loc + " " + .lvl + " " + .thr +  " " + .log + " - " + .msg' "deployserver.out"</code></pre><div class="note note note_note" id="log_audit__note_qsl_xq4_35b"><span class="note__title">Note:</span> The below logging exceptions are ignored by the JQ command:
+          <pre class="pre codeblock" id="log_audit__codeblock_rsl_xq4_35b"><code>(
+{"ex_msg", "ex_trc"}
+)</code></pre></div></div><p class="p"> </p></section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/log_ov.html" title="The server maintains logs for auditing and troubleshooting.">Logging</a></div></div></nav></article></main></body></html>

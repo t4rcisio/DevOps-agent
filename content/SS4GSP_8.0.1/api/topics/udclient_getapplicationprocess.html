@@ -1,0 +1,58 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Get information about an application process"><meta name="DC.subject" content="udclient commands, getApplicationProcess, udclient command, command-line commands"><meta name="keywords" content="udclient commands, getApplicationProcess, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_getapplicationprocess"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>getApplicationProcess</title></head><body id="udclient_getapplicationprocess"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">getApplicationProcess</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-597b85ac-9c1b-4553-864b-0e9a23169881">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Get information about an application process</p>
+<section class="section">
+Returns a JSON representation of an application process.
+</section>
+<section class="section"><h2 id="udclient_getapplicationprocess__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  getApplicationProcess [parameters]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_getapplicationprocess__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_getapplicationprocess__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_getapplicationprocess__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_getapplicationprocess__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_getapplicationprocess__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_getapplicationprocess__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_getapplicationprocess__composite_params__entry__1"><span class="keyword parmname">application</span></td>
+<td class="entry" headers="udclient_getapplicationprocess__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getapplicationprocess__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_getapplicationprocess__composite_params__entry__4">Name or ID of the application</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_getapplicationprocess__composite_params__entry__1"><span class="keyword parmname">applicationProcess</span></td>
+<td class="entry" headers="udclient_getapplicationprocess__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getapplicationprocess__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_getapplicationprocess__composite_params__entry__4">Name of the process</td>
+</tr>
+</tbody></table>
+
+</section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_getapplicationprocess__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  getApplicationProcess
+  -application JPetStore
+  -applicationProcess "Deploy JPetStore"</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_getapplicationprocess__title__6" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "id": "b02d0960-e878-45b5-88d9-7461159f0e19",
+  "name": "Deploy JPetStore",
+  "description": "",
+  "active": true,
+  "inventoryManagementType": "AUTOMATIC",
+  "offlineAgentHandling": "PRE_EXECUTION_CHECK",
+  "versionCount": 2,
+  "version": 2,
+  "commit": 30,
+  "path": "applications/c8a45972-da39-4450-87f0-21fae710e0f5/processes/b02d0960-e878-45b5-88d9-7461159f0e19"
+}</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_applicationprocess_info_get.html" title="Returns a JSON representation of an application process.">Get information about an application process</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

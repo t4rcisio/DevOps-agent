@@ -1,0 +1,132 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To create an authentication realm on the blueprint design server, specify where to store information about the users, such as internal storage on the blueprint design server or on an LDAP server."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_realms_ldap"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating LDAP authentication realms for the blueprint designer</title></head><body id="security_realms_ldap"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating LDAP authentication realms for the blueprint designer</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a59407c0-37fb-46e2-b202-7e2173bfd902">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To create an authentication realm on the blueprint design server, specify where to store
+information about the users, such as internal storage on the blueprint design server or on an LDAP
+server.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_realms_ldap__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" id="security_realms_ldap__permissions">
+<span class="ph cmd">Log in to the blueprint designer as a user with the following <span class="ph uicontrol">System</span>
+permissions:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">Configure Security</li>
+<li class="li">Manage Users &amp; Groups</li>
+</ul>
+</div>
+</li><li class="li step stepexpand" id="security_realms_ldap__users_tab"><span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Users</span></span>.</span></li><li class="li step stepexpand" id="security_realms_ldap__new_realm"><span class="ph cmd">Click <span class="ph uicontrol">Create New Realm</span>.</span>
+</li><li class="li step stepexpand" id="security_realms_ldap__name_description"><span class="ph cmd">Specify a name and description for
+the new authentication realm.</span></li><li class="li step stepexpand" id="security_realms_ldap__allowed_attempts"><span class="ph cmd">In the <span class="ph uicontrol">Allowed Login Attempts</span> list,
+specify the number of times that a user can attempt to log in before
+the account is locked.</span><div class="itemgroup info">A blank value means that an unlimited
+number of attempts are allowed. </div></li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Type</span> list, select <span class="ph uicontrol">LDAP
+or Active Directory</span>.</span></li><li class="li step stepexpand"><span class="ph cmd">If the LDAP server requires authentication to search the
+directory, clear the <span class="ph uicontrol">Search Anonymously</span> check
+box.</span></li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">LDAP URL</span> field, specify the
+URL for the server.</span><div class="itemgroup info">The URL begins with <code class="ph codeph">ldap://</code> or <code class="ph codeph">ldaps://</code>.
+To connect to more than one server, separate each URL with a space.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">User</span> section, specify the
+properties in the following table.</span><div class="itemgroup info"><table class="table"><caption><span class="table--title-label">Table 1. </span><span class="title">Properties
+for users in the LDAP authentication realms</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="security_realms_ldap__entry__1">Field</th>
+<th class="entry" id="security_realms_ldap__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__1"><span class="ph uicontrol">Search Method</span></td>
+<td class="entry" headers="security_realms_ldap__entry__2">If users exist in multiple directories, select <span class="ph uicontrol">Criteria-based
+search across multiple directories</span>. Otherwise, select <span class="ph uicontrol">Pattern
+to create the DN for users in a single directory</span>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__1"><span class="ph uicontrol">User Name Attribute</span></td>
+<td class="entry" headers="security_realms_ldap__entry__2">The attribute name that contains the user name, such as <code class="ph codeph">cn</code> or
+                      <code class="ph codeph">name</code>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__1"><span class="ph uicontrol">User Search Base</span></td>
+<td class="entry" headers="security_realms_ldap__entry__2"><span class="ph">When you search multiple directories, specify the starting
+directory that is used for searches, such as
+<code class="ph codeph">ou=employees,dc=mydomain,dc=com</code>.</span></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__1"><span class="ph uicontrol">Email Attribute</span></td>
+<td class="entry" headers="security_realms_ldap__entry__2">The attribute name that contains the email address, such as
+                      <code class="ph codeph">email</code> or <code class="ph codeph">mail</code>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__1"><span class="ph uicontrol">User Search Filter</span></td>
+<td class="entry" headers="security_realms_ldap__entry__2"><span class="ph">The LDAP filter expression to use when you search for group
+entries, such as <code class="ph codeph">(&amp;(|(mail={0})(cn={0}))(objectclass=ePerson))</code>. The user name
+replaces the <var class="keyword varname">{1}</var> variable in the search pattern, and the full user DN replaces
+the <var class="keyword varname">{0}</var> variable. If the value is not part of the DN pattern, enclose the value
+in parenthesis, for example, <code class="ph codeph">(accountName={0})</code>. For more information, see the help
+information for your LDAP server and look for information about creating user search
+filters.</span></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__1"><span class="ph uicontrol">Search User Subtree</span></td>
+<td class="entry" headers="security_realms_ldap__entry__2"><span class="ph">When you search multiple directories, select this check box to
+search directories below the base directory.</span></td>
+</tr>
+</tbody></table></div></li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Group</span> section, specify the
+properties in the following table.</span><div class="itemgroup info"><table class="table"><caption><span class="table--title-label">Table 2. </span><span class="title">Properties
+for groups in the LDAP authentication realms</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="security_realms_ldap__entry__15">Field</th>
+<th class="entry" id="security_realms_ldap__entry__16">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__15"><span class="ph uicontrol">Search Method</span></td>
+<td class="entry" headers="security_realms_ldap__entry__16">To search for groups according to roles, select <span class="ph uicontrol">Look
+up group membership by searching for roles</span>. To search
+for groups according to an attribute, select <span class="ph uicontrol">Look up group
+membership using this attribute</span>, and specify the attribute
+in the <span class="ph uicontrol">User Group Attribute</span> field.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__15"><span class="ph uicontrol">User Group Attribute</span></td>
+<td class="entry" headers="security_realms_ldap__entry__16">Specify the attribute that contains group names.
+This field is available only if you select <span class="ph uicontrol">Look up group
+membership using this attribute</span>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__15"><span class="ph uicontrol">Group Search Base</span></td>
+<td class="entry" headers="security_realms_ldap__entry__16"><span class="ph" id="security_realms_ldap__search_roles">This field is available
+only if you select <span class="ph uicontrol">Look up group membership by searching
+for roles</span>.</span></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__15"><span class="ph uicontrol">Group Search Filter</span></td>
+<td class="entry" headers="security_realms_ldap__entry__16">Specify the LDAP filter expression for groups.
+You can use the <code class="ph codeph">{0}</code> variable to represent the full
+user DN and the <code class="ph codeph">{1}</code> variable to represent the user
+name. <span class="ph">This field is available
+only if you select <span class="ph uicontrol">Look up group membership by searching
+for roles</span>.</span></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__15"><span class="ph uicontrol">Group Name</span></td>
+<td class="entry" headers="security_realms_ldap__entry__16">Specify the name of the entry that contains
+the user group names. <span class="ph">This field is available
+only if you select <span class="ph uicontrol">Look up group membership by searching
+for roles</span>.</span></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_realms_ldap__entry__15"><span class="ph uicontrol">Search Group Subtree</span></td>
+<td class="entry" headers="security_realms_ldap__entry__16">Select this check box to search the full subtree
+for groups. <span class="ph">This field is available
+only if you select <span class="ph uicontrol">Look up group membership by searching
+for roles</span>.</span></td>
+</tr>
+</tbody></table></div></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span></li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_realms_ldap__postreq__1">What to do next</h2></div><ul class="ul">
+<li class="li"><span class="ph">Add the users to groups and teams. You must add users to teams to
+give the users permission to work with blueprints and cloud resources.</span></li>
+<li class="li">Configure how the users authenticate to the cloud. See <a class="xref" href="security_auth_bds.html" title="You can provide users of the blueprint designer the permissions to access clouds in two ways. You can provide functional IDs through cloud projects, or you can use accounts on an OpenStack cloud that already have permissions.">Setting up access to clouds in the blueprint designer</a>.</li>
+</ul></section>
+</div>
+</article></main></body></html>

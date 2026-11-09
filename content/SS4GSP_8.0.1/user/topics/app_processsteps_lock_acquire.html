@@ -1,0 +1,35 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="This step acquires a lock on a specified string value. You can use locks to prevent concurrent modification of resources."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_processSteps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_processsteps_lock_acquire"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Acquire lock</title></head><body id="app_processsteps_lock_acquire"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Acquire lock</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-aba05c09-c7c0-4ed3-9527-7b2b5bab6dac">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">This step acquires a lock on a specified string value.
+You can use locks to prevent concurrent modification of resources. </p>
+<section class="section">
+<div class="note tip note_tip"><span class="note__title">Tip:</span> 
+<p class="p"><span class="ph"> Applications, components, and generic processes share some process steps.
+This step applies to application processes, component processes, and generic processes. This step
+applies to application processes that are associated with application templates.</span></p>
+</div><p class="p">When the process reaches this step, the process attempts
+to obtain a lock with the specified name. If no other process is using
+a lock with that name, the current process creates a lock with that
+name and continues. If another process is using a lock with the specified
+name, the current process waits until the lock is available.</p><p class="p">To release the lock, use the <a class="xref" href="app_processsteps_lock_release.html" title="This step releases a lock on a specified string value.">Release lock</a> step. Also, locks
+are released automatically when the process finishes. <span class="ph" id="app_processsteps_lock_acquire__lock_release_behavior">If multiple
+processes are waiting for the same lock, when the lock is released, the server selects the process
+that made the earliest request to acquire the lock.</span></p><div class="note note note_note"><span class="note__title">Note:</span> You
+can see the active locks by clicking <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Locks</span></span>.</div><table class="table" id="app_processsteps_lock_acquire__acquire_lock_properties"><caption><span class="table--title-label">Table 1. </span><span class="title">Acquire lock properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left" id="app_processsteps_lock_acquire__acquire_lock_properties__entry__1">Field</th>
+<th class="entry align-left" id="app_processsteps_lock_acquire__acquire_lock_properties__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="app_processsteps_lock_acquire__acquire_lock_properties__entry__1"><span class="ph uicontrol">Lock Name</span></td>
+<td class="entry align-left" headers="app_processsteps_lock_acquire__acquire_lock_properties__entry__2"><span class="ph">A string value that identifies the lock.</span>
+<div class="note note note_note"><span class="note__title">Note:</span>  Lock Name character limit is 4000. </div></td>
+</tr>
+</tbody></table></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_processSteps.html" title="Application processes, component processes, and generic processes are created with the process editor.">Process steps: Reference</a></div></div></nav></article></main></body></html>

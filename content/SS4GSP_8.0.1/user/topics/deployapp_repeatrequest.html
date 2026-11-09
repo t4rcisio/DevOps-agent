@@ -1,0 +1,29 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The repeat request function is available after an application deployment completes. The Repeat Request feature is on the Process Request page for the application."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_process.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_workflow_running"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Running the same process again</title></head><body id="comp_workflow_running"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Running the same process again</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6092eafc-f537-4a10-a03b-868a81486973">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">The repeat request function is available after an application deployment completes. The
+<span class="ph uicontrol">Repeat Request</span> feature is on the <span class="keyword wintitle">Process Request</span> page
+for the application.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_workflow_running__context__1">About this task</h2></div>
+   <p class="p"><img class="image" id="comp_workflow_running__image_tds_djc_pzb" src="../images/repeatrestart.jpg"></p>
+   <p class="p">It repeats the same deployment that was previously requested, including the selected versions.
+    Repeating a previous deployment might result in receiving an <samp class="ph msgph">Already Installed</samp>
+    message. When an application process step completes successfully, it is tagged with a version
+    number. If a process does not complete successfully, it remains at the same version. Therefore,
+    starting a repeat request function where some processes completed successfully and which some
+    failed, a mixture of updated versions and remaining versions exist.</p>
+   <p class="p">During the deployment process, the inventory of resources is verified. The resource version is
+    compared to the requested deployment version. If the resource was successful in the previous
+    build, the <samp class="ph msgph">Already Installed</samp> message is displayed because the resource was
+    successfully installed during the previous deployment process and it is not installed again. </p>
+   <p class="p">Eliminating the <samp class="ph msgph">Already Installed</samp> message, depends on how the request process
+    is defined. For example, when a failed installation process results in mixed versions, you can
+    manage environment inventory manually and remove artifacts for failed resources.</p>
+   <p class="p">To start the deployment process without using the repeat request feature, start the request in
+    the same manner as before and clear the <span class="ph uicontrol">Only changed versions</span> options.
+    Using this option causes the inventory check to be bypassed.</p>
+  </section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_process.html" title="You can use application processes to deploy or to roll back components.">Application processes</a></div></div></nav></article></main></body></html>

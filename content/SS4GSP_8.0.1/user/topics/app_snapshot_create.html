@@ -1,0 +1,80 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To create a snapshot, you specify which version of components and processes to include in the snapshot. Typically, to create a snapshot you copy the components and processes from an environment where you deployed the application without errors."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_snapshot.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_snapshot_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating snapshots</title></head><body id="app_snapshot_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating snapshots</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-07bb3956-ae74-4766-a7fc-6d3eda3a3d6e">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To create a snapshot, you specify which version of components
+and processes to include in the snapshot. Typically, to create a snapshot
+you copy the components and processes from an environment where you
+deployed the application without errors.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_snapshot_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+    <span class="ph cmd">From the dashboard, click <span class="ph uicontrol">Applications</span>, and then select an
+     application.</span>
+   </li><li class="li step stepexpand">
+<span class="ph cmd">On the application page, click <span class="ph uicontrol">Snapshots</span>, and then click
+<span class="ph uicontrol">Create Snapshot</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Type the name of the snapshot in the <span class="ph uicontrol">Name</span> field, and type a description
+in the <span class="ph uicontrol">Description</span> field.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup stepresult">The <span class="keyword wintitle">Component Versions</span> page opens for the new snapshot. All the
+components in the application are listed.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add component versions to the snapshot.</span>
+<ul class="ul choices">
+<li class="li choice">Typically, you create a snapshot by copying versions of components from an environment in
+which you deployed and tested the application without errors. To copy the component versions in an
+environment, click <span class="ph uicontrol">Select For All</span>, and then click <span class="ph uicontrol">Copy from
+Environment</span>. Select the environment from which to copy component versions and processes.
+This procedure copies the currently deployed versions of the components from that
+environment.</li>
+<li class="li choice">To create a snapshot that includes the component versions from another snapshot, click
+<span class="ph uicontrol">Select For All</span>, and then click <span class="ph uicontrol">Copy from
+Snapshot</span>.</li>
+<li class="li choice">To select component versions individually, for each component click
+<span class="ph uicontrol">Add</span> in the <span class="ph uicontrol">Versions</span> column. After you click
+<span class="ph uicontrol">Add</span>, click the <span class="ph uicontrol">Versions</span> field to select a version of
+that component that is available in CodeStation. To select all the latest versions or to select all
+versions that match a name pattern, click <span class="ph uicontrol">Select For All</span> and then select the
+appropriate option from the list.</li>
+</ul>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">To refine the versions of the component processes in the snapshot, click <span class="ph menucascade"><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Advanced Settings</span></span>. By default, the most recently defined version of each component process and property
+is used. <samp class="ph systemoutput sysout">Latest</samp> is displayed in the <span class="ph uicontrol">Versions</span>
+column, with the actual version in parentheses.</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">To select a specific version of a process or property, click <span class="ph uicontrol">Set Version</span>
+in the <span class="ph uicontrol">Actions</span> column.</li>
+<li class="li">To set all processes and properties to use the latest versions at the time of deployment, click
+<span class="ph uicontrol">Reset All to Latest</span>. In this case, the processes and properties use the most
+recent versions that are available at the time you run the deployment.</li>
+<li class="li">To set all processes and properties to use the most recent version that is currently available
+on the server, click <span class="ph uicontrol">Set Latest Entries to Current</span>. In this case, the
+processes and properties use the most recent versions that are available at the time that you click
+<span class="ph uicontrol">Set Latest Entries to Current</span>. Any changes that are made to processes and
+properties after this operation are not automatically absorbed into the snapshot.</li>
+<li class="li">To permanently prevent any changes to the snapshot, click <span class="ph uicontrol">Lock
+Configuration</span>. <div class="note warning note_warning"><span class="note__title">Warning:</span> After you click this button, no changes can be made
+to the snapshot. This setting cannot be reversed.</div></li>
+</ul>
+</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">To lock snapshot component versions, using the <span class="keyword wintitle">Applications</span> page, select
+an application, then click <span class="ph menucascade"><span class="ph uicontrol">Snapshot</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">snapshot name</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Component Versions</span></span>. By default, the lock setting is determined by the option selected in the
+<span class="ph uicontrol">Lock Snapshots</span> field on the <span class="keyword wintitle">Create Environment</span> window.
+To lock previously unlocked component versions, click <span class="ph uicontrol">Lock Versions</span>.</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">To lock a snapshot configuration, using the <span class="keyword wintitle">Applications</span> page, select an
+application, then click <span class="ph menucascade"><span class="ph uicontrol">Snapshot</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">snapshot name</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Advanced Settings</span></span>. By default, the lock setting is determined by the option selected in the
+<span class="ph uicontrol">Lock Snapshots</span> field on the <span class="keyword wintitle">Create Environment</span> window.
+To lock an unlocked snapshot configuration, click <span class="ph uicontrol">Lock Configuration</span>.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> When you add a new configuration to a snapshot that is locked, that new configuration will not
+be locked automatically.</div>
+</div>
+</li></ol></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_snapshot.html" title="A snapshot is a collection of specific versions of components and processes. Typically, a snapshot represents a set of component versions that are known to work together. In most cases, snapshots include all of the components in an application.">Snapshots</a></div></div></nav></article></main></body></html>

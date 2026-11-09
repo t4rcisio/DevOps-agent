@@ -1,0 +1,144 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Environments are deployment targets for the application components that you specify. You create another environment in the application's delivery pipeline to facilitate multiple active applications. You apply an agent resource and specify which components the agent resource deploys."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/snapshot_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="snapshot_environment"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 2: Creating an environment</title></head><body id="snapshot_environment"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 2: Creating an environment</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-0af9ac57-df8f-44fe-a809-2cb41b7f68ec">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Environments are deployment targets for the application
+components that you specify. You create another environment in the
+application's delivery pipeline to facilitate multiple active applications.
+You apply an agent resource and specify which components the agent
+resource deploys.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_environment__prereq__1">Before you begin</h2></div>Before you start this lesson, ensure that the agent is running. Click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agents</span></span> and make sure that your agent is listed as <code class="ph codeph">Online</code>, as in the
+following figure:<br><img class="image" src="../images/webapp_configure_a.gif" alt="The agent in the list of agents; the Status column shows that the agent is online"><br></section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_environment__context__1">About this task</h2></div>In this lesson, you create an environment to deploy the snapshots
+that you created. You also add your agent to the environment. By adding
+a second environment, you can mimic a simple delivery pipeline that
+has two environments.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_environment__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Define an environment for the application:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep">
+<span class="ph cmd">Click the <span class="ph uicontrol">Applications</span> tab, and then click
+<kbd class="ph userinput">JPetStore</kbd>.</span>
+</li>
+<li class="li substep"><span class="ph cmd">From the <span class="ph uicontrol">Environments</span> tab for
+the application, click <span class="ph uicontrol">Create Environment</span>.</span>
+</li>
+<li class="li substep"><span class="ph cmd">Specify the name to be <kbd class="ph userinput">Tutorial environment
+2</kbd>.</span></li>
+<li class="li substep"><span class="ph cmd">Accept the default values in the other fields in this
+window, and click <span class="ph uicontrol">Save</span>.</span></li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Specify the properties for the environment.</span><div class="itemgroup info">When
+you created the component processes, you included parameters that
+specify the location of artifacts on the target computer system, such
+as the location of the application server. Because these properties
+can vary on different target systems, you specify these properties
+as environment properties.</div>
+<ol type="a" class="ol substeps" id="snapshot_environment__env-props">
+<li class="li substep substepexpand"><span class="ph cmd">Open the environment by clicking the environment name.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Open the environment properties by clicking <span class="ph uicontrol">Configuration</span> and
+then clicking <span class="ph uicontrol">Environment Properties</span>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Add the following properties one at a time by clicking <span class="ph uicontrol">Add
+Property</span> and specifying the name and value of the property
+as shown in the following table:</span><div class="itemgroup info"> <table class="table" id="snapshot_environment__env_props"><caption><span class="table--title-label">Table 1. </span><span class="title">Properties for the environment</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="snapshot_environment__env_props__entry__1">Property</th>
+<th class="entry" id="snapshot_environment__env_props__entry__2">Description</th>
+<th class="entry" id="snapshot_environment__env_props__entry__3">Example Values</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="snapshot_environment__env_props__entry__1"><code class="ph codeph">tomcat.home</code></td>
+<td class="entry" headers="snapshot_environment__env_props__entry__2">The Tomcat home folder on the target computer</td>
+<td class="entry" headers="snapshot_environment__env_props__entry__3"><span class="ph filepath">/opt/apache-tomcat-9.0.100</span> on Linux™ or
+                                                  <span class="ph filepath">C:\apache-tomcat-9.0.100</span> on
+                                                  Windows™</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="snapshot_environment__env_props__entry__1"><code class="ph codeph">tomcat.contextroot</code></td>
+<td class="entry" headers="snapshot_environment__env_props__entry__2">The Tomcat webapp folder on the target computer, which is an identifier in the
+application URL</td>
+<td class="entry" headers="snapshot_environment__env_props__entry__3">For Tomcat version 9, specify <code class="ph codeph">JPetStoreProd</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="snapshot_environment__env_props__entry__1"><code class="ph codeph">db.url</code></td>
+<td class="entry" headers="snapshot_environment__env_props__entry__2">The URL to the MySQL database, relative to the
+target system</td>
+<td class="entry" headers="snapshot_environment__env_props__entry__3">If you installed MySQL on the same system as the agent and used the
+database name <code class="ph codeph">jpetstoreprod</code>, the URL looks like the following example:
+<code class="ph codeph">jdbc:mysql://host-or-ip:3306/jpetstoreprod</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="snapshot_environment__env_props__entry__1"><code class="ph codeph">tomcat.manager.url</code></td>
+<td class="entry" headers="snapshot_environment__env_props__entry__2">The location of the Tomcat manager application</td>
+<td class="entry" headers="snapshot_environment__env_props__entry__3">For Tomcat version 9, specify
+                                                  <code class="ph codeph">http://host-or-ip:8081/manager/text</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="snapshot_environment__env_props__entry__1"><code class="ph codeph">tomcat.start</code></td>
+<td class="entry" headers="snapshot_environment__env_props__entry__2">The location of the start script for Tomcat</td>
+<td class="entry" headers="snapshot_environment__env_props__entry__3"><span class="ph filepath">/opt/apache-tomcat-9.0.100/bin/startup.sh</span> on Linux or
+                                                  <span class="ph filepath">C:\apache-tomcat-9.0.100\bin\startup.bat</span>
+                                                  on Windows</td>
+</tr>
+</tbody></table>   </div>
+</li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Add the agent to the environment.</span><div class="itemgroup info">You added
+the agent as a resource to another resource group. Next, you add that
+resource to the environment, as described in the following steps:</div>
+<ol type="a" class="ol substeps" id="snapshot_environment__add-agent">
+<li class="li substep substepexpand"><span class="ph cmd">Click the <span class="ph uicontrol">Resources</span> tab for the
+environment.</span><div class="itemgroup info">Make sure that you are on the <span class="ph uicontrol">Resources</span> tab
+for the environment and not the <span class="ph uicontrol">Resources</span> tab
+at the top of the page.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Add Base Resources</span>.</span>
+<div class="itemgroup stepresult">The <span class="keyword wintitle">Add Resource to Environment</span> window
+shows all the resources that are available on the server.</div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Select the check box next to your agent in the <kbd class="ph userinput">Prod
+JPetStore agents</kbd> resource, and then click <span class="ph uicontrol">OK</span>.</span>
+<div class="itemgroup info"> <div class="note note note_note"><span class="note__title">Note:</span> Since one agent deploys the components for in both application
+environments, ensure that the agent you select is in the agent resource
+that you created for your new environment. You must not select the
+agent in the agent resource that is associated with the application's
+other environment.</div> </div></li>
+</ol>
+<div class="itemgroup stepresult" id="snapshot_environment__add-agent_results">The resource is shown on the <span class="ph uicontrol">Resources</span> tab
+for the environment, as shown in the following figure:<br><img class="image" src="../images/snapshot_environment_a.gif" alt="The Resources tab for the environment, which shows the resource that is bound to the environment"><br></div></li><li class="li step stepexpand" id="snapshot_environment__map_components"><span class="ph cmd">Map the components to this agent resource.</span>
+<div class="itemgroup info">If you had many agents on a system with multiple nodes, you
+would specify which components run on each agent resource. In this
+case, you have only one agent resource, so all the components run
+on this agent.</div>
+<ol type="a" class="ol substeps" id="snapshot_environment__add-components-to-agent">
+<li class="li substep substepexpand"><span class="ph cmd">On the same row as the <kbd class="ph userinput">Prod JPetStore agents</kbd> resource,
+click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Component</span></span>.</span><div class="itemgroup info">The <span class="ph uicontrol">Actions</span> button
+is not displayed until you hover the mouse over the resource.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Select the application component and then click <span class="ph uicontrol">Save</span>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Repeat the process to add the other components to the
+resource.</span><div class="itemgroup info"> <div class="note note note_note"><span class="note__title">Note:</span> Be sure to add each component to the agent
+resource and not to another component. The components must be at the
+same hierarchy level, and not child items of each other.</div> </div>
+</li>
+</ol>
+<div class="itemgroup stepresult">The components are mapped to the target system, as shown in the following
+                                                  figure:<p class="p"><img class="image" src="../images/snapshot_environment_b.gif"></p></div></li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_environment__result__1">Results</h2></div>The <span class="ph uicontrol">Environments</span> tab includes the new environment, as shown in the
+                                    following image<img class="image" src="../images/snapshot_environment_c.gif"> With
+                                    the environment prepared and the agent running, you can run the
+                                    application process on the environment to deploy the components
+                                    that you specified in the snapshot.</section><section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_environment__postreq__1">What to do next</h2></div><p class="p">In this lesson, you added an environment to the application</p>In the previous tutorial,
+you proved that the components in the first environment are compatible and complete. You can use the
+snapshot that you created to quickly promote all the components to the new environment. Your
+delivery pipeline might include deploying an application to testing and quality assurance servers
+before you deploy it to a production server. By using a snapshot, you can ensure that you quickly
+and correctly select all the right component versions as you move an application through the
+delivery pipeline.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_6.2.0 SS4GSP_8.0.1" href="../../tutorial/topics/snapshot_abstract.html" title="In this tutorial, you deploy a simple web application to a new environment with IBM DevOps Deploy (Deploy). You create a snapshot of the components in an application, and then deploy the snapshot to an environment.">Creating and deploying snapshots</a></div></div></nav></article></main></body></html>

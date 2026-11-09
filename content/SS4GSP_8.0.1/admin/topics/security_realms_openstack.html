@@ -1,0 +1,73 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="You can use an authentication realm to import user accounts from an OpenStack server to the blueprint design server. You must specify the URL and account information for the Keystone identity service."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_realms_openstack"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating OpenStack identity service authentication realms for the blueprint designer</title></head><body id="security_realms_openstack"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating OpenStack identity service authentication realms for the blueprint designer</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f0ae5a3a-31be-4e85-b85a-dfee169c1edf">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can use an authentication realm to import user accounts from an OpenStack server to
+the blueprint design server. You must specify the URL and account information for the Keystone
+identity service.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_realms_openstack__prereq__1">Before you begin</h2></div>Install an engine for the OpenStack server. See <a class="xref" href="../../edt/topics/install_engine.html" title="To connect the blueprint design server to a cloud system, you need a Heat orchestration engine. Heat orchestration engines interpret blueprints and use them as patterns for cloud resources. To connect to OpenStack-based clouds, you extend the engine that is associated with the cloud. To connect to all other clouds, you install an engine with IBM DevOps Deploy (Deploy).">Installing the engine</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_realms_openstack__context__1">About this task</h2></div>These steps assume that you have user accounts on the OpenStack server and are managing
+user authentication on that server. To manage authentication through another source, create
+functional IDs on the OpenStack server and add those IDs to a cloud project, as described in <a class="xref" href="security_projects.html" title="A cloud project for the blueprint designer represents a tenant or project on a cloud system. You can give users access to cloud systems through cloud projects.">Creating cloud projects for the blueprint designer</a>.<p class="p">If your OpenStack identity service that uses API v3 contains
+multiple domains, you must create an authentication realm for each domain.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_realms_openstack__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Log in to the blueprint designer as a user with the following <span class="ph uicontrol">System</span>
+permissions:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">Configure Security</li>
+<li class="li">Manage Users &amp; Groups</li>
+</ul>
+</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Users</span></span>.</span></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Create New Realm</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify a name and description for the new authentication realm.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> If your OpenStack identity service uses API v3, include the domain name in the authentication
+realm. </div>
+</div>
+</li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Allowed Login Attempts</span> list,
+specify the number of times that a user can attempt to log in before
+the account is locked.</span><div class="itemgroup info">A blank value means that an unlimited
+number of attempts are allowed. </div></li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Type</span> list, select <span class="ph uicontrol">OpenStack
+Identity Service</span>.</span></li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">OpenStack Identity Service</span> section, in the <span class="ph uicontrol">Identity
+URL</span> field, specify the location of the identity service, such as
+<code class="ph codeph">https://example.com:5000/v2.0</code> or
+<code class="ph codeph">https://example.com:5000/v3</code>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify the Heat orchestration engine to use.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify the administrator user name, password, and tenant or project for the OpenStack
+server.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> If your OpenStack identity service uses API v3, specify the administrator
+user name, password, and tenant or project for a domain on the OpenStack server.</div>
+</div>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> This administrator user must be a member of each tenant that you want to use.</div>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If your OpenStack identity service uses API v3, enter the domain that the administrator user
+that you specified belongs to.</span>
+<div class="itemgroup info">If your OpenStack identity service uses API v2.0, accept the default value.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span><div class="itemgroup stepresult">The
+new realm opens, showing the table of users.</div></li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Users</span>, and then click <span class="ph uicontrol">Import User</span> to import
+users from the authentication realm.</span>
+<div class="itemgroup info">If your OpenStack identity service uses API v2.0, all users on the server are imported. If
+your OpenStack identity service uses API v3, only the users from the specified domain are
+imported.<div class="note note note_note"><span class="note__title">Note:</span> If you cannot import users, click <span class="ph uicontrol">Edit</span>, and then click
+<span class="ph uicontrol">Test Connection</span> to view the failure details.</div></div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_realms_openstack__result__1">Results</h2></div>The blueprint design server creates an authentication realm and cloud connection based on
+the cloud information that you specified. The blueprint design server also creates a cloud project
+for each tenant or project on the cloud.</section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_realms_openstack__postreq__1">What to do next</h2></div><ul class="ul">
+<li class="li"><span class="ph">Add the users to groups and teams. You must add users to teams to
+give the users permission to work with blueprints and cloud resources.</span></li>
+<li class="li">Add the cloud projects to teams.</li>
+</ul></section>
+</div>
+</article></main></body></html>

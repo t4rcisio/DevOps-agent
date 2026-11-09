@@ -1,0 +1,96 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="abstract" content="To use a MySQL or MariaDB database with the server, install the database first, and provide the JDBC JAR file for the server installation process."><meta name="description" content="To use a MySQL or MariaDB database with the server, install the database first, and provide the JDBC JAR file for the server installation process."><meta name="DC.relation" scheme="URI" content="../../install/topics/DBinstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="dbinstall_mysql"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring a MySQL or MariaDB database</title></head><body id="dbinstall_mysql"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring a MySQL or MariaDB database </h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5ac4cb9d-41f1-4d4c-9342-e16f647715fb">Edit online</a></span></div>
+
+  
+<div class="body taskbody"><div class="abstract"><span class="shortdesc">To use a MySQL or MariaDB database with the server, install the database
+      first, and provide the JDBC JAR file for the server installation process.</span>MySQL and
+    MariaDB are similar databases where you can choose one depending on your operating system and
+    version.</div>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdbinstall_mysql__prereq__1">Before you begin</h2></div>
+      <p class="p">Before you install the <span class="ph">IBM DevOps Deploy (Deploy)</span> server, install
+        MySQL or MariaDB, depending on your operating system and version. If you are evaluating
+          <span class="ph">Deploy</span>, you can
+        install the database on the same system as the <span class="ph">Deploy</span> server. </p>
+      <div class="p" id="dbinstall_mysql__install_start">For example, the command to install MariaDB on a system that runs Red
+        Hat Enterprise Linux™ version 7 resembles the
+        following example:<pre class="pre codeblock"><code>yum install -y mariadb mariadb-server</code></pre>To set the
+        database to run automatically and start the MariaDB database on a Linux system that uses <code class="ph codeph">systemctl</code>, run the
+        following
+        command:<pre class="pre codeblock"><code>systemctl enable mariadb; systemctl start mariadb</code></pre></div>
+      <p class="p">When you install <span class="ph">Deploy</span>, you need the database connection information, and a user account with table-creation
+        privileges.</p>
+      <div class="note note note_note" id="dbinstall_mysql__utf-8"><span class="note__title">Note:</span> It is recommended that you change the database to a case-sensitive
+        collation.</div>
+      <div class="p" id="dbinstall_mysql__set_utf8_mysql">Follow these steps to set the database encoding:<ol class="ol">
+          <li class="li">On the system that hosts the database, open MySQL or MariaDB configuration file. The
+            location of the file depends on the operating system. On Linux, the file is named
+              <span class="ph filepath">my.cnf</span>, and many distributions put the file in the folder
+              <span class="ph filepath">/etc</span> or <span class="ph filepath">/etc/mysql</span>. On Windows, the file is
+            named <span class="ph filepath">my.ini</span>.</li>
+          <li class="li">In the <code class="ph codeph">[mysqld]</code> section of the configuration file, add the following
+            lines:<pre class="pre codeblock"><code>character-set-server=utf8
+character-set-filesystem=utf8</code></pre></li>
+          <li class="li">Restart the database. For example, to restart MariaDB on Linux, use this
+            command:<pre class="pre codeblock"><code>systemctl restart mariadb</code></pre></li>
+        </ol></div>
+
+    </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdbinstall_mysql__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" id="dbinstall_mysql__log_into_mysql">
+        <span class="ph cmd">Open a command-line window and log in to the database.</span>
+        <div class="itemgroup stepxmp">The command might look like the following
+          example:<pre class="pre codeblock"><code>mysql -u <var class="keyword varname">username</var> -p<var class="keyword varname">password</var></code></pre>For
+              <code class="ph codeph"><var class="keyword varname">username</var></code>, specify the user name for the database.
+          The default user name is <code class="ph codeph">root</code>. For
+            <code class="ph codeph"><var class="keyword varname">password</var></code>, specify the password for that user name.
+          The default account has no password; in this case, omit the <code class="ph codeph">-p</code> flag and
+          the password.<div class="note note note_note"><span class="note__title">Note:</span> Do not insert a space between the <code class="ph codeph">-p</code> flag and the
+            password.</div></div>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">Create a database. Specify case-sensitive collation.</span>
+<div class="itemgroup stepxmp">The following commands are an example of how you might create this database:
+<pre class="pre codeblock"><code>CREATE USER '<var class="keyword varname">dbUser</var>'@'localhost' IDENTIFIED BY 'password';</code></pre><pre class="pre codeblock"><code>CREATE DATABASE <var class="keyword varname">dbName</var> character set utf8 collate utf8_bin;</code></pre></div>
+<div class="itemgroup stepxmp">Grant all permissions to the user on MySQL database versions 7 and
+prior:<pre class="pre codeblock"><code>GRANT ALL ON <var class="keyword varname">dbName</var>.* TO '<var class="keyword varname">dbUser</var>'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;</code></pre></div>
+<div class="itemgroup stepxmp">Grant all permissions to the user on MySQL database versions
+8:<pre class="pre codeblock"><code>GRANT ALL PRIVILEGES ON <var class="keyword varname">dbName</var>.* TO '<var class="keyword varname">dbUser</var>'@'localhost';
+GRANT ALL ON <var class="keyword varname">dbName</var>.* TO '<var class="keyword varname">dbUser</var>'@'localhost';</code></pre></div>
+<div class="itemgroup stepxmp">Where, <ul class="ul">
+<li class="li"><code class="ph codeph"><var class="keyword varname">dbUser</var></code> is the username for the database.</li>
+<li class="li"><code class="ph codeph"><var class="keyword varname">dbName</var></code> is the database name. Such as
+                <code class="ph codeph">deploydb</code>.</li>
+</ul></div>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">Log out of the database command line.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Obtain the database JDBC driver.</span>
+        <div class="itemgroup info">
+          <p class="p">Refer to the official website of your specific database provider for downloading the
+            appropriate JDBC driver. The driver files are specific to the database edition you are
+            using.</p>
+          <p class="p">When multiple drivers are available, you might need to consult with the database
+provider to determine which driver to use. The JDBC driver version that you must use might depend on
+the version of the database and the version of Java™ used by
+the <span class="ph">Deploy</span> server.</p>
+        </div>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">Copy the JDBC JAR file to
+<span class="ph filepath"><var class="keyword varname">installerDirectory</var>\lib\ext</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Begin server installation. See <a class="xref" href="serverInstall.html" title="The server provides services such as the user interface used to configure application deployments, the security service, and the artifact repository, among others. Installing the server involves specifying configuration information for the server, such as the ports that the server uses.">Installing the DevOps Deploy server</a>. When you are prompted for the
+database type, enter <kbd class="ph userinput">mysql</kbd>. </span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Provide the JDBC driver class <span class="ph">Deploy</span> uses to
+connect to the database.</span>
+  <div class="itemgroup info">The default value is <code class="ph codeph">com.mysql.cj.jdbc.Driver</code>.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Next, provide the JDBC connection string.</span><div class="itemgroup stepxmp">Typically, it is similar to the following code:
+            <pre class="pre codeblock"><code>jdbc:mysql://<var class="keyword varname">dbURL</var>:<var class="keyword varname">dbPORT</var>/<var class="keyword varname">dbNAME</var></code></pre><span class="ph" id="dbinstall_mysql__same_machine">For example, the connection string to database that is on the same
+            computer as the <span class="ph">Deploy</span> server and
+            that uses the default port resembles the following code:
+          </span><pre class="pre codeblock"><code>jdbc:mysql://localhost:3306/deploydb</code></pre></div>
+</li><li class="li step stepexpand"><span class="ph cmd">Finish by entering the database user name and password.</span>
+</li></ol></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/DBinstall.html" title="IBM DevOps Deploy (Deploy) requires a database. You can use the following database types for an evaluation or production server.">Installing the server database</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Every connection (except connections from the Start step) has a delete tool and conditional flag. The conditional flag sets a condition on a connection."><meta name="DC.relation" scheme="URI" content="../../user/topics/process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_process_conditional"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Conditional processes</title></head><body id="comp_process_conditional"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Conditional processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-4d01aa28-c6dc-44b3-96e5-f853fafccb85">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">Every connection (except connections from the Start step)
+has a delete tool and conditional flag. The conditional flag sets
+a condition on a connection.</p>
+<p class="p">To change a flag value, cycle through possible values by clicking
+the flag.</p>
+<div class="p">The possible conditional flags are as follows:<ul class="ul">
+<li class="li"><code class="ph codeph">success</code>: The process is complete.</li>
+<li class="li"><code class="ph codeph">fail</code>: The process did not finish.</li>
+<li class="li"><code class="ph codeph">both</code>: The process is complete or the process did not finish. Either status is
+acceptable, and the next step can start. </li>
+</ul>By default, all connections have the flag set to checked (success), meaning the originating
+step must end processing before the target step starts to process.</div>
+<div class="p">The following figure shows two steps that are connected with a <code class="ph codeph">success</code> conditional
+flag, which is the default for new connections. In this case, if the
+first step finishes, the process follows the connection to the second
+step. If the first step fails, the process ends, and the second step
+does not run.<br><img class="image" src="../images/comp_process_conditional_a.gif" alt="Two steps that are connected by a connection; the connection has a green success conditional flag"><br></div>
+<div class="p">A step can have multiple connections with different conditional
+flags. For example, the following figure shows a step with three connections:<ul class="ul">
+<li class="li">The connection to step 2 has a <code class="ph codeph">success</code> flag.
+Step 2 runs if the first step finishes.</li>
+<li class="li">The connection to step 3 has a <code class="ph codeph">failure</code> flag.
+Step 3 runs if the first step fails.</li>
+<li class="li">The connection to step 4 has a <code class="ph codeph">both</code> flag. Step 4 runs regardless of whether
+step 1 finishes or fails.</li>
+</ul><br><img class="image" src="../images/comp_process_conditional_b.gif" alt="A step that has three connections, each with a different conditional flag"><br></div>
+<div class="note note note_note"><span class="note__title">Note:</span> If a step has multiple connections that eventually reach the
+same target step, determining whether the target runs depends on the
+value of the intervening flags. If all of the intervening connections
+have success flags, the target runs only if all the steps are successful. </div>
+<p class="p">For an entire process to succeed, it must reach a Finish step. If it does not end with Finish,
+the process fails.</p>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/process_steps.html" title="When you design processes, you use different kinds of process steps and joining techniques. You can assign properties to process steps and use them to control step execution.">Process step types and logic</a></div></div></nav></article></main></body></html>

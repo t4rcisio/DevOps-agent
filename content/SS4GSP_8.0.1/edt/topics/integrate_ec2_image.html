@@ -1,0 +1,145 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="abstract" content="To use the blueprint designer to model environments on Amazon Web Services, you must register Amazon Elastic Compute Cloud (EC2) images with the cloud discovery service."><meta name="description" content="To use the blueprint designer to model environments on Amazon Web Services, you must register Amazon Elastic Compute Cloud (EC2) images with the cloud discovery service."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="integrate_ec2_image"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Registering Amazon EC2 images with the cloud discovery service</title></head><body id="integrate_ec2_image"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Registering Amazon EC2 images with the cloud discovery service</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-4a48da1f-617e-49db-ba88-e5b7398ca637">Edit online</a></span></div>
+
+<div class="body taskbody"><div class="abstract"><span class="shortdesc">To use the blueprint designer to model environments on Amazon Web Services, you
+must register Amazon Elastic Compute Cloud (EC2) images with the cloud discovery
+service.</span> EC2 is part of AWS. EC2 provides the virtual nodes in an environment, and other
+services in AWS provide services such as networking and data storage.</div>
+<section class="section prereq" id="integrate_ec2_image__config_cds"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_ec2_image__config_cds">Before you begin</h2></div>Before you register images, configure the cloud discovery service. See <a class="xref" href="../../user/topics/cds_configure.html" title="The cloud discovery service provides information about available images, regions, and flavors to the blueprint design server. This service runs with a default set of options, but you can customize these options so your images, regions and flavors are shown in the blueprint designer.">Setting up images, regions, and flavors for the cloud discovery service and engine</a>.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_ec2_image__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">From the EC2 web console, find the ID of the image to register.</span>
+<div class="itemgroup stepxmp">Image IDs start with <code class="ph codeph">ami-</code>, such as
+<code class="ph codeph">ami-abcd1234</code>.</div>
+<div class="itemgroup info">You can register virtual images that use a Linux™ or Windows™ operating system.</div>
+</li><li class="li step stepexpand" id="integrate_ec2_image__open_cds">
+<span class="ph cmd">Open the cloud discovery service configuration file in a text editor.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <code class="ph codeph">amazon</code> section, find the region for the image, such as
+<code class="ph codeph">us-east-1</code>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <code class="ph codeph">images</code> section, add the image ID to the list of images.</span>
+<div class="itemgroup stepxmp">For example, the following code from a configuration file includes three image IDs in the
+<code class="ph codeph">us-east-1</code>
+region.<pre class="pre codeblock"><code>"amazon": {
+  "regions": [
+    {
+      "id": "us-east-1",
+      "name": "US East (Northern Virginia)",
+      "images": [
+        "ami-abcd1234",
+        "ami-1234abcd",
+        "ami-5678abcd"
+
+      ]
+    }
+  ]
+},</code></pre></div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">In the <code class="ph codeph">images</code> section, configure images names that contain asterisks (*) as
+wildcards.</span>
+<div class="itemgroup info">All images that match the name pattern that you specify are displayed in the
+<span class="ph uicontrol">Images</span> palette of the blueprint designer.</div>
+<div class="itemgroup stepxmp">For example, the following code from a configuration file includes three specific image IDs
+and five image name patterns in the <code class="ph codeph">us-east-1</code>
+region.<pre class="pre codeblock" id="integrate_ec2_image__aws_cds_example"><code>"amazon": {
+  "regions": [
+    {
+      "id": "us-east-1",
+      "name": "US East (Northern Virginia)",
+      "images": [
+        "ami-abcd1234",
+        "ami-1234abcd",
+        "ami-5678abcd"
+        "name:RHEL-*HVM*-20*-GP2",
+        "name:suse-sles-12-sp*v20*hvm-ssd-x86_64*",
+        "name:suse-sles-11-sp4*v20*hvm-ssd-x86_64*",
+        "name:ubuntu/images/hvm-ssd/ubuntu-*-amd64-server-2016*",
+        "name:Windows_Server-20*English-64Bit-Base-2016*"
+      ]
+    }
+  ]
+},</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the cloud discovery service configuration file.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Register the EC2 instance types that you provision with the cloud discovery service.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Back up the
+<span class="ph filepath">/usr/lib/python2.7/site-packages/clouddiscoveryservice/resources/clouds/instance_type_details.py</span>
+file.</span>
+<div class="itemgroup stepxmp">For example, you might create a copy of the file and name it
+<span class="ph filepath">instance_type_details.py.old</span>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Open the <span class="ph filepath">instance_type_details.py</span> file.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Find the region to customize, such as <code class="ph codeph">us-east-1</code>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <code class="ph codeph">REGION_DETAILS</code> section, add the instance type IDs that you provision to
+the <code class="ph codeph">instance_types</code> section for each region.</span>
+<div class="itemgroup info">To review the list of available EC2 instance types, see <a class="xref" href="https://aws.amazon.com/ec2/instance-types/" target="_blank">Amazon EC2 Instance
+Types</a>.</div>
+<div class="itemgroup stepxmp">For example, the following code from the <span class="ph filepath">instance_type_details.py</span> file
+includes three instance types in the <code class="ph codeph">us-east-1</code>
+region.<pre class="pre codeblock"><code>REGION_DETAILS = {
+    # US East (Northern Virginia) Region
+    'us-east-1': {
+        'endpoint': 'ec2.us-east-1.amazonaws.com',
+        'api_name': 'ec2_us_east',
+        'country': 'USA',
+        'signature_version': '2',
+        'instance_types': [
+            't2.micro',
+            'm3.medium',
+            'm4.large'   
+        ]
+    }
+}</code></pre></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <code class="ph codeph">INSTANCE_TYPES</code> section, add the details for each instance type.</span>
+<div class="itemgroup info">Contact AWS support to obtain the instance type details.</div>
+<div class="itemgroup stepxmp">For example, the following code from the <span class="ph filepath">instance_type_details.py</span> file
+includes details for the <code class="ph codeph">t2.micro</code>, <code class="ph codeph">m3.medium</code>, and
+<code class="ph codeph">m4.large</code> instance types that are shown in the <code class="ph codeph">us-east-1</code> region.
+<pre class="pre codeblock"><code>INSTANCE_TYPES = {
+    't2.micro': {
+        'id': 't2.micro',
+        'name': 't2.micro (Burstable Performance Micro Instance)',
+        'ram': 1024,
+        'disk': 0,  # EBS Only
+        'bandwidth': None,
+        'extra': {
+            'cpu': 1
+        }
+    },
+    'm3.medium': {
+        'id': 'm3.medium',
+        'name': 'm3.medium (Medium Instance)',
+        'ram': 3840,
+        'disk': 4000,
+        'bandwidth': None
+    },
+    'm4.large': {
+        'id': 'm4.large',
+        'name': 'm4.large (Large Instance)',
+        'ram': 8192,
+        'disk': 32000,
+        'bandwidth': None
+    }
+}</code></pre></div>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the <span class="ph filepath">instance_type_details.py</span> file.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Restart the cloud discovery service.</span>
+<div class="itemgroup info">To restart the cloud discovery service, see <a class="xref" href="start_patterns.html" title="To start the blueprint designer and its associated services, you must start the cloud discovery service, the blueprint design server, and the engine Heat services.">Starting the blueprint designer, cloud discovery service, and engine</a> and <a class="xref" href="stop_patterns.html" title="To stop the blueprint designer and its associated services, you must stop the cloud discovery service, the blueprint design server, and the engine Heat services.">Stopping the blueprint designer, cloud discovery service, and engine</a>.</div>
+</li></ol></section>
+</div>
+</article></main></body></html>

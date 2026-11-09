@@ -1,0 +1,31 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="A switch step is a utility step that you use to branch process, based on the value of a property."><meta name="DC.relation" scheme="URI" content="../../user/topics/process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_process_switch"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Switch steps</title></head><body id="comp_process_switch"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Switch steps</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-15440ef3-0d30-4ce2-9f4a-ea18188a58f9">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">A <dfn class="term">switch step</dfn> is a utility step that you use to branch process, based on the
+value of a property.</p>
+<p class="p">When you add a switch step, you specify a property, either as the property name itself or in the
+      same form as you would use in other steps, such as
+        <code class="ph codeph">${p:<var class="keyword varname">propertyName</var>}</code>. Then, you add two or more outgoing
+      connections from the step, each with a possible value for that property. At run time, the
+      process follows the connection with the matching property value. The process also follows any
+      connections with <code class="ph codeph">fail</code> or <code class="ph codeph">both</code> conditional flags.</p>
+<div class="p">For example, the following figure shows a switch step for the <span class="keyword parmname">myProperty</span>
+component property. Two outgoing connections have different values for that property, including
+<code class="ph codeph">value1</code> and <code class="ph codeph">value2</code>. The third connection has the
+<code class="ph codeph">default</code> value, which means that the process follows this connection if no other
+values are matched.<br><img class="image" src="../images/comp_process_switch_a.gif" alt="A switch step with three outgoing connections, each with a different possible value for the property"><br></div>
+    <p class="p">To set the property to use, add the Switch step to the process and click the edit properties
+      icon <img class="image" src="../images/edit_proc_step.gif" alt="The edit properties icon">. In the step properties, specify the property, either by specifying the property name
+      by itself or in the same form as you would use in other steps, such as
+          <code class="ph codeph">${p:<var class="keyword varname">propertyName</var>}</code>. You cannot use a secure property in
+      this step.</p>
+<div class="p">To check whether a property is defined, create a second property, and give that property a null
+value. Then you can compare other properties to that property to see whether they are defined. For
+example, the following process contains a property that is named <span class="keyword parmname">nullProperty</span>;
+this property is not defined. In the process, the switch step compares a property that is named
+<span class="keyword parmname">myProperty</span> to this null property. If the property is not defined, step 1 runs.
+If the property has the <code class="ph codeph">othervalue</code> value, step 2 runs.<br><img class="image" src="../images/comp_process_switch_b.gif" alt="A switch step that uses a property value as one of the possible values"><br></div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/process_steps.html" title="When you design processes, you use different kinds of process steps and joining techniques. You can assign properties to process steps and use them to control step execution.">Process step types and logic</a></div></div></nav></article></main></body></html>

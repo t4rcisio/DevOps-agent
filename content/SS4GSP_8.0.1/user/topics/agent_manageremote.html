@@ -1,0 +1,181 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="After an agent is installed, you can manage (with the monitor process) many of its features from the IBM DevOps Deploy (Deploy) web application."><meta name="DC.relation" scheme="URI" content="../../user/topics/configure_agents.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_javapackage_addjavapackage_post.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_agentcliinstalljava_post.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_agentclisetjavahome_post.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_agentcli_restart_put.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_manageremote"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Managing agents remotely</title></head><body id="agent_manageremote"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Managing agents remotely</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-9d6b3358-ba20-4d7d-a04a-79dc577d7ffb">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">After an agent is installed, you can manage (with the monitor process) many of its
+    features from the <span class="ph">IBM DevOps Deploy (Deploy)</span> web
+    application.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_manageremote__context__1">About this task</h2></div>We characterize an agent as a single process, but technically an agent consists of two
+processes: a <dfn class="term">worker</dfn> process and a <dfn class="term">monitor</dfn> process. Worker processes do the
+actual work of deployment, such as handling plug-in steps. Monitor processes manage the worker
+process, such as handling restarts, upgrades, and tests. Agent properties can be changed directly by
+editing the agent's <span class="ph filepath">conf/agent/installed.properties</span> file and restarting the
+agent.<div class="note note note_note"><span class="note__title">Note:</span>  Agents can access Windows shared drives. Drives are mapped on a per-user basis, you can
+check if the agent has the drive mapped with <dfn class="term">fsutil fsinfo</dfn> drives. </div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_manageremote__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Display the <span class="keyword wintitle">Agents</span> pane (<span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agents</span></span>).</span>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">Click <span class="ph uicontrol">Actions</span> button on the desired agent. </span>
+        <div class="itemgroup info">Actions are described in the following table.<table class="table frame-all"><caption><span class="table--title-label">Table 1. </span><span class="title">Agent management</span></caption><colgroup><col><col></colgroup><thead class="thead">
+                <tr class="row">
+                  <th class="entry align-left colsep-1 rowsep-1" id="agent_manageremote__entry__1">Action</th>
+                  <th class="entry align-left colsep-1 rowsep-1" id="agent_manageremote__entry__2">Description</th>
+                </tr>
+              </thead><tbody class="tbody">
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">Edit</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">Edits the agent name, description, and team configuration.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">Delete</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">Deletes the agent permanently from the system.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">Mark as Unavailable</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">Makes the online agent unavailable for running jobs or being used by agent
+                      pools.<p class="p">The <code class="ph codeph">Unavailable</code> status acts like
+                        <code class="ph codeph">Offline</code> status without having the agent or agent service
+                      shut down. You can make the unavailable agents online by using the
+                        <span class="ph uicontrol">Mark as Available</span> option from the actions
+                    menu.</p></td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">Restart</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">Shuts down and restarts the agent. While the agent is shut down, its status
+                    is <code class="ph codeph">Offline</code>.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">Test Connection</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">Runs the agent settings and connection test. Test results are displayed in
+                    the <span class="keyword wintitle">Connection Test</span> dialog.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">License</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">Sets the license from <code class="ph codeph">unlicensed</code> to
+                      <code class="ph codeph">authorized</code>.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">Set License Type</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">Changes the license type.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">Set Configuration Template</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">Applies an agent configuration template to the agent.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">Upgrade</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">This option shuts down the agent and applies the upgrade. While the agent
+                    is shut down, its status is <code class="ph codeph">Offline</code>. After the upgrade is
+                    applied, the agent is restarted.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">Set Java Home</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">Updates JAVA_HOME for the agent. The Java Home lists the packages that are
+                    installed on the agent. Select an appropriate package or enter the absolute path
+                    of a valid JAVA_HOME directory.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">Install Java Package</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">Installs the Java package on the agent. The Java Package list displays the
+                    packages that are added to the system and matches the agent architecture and
+                    OS.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__1">Uninstall Java Package</td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_manageremote__entry__2">Removes the Java package from the agent. The Java Package list displays the
+                    packages that are installed on the agent.</td>
+                </tr>
+              </tbody></table></div>
+        <div class="itemgroup info">
+          <div class="note note note_note"><span class="note__title">Note:</span> 
+            <ul class="ul">
+              <li class="li">The Java packages are added or managed in the <span class="ph uicontrol">System
+                  Settings</span>. Ask your administrator, if you want a specific Java package
+                added to the system.</li>
+              <li class="li">Agent properties and Java home information is available from the agent's
+                  <span class="ph uicontrol">Metadata</span> tab.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="itemgroup stepresult"></div>
+      </li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Perform the following actions on multiple selected agents using the <span class="ph uicontrol">Bulk
+Actions</span> option:</span>
+<div class="itemgroup info">
+<table class="table frame-all" id="agent_manageremote__table_r3z_wdt_frb"><caption></caption><colgroup><col style="width:25.97402597402597%"><col style="width:74.02597402597402%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="agent_manageremote__table_r3z_wdt_frb__entry__1">Bulk action</th>
+<th class="entry" id="agent_manageremote__table_r3z_wdt_frb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Restart</td>
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Shuts down and restarts the selected agents. While the agents shut down, their status is
+shown <code class="ph codeph">Offline</code>. When the agents start, the status is changed to
+<code class="ph codeph">online</code>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Upgrade</td>
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Shuts down the selected agents and applies the upgrade. While the agents shut down, their
+status is shown <code class="ph codeph">Offline</code>. After the upgrade is applied, the agents are
+restarted.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Add Tag</td>
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Allows you to apply tag to selected agents.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Remove Tag</td>
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Removes the applied tag from the selected agents.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Set License Type</td>
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Changes the license type for the selected agents.</td>
+</tr>
+                <tr class="row">
+                  <td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Mark as Unavailable</td>
+                  <td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Makes the online agents unavailable for running jobs or being used by agent
+                    pools.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Mark as Available</td>
+                  <td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Makes the unavailable agents online for running jobs or being used by agent
+                    pools.</td>
+                </tr>
+<tr class="row">
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Apply Configuration Template</td>
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Applies the agent configuration template to the selected agents. The configuration templates
+must already be set the agents. See <a class="xref" href="mass_agent_migration.html" title="Agent Configuration Templates allow you to migrate JMS agents on a server to Web agents with the ability to revert back to the original JMS configuration. This allows you to specify connection details for groups of agents.">Migrating agents to Web</a> for more information.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Set Configuration Template</td>
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Adds the selected agents to an agent configuration template.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Delete</td>
+<td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Deletes the selected agents permanently from the system.</td>
+</tr>
+        <tr class="row">
+         <td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Install Preferred Java Package</td>
+         <td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Installs the Java package that are set as preferred in the Systems Settings. See
+                      <a class="xref" href="../../admin/topics/settings_java_manage_bulk.html" title="You can manage the Java distribution on your numerous agents by using Bulk Actions.">Managing Java packages on agents in bulk</a> for more information.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Set Java Home to Preferred Java Package</td>
+         <td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Updates the Java home of the selected agents as configured for their preferred Java
+          package.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__1">Remove Unused Java Packages</td>
+         <td class="entry" headers="agent_manageremote__table_r3z_wdt_frb__entry__2">Removes Java packages for the selected agents that are neither active nor configured
+          for the agent.</td>
+        </tr>
+</tbody></table>
+</div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_manageremote__postreq__1">What to do next</h2></div>Verify all actions and their details from the agent's <span class="ph uicontrol">Maintenance</span>
+   tab.</section>
+</div>
+  <nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/configure_agents.html" title="After you install an agent for IBM DevOps Deploy (Deploy), you can modify its configuration or create an agent relay to facilitate communication to remote relays.">Agents and agent relay configuration</a></div></div><div class="linklist relinfo relref"><strong>Related reference</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="../../api/topics/rest_cli_javapackage_addjavapackage_post.html">Upload a Java package.</a></li><li class="linklist"><a class="link" href="../../api/topics/rest_cli_agentcliinstalljava_post.html" title="This command requests the agent install Java, but does not wait for or report the result. The returned maintenance task can be used to query the result.">Install a Java package as a new managed Java installation</a></li><li class="linklist"><a class="link" href="../../api/topics/rest_cli_agentclisetjavahome_post.html" title="This command requests the agent set JAVA_HOME, but does not wait for or report the result. The new JAVA_HOME will not take effect until the agent is restarted. The returned maintenance task can be used to query the result.">Set the configured JAVA_HOME of an agent</a></li><li class="linklist"><a class="link" href="../../api/topics/rest_cli_agentcli_restart_put.html">Restart an agent</a></li></ul></div></nav>
+</article></main></body></html>

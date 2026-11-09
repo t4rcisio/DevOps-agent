@@ -1,0 +1,160 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Notifications are defined in a notification scheme. The notification scheme is assigned to an application and the notifications are sent during the deployment of that application."><meta name="DC.relation" scheme="URI" content="../../user/topics/notify_work_with.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="task_ejx_d32_kfb"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating Notifications in a Notification Scheme</title></head><body id="task_ejx_d32_kfb"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating Notifications in a Notification Scheme</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-e7c3b2df-0ae3-47c4-8403-39c9ab5f2c7f">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">Notifications are defined in a notification scheme. The notification scheme is assigned
+to an application and the notifications are sent during the deployment of that
+application.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasktask_ejx_d32_kfb__prereq__1">Before you begin</h2></div>
+<p class="p">Each notification in a notification schemes must specify the group of users that receive the
+                notifications. Each user in the group must have a valid email address defined on the
+                    <span class="ph">IBM DevOps Deploy (Deploy)</span> server. An external SMTP mail server is also required. </p>
+<p class="p">Prior to configuring notifications, the following prerequisites must be met.</p>
+<div class="p">
+<table class="table" id="task_ejx_d32_kfb__table_lbh_xqk_kfb"><caption><span class="table--title-label">Table 1. </span><span class="title">Notification Prerequisites</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="task_ejx_d32_kfb__table_lbh_xqk_kfb__entry__1">Prerequisite</th>
+<th class="entry" id="task_ejx_d32_kfb__table_lbh_xqk_kfb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="task_ejx_d32_kfb__table_lbh_xqk_kfb__entry__1">An external SMTP mail server is required to send notifications. </td>
+<td class="entry" headers="task_ejx_d32_kfb__table_lbh_xqk_kfb__entry__2">For information about configuring a mail server, see <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="task_ejx_d32_kfb__table_lbh_xqk_kfb__entry__1">Notification recipients must have defined security system roles. </td>
+<td class="entry" headers="task_ejx_d32_kfb__table_lbh_xqk_kfb__entry__2">See <a class="xref" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a>
+</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="task_ejx_d32_kfb__table_lbh_xqk_kfb__entry__1">Notification recipients must have email addresses defined on the <span class="ph">Deploy</span> server.</td>
+<td class="entry" headers="task_ejx_d32_kfb__table_lbh_xqk_kfb__entry__2">See <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a> Note that
+email addresses are not automatically imported from authentication servers such as LDAP servers.
+Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication</span></span>, edit a user, and ensure that the user has an e-mail address attached.</td>
+</tr>
+</tbody></table>
+</div>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasktask_ejx_d32_kfb__context__1">About this task</h2></div>
+<p class="p">Notification schemes can be configured to hold multiple notifications related to an application.
+Since notification schemes are a system-resource, they and can be shared across applications for
+ease of use.</p>
+<p class="p">Each notification you configure in a notification scheme must specify the following items: a
+notification template, a triggering event, and a user group role to receive the notification. The
+user group role is inherited from the security system. For example, it is common for an
+administrator or environment owner to be notified when a work item is generated. </p>
+<div class="note note note_note"><span class="note__title">Note:</span> Notifications are <strong class="ph b">not</strong> sent to users assigned to any role on the System Team, regardless
+of whether or not that role is configured to receive notifications for the application.</div>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasktask_ejx_d32_kfb__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create the new notification scheme. Later, you can come back to add more notifications to the
+scheme or edit existing notifications. Display the <span class="keyword wintitle">Notifications</span> pane. Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Notification Schemes</span></span>
+<br><img class="image" data-hd-otherprops="ibm" src="../images/createnotificationscheme.gif" alt="The list of available notification schemes"><br></span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Create Notification Scheme</span> and provide a
+<span class="ph uicontrol">Name</span> and <span class="ph uicontrol">Description</span> for the new notification scheme.
+(To edit an existing notification scheme, select that scheme in the list.)</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Configure a notification for the notification scheme. Click <span class="ph uicontrol">Add Notification
+                        Entry</span>, and supply parameters for the notification at the
+                        <span class="keyword wintitle">Add Notification Entry</span> window. Notification parameters
+                    are listed in the following table. <br><img class="image" data-hd-otherprops="ibm" height="400" src="../images/notify_intro.gif" alt="The Add Notification Entry window and parameters"><br></span>
+<div class="itemgroup info">
+<table class="table" id="task_ejx_d32_kfb__table_o5l_xrk_kfb"><caption><span class="table--title-label">Table 2. </span><span class="title">Notification Parameters</span></caption><colgroup><col style="width:20%"><col style="width:30%"><col style="width:50%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry colsep-1 rowsep-1" id="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__1">Parameter</th>
+<th class="entry colsep-1 rowsep-1" id="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__2">Description</th>
+<th class="entry colsep-1 rowsep-1" id="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__3">Values</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__1"><span class="ph uicontrol">Role</span></td>
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__2"><span class="ph uicontrol">Role</span> corresponds to the roles in the security system. The notification
+message goes to any user who has the specified role on a team that is associated with the
+<span class="ph uicontrol">Target</span> element. For example, a deployment engineer would be interested in
+being notified about a failed deployment.</td>
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__3">&lt;<var class="keyword varname">user group role</var>&gt;</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__1"><span class="ph uicontrol">Event Type</span></td>
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__2">This field lists the type of event that will trigger the notification. For example, you can
+trigger a notification when a processes completes successfully. You can also trigger a notification
+when an approval is declined. Note that the <span class="ph uicontrol">Event Type</span> selected should
+correspond to the type of process (generic, application, environment, resource, or approval) that
+triggers the event. Refer to <a class="xref" href="comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a> and
+<a class="xref" href="app_approvalCreate.html" title="You can add approval requirements to deployments. The approval process identifies the deployment and the role of the approver. You respond to approval requests on the Work Items page, or, depending on the configuration, through email.">Creating an approval process</a>.</td>
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__3">Select these event types for generic and application processes: <span class="ph uicontrol">Process
+Success</span>, <span class="ph uicontrol">Process Failure</span>, or <span class="ph uicontrol">Process
+Started</span>. Select these event types for approval processes: <span class="ph uicontrol">Approval
+Completed</span> or <span class="ph uicontrol">Approval Failed</span>.</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__1"><span class="ph uicontrol">Target</span></td>
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__2">The <span class="ph uicontrol">Target</span> specifies the area of the deployment where the
+<span class="ph uicontrol">Event Type</span> occurs. The target refers to the general concept of an
+application, environment, or resource in the deployment. </td>
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__3"><span class="ph uicontrol">Application</span>, <span class="ph uicontrol">Environment</span>, or
+<span class="ph uicontrol">Resource</span></td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__1"><span class="ph uicontrol">Type</span></td>
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__2">The target can be further refined using the <span class="ph uicontrol">Type</span> field. The
+<span class="ph uicontrol">Type</span> pull-down lists the security types defined in a role's application,
+environment or resource permissions. Notifications will only be sent to users with roles that are
+configured with the selected security type indicated in the <span class="ph uicontrol">Type</span> pull-down.
+Refer to <a class="xref" href="../../admin/topics/security_roles_create.html" title="You can create roles on the server and assign permissions to them.">Creating roles and assigning permissions</a>. For
+example, if the <span class="ph uicontrol">Target</span> field is set to <span class="ph uicontrol">Application</span>,
+notifications are only sent to users that are configure in that specific application permission
+security type when the application is deployed.</td>
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__3">&lt;<var class="keyword varname">security type</var>&gt;</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__1"><span class="ph uicontrol">Template Name</span></td>
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__2">Default notification templates are provided for use. The templates contain fields that are
+automatically populated and formatted in the email when the notification is sent to the selected
+role. The template you select should be based on the <span class="ph uicontrol">Event Type</span>, or reason
+for the notification. You can select a default notification template or a notification template you
+have created. See <a class="xref" href="../../reference/topics/notification_ov.html#notification_ov" title="Notification templates are the basis for emails that the server sends to users after an event occurs on the server. You can create customized notification templates by modifying the default templates provided, or by creating new templates of your own.">Creating notification templates</a>. Note that
+the <span class="ph uicontrol">ApprovalCreated</span> notification template is <u class="ph u">NOT</u> intended for use in a
+notification scheme. It appears in the <span class="ph uicontrol">Template Name</span> drop-down, but should
+only be assigned as a single template when <a class="xref" href="app_approvalCreate.html" title="You can add approval requirements to deployments. The approval process identifies the deployment and the role of the approver. You respond to approval requests on the Work Items page, or, depending on the configuration, through email.">Creating an approval process</a> to notify an
+approver that an approval is required.</td>
+<td class="entry colsep-1 rowsep-1" headers="task_ejx_d32_kfb__table_o5l_xrk_kfb__entry__3">
+<p class="p">Use these default notification templates for <span class="ph uicontrol">Process Success</span>,
+<span class="ph uicontrol">Process Failure</span>, or <span class="ph uicontrol">Process Started</span> event types.</p>
+<div class="p"><ul class="ul">
+<li class="li"><span class="ph uicontrol">ProcessRequestStarted</span> - indicates that a specific application, user group
+environment, or application resource was initiated.</li>
+<li class="li"><span class="ph uicontrol">ApplicationDeploymentSuccess</span> or
+<span class="ph uicontrol">ApplicationDeploymentFailure</span>- indicates that a specific application
+deployment succeeded or failed. </li>
+<li class="li"><span class="ph uicontrol">TaskCreated</span> - reports on the state of manual tasks.</li>
+<li class="li"><span class="ph uicontrol">DeploymentReadied</span> - notifies the role that the deployment requires
+approval.</li>
+<li class="li"><span class="ph uicontrol">GenericProcessRequestStarted</span> - indicates that a <a class="xref" href="genProcess_ch.html#genprocess_ch" title="Generic processes are not specific to a particular component and can be used in any number of applications. They are like general purpose processes. You can use generic processes to download and install packages on the system or perform other configuration management related tasks such as configuring SSH or completing FTP tasks. With a generic process, for example, you can update Linux agents that were recently installed by using SSH to run as a service on a Linux computer. Linux agents cannot be updated in this way during a remote installation.">Generic processes</a> was started.</li>
+<li class="li"><span class="ph uicontrol">GenericProcessSuccess</span> or <span class="ph uicontrol">GenericProcessFailure </span> -
+indicates that a <a class="xref" href="genProcess_ch.html#genprocess_ch" title="Generic processes are not specific to a particular component and can be used in any number of applications. They are like general purpose processes. You can use generic processes to download and install packages on the system or perform other configuration management related tasks such as configuring SSH or completing FTP tasks. With a generic process, for example, you can update Linux agents that were recently installed by using SSH to run as a service on a Linux computer. Linux agents cannot be updated in this way during a remote installation.">Generic processes</a> succeeded or failed.</li>
+</ul>Use these notification templates for <span class="ph uicontrol">Approval Completed</span> or
+<span class="ph uicontrol">Approval Failed</span> event types.<ul class="ul">
+<li class="li"><span class="ph uicontrol">Deployment Readied</span> - indicates that an approval was granted for an
+approval process. </li>
+<li class="li"><span class="ph uicontrol">ApprovalFailed</span> - indicates that approval was denied for an approval
+process.</li>
+</ul></div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Assign a notification scheme to an application or approval process. For an application process,
+click the application, go to the <span class="ph uicontrol">Configuration</span> tab, and in the
+<span class="ph uicontrol">Notification Scheme</span> list, select the notification scheme. For an approval
+process, click the application, go to the <span class="ph uicontrol">Approval Process</span> tab, edit the
+required process step and assign the approval notification template at the <span class="keyword wintitle">Edit Properties
+for Component Approval Task</span> window.</span>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/notify_work_with.html" title="IBM DevOps Deploy (Deploy) can send email notifications whenever user-defined trigger events occur on the server.">Working with Notifications</a></div></div></nav>
+</article></main></body></html>

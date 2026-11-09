@@ -1,0 +1,38 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Create a component template from a JSON file"><meta name="DC.subject" content="udclient commands, createComponentTemplate, udclient command, command-line commands"><meta name="keywords" content="udclient commands, createComponentTemplate, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_createcomponenttemplate"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>createComponentTemplate</title></head><body id="udclient_createcomponenttemplate"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">createComponentTemplate</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5a06715b-4693-4a27-972f-52829f42fdfd">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Create a component template from a JSON file</p>
+<section class="section"><h2 id="udclient_createcomponenttemplate__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  createComponentTemplate [JSON file]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_createcomponenttemplate__title__3" class="title sectiontitle">Parameters</h2>
+None.</section>
+<section class="section"><h2 id="udclient_createcomponenttemplate__title__4" class="title sectiontitle">Template</h2>
+<div class="p">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "componentType": "STANDARD or ZOS",
+  "description": "Component template description",
+  "importAutomatically": "Optional, boolean. Force 
+  components to import versions automatically (true) or 
+  never import automatically (false). Leave blank to specify 
+  value when component is created.",
+  "integrationAgent": "ID of the Agent to use for 
+  importing new component versions (Optional)",
+  "integrationTag": "Tag name of the Agent to use for 
+  importing new component versions (Optional)",
+  "name": "Component template name or ID",
+  "properties": {"Source configuration plugin property 
+  name": "Property value"},
+  "sourceConfigPluginName": "Name of the source 
+  configuration type"
+}
+</code></pre></div></section>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_componenttemplate_create_put.html">Create a component template from a JSON file</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

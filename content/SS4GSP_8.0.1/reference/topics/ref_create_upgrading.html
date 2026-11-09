@@ -1,0 +1,38 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="This example shows how to upgrade a plug-in."><meta name="DC.relation" scheme="URI" content="../../reference/topics/reference_plugins_create.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="upgradingPlugins.d12e849"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Upgrading plug-ins</title></head><body id="upgradingPlugins.d12e849"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Upgrading plug-ins</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-42c1f85d-4ab9-4f6e-8f98-2ff476562cd2">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">This example shows how to upgrade a plug-in.</p>
+<p class="p">To create an upgrade, first, increment the number of the <code class="ph codeph">version</code> attribute of
+the <code class="ph codeph">&lt;identifier&gt;</code> element in the <span class="ph filepath">plugin.xml</span> file. Next,
+update the property and step-type elements in the <span class="ph filepath">plugin.xml</span> file. </p>
+<p class="p">If you change the names of a step or property, you must create an
+<span class="ph filepath">upgrade.xml</span> file that contains the changes. Add a
+<code class="ph codeph">&lt;migrate&gt;</code> element in the <span class="ph filepath">upgrade.xml</span> file with a
+<code class="ph codeph">to-version</code> attribute that contains the new number. Finally, place the names of
+changed property and step-type elements that match the updated <span class="ph filepath">plugin.xml</span> file
+in this element, as shown in the following example: </p>
+<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;plugin-upgrade
+        xmlns="http://www.&amp;company;.com/UpgradeXMLSchema_v1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;migrate to-version="3"&gt;
+    &lt;migrate-command name="Run SQLPlus script"&gt;
+      &lt;migrate-properties&gt;
+        &lt;migrate-property name="sqlFiles" old="sqlFile"/&gt;
+      &lt;/migrate-properties&gt;
+    &lt;/migrate-command&gt;
+  &lt;/migrate&gt;
+&lt;/plugin-upgrade&gt;</code></pre>
+<p class="p">You can also make a script-only upgrade, which is an upgrade that contains changes to the step's
+associated scripts and files but does not change the <span class="ph filepath">plugin.xml</span> file. This
+mechanism can be useful for plug-in development and for minor bug-fixes and updates.</p>
+<p class="p">If an update to a plug-in removes functionality, such as removing a step property, you must
+upgrade the plug-in and then open and re-save any processes that use the step. Until you open and
+re-save the processes, they use the pre-upgrade steps.</p>
+<p class="p">When creating a new version of a plugin, you many change the value of server:sub-tag in
+<span class="ph filepath">plugin.xml</span>, and you do not need to add an entry to
+<span class="ph filepath">upgrade.xml</span> for the change to take effect.</p>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/reference_plugins_create.html" title="You can create your own plug-ins for use with IBM DevOps Deploy (Deploy). A plug-in consists of XML files and supporting script files that the plug-in requires.">Creating plug-ins</a></div></div></nav></article></main></body></html>

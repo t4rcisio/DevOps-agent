@@ -1,0 +1,62 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="Blueprints for clouds that use virtual system patterns (VSPs) map the components of an application to the agents on the virtual images in the VSP."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueprint_create_vsp"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating blueprints for cloud environments that use virtual system patterns</title></head><body id="blueprint_create_vsp"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Creating blueprints for cloud environments that use virtual system patterns</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-51e94fb6-988f-441b-af4f-07cf131e7a92">Edit online</a></span></div>
+  
+  <div class="body taskbody"><p class="shortdesc">Blueprints for clouds that use virtual system patterns (VSPs) map the components of an
+    application to the agents on the virtual images in the VSP.</p>
+    <section class="section prereq" data-hd-otherprops="ibm"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_create_vsp__prereq__1">Before you begin</h2></div>
+<ul class="ul">
+<li class="li">Connect to a cloud that uses VSPs. See <a class="xref" href="../../edt/topics/../../user/topics/cloud_integrate_vsp_ov.html" title="The IBM DevOps Deploy (Deploy) server can use virtual system patterns from cloud systems such as IBM Cloud Orchestrator to create dynamic environments.">Connecting to clouds through DevOps Deploy</a>. The following clouds that use
+VSPs are supported by the <span class="ph">Deploy</span> server:<ul class="ul">
+					<li class="li"><span class="keyword">IBM Cloud Orchestrator</span> version 2.4 or later</li>
+					<li class="li">IBM SmartCloud® Orchestrator
+						versions 2.2 and 2.3</li>
+					<li class="li"><span class="keyword">IBM PureApplication® System</span> version 1.0 or later</li>
+					<li class="li"><span class="keyword">IBM Workload Deployer</span>
+						version 3.1.0.6 or later</li>
+				</ul></li>
+<li class="li">Import a resource template from the cloud. See <a class="xref" href="resources_template_import_cloud.html" title="If you have a virtual system pattern on a cloud system, you can import that pattern as a resource template. This resource template is a pattern from which you can provision cloud resources.">Importing resource templates from clouds</a>.</li>
+</ul>
+</section>
+    <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_create_vsp__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">On the <span class="ph">Deploy</span> server, click <span class="ph uicontrol">Applications</span>, click your application, and then
+          click <span class="ph uicontrol">Blueprints</span>.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Click <span class="ph uicontrol">Create Blueprint</span>.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Specify a name for the blueprint and select the resource template.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+        <div class="itemgroup stepresult">The new blueprint opens, showing the contents of the template, including the
+          agent prototypes.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Map the components of the application to the agent prototypes:</span>
+        <ol type="a" class="ol substeps">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Hover the mouse over an agent prototype and then click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Component</span></span>.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">In the window that opens, select a component, specify its information, and click
+                <span class="ph uicontrol">Save</span>.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Repeat this process to add the application components to the agent prototypes. </span>
+            <div class="itemgroup info">Depending on how your application is organized, you can add the same component to
+              multiple agent prototypes or multiple components to the same agent prototype.</div>
+          </li>
+        </ol>
+        <div class="itemgroup info">
+          <div class="note note note_note"><span class="note__title">Note:</span> If you create an environment from this blueprint and then add component mappings to
+the blueprint, the component mappings are also added to the environment. However, if you remove
+component mappings from the blueprint, the component mappings are not removed from the
+environment.</div>
+        </div>
+      </li></ol></section>
+    <section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_create_vsp__result__1">Results</h2></div>The complete application blueprint shows how the components are mapped to the
+      agent prototypes. The following example shows a simple blueprint. The resource template
+      contains two agent prototypes. In the blueprint, one component is mapped to each agent
+        prototype.<br><img class="image" id="blueprint_create_vsp__d182e108" src="../images/app_blueprint_create_a.gif" alt="A simple blueprint that was created from a two-node resource template"><br></section>
+    <section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_create_vsp__postreq__1">What to do next</h2></div>Provision environments from this blueprint. See <a class="xref" href="env_provision_vsp.html" title="You can provision environments on a cloud system as part of creating an application environment on the IBM DevOps Deploy (Deploy) server.">Provisioning environments through the server (through virtual system patterns)</a>.</section>
+  </div>
+</article></main></body></html>

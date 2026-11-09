@@ -1,0 +1,57 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Applications are responsible for bringing together all the components that must be deployed together."><meta name="DC.relation" scheme="URI" content="../../user/topics/part_using.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/getstart_application_create.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/app_create.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/plugins_worklight_jazzbuild.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="applications_ch"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Applications</title></head><body id="applications_ch"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Applications</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-af59ba8f-f0f8-49e6-9a3b-78581387cafa">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">Applications are responsible for bringing together all
+the components that must be deployed together.</p>
+<p class="p">Applications do this task by defining the different versions of each component and defining the
+different environments that the components must go through on the way to production. In addition,
+applications also map the constituent hosts and systems (called resources) that a component needs
+within every environment.</p>
+<p class="p">Applications also implement automated deployments, rollbacks, and similar tasks. These tasks are
+called processes. However, at the application level, processes are concerned only with the
+components and resources that are necessary for deployment, and related tasks. By contrast,
+component processes are concerned with running commands and related tasks.).</p>
+<p class="p">Applications also introduce snapshots to manage the different versions of each component. A
+<dfn class="term">snapshot</dfn> represents the current state of an application in the environment. Typically,
+the snapshot is generated in an environment that has no approval gates. This type of environment is
+called an uncontrolled environment. For most users, the snapshot is pushed through the pipeline.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> Before you configure an application, install at least one agent in a target environment. For
+evaluation purposes, the agent can be on the same system as the server. In addition, you must also
+add at least one resource group to the agent. See <a class="xref" href="resources_ch.html" title="A resource is a logical deployment target that typically resolves to an agent and a user-defined construct that is based on the architectural model of IBM DevOps Deploy (Deploy).">Resources</a>.</div>
+
+<section class="section"><h2 id="applications_ch__title__2" class="title sectiontitle">Environments</h2>
+
+<p class="p">An environment is a collection of resources that host the application. Environments typically
+    include host systems and <span class="ph">IBM DevOps Deploy (Deploy)</span> agents. When a
+    deployment is run, it is always done so in an environment. While environments are collections of
+    resources, resources can vary per environment.</p>
+<p class="p">For example, environment 1 might include a single web server, a single middleware server, and a
+single database server. <span class="ph">Deploy</span>
+represents these systems as three separate resources that are running in environment 1. Environment
+2, however, might include several clustered databases and servers. To deploy the same components on
+these different environments, <span class="ph">Deploy</span> organizes
+the resource elements with resource groups. The server also keeps an inventory of everything that is
+deployed to each environment. In this way, the <span class="ph">Deploy</span> server
+manages the contents of each environment and tracks the differences between those environments.</p>
+</section>
+<section class="section"><h2 id="applications_ch__title__3" class="title sectiontitle">Processes</h2>A <dfn class="term">process</dfn> plays a coordination role. They are authored
+with a visual drag-and-drop editor, and composed of steps that call the component processes. For
+example, to deploy the application you might run a process that is called Deploy. This Deploy
+process would in turn run the requisite components and run the deployment.</section>
+<section class="section"><h2 id="applications_ch__title__4" class="title sectiontitle">Snapshots</h2>Snapshots specify what combination of component versions you deploy
+together. They are models that you create before you deploy the application. A snapshot specifies
+the exact version for each component in the application. When a snapshot is created, <span class="ph">Deploy</span> gathers
+together information about the application, including the component versions, for an environment.
+Typically, the snapshot is generated in an environment that has no approval gates. This kind of
+environment is called an uncontrolled environment. For most users, the snapshot is pushed through
+the pipeline. Typically, one of the environments remains uncontrolled to allow for snapshots. When a
+successful deployment runs in the uncontrolled environment, a snapshot is created based on the state
+of the application within the environment: thus capturing the different versions of the components
+at that time. As the application moves through various testing environments, for example, <span class="ph">Deploy</span> ensures
+that the exact versions (bit for bit) are used in every environment. After all the appropriate
+stages and approvals for a snapshot are complete, the snapshot is pushed to production.</section>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/getstart_application_create.html">Getting started with creating applications</a></strong><br>Applications associate resources with environments and define processes to run   deployments.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/app_create.html">Creating applications</a></strong><br>You can create an application from scratch or import an existing one.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/plugins_worklight_jazzbuild.html">Rational Team Concert Build</a></strong><br>The <span class="keyword">Rational Team Concert™ Build</span> system defines resources that are used to describe and manage builds.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/part_using.html" title="Modeling software deployment in IBM DevOps Deploy (Deploy) includes configuring components and component processes and adding those components to applications. Then, you use processes to deploy the components to environments.">Modeling Software Deployment</a></div></div></nav></article></main></body></html>

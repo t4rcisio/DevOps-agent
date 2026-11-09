@@ -1,0 +1,56 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To uninstall the agent, stop it, remove its service and registry keys, and delete its files."><meta name="DC.relation" scheme="URI" content="../../install/topics/uninstall_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_uninstall"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Uninstalling agents</title></head><body id="agent_uninstall"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Uninstalling agents</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-7b51ac1d-74e6-42a0-b0ab-5ce45c5772ed">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To uninstall the agent, stop it, remove its service and
+registry keys, and delete its files.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_uninstall__prereq__1">Before you begin</h2></div>You must be an administrator to uninstall an agent.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_uninstall__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Change to the directory that hosts the agent.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Stop the agent.</span><div class="itemgroup info">You can stop the agent from the command line or from the server. To stop the agent from the
+                    command line, use the following commands:</div>
+<ul class="ul choices">
+                    <li class="li choice">For compact agent, run this
+                        command:<pre class="pre codeblock" id="agent_uninstall__codeblock_tnq_w2z_jyb"><code>agent.sh stop</code></pre></li>
+<li class="li choice">On Windows™, run this
+                        command:<pre class="pre codeblock"><code>agent.cmd stop</code></pre></li>
+<li class="li choice">On Linux™ or UNIX™, run this command:<pre class="pre codeblock"><code>./agent stop</code></pre></li>
+<li class="li choice">On <span class="keyword">z/OS®</span>,
+cancel the started task for the agent. For example, if the name of
+the started task is BUZAGNT, run this command:<pre class="pre codeblock"><code>C BUZAGNT</code></pre>If
+the name of the started task is 8 characters long, specify the address
+space ID in the cancel command. Cancel the started task and the two
+spawned tasks. For example, if the name of the started task is UCZAGENT
+and the address space IDs are 22, 46, and 86, run these commands:<pre class="pre codeblock"><code>C UCZAGENT,A=22
+C UCZAGENT,A=46
+C UCZAGENT,A=86</code></pre></li>
+</ul>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If the agent is running as a service on Windows,
+remove the service and registry keys.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Change to the <span class="ph filepath">C:\<var class="keyword varname">installed_agent</var>\bin\service</span> folder,
+where <var class="keyword varname">installed_agent</var> is the location of the agent.</span>
+</li>
+<li class="li substep substepexpand">
+                        <span class="ph cmd">Remove the service.</span>
+                        <div class="itemgroup info">
+                            <ul class="ul" id="agent_uninstall__ul_udc_sfz_jyb">
+                                <li class="li">For non-compact agent, run this
+                                    command:<pre class="pre codeblock" id="agent_uninstall__codeblock_e2q_sfz_jyb"><code>_agent.cmd remove <var class="keyword varname">service_name</var></code></pre>Use
+                                    the name of the service for
+                                            <code class="ph codeph"><var class="keyword varname">service_name</var></code>. To
+                                    find the service name, open the services view and find the entry
+                                    that starts with <code class="ph codeph"><span class="ph">DevOps Deploy</span></code><code class="ph codeph"> Agent</code>. The service name is in
+                                    parentheses in this entry.</li>
+                                <li class="li">For compact agent, run this
+                                    command:<pre class="pre codeblock" id="agent_uninstall__codeblock_cwf_wfz_jyb"><code>agent.sh uninstall-service</code></pre></li>
+                            </ul>
+                        </div>
+                    </li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Delete the agent installation directory.</span></li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/uninstall_ch.html" title="Learn how to uninstall the IBM DevOps Deploy (Deploy) server, and agent.">Uninstalling DevOps Deploy</a></div></div></nav></article></main></body></html>

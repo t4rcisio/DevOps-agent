@@ -1,0 +1,102 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="If you exported an application template, you can import the template to a different server. When you import an application template, you can create an entirely new template or upgrade an existing one."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_template.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_template_import"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Importing application templates</title></head><body id="app_template_import"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Importing application templates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a9467578-6164-42df-b27f-b68326797eab">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">If you exported an application template, you can import the template to a different
+server. When you import an application template, you can create an entirely new template or upgrade
+an existing one.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_template_import__context__1">About this task</h2></div>To move application templates between servers, you export the templates and import them to
+            a different server.<p class="p">When you export components, applications, processes, or templates, and then
+import them on a different computer, the same versions of the same plug-ins must be installed on
+both computers.</p><div class="note note note_note"><span class="note__title">Note:</span> You must create the JSON file that contains a template on a server
+                that uses the same version of <span class="ph">IBM DevOps Deploy (Deploy)</span> as the
+                destination server.</div><p class="p">When you import an application template, all resource
+                templates, environment templates, approval processes, application processes, generic
+                processes, and tags that it uses are also imported.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_template_import__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the <span class="keyword wintitle">Import Application Template</span> dialog box by clicking <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Import Application Template</span></span>.</span>
+</li><li class="li step stepexpand">
+                <span class="ph cmd">Click <span class="ph uicontrol">Choose File</span>, and then select the name of the JSON
+                    file that contains the template.</span>
+            </li><li class="li step stepexpand">
+<span class="ph cmd">To upgrade an existing application template, select <span class="ph uicontrol">Upgrade Template</span>. To
+create a template, leave <span class="ph uicontrol">Upgrade Template</span> cleared. </span>
+<div class="itemgroup info">If the name of the application template in the JSON file (not the name of the file itself)
+                    matches an existing template name, then the template parameters are upgraded. If
+                    items such as processes or properties exist, new versions are created. New
+                    items, such as processes, environment templates, resource templates, or
+                    properties, are also added. If the name of the application template is not
+                    found, the import action has no effect.<div class="note note note_note"><span class="note__title">Note:</span>  The application template name is
+                        the first parameter in the JSON file. For example,
+                        <pre class="pre codeblock language-json"><code>"name": "JPetStore",</code></pre></div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If the application template's processes contain generic processes, use the <span class="ph uicontrol">Generic
+Process Upgrade Type</span> list to specify how the generic processes that are called in the
+application processes are upgraded or created.</span>
+<div class="itemgroup info">This selection affects only generic processes, not the application processes in the
+application template. The import process has different results depending on whether the generic
+processes exist.</div>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> The server tracks generic processes by name. If a generic process on the destination server is
+assigned the same name as a generic process that is imported, then the generic process exists on the
+server.</div>
+<ul class="ul">
+<li class="li">To import an application template without updating the generic processes that are on your
+server, select <span class="ph uicontrol">Use Existing Generic Process</span>. If the generic process does not
+exist, a generic process is created. If a generic process with that name exists, another version is
+not created.</li>
+<li class="li">To create generic processes, select <span class="ph uicontrol">Create Generic Process</span>. A copy of the
+generic process is always created. If a generic process with that name exists, a unique string is
+added to the new generic process's name. When run, the application process calls the new generic
+process.</li>
+<li class="li">To create a fresh installation and ensure that generic processes are not on the importing
+server, select <span class="ph uicontrol">Fail if Generic Process Exists</span>. If you are creating an
+application template, it creates both an application template and generic processes unless generic
+processes exist, in which case the import action fails. <p class="p">If you are upgrading an application
+template, the upgrade fails if the imported application template's generic processes exist.</p></li>
+<li class="li">To ensure that generic processes are on the importing server, select <span class="ph uicontrol">Fail if Generic
+Process Does Not Exist</span>. If you are creating an application template, it creates both the
+application template and generic processes, unless the generic processes do not exist, in which case
+the import action fails.</li>
+<li class="li">To upgrade the generic processes, select <span class="ph uicontrol">Upgrade if Generic Process
+Exists</span>. This option creates an application template and versions of the generic
+processes on the importing server. If the generic processes do not exist, processes are
+created.</li>
+</ul>
+</div>
+</li><li class="li step stepexpand" id="app_template_import__resource_template">
+<span class="ph cmd">In the <span class="ph uicontrol">Resource Template Upgrade Type</span> list, specify how to handle
+resource templates that are being imported, along with the application templates that have the same
+names as existing resource templates.</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">To import an application template without updating the resource templates that are on your
+server, select <span class="ph uicontrol">Use Existing Resource Template</span>. If the resource templates do
+not exist, resource templates are created. If a resource template with that name exists, another
+version is not created.</li>
+<li class="li">To create resource templates, select <span class="ph uicontrol">Create Resource Template</span>. Copies of
+the resource templates are always created. If a resource template with that name exists, a unique
+string is added to the new resource template's name. When run, the application process calls the new
+resource template.</li>
+<li class="li">To create a fresh installation and ensure that resource templates are not on the importing
+server, select <span class="ph uicontrol">Fail If Resource Template Exists</span>. If you are creating an
+application template, it creates both the application template and resource templates unless
+resource templates exist, in which case the import action fails. <p class="p">If you are upgrading an
+application template, the upgrade fails if the imported application template's resource templates
+exist.</p></li>
+<li class="li">To ensure that resource templates are on the importing server, select <span class="ph uicontrol">Fail If
+Resource Template Does Not Exist</span>. If you are creating an application template, it
+creates both the application template and resource templates unless the resource templates do not
+exist, in which case the import action fails.</li>
+<li class="li">To upgrade the resource templates, select <span class="ph uicontrol">Upgrade Resource Template If
+Exists</span>. This option creates an application template and versions of the resource
+templates on the importing server. If the resource templates do not exist, resource templates are
+created.</li>
+</ul>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Submit</span>.</span>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_template.html" title="With an application template, you can save and reuse a collection of resources, environments, processes, and tagged components or component templates to create a standardized application.">Application templates</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The keydelete command removes a key for secure property encryption."><meta name="DC.relation" scheme="URI" content="../../admin/topics/managing_encryption_keys.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="deleting_an_encryption_key"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Deleting an encryption key</title></head><body id="deleting_an_encryption_key"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Deleting an encryption key</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-32f02765-75e6-4e30-bd4e-ecf2358c7f87">Edit online</a></span></div>
+    
+    <div class="body taskbody"><p class="shortdesc">The <strong class="ph b"><code class="ph codeph">keydelete</code></strong> command removes a key for secure property
+        encryption. </p>
+        <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdeleting_an_encryption_key__context__1">About this task</h2></div>
+            <p class="p">You can run the tool in dry-run mode such that the keystore is not modified and the
+                tool only demonstrates the change. The <span class="keyword cmdname">--change-keystore</span> argument
+                is required to cause the tool to complete the change.</p>
+            <p class="p">The keydelete tool can be run while the server is online. In an HA cluster, you must
+                run the tool on only one cluster member because all members share the same
+                keystore.</p>
+            <div class="p">
+                <div class="note note note_note" id="deleting_an_encryption_key__note_kcc_hsx_x5b"><span class="note__title">Note:</span> 
+                    <ul class="ul" id="deleting_an_encryption_key__ul_gkm_hsx_x5b">
+                        <li class="li">The keydelete tool cannot remove the primary encryption key. </li>
+                        <li class="li">The tool can only determine the primary key for the local server member
+                            in an HA cluster. It cannot detect if other members have configured a
+                            different primary key. For best results, set up the cluster so that all
+                            members use the same primary key.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="p">
+                <div class="note note note_note" id="deleting_an_encryption_key__note_rqs_dsx_x5b"><span class="note__title">Note:</span> Do not delete keys unless you have a
+                    compelling reason to do so. Only the primary key is used for encrypting new
+                    secure data. After the previous data is re-encrypted with the new key by using
+                    the keyrotate tool, previous keys are not used in normal operation. In some
+                    scenarios, you might require previous keys, such as decrypting data that you
+                    restore from a backup that used previous keys or when importing configurations
+                    that were created with a previous key. Retain previous keys for these kinds of
+                        scenarios.<p class="p">To delete an encryption key:</p></div>
+            </div>
+        </section>
+        <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdeleting_an_encryption_key__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+                <span class="ph cmd">Confirm that the server is configured to use a different key as its primary. </span>
+                <div class="itemgroup info">The tool cannot delete the primary key. View the
+                        <span class="ph filepath">installed.properties</span> file and check that the value of
+                    the <span class="keyword parmname">encryption.keystore.alias</span> property is not the alias of
+                    the key that you are targeting for deletion. In an HA cluster, each member has
+                    its own <span class="ph filepath">installed.properties</span> file, so each must be checked
+                    individually. </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Update servers that use the targeted key.</span>
+                <div class="itemgroup info">
+                    <p class="p">Edit the <code class="ph codeph">installed.properties</code> and set the
+                                <strong class="ph b"><code class="ph codeph">encryption.keystore.alias</code></strong> property to the
+                        alias of another key. In an HA cluster, each member has its own
+                            <code class="ph codeph">installed.properties</code> file, so you must edit each member
+                        individually. For best results, set up the cluster so that all members use
+                        the same primary key.</p>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Restart any updated servers.</span>
+                <div class="itemgroup info">
+                    <p class="p">The server loads keys and the primary key setting only at startup. In an HA
+                        cluster, each updated member must be restarted.</p>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Run the <span class="keyword cmdname">keydelete</span> command without the
+                        <span class="keyword cmdname">--change-keystore</span> argument to verify the action. </span>
+                <div class="itemgroup info">In an HA cluster, all members share the same keystore file, so you must run
+                    the <code class="ph codeph">keydelete</code> command on only one cluster member. For example,
+                    run the following
+                    command:<pre class="pre codeblock" id="deleting_an_encryption_key__codeblock_vkc_vtx_x5b"><code>keydelete --target-key &lt;key&gt;</code></pre>Here,
+                    the <span class="keyword cmdname">--target-key &lt;key&gt;</span> flag is required. The
+                        &lt;<em class="ph i">key</em>&gt; variable is the name of the key you are targeting for
+                    deletion. The key is not deleted unless <code class="ph codeph">--change-keystore</code> is
+                    also specified.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Run the <span class="keyword cmdname">keydelete</span> command again with the
+                        <span class="keyword cmdname">--change-keystore</span> argument to complete the action. </span>
+                <div class="itemgroup info">In an HA cluster, all members share the same keystore file, so you must run
+                    the <strong class="ph b"><code class="ph codeph">keydelete</code></strong> command on only one cluster
+                        member:<pre class="pre codeblock" id="deleting_an_encryption_key__codeblock_cly_n5x_x5b"><code>keydelete --target-key &lt;<em class="ph i">key</em>&gt; --change-keystore</code></pre><p class="p">Note
+                        that the <code class="ph codeph">--change-keystore</code> argument is optional. It enables
+                        the modification of the keystore. Unless this flag is specified, the tool
+                        only demonstrates the change without completing the action.</p></div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Restart the server.</span>
+                <div class="itemgroup info">
+                    <p class="p">The server never unloads a key. In an HA cluster, you must restart each
+                        member.</p>
+                </div>
+            </li></ol></section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/managing_encryption_keys.html" title="Using the encryption key tools, you can manage your encryption keys.">Encryption key tools</a></div></div></nav></article></main></body></html>

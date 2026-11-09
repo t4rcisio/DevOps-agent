@@ -1,0 +1,109 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The switch step allows decision logic in the process. It expands a variable by name or evaluates an expression containing a 'p' expression to a value. Based on the value, one case is selected and its actions are carried out."><meta name="DC.subject" content="PAC, generic process step, switch"><meta name="keywords" content="PAC, generic process step, switch"><meta name="DC.relation" scheme="URI" content="../../reference/topics/pac_generic_process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="pac_step_switch"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>switch</title></head><body id="pac_step_switch"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">switch</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2fcff216-0b1e-4ec5-ad7c-6fe3a9d431cd">Edit online</a></span></div>
+
+
+
+<div class="body refbody"><p class="shortdesc">The <code class="ph codeph">switch</code> step allows decision logic in the process. It expands a
+variable by name or evaluates an expression containing a 'p' expression to a value. Based on the
+value, one case is selected and its actions are carried out.</p>
+<section class="section"><h2 id="pac_step_switch__title__2" class="title sectiontitle">Format</h2>
+
+<pre class="pre codeblock"><code>switch step "foo" is
+    -- a variable or ${p:expression} to evaluate
+    evaluate "variable"
+
+-- case selected if the expression evaluates to "A"
+on case "A"
+    -- one or more start commands
+    start "step-a"
+
+-- additional cases follow
+on case "B"
+    start "step-b"
+
+-- case selected if no other expression matches; optional
+-- if present, this must be the final option
+on default
+    start "step-default"
+end</code></pre>
+</section>
+<section class="section"><h2 id="pac_step_switch__title__3" class="title sectiontitle">Properties</h2>
+
+<div class="p">
+<table class="table" id="pac_step_switch__table_dys_4bl_knb"><caption><span class="table--title-label">Table 1. </span><span class="title">Switch properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left" id="pac_step_switch__table_dys_4bl_knb__entry__1">Field</th>
+<th class="entry align-left" id="pac_step_switch__table_dys_4bl_knb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="pac_step_switch__table_dys_4bl_knb__entry__1"><span class="ph uicontrol">Name</span></td>
+<td class="entry align-left" headers="pac_step_switch__table_dys_4bl_knb__entry__2"><span class="ph">A name for the step. Other process steps can refer to this step by this
+name.</span></td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="pac_step_switch__table_dys_4bl_knb__entry__1"><span class="ph uicontrol">Property Name</span></td>
+<td class="entry align-left" headers="pac_step_switch__table_dys_4bl_knb__entry__2">The property to use for the branching. You can specify the
+property name by itself or in the same form as you would use in other steps, such as
+<code class="ph codeph">${p:<var class="keyword varname">propertyName</var>}</code>. You cannot use a secure property in this
+field.</td>
+</tr>
+</tbody></table>
+</div>
+</section>
+<div class="example"><h2 id="pac_step_switch__title__5" class="title sectiontitle">Example</h2>
+
+<pre class="pre codeblock"><code>start is
+    start A
+    start B
+    start C
+    start D
+    start E
+end
+
+switch step A is
+    evaluate prop-name-a
+on case case-a1
+    start case-a1-step
+on case case-a2
+    start case-a2-step
+on default
+    finish
+end
+
+switch step B is
+    evaluate prop-name-b
+on default
+    finish
+end
+
+switch step C is
+    evaluate prop-name-c
+on case case-c1
+    finish
+end
+
+switch step D is
+    evaluate prop-name-d
+end
+
+switch step E is
+    evaluate "${p:prop-name-e}"
+end
+
+shell step case-a1-step is
+    "echo case-a1-step"
+on success
+    finish
+end
+
+shell step case-a2-step is
+    "echo case-a2-step"
+on success
+    finish
+end</code></pre>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/pac_generic_process_steps.html" title="Lists the various generic steps that can be used in a process.">Generic process steps</a></div></div></nav></article></main></body></html>

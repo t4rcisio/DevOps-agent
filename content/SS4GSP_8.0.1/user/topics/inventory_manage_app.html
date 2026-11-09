@@ -1,0 +1,49 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can allow the server to manage the environment inventory and compliance automatically, or you can manage the environment inventory and compliance with steps in an application process."><meta name="DC.relation" scheme="URI" content="../../user/topics/env_compliance.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="inventory_manage_app"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Managing environment inventory and compliance</title></head><body id="inventory_manage_app"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Managing environment inventory and compliance</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6af934fc-c492-4b16-9d8c-9cd674de5320">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">You can allow the server to manage the environment inventory
+and compliance automatically, or you can manage the environment inventory
+and compliance with steps in an application process.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskinventory_manage_app__context__1">About this task</h2></div>The inventory for an environment shows the component versions that are intended to be
+deployed to an environment. The compliance level shows the component versions that are successfully
+deployed to that environment. For more information about the concepts of inventory and compliance,
+see <a class="xref" href="env_compliance.html" title="The inventory for an environment lists the component versions that are intended to be deployed to that environment. Compliance shows whether the environment contains those component versions.">Environment inventory and compliance</a>.<p class="p">When you create application processes, you
+can allow the server to manage the environment inventory and compliance automatically, or you can
+manage the inventory and compliance yourself. If the inventory management is automatic, the server
+automatically updates the inventory and compliance for each environment. When you run an application
+process, the server adds the selected component versions to the environment inventory. Similarly,
+when component processes run, the server updates the inventory to show which component versions were
+deployed and which component versions were not.</p><p class="p">For example, assume that an application
+process deploys one component version, but the component deployment process for another component
+version fails. In this case, the server sets the environment inventory to include the two component
+versions. The server also sets the compliance to include only the component version that was
+deployed.</p><p class="p">As an alternative, you can manage the environment inventory and compliance manually.
+In this case, you add steps that make specific changes to the inventory and
+compliance.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskinventory_manage_app__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">In the settings for the application process, set <span class="ph uicontrol">Inventory
+Management</span> to <span class="ph uicontrol">Advanced</span>.</span></li><li class="li step stepexpand"><span class="ph cmd">In the application process, add steps to install, uninstall,
+or configure component versions as usual.</span></li><li class="li step stepexpand">
+<span class="ph cmd">Add the <span class="ph uicontrol">Component Inventory Update</span> utility step, and then specify the
+properties for the step as described in <a class="xref" href="app_process_inventory_update.html" title="This step updates the inventory and compliance for the environment.">Inventory Update</a>.</span>
+<div class="itemgroup info">Specifically, specify the component to update the inventory for and the changes to make to the
+inventory and compliance. You can add as many Component Inventory Update steps to the process as you
+need.</div>
+<div class="itemgroup stepxmp">
+<p class="p">For example, to add a component version to the inventory and set the compliance to active,
+specify the following properties: select the component; from the <span class="ph uicontrol">Action</span> list,
+select <span class="ph uicontrol">Add Desired Inventory</span>; and from the <span class="ph uicontrol">Status</span>
+list, select <span class="ph uicontrol">Active</span>.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> <span class="ph" id="inventory_manage_app__advanced_inventory">The Component Inventory Update and Snapshot Inventory Update steps
+are available only in application processes that have <span class="ph uicontrol">Inventory Management</span>
+set to <span class="ph uicontrol">Advanced</span>.</span></div>
+</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If you use snapshots in application processes, add the <span class="ph uicontrol">Snapshot Inventory
+Update</span> utility step. Specify whether to add a snapshot version to or remove a snapshot
+version from the inventory, as described in <a class="xref" href="app_process_snap_update.html" title="Updates the snapshot inventory and compliance for the environment.">Snapshot Inventory Update</a>.</span>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/env_compliance.html" title="The inventory for an environment lists the component versions that are intended to be deployed to that environment. Compliance shows whether the environment contains those component versions.">Environment inventory and compliance</a></div></div></nav></article></main></body></html>

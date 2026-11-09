@@ -1,0 +1,47 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="If you have an engine, you can connect it to a Keystone server for a new cloud."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="install_engine_new_keystone"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Connecting engines to Keystone servers</title></head><body id="install_engine_new_keystone"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Connecting engines to Keystone servers</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fdc3c1e7-612e-41e4-94a3-f0ac12c85f85">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">If you have an engine, you can connect it to a Keystone server for a new
+  cloud.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskinstall_engine_new_keystone__prereq__1">Before you begin</h2></div>
+<ul class="ul">
+<li class="li">You must have an engine that is configured.
+     </li>
+<li class="li">You must have an OpenStack Keystone server.</li>
+</ul>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskinstall_engine_new_keystone__context__1">About this task</h2></div>These steps configure an engine to accept connections to a new cloud. </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskinstall_engine_new_keystone__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the engine, open Heat configuration file.</span>
+<div class="itemgroup info">By default, this file is in the location <span class="ph filepath">/etc/heat/heat.conf</span> .</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In this file, find the <span class="keyword parmname">allowed_auth_uris</span> property in both the
+<span class="keyword parmname">auth_password</span> and, if applicable, the <span class="keyword parmname">ec2authtoken</span>
+sections.</span>
+<div class="itemgroup info">This property is a comma-separated list of Keystone servers that the engine can
+contact.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add the complete URL to the Keystone server to each <span class="keyword parmname">allowed_auth_uris</span>
+property.</span>
+<div class="itemgroup stepxmp" id="install_engine_new_keystone__allowed_auth_uris_example">For example, if the engine connects to clouds at
+<code class="ph codeph">cloud1.example.com</code> and <code class="ph codeph">cloud2.example.com</code>, the property might look
+like the following
+example:<pre class="pre codeblock"><code>allowed_auth_uris=http://cloud1.example.com:5000/v2.0,http://cloud2.example.com:5002/v2</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save and close the file.</span>
+</li><li class="li step stepexpand">
+    <span class="ph cmd">Restart the engine.</span>
+    <div class="itemgroup info">
+     <pre class="pre codeblock"><code>systemctl restart openstack-heat-engine.service</code></pre>
+    </div>
+   </li><li class="li step stepexpand">
+    <span class="ph cmd">Restart the Heat API.</span>
+    <div class="itemgroup info">
+     <pre class="pre codeblock"><code>systemctl start openstack-heat-api.service</code></pre>
+    </div>
+   </li></ol></section>
+</div>
+</article></main></body></html>

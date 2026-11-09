@@ -1,0 +1,87 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can create roles on the server and assign permissions to them."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_roles.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_roles_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating roles and assigning permissions</title></head><body id="security_roles_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating roles and assigning permissions</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-842c3d75-291f-4144-806d-1bdc34a33259">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can create roles on the server and assign permissions to them.</p>
+		<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_roles_create__context__1">About this task</h2></div>By default, new roles have no permissions. Therefore, when you create a role, you must
+			add all the permissions for that role. For example, if you do not add permission to view
+			the pages of the server user interface in the <span class="ph uicontrol">Web UI</span> section,
+			users can log in to the server but cannot see any information.<div class="p">Several default roles
+				are available. These roles have matching default users.<ul class="ul">
+					<li class="li"><span class="ph uicontrol">Administrator</span> role has all permissions. It is
+						appropriate for administrators.</li>
+					<li class="li"><span class="ph uicontrol">Automation Engineer</span> is an example of a role for a
+						typical non-adminstrator user. It includes permissions to create and edit
+						most things on the server, including applications, component, and processes,
+						but not the permission to delete things, change permissions, or change
+						system settings.</li>
+					<li class="li"><span class="ph uicontrol">UC Auto Configure</span> role has the permissions to create
+						resources.</li>
+					<li class="li"><span class="ph uicontrol">UC Auto Discovery</span> role is used by plug-ins that
+						discover information about systems, such as the <span class="keyword">WebSphere® Application Server</span>
+						- Deploy plug-in.</li>
+					<li class="li"><span class="ph uicontrol">UC Version Import</span> role has only the permission to
+						manage versions.</li>
+				</ul></div><p class="p">Create roles and assign them permissions as follows:</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_roles_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the server, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Role Configuration</span></span>.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">In the <span class="keyword wintitle">Role Configuration</span> pane, click <span class="ph uicontrol">Create
+Role</span>.</span></li><li class="li step stepexpand">
+				<span class="ph cmd">Enter a name for the role, and then click <span class="ph uicontrol">Save</span>.</span>
+			</li><li class="li step stepexpand">
+				<span class="ph cmd">Click the role to select it.</span>
+			</li><li class="li step stepexpand">
+				<span class="ph cmd">With the role selected, select the object type to which you want to assign permissions,
+					such as environments, applications, or components. </span>
+				<div class="itemgroup info">All security types for the selected object type are displayed. For information about
+					creating security types, see <a class="xref" href="security_types_create.html#security_types_create" title="Create security subtypes to help you manage access to objects through the server.">Creating security types</a>.<p class="p">In the
+						following figure, the security types for the <span class="ph uicontrol">Agent</span>
+						product area are displayed. Because the
+							<samp class="ph systemoutput sysout">agentSuper</samp> role is selected, only that role
+						is affected by permission changes to the <samp class="ph systemoutput sysout">Standard
+							Agent</samp> and <samp class="ph systemoutput sysout">agentManager</samp>
+						security types. That is, if you select the <span class="ph uicontrol">Agent</span>
+						object type for the <samp class="ph systemoutput sysout">deploySuper</samp> role, the
+						granted permissions reflect the settings that were defined the last time
+						that role was modified.</p><div class="p">
+						<div class="note tip note_tip"><span class="note__title">Tip:</span> Some users might no be unable to see agent relays in the
+							user interface, even though they were visible before the upgrade. You
+							can set the permission for these users to view agent relays: Click
+								<span class="ph uicontrol">Agent Relay</span> in the permissions area list, and
+							then select <span class="ph uicontrol">View Agent Relays</span>. </div>
+					</div><p class="p"><img class="image" id="security_roles_create__image_w23_j4p_pzb" src="../images/permissions.gif"></p></div>
+			</li><li class="li step stepexpand">
+				<span class="ph cmd">In the <span class="keyword wintitle">Permissions Granted to Role Members</span> pane of an
+					object type, grant permissions by selecting the associated checkbox for a
+					security type.</span>
+				<div class="itemgroup info">You can select all edit subpermissions by selecting the
+						<span class="ph uicontrol">Edit</span> check box. To deselect all subpermissions, clear
+					the corresponding check boxes. Select individual subpermissions by expanding the
+						<span class="ph uicontrol">Edit</span> list and clicking the corresponding check boxes.
+					For information about editing subpermissions, see <a class="xref" href="security_types.html#security_types" title="Security types define categories of objects on the server. You can put all objects into a single category, or you can put them in separate categories and give roles different access rights to different categories.">Security types</a><div class="note note note_note"><span class="note__title">Note:</span> If a role grants the Create permission for some object type, such as
+components, it is important that the role also grant the Edit Basic Settings and Manage Teams
+permissions for that type. Otherwise, the options for creating the object are limited.</div></div>
+				<div class="itemgroup info" data-hd-otherprops="ibm">For information on the permissions that are available, see
+						<a class="xref" href="security_roles_permission_ref.html" title="This table lists the permissions on the server that you can assign to roles.">Permission reference</a>.</div>
+			</li><li class="li step stepexpand"><strong>Required: </strong>
+				<span class="ph cmd">Click the <span class="ph uicontrol">Web UI</span> category, and specify the pages in the server
+					user interface that the role can access.</span>
+				<div class="itemgroup info">Each option in this list refers to a top-level page in the user interface.</div>
+				<div class="itemgroup stepxmp">For example, if you do not select the <span class="ph uicontrol">Applications Tab</span>
+					option in this list, users with this role do not see the top-level
+						<span class="ph uicontrol">Applications</span> tab when they log in to the server. You can select
+					each tab separately.</div>
+			</li><li class="li step stepexpand"><strong>Optional: </strong>
+				<span class="ph cmd">If the role users need system permissions, such as the ability to change permissions,
+					click <span class="ph uicontrol">Server Configuration</span>, and specify those permissions.</span>
+				<div class="itemgroup info">For more information, see <a class="xref" href="security_system.html" title="Set the server configuration permissions to define what users can do with the IBM DevOps Deploy (Deploy) server security, also referred to as system security. Typically, these permissions are granted to administrative roles.">Setting server configuration security</a>.</div>
+			</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Create a role from an existing role by clicking <img class="image" src="../images/copyRole_icon.png" alt="copy role"> icon next to the role you want to copy.</span>
+<div class="itemgroup info">Copying a role helps you save time in creating a similar role. The copied role duplicates the
+permission set of the existing role to allow to make minor modifications. </div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_roles_create__postreq__1">What to do next</h2></div>Assign roles to users by adding users or groups to teams. You cannot assign a role to a
+			user directly; users must be assigned roles when they are added to teams. See <a class="xref" href="security_teams_users.html" title="Assign users to teams so that users can be assigned to roles and work with objects that are associated with the teams.">Assigning users to teams</a>.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_roles.html" title="A role is a list of permissions that users have on the IBM DevOps Deploy (Deploy) server. These permissions include the ability to create, edit, and delete objects, such as applications, environments, and components. The permission also includes the parts of the server interface that users can access.">Roles and permissions</a></div></div></nav></article></main></body></html>

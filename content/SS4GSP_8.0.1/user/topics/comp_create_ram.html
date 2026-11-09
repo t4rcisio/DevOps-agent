@@ -1,0 +1,159 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="IBM Rational Asset Manager is a library management system for creating and governing software assets."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_create_ram"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating components from Rational Asset Manager</title></head><body id="comp_create_ram"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating components from Rational Asset
+Manager</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-636f8310-6042-49f7-863e-159b853b8dc8">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc"><span class="keyword">IBM® Rational® Asset Manager</span> is
+a library management system for creating and governing software assets.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_ram__prereq__1">Before you begin</h2></div>Install an agent that has access to the <span class="keyword">IBM Rational Asset Manager</span>
+server.<p class="p">To learn more about <span class="keyword">Rational Asset Manager</span>, see <a class="xref" href="http://www-01.ibm.com/support/knowledgecenter/SSUS84_7.5.2/com.ibm.ram.web.nav.doc/helpindex_ram.html?cp=SSUS84_7.5.2%2F0" target="_blank"><span class="keyword">Rational Asset Manager</span>
+</a>.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_ram__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">In <span class="ph">Deploy</span>,
+          click <span class="ph uicontrol">Components</span>, and then click <span class="ph uicontrol">Create
+            Component</span>.</span>
+        <div class="itemgroup info">The <span class="keyword wintitle">Create Component</span> window displays.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Specify a name and description for the component.</span>
+      </li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Teams</span> fields,
+specify the access information for the new component.</span></li><li class="li step stepexpand"><span class="ph cmd">To use a template for the new component,
+    select a template from the <span class="ph uicontrol">Template</span> list.</span>
+    <div class="itemgroup info">In this case, the component inherits source configuration, properties,
+      and processes from the template. For information about templates,
+      see <a class="xref" href="comp_template.html" title="With a component template, you can save and reuse component processes and properties and create components from them; template-based components inherit the template's properties and process.">Component templates</a>.</div></li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Source Configuration Type</span> list, select <span class="ph uicontrol">Rational Asset
+Manager</span>.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Specify the following parameters for the component:</span>
+<div class="itemgroup info"><dl class="dl parml">
+<dt class="dt pt dlterm"><span class="ph uicontrol">Repository URL</span></dt>
+<dd class="dd pd">The location of the <span class="keyword">Rational Asset Manager</span> repository.
+To find the repository URL, log on to <span class="keyword">Rational Asset Manager</span> from
+a web browser. Click <span class="ph menucascade"><span class="ph uicontrol">Help</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Extensions</span></span>. The repository URL is displayed in the <span class="ph uicontrol">Repository
+location</span> field, such as the following example:<pre class="pre codeblock"><code>http://ram.example.com:9080/ram</code></pre></dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">User</span></dt>
+<dd class="dd pd">The <span class="keyword">Rational Asset Manager</span> user
+name.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Password</span></dt>
+<dd class="dd pd">The password that is associated with the <span class="keyword">Rational Asset Manager</span> user
+name.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Unique ID</span></dt>
+<dd class="dd pd">The ID, or GUID, of the <span class="keyword">Rational Asset Manager</span> asset
+to load as a component source. In <span class="keyword">Rational Asset Manager</span>,
+the ID of an asset is displayed in the <span class="keyword wintitle">Attributes</span> section
+of the <span class="keyword wintitle">General Details</span> page for the asset.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Version Pattern</span></dt>
+<dd class="dd pd">A regular expression that represents the version of the <span class="keyword">Rational Asset Manager</span> asset
+to load as a component source. For example, <kbd class="ph userinput">(1\.[0-9]+).*</kbd> matches
+versions such as <code class="ph codeph">1.2</code> and <code class="ph codeph">1.2.3.4A</code>.
+If the expression matches more than one version, all versions are
+imported, up to the number in the <span class="ph uicontrol">Latest Build Count</span> field.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">State</span></dt>
+<dd class="dd pd">The state of the <span class="keyword">Rational Asset Manager</span> asset
+to load as a component source. Specify a value to limit the component
+to only assets with the specified state. <p class="p">States are defined in
+lifecycles in           <span class="keyword">Rational Asset Manager</span>.
+To learn more about lifecycles, see <a class="xref" href="http://www-01.ibm.com/support/knowledgecenter/SSUS84_7.5.2/com.ibm.ram.doc/topics/c_asset_lifecycle.html" target="_blank">Asset development and lifecycles</a> in the <span class="keyword">Rational Asset Manager</span> documentation.</p></dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Query</span></dt>
+<dd class="dd pd">The query to use to select an asset to load. Use this field only
+if you want to specify the asset with a complex query.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Latest Build Count</span></dt>
+<dd class="dd pd">The number of the search results to load. By default, only the
+most applicable result is loaded. However, to load more than one version
+or state of the asset, specify the number to load.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Extensions of files to Convert</span></dt>
+<dd class="dd pd">If text-type files must be converted into another character set, type the list of file
+extensions to be converted. Matching file types are converted into the default or system character
+set of the system where the agent is located. Separate list items with commas, for
+example:<pre class="pre codeblock"><code>txt,log,ini,sh</code></pre></dd>
+
+<dt class="dt pt dlterm">Charset</dt>
+<dd class="dd pd">If file types are listed in the <span class="ph uicontrol">Extensions of files
+to Convert</span> field, specify the character set to use. Otherwise,
+the file types are converted into the default or system character
+set of the system where the agent is located. </dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Include Dependent</span></dt>
+<dd class="dd pd">Select to load the related assets that the asset depends on.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Preserve Execute Permissions</span></dt>
+<dd class="dd pd">For Linux™ and UNIX™ operating systems, select this check box
+to retain the execute permissions for each file.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Preserve Execute Permissions</span></dt>
+<dd class="dd pd">For Linux and UNIX operating systems, select this check box
+to retain the execute permissions for each file.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Import Versions Automatically</span></dt>
+<dd class="dd pd">Select this check box to check for new versions periodically and
+to import new versions automatically. Also, if you select this check
+box, the server synchronizes the status of the component with the
+state of the asset.<p class="p">If you do not import versions automatically,
+you can import versions manually by clicking <span class="ph menucascade"><span class="ph uicontrol">Components</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected component</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Versions</span></span> and then clicking <span class="ph uicontrol">Import New Versions</span>.</p></dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Copy to CodeStation</span></dt>
+<dd class="dd pd">This option, which is selected by default, creates tamper-protected copies of the artifacts and
+stores them in the embedded artifact management system, CodeStation. If the check box is cleared,
+only metadata about the artifacts is imported. In most cases, keep this check box selected. The
+default for this setting is in the system setting <span class="ph uicontrol">Components copy to CodeStation by
+default</span>. For more information, see <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Default Version Type</span></dt>
+<dd class="dd pd">Specify how to import versions into CodeStation:<dl class="dl">
+<dt class="dt dlterm"><span class="ph uicontrol">Full</span></dt>
+<dd class="dd">Each version is comprehensive and contains all artifacts.</dd>
+
+<dt class="dt dlterm"><span class="ph uicontrol">Incremental</span></dt>
+<dd class="dd">Each version contains a subset of artifacts.</dd>
+</dl></dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Use the system's default version import agent/tag</span></dt>
+<dd class="dd pd">If this parameter is selected, the agent or tag that you specified on the <span class="keyword wintitle">System
+Settings</span> page is used to import component artifacts. Agents must have access to the
+system where the artifacts are located. For more information, see <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Import new component versions using a single agent</span></dt>
+<dd class="dd pd">If this parameter is selected, use the <span class="ph uicontrol">Agent for Version
+Imports </span>                 field to identify the agent that
+is used to import artifacts into the component. The              
+  agent must have access to the system where the artifacts are located.
+To import                 artifacts from where the server is located,
+install an agent in the same location                 and specify
+that agent.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Import new component versions using any agent with
+the specified tag</span></dt>
+<dd class="dd pd">If this parameter is selected, use the <span class="ph uicontrol">Agent Tag for
+Version Imports </span>                 field to identify the
+tag that is used to select agents to import artifacts into the   
+             component. All tagged agents must have access to the
+system where the artifacts are                 located.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Inherit Cleanup Settings</span></dt>
+<dd class="dd pd">To apply the component version cleanup settings that are specified on the <span class="keyword wintitle">System
+                  Settings</span> page, select the <span class="ph uicontrol">Inherit Cleanup
+                  Settings</span> check box. If this check box is cleared, you must specify how
+                long to keep component versions. <span class="ph" id="comp_create_ram__d398e246">For more information
+                  about cleaning up component versions, see <a class="xref" href="settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a>.</span></dd>
+</dl></div></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span></li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_ram__result__1">Results</h2></div><span class="ph" id="comp_create_ram__d398e261">The new component is listed on the
+<span class="keyword wintitle">Components</span> page. The <span class="keyword wintitle">Versions</span> tab shows the available
+versions of the component.</span> If you selected the <span class="ph uicontrol">Import Versions
+Automatically</span> check box, versions are displayed automatically. Otherwise, click
+<span class="ph uicontrol">Import New Versions</span> to show the available versions. Depending on the number
+and size of the artifacts, it might take time before the versions are displayed. To see the
+artifacts in the component, click a component version. </section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_ram__postreq__1">What to do next</h2></div>Create processes for the component. See <a class="xref" href="comp_process_configure.html" title="A component process is a series of user-defined steps that operate on a component's artifacts. You create a component process in two steps: first, you configure basic information, such as name; second, you use the process editor to assemble the process.">Creating component processes</a>.</section>
+</div>
+
+</article></main></body></html>

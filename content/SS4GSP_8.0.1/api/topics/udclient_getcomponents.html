@@ -1,0 +1,95 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Get information about all components on the server"><meta name="DC.subject" content="udclient commands, getComponents, udclient command, command-line commands"><meta name="keywords" content="udclient commands, getComponents, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_getcomponents"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>getComponents</title></head><body id="udclient_getcomponents"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">getComponents</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-9a593fed-ce43-4abd-9388-9dcf7276ae3c">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Get information about all components on the server</p>
+<section class="section">
+This command returns a JSON representation of all components on the server.
+</section>
+<section class="section"><h2 id="udclient_getcomponents__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  getComponents [parameters]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_getcomponents__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_getcomponents__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_getcomponents__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_getcomponents__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_getcomponents__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_getcomponents__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_getcomponents__composite_params__entry__1"><span class="keyword parmname">active</span></td>
+<td class="entry" headers="udclient_getcomponents__composite_params__entry__2">boolean</td>
+<td class="entry" headers="udclient_getcomponents__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_getcomponents__composite_params__entry__4"></td>
+</tr>
+</tbody></table>
+
+</section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_getcomponents__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  getComponents</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_getcomponents__title__6" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>[
+  {
+    "id": "69a6a5bd-583b-4b40-bd47-54b28f5aa1e6",
+    "name": "JPetStore-APP",
+    "description": "",
+    "created": 1387315824908,
+    "importAutomatically": false,
+    "useVfs": true,
+    "active": true,
+    "deleted": false,
+    "defaultVersionType": "FULL",
+    "cleanupDaysToKeep": 0,
+    "cleanupCountToKeep": 0,
+    "tags": [
+      {
+        "id": "d140ae5a-dfb0-477a-910b-762cc0d99cc6",
+        "name": "Tag2",
+        "color": "#7fff00",
+        "description": "",
+        "objectType": "Component"
+      }
+    ],
+    "user": "admin"
+  },
+  {
+    "id": "f4a37f52-7d96-4fb5-b43b-57166b177e7c",
+    "name": "JPetStore-DB",
+    "description": "",
+    "created": 1387316389625,
+    "importAutomatically": false,
+    "useVfs": true,
+    "active": true,
+    "deleted": false,
+    "defaultVersionType": "FULL",
+    "cleanupDaysToKeep": 0,
+    "cleanupCountToKeep": 0,
+    "tags": [
+    ],
+    "user": "admin"
+  },
+  {
+    "id": "76299d8e-c328-42f4-99ab-aa7bfee7aa14",
+    "name": "JPetStore-WEB",
+    "description": "",
+    "created": 1387316469977,
+    "importAutomatically": false,
+    "useVfs": true,
+    "active": true,
+    "deleted": false,
+    "defaultVersionType": "FULL",
+    "cleanupDaysToKeep": 0,
+    "cleanupCountToKeep": 0,
+    "tags": [
+    ],
+    "user": "admin"
+  }
+]</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_component_get.html" title="This command returns a JSON representation of all components on the server.">Get information about all components on the server</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

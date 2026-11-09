@@ -1,0 +1,444 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The following example describes how to use the REST commands to deploy an application."><meta name="DC.subject" content="REST commands, deploying applications, application deployments"><meta name="keywords" content="REST commands, deploying applications, application deployments"><meta name="DC.relation" scheme="URI" content="../../user/topics/c_node_tutorialsHowTo.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_api_ref_example"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>How-to: Deploy applications by using REST commands</title></head><body id="rest_api_ref_example"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">How-to: Deploy applications by using REST commands</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5486a454-77b2-4793-82d6-5b121e45df7d">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">The following example describes how to use the REST commands
+to deploy an application.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrest_api_ref_example__prereq__1">Before you begin</h2></div> This example follows the steps in the tutorial <a class="xref" href="../../tutorial/topics/quickstart_abstract.html" title="In this tutorial, you create a simple application with IBM DevOps Deploy (Deploy). You use standard plug-ins to create a component and define an application that deploys the component to an environment.">Create a simple helloWorld deployment</a>. Review the tutorial before
+you attempt to follow this example. Configure your system as described
+in <a class="xref" href="../../tutorial/topics/quickstart_configure.html" title="To deploy the tutorial component, or any component, you must have an agent. An agent is a lightweight process that runs on a target computer and does the actual work of deploying components.">Configure the helloWorld tutorial system</a>. Substitute values for
+your server name, user name, and password where appropriate.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrest_api_ref_example__context__1">About this task</h2></div>This example shows the use of the Linux™ <span class="keyword cmdname">curl</span> program to run
+REST commands. You can use many different programs or programming
+languages to run REST commands. The code authenticates with the server
+by specifying the user name and password on the command line. To learn
+more about running REST commands and authentication, see <a class="xref" href="rest_api_ref_using.html" title="Many different programs can run REST commands. To run the command, you call a method on a REST resource and pass parameters or a request in JSON format.">Running REST commands</a> and <a class="xref" href="rest_api_ref_authenticating.html" title="The way that you authenticate to run REST commands depends on how the server is set up and the tool that you are using to run the commands.">Authenticating for REST commands</a>.<p class="p">The
+server that is used in this example is <span class="ph filepath">server.example.com</span>.
+The user is <kbd class="ph userinput">nsmith</kbd> and the password is <kbd class="ph userinput">passwd</kbd>.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrest_api_ref_example__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Create and import a component.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">createComponent</span> PUT command
+to create the component.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd
+  https://server.example.com:8443/cli/component/create
+  -X PUT -d @newComponent.json</code></pre><div class="note note note_note"><span class="note__title">Note:</span> You must enter commands
+on a single line. Commands are split onto different lines here for
+clarity.</div>The following JSON file represents the component:<pre class="pre codeblock language-json"><code>{
+  "name": "helloWorld",
+  "description": "",
+  "importAutomatically": false,
+  "useVfs": true,
+  "sourceConfigPlugin": "File System (Versioned)",
+  "defaultVersionType": "FULL",
+  "properties": {
+    "FileSystemVersionedComponentProperties/basePath": "/home/user1/artifacts/shared/helloWorld"
+  }
+}</code></pre></div><div class="itemgroup stepresult">The command returns a result that
+is similar to the following JSON information:<pre class="pre codeblock language-json"><code>{
+  "id":"cf355787-a772-4533-be45-3e169e9da6eb",
+  "securityResourceId":"23504603-ab8c-4740-bc2d-d18c08f790e9",
+  "name":"helloWorld",
+  "description":"",
+  "created":1396878409753,
+  "importAutomatically":false,
+  "useVfs":true,
+  "active":true,
+  "integrationFailed":false,
+  "deleted":false,
+  "defaultVersionType":"FULL",
+  "cleanupDaysToKeep":0,
+  "cleanupCountToKeep":0,
+  "tags":[],
+  "user":"nsmith"
+}</code></pre></div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">setComponentProperty</span> PUT
+command to set a component property.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd 
+  "https://server.example.com:8443/cli/
+  component/propValue?component=helloWorld&amp;name=helloHome&amp;value=c%3A%5ChelloWorld" -X PUT</code></pre></div>
+<div class="itemgroup stepresult">The command returns a result similar to the following
+JSON information:<pre class="pre codeblock language-json"><code>{
+  "id":"194b6e0c-3f30-4d9a-b3cf-dd61dd1a7328",
+  "name":"helloHome",
+  "value":"c:\\helloWorld",
+  "secure":false
+}</code></pre></div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">importVersions</span> PUT command
+to import the component version.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd 
+  https://server.example.com:8443/cli/component/integrate
+  -X PUT -d {"component":"helloWorld"}</code></pre></div><div class="itemgroup stepresult">The
+command returns the following result:<pre class="pre codeblock language-json"><code>{}</code></pre></div>
+</li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">createComponentProcess</span> PUT command
+to create a component process.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd
+  https://server.example.com:8443/cli/componentProcess/create
+  -X PUT -d @componentProcess.json
+</code></pre>The following JSON file represents this component process:<pre class="pre codeblock language-json"><code>{
+  "active": "true",
+  "component": "helloWorld",
+  "configActionType": "ADD",
+  "defaultWorkingDir": "${p:resource/work.dir}/${p:component.name}",
+  "description": "",
+  "inventoryActionType": "ADD",
+  "name": "helloProcess",
+  "propDefs": [],
+  "rootActivity": {
+    "children": [
+      {
+        "allowFailure": false,
+        "children": [],
+        "commandName": "Delete Files and Directories",
+        "impersonationUseSudo": false,
+        "name": "Clean work space",
+        "pluginName": "File Utils",
+        "pluginVersion": 31,
+        "properties":{
+            "baseDir":".",
+            "includes":"*",
+            "excludes":"",
+            "followSymlinks":"false",
+            "caseSensitive":"true"
+         },
+        "showHidden": false,
+        "type": "plugin",
+        "useImpersonation": false
+      },
+      {
+        "allowFailure": false,
+        "children": [],
+        "commandName": "Download Artifacts",
+        "impersonationUseSudo": false,
+        "name": "Download Artifacts",
+        "pluginName": "IBM UrbanCode Deploy Versioned File Storage",
+        "pluginVersion": 18,
+        "properties":{
+           "directoryOffset":".",
+           "artifactSetBaseDir":"",
+           "fileIncludePatterns":"**/*",
+           "fileExcludePatterns":"",
+           "syncMode":"true",
+           "fullVerification":"true",
+           "setFileExecuteBits":"false",
+           "verifyFileIntegrity":"false",
+           "repositoryUrl":"${p:server.url}/vfs",
+           "repositoryId":"${p:component/code_station/repository}",
+           "label":"${p:version.name}",
+           "serverUrl":"${p:server.url}",
+           "compId":"${p:component.id}",
+           "resId":"${p:resource.id}",
+           "charset":""
+        },
+        "showHidden": false,
+        "type": "plugin",
+        "useImpersonation": false
+      },
+      {
+         "allowFailure":false,
+         "children": [],
+         "commandName":"Create .zip File",
+         "impersonationUseSudo":false,
+         "name":"Compress artifacts",
+         "pluginName":"File Utils",
+         "pluginVersion":31,
+         "properties":{
+            "zipName":"helloWorld.zip",
+            "baseDir":".",
+            "includes":"*",
+            "excludes":"",
+            "update":"false",
+            "followSymlinks":"false",
+            "caseSensitive":"true"
+         },
+        "showHidden": false,
+        "type": "plugin",
+        "useImpersonation": false
+      },
+      {
+         "allowFailure":false,
+         "children": [],
+         "commandName":"Move Directory",
+         "impersonationUseSudo":false,
+         "name":"Deploy artifacts",
+         "pluginName":"File Utils",
+         "pluginVersion":31,
+         "properties":{
+            "sourceDir":".",
+            "destDir":"${p:helloHome}/target",
+            "includes":"*.zip",
+            "excludes":"",
+            "mapperRules":""
+         },
+        "showHidden": false,
+        "type": "plugin",
+        "useImpersonation": false
+      },
+      {
+        "children": [],
+        "name": "FINISH",
+        "type": "finish"
+      }
+    ],
+    "edges": [
+      {
+        "to": "Clean work space",
+        "type": "ALWAYS",
+        "value": ""
+      },
+      {
+        "from": "Clean work space",
+        "to": "Download Artifacts",
+        "type": "ALWAYS",
+        "value": ""
+      },
+      {
+        "from": "Download Artifacts",
+        "to": "Compress artifacts",
+        "type": "ALWAYS",
+        "value": ""
+      },
+      {
+        "from": "Compress artifacts",
+        "to": "Deploy artifacts",
+        "type": "ALWAYS",
+        "value": ""
+      },
+      {
+        "from": "Deploy artifacts",
+        "to": "FINISH",
+        "type": "ALWAYS",
+        "value": ""
+      }
+    ],
+    "name": "GRAPH",
+    "offsets": [
+      {
+        "name": "Clean work space",
+        "x": "-65",
+        "y": "90"
+      },
+      {
+        "name": "Download Artifacts",
+        "x": "-70",
+        "y": "210"
+      },
+      {
+        "name": "Compress artifacts",
+        "x": "-70",
+        "y": "290"
+      },
+      {
+        "name": "Deploy artifacts",
+        "x": "-65",
+        "y": "370"
+      },
+      {
+        "name": "FINISH",
+        "x": "-60",
+        "y": "450"
+      }
+    ],
+    "type": "graph"
+  },
+  "status": "Active",
+  "takesVersion": "true"
+}</code></pre></div><div class="itemgroup stepresult">The command returns a result that
+is similar to the following JSON information:<pre class="pre codeblock language-json"><code>{
+  "id":"12f65517-5fc1-44ff-a58b-2401cfba8f2f",
+  "name":"helloProcess",
+  "description":"",
+  "defaultWorkingDir":"${p:resource\/work.dir}\/${p:component.name}",
+  "takesVersion":true,
+  "inventoryActionType":"ADD",
+  "status":"Active",
+  "active":true,
+  "versionCount":1,
+  "version":1,
+  "commit":0,
+  "path":"components\/cf355787-a772-4533-be45-3e169e9da6eb\/processes\/12f65517-5fc1-44ff-a58b-2401cfba8f2f"
+}</code></pre></div></li><li class="li step stepexpand"><span class="ph cmd">Create an application, and then associate the component
+with the application.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">createApplication</span> PUT command
+to create an application.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd
+  https://server.example.com:8443/cli/application/create
+  -X PUT -d @newApplication.json</code></pre>The following JSON file
+represents the application:<pre class="pre codeblock language-json"><code>{
+  "name": "hello Application",
+  "description": "",
+  "notificationScheme": "None",
+  "enforceCompleteSnapshots": "false"
+}</code></pre></div><div class="itemgroup stepresult">The command returns a result that
+is similar to the following JSON information:<pre class="pre codeblock language-json"><code>{
+  "id":"932452cc-3562-4545-8de5-c57aa7efbcc4",
+  "securityResourceId":"2bc72218-dbfe-4c11-b16f-752b7ca63d06",
+  "name":"hello Application",
+  "description":"",
+  "created":1396882026943,
+  "enforceCompleteSnapshots":false,
+  "active":true,
+  "tags":[],
+  "user":"nsmith"
+}</code></pre></div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">addComponentToApp</span> PUT command
+to associate the component with the application.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd 
+  "https://server.example.com:8443/cli/
+  application/addComponentToApp?component=helloWorld&amp;application=hello%20Application"
+  -X PUT</code></pre></div><div class="itemgroup stepresult">The command returns the
+following result:<pre class="pre codeblock language-json"><code>{}</code></pre></div></li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Create an environment, and associate it with a resource. </span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">createEnvironment</span> PUT command
+to create an environment.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd 
+  "https://server.example.com:8443/cli/environment/createEnvironment?application=hello%20Application&amp;name=helloDeploy"
+  -X PUT</code></pre></div><div class="itemgroup stepresult">The command returns the
+ID of the environment, which is similar to the following string:<pre class="pre codeblock"><code>2142c0e3-7ebe-4a2f-9e0d-14ccacc70a79</code></pre></div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">addEnvironmentBaseResources</span> PUT
+command to associate the resource that you configured earlier with
+the environment.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd 
+  "https://server.example.com:8443/cli/environment/addBaseResource?application=hello%20Application&amp;environment=helloDeploy&amp;resource=%2FhelloWorld%20Tutorial"
+  -X PUT</code></pre></div><div class="itemgroup stepresult">This command does not return
+a result if the resource is correctly associated with the environment.</div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">createResource</span> PUT command
+to map the helloWorld component to the agent resource.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd 
+  https://server.example.com:8443/cli/resource/create 
+  -X PUT -d @componentResource.json</code></pre>The
+following JSON file represents the component
+resource:<pre class="pre codeblock language-json"><code>{
+  "roleId":"09456abd-65e3-469e-94c6-a6a873b971a8",
+  "name":"helloWorld",
+  "description":"",
+  "inheritTeam":"true",
+  "useImpersonation":"false",
+  "roleProperties":{},
+  "parentId":"b2ff919e-b4c0-4d13-8973-eff44e4835e2",
+  "teamMappings":[]
+}</code></pre></div><div class="itemgroup stepresult">The command returns a result that
+is similar to the following JSON information:<pre class="pre codeblock language-json"><code>{
+  "id":"ba958487-fb86-4290-9240-da766af37963",
+  "securityResourceId":"66685b67-21ab-411d-99bb-f577a74d88b3",
+  "name":"helloWorld",
+  "path":"\/helloWorld Tutorial\/fit-vm11-157\/helloWorld",
+  "active":true,
+  "description":"",
+  "inheritTeam":true,
+  "impersonationPassword":"****",
+  "impersonationUseSudo":false,
+  "impersonationForce":false,
+  "type":"subresource",
+  "status":"ONLINE",
+  "hasAgent":true,
+  "tags":[]
+}</code></pre></div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">addTagToResource</span> PUT command
+to add a tag to the component resource.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd
+  "https://server.example.com:8443/cli/
+  resource/tag?resource=ba958487-fb86-4290-9240-da766af37963&amp;tag=blueCycle&amp;color=0000FF"
+  -X PUT</code></pre></div><div class="itemgroup stepresult">This command does not return
+a result if the component is correctly tagged.</div></li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">createApplicationProcess</span> PUT
+command to create an application process.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd
+  https://server.example.com:8443/cli/applicationProcess/create
+  -X PUT -d @applicationProcess.json</code></pre>The
+following JSON file represents the application process. The application ID is the same as the ID
+that is returned in step
+3.<pre class="pre codeblock language-json"><code>{
+  "application": "932452cc-3562-4545-8de5-c57aa7efbcc4",
+  "description": "",
+  "inventoryManagementType": "AUTOMATIC",
+  "name": "hello App Process",
+  "offlineAgentHandling": "PRE_EXECUTION_CHECK",
+  "rootActivity": {
+    "children": [
+      {
+        "children": [{
+          "children": [{
+            "allowFailure": false,
+            "children": [],
+            "componentName": "helloWorld",
+            "componentProcessName": "helloProcess",
+            "name": "Deploy helloWorld",
+            "properties": {},
+            "type": "componentProcess"
+          }],
+          "componentName": "helloWorld",
+          "name": "inventoryVersionCheck",
+          "status": "Active",
+          "type": "inventoryVersionDiff"
+        }],
+        "componentName": "helloWorld",
+        "failFast": "false",
+        "maxIteration": "-1",
+        "name": "Deploy helloWorld",
+        "runOnlyOnFirst": "false",
+        "type": "componentEnvironmentIterator"
+      },
+      {
+        "children": [],
+        "name": "FINISH",
+        "type": "finish"
+      }
+    ],
+    "edges": [
+      {
+        "to": "Deploy helloWorld",
+        "type": "ALWAYS",
+        "value": ""
+      },
+      {
+        "from": "Deploy helloWorld",
+        "to": "FINISH",
+        "type": "ALWAYS",
+        "value": ""
+      }
+    ],
+    "name": "GRAPH",
+    "offsets": [
+      {
+        "name": "Deploy helloWorld",
+        "x": "-35",
+        "y": "210"
+      },
+      {
+        "name": "FINISH",
+        "x": "0",
+        "y": "420"
+      }
+    ],
+    "propDefs": [],
+    "type": "graph"
+  }
+}</code></pre></div><div class="itemgroup stepresult">The command returns a result that
+is similar to the following JSON information:<pre class="pre codeblock language-json"><code>{
+  "id":"37d563ce-7885-48f1-b8c0-f79046c0f024",
+  "name":"hello App Process",
+  "description":"",
+  "active":true,
+  "inventoryManagementType":"AUTOMATIC",
+  "offlineAgentHandling":"PRE_EXECUTION_CHECK",
+  "versionCount":1,
+  "version":1,
+  "commit":0,
+  "path":"applications\/932452cc-3562-4545-8de5-c57aa7efbcc4\/processes\/37d563ce-7885-48f1-b8c0-f79046c0f024"
+}</code></pre></div></li><li class="li step stepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">requestApplicationProcess</span> PUT
+command to deploy the application.</span><div class="itemgroup stepxmp"><pre class="pre codeblock"><code>curl -k -u nsmith:passwd
+  https://server.example.com:8443/cli/applicationProcessRequest/request
+  -X PUT -d @applicationDeploy.json</code></pre>The following JSON
+file represents the deployment request:<pre class="pre codeblock language-json"><code>{
+  "application": "hello Application",
+  "applicationProcess": "hello App Process",
+  "environment": "helloDeploy",
+  "versions": [{
+    "version": "1.0",
+    "component": "helloWorld"
+  }]
+}</code></pre></div><div class="itemgroup stepresult">The command returns a result that
+is similar to the following JSON information:<pre class="pre codeblock language-json"><code>{"requestId":"bffff82f-ff69-4c07-b010-26ca3f21be39"}</code></pre></div>
+</li></ol></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/c_node_tutorialsHowTo.html" title="Instructions for specific features.">How-tos</a></div></div></nav></article></main></body></html>

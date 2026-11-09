@@ -1,0 +1,217 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Component processes are user-defined tasks that operate on components."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/quickstart_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="componentProcess.d12e2"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 2 Create a component process</title></head><body id="componentProcess.d12e2"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 2 Create a component process</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1890160-8e8e-4bf7-96d2-5e93036671c1">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Component processes are user-defined tasks that operate
+on components. </p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomponentProcess.d12e2__context__1">About this task</h2></div> <p class="p">A component process is a succession of commands that are called <dfn class="term">steps</dfn>. Steps can
+manipulate files, run system commands, set properties, pass information to other steps, and run
+programs. Steps are provided by <dfn class="term">automation plug-ins</dfn>. Processes are designed with the
+drag-and-drop process editor where you drag plug-in steps onto the design editor and configure them
+as you go. Several plug-ins come with the product and others are available, which work with many
+different types of software. In this tutorial, you use two plug-ins, both of which come with the
+product: <span class="ph uicontrol">FileUtils</span> and <span class="ph">Deploy</span> Versioned file storage. A component can have any number of processes
+defined for it, but a component must have at least one process. </p> <p class="p">In this lesson, you create a deployment process
+for the helloWorld component. Later, you create an application process
+that uses the component process to deploy the component.</p> <p class="p">To
+create the component process:</p> </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomponentProcess.d12e2__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Define the component process:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">On the "<span class="keyword wintitle">Component: helloWorld</span>" page, click the
+<span class="ph uicontrol">Processes</span> tab, and then click <span class="ph uicontrol">Create Process</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Process</span> window, type <kbd class="ph userinput">helloProcess</kbd> in
+the <span class="ph uicontrol">Name</span> field.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Accept the default values for the other fields, and click <span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup info">The <span class="ph uicontrol">Default Working Directory</span> field becomes the folder that the agent
+uses to do its work, such as downloading artifacts and creating temporary files. For the tutorial,
+the value becomes <span class="ph filepath">\agent_install\var\work\helloWorld</span>.</div>
+</li>
+</ol>
+<div class="itemgroup stepresult">The process is listed on the <span class="keyword wintitle">Processes</span> pane.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Open the <span class="ph uicontrol">helloProcess</span> process editor and go to
+<span class="ph uicontrol">Design</span>. </span>
+<div class="itemgroup stepresult">The process editor lists plug-ins and steps. The required <span class="ph uicontrol">Start</span>
+and <span class="ph uicontrol">Finish</span> steps represent the beginning and the end of the process and are
+automatically placed on the design area. You add steps to the process by dragging them onto the
+design area and arranging them between the <span class="ph uicontrol">Start</span> and
+<span class="ph uicontrol">Finish</span> steps.<br><img class="image" src="../images/qs-plugin-design-1.gif" alt="The process design editor"><br></div>
+</li><li class="li step stepexpand"><span class="ph cmd">Add a step that removes files from the working directory.</span>
+<div class="itemgroup info">To ensure that the agent works with the most recent files, remove
+files that remain from previous work:</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Step Palette</span> pane, click <span class="ph menucascade"><span class="ph uicontrol">Utilities</span></span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click and drag the <span class="ph uicontrol">Delete Files and Directories</span> step to the process
+editor.</span>
+<div class="itemgroup stepresult">Click the edit properties icon <img class="image" src="../images/edit_proc_step.gif" alt="">, and the <span class="keyword wintitle">Edit Properties</span> window opens, showing the properties for the
+step. Some of these properties are unique to the step, and others are the same for all
+steps.</div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Name</span> field, specify a
+name, for example, <kbd class="ph userinput">Clean work space</kbd>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Base Directory</span> field,
+specify a single period (<code class="ph codeph">.</code>).</span><div class="itemgroup info">This value resolves to the folder that you specified as the agent working directory, such as
+                                    <span class="ph filepath"><var class="keyword varname">&lt;DEPLOY_AGENT_HOME&gt;</var>/var/work</span>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click the <span class="ph uicontrol">Include</span> field, and in the <span class="keyword wintitle">Edit Text</span> box,
+specify an asterisk (<code class="ph codeph">*</code>); then, click <span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup info"> This parameter instructs the agent to remove all files in the working directory. </div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Accept the default values for the other properties, and then click
+<span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">The new step is displayed in the design area. Each step has two icons at the upper-right
+corner of the step. Click the <span class="ph uicontrol">Edit</span> icon <img class="image" src="../images/edit_icon.gif" alt=""> to reopen the <span class="keyword wintitle">Edit Properties</span> window where you can modify the step
+properties. Click the <span class="ph uicontrol">X</span> icon <img class="image" src="../images/delete_step.gif" alt=""> to delete the step and connections to or from it.<br><img class="image" src="../images/qs-plugin-design-2.gif" alt="The new process with one step"><br><p class="p">The <span class="ph uicontrol">Start</span> and <span class="ph uicontrol">Finish</span> steps are
+automatically connected to the step.</p></div></li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If the process step became disconnected from the <span class="ph uicontrol">Start</span> and
+<span class="ph uicontrol">Finish</span> steps, connect the <span class="ph uicontrol">Start</span> step to the
+<span class="ph uicontrol">Clean work space</span> step. Beginning with <span class="ph uicontrol">Start</span>, the
+connections between steps determine the process flow. You can define connections as you place steps
+or later.</span>
+
+</li><li class="li step stepexpand"><span class="ph cmd">Add a step to download the latest version of the component
+artifacts from the CodeStation repository.</span><div class="itemgroup info">The <span class="ph uicontrol">Download
+Artifacts</span> step is used in most deployment-type processes.
+This step downloads the specified version of the component artifacts
+to the agent's recently cleaned working directory. When you run the
+process, specify which version of the component artifacts to use.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+                        <span class="ph cmd">Click <span class="ph uicontrol">Repositories</span>, and under
+                                <span class="ph uicontrol">Artifact/Deploy</span> drag the <span class="ph uicontrol">Download
+                                Artifacts</span> step to the process editor.</span>
+                        <div class="itemgroup info">Be sure to highlight the connection arrow when you drag the step to
+                            the process editor so that connection arrows are automatically inserted
+                            from the previous step to the Finish step. See the highlighted
+                            connection arrow in this illustration: <img class="image" src="../images/qs_connection_hi-lite.gif" alt="Highlighted connection arrow as a step is dragged to the process editor"></div>
+                    </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click the <span class="ph uicontrol">Edit</span> icon <img class="image" src="../images/edit_icon.gif" alt="">, and in the <span class="keyword wintitle">Edit Properties</span> window, accept the default values; then,
+click <span class="ph uicontrol">OK</span>.</span>
+</li>
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If you didn't highlight the connection arrow when you dragged the step to the editor, complete
+these steps: </span>
+<div class="itemgroup info">
+<ol class="ol" type="i">
+<li class="li">Delete the connection arrow between the <span class="ph uicontrol">Clean work space</span> step and the
+<span class="ph uicontrol">Finish</span> step.</li>
+<li class="li">Draw a connection from the <span class="ph uicontrol">Clean work space</span> step to the
+<span class="ph uicontrol">Download Artifacts</span> step, and then connect the <span class="ph uicontrol">Download
+Artifacts</span> step to the <span class="ph uicontrol">Finish</span> step.</li>
+</ol>
+</div>
+<div class="itemgroup info">
+<div class="p">
+<div class="note tip note_tip"><span class="note__title">Tip:</span> To manually connect steps, move the mouse over one step. The arrow icon is
+displayed, as the following figure shows. You use this icon to connect steps to one another. <br><img class="image" src="../images/qs-plugin-design-3.gif" alt="The arrow icon"><br>. Click and drag the arrow icon over the subsequent step. The direction of the arrow defines
+the direction of the process flow.</div>
+</div>
+</div>
+<div class="itemgroup info">Except for connections from <span class="ph uicontrol">Start</span>, each connection has a
+<dfn class="term">conditional flag</dfn>. The conditional flag represents the process status that is required
+before the connection can be followed. The connection is followed only if the originating step is
+complete, and the specified condition is met. The possible conditions are as follows: success,
+failure, or either. The default condition is success, which is represented by a green check mark, as
+the following figure shows. In this example, the <span class="ph uicontrol">Download Artifacts</span> step is
+started only if the <span class="ph uicontrol">Clean work space</span> step finishes with a success condition.
+You can change the conditional flag by clicking the icon.<br><img class="image" src="../images/qs-plugin-design-5.gif" alt="The conditional flag"><br></div>
+</li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Add a step to create a compressed file.</span><div class="itemgroup info">In this
+example, the compressed file contains the files that were downloaded
+in the previous step.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Utilities</span>, and under <span class="ph uicontrol">FileUtils</span>, drag a
+<span class="ph uicontrol">Create .zip File</span> step to the process editor.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Edit Properties</span> window, specify the name: <kbd class="ph userinput">Compress
+artifacts</kbd>. (To open the <span class="keyword wintitle">Edit Properties</span> window, the click the
+<span class="ph uicontrol">Edit</span> icon <img class="image" src="../images/edit_icon.gif" alt="">.)</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">.zip File Name</span> field,
+type <kbd class="ph userinput">helloWorld.zip</kbd>.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Base Directory</span> field,
+type a single period (<code class="ph codeph">.</code>).</span><div class="itemgroup info"> The compressed
+file is created in the agent working directory.<div class="note note note_note"><span class="note__title">Note:</span> If you specify
+the final destination directory instead of the agent working directory,
+the following step would be unnecessary. However, in addition to moving
+the file, the following step demonstrates how to use the property
+that you created earlier.</div></div></li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the text editor that opens for the <span class="ph uicontrol">Include</span> field, type an asterisk
+(<code class="ph codeph">*</code>); then, click <span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup info">The compressed file contains all the files that were downloaded from the repository.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Accept the default values in the other fields, and click <span class="ph uicontrol">OK</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Verify that there is a connection from the <span class="ph uicontrol">Download Artifacts</span> step to
+the <span class="ph uicontrol">Compress artifacts</span> step. If the steps are not connected, manually connect
+them.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Add a step to move the artifacts.</span><div class="itemgroup info">This step
+moves the compressed file to the target folder. For simplicity, the
+tutorial moves the file to a directory in the <span class="ph filepath">\helloWorld</span> folder.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Expand <span class="ph uicontrol">Utilities</span>, and under <span class="ph uicontrol">FileUtils</span>, drag a
+<span class="ph uicontrol">Move Directory</span> step to the process editor.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="keyword wintitle">Edit Properties</span> window,
+specify the name <kbd class="ph userinput">Deploy artifacts</kbd>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Source Directory</span> field,
+type a single period (<code class="ph codeph">.</code>).</span></li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Destination Directory</span> field, type the following value:
+<code class="ph codeph">${p:helloHome}/target</code>.</span>
+<div class="itemgroup info">The <code class="ph codeph">${p:helloHome}</code> value refers to the property that you created earlier. The
+<span class="ph filepath">/target</span> directory is relative to the property value. If, for example, you
+defined the property value as <span class="ph filepath">/home/user1/artifacts/shared/helloWorld</span>, the file
+is moved to <span class="ph filepath">/home/user1/artifacts/shared/helloWorld/target</span>. For information
+about using properties, see <a class="xref" href="../../user/topics/ud_properties_overview.html" title="Properties are variables that store information about many different elements, including components, environments, processes, and applications. You can also set global properties for the system.">Properties</a>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the text box that opens for the <span class="ph uicontrol">Include Files</span> field, type:
+<code class="ph codeph">*.zip</code>; then, click <span class="ph uicontrol">Save</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Accept the default values in the other fields, and click <span class="ph uicontrol">OK</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Verify that there is a connection from the <span class="ph uicontrol">Compress artifacts</span> step to
+the <span class="ph uicontrol">Deploy artifacts</span> step.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Verify that there is a connection from the <span class="ph uicontrol">Deploy artifacts</span> step to the
+<span class="ph uicontrol">Finish</span> step.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the process by clicking <span class="ph uicontrol">Save</span> .</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomponentProcess.d12e2__result__1">Results</h2></div>The complete process for the helloWorld component looks like
+the following figure:<br><img class="image" src="../images/qs-plugin-design-6.gif" alt="The complete process for the helloWorld component"><br><p class="p">In this lesson, you created a component process to deploy the helloWorld component. </p><p class="p">You can use component processes to automate many tasks on
+components. Later in this tutorial, you create an application process
+to deploy the component.</p></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_6.2.0 SS4GSP_8.0.1" href="../../tutorial/topics/quickstart_abstract.html" title="In this tutorial, you create a simple application with IBM DevOps Deploy (Deploy). You use standard plug-ins to create a component and define an application that deploys the component to an environment.">Create a simple helloWorld deployment</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="docker_helmparameters_agent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Helm chart configuration parameters for agent</title></head><body id="docker_helmparameters_agent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Helm chart configuration parameters for agent</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6947220c-8247-4c6c-ab4d-09e4c0b64aa4">Edit online</a></span></div>
+
+<div class="body taskbody">
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdocker_helmparameters_agent__context__1">About this task</h2></div>
+<p class="p">The Helm chart has the following values that can be overridden using the
+<span class="keyword parmname">--set</span> parameter specified via <span class="keyword parmname">-f my_values.yaml</span>.</p>
+<table class="table" id="docker_helmparameters_agent__table_upm_trm_3fb"><caption></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="docker_helmparameters_agent__table_upm_trm_3fb__entry__1">Qualifier</th>
+<th class="entry" id="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">Parameter</th>
+<th class="entry" id="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Definition</th>
+<th class="entry" id="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Allowed Value</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1">image</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">pullPolicy</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Image Pull Policy</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Always, Never, or IfNotPresent. Defaults to Always</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">repository</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Name of image, including repository prefix (if required)</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">See <a class="xref" href="https://docs.docker.com/engine/reference/commandline/tag/#extended-description" target="_blank">Extended description of Docker tags</a></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">tag</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Docker image tag</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">See <a class="xref" href="https://docs.docker.com/engine/reference/commandline/tag/" target="_blank">Docker tag description</a></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">secret</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">An image pull secret used to authenticate with the image registry</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Empty (default) if no authentication is required to access the image registry.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1">persistence</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">enabled</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Determines if persistent storage will be used to hold the  server appdata directory contents.
+This should always be true to preserve server data on container restarts.</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Default value "true"</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">useDynamicProvisioning</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3"> Set to "true" if the cluster supports dynamic storage provisioning.</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Default value "false"</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">fsGroup</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3"> fsGroup value to use for gid when accessing persistent storage.</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Default value is "0"</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1">confVolume</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">name</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">The base name used when the Persistent Volume and/or Persistent Volume Claim for the agent
+conf directory is created by the chart.</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Default value is "conf"</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">existingClaimName</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">The name of an existing Persistent Volume Claim that references the Persistent Volume that
+will be used to hold the agent conf directory.</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">storageClassName</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">The name of the storage class to use when persistence.useDynamicProvisioning is set to
+"true".</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">size</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Size of the volume to hold the agent conf directory.</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1">relayUri</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Agent relay URI if the agent is connecting to a relay. If multiple relays are specified,
+separate them with commas. For example, random:(http://relay1:20080,http://relay2:20080)</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1">serverUri</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">The server URI. If multiple servers are specified, separate them with commas. For example,
+random: (wss://examplehost1.com:7919,wss://examplehost2.com:7919).</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1">agentTeams</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3"> Teams to add this agent to when it connects to the server. Multiple team specifications are
+separated with a comma.</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1">userUtils</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">existingClaimName</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">The name of an existing Persistent Volume Claim that references the Persistent Volume holding
+the user specified utilities.</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">executablesPath</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Comma separated list of relative directory paths</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Default value is top-level directory for the specified PV, '.'</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1">resources</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">constraints.enabled</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Specifies whether the resource constraints specified in this helm chart are enabled.</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Default value is true.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">limits.cpu</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Describes the maximum amount of CPU allowed</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Default is 2000m. See Kubernetes - <a class="xref" href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu" target="_blank">meaning of CPU</a></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">limits.memory</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Describes the maximum amount of memory allowed</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Default is 2Gi. See Kubernetes - <a class="xref" href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory" target="_blank">meaning of Memory</a></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">requests.cpu</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Describes the minimum amount of CPU required - if not specified will default to limit (if
+specified) or otherwise implementation-defined value.</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Default is 1000m. See Kubernetes - <a class="xref" href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu" target="_blank">meaning of CPU</a></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__1"></td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__2">requests.memory</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__3">Describes the minimum amount of memory required If not specified, the memory amount will
+default to the limit (if specified) or the implementation-defined value</td>
+<td class="entry" headers="docker_helmparameters_agent__table_upm_trm_3fb__entry__4">Default is 1Gi. See Kubernetes - <a class="xref" href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory" target="_blank">meaning of Memory</a></td>
+</tr>
+</tbody></table>
+</section>
+</div>
+
+</article></main></body></html>

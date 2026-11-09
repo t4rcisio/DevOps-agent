@@ -1,0 +1,51 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="With appropriate permissions, you can add, edit, enable, and delete the default logs."><meta name="DC.subject" content="troubleshoot, log file"><meta name="keywords" content="troubleshoot, log file"><meta name="DC.relation" scheme="URI" content="../../user/topics/log_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="troubleshoot_logsize"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Managing the logs</title></head><body id="troubleshoot_logsize"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Managing the logs</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6399fb4e-0f0f-4de4-afe1-8f0176d71142">Edit online</a></span></div>
+
+
+
+<div class="body taskbody"><p class="shortdesc">With appropriate permissions, you can add, edit, enable, and delete the default
+        logs.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasktroubleshoot_logsize__context__1">About this task</h2></div>
+<p class="p">The <span class="ph uicontrol">Other Logs</span> page lists some default logs, such as audit, cleanup,
+                license, login audit, and user audit. Each of these logs contains information for
+                different purposes. </p>
+            <p class="p">You can manage the default logs on this page with several actions.</p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasktroubleshoot_logsize__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+                <span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Logging</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"> Other Logs</span></span>. </span>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Edit a log from the actions column.</span>
+                <div class="itemgroup info">The <span class="ph uicontrol">Edit Log</span> window allows you to edit the following
+                        information:<ul class="ul" id="troubleshoot_logsize__ul_cmb_gmg_ytb">
+                        <li class="li">The rotation type of the log file, such as hourly, daily, weekly,
+                            monthly or with respect to its size</li>
+                        <li class="li">The number of files to generate</li>
+                        <li class="li">The maximum size of log files</li>
+                        <li class="li">The enablement status of the log</li>
+                        <li class="li">Add or delete loggers</li>
+                    </ul></div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Add a log by clicking <span class="ph uicontrol">New Log</span> and provide information as
+                    mentioned in step 2.</span>
+                <div class="itemgroup info">
+                    <p class="p">The <span class="ph uicontrol">New Log </span>feature allows you to send log data to a
+                        specific file. It is the Log4j 2.x implementation of Log4j 1.x appenders as
+                        used in v7.2.2 and earlier versions.</p>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Delete a custom log.</span>
+                <div class="itemgroup info">Note that you cannot delete default logs.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Enable or disable a log.</span>
+                <div class="itemgroup info">The cleanup log is enabled by default and cannot be disabled. However, some
+                    logs are disabled by default, such as server audit and licensing.<div class="note note note_note" id="troubleshoot_logsize__note_il2_n5y_d3c"><span class="note__title">Note:</span> If you are upgrading to <span class="ph">IBM DevOps Deploy (Deploy)</span>
+                        version 7.2.3.0 or later, you must manually enable the audit log.
+                    </div></div>
+            </li><li class="li step stepexpand"><strong>Optional: </strong>
+                <span class="ph cmd">Perform a bulk operation by selecting one or more logs, and enable, disable, or
+                    delete them simultaneously.</span>
+            </li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/log_ov.html" title="The server maintains logs for auditing and troubleshooting.">Logging</a></div></div></nav></article></main></body></html>

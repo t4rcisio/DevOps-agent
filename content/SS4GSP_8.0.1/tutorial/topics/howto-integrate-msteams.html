@@ -1,0 +1,136 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Integrate Microsoft Teams with IBM DevOps Deploy (Deploy) to post notifications automatically to your Teams channel whenever a specific deployment event happens."><meta name="DC.relation" scheme="URI" content="../../user/topics/c_node_tutorialsHowTo.html"><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/howto-integrate-teams-templates.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="howto_msteams"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>How-to: Integrate MS Teams</title></head><body id="howto_msteams"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">How-to: Integrate MS Teams</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b9f8ee89-8f3a-448a-a732-d7bb9947ba0b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Integrate Microsoft Teams with <span class="ph">IBM DevOps Deploy (Deploy)</span> to post
+        notifications automatically to your Teams channel whenever a specific deployment event
+        happens.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskhowto_msteams__context__1">About this task</h2></div><p class="p">By using the Incoming Webhook connector in Teams, you can integrate <span class="ph">Deploy</span>
+                services so that you get notified of an event through the Teams channels.</p>In this
+            example, you'll learn about the requirements and procedures to integrate Teams with
+                <span class="ph">Deploy</span>.
+            To integrating Teams with <span class="ph">Deploy</span>, follow the
+            steps provided in this section. </section>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../tutorial/topics/howto-integrate-teams-templates.html">Teams message card templates</a></strong><br>Example templates are provided that helps you to create message cards to use with MS Teams integration.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/c_node_tutorialsHowTo.html" title="Instructions for specific features.">How-tos</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" lang="en-us" id="add-connector">
+<h2 class="title topictitle2" id="ariaid-title2">Step 1: Obtain the webhook URL from your Teams channel</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b9f8ee89-8f3a-448a-a732-d7bb9947ba0b">Edit online</a></span></div>
+<div class="body taskbody">
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskadd-connector__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the Teams channel where you want to add the webhook and select (•••) <span class="ph uicontrol">More
+Options</span> from the top navigation bar.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Choose <strong class="ph b">Connectors</strong> from the menu and search for <strong class="ph b">Incoming Webhook</strong>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select <strong class="ph b">Configure</strong>, provide a name, and, optionally, upload an image avatar for your
+webhook.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Submit the details.</span>
+<div class="itemgroup info">The dialog box presents a unique URL that will map to the channel. Make sure that you copy and
+save the URL. You have to provide this URL when you add the webhook to a process.</div>
+<div class="itemgroup info">The webhook URL looks similar to the following
+                        example:<pre class="pre codeblock"><code>https://o365.webhook.office.com/webhookb2/00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000/IncomingWebhook/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/00000000-0000-0000-0000-000000000000</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select <span class="ph uicontrol">Done</span>.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskadd-connector__result__1">Results</h3></div>The webhook is added to the Teams channel and posts a confirmation message like this
+example:<img class="image" src="../images/howto_integrate_msteams1.GIF" alt="An example of Teams incoming webhook addition"><div class="note note note_note"><span class="note__title">Note:</span> For additional information about Teams webhooks, refer to the <a class="xref" href="https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/what-are-webhooks-and-connectors" target="_blank">MS Teams webhooks documentation</a>.</div></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" lang="en-us" id="format-card">
+<h2 class="title topictitle2" id="ariaid-title3">Step 2: Format the message card</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b9f8ee89-8f3a-448a-a732-d7bb9947ba0b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">A message card is defined in a JSON format that includes the message in text, links, and
+            image, if required. For <span class="ph">IBM DevOps Deploy (Deploy)</span>, you can
+            create a message card that refers to the process name, status, and a link to the process
+            deployment page. The message card format is used as body in the webhook
+            template.</p>
+<section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskformat-card__context__1">About this task</h3></div>The message cards can be created using the following available templates: <ul class="ul">
+<li class="li"><a class="xref" href="howto-integrate-teams-templates.html#task_en1_rf1_2rb">Application Deployment Failure JSON body</a></li>
+<li class="li"><a class="xref" href="howto-integrate-teams-templates.html#task_o4k_vf1_2rb">Application Deployment Success JSON body</a></li>
+<li class="li"><a class="xref" href="howto-integrate-teams-templates.html#task_uzb_bg1_2rb">Application Process Request Started JSON body</a></li>
+<li class="li"><a class="xref" href="howto-integrate-teams-templates.html#task_fw5_dg1_2rb">Approval Completed JSON body</a></li>
+<li class="li"><a class="xref" href="howto-integrate-teams-templates.html#task_qhg_hg1_2rb">Approval Failed JSON body</a></li>
+<li class="li"><a class="xref" href="howto-integrate-teams-templates.html#task_jg3_4g1_2rb">External Approval Completed JSON body</a></li>
+<li class="li"><a class="xref" href="howto-integrate-teams-templates.html#task_uk4_qg1_2rb">External Approval Failed JSON body</a></li>
+<li class="li"><a class="xref" href="howto-integrate-teams-templates.html#task_iym_tg1_2rb">Generic Process Completed JSON body</a></li>
+<li class="li"><a class="xref" href="howto-integrate-teams-templates.html#task_om2_wg1_2rb">Generic Process Request Started JSON body</a></li>
+<li class="li"><a class="xref" href="howto-integrate-teams-templates.html#task_f3q_yg1_2rb">Scheduled Process Not Started JSON body</a></li>
+</ul>
+</section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title4" id="create-template">
+<h2 class="title topictitle2" id="ariaid-title4">Step 3: Create a webhook template</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b9f8ee89-8f3a-448a-a732-d7bb9947ba0b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Create a webhook template for an event so that when the event happens a notification is
+triggered on Teams.</p>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskcreate-template__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step">
+<span class="ph cmd">Select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Webhook Templates</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Webhook Template</span></span>.</span>
+</li><li class="li step">
+<span class="ph cmd">Provide a name and description for the template. For this example, give the name as
+<kbd class="ph userinput">Process failure notification</kbd>.</span>
+</li><li class="li step">
+<span class="ph cmd">Click on <span class="ph uicontrol">Body</span> area and paste the example code from the step 2.</span>
+</li><li class="li step">
+<span class="ph cmd">Choose the event type <span class="ph uicontrol">Process Failure</span> from the
+<span class="ph uicontrol">Type</span> field. </span>
+</li><li class="li step">
+<span class="ph cmd">Submit your changes.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskcreate-template__result__1">Results</h3></div>The webhook template is created and ready to be added to an application.</section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title5" id="add-template">
+<h2 class="title topictitle2" id="ariaid-title5">Step 4: Add webhook template to an application</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b9f8ee89-8f3a-448a-a732-d7bb9947ba0b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can add a webhook template to applications, generic processes, and external approval
+processes. For this example, you add the template to an application.</p>
+<section class="section prereq"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskadd-template__prereq__1">Before you begin</h3></div>Make sure that you created an environment for the application and have resources added to
+it.</section>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskadd-template__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Select <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">application name</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Webhooks</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Webhook</span></span>.</span>
+<div class="itemgroup info">The <span class="keyword wintitle">Add Webhook</span> window is displayed.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Copy the URL generated that was generated in step 1 and paste it in the
+<span class="ph uicontrol">URL</span> field.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify the event type as <span class="ph uicontrol">Process Failure</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select the template name that you created in step 3 from the <span class="ph uicontrol">Webhook
+Template</span> field.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify the environment name from the <span class="ph uicontrol">Environments</span> field.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Submit your changes.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskadd-template__result__1">Results</h3></div>The webhook template is added to the application. When an application process run on the
+environment and fails, the Teams channel shows the following notification.<table class="table frame-none" id="add-template__table_ipr_hk4_gqb"><caption><span class="desc tabledesc">
+<p class="p summary">Teams example notification for approval failed event</p>
+</span></caption><colgroup><col style="width:81.98198198198197%"><col style="width:18.01801801801802%"></colgroup><tbody class="tbody">
+<tr class="row">
+<td class="entry"><strong class="ph b">Webhook-Integration-Test</strong>
+                                </td>
+<td class="entry">6/13 6:53 PM</td>
+</tr>
+<tr class="row">
+<td class="entry" colspan="2"><strong class="ph b">An approval failed for the App application on the Env
+environment</strong></td>
+</tr>
+<tr class="row">
+<td class="entry" colspan="2">An application process was rejected during its approval
+process</td>
+</tr>
+<tr class="row">
+<td class="entry" colspan="2">Application: App Environment: Env Requested by: admin Scheduled
+for: Sun Jun 13 18:52:31 IST 2021 Description: ${request.Description}</td>
+</tr>
+<tr class="row">
+<td class="entry" colspan="2">Click <span class="ph uicontrol">View Details</span> for more information.
+</td>
+</tr>
+</tbody></table></section>
+</div>
+</article>
+
+</article></main></body></html>

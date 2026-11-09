@@ -1,0 +1,136 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can enable extra security to configure the agents to verify the identity of the server for communication that uses the HTTPS protocol."><meta name="DC.relation" scheme="URI" content="../../user/topics/SSLinstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ssl_addl_security"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Enabling server identity verification</title></head><body id="ssl_addl_security"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Enabling server identity verification</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-c394d5a0-0cfa-4af5-892d-4d6e972dbc17">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">You can enable extra security to configure the agents to verify the identity of the
+    server for communication that uses the HTTPS protocol.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskssl_addl_security__prereq__1">Before you begin</h2></div>
+<div class="p">Upgrade <span class="ph">IBM DevOps Deploy (Deploy)</span> to
+        version 6.2.1.1 or later. If you use agent relays, update to version 6.2.3 or later. Upgrade
+        the following plug-ins to the latest versions that are available:<ul class="ul">
+          <li class="li">All source configuration plug-ins</li>
+          <li class="li"><span class="keyword">z/OS®</span>
+            Utility plug-in</li>
+          <li class="li"><span class="keyword"> MobileFirst
+Platform Foundation</span>
+            (formerly Worklight) plug-in</li>
+          <li class="li"><span class="keyword">WebSphere® Application Server</span> -
+            Deployment plug-in</li>
+        </ul>Versions of these plug-ins that were released before March 2016 do not support server
+        identity verification.</div>
+<p class="p">Ensure that the <span class="keyword cmdname">keytool</span> utility, which is provided with the Java™ developer kit and is not part of <span class="ph">Deploy</span>, is
+available in the system path.</p>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskssl_addl_security__context__1">About this task</h2></div>
+<p class="p">When you install the <span class="ph">Deploy</span> server, a
+private key and self-signed certificate with the alias <samp class="ph systemoutput sysout">server</samp> are
+stored in the
+<span class="ph filepath"><var class="keyword varname">server_installation_directory</var>/opt/tomcat/conf/tomcat.keystore</span>
+file. This certificate is presented to agents, agent relays, and users that connect to the server
+via HTTPS. Because the certificate that is associated with the private key has a generic
+distinguished name (DN), you must replace the key so that the agent or agent relay can correctly
+verify the host name of the server. After you configure the server to present a certificate with a
+valid host name, you then configure the agents to accept that trusted certificate and to require
+verification of the host name of the server.</p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskssl_addl_security__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Stop the <span class="ph">Deploy</span>
+server.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Open a command-line window, and go to the
+<span class="ph filepath"><var class="keyword varname">server_installation_directory</var>/opt/tomcat/conf</span>
+directory.</span>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">Generate a private key that is associated with the correct host name to use for HTTPS
+          communication. Run a command similar to the following command:</span>
+        <div class="itemgroup info">
+          <pre class="pre codeblock"><code>keytool -genkeypair -alias serverNewCN -keysize 2048 -sigalg SHA256withRSA -keyalg RSA -keystore tomcat.keystore</code></pre>
+          <p class="p">The existing key is stored in the <span class="ph filepath">tomcat.keystore</span> file with the
+              <samp class="ph systemoutput sysout">server</samp> alias.</p>
+        </div>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">Edit the <code class="ph codeph">tomcat.key.alias</code> property in the installed.properties file to specify
+the alias in the keystore that contains the certificate to use.</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>tomcat.key.alias="serverNewCN"</code></pre>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Edit the following properties in the <code class="ph codeph">secured-installed.properties</code> file to
+specify the password for the certificate and keystore to use.</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>server.key.password=&lt;new_certificate_password&gt;
+tomcat.keystore.password=changeit</code></pre>
+</div>
+<div class="itemgroup info">Enter the passwords in plain text, so that it automatically encrypts once the server
+runs.</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Create a certificate signing request that uses the new private key, and then use an internal or
+external certificate authority to sign it.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Export the server certificate. Run a command similar to the following command: </span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>keytool -exportcert -alias server -keystore tomcat.keystore -file server.cert</code></pre>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Start the <span class="ph">Deploy</span>
+server.</span>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">If you used a certificate authority that is not already trusted by the agents, copy the
+          server certificate to the agent computer, and then import the certificate into the
+          keystore of the JRE that is used to run the agent process.</span>
+        <div class="itemgroup info">By default, the path to the keystore is
+            <span class="ph filepath">$JAVA_HOME/lib/security/cacerts</span>. If you use agent relays, repeat
+          this step for all agent relays.</div>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">If you use agent relays, complete the following steps to configure the agents to verify the
+identity of the agent relays.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> Server identity verification uses the HTTPS, or <var class="keyword varname">codestation</var>, keystores for
+the agent relays.</div>
+</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Open a command-line window on the agent relay computer, and go to the
+<span class="ph filepath">/<var class="keyword varname">agent_relay_install</var>/conf/</span> directory.</span>
+<div class="itemgroup info">By default, the <var class="keyword varname">agent-relay-install</var> location is <span class="ph"><code class="ph codeph">/opt/devops-deploy/agentrelay</code> on Linux™ and <code class="ph codeph">C:\Program Files\devops-deploy\agentrelay</code> on Windows™.</span></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Generate a private key that is associated with the HTTPS connection for the agent relay. Run a
+command similar to the following command:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>keytool -genkeypair -alias agentrelay -keysize 2048 -sigalg  SHA256withRSA
+    -storepass changeit -keypass changeit -keyalg RSA -keystore codestation.keystore</code></pre>For
+the <code class="ph codeph">-alias</code> argument, specify the certificate alias of the
+<var class="keyword varname">codestation</var> keystore for the agent relay. The certificate is in the
+<span class="ph filepath">agentrelay.properties</span> file for the agent relay, in the property
+<span class="keyword parmname">codestation.cert.alias</span>. The default value is
+<code class="ph codeph">agentrelay</code>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Export the agent relay certificate. Run a command similar to the following command:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>keytool -exportcert -alias agentrelay -keystore codestation.keystore -file agentrelay.cert</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Copy the agent relay certificate to the agent computer, and then import the certificate into
+the keystore of the JRE that is used to run the agent process.</span>
+<div class="itemgroup info"> By default, the path to the keystore is <span class="ph filepath">$JAVA_HOME/lib/security/cacerts</span>.
+</div>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">Add <kbd class="ph userinput">verify.server.identity=true</kbd> to the
+              <span class="ph filepath"><var class="keyword varname">&lt;DEPLOY_AGENT_HOME&gt;</var>/conf/agent/installed.properties</span>
+          file on each agent.</span>
+        <div class="itemgroup info">If you use agent relays to cache artifacts, repeat this step for all agent
+          relays.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Upgrade each agent or agent relay. If an agent is already upgraded, restart the
+          agent.</span>
+        <div class="itemgroup info"> Agents can communicate with the server during this process, so you can upgrade agents
+          one at a time.</div>
+      </li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/SSLinstall.html" title="With Secure Sockets Layer (SSL) technology, clients and servers can communicate securely by encrypting all communications. Data is encrypted before it is sent and decrypted by the recipient. This communication cannot be deciphered or modified by third-parties. In addition to encryption, SSL can also support authentication.">SSL configuration</a></div></div></nav></article></main></body></html>

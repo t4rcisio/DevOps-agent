@@ -1,0 +1,60 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Creating a snapshot involves saving a collection of component versions that are part of an application."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/snapshot_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="snapshot_snapshots"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 1: Adding snapshots</title></head><body id="snapshot_snapshots"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 1: Adding snapshots</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f8b8fbd6-60bd-435a-9a3c-00c68f36c266">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Creating a snapshot involves saving a collection of component versions that are part of
+an application.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_snapshots__context__1">About this task</h2></div>These steps describe how to create a snapshot that uses components of the sample
+application. In the <a class="xref" href="webapp_abstract.html" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">Deploying a simple web application</a> tutorial, you deployed the JPetStore
+application twice to the same environment. In the second deployment, you used two components that
+contain new information. In this lesson, you create a snapshot that uses the same components as the
+deployed environment. You create a snapshot from a functioning development environment in
+preparation for deployment to the next phase of your continuous delivery pipeline. In a later
+lesson, you deploy this snapshot to a new environment. By deploying with snapshots in <span class="ph">Deploy</span>, you can
+quickly bring a new environment to a specific state.<div class="note note note_note"><span class="note__title">Before you begin:</span> Make sure that your <span class="ph">Deploy</span> server
+has the prerequisites that are listed in <a class="xref" href="snapshot_intro.html#snapshot_intro__prereqs">Prerequisites</a>
+and that you completed the steps in <a class="xref" href="snapshot_configure_agent.html" title="Modify the IBM DevOps Deploy (Deploy) server that you used in the previous tutorial. Create another agent resource and incorporate a new environment property to allow for easy reuse.">Configuring the server and target system</a>.</div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_snapshots__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Click the <span class="ph uicontrol">Applications</span> tab, and then click
+<kbd class="ph userinput">JPetStore</kbd>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the same row as your environment, click the <span class="ph uicontrol">Create Snapshot </span><img class="image" src="../images/snapshot_snapshots_a.gif" alt=""> icon, as shown in the following figure: </span>
+<div class="itemgroup info">
+<br><img class="image" src="../images/snapshot_snapshots_b.gif" alt="Clicking Create Snapshot on an environment"><br>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Snapshot</span> window, specify the name to be <kbd class="ph userinput">Version
+1.1</kbd>.</span></li><li class="li step stepexpand">
+<span class="ph cmd">Accept the default values in the other field, and then click <span class="ph uicontrol">Save</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click the <span class="ph uicontrol">Component Versions</span> tab.</span>
+                                <div class="itemgroup info">The snapshot is shown as in the following image.</div>
+                                <div class="itemgroup info"><img class="image" src="../images/snapshot_snapshots_e.gif"></div>
+                                <div class="itemgroup info">
+                                        <p class="p">The <kbd class="ph userinput">JPetStore-DB</kbd> component uses
+                                                incremental versions and must contain both the
+                                                  <kbd class="ph userinput">1.0</kbd> and
+                                                  <kbd class="ph userinput">1.1</kbd> versions to deploy. If
+                                                the <kbd class="ph userinput">JPetStore-DB</kbd> component
+                                                does not contain both versions, you must update the
+                                                component version. See <a class="xref" href="snapshot_configure_agent.html" title="Modify the IBM DevOps Deploy (Deploy) server that you used in the previous tutorial. Create another agent resource and incorporate a new environment property to allow for easy reuse.">Configuring the server and target system</a>.</p>
+                                </div>
+<div class="itemgroup stepresult">The <kbd class="ph userinput">JPetStore-DB</kbd> component uses incremental versions and must
+                                        contain both the <kbd class="ph userinput">1.0</kbd> and
+                                                <kbd class="ph userinput">1.1</kbd> versions to deploy. If
+                                        the <kbd class="ph userinput">JPetStore-DB</kbd> component does not
+                                        contain both versions, you must update the component
+                                        version. See <a class="xref" href="snapshot_configure_agent.html#snapshot_configure_agent__increment">Configuring the server and target
+                                        system</a>.</div>
+</li></ol></section><section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_snapshots__result__1">Results</h2></div>In this lesson, you added a snapshot to the application. The snapshot is based on the
+components in the application that are currently deployed to an environment.<div class="p">On the application's <span class="keyword wintitle">Snapshots</span> page, you have a snapshot, as shown in
+the following figure:<br><img class="image" src="../images/snapshot_snapshots_d.gif" alt="The snapshot on the Snapshots tab"><br> In the next lesson, you create an environment to for the next step in the JPetStore
+application's delivery pipeline.</div></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_snapshots__postreq__1">What to do next</h2></div>After you create a snapshot that describes a collection of components, you can deploy the
+snapshots to an environment. In the next lesson, you create another environment.<p class="p">For more
+information about creating snapshots, see <a class="xref" href="../../user/topics/app_snapshot_create.html#app_snapshot_create" title="To create a snapshot, you specify which version of components and processes to include in the snapshot. Typically, to create a snapshot you copy the components and processes from an environment where you deployed the application without errors.">Creating snapshots</a>.
+</p></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_6.2.0 SS4GSP_8.0.1" href="../../tutorial/topics/snapshot_abstract.html" title="In this tutorial, you deploy a simple web application to a new environment with IBM DevOps Deploy (Deploy). You create a snapshot of the components in an application, and then deploy the snapshot to an environment.">Creating and deploying snapshots</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Enabling the maintenance mode stops activity on the server so you can run important tasks that require the server to be idle."><meta name="DC.subject" content="maintenance mode, system shutdown"><meta name="keywords" content="maintenance mode, system shutdown"><meta name="DC.relation" scheme="URI" content="../../user/topics/settings_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="server_maintenancemode"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Enabling maintenance mode</title></head><body id="server_maintenancemode"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Enabling maintenance mode</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-977b5fd3-7de0-448e-b024-92f459aeb18d">Edit online</a></span></div>
+
+
+                
+<div class="body taskbody"><p class="shortdesc">Enabling the maintenance mode stops activity on the server so you can run important tasks
+    that require the server to be idle.</p>
+    <section class="section prereq" id="server_maintenancemode__prereq_ejn_ctf_gfc"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_maintenancemode__prereq_ejn_ctf_gfc">Before you begin</h2></div>Ensure that you have permissions to manage maintenance
+      mode.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_maintenancemode__context__1">About this task</h2></div>When you enable maintenance mode, users can log in to the server as usual and perform some
+      limited tasks. A message is displayed at the top indicating the start and and estimated end
+      time of the maintenance activity. While the maintenenace mode is enabled, some of the
+      tasks/actions are blocked and some are allowed. Below is a list of such tasks: <div class="p"><strong class="ph b">What is
+          blocked during maintenance mode?</strong><ul class="ul">
+          <li class="li">Execution of new global, component, and application processes. <p class="p">With additional
+              permissions, you can allow users to execute new deployments while maintenance mode is
+              enabled.</p></li>
+          <li class="li">Execution of processes triggered by the calendar, including recurring
+            deployments.</li>
+          <li class="li">Execution of processes triggered by a repeating a process request.</li>
+          <li class="li">Approval or Rejection of any approval tasks.</li>
+          <li class="li">New version imports.</li>
+          <li class="li">Automatic version imports.</li>
+          <li class="li">Processes started upon completion of a version import.</li>
+          <li class="li">Auto Discovery.</li>
+          <li class="li">Auto Compare.</li>
+          <li class="li">Auto Configure.</li>
+        </ul></div><div class="p"><strong class="ph b">What is not blocked during maintenance mode?</strong><ul class="ul">
+          <li class="li">Processes which begun before maintenance mode are allowed to run to completion.</li>
+          <li class="li">Sub-processes kicked off by processes that begun before maintenance mode are
+            allowed.</li>
+          <li class="li">Manual tasks that are part of a process can be responded to, and the process are
+            allowed to continue.</li>
+          <li class="li">Make changes to the server, such as changing properties, creating elements such as
+            applications and resources, and editing processes.</li>
+        </ul></div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_maintenancemode__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+                                                  <span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"> System Settings</span></span>.</span>
+                                                </li><li class="li step stepexpand">
+                                                  <span class="ph cmd">Activate the <span class="ph uicontrol">Enable Maintenance
+                                                  Mode</span> option in the <span class="ph uicontrol">General
+                                                  Settings</span> field.</span>
+                                                </li><li class="li step stepexpand">
+                                                  <span class="ph cmd"><span class="ph uicontrol">Save</span> the
+                                                  settings.</span>
+                                                </li><li class="li step stepexpand">
+                                                  <span class="ph cmd">To schedule a full
+                                                  system shutdown, select the start date and time
+                                                  and end date and time for the scheduled full
+                                                  system blackout. </span>
+                                                  <div class="itemgroup info">This step takes the database offline during
+                                                  the dates selected for maintenance.</div>
+                                                  <div class="itemgroup info">
+                                                  <div class="note note note_note" id="server_maintenancemode__note_jvn_klq_5xb"><span class="note__title">Note:</span> You require
+                                                  permissions to set up full system blackout. Go to <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Manage Maintenance Blackout</span></span>, and enable the <span class="ph uicontrol">Create
+                                                  Maintenance Blackout</span> option.</div>
+                                                  </div>
+                                                </li></ol></section>
+    <section class="section result" id="server_maintenancemode__result_xmc_ftf_gfc"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_maintenancemode__result_xmc_ftf_gfc">Results</h2></div>The maintenance mode is enabled.</section>
+  <section class="section postreq" id="server_maintenancemode__postreq_vy4_xvq_5xb"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_maintenancemode__postreq_vy4_xvq_5xb">What to do next</h2></div>
+      <div class="p" data-hd-otherprops="ibm">
+        <ul class="ul" id="server_maintenancemode__ul_tv1_vsf_gfc">
+          <li class="li">After maintainence mode is enabled, make sure you do not restart the server until all
+            processes have completed.</li>
+          <li class="li">After the maintenance schedule ends, you must disable the <span class="ph uicontrol">Enable
+              Maintenance Mode</span> option manually.</li>
+        </ul>
+      </div>
+    </section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/settings_ch.html" title="After you install IBM DevOps Deploy (Deploy), you can modify the server configuration and configure more options.">Server settings and configuration</a></div></div></nav></article></main></body></html>

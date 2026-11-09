@@ -1,0 +1,234 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can install agents by using the IBM DevOps Deploy (Deploy) web application."><meta name="DC.relation" scheme="URI" content="../../install/topics/agent_install_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_installremote"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Installing agents remotely</title></head><body id="agent_installremote"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Installing agents remotely</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d367c9e7-2e8d-4360-81bb-d1f93fa89ad0">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">You can install agents by using the <span class="ph">IBM DevOps Deploy (Deploy)</span> web
+    application.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_installremote__prereq__1">Before you begin</h2></div>
+      <ul class="ul">
+        <li class="li">You must have permission to see the <span class="ph uicontrol">Settings</span> tab to install
+          agents with this method.
+        </li>
+        <li class="li" id="agent_installremote__user_account">For production environments, create a user account that is dedicated
+to running the agent on the computer where the agent is installed. </li>
+<li class="li">For production environments, create a user account that has the required privileges for the
+installation.<p class="p">If the user account does not have the necessary privileges, the installation
+fails.</p><p class="p">For AIX, HP, Solaris, Windows and Mac OS, the user account must have access to all
+working directories used in the process the agent runs.</p><p class="p">For Linux and Unix OS, the user
+account must have root privileges in order to issue the <span class="keyword cmdname">su</span> or
+<span class="keyword cmdname">sudo</span> command when installing.</p><p class="p">For z/OS environments, review the security
+requirements for the IBM z/OS computers.</p></li>
+        <li class="li" data-hd-otherprops="ibm">
+<p class="p" id="agent_installremote__jre_minimum"><span class="ph" id="agent_installremote__jre_minimum_ph">Ensure that each computer where you are installing an
+agent has a supported version of the Java™ Runtime Environment
+(JRE) or Java developer kit. For more information, see <a class="xref" href="https://www.ibm.com/software/reports/compatibility/clarity/index.html" target="_blank">SPCR for Deploy</a>.</span></p>
+</li>
+
+        <li class="li">
+          <p class="p" id="agent_installremote__ibm_jre_requirement_agent">If the target computer has an IBM® JRE or Java developer kit, update to a supported version of the IBM JRE or Java developer kit.</p>
+        </li>
+        <li class="li" data-hd-otherprops="ibm">Make sure that your networks and firewalls allow communication on the
+required ports. See <a class="xref" href="../../install/topics/agent_firewalls.html" title="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication.">Firewall and communication configuration</a>.</li>
+        
+        <li class="li" data-hd-otherprops="ibm">Ensure that there is no limit on the maximum memory size and virtual memory size.
+For example, on most Linux™ systems, you can run the
+<code class="ph codeph">ulimit -m</code> and <code class="ph codeph">ulimit -v</code> commands and ensure that both return the
+value <code class="ph codeph">unlimited</code>. To find out how to remove the limit on the maximum memory size and
+virtual memory size, see the documentation for the operating system.</li>
+        
+      </ul>
+<ul class="ul">
+<li class="li">
+<p class="p">An Agent Configuration Template will need to be assigned to the agent or agents.</p>
+<div class="p">
+<ol class="ol">
+<li class="li">Click <span class="ph uicontrol">Resources</span> &gt;<span class="ph uicontrol">Agent Configuration
+Templates</span>.</li>
+<li class="li">Click on <span class="ph uicontrol">Create Agent Configuration Template</span> on the right side of the
+page. </li>
+<li class="li">Give the template a name and description in the designated boxes.</li>
+<li class="li">Add teams that you want to give access.</li>
+<li class="li">Enter the URLs of the servers or relays where you would like agents to connect. </li>
+<li class="li">Click <span class="ph uicontrol">Save</span>. </li>
+<li class="li">Click on the template name and click <span class="ph uicontrol">Add Agents</span> to apply agents to the
+specific template. </li>
+</ol>
+</div>
+</li>
+</ul>
+      <div class="note note note_note"><span class="note__title">Note:</span> Another option to install agents remotely is to add the Install Agent with SSH step
+          (<span class="ph">Deploy</span>
+        Resources plug-in).</div> </section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_installremote__context__1">About this task</h2></div> <p class="p">You can install an agent by specifying its target location or install an agent that was
+        previously discovered with the agent discovery feature. You can install several agents
+        simultaneously, and, by using agent installation property sheets, ensure that all agents
+        share basic parameters.</p> <p class="p">You can install agents only on computers that are running Linux, UNIX™, Windows™, or Mac OS. For systems like z/OS®, see <a class="xref" href="../../install/topics/agentInstall.html" title="Installing an agent from the command line involves running a batch file or shell script and specifying information about how the agent connects to the server or agent relay.">Installing agents from the command line</a>.</p> </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_installremote__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd"> From the server, click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agents</span></span>.</span>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">Complete one of the following steps to install an agent: </span>
+<ul class="ul choices">
+<li class="li choice">If you know the target host, click <span class="ph uicontrol">Install New Agent</span>.</li>
+<li class="li choice">To install an agent that was discovered with the agent discovery feature, click the
+<span class="ph uicontrol">Install Agent</span> action for the agent. Discovered agents have the
+<samp class="ph systemoutput sysout">Installable</samp> status.</li>
+</ul>
+<div class="itemgroup info">For information about the agent discovery feature, see <a class="xref" href="agent_discovery.html" title="You can use IBM DevOps Deploy (Deploy) to discover potential agent locations on UNIX and Windows.">Discovering agents automatically</a>.</div>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">In the <span class="keyword wintitle">Install New Agent</span> window, select
+          <span class="ph uicontrol">SSH</span>.</span>
+        <div class="itemgroup info">
+          <div class="note note note_note"><span class="note__title">Note:</span> If you are installing a discovered agent, this step is skipped because the system
+            type is automatically determined during discovery.</div>
+        </div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Enter the host name or IP address of the system where you want to install the agent in
+          the <span class="ph uicontrol">Target Hosts</span> field.</span>
+        <div class="itemgroup info">To specify multiple entries, type each one on a separate line.<div class="note note note_note"><span class="note__title">Note:</span> If you are
+installing a discovered agent, this step is skipped because the host or IP address is automatically
+determined during discovery.</div></div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Specify the following parameters:</span>
+        <ol type="a" class="ol substeps">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Enter the SSH port address of the target system in the <span class="ph uicontrol">SSH
+                Port</span> field.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Select the <span class="ph uicontrol">Use Public Key Authentication</span> check box to use
+              public key authentication.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Enter a name for the agent in the <span class="ph uicontrol">Agent Name</span> field.</span>
+            <div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> If you enter multiple hosts in the <span class="ph uicontrol">Target Hosts</span> field, the agent name
+is appended with a number. The number is incremented for each host after the first one. </div>
+<div class="note note note_note"><span class="note__title">Note:</span> There are&nbsp;some constraints to uses <span class="ph uicontrol">Public Key Authentication</span>.<ul class="ul">
+<li class="li">Private key must be in <span class="ph filepath">&lt;userhome&gt;/.ssh/id_rsa </span> or
+<span class="ph filepath">&lt;userhome&gt;/.ssh/id_dsa</span> , where <span class="ph filepath">&lt;userhome&gt;</span> is the
+home of the user that the <span class="ph">Deploy</span> server process runs as.</li>
+</ul><ul class="ul">
+<li class="li"><span class="ph">Deploy</span> does not support passphrase protected private keys.</li>
+</ul><ul class="ul">
+<li class="li">Keypairs must be in the PEM format, OpenSSH formatted keys are not supported.</li>
+</ul></div>
+</div>
+            <div class="itemgroup stepxmp">For example, if you enter <kbd class="ph userinput">my_agent</kbd> as the agent name and
+              specify three hosts, the name of the agent for the first host is
+                <kbd class="ph userinput">my_agent</kbd>, the name of the agent for the second host is
+                <kbd class="ph userinput">my_agent1</kbd>, and the name of the third agent is
+                <kbd class="ph userinput">my_agent2</kbd>. Host names are processed from beginning of the
+              list to the end.</div>
+          </li>
+        </ol>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd"> Enter the name of the target host user with appropriate permissions in the
+            <span class="ph uicontrol">Username</span> field.</span>
+        <div class="itemgroup info">This user must have permission to edit the agent directory on the target host.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Enter the password that is associated with the user in the
+            <span class="ph uicontrol">Password</span> field.</span>
+      </li><li class="li step stepexpand" id="agent_installremote__agent_installation_properties">
+        <span class="ph cmd">Select an agent installation property sheet from the <span class="ph uicontrol">Agent Installation
+            Properties</span> list, or use <span class="ph uicontrol">New</span> to create a property
+          sheet. </span>
+        <div class="itemgroup info">Agent installation property sheets are templates that can be saved and used to install
+          agents. You can create any number of agent installation property sheets. The agent
+          installation properties are listed in the following table:<table class="table frame-all" id="agent_installremote__remote_agent_props"><caption><span class="table--title-label">Table 1. </span><span class="title">Remote agent installation properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+                <tr class="row">
+                  <th class="entry align-left colsep-1 rowsep-1" id="agent_installremote__remote_agent_props__entry__1">Field</th>
+                  <th class="entry align-left colsep-1 rowsep-1" id="agent_installremote__remote_agent_props__entry__2">Description</th>
+                </tr>
+              </thead><tbody class="tbody">
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Name</span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">Name of the agent installation property sheet. <span class="ph" id="agent_installremote__required">This value
+                      is required.</span></td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Description</span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">Property sheet description.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Agent Dir</span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">Directory on the target where the agent is installed. <span class="ph">This value
+                      is required.</span></td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Temp Dir Path</span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">Path to the directory that is used during installation for temporary files.
+                      <span class="ph">This value
+                      is required.</span></td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Server Host</span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">Host name or IP address of the <span class="ph">Deploy</span> server or agent relay to which the agent connects. <span class="ph">This value
+                      is required.</span></td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Server Port</span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">The port that is used by the <span class="ph">Deploy</span> server or agent relay to connect to the agent.  <span class="ph">This value
+                      is required.</span></td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Proxy Host </span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">Host name or IP address of the agent relay, if used.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Proxy Port</span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">HTTP proxy port of the agent relay, if used. The default value is
+                      <code class="ph codeph">20080</code>.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Auto Start</span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">If you want to install the agent as a service, select <span class="ph uicontrol">Auto
+                      Start</span> to run the agent automatically when Windows starts. Windows only.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Service Name</span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">If the agent is installed as a service, specifies the name for the agent
+                    service. Windows only.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Service User</span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">If the agent is installed as a service, enter a user name that has
+                    appropriate permission to run a service. Windows only.</td>
+                </tr>
+                <tr class="row">
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__1"><span class="ph uicontrol">Service Password </span></td>
+                  <td class="entry align-left colsep-1 rowsep-1" headers="agent_installremote__remote_agent_props__entry__2">If the agent is installed as a service, enter the password that is
+                    associated with the service user. Windows only.</td>
+                </tr>
+              </tbody></table>
+        </div>
+      </li><li class="li step stepexpand" id="agent_installremote__assign_team"><strong>Optional: </strong>
+        <span class="ph cmd">Check <span class="ph uicontrol">Assign Team</span> to assign the agent to a team. </span>
+        <div class="itemgroup info">
+          <br><img class="image" data-hd-otherprops="ibm" src="../images/agent-team.gif" alt="The parameters that are used to assign an agent to a team"><br>
+        </div>
+        <ol type="a" class="ol substeps">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Select the team to which you want to assign the agent from the
+                <span class="ph uicontrol">Team</span> list.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Select the agent role from the <span class="ph uicontrol">Role</span> list.</span>
+            <div class="itemgroup info">For information about teams, see <a class="xref" href="../../admin/topics/security_teams_resources.html" title="You can assign a team to an object (such as a component or an application) when you create the object.">Assigning teams to objects</a></div>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd"></span><br>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Click <span class="ph uicontrol">Add</span>.</span>
+          </li>
+        </ol>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">When you are done, click <span class="ph uicontrol">Save</span>.</span>
+      </li></ol></section>
+<section class="section result" id="agent_installremote__result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_installremote__result">Results</h2></div>Remotely installed agents start running automatically. If a remotely installed
+      agent stops running, it must be restarted on the system that hosts the agent.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/agent_install_ov.html" title="You can install agents from the server or from the command line on the agent system. To configure a failover server for an agent, you must install the agent from the command line.">Installing agents</a></div></div></nav></article></main></body></html>

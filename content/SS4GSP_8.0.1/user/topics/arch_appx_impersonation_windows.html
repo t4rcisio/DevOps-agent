@@ -1,0 +1,53 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="For agents that are running on Windows, IBM DevOps Deploy (Deploy) provides a program that handles impersonation."><meta name="DC.relation" scheme="URI" content="../../user/topics/arch_appx_sudo.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="arch_appx_impersonation_windows"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Impersonation on Windows systems</title></head><body id="arch_appx_impersonation_windows"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Impersonation on Windows systems</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6f0c3d13-5cfe-4fbb-bde0-a7deac96e4ff">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">For agents that are running on Windows™, <span class="ph">IBM DevOps Deploy (Deploy)</span> provides
+            a program that handles impersonation.</p>
+<p class="p">You implement impersonation for agents on Windows the same way you do for agents on UNIX™ or Linux™: when you configure a process step, you
+specify the user credentials that are used when the step is processed.
+These credentials are the user that the agent is impersonating. In
+this way, two user accounts are active: the user that the agent runs
+as normally and the user that the agent is impersonating while it
+runs the step.</p>
+<p class="p">To run steps on Windows, the agent must be running as
+LocalSystem as a service or running in an administrator command prompt. Also, this user must have
+the following privileges, at a minimum:</p>
+<ul class="ul">
+<li class="li"><span class="keyword parmname">SE_RESTORE_NAME</span> (Restore files and directories)</li>
+<li class="li"><span class="keyword parmname">SE_BACKUP_NAME</span> (Back up files and directories)</li>
+<li class="li"><span class="keyword parmname">SE_INCREASE_QUOTA_NAME</span> (Adjust memory quotas
+for a process)</li>
+<li class="li"><span class="keyword parmname">SE_ASSIGNPRIMARYTOKEN_NAME</span> (Replace a process-level
+token)</li>
+      <li class="li">The user must also have access to the agent working directory, such as
+                                    <span class="ph filepath"><var class="keyword varname">&lt;DEPLOY_AGENT_HOME&gt;</var>/var/work</span>.</li>
+</ul>
+<p class="p">Also, to impersonate an administrator, the agent user account must
+have the <span class="keyword parmname">SE_TCB_NAME</span> (Act as part of the operating
+system) permission.</p>
+<div class="p">The user that the agent is impersonating must have at least one
+of the following privileges:<ul class="ul">
+<li class="li"><span class="keyword parmname">SE_BATCH_LOGON_NAME</span> (Log on as a batch job)</li>
+<li class="li"><span class="keyword parmname">SE_INTERACTIVE_LOGON_NAME</span> (Log on locally)</li>
+<li class="li"><span class="keyword parmname">SE_SERVICE_LOGON_NAME</span> (Log on as a service)</li>
+</ul></div>
+<p class="p">In Windows Vista and later
+versions of Windows, when
+the agent logs in as the impersonated user, the operating system returns
+a restricted token. If the impersonated user is a member of the Administrators
+group, the agent attempts to get an elevated token. However, if the
+agent user account does not have the <span class="keyword parmname">SE_TCB_NAME</span> permission,
+the agent does not receive an elevated token. In this case, the agent
+attempts to run the step with the restricted token, but it does not
+have administrator permissions.</p>
+<p class="p">You can also impersonate the Windows LocalSystem
+account. The LocalSystem account is installed on every Windows system and is the equivalent of the
+root user on UNIX and Linux. It always has the privileges
+that are listed above.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> For agents on Windows,
+the <span class="keyword cmdname">sudo</span> option is ignored if selected.</div>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/arch_appx_sudo.html" title="IBM DevOps Deploy (Deploy) can use user impersonation when an agent must run a command for which it might not otherwise have permission, or when a specific user must be employed for a process.">User impersonation for process steps</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To use licenses, you install a Common Licensing server, import your license keys, and link the IBM DevOps Deploy (Deploy) servers or agents to the license server."><meta name="DC.relation" scheme="URI" content="../../user/topics/licenseManage.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="license_apply"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Applying licenses to servers and agents</title></head><body id="license_apply"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Applying licenses to servers and agents</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-23c661b5-0672-480d-a52a-685fdc112c19">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To use licenses, you install a <span class="keyword">Common Licensing</span> server, import your license
+  keys, and link the <span class="ph">IBM DevOps Deploy (Deploy)</span> servers or agents to the license server.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasklicense_apply__prereq__1">Before you begin</h2></div>Ensure that you have a <span class="keyword">Common Licensing</span>
+server with licenses for <span class="ph">Deploy</span>. <p class="p"> The following Roles and Permissions are needed to assign Licenses to an Agent:</p><p class="p"><strong class="ph b">Web
+UI:</strong>
+</p><p class="p"> Resources Tab</p><p class="p"><strong class="ph b">Agent:</strong>
+</p><p class="p"> View Agents</p><p class="p"> Edit Basic Settings</p><p class="p">For more information regarding roles and
+permissions see <a class="xref" href="../../admin/topics/security_roles_permission_ref.html#security_roles_permission_ref" title="This table lists the permissions on the server that you can assign to roles.">Permission reference</a>
+</p></section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasklicense_apply__context__1">About this task</h2></div>For information about the types of licenses, see <a class="xref" href="license_scenarios.html" title="After the evaluation period, you must acquire a license before you can use all product features. Several different license scenarios are available. Depending on the scenario, you might need to apply licenses to IBM DevOps Deploy (Deploy) servers, agents, or both.">License scenarios</a>.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasklicense_apply__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the <span class="ph">Deploy</span> server, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System Settings</span></span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">On the <span class="keyword wintitle">System Settings</span> page, under <span class="ph uicontrol">Licensing</span>,
+specify the connection information for the license server and click
+<span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup info"><span class="ph">You can specify the port and host name or IP address for the license server,
+                      such as <code class="ph codeph">27000@RCLServer.example.com</code>. To avoid problems when a
+                      license server is not available, you can specify multiple license servers. In
+                      this case, separate each address with colons on Linux™ and UNIX™
+                      or semicolons on Windows™, as in the
+                      following example: <code class="ph codeph">27000@RCLServer.example.com; 27000@backupRCLServer.example.com</code>. For more complicated license
+                      server scenarios, see this <a class="xref" href="https://www.ibm.com/docs/en/common-licensing/9.0.0" target="_blank">document</a>. <span class="ph" data-hd-otherprops="ibm">For information about setting up a IBM Common
+                License server and applying licenses, see <a class="xref" href="https://www.ibm.com/docs/en/common-licensing/9.0.0?topic=overview-getting-started-common-licensing" target="_blank">Getting started with IBM Common Licensing</a>.
+            </span></span></div>
+<div class="itemgroup stepresult">The <span class="ph uicontrol">Server License Type</span> field shows the type of licensing that
+the server is using.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If you are using virtual server and managed virtual server (Server Agent) licensing, specify
+whether to assign licenses to the agents automatically or manually. These steps are not necessary
+for the other types of licensing.</span>
+<ul class="ul choices">
+<li class="li choice">To assign licenses to agents automatically, set <span class="ph uicontrol">Automatic Agent
+              Licensing</span> to <span class="ph uicontrol">On</span> and then click
+              <span class="ph uicontrol">Save</span>. This setting is meaningful only if you are using virtual
+            server and managed virtual server (Server Agent) licensing.</li>
+<li class="li choice">To assign licenses to agents manually, follow these steps:</li>
+</ul>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agents</span></span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Next to an agent, click <span class="ph uicontrol">Actions</span> and then click
+<span class="ph uicontrol">License</span>.</span>
+<div class="itemgroup info">This menu item is available only if the <span class="ph uicontrol">Server License Type</span> field is
+set to <code class="ph codeph">Server Agent</code> and <span class="ph uicontrol">Automatic Agent Licensing</span> is set to
+<span class="ph uicontrol">Off</span>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Confirmation</span> window, click <span class="ph uicontrol">OK</span>.</span>
+<div class="itemgroup stepresult">The <span class="ph uicontrol">License</span> column for the agent shows
+<span class="ph uicontrol">AUTHORIZED</span> and the agent is licensed.</div>
+</li>
+</ol>
+<div class="itemgroup info">If you are using a license scenario other than virtual server and managed virtual server
+          (Server Agent) licensing, the <span class="ph">Deploy</span> server assigns
+          licenses to agents automatically. If you are using token licenses or floating licenses,
+          the server attempts to retrieve the necessary license or licenses from the license servers
+          that are available to the <span class="ph">Deploy</span> server.<div class="note note note_note"><span class="note__title">Note:</span> If
+            you provision cloud environments and use virtual server and managed virtual server
+            (Server Agent) licensing, configure the server to assign licenses to agents
+            automatically.</div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Restart the <span class="ph">Deploy</span> server.</span>
+<div class="itemgroup info">You must restart the server for it to recognize the new type of license.</div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasklicense_apply__result__1">Results</h2></div>The Common Licensing server tries to connect to licensed and unlicensed authorized agents
+      every 30 seconds, checks the connectivity, and updates the license information.</section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasklicense_apply__postreq__1">What to do next</h2></div>Now you can run processes on the licensed servers and agents.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/licenseManage.html" title="IBM DevOps Deploy (Deploy) provides a 60-day license-free evaluation period. You must have a license to use all product features after the evaluation period.">Licensing</a></div></div></nav></article></main></body></html>

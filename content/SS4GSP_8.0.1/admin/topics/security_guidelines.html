@@ -1,0 +1,34 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Although there is no single best way to set up security for the server, the following steps are sufficient in most cases."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_guidelines"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Guidelines for setting up server security</title></head><body id="security_guidelines"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Guidelines for setting up server security</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-9ec6027f-724a-4db7-8b4d-69e8fc8ca78a">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Although there is no single best way to set up security for the server, the following
+steps are sufficient in most cases.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_guidelines__context__1">About this task</h2></div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_guidelines__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">Create an authorization realm for the server. Authorization realms are used by
+					authentication realms to associate users with groups and to determine user
+					access. <span class="ph">IBM DevOps Deploy (Deploy)</span>
+					includes an internal database for storing security information and integration
+					with the Lightweight Directory Access Protocol (LDAP). LDAP is a widely used
+					protocol for accessing distributed directory information over IP networks.</span>
+			</li><li class="li step stepexpand">
+<span class="ph cmd">Create an authentication realm for the server. The authentication realm is used to determine a
+user's identity within an authorization realm.</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+				<span class="ph cmd">Create security types.</span>
+				<div class="itemgroup info">Security types classify artifacts such as environments and components by level of
+					security.</div>
+			</li><li class="li step stepexpand">
+				<span class="ph cmd">Create roles and define permissions for them.</span>
+			</li><li class="li step stepexpand"><span class="ph cmd">Create and import users and groups.</span></li><li class="li step stepexpand">
+<span class="ph cmd">Create teams, and assign users and groups to them. </span>
+</li><li class="li step stepexpand">
+				<span class="ph cmd">Assign elements, such as applications and environments, to teams.</span>
+				<div class="itemgroup stepresult">After you complete the preceding steps, users on the associated teams have
+					access to those elements. The access rights that each user has for those elements depend
+					on the user's role within that team.</div>
+			</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a></div></div></nav></article></main></body></html>

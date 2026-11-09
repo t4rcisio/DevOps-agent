@@ -1,0 +1,162 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="An LDAP authorization realm defines how to use an external LDAP server for group authorization."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_config.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_config_ldap_realm"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating an LDAP authorization realm</title></head><body id="security_config_ldap_realm"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+	<h1 class="title topictitle1" id="ariaid-title1">Creating an LDAP authorization realm</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f993ae8b-1c9a-4dc3-a59b-f9511a45343f">Edit online</a></span></div>
+	
+	<div class="body taskbody"><p class="shortdesc">An LDAP authorization realm defines how to use an external LDAP server for group
+authorization.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_config_ldap_realm__prereq__1">Before you begin</h2></div>You must have the URL of the external LDAP server that you want to use for
+authorization.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_config_ldap_realm__context__1">About this task</h2></div>An LDAP authorization realm defines how to search user groups. Typically, authorization
+			realms work in tandem with LDAP authentication realms. When unknown users attempts to
+			log on, an external LDAP server is used to authenticate them by using the authorization
+			and authentication realms that you define. Administrators can also use the authorization
+			and authentication realms to import users. Before importing users, make sure that
+			authorization realm matches with the authentication realm unless there are two different
+			LDAP systems being used. You might want to import users and assign them to teams before
+			their first logon attempt. When you import users, you can supply additional parameters
+			to further refine the search. For more information, see <a class="xref" href="security_user_import.html" title="On the server, LDAP authentication realm users are imported from external LDAP systems.">Importing LDAP users</a>.<p class="p">To create an LDAP authorization
+				realm, you identify the URL of the LDAP server, and define a role-based search. If
+				you use an LDAP authentication realm, you do not need to define a user-based search.
+				If you use an SSO authentication realm, you must also define a user-based search.
+			</p></section>
+		<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_config_ldap_realm__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the server, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authorization (Groups)</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Authorization Realm</span></span>. The <span class="keyword wintitle">Create Authorization Realm</span> dialog box opens.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Name</span> field, enter a realm name.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Type</span> list, select <span class="ph uicontrol">LDAP or Active
+Directory</span>. </span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">LDAP URL</span> field, enter the URL of the LDAP or LDAPS server.</span>
+<div class="itemgroup info">Separate multiple servers by commas.</div>
+<div class="itemgroup stepxmp">For example,
+<code class="ph codeph">ldap://ldap_server.my_domain.com:389,ldap://ldap_server.my_domain2.com:389,ldaps://ldaps_server.my_domain3.com:389</code>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Define a role-based search by completing one of these steps:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">If you want to reference roles by members, select <span class="ph uicontrol">Roles in LDAP reference their
+members; look up group membership by searching for roles</span>, and then specify the following
+parameters: </span>
+<div class="itemgroup info">
+<table class="table" id="security_config_ldap_realm__table_rmc_3l2_p1b"><caption><span class="table--title-label">Table 1. </span><span class="title">LDAP roles referenced by member properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left" id="security_config_ldap_realm__table_rmc_3l2_p1b__entry__1">Field</th>
+<th class="entry align-left" id="security_config_ldap_realm__table_rmc_3l2_p1b__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="security_config_ldap_realm__table_rmc_3l2_p1b__entry__1"><span class="ph uicontrol">Group Search Base</span></td>
+<td class="entry align-left" headers="security_config_ldap_realm__table_rmc_3l2_p1b__entry__2">The directory that is used for group searches, such as
+<code class="ph codeph">ou=employees,dc=mydomain,dc=com</code>. </td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="security_config_ldap_realm__table_rmc_3l2_p1b__entry__1"><span class="ph uicontrol">Group Search Filter </span></td>
+<td class="entry align-left" headers="security_config_ldap_realm__table_rmc_3l2_p1b__entry__2">The LDAP filter expression that is used when you search for user
+entries. The user name replaces the <var class="keyword varname">{1}</var> variable in the search pattern and the
+full user distinguished name (DN) replaces the <var class="keyword varname">{0}</var> variable, for example,
+<code class="ph codeph"> (&amp;(uniqueMember={0})(cn=BSO*)) </code>.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="security_config_ldap_realm__table_rmc_3l2_p1b__entry__1"><span class="ph uicontrol">Group Name</span></td>
+<td class="entry align-left" headers="security_config_ldap_realm__table_rmc_3l2_p1b__entry__2">The name of the entry that contains the users' group names in the
+directory entries that are returned by the group search. If this entry is not specified, no group
+search runs. For example, enter <code class="ph codeph">cn</code>.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="security_config_ldap_realm__table_rmc_3l2_p1b__entry__1"><span class="ph uicontrol">Search Group Subtree</span></td>
+<td class="entry align-left" headers="security_config_ldap_realm__table_rmc_3l2_p1b__entry__2">Subtrees (if any) are searched. If the item is not selected, the
+search is limited to the group search base.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="security_config_ldap_realm__table_rmc_3l2_p1b__entry__1"><span class="ph uicontrol">Search For Containing Groups</span></td>
+<td class="entry align-left" headers="security_config_ldap_realm__table_rmc_3l2_p1b__entry__2">Perform additional lookups to find indirectly assigned groups.
+This option may significantly increase the amount of time required to authenticate users. Consult
+your LDAP administrators before enabling this option.</td>
+</tr>
+</tbody></table>
+<p class="p">The values in the <span class="ph uicontrol">Group Search Base</span> and <span class="ph uicontrol">Search Group
+Subtree</span> fields define the scope of the search. Within the scope, groups that match the
+group search filter are searched. The value in the <span class="ph uicontrol">Group Name</span> field specifies
+the LDAP attribute that contains the group name.</p>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">If you want to reference roles by user attributes, select <span class="ph uicontrol">User roles are defined as
+an attribute on that user; look up group membership using this attribute</span>, and then, in
+the <span class="ph uicontrol">User Group Attribute</span> field, specify the attribute that contains group
+names in the user directory entry. </span>
+<div class="itemgroup info">If user groups are defined in LDAP as an attribute of the user, you must use the Group
+Attribute configuration.</div>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Define a user-based search by completing one of these steps:</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> If you plan to use an SSO authentication realm with this authorization realm, you must define
+a user-based search. If you plan to use an LDAP authentication realm, you can skip this step.</div>
+</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">If user records exist in multiple directories, select <span class="ph uicontrol">LDAP users may exist in many
+directories; search across LDAP using a criteria.</span>, and then specify these parameters: </span>
+<div class="itemgroup info">
+<table class="table" id="security_config_ldap_realm__table_m3m_w3l_r1b"><caption><span class="table--title-label">Table 2. </span><span class="title">LDAP user properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left" id="security_config_ldap_realm__table_m3m_w3l_r1b__entry__1">Field</th>
+<th class="entry align-left" id="security_config_ldap_realm__table_m3m_w3l_r1b__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="security_config_ldap_realm__table_m3m_w3l_r1b__entry__1"><span class="ph uicontrol">User Search Base</span></td>
+<td class="entry align-left" headers="security_config_ldap_realm__table_m3m_w3l_r1b__entry__2">The starting directory for the search, such as
+<code class="ph codeph">ou=employees,dc=mydomain,dc=com</code>. </td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="security_config_ldap_realm__table_m3m_w3l_r1b__entry__1"><span class="ph uicontrol">User Search Filter </span></td>
+<td class="entry align-left" headers="security_config_ldap_realm__table_m3m_w3l_r1b__entry__2">The LDAP filter expression that is used when searching for user
+												entries. The user name replaces the
+												<var class="keyword varname">{0}</var> variable in the search
+												pattern, for example, <code class="ph codeph">uid={0}</code>. If
+												the value is not part of the DN pattern, wrap the
+												value in parenthesis, such as
+												<code class="ph codeph">(sAMAccountName={0})</code>.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="security_config_ldap_realm__table_m3m_w3l_r1b__entry__1"><span class="ph uicontrol">Search Group Subtree</span></td>
+<td class="entry align-left" headers="security_config_ldap_realm__table_m3m_w3l_r1b__entry__2">Subtrees (if any) are searched. If the item is not selected, the
+search is limited to the search base.</td>
+</tr>
+</tbody></table>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">If users exist in a single directory, select <span class="ph uicontrol">LDAP users exist in a single directory;
+use a pattern to create the DN for users</span>, and then, in the <span class="ph uicontrol">User DN
+Pattern</span> field, specify the name. </span>
+<div class="itemgroup info">The name is substituted in place of <var class="keyword varname">{0}</var> in the search pattern, such as
+<code class="ph codeph">cn=[0],ou=employees,dc=mydomain,dc=com</code>. </div>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+				<span class="ph cmd">Secure the communication between the LDAP server and the <span class="ph">IBM DevOps Deploy (Deploy)</span>
+					server as described in <a class="xref" href="../../user/topics/ssl_config.html" title="The steps for configuring secure HTTPS connections with the IBM DevOps Deploy (Deploy) server are similar to the steps for any Java Platform, Enterprise Edition server.">Configuring SSL on Apache Tomcat and LDAP servers</a>.</span>
+			</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Set the length of time for the server to wait for a response from the LDAP server. On the
+server, in the <span class="ph filepath">installed.properties</span> file, set the property
+<span class="keyword parmname">com.sun.jndi.ldap.read.timeout</span> to the timeout period in milliseconds. Then,
+restart the server.</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Enable <span class="ph uicontrol">Nested Groups</span>. This feature enables <span class="ph">Deploy</span> to recursively search for roles in the LDAP server. <strong class="ph b">Note:</strong> If a user logs in who has many
+direct LDAP group mappings, this feature could generate many extra LDAP queries.  </span>
+<div class="itemgroup info">
+<p class="p">if a user logs in that has a lot of direct ldap group mappings</p>
+</div>
+<div class="itemgroup info"></div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_config_ldap_realm__result__1">Results</h2></div>The first time an unknown user attempts to log on, LDAP authorization realms are searched in
+an attempt to identify the user. If the user is found, a corresponding user ID is created in
+<span class="ph">Deploy</span>. In addition, if the user is part of an LDAP group, that group is imported too.</section>
+	</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_config.html" title="Use the Authorization Realms pane to create authorization realms and user groups for the server. Groups can be imported from external systems, such as LDAP.">Authorization realms</a></div></div></nav></article></main></body></html>

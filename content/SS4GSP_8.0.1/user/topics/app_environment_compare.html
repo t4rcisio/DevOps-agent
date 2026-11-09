@@ -1,0 +1,65 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can compare two environments to see differences in their inventories or property values."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_environment.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_environment_compare"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Comparing environments</title></head><body id="app_environment_compare"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Comparing environments</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-8701b7f9-3e71-4f25-a1d1-a23413e4ac92">Edit online</a></span></div>
+<p class="shortdesc">You can compare two environments to see differences in their inventories or property
+values.</p>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_environment.html" title="An environment is a user-defined collection of resources that hosts an application.">Application environments</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" id="compare_inventories">
+<h2 class="title topictitle2" id="ariaid-title2">Comparing environment inventories</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-8701b7f9-3e71-4f25-a1d1-a23413e4ac92">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Comparing two environment inventories shows the differences in component versions between
+two environments. It also shows the differences in files and properties.</p>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskcompare_inventories__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">From the <span class="ph">Deploy</span> dashboard, click <span class="ph uicontrol">Applications</span>, and then select an application.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">More</span> for one of the environments to compare, and then click
+<span class="ph uicontrol">Compare</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Environment</span> list, select the other environment to compare, and
+then click <span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup stepresult">The <span class="keyword wintitle">Environment Comparison</span> page opens. The component versions that
+are contained in each environment are displayed on the <span class="ph uicontrol">Versions</span> tab, as shown
+in the following figure. <br><img class="image" src="../images/app_environment_compare_a.gif" alt="Comparing two environments, with columns that show which component versions are deployed to each environment"><br></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To see the differences between component environment properties in the two environments, click
+the <span class="ph uicontrol">Configuration</span> tab.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To see the differences between files in the two environments, click the
+<span class="ph uicontrol">Files</span> tab.</span>
+</li></ol></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" id="compare_properties">
+<h2 class="title topictitle2" id="ariaid-title3">Comparing properties</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-8701b7f9-3e71-4f25-a1d1-a23413e4ac92">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can run a detailed comparison of properties between environments. You use one
+environment as a reference point, select one or more other environments, and the server shows the
+differences in properties on the other environments.</p>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskcompare_properties__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step">
+<span class="ph cmd">From the <span class="ph">Deploy</span> dashboard, click <span class="ph uicontrol">Applications</span>, and then select an application.</span>
+</li><li class="li step">
+<span class="ph cmd">Click <span class="ph uicontrol">Compare Environments</span>.</span>
+</li><li class="li step">
+<span class="ph cmd">In the <span class="keyword wintitle">Select Environments</span> window, select a reference environment and then
+select one or more other environments to compare with the reference environment.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskcompare_properties__result__1">Results</h3></div>
+<div class="p">The <span class="keyword wintitle">Environment Comparison</span> page shows the differences in properties between
+the reference environment and the other environments. The reference environment is shown on the left
+side of the page and the other environments are shown in the columns to the right. <ul class="ul">
+<li class="li">A green dot <img class="image" src="../images/green_dot.gif" alt=""> indicates that the property has the same value as the reference environment.</li>
+<li class="li">A not equals sign <img class="image" src="../images/not_equals.gif" alt=""> indicates that the property has a different value than the reference environment.</li>
+<li class="li">An empty circle <img class="image" src="../images/empty_circle.gif" alt=""> indicates that the property does not exist on the environment.</li>
+<li class="li">An exclamation point <img class="image" src="../images/exclamation_point.gif" alt=""> indicates that the property is required, but it does not have a value on that
+environment.</li>
+<li class="li">A lock <img class="image" src="../images/lock.gif" alt=""> indicates that the property is secure. The server does not compare secure properties.</li>
+</ul>The <span class="keyword wintitle">Environment Comparison</span> looks like the following figure:<br><img class="image" src="../images/app_environment_compare_b.gif" alt="Comparing the properties in a reference environment to three reference environments"><br></div>
+<p class="p">You can also export the results of the comparison to a CSV file by clicking
+<span class="ph uicontrol">Download</span>. The output file escapes values that start with Excel function
+characters such as <code class="ph codeph">=</code>, <code class="ph codeph">+</code>, <code class="ph codeph">-</code>, and
+<code class="ph codeph">@</code> by prepending an apostrophe. Property values that are longer than 4,000
+characters are truncated to 4,000 characters in the output.</p>
+</section>
+</div>
+</article>
+</article></main></body></html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="abstract" content="Use the following procedures and tips to help troubleshoot plug-ins that you use with IBM DevOps Deploy (Deploy):"><meta name="description" content="Use the following procedures and tips to help troubleshoot plug-ins that you use with IBM DevOps Deploy (Deploy):"><meta name="DC.relation" scheme="URI" content="../../user/topics/trouble_serveragents_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="task_vp2_345_xy"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Troubleshooting plug-ins</title></head><body id="task_vp2_345_xy"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Troubleshooting plug-ins</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f6962bdf-ecc3-445f-8fef-eedaf5a14269">Edit online</a></span></div>
+
+
+<div class="body taskbody"><div class="abstract">
+<p class="shortdesc">Use the following procedures and tips to help troubleshoot plug-ins that you use with
+                <span class="ph">IBM DevOps Deploy (Deploy)</span>: </p>
+<p class="p"><a class="xref" href="#error_undefined">Installing a plug-in generates an error:
+<samp class="ph systemoutput sysout">Error loading plugin: undefined</samp></a>.</p>
+<p class="p"><a class="xref" href="#DB2_plugin_error">Loading a plug-in generates errors and steps are not
+displayed in the process editor</a>.</p>
+</div></div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/trouble_serveragents_ov.html" title="Troubleshooting information that is specific to the server and agents is provided here.">Troubleshooting the DevOps Deploy server and agents</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" id="error_undefined">
+<h2 class="title topictitle2" id="ariaid-title2">Installing a plug-in generates an error: <samp class="ph systemoutput sysout">Error loading plugin:
+undefined</samp></h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f6962bdf-ecc3-445f-8fef-eedaf5a14269">Edit online</a></span></div>
+<div class="body taskbody">
+<section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskerror_undefined__context__1">About this task</h3></div>You attempt to install a plug-in, and you receive this message: <samp class="ph systemoutput sysout">Error loading
+plugin: undefined</samp>.  This error message is displayed when the file system has
+insufficient space. The plug-in requires more space even though it seems as though enough space is
+available for installation.</section>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskerror_undefined__steps__1">Procedure</h3></div><div class="li step p">
+<span class="ph cmd">Depending on your hardware, add more space to the file system, and then try to install the
+plug-in again.</span>
+</div></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" id="DB2_plugin_error">
+<h2 class="title topictitle2" id="ariaid-title3">Loading a plug-in generates errors, and steps are not displayed in the process editor</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f6962bdf-ecc3-445f-8fef-eedaf5a14269">Edit online</a></span></div>
+<div class="body taskbody">
+<section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskDB2_plugin_error__context__1">About this task</h3></div>
+<p class="p">You installed a trial version of <span class="ph">Deploy</span> with <span class="keyword">IBM® DB2®</span> as database. After starting the server, you cannot see any plug-ins and you are unable to load
+new plug-ins. Numerous errors are written to the log.</p>
+</section>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskDB2_plugin_error__steps__1">Procedure</h3></div><div class="li step p">
+          <span class="ph cmd">The pagesize must be specified correctly when the DB2 database is created. <span class="ph">Deploy</span> DB2 requires a pagesize of 32 k. See <a class="xref" href="../../install/topics/dbinstall_db2.html" title="To use a DB2 database with the server, before you install the server, install the IBM DB2 database and provide the JDBC JAR file for the server installation process.">Configuring a DB2 database</a>.</span>
+        </div></section>
+</div>
+</article>
+</article></main></body></html>

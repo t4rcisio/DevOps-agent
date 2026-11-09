@@ -1,0 +1,90 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Different issues require different set of information to diagnose and solve problems. However, there is a set of general information used to diagnosis all issues."><meta name="DC.subject" content="troubleshoot, general information"><meta name="keywords" content="troubleshoot, general information"><meta name="DC.relation" scheme="URI" content="../../user/topics/c_troubleshooting_and_support_resources.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="troubleshoot_infocollect"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>General information to collect</title></head><body id="troubleshoot_infocollect"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">General information to collect</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5a34fef3-08bf-4873-bb1e-1164631e391f">Edit online</a></span></div>
+
+
+
+<div class="body conbody"><p class="shortdesc">Different issues require different set of information to diagnose and solve problems.
+However, there is a set of general information used to diagnosis all issues.</p>
+<p class="p" data-hd-otherprops="ibm">When contacting IBM Software Support for assistance with resolving product
+      issues, having topology, product components and version, and time zone information available
+      is helpful. For detailed information, refer to <a class="xref" href="https://www.ibm.com/support/pages/mustgather-read-first-ibm-devops-urbancode-deploy" target="_blank">Readfirst for IBM DevOps Deploy</a>.</p>
+<section class="section"><h2 id="troubleshoot_infocollect__title__2" class="title sectiontitle">Topology</h2>
+
+<div class="p">It is important that the support representative understands the server topology. You should be
+able to provide enough information that a graph can be sketched representing the topology. Answers
+to the following questions provide information about the topology.<ul class="ul">
+<li class="li"> What topology do you use, such as: core, multi-region, high-availability clustered? For
+            information about the types of topologies, see the <a class="xref" href="ov_systems.html" title="IBM DevOps Deploy (Deploy) includes several systems, including a server and one or more agents. You can configure multiple topologies, including ones that use high availability, disaster recovery, and so on, to meet your needs.">Systems and topology overview</a>
+            topic.</li>
+<li class="li">Do you use a single-server or high-availability topology? </li>
+<li class="li">What configuration do you use for high-availability, cold-standby or active-active? </li>
+<li class="li">How do you load-balance the topology? Which protocol and scheduling scheme are used?</li>
+</ul></div>
+</section>
+<section class="section"><h2 id="troubleshoot_infocollect__title__3" class="title sectiontitle">Product components and versions</h2>
+
+<div class="p">Clarify the core product components and their version. For details about the <span class="ph">IBM DevOps Deploy (Deploy)</span> topology components,
+    see <a class="xref" href="ov_systems.html" title="IBM DevOps Deploy (Deploy) includes several systems, including a server and one or more agents. You can configure multiple topologies, including ones that use high availability, disaster recovery, and so on, to meet your needs.">Systems and topology overview</a>. <ul class="ul">
+     <li class="li">The version of the <span class="ph">Deploy</span> server can be found
+      in the <span class="ph filepath">deploy-server/conf/installed.version</span> file in the
+       <span class="ph uicontrol">installed.version</span> property.</li>
+     <li class="li">Provide the database product and version being used. If the problem is a performance issue,
+      know the number of allowed parallel connections and active locks. For localization issues,
+      knowing how strings are compared is relevant.</li>
+    </ul>It is important to understand the network components between different components involved
+    in issues. Because networks might not be reachable, have different latencies, have restrictive
+    firewall rules, load balancers, proxies, single sign-on solutions, and more; it is important to
+    understand the network between different components involved in issues. <ul class="ul">
+     <li class="li">Browser and the <span class="ph">Deploy</span> server </li>
+     <li class="li"><span class="ph">Deploy</span> server
+      and agents or the relay </li>
+     <li class="li"><span class="ph">Deploy</span> and the
+      database </li>
+     <li class="li"><span class="ph">Deploy</span> agent and
+      source configuration from which you import </li>
+     <li class="li"><span class="ph">Deploy</span> client or
+       <span class="ph">Deploy</span> post-build
+      publisher </li>
+     <li class="li"><span class="ph">Deploy</span> Jenkins
+      publisher and server</li>
+    </ul></div>
+</section>
+<section class="section"><h2 id="troubleshoot_infocollect__title__4" class="title sectiontitle">Time zones</h2>
+
+<p class="p">In a globalized work environment, the various product components and users might be located in
+different time zones creating log data for the issue to have different timestamps. For example, an
+user reports a problem with times from their time zone, the server writes the time to the log files
+in its time zone, and the agent on which step runs is in a different time zone.</p>
+</section>
+
+<section class="section" data-hd-otherprops="ibm"><h2 id="troubleshoot_infocollect__title__5" class="title sectiontitle">Sending data to IBM Support</h2>
+
+<div class="p">The data you collect needs to be in a format that IBM Support specialists can use. The following
+table outlines the data type and the format for sending to IBM Support.<table class="table frame-all" id="troubleshoot_infocollect__table_w5p_1sm_nz"><caption><span class="table--title-label">Table 1. </span><span class="title">Data format types to send support</span></caption><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry colsep-1 rowsep-1" id="troubleshoot_infocollect__table_w5p_1sm_nz__entry__1">Data Type</th>
+<th class="entry colsep-1 rowsep-1" id="troubleshoot_infocollect__table_w5p_1sm_nz__entry__2">File Type</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="troubleshoot_infocollect__table_w5p_1sm_nz__entry__1">Documents</td>
+<td class="entry colsep-1 rowsep-1" headers="troubleshoot_infocollect__table_w5p_1sm_nz__entry__2">PDF</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="troubleshoot_infocollect__table_w5p_1sm_nz__entry__1">Logs</td>
+<td class="entry colsep-1 rowsep-1" headers="troubleshoot_infocollect__table_w5p_1sm_nz__entry__2">Plain text</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="troubleshoot_infocollect__table_w5p_1sm_nz__entry__1">Compressed files</td>
+<td class="entry colsep-1 rowsep-1" headers="troubleshoot_infocollect__table_w5p_1sm_nz__entry__2">ZIP, TAR, GZ, TAR.GZ,.BZ2</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="troubleshoot_infocollect__table_w5p_1sm_nz__entry__1">Images</td>
+<td class="entry colsep-1 rowsep-1" headers="troubleshoot_infocollect__table_w5p_1sm_nz__entry__2">PNG, JPG</td>
+</tr>
+</tbody></table></div>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/c_troubleshooting_and_support_resources.html" title="There are a number of self-help information resources and tools to help you troubleshoot problems.">General product troubleshooting</a></div></div></nav></article></main></body></html>

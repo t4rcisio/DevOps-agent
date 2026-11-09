@@ -1,0 +1,33 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The Java heap is memory that contains objects used by Java programs. It contains objects that are currently in use, objects that are no longer needed, and free memory. Objects that are no longer needed are freed by the garbage collection process. The JVM heap size determines how often to run garbage collection and how long the garbage collection runs."><meta name="DC.subject" content="troubleshoot, Java heap memory size"><meta name="keywords" content="troubleshoot, Java heap memory size"><meta name="DC.relation" scheme="URI" content="../../user/topics/log_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="troubleshoot_javaheapsize"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Determining the Java heap memory size</title></head><body id="troubleshoot_javaheapsize"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Determining the Java heap memory size</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-643a30de-4029-4f26-8a8f-8a9410587157">Edit online</a></span></div>
+
+
+
+<div class="body taskbody"><p class="shortdesc">The Java heap is memory that contains objects used by Java programs. It contains objects
+that are currently in use, objects that are no longer needed, and free memory. Objects that are no
+longer needed are freed by the garbage collection process. The JVM heap size determines how often to
+run garbage collection and how long the garbage collection runs.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasktroubleshoot_javaheapsize__context__1">About this task</h2></div>
+<p class="p">Tuning the heap size minimizes the amount of garbage collection processing. Insufficient Java
+heap space can result in out of memory errors or slow performance. </p>
+<div class="p">The JVM settings are specified in the <span class="ph filepath">set_env</span> file which is in the
+                    <span class="ph filepath">devops-deploy/server/bin</span> directory. The
+                    <span class="ph uicontrol">JAVA_OPTS</span> environment variable contains the following
+                arguments related to heap size: <dl class="dl">
+                    
+                        <dt class="dt dlterm">-Xms</dt>
+                        <dd class="dd">Initial Java heap size.</dd>
+                    
+                    
+                        <dt class="dt dlterm">-Xmx</dt>
+                        <dd class="dd">Maximum Java heap size</dd>
+                    
+                </dl>
+            </div>
+<p class="p">For the Agent add <span class="keyword parmname">-Xmx</span> as the first line in the&nbsp;agent's
+<span class="ph filepath">conf/plugin-javaopts.conf</span> file.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/log_ov.html" title="The server maintains logs for auditing and troubleshooting.">Logging</a></div></div></nav></article></main></body></html>

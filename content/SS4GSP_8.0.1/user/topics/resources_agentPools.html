@@ -1,0 +1,100 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="abstract" content="Similar to resource groups, agent pools help you organize and manage agents that are installed in different environments."><meta name="description" content="Similar to resource groups, agent pools help you organize and manage agents that are installed in different environments."><meta name="DC.subject" content="agent pools, creating, managing"><meta name="keywords" content="agent pools, creating, managing"><meta name="DC.relation" scheme="URI" content="../../user/topics/configure_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="resources_agentpools"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating and managing agent pools</title></head><body id="resources_agentpools"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating and managing agent pools</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-483a0769-b1d4-4658-a115-bcf270423083">Edit online</a></span></div>
+
+<div class="abstract"><p class="shortdesc">Similar to resource groups, <dfn class="term">agent pools</dfn> help you organize and
+            manage agents that are installed in different environments.</p> You can use an
+        agent pool to spread the deployment processing work among participating agents and provide
+        relief to otherwise overburdened agents. Users assign agents to pools and pools are assigned
+        to resources, just like lone agents. When an agent pool is assigned to a resource, work
+        items are sent to eligible agents. If you don't use a pool, then the agent that is assigned
+        to the resource is assigned all the processing work regardless of its current workload. Such
+        a workload might lead to bottlenecks.<div class="note note note_note" data-hd-otherprops="ibm"><span class="note__title">Note:</span> Starting in <span class="ph">IBM DevOps Deploy (Deploy)</span> 7.0.3,
+            there is a new agent pool algorithm which will assign the workload to the most available
+            agents in the pool. Most available agents are determined by which agents have the
+            minimum running plugin steps in the agent pool. If there are multiple agents in the pool
+            with the same plugin step count, the agents the database returns first will be assigned
+            the workload. Prior to <span class="ph">Deploy</span> 7.0.3,
+            agents were assigned the work at random.</div>
+    </div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/configure_agents.html" title="After you install an agent for IBM DevOps Deploy (Deploy), you can modify its configuration or create an agent relay to facilitate communication to remote relays.">Agents and agent relay configuration</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_jzw_g3p_y5">
+<h2 class="title topictitle2" id="ariaid-title2">Creating an agent pool</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-483a0769-b1d4-4658-a115-bcf270423083">Edit online</a></span></div>
+<div class="body taskbody">
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="tasktask_jzw_g3p_y5__steps__1">Procedure</h3></div><div class="li stepsection">To create an agent pool, specify the agents that are the members of the
+pool.</div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Resources</span> tab, click <span class="ph uicontrol">Agent Pools.</span></span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">From the <span class="keyword wintitle">Agent Pools</span> pane, click <span class="ph uicontrol">Create Agent
+Pool</span>.</span>
+<div class="itemgroup stepresult">The <span class="keyword wintitle">Create Agent Pool</span> window opens.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify the pool name.</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Enter a description in the <span class="ph uicontrol">Description</span> field.</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">To manage the teams that can access the agent pool, click the plus icon by
+<span class="ph uicontrol">Teams</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To add agents to the pool, click the <span class="ph uicontrol">Add Agents</span> field.</span>
+<div class="itemgroup stepresult">A list of the available agents appears.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select the agent or agents to add to the pool. </span>
+<div class="itemgroup info">You can filter the listed agents by entering search text into the field.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">When you are finished, click <span class="ph uicontrol">Save</span>.</span>
+</li></ol></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" id="task_ajm_rgc_y5">
+<h2 class="title topictitle2" id="ariaid-title3">Managing agent pools</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-483a0769-b1d4-4658-a115-bcf270423083">Edit online</a></span></div>
+<div class="body taskbody">
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="tasktask_ajm_rgc_y5__steps__1">Procedure</h3></div><div class="li stepsection">You can manage agent pools from the web interface.</div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">To display the <span class="keyword wintitle">Agent Pools</span> pane, click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agent Pools</span></span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click an action link for the pool. </span>
+<div class="itemgroup info">Actions are described in the following table. <table class="table" id="task_ajm_rgc_y5__table_pgc_qhc_y5"><caption></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left" id="task_ajm_rgc_y5__table_pgc_qhc_y5__entry__1">Action</th>
+<th class="entry align-left" id="task_ajm_rgc_y5__table_pgc_qhc_y5__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="task_ajm_rgc_y5__table_pgc_qhc_y5__entry__1">Edit</td>
+<td class="entry align-left" headers="task_ajm_rgc_y5__table_pgc_qhc_y5__entry__2">With this option, you can add or remove agents and edit the
+pool's name and description.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="task_ajm_rgc_y5__table_pgc_qhc_y5__entry__1">Copy</td>
+<td class="entry align-left" headers="task_ajm_rgc_y5__table_pgc_qhc_y5__entry__2">Creates a pool with the same agents as the selected pool.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="task_ajm_rgc_y5__table_pgc_qhc_y5__entry__1">Delete</td>
+<td class="entry align-left" headers="task_ajm_rgc_y5__table_pgc_qhc_y5__entry__2">Removes the agent pool.</td>
+</tr>
+</tbody></table></div>
+<div class="itemgroup info">To deploy a resource to an agent pool, the resource must be a child of the agent pool.</div>
+</li></ol></section>
+</div>
+<article class="topic task nested2" aria-labelledby="ariaid-title4" id="task_t2h_hpt_xrb">
+<h3 class="title topictitle3" id="ariaid-title4">Agent pools for containers</h3><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-483a0769-b1d4-4658-a115-bcf270423083">Edit online</a></span></div>
+<div class="body taskbody">
+<section><div class="tasklabel"><h4 class="sectiontitle tasklabel" id="tasktask_t2h_hpt_xrb__steps__1">Procedure</h4></div><div class="li stepsection">
+<p class="p">Agent pools can be used to provide efficiency with your use of <span class="ph">Deploy</span> licenses. You can take advantage of running your agents in a Kubernetes-based environment where
+you can spin agent instances up and down quickly. </p>
+<p class="p">Follow these steps in order to achieve this efficiency: </p>
+</div><ol class="ol steps"><li class="li step">
+<span class="ph cmd">Build the application resource tree using an Agent Pool instead of using the Agent directly.
+.</span>
+</li><li class="li step">
+<span class="ph cmd">Deploy an instance of the <span class="ph">Deploy</span> Agent to your Kubernetes cluster. See <a class="xref" href="https://github.com/IBM/charts/blob/master/repo/ibm-helm/ibm-ucda-prod.md" target="_blank"><u class="ph u">Deploying Agent in Kubernetes Cluster</u></a>. </span>
+</li><li class="li step"><span class="ph cmd">The agent will be automatically get a license per the system setting on licensing
+agent.</span>
+</li><li class="li step"><span class="ph cmd">Use the REST API to add the agent into the specified Agent Pool. See <a class="xref" href="../../api/topics/rest_cli_agentpool_addagenttopool_put.html">Add an agent to an agent pool</a>.</span></li><li class="li step"><span class="ph cmd">Run your deployment. </span></li><li class="li step"><span class="ph cmd">Use the REST API to remove the agent from the specified Agent Pool. See <a class="xref" href="../../api/topics/rest_cli_agentpool_removeagentfrompool_delete.html">Remove an agent from an agent pool</a>.
+</span></li><li class="li step"><span class="ph cmd">The license will be removed if you are using server-agent license model; license will be
+released 15 minutes later if you are using Simultaneous Session license model. </span></li><li class="li step"><span class="ph cmd">Delete the instance of the <span class="ph">Deploy</span> Agent from the Kubernetes cluster. </span></li></ol></section>
+</div>
+</article>
+</article>
+</article></main></body></html>

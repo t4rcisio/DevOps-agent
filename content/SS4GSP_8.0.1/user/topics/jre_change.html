@@ -1,0 +1,78 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can change the JRE of active servers by editing their configuration files."><meta name="DC.relation" scheme="URI" content="../../user/topics/settings_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="jre_change"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Changing or updating the JRE of servers</title></head><body id="jre_change"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Changing or updating the JRE of servers</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dc34331c-5c07-4f99-8e3f-b742d7e979ed">Edit online</a></span></div>
+  
+  <div class="body taskbody"><p class="shortdesc">You can change the JRE of active servers by editing their configuration
+    files.</p>
+    <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskjre_change__context__1">About this task</h2></div>
+<div class="note note note_note"><span class="note__title">Note:</span> 
+        <ul class="ul" id="jre_change__ul_cc1_lzs_v5b">
+          <li class="li">Any certificates that you imported to the old JRE cacerts file must be imported into
+            your new JRE cacerts file as well. See<a class="xref" href="ssl_config.html" title="The steps for configuring secure HTTPS connections with the IBM DevOps Deploy (Deploy) server are similar to the steps for any Java Platform, Enterprise Edition server.">Configuring SSL on Apache Tomcat and LDAP servers</a> for more
+            information.</li>
+          <li class="li">Starting from v7.2.1, the keystore converter utility is no more needed, and <span class="ph">Deploy</span> handles any
+            necessary conversions itself.</li>
+        </ul>
+      </div>
+    </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskjre_change__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">Install the new JRE.</span>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">Stop the server.</span>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">Update the location of the JRE in the following files:</span>
+        <div class="itemgroup info">
+<ul class="ul">
+<li class="li">In the file <span class="ph filepath"><var class="keyword varname">server_install</var>/bin/set_env</span>, set the value of
+the <span class="keyword parmname">JAVA_HOME</span> system variable to the location of the JRE.</li>
+<li class="li">In the file
+<span class="ph filepath"><var class="keyword varname">server_install</var>/conf/server/installed.properties</span>, set the
+value of the <span class="keyword parmname">install.java.home</span> property to the location of the JRE.</li>
+</ul>
+<div class="note note note_note"><span class="note__title">Note:</span> As a shortcut, you can delete the old JRE and move the new JRE into the location of the old
+JRE. In this case, you do not need to update the <span class="keyword parmname">JAVA_HOME</span> system variable and
+<span class="keyword parmname">install.java.home</span> property because they now point to the new JRE.</div>
+<div class="note note note_note"><span class="note__title">Note:</span> The value of the <span class="keyword parmname">JAVA_HOME</span> system variable must match the value of the
+<span class="keyword parmname">install.java.home</span> property.</div>
+<div class="note note note_note"><span class="note__title">Note:</span>  If you are upgrading to Java 9 or above and are moving off  Oracle Java to AdoptOpenJDK you
+must manually remove the <span class="ph filepath">-Djava.endorsed.dir</span> entry from the
+<span class="ph filepath">server_install/bin/set_env</span> file. </div>
+</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">If the server is running as a service on Windows:™</span>
+        <ol type="a" class="ol substeps">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Open the file
+                <span class="ph filepath"><var class="keyword varname">server_install</var>\bin\service\_service.cmd</span> in a
+              text editor.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Edit the line that starts with the code <code class="ph codeph">set JAVA_HOME</code> to the path
+              to the new JRE.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Open a command prompt as an administrator.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Go to the <span class="ph filepath"><var class="keyword varname">server_install</var>\bin\service</span>
+              folder.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Remove the service by running the following command:</span>
+            <div class="itemgroup info"><pre class="pre codeblock"><code>service.cmd remove <var class="keyword varname">service_name</var></code></pre>Use the
+name of the service for <code class="ph codeph"><var class="keyword varname">service_name</var></code>. To find the service name,
+open the services view and find the entry that starts with <code class="ph codeph"><span class="ph">Deploy</span></code>. The service name is in parentheses in this entry.</div>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Reinstall the service by running the following command:</span>
+            <div class="itemgroup info">
+              <pre class="pre codeblock"><code>service.cmd install <var class="keyword varname">service_name</var></code></pre>
+            </div>
+          </li>
+        </ol>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">Start the server.</span>
+</li></ol></section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/settings_ch.html" title="After you install IBM DevOps Deploy (Deploy), you can modify the server configuration and configure more options.">Server settings and configuration</a></div></div></nav></article></main></body></html>

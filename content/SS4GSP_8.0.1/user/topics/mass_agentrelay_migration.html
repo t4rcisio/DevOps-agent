@@ -1,0 +1,41 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="JMS agent relays on a server can be migrated to Web with the ability to revert back to the original JMS configuration. This allows you to specify connection details for groups of agent relays."><meta name="DC.relation" scheme="URI" content="../../user/topics/configure_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="mass_agentrelay_migration"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Migrating agents relays to Web</title></head><body id="mass_agentrelay_migration"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Migrating agents relays to Web</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-991267b7-eb1e-4d3d-af99-29ac27722251">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">JMS agent relays on a server can be migrated to Web with the ability to revert back to
+the original JMS configuration. This allows you to specify connection details for groups of agent
+relays. </p>
+<section class="section"><h2 id="mass_agentrelay_migration__title__2" class="title sectiontitle"> Prerequisites</h2>
+
+<p class="p">Agents, agents relay, and server must be upgraded to the <span class="ph">IBM DevOps Deploy (Deploy)</span> 7.0.4 or later. For
+    more information, see <a class="xref" href="../../install/topics/upgradeAgents.html#upgradeagents" title="In most cases, you upgrade agents from the server interface, but you can also upgrade the agents from the command line. Always upgrade agents and agent relays in addition to upgrading the server.">Upgrading agents</a> and
+     <a class="xref" href="../../install/topics/upgradeInstall.html#upgradeinstall" title="You can upgrade the IBM DevOps Deploy (Deploy) server to incorporate to a later version.">Upgrading the server</a>. </p>
+<p class="p">JMS agents are NOT supported on Web relays. Make sure that the connected agents are migrated to
+Web.</p>
+</section>
+<section class="section"><h2 id="mass_agentrelay_migration__title__3" class="title sectiontitle">About this task</h2>
+
+<div class="p">Up to version 7.1.0.0, migration of agent relays can be done manually by modifying the
+<code class="ph codeph">agentcomm</code> properties in the agentrelay.properties file. Relays can be automatically
+migrated to Web while upgrading the agent relays. For more information, see <a class="xref" href="../../install/topics/upgradeAgentRelays.html" title="In most cases, you upgrade agents relays from the command line, but starting from 7.0.4.2 version, you can upgrade the server from the interface. Always upgrade agents and agent relays in addition to upgrading the server.">Upgrade Agent
+Relays</a>. This task explains the procedure to migrate the agent relays manually. <div class="note note note_note"><span class="note__title">Note:</span> You can
+only revert back an agent to JMS if that agent relay was previously a JMS relay.</div>
+</div>
+</section>
+<section class="section"><h2 id="mass_agentrelay_migration__title__4" class="title sectiontitle">Manual Migration</h2>
+
+<ol class="ol">
+<li class="li">Stop the relay you want to migrate.</li>
+<li class="li">Open the <code class="ph codeph"><var class="keyword varname">relayInstallation</var>/conf/agentrelay.properties</code> file. </li>
+<li class="li">Edit the file as follows:<pre class="pre codeblock"><code>agentcomm.enabled=true
+agentcomm.server.uri=random\:(wss\://host-or-ip\:7919)</code></pre>
+<div class="note note note_note"><span class="note__title">Note:</span> Change <code class="ph codeph">host-or-ip</code> to your <span class="ph">Deploy</span> server name.</div></li>
+<li class="li">Restart the relay.</li>
+<li class="li">Verify that the Web agents are connected to the Web relay.</li>
+</ol>
+<div class="note note note_note"><span class="note__title">Note:</span>  If migration fails, you can view the logs in the
+<span class="ph filepath"><var class="keyword varname">relayInstallation</var>/var/log</span> directory.</div>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/configure_agents.html" title="After you install an agent for IBM DevOps Deploy (Deploy), you can modify its configuration or create an agent relay to facilitate communication to remote relays.">Agents and agent relay configuration</a></div></div></nav></article></main></body></html>

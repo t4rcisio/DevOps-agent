@@ -1,0 +1,68 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Application processes direct underlying component processes and orchestrate multi-component deployments."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/quickstart_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="quickstart_application_process"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 5 Create an application process</title></head><body id="quickstart_application_process"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 5 Create an application process</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-33503972-b808-4704-a159-a4f9b05c145a">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Application processes direct underlying component processes
+and orchestrate multi-component deployments.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_application_process__context__1">About this task</h2></div>An application process, like a component process, consists of steps that are configured
+with the process editor. In this lesson, you create an application process that installs the
+helloWorld component by calling the component process that you created earlier. You must use
+application processes to deploy components.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_application_process__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step">
+<span class="ph cmd">Click the <span class="ph uicontrol">Applications</span> tab, and then click <span class="ph uicontrol">hello
+Application</span>.</span>
+</li><li class="li step">
+<span class="ph cmd">Click <span class="ph uicontrol">Processes</span>, and then click <span class="ph uicontrol">Create
+Process</span>.</span>
+</li><li class="li step"><span class="ph cmd">In the <span class="keyword wintitle">Create an Application Process</span> window,
+name the new application process something like <kbd class="ph userinput">hello App
+Process</kbd>.</span></li><li class="li step">
+<span class="ph cmd">Accept the default values for the other fields, and click <span class="ph uicontrol">Save</span>.</span>
+</li><li class="li step"><span class="ph cmd">To open the new process in the process editor, click the
+new process.</span></li><li class="li step"><span class="ph cmd">Add a step that deploys the helloWorld component:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">From the list of steps, add an <span class="ph uicontrol">Install Component</span> step to the design
+area, and then on the process step click the <span class="ph uicontrol">Edit</span> icon<img class="image" src="../images/edit_icon.gif">.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="keyword wintitle">Edit Properties</span> window,
+name the step something like <kbd class="ph userinput">Deploy helloWorld</kbd>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Component</span> list, select
+the <span class="ph uicontrol">helloWorld</span> component.</span><div class="itemgroup info">All components
+that are associated with an application are available.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Component Process</span> list,
+select the <span class="ph uicontrol">helloProcess</span> component process.</span>
+<div class="itemgroup info">If multiple processes were defined for the helloWorld component,
+they are listed.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Limit to Tag</span> list, select
+the <span class="ph uicontrol">blueCycle</span> tag that you defined earlier.</span>
+<div class="itemgroup info">After you select <span class="ph uicontrol">blueCycle</span>, the application
+deploys only components with this tag.</div></li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Accept the default values for the other fields, and click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+</li><li class="li step">
+<span class="ph cmd">Verify that the <span class="ph uicontrol">Start</span> step is connected to the <span class="ph uicontrol">Deploy
+helloWorld</span> step.</span>
+</li><li class="li step">
+<span class="ph cmd">Verify that the <span class="ph uicontrol">Deploy helloWorld</span> step is connected to the
+<span class="ph uicontrol">Finish</span> step.</span>
+</li><li class="li step">
+<span class="ph cmd">Save the process by clicking <span class="ph uicontrol">Save</span>.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_application_process__result__1">Results</h2></div>The complete application process looks like the following figure:<br><img class="image" src="../images/qs-plugin-design-8.gif" alt="The complete application process"><br></section>
+
+<section class="example" id="quickstart_application_process__section_c53_3bk_xl"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_application_process__section_c53_3bk_xl">Example</h2></div>
+
+<p class="p">In this lesson, you created an application process that
+deploys the helloWorld component.</p>
+The <span class="ph uicontrol">Processes</span> tab lists the application
+process. </section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_application_process__postreq__1">What to do next</h2></div>For more information about creating application processes,
+see <a class="xref" href="../../user/topics/app_process.html" title="You can use application processes to deploy or to roll back components.">Application processes</a>.</section>
+
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_6.2.0 SS4GSP_8.0.1" href="../../tutorial/topics/quickstart_abstract.html" title="In this tutorial, you create a simple application with IBM DevOps Deploy (Deploy). You use standard plug-ins to create a component and define an application that deploys the component to an environment.">Create a simple helloWorld deployment</a></div></div></nav></article></main></body></html>

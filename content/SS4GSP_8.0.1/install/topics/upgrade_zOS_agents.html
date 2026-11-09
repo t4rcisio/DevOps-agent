@@ -1,0 +1,70 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can upgrade IBM z/OS agents. However, you must upgrade the server before you upgrade the agents."><meta name="DC.relation" scheme="URI" content="../../install/topics/upgradeAgents.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/zOS_624_agent_changes.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/migrate_b4_611.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="upgrade_zOS_agents"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Upgrading IBM z/OS agents</title></head><body id="upgrade_zOS_agents"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Upgrading <span class="keyword">IBM z/OS</span> agents</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-8a9aaccb-7395-4c46-99d0-e2cdf87ee448">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">You can upgrade <span class="keyword">IBM® z/OS®</span> agents. However, you must upgrade the server before you upgrade the agents.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupgrade_zOS_agents__context__1">About this task</h2></div>
+<p class="p">Depending on how the <span class="keyword">z/OS</span> agents are installed, you have several options for upgrading the agents. </p>
+<p class="p">If you are upgrading to version 6.2.4 from a previous version, review <a class="xref" href="zOS_624_agent_changes.html#zOS_624_agent_changes">IBM z/OS agent changes in version 6.2.4</a>. </p>
+<p class="p">If you are upgrading to version 6.2.4 from a version earlier than 6.1.1, see <a class="xref" href="migrate_b4_611.html#migrate_b4_611" title="Upgrade the server, agents, and agent relays before upgrading the IBM z/OS deployment tools.">Migrating data from versions before 6.1.1</a>.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> <span class="ph">IBM DevOps Deploy (Deploy)</span> does not
+                support upgrading z/OS agents remotely.</div>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupgrade_zOS_agents__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">To upgrade from SMP/E installation, complete these steps:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">If a different high-level qualifier than that for the previous installation is used, edit each
+agent's <span class="ph filepath">installed.properties</span> file, specifying the new high-level
+qualifier.</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">
+<ul class="ul">
+<li class="li">&lt;AGENT_HOME&gt;/conf/agent/installed.properties (file is in ASCII encoding)</li>
+<li class="li">&lt;AGENT_HOME&gt;/mvs/dataset.properties (file is in EBCDIC encoding)</li>
+<li class="li">&lt;AGENT_HOME&gt;/conf/toolkit/ISPF.conf (If using <span class="ph">Deploy</span> ISPF configuration)</li>
+</ul>
+</li>
+</ul>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Follow the instructions in the Program Directory for <span class="ph">Deploy</span> for <span class="keyword">z/OS</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Upgrade each agent by using one of the options in <a class="xref" href="upgradeAgents.html#upgradeagents" title="In most cases, you upgrade agents from the server interface, but you can also upgrade the agents from the command line. Always upgrade agents and agent relays in addition to upgrading the server.">Upgrading agents</a></span>
+</li>
+</ol>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> 
+<p class="p">After the SMP/E installation, the UNIX installer is already on your file system so you can skip
+the first few steps in the typical command-line install or upgrade guide and start from running the
+shell commands. If you are following the instructions in <a class="xref" href="upgrade_agent_cli.html#upgrade_agent_cli" title="You can upgrade agents by stopping them and running the installation program for the new version.">Upgrading agents from the command line</a> or <a class="xref" href="upgrade_agent_silent.html#upgrade_agent_silent" title="You can upgrade agents by specifying the installation properties in a text file.">Upgrading agents in silent mode</a>
+topics, you can skip the steps that download and extract the installer. Start with running the
+<span class="keyword cmdname">install-agent.sh</span> or <span class="keyword cmdname">install-agent-from-file.sh</span> script from
+your SMP/E installation directory. </p>
+</div>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To upgrade from a non-SMP/E installation, complete these steps:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Upgrade by using one of the options in <a class="xref" href="upgradeAgents.html#upgradeagents" title="In most cases, you upgrade agents from the server interface, but you can also upgrade the agents from the command line. Always upgrade agents and agent relays in addition to upgrading the server.">Upgrading agents</a>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Submit a job to load the agent data sets. Locate the job JCL at <span class="ph filepath"><var class="keyword varname">agent
+install dir</var>/mvs/BUZEXPD</span>. The JCL, except the job parameter, is already
+customized, based on the agent configuration. Edit and submit the job to load the agent data sets.
+For example, use the following commands in OMVS to edit or submit the JCL: </span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>oedit <var class="keyword varname">agent install dir</var>/mvs/BUZEXPD
+submit <var class="keyword varname">agent install dir</var>/mvs/BUZEXPD</code></pre>
+</div>
+</li>
+</ol>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../install/topics/zOS_624_agent_changes.html">IBM z/OS agent changes in version 6.2.4</a></strong><br></li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../install/topics/migrate_b4_611.html">Migrating data from versions before 6.1.1</a></strong><br>Upgrade the server, agents, and agent relays before upgrading the <span class="keyword">IBM z/OS</span> deployment tools.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/upgradeAgents.html" title="In most cases, you upgrade agents from the server interface, but you can also upgrade the agents from the command line. Always upgrade agents and agent relays in addition to upgrading the server.">Upgrading agents</a></div></div></nav></article></main></body></html>

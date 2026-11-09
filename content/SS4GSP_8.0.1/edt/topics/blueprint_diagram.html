@@ -1,0 +1,85 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="You can edit Terraform blueprints in a graphical editor."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueprint_diagram"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Editing Terraform blueprint diagram</title></head><body id="blueprint_diagram"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Editing Terraform blueprint diagram</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-4f017d36-c21e-4e7f-bb31-8119ce0d73d3">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can edit Terraform blueprints in a graphical editor.</p>
+<section class="section prereq" id="blueprint_diagram__prereq_uyc_k3s_g3b"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_diagram__prereq_uyc_k3s_g3b">Before you begin</h2></div>Log into the Blueprint Designer.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_diagram__context__1">About this task</h2></div>
+<p class="p">To edit a Terraform blueprint in the graphical editor, in the <span class="ph uicontrol">Files</span> list,
+open the appropriate folder and click on any file with the extension <code class="ph codeph">tf</code>. The
+<span class="ph uicontrol">Diagram</span> tab shows the blueprint in a graphical editor.</p>
+<br><img class="image" src="../images/blueprint_diagram.png" alt="Diagram mode of blueprint designer."><br>
+<p class="p">The other tabs enable you to view and edit the source code for the blueprint. For more
+information, see <a class="xref" href="blueprint_source.html" title="You can edit the Heat Orchestration Template (HOT) source code of blueprints directly.">Editing blueprint source code</a>.</p>
+<div class="p" id="blueprint_diagram__palette">The palette at the right side of the editor shows resources that you can add to the
+blueprint. The palette is divided into multiple drawers. If a drawer contains many items, the
+contents are separated across tabs. On tablet computers, the pallet is on the right side of the
+editor and is collapsed by default. If you are using a tablet computer, to add elements to a
+blueprint, typically you click Add <img class="image" id="blueprint_diagram__image_z4n_kjs_g3b" src="../images/icons/add_resource.gif" alt="">to open the <span class="ph uicontrol">Add Element</span> window. <ul class="ul">
+<li class="li"> The <span class="ph uicontrol">Components</span> drawer shows components and tags from the <span class="ph">Deploy</span> server. This drawer also includes a resource named <span class="ph uicontrol">Referenced Component</span>.
+This resource represents a generic component. You use the <span class="ph uicontrol">Referenced
+Component</span> to represent a component that you specify later. </li>
+<li class="li">The <span class="ph uicontrol">Catalogs</span> drawer lists assets from vRealize Automation blueprints that
+are available for use, if you are connected to a VMware vRealize Automation cloud. To reuse these
+existing catalog items, you can drag one onto an empty blueprint.</li>
+<li class="li"> The <span class="ph uicontrol">Instances</span> drawer shows the resources for creating virtual machines
+in cloud environments. You can drag these to the blueprint. This drawer is available only when
+editing a Terraform blueprint. </li>
+<li class="li"> The <span class="ph uicontrol">Networks</span> drawer shows referenced networks and new networks. To
+connect a virtual machine to an existing network, use a referenced network. To create a new network
+in the cloud, use a new network. </li>
+<li class="li"> The <span class="ph uicontrol">Storage</span> drawer shows cloud storage volumes. To add a storage volume,
+drag a volume to an instance and specify the mount point for the volume. </li>
+<li class="li">The <span class="ph uicontrol">Security</span> drawer shows security configurations that you can apply to
+an instance.</li>
+<li class="li"> The <span class="ph uicontrol">Modules</span> drawer shows the Terraform modules that you have access to.
+To use a module, drag it onto the canvas and supply the module property values. This drawer is
+available only when editing a Terraform blueprint. </li>
+<li class="li">The <span class="ph uicontrol">Policies</span> drawer includes resources such as load balancers and
+autoscaling groups. This drawer is available only when editing a Heat blueprint. </li>
+<li class="li"> The <span class="ph uicontrol">Other</span> drawer includes miscellaneous resources such as deployment
+sequence, load balancers, and null resource. A null resource is generally used to run Terraform
+provisioners on a virtual machine. This drawer is available only when editing a Terraform blueprint.
+</li>
+</ul></div>
+<p class="p">Resource names can contain only alphanumeric characters and the following special characters:
+hyphen (-) and underscore (_). If, when prompted, you enter a name containing unsupported
+characters, the Blueprint Designer replaces those characters with underscore character (_). </p>
+<p class="p">To search the palette contents, click <span class="ph uicontrol">Add</span>
+<img class="image" id="blueprint_diagram__image_sj2_rls_g3b" src="../images/icons/add_resource.gif" alt="">, and then in the <span class="keyword wintitle">Add Element</span> window filter field, enter your search
+term. You can also change storage resource <img class="image" id="blueprint_diagram__image_v2x_ddf_3jb" src="../images/icons/storage_Resource.jpg" alt="storge resource">, security resource (except VMware) <img class="image" id="blueprint_diagram__image_klq_2df_3jb" src="../images/icons/security_resource.jpg">, ip resource <img class="image" id="blueprint_diagram__image_prl_fdf_3jb" src="../images/icons/ip_resource.jpg">, connection <img class="image" id="blueprint_diagram__image_hkb_jdf_3jb" src="../images/icons/connection.jpg">, provisioner, load balancer (AWS
+only) <img class="image" id="blueprint_diagram__image_xhh_gdf_3jb" src="../images/icons/load_balancer.jpg">, resource group
+resource <img class="image" id="blueprint_diagram__image_c32_ldf_3jb" src="../images/icons/resource_group.jpg">(Azure only) and
+resource pool resource <img class="image" id="blueprint_diagram__image_rgz_ldf_3jb" src="../images/icons/resource_pool.jpg">(VMware only) via the icon on an instance.</p>
+<p class="p">Some resources can be connected. For example, you can connect an instance to a network by
+grabbing the networks connection icon and dragging to instance. </p>
+<div class="note note note_note"><span class="note__title">Note:</span> On tablet computers, connection icons are not displayed on elements. Instead, to connect
+elements, touch and hold the first element until the outline of the element flashes green. Then,
+without lifting your finger, drag your finger to the second element.</div>
+<p class="p">When you click a resource to select it, its properties are displayed in the
+<span class="ph uicontrol">Properties</span> drawer, to the left of the editor. From this drawer, you can
+change property values or externalize them to properties as described in <a class="xref" href="blueprint_props_externalize.html" title="Rather than hardcoding values in a blueprint, you can externalize properties to parameters. Then, you can specify values in a configuration file or specify values when you provision an environment.">Externalizing properties in blueprints</a>. </p>
+<p class="p" id="blueprint_diagram__error_icon">If the blueprint contains an error, warning, or unfinished TODO item, an icon
+that represents the most serious types of item is displayed on the editor toolbar. For example, if
+the blueprint contains at least one error, the error icon is displayed. Hover over the icon <img class="image" id="blueprint_diagram__image_txb_hms_g3b" src="../images/icons/error.gif" alt=""> to display a list of all items that you must correct or complete before you provision the
+blueprint. </p>
+<p class="p">When you add components to the blueprint, the editor automatically adds the resource tree
+    resource to the blueprint. This resource represents a base resource tree on the <span class="ph">Deploy</span>
+server. If, on this resource, you specify the parent property, a forward slash character (/)
+indicates a hierarchical relationship. For example, if you specify
+<code class="ph codeph">/Cloud/Environment/OtherResources</code>, then this resource tree will be added under
+<code class="ph codeph">/Cloud/Environment/OtherResources</code>.</p>
+<div class="p">The editor toolbar contains useful tools for working with your blueprint. It includes tools like
+cut, copy, paste, and delete. Also <ul class="ul" id="blueprint_diagram__ul_us2_5ms_g3b">
+<li class="li"><img class="image" id="blueprint_diagram__image_u42_mwl_k3b" src="../images/icons/EditVariables.png">Edit variables</li>
+<li class="li"><img class="image" id="blueprint_diagram__image_ldr_mwl_k3b" src="../images/icons/EditOutputs.png">Add or edit outputs</li>
+<li class="li"><img class="image" id="blueprint_diagram__image_zbx_vks_k3b" src="../images/icons/AddElement.png">Add an element to the
+blueprint. An alternative to using the Palette.</li>
+<li class="li"><img class="image" id="blueprint_diagram__image_q1b_1nl_k3b" src="../images/icons/EditDiagramSync.png">Synchronize variables
+with <code class="ph codeph">camvariables.json</code>. Only variable when working with Cloud Automation Manager
+projects. </li>
+</ul></div>
+</section>
+</div>
+</article></main></body></html>

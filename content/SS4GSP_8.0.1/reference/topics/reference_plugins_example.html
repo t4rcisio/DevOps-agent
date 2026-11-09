@@ -1,0 +1,39 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="A plug-in consists of one or more steps. A step represents a unit of functionality that can be user-configured and combined with other steps into a process. Creating a plug-in consists in defining its individual steps and then grouping them together for presentation in IBM DevOps Deploy (Deploy)."><meta name="DC.relation" scheme="URI" content="../../reference/topics/plugin_ch.html"><meta name="DC.relation" scheme="URI" content="../../reference/topics/ref_example_step_properties.html"><meta name="DC.relation" scheme="URI" content="../../reference/topics/ref_example_step_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="examplePlugin.d12e2"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Example plug-in</title></head><body id="examplePlugin.d12e2"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Example plug-in</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-07194547-c306-43c7-becf-8727b5997262">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">A plug-in consists of one or more steps. A step represents a unit of functionality that
+  can be user-configured and combined with other steps into a process. Creating a plug-in consists
+  in defining its individual steps and then grouping them together for presentation in <span class="ph">IBM DevOps Deploy (Deploy)</span>.</p>
+<p class="p">Plug-in steps are run by an agent that is installed in the target
+environment. This means that plug-ins can be written in any scripting
+language as long as the agent can access the required scripting tools
+on the host.</p>
+<p class="p">In this section, we examine the mechanics of plug-ins by examining
+a plug-in step in detail. The example plug-in that we use is FileUtils,
+which contains several steps that are related to file manipulation.
+The FileUtils plug-in is shipped with <span class="ph">Deploy</span>.</p>
+<p class="p">Each plug-in step is an individually configurable object in the
+editor. In the following illustration, you can see some of FileUtils'
+individual steps in the process editor.</p>
+<br><img class="image" src="../images/samp_plug1.png" alt="An illustration of the steps in the code of the plug-in and the matching steps in the process editor"><br>
+<p class="p">We examine the <code class="ph codeph">Create File</code> step in this example.
+Create File is straightforward and (as the name implies) creates a
+file.</p>
+<p class="p">Each step (<span class="ph filepath">step-type</span> element) has the same
+structure: </p>
+<ul class="ul">
+<li class="li"><code class="ph codeph">properties</code> element can contain any number of <code class="ph codeph">&lt;property&gt;</code> child
+elements; property values can be supplied at design time or runtime</li>
+<li class="li"><code class="ph codeph">post-processing</code> element provides error-handling
+and sets property values that can be used by other steps</li>
+<li class="li"><code class="ph codeph">command</code> element performs the step's function.
+The function can be defined completely by the element, or be constructed
+in part or entirely from the step's properties at design time or runtime</li>
+</ul>
+<p class="p">The following figure illustrates the structure of the Create File
+step.</p>
+<br><img class="image" src="../images/samp_plug2.png" alt="The structure of the step shows the properties of the step, which correspond to the properties in the Edit Properties window"><br>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../reference/topics/ref_example_step_properties.html">Step properties</a></strong><br>In the context of our discussion, properties are values that are used by the step's command. Step properties are defined with the <span class="ph filepath">property</span> element.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../reference/topics/ref_example_step_commands.html">Step commands</a></strong><br>The step's <code class="ph codeph">command</code> element specifies the scripting tool that runs the step and identifies the file that contains the actual script.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/plugin_ch.html" title="The Deploy plug-ins provide tools for creating component processes and integrations. IBM provides plug-ins for several common deployment processes, and others are available to integrate with a wide variety of tools, such as middleware tools, databases, and servers.">Plug-ins</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To stop the blueprint designer and its associated services, you must stop the cloud discovery service, the blueprint design server, and the engine Heat services."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="stop_patterns"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Stopping the blueprint designer, cloud discovery service, and engine</title></head><body id="stop_patterns"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Stopping the blueprint designer, cloud discovery service, and engine</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-845008a6-1f32-4245-acfd-6338c5141eae">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To stop the blueprint designer and its associated services, you must stop the cloud
+discovery service, the blueprint design server, and the engine Heat services.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskstop_patterns__context__1">About this task</h2></div>Depending on your system configuration, these components might be on different computers.
+Be sure to stop the cloud discovery service, the blueprint design server, and the engine Heat
+services on the correct computers.</section>
+</div>
+<article class="topic task nested1" aria-labelledby="ariaid-title2" id="stop_cds">
+<h2 class="title topictitle2" id="ariaid-title2">Stopping the cloud discovery service</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-845008a6-1f32-4245-acfd-6338c5141eae">Edit online</a></span></div>
+<div class="body taskbody">
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskstop_cds__steps__1">Procedure</h3></div><div class="li step p" id="stop_cds__stop_cds">
+<span class="ph cmd">Stop the cloud discovery service.</span>
+<div class="itemgroup info">On version 6.1.1.1 and later, the cloud discovery service is installed along with the
+blueprint design server.</div>
+<ul class="ul choices">
+<li class="li choice">On Linux™ systems that manage services with the
+<span class="keyword cmdname">systemd</span> system manager, use the <span class="keyword cmdname">systemctl</span> command:
+<pre class="pre codeblock"><code>systemctl stop ibm-cloud-discovery.service</code></pre><div class="note note note_note"><span class="note__title">Note:</span> If you started the cloud
+discovery service with the <span class="keyword cmdname">systemctl</span> command, you must use the
+<span class="keyword cmdname">systemctl</span> command to stop the cloud discovery service.</div></li>
+<li class="li choice">On other versions of Linux: <ul class="ul">
+<li class="li">Using the <span class="keyword cmdname">ps</span> command, find the process IDs of the cloud discovery
+service:<pre class="pre codeblock"><code>ps aux | grep -i -e "cloud" | grep -v "grep"</code></pre>For example, the output
+of the command might look like the following
+code:<pre class="pre codeblock"><code>root      1218  0.0  1.5 319048 29932 ?        Sl   Dec08   0:00 /usr/bin/python /usr/bin/cloud-discovery-service
+</code></pre></li>
+<li class="li">Using the <span class="keyword cmdname">kill</span> command, stop the processes. For
+example:<pre class="pre codeblock"><code>kill 1218</code></pre></li>
+</ul></li>
+<li class="li choice">On Windows™:<ul class="ul" id="stop_cds__ul_xb5_nvl_3z">
+<li class="li">Using the Task Manager program, find the <span class="keyword cmdname">cloud-discovery-service</span>
+process.</li>
+<li class="li">Right-click the <span class="keyword cmdname">cloud-discovery-service</span> process and click <span class="ph uicontrol">End
+task</span>.</li>
+</ul></li>
+</ul>
+</div></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" id="stop_design_server">
+<h2 class="title topictitle2" id="ariaid-title3">Stopping the blueprint design server</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-845008a6-1f32-4245-acfd-6338c5141eae">Edit online</a></span></div>
+<div class="body taskbody">
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskstop_design_server__steps__1">Procedure</h3></div><div class="li step p">
+<span class="ph cmd">Stop the blueprint design server:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code><var class="keyword varname">server_installation_directory</var>/bin/server stop</code></pre>Use the
+server installation directory for <code class="ph codeph"><var class="keyword varname">server_installation_directory</var></code>.
+<span class="ph">The
+default installation directory is <span class="ph filepath">/opt/ibm-ucd-patterns</span> on Linux and <span class="ph filepath">C:\Program Files\ibm-ucd-patterns</span>
+on Windows.</span>
+By default, the command looks like this
+code:<pre class="pre codeblock"><code>/opt/ibm-ucd-patterns/bin/server stop</code></pre></div>
+</div></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title4" id="stop_engine">
+<h2 class="title topictitle2" id="ariaid-title4">Stopping the engine Heat services</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-845008a6-1f32-4245-acfd-6338c5141eae">Edit online</a></span></div>
+<div class="body taskbody">
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskstop_engine__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Stop the Heat services.</span>
+<div class="itemgroup info">Run the following commands:<pre class="pre codeblock"><code>systemctl stop openstack-heat-engine.service</code></pre>
+<pre class="pre codeblock"><code>systemctl stop openstack-heat-api.service</code></pre>
+<pre class="pre codeblock"><code>systemctl stop openstack-heat-api-cfn.service</code></pre>
+<pre class="pre codeblock"><code>systemctl stop openstack-heat-api-cloudwatch.service</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If you installed a Keystone server when you installed the engine, stop it.</span>
+<div class="itemgroup info">Run the following
+command:<pre class="pre codeblock"><code>systemctl stop openstack-keystone.service</code></pre></div>
+</li></ol></section>
+</div>
+</article>
+</article></main></body></html>

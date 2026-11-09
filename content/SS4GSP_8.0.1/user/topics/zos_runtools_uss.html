@@ -1,0 +1,188 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To create IBM z/OS component versions from z/OS UNIX System Services, submit the buztool.sh command from a z/OS UNIX shell."><meta name="DC.relation" scheme="URI" content="../../user/topics/zos_runtools.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="zos_runtools_uss"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating z/OS component versions from z/OS UNIX System Services</title></head><body id="zos_runtools_uss"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating <span class="keyword">z/OS</span> component
+versions from <span class="keyword">z/OS</span> UNIX System Services</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-52049560-9916-458b-b9d1-c8c927060dd2">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To create <span class="keyword">IBM® z/OS®</span> component
+versions from  <span class="keyword">z/OS</span> UNIX™ System Services, submit the <span class="keyword cmdname">buztool.sh</span> command
+from a <span class="keyword">z/OS</span> UNIX shell.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_runtools_uss__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Open a <span class="keyword">z/OS</span> UNIX shell.</span></li><li class="li step stepexpand"><span class="ph cmd">Use the <span class="keyword cmdname">buztool.sh createzosversion</span> command
+to create the component version.</span><div class="itemgroup info">
+     <table class="table" id="zos_runtools_uss__table_jq3_cwz_4vb"><caption><span class="table--title-label">Table 1. </span><span class="title">Arguments for the <span class="keyword cmdname">buztool createzosversion.sh createzosversion</span>
+command</span></caption><colgroup><col style="width:24.50805008944544%"><col style="width:17.88908765652952%"><col style="width:57.60286225402504%"></colgroup><thead class="thead">
+                                                  <tr class="row valign-bottom">
+                                                  <th class="entry" id="zos_runtools_uss__table_jq3_cwz_4vb__entry__1">Parameter</th>
+                                                  <th class="entry" id="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">Required</th>
+                                                  <th class="entry" id="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">Description</th>
+                                                  </tr>
+                                                  </thead><tbody class="tbody">
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-c</span>,
+                                                  <span class="keyword parmname">-component</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">true</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The component name in
+                                                  <span class="ph">Deploy</span>. The component name can contain only letters,
+                                                  numbers, and spaces.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-v</span>,
+                                                  <span class="keyword parmname">-version</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The name of the version to
+                                                  create. If a version is not specified, a version
+                                                  name is generated from the current time stamp. The
+                                                  version name can contain only letters, numbers,
+                                                  and spaces. </td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-s</span>,
+                                                  <span class="keyword parmname">-shiplist</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">true</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The location of the ship
+                                                  list file.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-verb</span>,
+                                                  <span class="keyword parmname">-verbose</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">To display a trace log, set
+                                                  this parameter to true. If verbose is specified
+                                                  with no value, it is assumed true. This value
+                                                  should always be set to false in all environments,
+                                                  unless additional logging is needed for a specific
+                                                  need. Setting this to true, can cause out of
+                                                  memory errors, if the log generated is
+                                                  immense.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-o</span>,
+                                                  <span class="keyword parmname">-output</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The full path name of the
+                                                  file where the output of the version creation is
+                                                  written.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-t</span>,
+                                                  <span class="keyword parmname">-type</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The type of the version to
+                                                  create. Set to full to create a full version.
+                                                  Default is incremental.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-to</span>,
+                                                  <span class="keyword parmname">-token</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The token used to
+                                                  authenticate the server. This token can be created
+                                                  by a user who has access to create versions in the
+                                                  corresponding component. If the token is not
+                                                  provided, <span class="keyword cmdname">buztool</span> takes the
+                                                  token from the
+                                                  <span class="ph filepath">&lt;agent_home&gt;/conf/installed.properties&gt;</span>
+                                                  <span class="keyword cmdname">server.token </span>value to
+                                                  authenticate. </td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-prop</span>,
+                                                  <span class="keyword parmname">-propertiesFilePath</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The full path of the buztool
+                                                  properties file. The buztool property file
+                                                  contains <code class="ph codeph">deployType</code> to
+                                                  <code class="ph codeph">copyType</code> mappings. Use this
+                                                  parameter to pass details of external repository .
+                                                  See <a class="xref" href="zos_runtools_v2.html#zos_runtools_v2__section_orc_ldk_1mb">The buztool properties file</a>, for more information.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-url</span>,
+                                                  <span class="keyword parmname">-serverUrl</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The URL of the server in
+                                                  which the version is to be created.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-runtime.deploy</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">When set to false, disables
+                                                  hash calculation of artifacts. Default is
+                                                  true.</td>
+                                                  </tr>
+                                                          <tr class="row">
+                                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-zpv</span></td>
+                                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">To use v2 package format, set this parameter to v2. If the parameter
+                                                                          is not provided, it assumes it to be v1.</td>
+                                                          </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-extrepo.url</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The URL of external
+                                                  repository.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-extrepo.repositoryType</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The type of external
+                                                  repository. The value can be Nexus, or
+                                                  Artifactory.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-extrepo.repository</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The name of the repository
+                                                  in Artifactory (or Nexus) to which the version is
+                                                  uploaded.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-extrepo.username</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The user name of external
+                                                  repository.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-extrepo.password</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The password of external
+                                                  repository.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-extrepo.apiKey</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The API key of JFrog
+                                                  Artifactory to be used.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-extrepo.rawDirectory</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The raw directory in the
+                                                  Nexus repository to be used.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-extrepo.httpProxyHost</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The proxy host for external
+                                                  repository.</td>
+                                                  </tr>
+                                                  <tr class="row">
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__1"><span class="keyword parmname">-extrepo.httpProxyPort</span></td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__2">false</td>
+                                                  <td class="entry" headers="zos_runtools_uss__table_jq3_cwz_4vb__entry__3">The proxy port for external
+                                                  repository.</td>
+                                                  </tr>
+                                                  </tbody></table>
+     </div><div class="itemgroup stepxmp">For example, the following command creates
+a new version in the CICSModules component:<pre class="pre codeblock"><code>buztool.sh createzosversion -c CICSModules -v fixbug100 -s /u/ucduser/build/shiplist.xml</code></pre>If
+an argument contains spaces, enclose the argument in double quotation
+marks, as shown in the following example:<pre class="pre codeblock"><code>buztool.sh createzosversion -c "CICS Modules" -v "fixbug 100" -s /u/ucduser/build/shiplist.xml</code></pre></div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_runtools_uss__result__1">Results</h2></div>The content that the ship list file specifies is available in a component in <span class="ph">Deploy</span>. <div class="note note note_note"><span class="note__title">Note:</span> If the agent is upgraded from V7.0.5, the postfix "/artifactory/" is not automatically
+added to the Artifactory URL from agent V7.1.0. This may result in HTTP response error code 404
+while creating version using the buztool. Add postfix "/artifactory" manually to the
+<var class="keyword varname">url</var> property in the artifactory properties file to avoid the 404 HTTP
+error.</div></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/zos_runtools.html" title="You can create z/OS component version by running the buztool.sh command from job control language (JCL) or from the z/OS UNIX System Services command line. You can also create z/OS component version by using the z/OS File Source Config plug-in.">Creating z/OS component versions</a></div></div></nav></article></main></body></html>

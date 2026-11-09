@@ -1,0 +1,55 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="abstract" content="You can specify where components are deployed by adding a resource or resource group to the environment. Then, map the components to those resources."><meta name="description" content="You can specify where components are deployed by adding a resource or resource group to the environment. Then, map the components to those resources."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_environment.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_environment_mapping"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Mapping resources and components to environments</title></head><body id="app_environment_mapping"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Mapping resources and components to environments</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-9d703192-494d-4886-afc8-987f772e7526">Edit online</a></span></div>
+
+<div class="body taskbody"><div class="abstract">  <span class="shortdesc">You can specify where components are deployed by adding a resource or resource group to
+   the environment. Then, map the components to those resources.</span> </div>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_environment_mapping__context__1">About this task</h2></div>Resources and resource groups identify the agents that do
+the work of deploying components and provide other configuration information.
+You must identify the resources for the environment and then specify
+which components run on which resources.<p class="p">If you are using <span class="keyword">IBM® WebSphere® Application Server</span>,
+you can import information from cells as resources; see <a class="xref" href="resources_import_was.html" title="Use the WebSphere Application Server - Deploy plug-in to import information about an IBM WebSphere Application Server system into a collection of resources. Typically, importing information by using the plug-in takes less time than manually creating resources to match the IBM WebSphere Application Server.">Importing resources from WebSphere Application Server</a>.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_environment_mapping__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+    <span class="ph cmd">To open the environment, click <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"> application</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"> environment</span></span>.</span>
+   </li><li class="li step stepexpand">
+    <span class="ph cmd">Click <span class="ph uicontrol">Add Base Resources</span> to display the <span class="keyword wintitle">Add Resource to
+      Environment</span> window for the selected environment.</span>
+    <div class="itemgroup info">All previously defined resources are available for use, as shown in the following
+      figure:<br><img class="image" src="../images/app_create-5.png" alt="Selecting resources for an environment"><br></div>
+   </li><li class="li step stepexpand">
+<span class="ph cmd">Select the check box that is associated with the resource or resource group to use.</span>
+<div class="itemgroup info">You can select more than one resource. Selecting a resource that was previously added to the
+environment has no effect. Adding more than 10 base resources in an environment may result in
+performance issues.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">OK</span>. The selected resource
+or resource group is added to the environment. </span></li><li class="li step stepexpand">
+<span class="ph cmd">To remove a base resource from the environment, in the same row as the resource, click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Remove From Environment</span></span>.</span>
+<div class="itemgroup info">Removing a base resource removes its child resources as well. Starting from v7.0.5.1, you can
+     delete a resource from the environment. Note that deleting a resource from the environment
+     resource tree deletes the resource from the system. Delete a resource from the system as
+     follows:</div><ol type="a" class="ol substeps"><li class="li substep"><span class="ph cmd">Go to <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System Settings</span></span>.</span></li><li class="li substep"><span class="ph cmd">Enable <span class="ph uicontrol">Deleting Resources from Environment Resource Tree</span>, confirm, and save your changes.</span></li><li class="li substep"><span class="ph cmd">Go back to your environment resource tree, in the same row as the resource, click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Delete</span></span>.</span></li></ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Map each component in the application to the resources.</span>
+<div class="itemgroup info">Each component must be mapped to at least one resource. You
+can map the same component to multiple resources. Or to specify that
+the component is deployed more than once to the environment, you can
+map the component multiple times to the same resource. There are several
+ways to map components to resources:</div>
+<ul class="ul choices">
+<li class="li choice">To add components one at a time, in the same row as the resource,
+click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Component</span></span>, and then select the component.</li>
+<li class="li choice">To drag components, click <span class="ph menucascade"><span class="ph uicontrol">Show</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Components</span></span>. Then, in the list
+of components that are associated with the application, drag one or
+more components to the resource.</li>
+<li class="li choice">To add multiple components at once, ensure that each component
+has the same tag. Then, in the same row as the resource, click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Component Tag</span></span>, and specify the tag that identifies the components.</li>
+</ul>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_environment_mapping__result__1">Results</h2></div>The environment is populated with resources and components.</section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_environment_mapping__postreq__1">What to do next</h2></div><div class="note note note_note" id="app_environment_mapping__note_lwp_1v2_5hc"><span class="note__title">Note:</span> For z/OS deployments, you must use a one-to-one (1:1) mapping
+    between environments and resources. This practice ensures that each resource is assigned
+    exclusively to a single environment within the application context.</div>After mapping
+   components and resources, create an application process. For information about creating
+   application processes, see <a class="xref" href="app_process_create.html#app_process_create" title="You can use application processes to deploy or to roll back components.">Creating application processes</a>.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_environment.html" title="An environment is a user-defined collection of resources that hosts an application.">Application environments</a></div></div></nav></article></main></body></html>

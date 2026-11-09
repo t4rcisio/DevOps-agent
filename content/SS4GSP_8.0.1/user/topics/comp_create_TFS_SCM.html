@@ -1,0 +1,120 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Microsoft Team Foundation Server SCM is a source code management tool."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_create_scm.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_create_TFS_SCM"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating components from Microsoft Team Foundation Server SCM</title></head><body id="comp_create_TFS_SCM"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating components from Microsoft Team
+Foundation Server SCM</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2343ebd1-3d79-4052-b7f2-59a92931dfb6">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc"> Microsoft™ Team
+Foundation Server SCM is a source code management tool.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_TFS_SCM__prereq__1">Before you begin</h2></div>Install an agent on a computer that is running Microsoft
+   Windows™. The agent computer must have access to the Microsoft Team Foundation Server. Microsoft .NET Framework 3.5 must be installed on the agent
+    computer.<div class="note note note_note"><span class="note__title">Note:</span> The agent must be installed on a computer that running is Windows.</div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_TFS_SCM__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">In <span class="ph">Deploy</span>,
+          click <span class="ph uicontrol">Components</span>, and then click <span class="ph uicontrol">Create
+            Component</span>.</span>
+        <div class="itemgroup info">The <span class="keyword wintitle">Create Component</span> window displays.</div>
+      </li><li class="li step stepexpand"><span class="ph cmd">To use a template for the new component,
+    select a template from the <span class="ph uicontrol">Template</span> list.</span>
+    <div class="itemgroup info">In this case, the component inherits source configuration, properties,
+      and processes from the template. For information about templates,
+      see <a class="xref" href="comp_template.html" title="With a component template, you can save and reuse component processes and properties and create components from them; template-based components inherit the template's properties and process.">Component templates</a>.</div></li><li class="li step stepexpand">
+        <span class="ph cmd">Specify a name and description for the component.</span>
+      </li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Teams</span> fields,
+specify the access information for the new component.</span></li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Source Configuration Type</span> list,
+select <span class="ph uicontrol">TFS_SCM</span>.</span></li><li class="li step stepexpand"><span class="ph cmd">Specify the following parameters for the component:</span>
+<div class="itemgroup info"><dl class="dl parml">
+<dt class="dt pt dlterm"><span class="ph uicontrol">Repository URL</span></dt>
+<dd class="dd pd">The URL of the TFS repository, such as <code class="ph codeph">http://tfs2010:8080/tfs/mygroup</code>.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">User</span></dt>
+<dd class="dd pd">The user name of the TFS-credentialed user.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Password</span></dt>
+<dd class="dd pd">The password of the TFS-credentialed user.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">tf.exe Path</span></dt>
+<dd class="dd pd">The location of the <span class="ph filepath">tf.exe</span> file, for example, <code class="ph codeph">C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE</code>. </dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Workspace</span></dt>
+<dd class="dd pd">The name of the TFS workspace. A workspace maps local and version-controlled
+folders on the TFS server.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Server Folder</span></dt>
+<dd class="dd pd">The location of the TFS server folder.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Local Folder</span></dt>
+<dd class="dd pd">The location of the workspace local folder.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Preserve Execute Permissions</span></dt>
+<dd class="dd pd">For Linux™ and UNIX™ operating systems, select this check box
+to retain the execute permissions for each file.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Extensions of files to Convert</span></dt>
+<dd class="dd pd">If text-type files must be converted into another character set, type the list of file
+extensions to be converted. Matching file types are converted into the default or system character
+set of the system where the agent is located. Separate list items with commas, for
+example:<pre class="pre codeblock"><code>txt,log,ini,sh</code></pre></dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Import Versions Automatically</span></dt>
+<dd class="dd pd">Select this check box to check for new versions periodically and to import new versions
+automatically. If you do not import versions automatically, you can import versions manually by
+clicking <span class="ph menucascade"><span class="ph uicontrol">Components</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected component</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Versions</span></span> and then clicking <span class="ph uicontrol">Import New Versions</span>.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Copy to CodeStation</span></dt>
+<dd class="dd pd">This option, which is selected by default, creates tamper-protected copies of the artifacts and
+stores them in the embedded artifact management system, CodeStation. If the check box is cleared,
+only metadata about the artifacts is imported. In most cases, keep this check box selected. The
+default for this setting is in the system setting <span class="ph uicontrol">Components copy to CodeStation by
+default</span>. For more information, see <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Default Version Type</span></dt>
+<dd class="dd pd">Specify how to import versions into CodeStation:<dl class="dl">
+<dt class="dt dlterm"><span class="ph uicontrol">Full</span></dt>
+<dd class="dd">Each version is comprehensive and contains all artifacts.</dd>
+
+<dt class="dt dlterm"><span class="ph uicontrol">Incremental</span></dt>
+<dd class="dd">Each version contains a subset of artifacts.</dd>
+</dl></dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Use the system's default version import agent/tag</span></dt>
+<dd class="dd pd">If this parameter is selected, the agent or tag that you specified on the <span class="keyword wintitle">System
+Settings</span> page is used to import component artifacts. Agents must have access to the
+system where the artifacts are located. For more information, see <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Import new component versions using a single agent</span></dt>
+<dd class="dd pd">If this parameter is selected, use the <span class="ph uicontrol">Agent for Version
+Imports </span>                 field to identify the agent that
+is used to import artifacts into the component. The              
+  agent must have access to the system where the artifacts are located.
+To import                 artifacts from where the server is located,
+install an agent in the same location                 and specify
+that agent.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Import new component versions using any agent with
+the specified tag</span></dt>
+<dd class="dd pd">If this parameter is selected, use the <span class="ph uicontrol">Agent Tag for
+Version Imports </span>                 field to identify the
+tag that is used to select agents to import artifacts into the   
+             component. All tagged agents must have access to the
+system where the artifacts are                 located.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Inherit Cleanup Settings</span></dt>
+<dd class="dd pd">To apply the component version cleanup settings that are specified on the <span class="keyword wintitle">System
+                  Settings</span> page, select the <span class="ph uicontrol">Inherit Cleanup
+                  Settings</span> check box. If this check box is cleared, you must specify how
+                long to keep component versions. <span class="ph" id="comp_create_TFS_SCM__d398e246">For more information
+                  about cleaning up component versions, see <a class="xref" href="settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a>.</span></dd>
+</dl></div></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span></li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_TFS_SCM__result__1">Results</h2></div><span class="ph" id="comp_create_TFS_SCM__d398e261">The new component is listed on the
+<span class="keyword wintitle">Components</span> page. The <span class="keyword wintitle">Versions</span> tab shows the available
+versions of the component.</span> If you selected the <span class="ph uicontrol">Import Versions
+Automatically</span> check box, versions are displayed automatically. Otherwise, click
+<span class="ph uicontrol">Import New Versions</span> to show the available versions. Depending on the number
+and size of the artifacts, it might take time before the versions are displayed. To see the
+artifacts in the component, click a component version. </section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_TFS_SCM__postreq__1">What to do next</h2></div>Create processes for the component. See <a class="xref" href="comp_process_configure.html" title="A component process is a series of user-defined steps that operate on a component's artifacts. You create a component process in two steps: first, you configure basic information, such as name; second, you use the process editor to assemble the process.">Creating component processes</a>.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_create_scm.html" title="You can create components from the artifacts in various source-code management systems.">Creating components from source-code management systems</a></div></div></nav></article></main></body></html>

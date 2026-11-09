@@ -1,0 +1,68 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Agent relays coordinate communication between agents and the IBM DevOps Deploy (Deploy) server. Agent relays improve the performance of communication between the server and agents. Relays also allow agents to communicate through firewalls."><meta name="DC.relation" scheme="URI" content="../../user/topics/resources_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="arch_agent_relays"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Agent relays</title></head><body id="arch_agent_relays"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Agent relays</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-c39dc4af-38ef-44f7-aa3f-305b9b1662a2">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">Agent relays coordinate communication between agents and the <span class="ph">IBM DevOps Deploy (Deploy)</span> server. Agent relays
+  improve the performance of communication between the server and agents. Relays also allow agents
+  to communicate through firewalls.</p>
+<p class="p"> To enhance performance and reduce maintenance, <span class="ph">Deploy</span> can use <dfn class="term">agent relays</dfn> to communicate with remote agents. Instead of each agent
+connecting directly to the server, agents connect to agent relays, which then connect directly to
+the server. Using agent relays in this way reduces load on the server because the server has fewer
+direct connections.</p>
+<p class="p">Agent relays also simplify communication across networks and firewalls. If multiple agents are in
+a remote network without an agent relay, each agent must connect to the server individually. In this
+case, each agent must have network permission to connect to the server, including firewall
+permissions. With an agent relay, the agents connect only to the relay, and the relay is the only
+system that contacts the server directly, such as with a VPN or tunnel.</p>
+<p class="p">Agent relays are often convenient when the agents are on cloud systems, because cloud systems are
+often separated from the <span class="ph">Deploy</span> server by a firewall or require a VPN or tunnel to reach the server.</p>
+<div class="p">The following figure is a simple diagram of communication between agents, an agent relay, and the
+server across a firewall. The agents connect directly to the agent relay, and the agent relay is the
+only system that connects to the server through the firewall.<br><img class="image" src="../images/intro_arch_f5.gif" alt="A diagram of how an agent relay enables agents to communicate with a server through a firewall"><br></div>
+<p class="p">The agent relay communicates with the server and the agents by using the same combination of
+HTTP, and HTTPS communication protocols that the agents use. As long as there is at least a
+low-bandwidth WAN connection between the server and agent relay, the <span class="ph">Deploy</span> server can send work to agents in other locations.</p>
+<div class="p">
+<div class="note note note_note"><span class="note__title">Note:</span> Starting with version 7.0.5. the agent relay uses a new proxy by default. Only HTTPS traffic
+can be proxied with this new proxy, but the relay has historically used HTTPS. If for any reason the
+relay needs to be able to proxy HTTP traffic then the old proxy can be enabled by including the
+following line in the relays <code class="ph codeph">agentrelay.properties</code> file:
+<code class="ph codeph">agentrelay.http_proxy.use_rabbit=true</code> The new proxy can now support up to 10,000
+connected web agents, although to reach maximum scalability, OS file descriptor and ephemeral port
+limits may need to be raised.</div>
+</div>
+<div class="p">Agent relays open the connections to the <span class="ph">Deploy</span> server; the server
+   never opens connections to the agent relays. Agents open the connections to the agent relay; the
+   agent relay never opens connections to the agent. Agent to server communication is always
+   encrypted. HTTP 20080 port is used to establish a tunnel between agent and server to transfer
+   encrypted data. By default, agent relays open connections on the following ports for communication:<ul class="ul">
+    <li class="li">8080 and 8443 for HTTP and HTTPS connections to the server</li>
+   </ul>Agent relays accept connections on the following default ports:<ul class="ul">
+    <li class="li">20080 for HTTP proxy connections from agents.</li>
+    <li class="li">20081, the encrypted port, for artifact cache requests from agents.</li>
+   </ul></div>
+<p class="p">The server does not open connections to agents or agent relays.</p>
+<div class="p">The following diagram shows the main default ports that are involved in
+        communication between agents, agent relays, and the server.<br><img class="image" src="../../install/images/web-agent-topology.png" height="459" width="434" alt="A diagram of the ports that agents, agent relays, and servers use to communicate; these are the same posts in the lists above"><br></div>
+<p class="p">You can also cache artifacts on agent relays to improve system performance. See <a class="xref" href="../../install/topics/t_agent_relay_cache_setup.html" title="Agent relays can cache downloaded artifacts. Caching artifacts in this way improves performance because agents retrieve artifacts from agent relays instead of from the server.">Caching artifacts on agent relays</a>.</p>
+<div class="example"><h2 id="arch_agent_relays__title__2" class="title sectiontitle">Example</h2>
+
+<p class="p">The following simple artifact move illustrates the mechanics of remote communications:</p>
+<ol class="ol">
+<li class="li">A remote agent starts and establishes a connection to the agent relay through WebSocket</li>
+<li class="li">The agent relay alerts the <span class="ph">Deploy</span> server through
+     WebSocket that the remote agent is online.</li>
+<li class="li">The server sends an artifact download command to the relay through WebSocket, and the relay
+delivers the message to the remote agent, also through WebSocket. </li>
+<li class="li">The server locates the artifacts. If the artifacts are not in the relay's CodeStation cache, the
+server sends the artifacts to the relay over HTTP or HTTPS. </li>
+<li class="li">The agent relay streams the artifacts directly to the agent over the server-relay HTTP or HTTPS
+connection.</li>
+<li class="li">After the remote agent completes the work, it informs the server through the agent relay
+WebSocket connection.</li>
+</ol>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/resources_ch.html" title="A resource is a logical deployment target that typically resolves to an agent and a user-defined construct that is based on the architectural model of IBM DevOps Deploy (Deploy).">Resources</a></div></div></nav></article></main></body></html>

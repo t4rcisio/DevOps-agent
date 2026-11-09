@@ -1,0 +1,260 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The agent properties in the installed.properties file control details about the agent, including how it connects to the server."><meta name="DC.relation" scheme="URI" content="../../install/topics/agent_install_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_properties"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Agent installation properties</title></head><body id="agent_properties"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Agent installation properties</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3d1a428b-1026-4718-a1aa-57b346b84ed5">Edit online</a></span></div>
+
+<div class="body refbody"><p class="shortdesc">The agent properties in the <span class="ph filepath">installed.properties</span> file
+control details about the agent, including how it connects to the
+server.</p>
+<table class="table"><caption><span class="table--title-label">Table 1. </span><span class="title">Properties in the agent <span class="ph filepath">installed.properties</span> file</span></caption><colgroup><col style="width:27.835051546391753%"><col style="width:25.773195876288664%"><col style="width:46.391752577319586%"></colgroup><thead class="thead">
+                                        <tr class="row">
+                                                <th class="entry align-left valign-middle" id="agent_properties__entry__1">Property</th>
+                                                <th class="entry align-left valign-middle" id="agent_properties__entry__2">Default value</th>
+                                                <th class="entry align-left valign-middle" id="agent_properties__entry__3">Description</th>
+                                        </tr>
+                                </thead><tbody class="tbody">
+          <tr class="row">
+            <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">agentcomm.pinLimitEnforcement.enabled</span></td>
+            <td class="entry align-left" headers="agent_properties__entry__2"><code class="ph codeph">true</code></td>
+            <td class="entry align-left" headers="agent_properties__entry__3">The agent default property which is set by the system. Ensure that
+              you do not edit or delete this property. <p class="p">The property is added in the
+              v8.0.1.3.</p></td>
+          </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">agentcomm.server.uri</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">random:(wss://examplehost1.com:7919,wss://examplehost2.com:7919)</span>
+                                                </td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">For Web agents, the WebSocket
+              connection used to communicate with the <span class="ph">Deploy</span> server. The
+              WebSocket secure URL must have the format: <span class="ph filepath">wss://host-or-ip:port</span>.
+              In a high-availability (HA) environment, multiple server URLs can be specified using
+              the supported failover syntax. For example,
+                <code class="ph codeph">random:(wss://node1.example.com:7919,wss://node2.example.com:7919)</code>.
+              Each server must have a unique URL, and every server in an HA cluster must be able to
+              connect to the specified URL.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">agentcomm.proxy.uri</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2">
+                                                  <span class="ph filepath">random:(http://relay1:20080,http://relay2:20080)</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">For Web agents, the connection
+              that is used to communicate with an agent relay. In an HA environment, you can specify
+              multiple agent relay end-points by using the supported failover syntax. For example,
+                <code class="ph codeph">random:(http://relay1.example.com:20080,http://relay2.example.com:20080)</code>.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1">
+                                                  <p class="p"><strong class="ph b">com.urbancode.air.devilfish.apps.plug
+                                                          in.PluginRuntimeServer.execExecutorScale</strong></p>
+                                                </td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2">4</td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">The number of concurrent
+                                                  processes per CPU. For example, if the agent host
+                                                  has 2 CPUs then by default the agent can run ( 2*4
+                                                  = ) 8 concurrent processes. You can change the
+                                                  setting to another value based on your environment
+                                                  needs. Refer to the <a class="xref" href="https://www.ibm.com/support/pages/how-change-number-concurrent-processes-agent-can-run" target="_blank">technote</a> for
+                                                  more information.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1">
+                                                  <p class="p"><strong class="ph b">com.urbancode.shell.impersonation.u
+                                                          nix.scriptLocation</strong></p>
+                                                </td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2">None</td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">The location to which the
+                                                  impersonation scripts are written before they are
+                                                  run on the agent. For example, to write scripts to
+                                                  the folder
+                                                  <span class="ph filepath">/opt/devops-deploy/agent/scripts</span>,
+                                                  use this
+                                                  code:<span class="ph filepath">com.urbancode.shell.impersonation.unix.scriptLocation=/opt/devops-deploy/scripts</span></td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1">
+                                                  <p class="p"><span class="keyword parmname">com.urbancode.shell.impersonation.u
+                                                          nix.scriptMode</span></p>
+                                                </td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2">None</td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">This property represents the
+                                                  file permissions to use for the scripts that are
+                                                  written for each impersonation step. For example,
+                                                  to set the file permissions to 0750, which means
+                                                  that the owner can read, write, and execute, and
+                                                  the group can read and execute but not write, use
+                                                  this
+                                                  code:<span class="ph filepath">com.urbancode.shell.impersonation.unix.scriptMode=0750</span></td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1">
+                                                  <p class="p"><span class="keyword parmname">com.urbancode.shell.impersonation.u
+                                                          nix.scriptPostExecuteAction</span></p>
+                                                </td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2">None</td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">With this property, you can
+              specify a script to run after each step that uses impersonation. For example:
+                <span class="ph filepath">com.urbancode.shell.impersonation.unix.scriptPostExecuteAction=/opt/devops-deploy/agent/bin/sudoPostAction.sh</span></td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1">
+                                                  <p class="p"><span class="keyword parmname">com.urbancode.shell.impersonation.u
+                                                          nix.scriptPreExecuteAction</span></p>
+                                                </td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2">None</td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">With this property, you can
+                                                  specify a script to run before each step that uses
+                                                  impersonation. For example:
+                                                  <span class="ph filepath">com.urbancode.shell.impersonation.unix.scriptPreExecuteAction=/opt/devops-deploy/agent/bin/sudoPreAction.sh</span></td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">locked/agent.home</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">/opt/devops-deploy/agent</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">The installation directory for
+                                                  the agent. </td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">locked/agent.initial.teams</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2">None</td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">Use this option to assign a
+                                                  team to your agent. The value to specify is the
+                                                  team name. To specify the agent's security type
+                                                  for a team, provide the team and security type in
+                                                  the following format:
+                                                  <span class="keyword cmdname">team:type</span>. Separate multiple
+                                                  teams by commas. Trailing spaces are
+                                                  ignored.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">locked/agent.keystore</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">/opt/devops-deploy/keys/common.keystore</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">The path to the agent
+                                                  keystore.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">locked/agent.keystore.pwd</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">changeit</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">The agent keystore
+                                                  password.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">locked/agent.name</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">deployagent</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">The name of the agent. Agent
+                                                  names must be unique. You cannot change an agent
+                                                  name by editing this value. Rename agents in the
+                                                  graphical user interface by clicking the
+                                                  <span class="ph uicontrol">Edit</span> icon that is
+                                                  associated with an agent in the resource
+                                                  tree.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">locked/agent.service</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">true</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">Specify
+                                                  <span class="ph filepath">true</span> to configure the agent
+                                                  to run as a service on Windows™.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">locked/agent.service.name</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">DevOps Deploy
+                Agent</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">The name of the agent service.
+                                                  <span class="ph" id="agent_properties__windows_service">This property applies
+                                                  only when the agent is installed as a service on
+                                                  Windows.</span></td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">locked/agent.service.login</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">.\\localsystem</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">The service user account. The
+                                                  account must have the correct permissions to run a
+                                                  service. <span class="ph">This property applies
+                                                  only when the agent is installed as a service on
+                                                  Windows.</span></td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">locked/agent.service.password</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">nopass</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">The password that is
+                                                  associated with the service user. <span class="ph">This property applies
+                                                  only when the agent is installed as a service on
+                                                  Windows.</span></td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">locked/agent.service.autostart</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">false</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">Specify
+                                                  <span class="ph filepath">true</span> to configure the agent
+                                                  to run automatically when Windows starts. <span class="ph">This property applies
+                                                  only when the agent is installed as a service on
+                                                  Windows.</span></td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">vendor.name</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><code class="ph codeph" data-hd-otherprops="ibm">ibm</code></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">Mentions vendor name.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">verify.server.identity</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">false</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">Specify
+                                                  <span class="ph filepath">true</span> to configure the agent
+                                                  to reject self-signed certificates when connecting
+                                                  to the server. See <a class="xref" href="ssl_addl_security.html" title="You can enable extra security to configure the agents to verify the identity of the server for communication that uses the HTTPS protocol.">Enabling server identity verification</a>.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">server.token</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">An authentication token to be
+                                                  used to import z/OS component versions. The token
+                                                  is encrypted after the first time it is
+                                                  used.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">server.url</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">https://0.0.0.0:8443</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">The HTTP/HTTPS web URL for the
+                <span class="ph">Deploy</span> server
+              or Load Balancer. This URL is used for CodeStation artifact downloads and utility
+              tools such as buztool (used only by z/OS). In an HA environment, this value must point
+              to the Load Balancer or Virtual IP address (VIP). This property accepts only a single
+              URL and does not support comma-separated URLs or failover-list syntax.</td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="entry align-left" headers="agent_properties__entry__1"><span class="keyword parmname">agent.containerized</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__2"><span class="ph filepath">false</span></td>
+                                                <td class="entry align-left" headers="agent_properties__entry__3">Specify <code class="ph codeph">true</code>
+                                                  if the agent is running in a container. You cannot
+                                                  upgrade containerized agents or perform Java
+                                                  management actions using the WebUI.</td>
+                                        </tr>
+                                </tbody></table>
+  <section class="section" id="agent_properties__section_qbw_yf1_rwb"><h2 id="agent_properties__section_qbw_yf1_rwb__title__1" class="title sectiontitle">z/OS agent properties</h2>
+   
+   <div class="p">The below properties can be added to agent installation properties file and are applicable to
+    the z/OS agents only. <table class="table" id="agent_properties__table_fcc_gg1_rwb"><caption><span class="table--title-label">Table 2. </span><span class="title">z/OS agent properties</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+       <tr class="row">
+        <th class="entry align-left" id="agent_properties__table_fcc_gg1_rwb__entry__1">Property</th>
+        <th class="entry align-left" id="agent_properties__table_fcc_gg1_rwb__entry__2">Example value</th>
+        <th class="entry align-left" id="agent_properties__table_fcc_gg1_rwb__entry__3">Description</th>
+       </tr>
+      </thead><tbody class="tbody">
+       <tr class="row">
+        <td class="entry align-left" headers="agent_properties__table_fcc_gg1_rwb__entry__1"><span class="keyword parmname">mvs.sysoutclass</span></td>
+        <td class="entry align-left" headers="agent_properties__table_fcc_gg1_rwb__entry__2"><span class="ph filepath">C</span></td>
+        <td class="entry align-left" headers="agent_properties__table_fcc_gg1_rwb__entry__3">The SYSOUT class to be used.</td>
+       </tr>
+       <tr class="row">
+        <td class="entry align-left" headers="agent_properties__table_fcc_gg1_rwb__entry__1"><span class="keyword parmname">mvs.tempunit</span></td>
+        <td class="entry align-left" headers="agent_properties__table_fcc_gg1_rwb__entry__2"><span class="ph filepath">237</span></td>
+        <td class="entry align-left" headers="agent_properties__table_fcc_gg1_rwb__entry__3">The UNIT value to be used for creating temporary datasets.</td>
+       </tr>
+       <tr class="row">
+        <td class="entry align-left" headers="agent_properties__table_fcc_gg1_rwb__entry__1"><span class="keyword parmname">mvs.tempvolser</span></td>
+        <td class="entry align-left" headers="agent_properties__table_fcc_gg1_rwb__entry__2"><span class="ph filepath">13230</span></td>
+        <td class="entry align-left" headers="agent_properties__table_fcc_gg1_rwb__entry__3">The VOLSER value to be used for creating temporary datasets.</td>
+       </tr>
+      </tbody></table></div>
+  </section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/agent_install_ov.html" title="You can install agents from the server or from the command line on the agent system. To configure a failover server for an agent, you must install the agent from the command line.">Installing agents</a></div></div></nav></article></main></body></html>

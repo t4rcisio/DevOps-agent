@@ -1,0 +1,50 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To deploy the component, run the application process on an environment."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/quickstart_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="quickstart_run_app"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 6 Deploy the component</title></head><body id="quickstart_run_app"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 6 Deploy the component</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f481b8b2-99a8-4b91-adf2-3c7f1b232507">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To deploy the component, run the application process on
+an environment.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_run_app__context__1">About this task</h2></div>Using the application environment and process that you created
+in previous steps, you can    deploy the component.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_run_app__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the application page by clicking <span class="ph uicontrol">Applications</span> and then clicking the
+application name.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the same row as your environment, click the <span class="ph uicontrol">Request Process</span> icon
+<img class="image" src="../images/request_process.gif" height="24" width="23" alt="">.</span>
+<div class="itemgroup info">The <span class="ph uicontrol">Run Application Process</span> window opens.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Process</span> list, select the <span class="ph uicontrol">hello App Process</span>
+process.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Accept the default value for the <span class="ph uicontrol">Only Changed Versions</span> parameter.</span>
+<div class="itemgroup info">If this check box is selected, no previously deployed component versions are deployed. </div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify component version by clicking <span class="ph uicontrol">Select For All</span>, and then select
+<span class="ph uicontrol">Latest Available</span> from the <span class="ph uicontrol">Choose Component Versions</span>
+tab or specify a snapshot from the <span class="ph uicontrol">Select a Snapshot</span> tab.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Set the date, time, and pattern of deployment. The <span class="ph uicontrol">Run Now</span> option is
+enabled by default for immediate deployment. You can schedule deployments by disabling this
+option.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Review your deployment configuration and make changes, if necessary.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Submit Deployment</span> when ready.</span>
+<div class="itemgroup stepresult">The <span class="keyword wintitle">Application Process Request</span> page shows the progress of the
+request. From here, you can watch as the process runs. <p class="p">If the application process execution is
+not successful, expand a process step and click <span class="ph uicontrol">View Child Execution</span> to open
+the Deployment of Component pane, which can be used to review the deployment details. The
+<span class="keyword wintitle">Deployment of Component</span> page shows the log for each step in the component
+process. In the Deployment of Component pane, you can review the deployment output log, error log,
+and input and output parameters. </p></div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_run_app__result__1">Results</h2></div>
+<p class="p">The application process installed the helloWorld component into the target environment.</p>
+<p class="p">Application processes can also uninstall or update components or run other configuration.</p>
+</section><section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_run_app__postreq__1">What to do next</h2></div>For more information about running deployments, see <a class="xref" href="../../user/topics/deployment_ch.html" title="To deploy application components, run an application process on an environment.">Deploying applications</a>.</section>
+</div>
+
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_6.2.0 SS4GSP_8.0.1" href="../../tutorial/topics/quickstart_abstract.html" title="In this tutorial, you create a simple application with IBM DevOps Deploy (Deploy). You use standard plug-ins to create a component and define an application that deploys the component to an environment.">Create a simple helloWorld deployment</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="The IBM DevOps Deploy (Deploy) elements that you use to model software deployments include applications, environments, and components."><meta name="DC.relation" scheme="URI" content="../../user/topics/intro_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ov_elements"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Elements overview</title></head><body id="ov_elements"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+	<h1 class="title topictitle1" id="ariaid-title1">Elements overview</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-421677fb-6365-44b0-a39c-f9cece723e19">Edit online</a></span></div>
+	
+	<div class="body conbody"><p class="shortdesc">The <span class="ph">IBM DevOps Deploy (Deploy)</span> elements
+that you use to model software deployments include applications, environments, and
+components.</p>
+		<div class="p">This graphic shows the relationships between different elements on the server, such as
+applications, environments, and components. Each element is described in the following text.<br><img class="image" data-hd-otherprops="ibm" src="../images/intro_ch.gif" alt="A conceptual diagram of key Deploy components"><br></div>
+    <section class="section"><h2 id="ov_elements__title__2" class="title sectiontitle">Components</h2>
+      
+      <p class="p">Software components are central to <span class="ph">Deploy</span>. Components represent deploy-able items, also called artifacts, which can be files, images,
+databases, configuration materials, or anything else that is associated with a software project.
+Each time that you import new files that are associated with a component, a new component version is
+created. The server keeps copies of these component version artifacts, and you specify which
+component version to use each time you deploy. You can also apply statuses, such as
+<kbd class="ph userinput">Selenium tests passed</kbd> to component versions and use the statuses in processes
+to control deployment behavior.</p>
+      <p class="p">You create component processes, processes that usually contain all the steps that are
+        necessary for the server to deploy the component to an environment. These steps describe all
+        actions, such as starting a Tomcat server or updating files in a database. Many process
+        steps are available by default, and you can obtain more steps from plug-ins.</p>
+    </section>
+    <section class="section"><h2 id="ov_elements__title__3" class="title sectiontitle">Plug-ins</h2>
+      
+      <p class="p" data-hd-otherprops="ibm"> Automation
+        plug-ins are the most common type of plug-in, and they provide more steps for component
+        processes. For information about specific plug-ins, see the <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/" target="_blank">Deploy Plug-ins</a> site. </p>
+
+    </section>
+    <section class="section"><h2 id="ov_elements__title__4" class="title sectiontitle">Resources</h2>
+      
+      <p class="p">Resources are represented in a tree throughout <span class="ph">Deploy</span> to
+represent the relationships between components, the agents that deploy the components, and the
+target deployment environments. You create groups to represent target servers and environments,
+attach the agents that deploy to the environments, and attach components to the agents that run
+their processes.</p>
+      <p class="p">The most common resource is an agent, a software program that facilitates communication
+        between the component's host and the server. The agent runs the processes that deploy
+        components.</p>
+      <p class="p">To replicate a section of the resource tree, create a resource template. Resource templates
+        describe a small section of the resource tree and can be applied to environments through a
+        blueprint.</p>
+    </section>
+    <section class="section"><h2 id="ov_elements__title__5" class="title sectiontitle">Applications</h2>
+      
+      <p class="p">An application is a logical group of components that are deployed together. Applications
+        have processes, but their steps usually start processes or modify resources. An application
+        contains environments, which describe all the deployment locations that are needed in your
+        deployment process, and you run application processes to deploy components to
+        environments.</p>
+      <p class="p" data-hd-otherprops="ibm"><span class="ph">Deploy</span> provides you with tools to ensure consistent deployments, like snapshots, and simplify the
+creation of environments, like blueprints. Snapshots record the component versions that are deployed
+to an environment, and you can use a snapshot to select the component versions that are applied
+during a deployment. Blueprints are plans for application environments; they apply resource
+templates to new environments.</p>
+
+    </section>
+    <section class="section"><h2 id="ov_elements__title__6" class="title sectiontitle">Generic processes</h2>
+      
+      <p class="p">You create a generic process to run any automated task that is not tied to a specific
+component or application. You can use any process step that is available for component processes
+when you create generic processes. You can create generic processes to set up new target servers or
+to perform audit tasks.</p>
+    </section>
+	</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/intro_ch.html" title="Use IBM DevOps Deploy (Deploy) to standardize and simplify the process of deploying software components to each environment in your development cycle.">Overview of DevOps Deploy</a></div></div></nav></article></main></body></html>

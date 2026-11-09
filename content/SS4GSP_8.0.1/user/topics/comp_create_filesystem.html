@@ -1,0 +1,25 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can create components by importing artifacts from the file system on the IBM DevOps Deploy (Deploy) server. You can import a single version or automatically import versions as they are added to the file system."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_create.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_create_filesystem_basic.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_create_filesystem_versioned.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_create_filesystem"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating components from the file system</title></head><body id="comp_create_filesystem"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating components from the file system</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-57c9916d-f32a-486a-a649-2aa72d3be195">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can create components by importing artifacts from the file system on the <span class="ph">IBM DevOps Deploy (Deploy)</span> server. You can import a
+  single version or automatically import versions as they are added to the file system.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_filesystem__context__1">About this task</h2></div><span class="ph">Deploy</span>
+   imports local files by two methods:<dl class="dl">
+    
+     <dt class="dt dlterm">File System</dt>
+     <dd class="dd">This method imports all files in the specified directory. You can manually update these
+      files to create component versions, but the server does not create versions automatically. See
+       <a class="xref" href="comp_create_filesystem_basic.html" title="To import artifacts that are not stored in versioned folders, store the artifacts in a folder and create a component with the File System source configuration type.">Creating components from a nonversioned file system</a>.</dd>
+    
+    
+     <dt class="dt dlterm">File System (Versioned)</dt>
+     <dd class="dd">This method treats each subdirectory in the target directory as a different version of the
+      artifacts. You can set the server to check for new subdirectories periodically and
+      automatically create component versions when new subdirectories are detected. See <a class="xref" href="comp_create_filesystem_versioned.html" title="To import artifacts with versions, create a directory with subdirectories that represent the versions of the artifacts. Then, create the component with the File System (Versioned) source configuration type.">Creating components from a versioned file system</a>.</dd>
+    
+   </dl><p class="p">In either case, the artifacts must be on the same file system as the <span class="ph">Deploy</span>
+    server.</p></section>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_create_filesystem_basic.html">Creating components from a nonversioned file system</a></strong><br>To import artifacts that are not stored in versioned folders, store the artifacts in a folder and create a component with the <span class="ph uicontrol">File System</span> source configuration type.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_create_filesystem_versioned.html">Creating components from a versioned file system</a></strong><br>To import artifacts with versions, create a directory with subdirectories that represent the versions of the artifacts. Then, create the component with the <span class="ph uicontrol">File System (Versioned)</span> source configuration type.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_create.html" title="A component consists of artifacts of a single source type and one or more processes. Component creation is the same for all source types, however; the content can be different.">Creating components</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Tokens provide authorization for agents, agent relays, users, and external systems or applications from the server. Agents use tokens when they run process steps and communicate with the IBM DevOps Deploy (Deploy) server and external services."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_ch.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_token_restrict.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_settings_tokens.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_token_update.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_token"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Tokens</title></head><body id="security_token"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Tokens</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3cff6188-50c0-4bd2-aab4-299ff2044636">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc"><dfn class="term">Tokens</dfn> provide authorization for agents, agent relays, users, and external
+                systems or applications from the server. Agents use tokens when they run process
+                steps and communicate with the <span class="ph">IBM DevOps Deploy (Deploy)</span>
+                server and external services.</p>
+<p class="p">Users can use tokens with the command-line interface (CLI) client instead of supplying a user
+name and password in certain situations. For information, see <a class="xref" href="../../reference/topics/cli_ch.html" title="CLI is a command-line interface that provides access to the IBM DevOps Deploy (Deploy) server. It can be used to find or set properties and to run numerous functions.">Command-line client (CLI) reference</a>.</p>
+<p class="p">Follow these steps to create a token. You can also create a token through the CLI; see <a class="xref" href="../../api/topics/udclient_createauthtoken.html" title="Create an authorization token">createAuthToken</a>.</p>
+<ol class="ol">
+      <li class="li">Log in as a user with the <strong class="ph b">Manage Security</strong> permission. See <a class="xref" href="security_system.html" title="Set the server configuration permissions to define what users can do with the IBM DevOps Deploy (Deploy) server security, also referred to as system security. Typically, these permissions are granted to administrative roles.">Setting server configuration security</a>.</li>
+<li class="li">On the server, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Tokens</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Token</span></span>. The <span class="keyword wintitle">Create Token</span> dialog box
+                                appears.</li>
+<li class="li">From the <span class="ph uicontrol">User</span> list, select the user for the token. You can limit the
+actions available to the token by applying a token restriction to it. For information about creating
+and applying token restrictions, see <a class="xref" href="security_token_restrict.html" title="Limit authentication token actions by applying token restrictions to process plug-in steps.">Restricting authentication tokens</a>.<div class="note note note_note"><span class="note__title">Note:</span> 
+<p class="p">If you are using the token to integrate with <span class="keyword">IBM DevOps
+                                        Release</span>, you must specify the administrator.</p>
+<p class="p">If the token is for an agent relay that is intended to use component version replication, the
+user must have a role that has the Read Artifact Set List permission. For information about the Read
+Artifact Set List permission, see <a class="xref" href="security_system.html#security_system" title="Set the server configuration permissions to define what users can do with the IBM DevOps Deploy (Deploy) server security, also referred to as system security. Typically, these permissions are granted to administrative roles.">Setting server configuration security</a>.</p>
+</div>
+</li>
+<li class="li">Specify the expiration date and time.</li>
+<li class="li" id="security_token__optional">To limit the use of the token to certain IP addresses, specify one or more IPv4
+addresses in CIDR notation in the <span class="ph uicontrol">Allowed IPs</span> field, such as
+<code class="ph codeph">10.15.10.0/24</code>.<div class="note note note_note"><span class="note__title">Note:</span> If you are using clustered servers as described in <a class="xref" href="../../user/topics/server_install_clustered.html" title="To configure a high-availability cluster, you store shared files on network storage. Then, you configure multiple servers, set each server to access the same files and database, and configure a load balancer to distribute the traffic between the servers.">Setting up high-availability clusters</a>, leave
+this field blank.</div></li>
+<li class="li">To map token restrictions to user tokens within the <span class="ph">Deploy</span> server during token creation, scroll through the created
+                                restrictions in the <span class="ph uicontrol">Auth Token Restriction</span>
+                                field and select the desired list. Select <span class="ph uicontrol">New</span>
+                                and fill out the required fields to create a new Auth Token
+                                Restriction. This feature allows you to restrict a token's usage
+                                down to specific REST API endpoints. For example, locking down an
+                                administrator user's token to only be able to call
+                                /cli/agentCLI/info.</li>
+      <li class="li">Click  <span class="ph uicontrol">Save</span>.<div class="note important note_important"><span class="note__title">Important:</span> The token is shown only one time
+          after you create it. Copy the token immediately, because you cannot see it
+        again.</div></li>
+</ol>
+<p class="p">Tokens can be used immediately after they are created. You can revoke a token at any time by
+      clicking <span class="ph uicontrol">Delete</span> in the <span class="ph uicontrol">Actions</span> column.</p>
+                <div class="note note note_note" id="security_token__note_dns_ffs_nbc"><span class="note__title">Note:</span> <strong class="ph b">How to generate
+                                AuthTokens</strong><p class="p">Authentication tokens (AuthTokens) are randomly
+                                generated as 128-bit values through the SHA-256 algorithm. These
+                                tokens are associated with a user ID and a set of restrictions when
+                                they are created. The value is produced by using a type 4
+                                Universally Unique Identifier (UUID) and the Java Virtual Machine’s
+                                (JVM) Secure Random generator. The generator provides 122 bits of
+                                entropy due to the inclusion of 6 bits of UUID variant
+                                information.</p><p class="p">The UUID generation is managed by the JVM, which
+                                uses its configured secure random data source, which is typically
+                                        <span class="ph filepath">/dev/random</span> or
+                                        <span class="ph filepath">/dev/urandom</span>. However, this source can
+                                vary based on the JVM configuration.</p><p class="p">The 128 bit entropy is
+                                generated by the <var class="keyword varname">java.util.UUID.randomUUID()</var>
+                                variant, which calls the
+                                        <span class="keyword apiname">java.security.SecureRandom.nextBytes()</span>
+                                bytes to produce 16 bytes (128 bits) of random data. The
+                                        <span class="keyword apiname">SecureRandom</span> instance is created by a
+                                plain call of a <span class="keyword apiname">new SecureRandom()</span> object. You
+                                must consult the JVM documentation for details about entropy this
+                                process is not implemented in <span class="ph">Deploy</span>.</p><div class="p">For complete information about the JVM, see the following
+                                        resources:<ul class="ul" id="security_token__ul_xxn_fls_nbc">
+                                        <li class="li"><a class="xref" href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/security/SecureRandom.html" target="_blank">SecureRandom</a></li>
+                                        <li class="li"><a class="xref" href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/security/SecureRandom.html" target="_blank">UUID</a></li>
+                                </ul></div></div>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_token_restrict.html">Restricting authentication tokens</a></strong><br>Limit authentication token actions by applying token restrictions to process plug-in steps.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_settings_tokens.html">Token expiration settings</a></strong><br>Tokens provide authorization for agents, agent relays, users, and external             systems or applications from the server. Agents use tokens when they run process steps             and communicate with the <span class="ph">IBM DevOps Deploy (Deploy)</span> server and             external services. In the <span class="ph uicontrol">Security</span> settings area, you can set             time limits for four tokens types. </li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_token_update.html">Updating the agent relay authentication token password</a></strong><br>The authentication token password for the agent relay is specified during installation of the agent relay. You can update the authentication token and provide a password for the token by updating the agent relay properties file.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a></div></div></nav></article></main></body></html>

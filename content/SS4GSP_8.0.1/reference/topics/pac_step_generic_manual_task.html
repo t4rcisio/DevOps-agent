@@ -1,0 +1,337 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The generic-manual-task step pauses the process until a manual approval is completed. This step is only valid in a generic process."><meta name="DC.subject" content="PAC, generic process step, generic-manual-task"><meta name="keywords" content="PAC, generic process step, generic-manual-task"><meta name="DC.relation" scheme="URI" content="../../reference/topics/pac_generic_process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="pac_step_generic_manual_task"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>generic-manual-task</title></head><body id="pac_step_generic_manual_task"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">generic-manual-task</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-81d39bd1-a1c4-4f5d-88cc-65824417f9b4">Edit online</a></span></div>
+
+
+
+<div class="body refbody"><p class="shortdesc">The <code class="ph codeph">generic-manual-task</code> step pauses the process until a manual approval
+is completed. This step is only valid in a generic process.</p>
+<section class="section"><h2 id="pac_step_generic_manual_task__title__2" class="title sectiontitle">Format</h2>
+
+<pre class="pre codeblock"><code>generic-manual-task step "foo" is
+    -- users that can approve the task; required
+    -- approval restriction to the deploying user
+    restrict-approval-to deploying-user
+
+    -- name of notification template; optional
+    notification-template "TaskCompleted"
+
+    -- require a user comment when approving the task; optional
+    -- default is false
+    comment-required true
+
+    -- the prompt for a user comment when approving the task; optional
+    comment-prompt "Enter reason"
+
+    -- property-definition establishes a property definition; optional, repeatable
+
+    -- a text property definition with all options
+    property-definition p1-text is text with
+        -- label for the property definition; optional
+        -- common to all property defintion types
+        label "p1-label"
+
+        -- description for the property definition; optional
+        -- common to all property defintion types
+        description "p1-description"
+
+        -- regex pattern for the property definition's property values; optional
+        -- an empty pattern is equivalent to ".*"
+        -- common to all property defintion types
+        pattern "p1-pattern-.*"
+
+        -- a value is required for property defined by this property definition; optional
+        -- common to all property defintion types
+        required true
+
+        -- default value for text properties created by this property definition; optional
+        default "p1-pattern-default"
+    end
+
+    -- a text property definition with no options
+    property-definition p2-text-simple is text
+
+    -- a text area property definition with all options
+    property-definition p3-textarea is text-area with
+        -- common options; optional
+        label "p3-label"
+        description "p3-description"
+        pattern ".*"
+        required true
+
+        -- default value for text area properties created by this property definition; optional
+        default
+            """
+            p3-default-line1
+            p3-default-line2
+            p3-default-line3
+            """
+    end
+
+    -- a text area property definition with no options
+    property-definition p4-textarea-simple is text-area
+
+    -- a text area property definition with all options
+    property-definition p5-secure is secure with
+        -- common options; optional
+        label "p5-label"
+        description "p5-description"
+        pattern "p5-pattern-.*" -- currently, patterns for secure properties do not function properly and their use is not recommended
+        required true
+
+        -- default value for secure properties created by this property definition; optional
+        -- currently, default values for secure properties do not function properly and their use is not recommended
+        default "p5-pattern-default"
+    end
+
+    -- a secure property definition with no options
+    property-definition p6-secure-simple is secure
+
+    -- a checkbox property definition with all options
+    property-definition p7-checkbox is checkbox with
+        -- common options; optional
+        label "p7-label"
+        description "p7-description"
+        pattern "true|false"
+        required true
+
+        -- default value for checkbox properties created by this property definition; optional
+        -- permitted values are 'true' or 'false'
+        default true
+    end
+
+    -- a checkbox property definition with no options
+    property-definition p8-checkbox-simple is checkbox
+
+    -- a date-time property definition with all options
+    property-definition p9-datetime is date-time with
+        -- common options; optional
+        label "p9-label"
+        description "p9-description"
+        pattern ""
+        required true
+
+        -- default value for date-time properties created by this property definition; optional
+        -- time is specified as milliseconds from 1970-01-01 00:00:00 UTC.
+        default millis 1594814965125
+    end
+
+    -- a date-time property with an xml schema format default value
+    property-definition p10-datetime-xml is date-time with
+        -- default value for date-time properties created by this property definition; optional
+        -- time is format is specified at https://www.w3.org/TR/xmlschema-2/#dateTime
+        default xml "2000-01-20T12:00:00+12:00"
+    end
+
+    -- a date-time property definition with no options
+    property-definition p11-datetime-simple is date-time
+
+    -- a select property definition with all options
+    -- at least one value must be supplied
+    -- at most one value may be selected as the default value
+    property-definition p12-select is select of
+        -- a possible value in for the property; optional, repeatable
+        value "p12-value1"
+
+        -- a value with an optional label
+        value "p12-value2" as "Value 2"
+
+        -- a value with a label and optionally selected as the default value
+        value "p12-value3" as "Value 3" selected
+    with
+        -- common otptions; optional
+        label "p12-label"
+        description "p12-description"
+        pattern "p12-value.*"
+        required true
+    end
+
+    -- a select property definition with an unlabeled value selected as the default and no common options
+    property-definition p13-select-default-unlabeled is select of
+        value "p13-value1" selected
+        value "p13-value2"
+        value "p13-value3"
+    end
+
+    -- a select property definition with no options
+    property-definition p14-select-simple is select of
+        value p14-value1
+        value p14-value2
+        value p14-value3
+    end
+
+    -- a multi-select property definition with all options
+    -- a date-time property definition with all options
+    -- one or more values may be selected as the default value
+    property-definition p15-multiselect is multi-select of
+        -- a possible value in for the property; optional, repeatable
+        value "p15-value1"
+
+        -- a value with a label and optionally selected as one of the default values
+        value "p15-value2" as "Value 2" selected
+
+        -- a value with a label and optionally selected as a second default value
+        value "p15-value3" as "Value 3" selected
+    with
+        -- common options; optional
+        label "p15-label"
+        description "p15-description"
+        pattern "p15-value.*"
+        required true
+    end
+
+    -- a select property definition with an unlabeled values selected as the defaults and no common options
+    property-definition p16-multiselect-default-unlabeled is multi-select of
+        value "p16-value1" selected
+        value "p16-value2" selected
+        value "p16-value3"
+    end
+
+    -- a select property definition with a single unlabeled value selected as the default and no common options
+    property-definition p17-multiselect-one-default is multi-select of
+        value "p17-value1" selected
+        value "p17-value2"
+        value "p17-value3"
+    end
+
+    -- a multi-select property definition with no options
+    property-definition p18-multiselect-simple is multi-select of
+        value "p18-value1"
+        value "p18-value2"
+        value "p18-value3"
+    end
+on success
+    finish
+end
+
+generic-manual-task step "bar" is
+    -- approval restricted to certain users and groups
+    -- if present, at least one user or group must be supplied
+    restrict-approval-to identities
+        -- list of approving users; optional
+        -- if present, at least one user must be listed
+        users of
+            -- a user that can approve; repeatable
+            user Alice
+        end
+
+        -- list of approving groups; optional
+        -- if present, at least one group must be listed
+        groups of
+            -- a group that can approve; repeatable
+            group DevOpsTeam
+        end
+    end
+end</code></pre>
+</section>
+<section class="section"><h2 id="pac_step_generic_manual_task__title__3" class="title sectiontitle">Properties</h2>
+
+<div class="p">
+<table class="table frame-all" id="pac_step_generic_manual_task__table_dys_4bl_knb"><caption><span class="table--title-label">Table 1. </span><span class="title">Manual Application Task properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left colsep-1 rowsep-1" id="pac_step_generic_manual_task__table_dys_4bl_knb__entry__1">Field</th>
+<th class="entry align-left colsep-1 rowsep-1" id="pac_step_generic_manual_task__table_dys_4bl_knb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__1"><span class="ph uicontrol">Name</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__2">The name for the manual task.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__1"><span class="ph uicontrol">Only Allow Deploying User To Complete</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__2">Restrict approval to the user who started the deployment.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__1"><span class="ph uicontrol">Notification Template</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__2">Specify a notification template. The individual tasks map to the
+notification scheme used by the application (see <a class="xref" href="../../user/topics/notify_create.html" title="Notifications are defined in a notification scheme. The notification scheme is assigned to an application and the notifications are sent during the deployment of that application.">Creating Notifications in a Notification Scheme</a>).
+If you do not want notifications created for the task, select <span class="ph uicontrol">None</span>.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__1"><span class="ph uicontrol">Properties</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__2">Optionally, add one or more properties to the task.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__1"><span class="ph uicontrol">Require Comment</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__2">Select to require that users must add a comment about this manual
+task.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__1"><span class="ph uicontrol">Comment Prompt</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="pac_step_generic_manual_task__table_dys_4bl_knb__entry__2"><div class="note note note_note"><span class="note__title">Note:</span> This field applies only to generic process steps.</div>Enter the
+text that requests users to add a comment about this manual task.</td>
+</tr>
+</tbody></table>
+</div>
+</section>
+<div class="example"><h2 id="pac_step_generic_manual_task__title__5" class="title sectiontitle">Example</h2>
+
+<pre class="pre codeblock"><code>start is
+    start A
+    start B
+    start C
+    start D
+end
+
+generic-manual-task step A is
+    restrict-approval-to deploying-user
+
+    notification-template template1
+    comment-required true
+    comment-prompt "comment-prompt1"
+
+    property-definition p1-text is text with
+        label "p1-label"
+        description "p1-description"
+        pattern "p1-pattern-.*"
+        required true
+        default "p1-pattern-default"
+    end
+on success
+    finish
+end
+
+generic-manual-task step B is
+    restrict-approval-to identities
+        users of
+            user user1
+            user user2
+        end
+        groups of
+           group group1
+           group group2
+        end
+    end
+
+    comment-prompt "comment-prompt2"
+on success
+    finish
+end
+
+generic-manual-task step C is
+    restrict-approval-to identities
+        users of
+            user user3
+            user user4
+        end
+    end
+
+    comment-required true
+on success
+    finish
+end
+
+generic-manual-task step D is
+    restrict-approval-to identities
+        groups of
+            group group3
+            group group4
+        end
+    end
+on success
+    finish
+end</code></pre>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/pac_generic_process_steps.html" title="Lists the various generic steps that can be used in a process.">Generic process steps</a></div></div></nav></article></main></body></html>

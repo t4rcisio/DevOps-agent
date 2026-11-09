@@ -1,0 +1,54 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="This command requests a set of agents set JAVA_HOME, but does not wait for or report the results. Each new JAVA_HOME will not take effect until the respective agent is restarted. The returned maintenance tasks can be used to query the results.Individual sub-requests may succeed or fail independently. A single request may contain up to 250 sub-requests."><meta name="DC.subject" content="REST API, agentCLI resource, bulkSetAgentJavaHome POST, POST methods, /agentCLI/bulkSetAgentJavaHome"><meta name="keywords" content="REST API, agentCLI resource, bulkSetAgentJavaHome POST, POST methods, /agentCLI/bulkSetAgentJavaHome"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_agentcli.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_agentclibulksetagentjavahome_post"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Set the configured JAVA_HOME of agents in bulk</title></head><body id="rest_cli_agentclibulksetagentjavahome_post"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Set the configured JAVA_HOME of agents in bulk</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d5c02e3b-d5b7-4279-88ce-1b810bde87c5">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">This command requests a set of agents set JAVA_HOME, but does not wait for or report the results. Each new JAVA_HOME will not take effect until the respective agent is restarted. The returned maintenance tasks can be used to query the results.Individual sub-requests may succeed or fail independently. A single request may contain up to 250 sub-requests.</p>
+<section class="section"><h2 id="rest_cli_agentclibulksetagentjavahome_post__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>POST https://{hostname}:{port}
+    /cli/agentCLI/bulkSetAgentJavaHome
+Accept: {contentType}
+Content-Type: application/json
+</code></pre><table class="table" id="rest_cli_agentclibulksetagentjavahome_post__header_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__1"><span class="keyword parmname">Content-Type</span></td>
+<td class="entry" headers="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__2"><code class="ph codeph">application/json</code></td>
+<td class="entry" headers="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__4"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_agentclibulksetagentjavahome_post__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+<div class="p" id="rest_cli_agentclibulksetagentjavahome_post__template">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "README": "See entity attribute for the template 
+  description expected by this endpoint.",
+  "entity": [{
+    "agent": "Name or ID of an agent",
+    "javahome": "Name of managed Java install or absolute 
+  path of a valid JAVA_HOME directory"
+  }]
+}
+</code></pre></div></section>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_bulksetagentjavahome.html" title="Set the configured JAVA_HOME of agents in bulk">bulkSetAgentJavaHome</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_agentcli.html" title="Resources for creating, editing, and deleting agents.">agentCLI resource</a></div></div></nav></article></main></body></html>

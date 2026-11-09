@@ -1,0 +1,99 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To use Microsoft Azure marketplace images in the blueprint designer, you must register images with the cloud discovery service."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="integrate_azure_image"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Registering Azure marketplace images with the cloud discovery service</title></head><body id="integrate_azure_image"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Registering Azure marketplace images with the cloud discovery service</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-40644893-3563-424d-97d9-31c0845859da">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To use Microsoft™ Azure marketplace images in
+the blueprint designer, you must register images with the cloud discovery service.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_azure_image__prereq__1">Before you begin</h2></div>Before you register images, configure the cloud discovery service. See <a class="xref" href="../../user/topics/cds_configure.html" title="The cloud discovery service provides information about available images, regions, and flavors to the blueprint design server. This service runs with a default set of options, but you can customize these options so your images, regions and flavors are shown in the blueprint designer.">Setting up images, regions, and flavors for the cloud discovery service and engine</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_azure_image__context__1">About this task</h2></div>For version 6.2.1, Linux™ images that are preloaded
+with the <code class="ph codeph">cloud-init</code> package are the only images that are supported. In version
+6.2.1.1 and later, you can use Windows images, and you can use Linux images with or without the
+<code class="ph codeph">cloud-init</code> package.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_azure_image__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Obtain the following information for each image that you want to use in the blueprint
+designer:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">The publisher name, usually the name of the company that provides the image. For example,
+Canonical is the publisher of Ubuntu images.</li>
+<li class="li">The <span class="keyword parmname">SKU</span> or stock-keeping unit parameter of the image, which is typically
+the version number of the operating system on the image.</li>
+<li class="li">The <span class="keyword parmname">offer</span> parameter of the image, which is an identifier that describes the
+image, such as <code class="ph codeph">ubuntuserver</code> or <code class="ph codeph">openSUSE</code>. This identifier is not
+case-sensitive.</li>
+</ul>
+</div>
+<div class="itemgroup stepxmp">To obtain this information, you can find the image in the Azure web portal or use the
+command-line interface. For example, to list information about images that are provided by Canonical
+and are available in the <code class="ph codeph">East US</code> region, run the following
+command:<pre class="pre codeblock"><code>azure vm image list eastus canonical</code></pre>To list information about SUSE
+images, run the following command:<pre class="pre codeblock"><code>azure vm image list eastus SUSE</code></pre>From the
+resulting table of information, take the publisher name, the SKU value, and the
+<span class="keyword parmname">offer</span>
+identifier.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Open the cloud discovery service configuration file in a text editor.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If the cloud discovery service configuration file does not have an Azure section, create the
+Azure section: </span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">To the <code class="ph codeph">CLOUD_SETTINGS</code> section, add a section that looks like the following
+code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>"azure": {
+    "images": [
+        
+    ]
+}
+</code></pre>
+</div>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To the Azure section of the cloud discovery service configuration file, add entries for each
+image that you want to use.</span>
+<div class="itemgroup info">Each entry follows this format:<pre class="pre codeblock"><code>"publisher":"<var class="keyword varname">publisher</var>",
+"sku":[<var class="keyword varname">listOfSKUs</var>],
+"offer":"<var class="keyword varname">offer</var>",
+"display_name":"<var class="keyword varname">displayName</var>"</code></pre><ul class="ul">
+<li class="li">For <code class="ph codeph"><var class="keyword varname">publisher</var></code>, specify the publisher.</li>
+<li class="li">For <code class="ph codeph"><var class="keyword varname">listOfSKUs</var></code>, specify a comma-separated list of SKU
+values, in quotes.</li>
+<li class="li">For <code class="ph codeph"><var class="keyword varname">offer</var></code>, specify the <span class="keyword parmname">offer</span>
+value.</li>
+<li class="li">For <code class="ph codeph"><var class="keyword varname">display_name</var></code>, specify a display name for the image in
+the blueprint designer.</li>
+</ul></div>
+<div class="itemgroup stepxmp">For example, the following code includes Ubuntu images, an openSUSE image, and CentOS
+images:<pre class="pre codeblock"><code>"azure": {
+    "images": [
+        {
+            "publisher": "Canonical",
+            "sku": ["12.10","14.04.3-LTS","15.10"],
+            "offer": "UbuntuServer",
+            "display_name": "UbuntuServer"
+        },
+        {
+            "publisher": "SUSE",
+            "sku": ["13.2"],
+            "offer": "openSUSE",
+            "display_name": "openSUSE"
+        },
+        {
+            "publisher": "openlogic",
+            "sku": ["6.5","6.6","7.0","7.1"],
+            "offer": "CentOS",
+            "display_name" : "CentOS"
+        }
+    ]
+}
+</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the file and restart the cloud discovery service.</span>
+<div class="itemgroup info">To restart the cloud discovery service, see <a class="xref" href="start_patterns.html" title="To start the blueprint designer and its associated services, you must start the cloud discovery service, the blueprint design server, and the engine Heat services.">Starting the blueprint designer, cloud discovery service, and engine</a> and <a class="xref" href="stop_patterns.html" title="To stop the blueprint designer and its associated services, you must stop the cloud discovery service, the blueprint design server, and the engine Heat services.">Stopping the blueprint designer, cloud discovery service, and engine</a>.</div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_azure_image__result__1">Results</h2></div>Now you can add the images to blueprints.</section>
+</div>
+</article></main></body></html>

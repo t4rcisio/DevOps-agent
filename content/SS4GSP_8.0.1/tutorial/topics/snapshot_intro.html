@@ -1,0 +1,61 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="In this tutorial, you deploy a simple web application to a new environment with IBM DevOps Deploy (Deploy). You create a snapshot of the components in an application, and then deploy the snapshot to an environment."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/snapshot_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="snapshot_intro"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Introduction</title></head><body id="snapshot_intro"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Introduction</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-8d990f3b-00eb-4c9a-9e35-b8dbbe81bd6d">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">In this tutorial, you deploy a simple web application to a new environment
+with <span class="ph">IBM DevOps Deploy (Deploy)</span>. You
+create a snapshot of the components in an application, and then deploy the snapshot to an
+environment.</p>
+<p class="p">You can use <span class="ph">Deploy</span> to
+facilitate a continuous deployment pipeline in your release cycle. You can plan and automate the
+deployment of complex applications to development, test, and production environments. You can use
+this tool to deploy applications as often as needed and to as many different environments as you
+require. By using snapshots, you combine the planning and automation capabilities of <span class="ph">Deploy</span> with the
+ability to quickly and precisely control the contents of your delivery pipeline's
+environments.</p><p class="p">When you develop a complex application, you use many tests to validate that all the
+application components work together. After your application passes the tests, you must ensure that
+you promote the correct collection of application components to the next step in your continuous
+delivery pipeline. However, you must ensure that you promote the set of components that passed the
+tests. In <span class="ph">Deploy</span>, you use
+snapshots. A snapshot specifies all the versions of an application’s components that are used in an
+environment. The snapshot also specifies versions of configuration, such as deployment processes,
+that are used to deploy those components. If you use snapshots to deploy to different environments
+in your continuous delivery pipeline, you no longer must track and promote individual components
+through the environments in your pipeline. Instead, you promote configurations of components that
+were tested together. This ability to promote tested snapshots of components to environments is
+essential in maintaining a continuous delivery pipeline.</p><p class="p">In this tutorial, you use snapshots
+to deploy the components, application, and processes that you created for a three-tiered web
+application to a new environment. In most cases, you use snapshots to manage complex deployment
+environments in <span class="ph">Deploy</span>. You
+typically use snapshots to control deployments to different environments on different servers.
+However, for simplicity, in this lesson you use snapshots to deploy an application to two different
+environments on a single server.</p>
+<section class="section"><h2 id="snapshot_intro__title__2" class="title sectiontitle">Learning objectives</h2>In this tutorial, you
+learn how to complete these tasks:<ul class="ul">
+<li class="li">Create a snapshot of an environment's components to quickly deploy its application to another
+environment.</li>
+<li class="li">Configure environments on which to deploy applications.</li>
+<li class="li">Select a snapshot while you run an application process to promote the snapshots to a new
+environment.</li>
+</ul></section>
+<section class="section"><h2 id="snapshot_intro__title__3" class="title sectiontitle">Time required</h2>This tutorial takes approximately 1 hour to finish. If you
+explore other concepts that are related to this tutorial, it might take longer to
+complete.</section>
+<section class="section"><h2 id="snapshot_intro__title__4" class="title sectiontitle">System requirements</h2>To run this tutorial, you must have an
+installation of <span class="ph">Deploy</span>, version
+6.0 or later </section>
+<section class="section" id="snapshot_intro__prereqs"><h2 id="snapshot_intro__prereqs__title__1" class="title sectiontitle">Prerequisites</h2>
+
+<ul class="ul">
+<li class="li">Make sure that you completed the <a class="xref" href="webapp_abstract.html" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">Deploying a simple web application</a> tutorial and have access to
+its <span class="ph">Deploy</span> server
+and computers, virtual images, or cloud instances.</li>
+<li class="li">You must have an account on the server with the permissions to create and edit environments and
+to run processes.</li>
+<li class="li">You must know the user names and passwords for the MySQL database and Apache Tomcat manager role
+that you configured in the <a class="xref" href="webapp_abstract.html" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">Deploying a simple web application</a> tutorial.</li>
+</ul>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_6.2.0 SS4GSP_8.0.1" href="../../tutorial/topics/snapshot_abstract.html" title="In this tutorial, you deploy a simple web application to a new environment with IBM DevOps Deploy (Deploy). You create a snapshot of the components in an application, and then deploy the snapshot to an environment.">Creating and deploying snapshots</a></div></div></nav></article></main></body></html>

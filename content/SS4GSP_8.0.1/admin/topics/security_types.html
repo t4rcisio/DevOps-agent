@@ -1,0 +1,34 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Security types define categories of objects on the server. You can put all objects into a single category, or you can put them in separate categories and give roles different access rights to different categories."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_ch.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_types_create.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_types"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Security types</title></head><body id="security_types"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Security types</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-efa286b4-c1de-4920-97fd-4d6fd4a41c42">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">Security types define categories of objects on the server. You can put all objects into a
+single category, or you can put them in separate categories and give roles different access rights
+to different categories.</p>
+		<p class="p">By default, all object types on the server have a standard security type. For example,
+applications have the Standard Application security type, and environments have the Standard
+Environment security type. You do not have to create more security types unless you want to give
+different levels of access to different roles.</p>
+		<p class="p">For example, suppose that you have different environment categories for different purposes,
+such as production environments, testing environments, and sandbox environments. You want to give
+different users different levels of access to these environments. You can allow only development
+superusers to modify production environments but allow other users to view the state of these
+environments. You can also allow anyone to modify sandbox environments.</p>
+		<p class="p">In this case, you create security types for different categories of environments and assign
+			the environments to those types. Then, you create roles for different levels of access to the
+			environments. For example, you might create a deployment superuser role that can create and
+			edit environments. Then, within that role, you specify the access that users have for each
+			type of environment.</p>
+		<div class="p">For example, the following figure shows a role that is named <code class="ph codeph">Development superuser</code>. This role has full access to production environments, testing environments,
+sandbox environments, and standard environments.<br><img class="image" src="../images/security_types_a.gif" alt="The permissions for the Development superuser role, which has full access to all four types of environments"><br>A role for less-privileged users might be able to view and edit existing sandbox
+environments but only view production environments. The following figure shows the permissions for
+the <code class="ph codeph">Developer</code> role. This role can view and edit existing sandbox environments. It
+can view but not edit production environments.<br><img class="image" src="../images/security_types_b.gif" alt="The permissions for the Developer role, which has full access to sandbox environments but read-only access to other types of environment"><br></div>
+<p class="p">The System Team has access to everything on the server according
+to the permissions in the standard security type. For example, the members of the System Team have
+the environment permissions that are listed in the Standard Environment security type for all
+environments.</p>
+		<p class="p">For information about assigning permissions to roles, see <a class="xref" href="security_roles_create.html#security_roles_create" title="You can create roles on the server and assign permissions to them.">Creating roles and assigning permissions</a>.</p>
+	</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_types_create.html">Creating security types</a></strong><br>Create security subtypes to help you manage access to objects through the server.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a></div></div></nav></article></main></body></html>

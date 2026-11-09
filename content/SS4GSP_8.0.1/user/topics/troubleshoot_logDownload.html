@@ -1,0 +1,40 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can create rotating audit log file at a regular interval, such as every day."><meta name="DC.subject" content="troubleshoot, audit, log file"><meta name="keywords" content="troubleshoot, audit, log file"><meta name="DC.relation" scheme="URI" content="../../user/topics/storage_cleanup.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/log_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="troubleshoot_logDownload"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating a rotating audit log file</title></head><body id="troubleshoot_logDownload"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating a rotating audit log file</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-04b12185-aecf-4c55-aa47-0e12232f6e78">Edit online</a></span></div>
+
+
+
+<div class="body taskbody"><p class="shortdesc">You can create rotating audit log file at a regular interval, such as every
+day.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasktroubleshoot_logDownload__context__1">About this task</h2></div>
+<p class="p">You can create a rotating audit log file by adding the <code class="ph codeph">audit-log-to-file</code>
+appenders to the log4j.properties. Starting with 7.0.1.1, you can find the appenders in the
+log4j.properties file. Go to <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Logging</span></span>, and uncomment the respective appenders.</p>
+<div class="p">The following code fragment shows the <code class="ph codeph">audit-log-to-file</code> appenders to be used to
+create a rotating audit log
+file:<pre class="pre codeblock"><code>log4j.appender.audit-log-to-file=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.audit-log-to-file.File=../var/log/audit.log
+log4j.appender.audit-log-to-file.MaxFileSize=100MB
+log4j.appender.audit-log-to-file.DatePattern='.'yyyy-MM-dd
+log4j.appender.audit-log-to-file.layout=org.apache.log4j.PatternLayout
+log4j.appender.audit-log-to-file.layout.ConversionPattern=%m%n
+log4j.logger.AuditLog=DEBUG, audit-log-to-file
+log4j.additivity.AuditLog=false</code></pre></div>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasktroubleshoot_logDownload__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Edit the <span class="ph filepath">log4j.properties</span> file.</span>
+<div class="itemgroup info">Use a text editor to edit the file. You can also access the file by clicking <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Logging</span></span>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Modify the appenders.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Restart the server.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Verify the logs generating in the <code class="ph codeph">/var/log/audit.log</code> file.</span>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasktroubleshoot_logDownload__postreq__1">What to do next</h2></div>
+<p class="p">This feature works especially well with audit log cleanup enabled. Go to <span class="ph menucascade"><span class="ph uicontrol">Settings &gt; System &gt; Audit Log &gt; Audit Log settings &gt; Enable Audit Log Cleanup</span></span> to enable audit log cleanup. Additionally, configure your audit log settings from the
+<a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a> as required.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/storage_cleanup.html" title="If you have storage issues and feel that you need to cleanup some unnecessary stored data, you can use cleanup settings to cleanup your database and file system storage.">Cleaning up targets</a></div></div><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/log_ov.html" title="The server maintains logs for auditing and troubleshooting.">Logging</a></div></div></nav></article></main></body></html>

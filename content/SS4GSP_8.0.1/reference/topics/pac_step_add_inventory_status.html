@@ -1,0 +1,59 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The add-inventory-status step adds a status to a component resource."><meta name="DC.subject" content="PAC, core component process step, add-inventory-status"><meta name="keywords" content="PAC, core component process step, add-inventory-status"><meta name="DC.relation" scheme="URI" content="../../reference/topics/pac_component_process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="pac_step_add_inventory_status"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>add-inventory-status</title></head><body id="pac_step_add_inventory_status"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">add-inventory-status</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-da243f34-11b6-467b-8fbd-5672942ba0c5">Edit online</a></span></div>
+
+
+
+<div class="body refbody"><p class="shortdesc">The <code class="ph codeph">add-inventory-status</code> step adds a status to a component
+resource.</p>
+<section class="section"><h2 id="pac_step_add_inventory_status__title__2" class="title sectiontitle">Format</h2>
+
+<pre class="pre codeblock"><code>add-inventory-status step "foo" is
+    -- name of the status to add to the component resource; required
+    status "Active"
+on success
+    finish
+end</code></pre>
+</section>
+<section class="section"><h2 id="pac_step_add_inventory_status__title__3" class="title sectiontitle">Properties</h2>
+
+<div class="p">
+<table class="table frame-all" id="pac_step_add_inventory_status__table_dys_4bl_knb"><caption><span class="table--title-label">Table 1. </span><span class="title">Add Inventory Status properties</span></caption><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="pac_step_add_inventory_status__table_dys_4bl_knb__entry__1">Field</th>
+<th class="entry" id="pac_step_add_inventory_status__table_dys_4bl_knb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="pac_step_add_inventory_status__table_dys_4bl_knb__entry__1"><span class="ph uicontrol">Status</span></td>
+<td class="entry" headers="pac_step_add_inventory_status__table_dys_4bl_knb__entry__2">The component resource that the process is running against will have an inventory entry
+created for it with the specified status. <samp class="ph systemoutput sysout">Active</samp> indicates that the
+component version is deployed to its target resource. You can create other statuses and have those
+statuses applied to component versions when processes are complete. The status is displayed on the
+Inventory panes for the component itself and environments that ran the process.</td>
+</tr>
+</tbody></table>
+</div>
+</section>
+<div class="example"><h2 id="pac_step_add_inventory_status__title__5" class="title sectiontitle">Example</h2>
+
+<pre class="pre codeblock"><code>start is
+    start "A"
+    start "B"
+end
+
+add-inventory-status step A is
+    status Active
+on success
+    finish
+end
+
+add-inventory-status step B is
+    status inventory-status-1
+on success
+    finish
+end</code></pre>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/pac_component_process_steps.html" title="Lists the various core component steps that can be used in a process.">Core component process steps</a></div></div></nav></article></main></body></html>

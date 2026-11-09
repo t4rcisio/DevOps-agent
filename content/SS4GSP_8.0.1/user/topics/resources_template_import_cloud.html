@@ -1,0 +1,92 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="If you have a virtual system pattern on a cloud system, you can import that pattern as a resource template. This resource template is a pattern from which you can provision cloud resources."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="resources_template_import_cloud"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Importing resource templates from clouds</title></head><body id="resources_template_import_cloud"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Importing resource templates from clouds</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-cdafe9d0-4006-4785-9910-87e160940502">Edit online</a></span></div>
+	
+
+<div class="body taskbody"><p class="shortdesc">If you have a virtual system pattern on a cloud system,
+you can import that pattern as a resource template. This resource
+template is a pattern from which you can provision cloud resources.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_template_import_cloud__prereq__1">Before you begin</h2></div>Create a virtual system pattern on a compatible cloud system. Each node in this pattern must
+			include the <span class="ph" id="resources_template_import_cloud__agent_install_package">Install <span class="ph">Deploy</span>
+				Agent</span> script package. See <a class="xref" href="resources_template_pattern.html" title="To provision dynamic environments from a cloud system, you must create a virtual system pattern that specifies the contents of the environment.">Creating virtual system patterns for resource templates</a>.<div class="p" id="resources_template_import_cloud__supported_clouds">For this type of cloud integration, the following cloud
+				systems are supported:<ul class="ul" id="resources_template_import_cloud__supported_vsps">
+					<li class="li"><span class="keyword">IBM® Cloud Orchestrator</span> version 2.4 or later</li>
+					<li class="li">IBM SmartCloud® Orchestrator
+						versions 2.2 and 2.3</li>
+					<li class="li"><span class="keyword">IBM PureApplication® System</span> version 1.0 or later</li>
+					<li class="li"><span class="keyword">IBM Workload Deployer</span>
+						version 3.1.0.6 or later</li>
+				</ul>Within these cloud systems, you can provision the virtual resources in
+				environment profiles or in cloud groups. You can also assign the virtual resources
+				to IP groups, but only when you assign the resources to an environment profile
+				first. For more information, see <a class="xref" href="app_environment_create.html" title="Before you can run a deployment, you must define at least one application environment that associates components with an agent on the target host.">Creating environments</a>. You can
+				also use virtual images with no more than one virtual network card. <span class="ph">IBM DevOps Deploy (Deploy)</span> does
+				not support selecting different flavors of virtual resources or virtual nodes that
+				have a multiplicity greater than 1.</div><p class="p" data-hd-otherprops="ibm">To connect to OpenStack and
+				OpenStack-based clouds, SoftLayer®,
+				Amazon Elastic Compute Cloud, VMware vCenter, or Microsoft™ Azure, see <a class="xref" href="../../edt/topics/security_cloud_connection.html" title="To create a connection to a cloud to use with the blueprint designer, you use OpenStack Heat. You specify the location of the identity server and the engine to use. The steps are different for each type of cloud.">Connecting to clouds through the blueprint designer</a>.</p><div class="p"><span class="keyword">Cloud
+Orchestrator</span> and
+					<span class="keyword">PureApplication System</span> introduced a new system for virtual system patterns. This new system is referred
+				to as VSys.Next. The new virtual system patterns are supported on the following
+				cloud systems:<ul class="ul">
+					<li class="li"><span class="keyword">Cloud
+Orchestrator</span>
+						version 2.4 or later</li>
+					<li class="li"><span class="keyword">PureApplication System</span>
+						version 2.0 or later</li>
+				</ul>When you use these cloud systems, you specify whether to use the original
+				virtual system patterns or the new VSys.Next patterns. Resources that you provision
+				with VSys.Next patterns appear under <span class="ph menucascade"><span class="ph uicontrol">Instances</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Virtual Systems</span></span>. Resources that you provision without using the <span class="ph uicontrol">Use
+					VSys.Next patterns</span> option appear under <span class="ph menucascade"><span class="ph uicontrol">Instances</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Virtual Systems (classic)</span></span>. <span class="ph" id="resources_template_import_cloud__nsysnext_env_profile">To provision resources with the
+						<span class="ph uicontrol">Use VSys.Next patterns</span> option, you must select an
+					environment profile; you cannot use a cloud group.</span> For more information
+				about VSys.next patterns, see the following document: <a class="xref" href="http://www.ibm.com/developerworks/websphere/library/techarticles/1412_apte/1412_apte.html" target="_blank">http://www.ibm.com/developerworks/websphere/library/techarticles/1412_apte/1412_apte.html</a>. You can also refer to the documentation for your cloud
+				system.</div><p class="p" data-hd-otherprops="ibm" id="resources_template_import_cloud__using_ucdp">To connect to OpenStack and
+				OpenStack-based clouds, SoftLayer,
+				Amazon Elastic Compute Cloud, VMware vCenter, or Microsoft Azure, see <a class="xref" href="../../edt/topics/security_cloud_connection.html" title="To create a connection to a cloud to use with the blueprint designer, you use OpenStack Heat. You specify the location of the identity server and the engine to use. The steps are different for each type of cloud.">Connecting to clouds through the blueprint designer</a>.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_template_import_cloud__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Resource Templates</span></span>.</span></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Import Template from Cloud</span>.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Under <span class="ph uicontrol">Import Resource Template</span>,
+specify a name for the new resource template.</span></li><li class="li step stepexpand">
+				<span class="ph cmd">In the <span class="ph uicontrol">Cloud Connection</span> list, select the connection to the cloud
+					system.</span>
+				<div class="itemgroup info">If you do not have a connection to the cloud system, click <span class="ph uicontrol">New
+						Connection</span>, and specify the information for the connection, including the
+					host name and login information for the cloud system. For more information, see <a class="xref" href="cloud_integrate_vsp_ov.html" title="The IBM DevOps Deploy (Deploy) server can use virtual system patterns from cloud systems such as IBM Cloud Orchestrator to create dynamic environments.">Connecting to clouds through DevOps Deploy</a>.</div>
+			</li><li class="li step stepexpand"><span class="ph cmd">If the cloud system supports VSys.next patterns (<span class="keyword">Cloud
+Orchestrator</span> version
+2.4 or later or <span class="keyword">PureApplication System</span> version
+2.0 or later), select the <span class="ph uicontrol">Use VSys.Next patterns</span> check
+box to use these patterns.</span></li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Cloud Resource</span> list, select
+the virtual system pattern to use.</span></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span></li><li class="li step stepexpand"><strong>Optional: </strong><span class="ph cmd">Edit the properties for the nodes
+in the resource template:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Click the new resource template to select it.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Click an agent prototype, go to the <span class="ph uicontrol">Configuration</span> tab,
+and click <span class="ph uicontrol">Resource properties</span>.</span><div class="itemgroup info">This
+table shows the properties for the node, including virtual image properties
+such as memory, number of processors, and starting passwords. The
+window also shows the properties for each script package on the node.</div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Edit the properties by clicking <span class="ph uicontrol">Edit</span> next
+to a property.</span><div class="itemgroup stepxmp"> <div class="p">You can use variables to refer to
+values that are not yet specified. For example, if you have a database
+node that is named <code class="ph codeph">DB_node</code> and an application node
+that is named <code class="ph codeph">app_node</code>, you might have to use the
+host name of the database node in the application node configuration.
+However, the host name is not set until the cloud system provisions
+the nodes. In this case, you can refer to the host name of the database
+node with the following variable:<pre class="pre codeblock"><code>${DB_node.hostname}</code></pre></div> </div>
+<div class="itemgroup info"><p class="p">For more information about using property variables, see
+the documentation for your cloud system.</p></div></li>
+</ol>
+<div class="itemgroup info"><br><img class="image" src="../images/resources_template_import_cloud_b.gif" alt="The table of properties for a node in the resource template"><br></div></li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_template_import_cloud__result__1">Results</h2></div>The template opens, displaying the resource hierarchy for
+the template. The template contains a top-level folder and one agent
+prototype for each node in the pattern, as shown in the following
+figure. <br><img class="image" src="../images/resources_template_import_cloud_a.gif" alt="The complete resource template, showing a main folder that contains two agent prototypes"><br></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_template_import_cloud__postreq__1">What to do next</h2></div>Create an application blueprint from this resource template. See <a class="xref" href="blueprint_create_vsp.html" title="Blueprints for clouds that use virtual system patterns (VSPs) map the components of an application to the agents on the virtual images in the VSP.">Creating blueprints for cloud environments that use virtual system patterns</a>.</section>
+</div>
+
+</article></main></body></html>

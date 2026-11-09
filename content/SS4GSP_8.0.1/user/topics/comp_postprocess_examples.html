@@ -1,0 +1,202 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Post-processing scripts are written in JavaScript."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_postProcess.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_postprocess_examples"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Examples of post-processing scripts</title></head><body id="comp_postprocess_examples"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Examples of post-processing scripts</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-101229b7-383d-4b30-ad0c-ae99efa0a790">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">Post-processing scripts are written in JavaScript™.</p>
+<div class="p" id="comp_postprocess_examples__requirements">Post-processing scripts must set the <span class="keyword parmname">Status</span> property
+to specify the status of the script. The script can specify any value
+for the <span class="keyword parmname">Status</span> property. For example, to specify
+that the script was a success, run the following command in the post-processing
+script:<pre class="pre codeblock"><code>properties.put("Status","Success");</code></pre></div>
+<section class="section"><h2 id="comp_postprocess_examples__title__2" class="title sectiontitle">Writing to the log</h2>You can write to the output
+log for the process with the following command:<pre class="pre codeblock"><code>commandOut.print("hello");</code></pre></section>
+<section class="section"><h2 id="comp_postprocess_examples__title__3" class="title sectiontitle">Checking the result of a step</h2><p class="p">The post-processing
+script can examine the step's output log and run commands based on
+the result. In the following code fragment, <code class="ph codeph">scanner.register()</code> registers
+the strings <kbd class="ph userinput">error at line</kbd> and <kbd class="ph userinput">the
+value is</kbd> with a regular expression engine, then runs commands
+if those strings are found. After all strings are registered, it calls <code class="ph codeph">scanner.scan()</code> on
+the step's output log line by line.</p><div class="p"><pre class="pre codeblock"><code>     properties.put("Status", "Success");
+
+     //
+     // Evaluate the built-in exitCode property, which indicates the exit code
+     // of the script called by the plug-in step. Typically, if the value of
+     // the exitCode property is non-zero, the plug-in step failed.
+     //
+     if (properties.get("exitCode") != 0) {
+          properties.put("Status", "Failure");
+     }
+     else {
+
+          //
+          // Register a scanner to search for the text "error at line" in the log.
+          // The first argument is a regular expression.
+          //
+          // The second argument, an inline function, is invoked once for
+          // every line in the log output that matches the pattern. The "lineNumber"
+          // variable contains the line number where the match occurred, and the
+          // "line" variable is the full text of the line.
+          //
+          scanner.register("(?i)ERROR at line",  function(lineNumber, line) {
+
+              //
+              // In this case, we build up an "Error" property which
+              // contains the text of all errors that are found. We find every
+              // line starting with "error at line" and add it to this list.
+              //
+              errors.put("Errors", errorString);
+
+
+              //
+              // If a line starting with "error at line" is found, the step has
+              // failed, so we set the special "Status" property to "Failure",
+              // indicating to the DevOps Deploy server that the step should
+              // be marked as a failure.
+              //
+              properties.put("Status", "Failure");
+          });
+         
+          //
+          // Multiple searches can be registered with the scanner. We add a
+          // second search to look for some interesting text to set as an output
+          // property.
+          //
+          // For example, if there is a line "The value is BLUE", then we end up
+          // with an output property, "Value", with a value of "BLUE".
+          //
+          scanner.register("The value is", function(lineNumber, line) {
+              var value = line.replace("The value is ", "");
+              properties.put("Value", value);
+          });
+         
+          scanner.scan();
+
+
+          //
+          // Convert the collected list of error strings into a single string and
+          // set that as an output property.
+          //
+          var errors = properties.get("Error");
+          if (errors == null) {
+              errors = new java.util.ArrayList();
+              properties.put("Error", errors);
+          }
+          properties.put("Error", errors.toString());
+     }
+</code></pre></div></section>
+<section class="section"><h2 id="comp_postprocess_examples__title__4" class="title sectiontitle">Retrieving a property from a previous step</h2><div class="p">The
+following scripts assume two steps that are in the same process. The
+post-processing script for the first step creates two output properties,
+which are named <span class="keyword parmname">Status</span> and <span class="keyword parmname">Step1Prop</span>:<pre class="pre codeblock"><code>if (properties.get("exitCode")==0)
+  { properties.put("Status","Success"); }
+else
+  { properties.put("Status","Failure"); }
+
+properties.put("Step1Prop","value1");</code></pre></div><div class="p">Then, a second step can access those properties. For example, if the first step was named
+<code class="ph codeph">Step1</code> and specified the output properties <span class="keyword parmname">Status</span> and
+<span class="keyword parmname">Step1Prop</span>, you might create a Shell step with the following code to access
+those
+properties:<pre class="pre codeblock"><code>echo Properties of previous step:
+echo "${p:Step1/Status}"
+echo "${p:Step1/Step1Prop}"
+</code></pre>The
+second step can also use those properties in its post-processing script. For example, the following
+post-processing script includes the <span class="keyword parmname">Status</span> property of the previous step in a
+property for the second
+step:<pre class="pre codeblock language-json"><code>{ 
+properties.put("Step2Prop","New property");
+properties.put("Status","OK"); 
+properties.put("StatusOfPreviousStep","${p:Step1/Status}"); 
+}</code></pre></div></section>
+<section class="section"><h2 id="comp_postprocess_examples__title__5" class="title sectiontitle">Passing a value from one step to another</h2><div class="p">Passing
+a value from one step to another involves a few general steps:<ol class="ol">
+<li class="li">In the first step, store the value in a place where the post-processing script can access it.
+You can store the value by writing it to the log file for the step. For example, if you are using a
+Shell step, you can write the value and a unique key to the log with an <code class="ph codeph">echo</code>
+command:<pre class="pre codeblock"><code>echo "myvalue=1234"</code></pre>As a result, the log for the step shows the key
+and value:<pre class="pre codeblock"><code>myvalue=12345</code></pre></li>
+<li class="li">In the post-processing script for the step, use the <span class="keyword cmdname">scanner</span> object to scan
+                        the log for the key. Then, assign the value to an output parameter. The
+                        following example script searches the output log for the key
+                            <code class="ph codeph">myvalue=</code> and then stores the value in the output
+                        property
+                        <code class="ph codeph">myOutputValue</code>:<pre class="pre codeblock"><code>var exit = properties.get('exitCode');
+
+scanner.register("my value=", function(lineNumber, line) {
+     var value=line.replace("my value=","");
+     properties.put("myOutputValue",value);
+});
+
+if (exit == 0) {
+    properties.put('Status', 'Success');
+}
+else {
+     properties.put('Status', 'Failure');
+}
+scanner.scan();</code></pre></li>
+<li class="li">In future steps, refer to the output parameter of the first step. For example, if the first step
+is named <code class="ph codeph">SetMyValue</code>, future steps can refer to the property with the following
+code:<pre class="pre codeblock"><code>${p:SetMyValue/myOutputValue}</code></pre></li>
+</ol></div></section>
+<section class="section"><h2 id="comp_postprocess_examples__title__6" class="title sectiontitle">Adding a deployment warning</h2>
+
+<p class="p">A warning can be added by a post-processing script at design time using the process author.
+Here's the default post-processing script which is an example of how this is done:</p>
+<pre class="pre codeblock"><code>// post-processing script
+var exit = properties.get('exitCode');
+
+
+/* Set a warning
+scanner.register('^Warning: ', function(lineNumber, line) {
+    properties.put('ucdWarning', line);
+});
+
+scanner.scan();
+*/
+
+
+if (exit == 0) {
+    properties.put('Status', 'Success');
+}
+else {
+    properties.put('Status', 'Failure');
+}</code></pre>
+</section>
+<section class="section"><h2 id="comp_postprocess_examples__title__7" class="title sectiontitle">Allowlisted in-line functions and objects</h2>
+
+<p class="p">The following objects and functions are allowed to be used in the JavaScript runtime: </p>
+<pre class="pre codeblock"><code>Function
+Object
+Error
+decodeURI
+decodeURIComponent
+encodeURI
+encodeURIComponent
+escape
+isNaN
+unescape
+NaN
+isFinite
+parseFloat
+parseInt
+Infinity
+undefined
+EvalError
+RangeError
+ReferenceError
+SyntaxError
+TypeError
+URIError
+Array
+String
+Boolean
+Number
+Date
+Math
+JSON
+RegExp</code></pre>
+</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_postProcess.html" title="Post-processing scripts run after a step finishes. Typically, post-processing scripts ensure that expected results occurred.">Post-processing scripts</a></div></div></nav></article></main></body></html>

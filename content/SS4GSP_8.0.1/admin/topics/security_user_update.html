@@ -1,0 +1,24 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="LDAP users' name, addresses, and groups can be updated."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_auth.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_user_update"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Updating LDAP users and groups</title></head><body id="security_user_update"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+	<h1 class="title topictitle1" id="ariaid-title1">Updating LDAP users and groups</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-654f3507-b456-457f-90b6-655e2ee50566">Edit online</a></span></div>
+	
+	<div class="body taskbody"><p class="shortdesc">LDAP users' name, addresses, and groups can be updated.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_user_update__context__1">About this task</h2></div>LDAP users and groups can be updated in following ways:<ul class="ul">
+<li class="li"><strong class="ph b">LDAP or Active Directory Authentication Realms</strong> using LDAP authorization realms to update
+names and email addresses.</li>
+<li class="li"><strong class="ph b">SSO authentication realms</strong> using LDAP authorization realms to update groups. Names and
+email addresses are updated when user logs-in through SSO.</li>
+</ul><div class="note note note_note"><span class="note__title">Note:</span> You can not update users or groups if there is no LDAP Authorization realms being
+used.</div></section>
+		<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_user_update__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the server, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication (Users)</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">select LDAP/SSO realm</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Update Users</span></span> for the LDAP authentication realm to use. </span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Update All Users</span> dialog box, click <span class="ph uicontrol">Submit</span> to
+update the LDAP user information for the selected LDAP or SSO realm.</span>
+<div class="itemgroup stepresult">The names, email addresses, and/or groups for all users in the realm are
+updated.<div class="note note note_note"><span class="note__title">Note:</span> User information is also synced when a user logs-in manually from the LDAP or Active
+Directory.</div></div>
+</li></ol></section>
+	</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_auth.html" title="Authentication realms manage users and determine user identity within authorization realms for the server.">Authentication realms</a></div></div></nav></article></main></body></html>

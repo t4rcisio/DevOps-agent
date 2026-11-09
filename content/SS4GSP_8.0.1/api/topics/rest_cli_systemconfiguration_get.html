@@ -1,0 +1,105 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="These properties are available on the System Settings page of the server."><meta name="DC.subject" content="REST API, systemConfiguration resource, /systemConfiguration GET, GET methods, /systemConfiguration"><meta name="keywords" content="REST API, systemConfiguration resource, /systemConfiguration GET, GET methods, /systemConfiguration"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_systemconfiguration.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_systemconfiguration_get"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>List system configuration properties</title></head><body id="rest_cli_systemconfiguration_get"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">List system configuration properties</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-48873129-f639-4267-b334-c19fbfceffb7">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">These properties are available on the System Settings page of the server.</p>
+<section class="section"><h2 id="rest_cli_systemconfiguration_get__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>GET https://{hostname}:{port}
+    /cli/systemConfiguration
+Accept: {contentType}
+</code></pre><table class="table" id="rest_cli_systemconfiguration_get__header_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_systemconfiguration_get__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_systemconfiguration_get__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_systemconfiguration_get__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_systemconfiguration_get__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_systemconfiguration_get__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_systemconfiguration_get__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_systemconfiguration_get__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_systemconfiguration_get__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+</section>
+<div class="example" data-hd-audience="all"><h2 id="rest_cli_systemconfiguration_get__title__4" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+    "vendorName": "",
+    "externalURL": "https://example.hostname.com:8443",
+    "externalUserURL": "https://example.hostname.com:8443",
+    "repoAutoIntegrationPeriod": 300,
+    "deployMailHost": "smtp.example.com",
+    "deployMailPassword": "****",
+    "deployMailPort": 25,
+    "deployMailSecure": false,
+    "deployMailSender": "sender@example.com",
+    "deployMailUsername": "username",
+    "snapshotDaysToKeep": -1,
+    "cleanupHourOfDay": 0,
+    "cleanupDaysToKeep": -1,
+    "cleanupCountToKeep": -1,
+    "environmentDaysToKeep": -1,
+    "environmentCountToKeep": -1,
+    "cleanupArchivePath": "",
+    "historyCleanupHour": 0,
+    "historyCleanupMinute": 0,
+    "historyCleanupDaysToKeep": 730,
+    "historyCleanupDuration": 23,
+    "historyCleanupEnabled": false,
+    "auditLogReadEntriesEnabled": false,
+    "auditLogCleanupEnabled": false,
+    "auditLogCleanupHour": 0,
+    "auditLogCleanupMinute": 0,
+    "auditLogRetentionLength": 30,
+    "enableInactiveLinks": false,
+    "enablePromptOnUse": true,
+    "enableAllowFailure": false,
+    "validateAgentIp": false,
+    "skipCollectPropertiesForExistingAgents": false,
+    "minimumPasswordLength": 1,
+    "requireUppercase": false,
+    "requireLowercase": false,
+    "requireSpecials": false,
+    "requireDigits": false,
+    "requireDuplicate": false,
+    "enableUIDebugging": true,
+    "messageOfTheDay": "",
+    "isCreateDefaultChildren": false,
+    "requireCommentForProcessChanges": false,
+    "requireProcessPromotionApproval": false,
+    "failProcessesWithUnresolvedProperties": false,
+    "enforceDeployedVersionIntegrity": false,
+    "copyToCodestation": true,
+    "discoveryExpiry": 300,
+    "configureExpiry": 43200,
+    "importExpiry": 7200,
+    "pluginStepExpiry": 86400,
+    "useDefaultATRIfNotSpecified": false,
+    "safeEditEnabled": false,
+    "allowProcessLocking": false,
+    "requireProcessLocking": false,
+    "maintenanceModeEnabled": false,
+    "keepMeLoggedInHours": 12,
+    "versionImportKeepRecords": 100,
+    "licenseServerUrl": "use the default that the server tooltip recommends",
+    "licenseMode": "MIXED",
+    "agentAutoLicenseType": "",
+    "defaultLocale": "en_US",
+    "defaultSnapshotLockType": "ALL",
+    "envCompPropsOverrideEnvProps": false,
+    "deleteEnvResources": false,
+    "vcCompressionUpgradeEnabled": false,
+    "vcCompressionUpgradeCompleted": false,
+    "trustedProxyIPs": ""
+}</code></pre></div>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_getsystemconfiguration.html" title="List system configuration properties">getSystemConfiguration</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_systemconfiguration.html">systemConfiguration resource</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Create an application from a template to apply a set of tagged components, environments, and the specified resource tree to the application."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_template.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_template_using"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating applications from application templates</title></head><body id="app_template_using"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating applications from application templates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-271e669a-86fc-4e5a-9135-a3d070de4e83">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Create an application from a template to apply a set of tagged components, environments,
+and the specified resource tree to the application.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_template_using__prereq__1">Before you begin</h2></div>Confirm that your role has access to an application template and the permissions that are
+needed to create an application from a template. See <a class="xref" href="../../admin/topics/app_template_ref.html#app_template_ref" title="Permissions for roles that create applications from templates.">Permissions reference for using application templates</a>.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_template_using__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Applications</span>, and then click <span class="ph uicontrol">Create
+Application</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Complete the information in the <span class="keyword wintitle">Create Application</span> dialog box.</span>
+<div class="itemgroup info">See <a class="xref" href="app_create.html" title="You can create an application from scratch or import an existing one.">Creating
+applications</a>.<div class="note note note_note"><span class="note__title">Note:</span> You must select the application template from the <span class="ph uicontrol">Application
+Template</span> list.</div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd"> If the application template specifies application properties, you must complete them.</span>
+<div class="itemgroup info">Application properties are listed at the bottom of the dialog box, after the
+<span class="ph uicontrol">Enforce Complete Snapshots</span> option.<div class="note note note_note"><span class="note__title">Note:</span> You cannot delete application
+properties that you create with the application template. After you create the application, you can
+view and edit these properties. Open the application, click the <span class="ph uicontrol">Configuration</span>
+tab (not the <span class="keyword wintitle">Configuration</span> tab at the top of the page), and then click
+<span class="ph uicontrol">Basic Settings</span>. </div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Next</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select components from the appropriate lists or create components to satisfy the listed
+requirements.</span>
+<div class="itemgroup info">You must select or create the number of components that is specified for each tag
+type.<div class="note note note_note"><span class="note__title">Note:</span> To create components, you must have permission to create components from templates. You
+can only create components from component templates that contain the tag that is specified in the
+application template.</div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd"> Click <span class="ph uicontrol">Next</span>.</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Create the environments to use in this application.</span>
+<div class="itemgroup info">By default, one environment is shown for each environment template in the application
+template. You can create more environments that use the same template or remove any environments,
+including those environments provided by default. </div>
+<ul class="ul choices">
+<li class="li choice">To create another environment, click <span class="ph uicontrol">Create an environment from a
+template</span>
+<img class="image" src="../images/add_app_temp.gif" alt="">, and then select the environment from the list. An environment is added to the
+<span class="ph uicontrol">Environment list</span>. The environment name contains the name of the environment
+template and a unique number.</li>
+<li class="li choice">To create a copy of an environment, select the environment and click <span class="ph uicontrol">Duplicate
+the selected environment</span>
+<img class="image" src="../images/copy_app_temp.gif" alt="">. An environment is added to the <span class="ph uicontrol">Environment list</span>. The environment
+name contains the name of the source environment name and "copy." The new environment contains the
+same values for the description and properties values as the source environment.</li>
+<li class="li choice">To remove an environment, select the environment from the <span class="keyword wintitle">Environments</span>
+list, and then click <span class="ph uicontrol">Delete the selected environment</span>
+<img class="image" src="../images/delete_app_temp.gif" alt="">. <div class="p"><div class="note note note_note"><span class="note__title">Note:</span> </div>When creating an application from an application template and no environment is
+selected, a resource named after the application is also created.</div></li>
+</ul>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> You cannot delete an application template if it is in use by an application. You cannot delete
+environment properties that you create with the application template. After you create the
+application, you can view and edit these properties. Open the environment, click the
+<span class="ph uicontrol">Configuration</span> tab (not the <span class="keyword wintitle">Configuration</span> tab at the top
+of the page), and then click <span class="ph uicontrol">Basic Settings</span>.</div>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If an environment template contains environment properties, provide values for them.</span>
+<div class="itemgroup info">You must provide values for required environment properties. If an environment contains
+required properties, a blank circle is displayed in the same row as the environment name. When all
+required environment properties are provided, the circle is shaded.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Next</span>.</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd"> If you specified environment templates, add agents or agents pools to them.</span>
+<div class="itemgroup info">Drag an agent/agent pool onto each agent prototype that is shown in the
+<span class="keyword wintitle">Environments</span> pane. If you drag multiple agents onto an agent prototype, a copy
+of the resource tree for the agent prototype is created for each agent.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd"> Click <span class="ph uicontrol">Save</span>.</span>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_template.html" title="With an application template, you can save and reuse a collection of resources, environments, processes, and tagged components or component templates to create a standardized application.">Application templates</a></div></div></nav></article></main></body></html>

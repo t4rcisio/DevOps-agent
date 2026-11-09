@@ -1,0 +1,51 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To deploy the components in the application, run the application process on the new environment."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/webapp_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="webapp_deploy"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 5: Deploying the application components</title></head><body id="webapp_deploy"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 5: Deploying the application components</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2d8271f0-7b58-47d0-9564-4367fe1085cb">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To deploy the components in the application, run the application
+process on the new environment.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_deploy__context__1">About this task</h2></div>Now that you have an environment and all the necessary processes,
+you can deploy the components by running the application process.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_deploy__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Open the application page by clicking <span class="ph uicontrol">Applications</span> and
+then clicking the application name.</span></li><li class="li step stepexpand"><span class="ph cmd">In the same row as your environment, click the <span class="ph uicontrol">Request
+Process</span> <img class="image" src="../images/request_process.gif" alt=""> icon, as shown in the following figure.</span><div class="itemgroup info"><br><img class="image" src="../images/webapp_deploy_i.gif" height="192" width="750" alt="Clicking Request Process on an environment"><br></div></li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Deployment</span> wizard, select the <code class="ph codeph">Deploy
+JPetStore</code> process.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Go to <span class="ph uicontrol">Choose Component Versions</span> and click <span class="ph menucascade"><span class="ph uicontrol">Select For All</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Latest Available</span></span>. </span>
+<div class="itemgroup info">Make sure that version 1.0 is selected for each component, as shown in the following
+figure:<br><img class="image" src="../images/webapp_deploy_h.gif" height="319" width="600" alt="Selecting the most recent version of each component"><br>You must select a version for each component; if you do not select a version, that component
+is not deployed.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Review the deployment settings and click <span class="ph uicontrol">Submit Deployment</span>.</span></li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_deploy__result__1">Results</h2></div>The web page shows you the progress of the application process request. From this page, you
+            can watch as the processes run. The following figure the application process partially
+            completed. The application component process is finished and the other two component
+            processes are running. <br><img class="image" src="../images/webapp_deploy_a.gif" alt="The log for the application process request, showing the component processes that are running"><br>If the process runs successfully, the request shows that each component process
+            is finished, as in the following figure:<br><img class="image" src="../images/webapp_deploy_b.gif" alt="The log for the application process request, showing that the component processes ran successfully"><br>In this case, you can view the running application at the following URL, by
+            substituting the host name of your target system for <var class="keyword varname">hostname</var>. This
+            is the host name of the agent that you configured in <a class="xref" href="webapp_configure_agent.html" title="To deploy applications with IBM DevOps Deploy (Deploy), you need one or more agents. The server uses the agents to deploy the application components on target systems.">Configuring the agent and target system</a>. In the URL, specify the
+                <var class="keyword varname">tomcat.contextroot</var> value that you entered for this environment
+            after the port
+            number.<pre class="pre codeblock"><code>http://<var class="keyword varname">hostname</var>:8081/JPetStoreDev</code></pre>The
+            application shows a simple online shopping site in the form of a pet store. The
+            following figure shows the home page:<br><img class="image" src="../images/webapp_deploy_e.gif" alt="The home page of the JPetStore application, showing a link to enter the store"><br>From the home page, click <span class="ph uicontrol">Enter the Store</span> and then browse
+            the items that are available, as shown in the following figure:<br><img class="image" src="../images/webapp_deploy_f.gif" alt="The main menu page of the JPetStore application"><br><div class="p">If the application process did not run successfully, one of the component
+                processes might have failed. In this case, the process is listed with a status of
+                    <code class="ph codeph">Failed</code>. To troubleshoot this failed process, expand the log
+                section for the component, and find the step that failed:<br><img class="image" src="../images/webapp_deploy_c.gif" alt="The log for the application process request, showing a component process that did not complete"><br>Click <span class="ph uicontrol">View Output Log </span>to look at the command-line
+                output log for each step in the process.. </div><div class="p">If one of your component processes
+                did not complete, identify the step that did not complete. Verify that the
+                properties for that step are correct and that the steps are in the correct order in
+                the process. Then, run the application process again. <div class="note note note_note"><span class="note__title">Note:</span> If you run the
+                    application process again, be sure to clear the <span class="ph uicontrol">Only Changed
+                        Versions</span> check box and select the versions of each component. If
+                    you leave this check box selected, the server runs the component processes only
+                    for components that have new versions.</div></div><p class="p">This application process
+                installed each of the components in the application by running their component
+                processes.</p><p class="p">Application processes can also uninstall or update components or
+                run other configuration tasks for the application and its components. </p></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.1 SS4GSP_8.0.1" href="../../tutorial/topics/webapp_abstract.html" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">Deploying a simple web application</a></div></div></nav></article></main></body></html>

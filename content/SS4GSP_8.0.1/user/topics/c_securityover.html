@@ -1,0 +1,105 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="You can act to ensure that your installation is secure and set up user access controls."><meta name="DC.subject" content="security, overview"><meta name="keywords" content="security, overview"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="c_securityover"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Security Considerations</title></head><body id="c_securityover"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Security Considerations</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fd76991b-24c2-4659-9092-26db532c2457">Edit online</a></span></div>
+
+
+
+<div class="body conbody"><p class="shortdesc">You can act to ensure that your installation is secure
+and set up user access controls.</p>
+<ul class="ul">
+<li class="li"><a class="xref" href="c_securityover.html#c_securityover__EnablingSecurityInstall">Enabling security during the installation process</a></li>
+<li class="li"><a class="xref" href="c_securityover.html#c_securityover__EnablingSecureCommunication">Enabling secure communication between multiple applications</a></li>
+<li class="li"><a class="xref" href="c_securityover.html#c_securityover__PortsProtocolsAndServices">Ports, protocols, and services</a></li>
+<li class="li"><a class="xref" href="c_securityover.html#c_securityover__SSLKeystores">Keystores for SSL communication and for encrypting secure properties</a></li>
+<li class="li"><a class="xref" href="c_securityover.html#c_securityover__CustomizingYourSecuritySettings">Customizing your security settings</a></li>
+<li class="li"><a class="xref" href="c_securityover.html#c_securityover__SettingUpUserRolesAndAccess">Setting up user roles and access</a></li>
+<li class="li" data-hd-otherprops="ibm"><a class="xref" href="c_securityover.html#c_securityover__Cookies">Privacy policy considerations</a></li>
+</ul>
+<section class="section" id="c_securityover__EnablingSecurityInstall"><h2 id="c_securityover__EnablingSecurityInstall__title__1" class="title sectiontitle">Enabling security during
+the installation process</h2><p class="p">During the installation process,
+by default the server is configured to use Secure Sockets Layer (SSL)
+for secure communication. The server is configured to use SSL in both
+manual and silent installations. In addition to SSL communication,
+role-based access controls are available that determine what actions
+a particular user can do.</p><p class="p">In general, you configure security on the application server or the database server, not in
+                              <span class="ph">Deploy</span>. <span class="ph">Deploy</span> communicates with the database by using the Java™ Database Connectivity (JDBC) provider on
+                        the application server.</p><p class="p">To learn
+about configuring Lightweight Directory Access Protocol (LDAP) authentication,
+see <a class="xref" href="../../admin/topics/security_auth.html" title="Authentication realms manage users and determine user identity within authorization realms for the server.">Authentication realms</a>.</p></section>
+<section class="section" id="c_securityover__EnablingSecureCommunication"><h2 id="c_securityover__EnablingSecureCommunication__title__1" class="title sectiontitle">Enabling secure communication
+between multiple applications</h2><p class="p">You can use tokens to secure communications between products that integrate with <span class="ph">Deploy</span>. To learn more about tokens, see <a class="xref" href="../../admin/topics/security_token.html" title="Tokens provide authorization for agents, agent relays, users, and external systems or applications from the server. Agents use tokens when they run process steps and communicate with the IBM DevOps Deploy (Deploy) server and external services.">Tokens</a>.</p></section>
+<section class="section" id="c_securityover__PortsProtocolsAndServices"><h2 id="c_securityover__PortsProtocolsAndServices__title__1" class="title sectiontitle">Ports, protocols, and services</h2>
+
+<p class="p">The following table shows the default port numbers for the server.</p>
+<table class="simpletable"><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead><tr class="sthead">
+<th class="stentry" scope="col">Port type</th>
+<th class="stentry" scope="col">Default port number</th>
+</tr></thead><tbody><tr class="strow">
+<td class="stentry">Incoming connections to the server web interface (HTTPS)</td>
+<td class="stentry">8443</td>
+</tr><tr class="strow">
+<td class="stentry">WebSocket agent</td>
+<td class="stentry">7919</td>
+</tr><tr class="strow">
+<td class="stentry"><span class="ph" id="c_securityover__communication_rcl">Communication with the <span class="keyword">Common Licensing</span> server</span></td>
+<td class="stentry"><span class="ph" id="c_securityover__rcl_ports">Port 27000 for the <code class="ph codeph">lmrgd</code> daemon. The port numbers for
+                                          the vendor daemon can change, but are typically between
+                                          27001 and 27009. See your <span class="keyword">Common Licensing</span> server for the active ports.</span></td>
+</tr></tbody></table>
+<p class="p" data-hd-otherprops="ibm">The communication with the <span class="keyword">Common Licensing</span>
+                        server uses port 27000 for the <code class="ph codeph">lmrgd</code> daemon. The port
+                        numbers for the vendor daemon can change, but are typically between 27001
+                        and 27009. See your <span class="keyword">Common Licensing</span>
+                        server for the active ports.</p>
+</section>
+<section class="section" id="c_securityover__SSLKeystores"><h2 id="c_securityover__SSLKeystores__title__1" class="title sectiontitle">Keystores for SSL communication and for encrypting secure properties</h2>
+
+<p class="p"><span class="ph">Deploy</span> supports
+                        multiple keystores, which support different security features. The following
+                        list describes the default keystores.</p>
+<dl class="dl">
+
+<dt class="dt dlterm"><span class="ph filepath">tomcat.keystore</span></dt>
+<dd class="dd">The certificate for SSL communication on the HTTPS port of the <span class="ph">Deploy</span> server is stored in the <span class="ph filepath">tomcat.keystore</span>
+                                    file.</dd>
+
+
+<dt class="dt dlterm"><span class="ph filepath">encryption.keystore</span></dt>
+<dd class="dd">The secret key that is used to encrypt and decrypt secure properties is stored in the
+                                          <span class="ph filepath">encryption.keystore</span> file. If you
+                                    export applications and components that use secure properties to
+                                    other <span class="ph">Deploy</span> servers, you must exchange the contents of this keystore
+                                    between the servers. The secret key in the
+                                          <span class="ph filepath">encryption.keystore</span> file is randomly
+                                    generated during installation. The password is stored in the
+                                          <code class="ph codeph">encryption.keystore.password</code> property,
+                                    and its initial value is the same as the
+                                          <code class="ph codeph">server.keystore.password</code> property value.
+                                    AES-256 is the default encryption level. At the time of
+                                    installation and upgrade, new keys are generated as AES-256 and
+                                    set to default. </dd>
+
+</dl>
+<p class="p">For more information on keystores and certificates, see <a class="xref" href="ssl_config.html#ssl_config" title="The steps for configuring secure HTTPS connections with the IBM DevOps Deploy (Deploy) server are similar to the steps for any Java Platform, Enterprise Edition server.">Configuring SSL on Apache Tomcat and LDAP servers</a>.</p>
+</section>
+<section class="section" id="c_securityover__CustomizingYourSecuritySettings"><h2 id="c_securityover__CustomizingYourSecuritySettings__title__1" class="title sectiontitle">Customizing your
+security settings</h2><p class="p">The user ID that is created by default is <samp class="ph systemoutput sysout">admin</samp> for the server. </p>
+<p class="p">To change the password for <samp class="ph systemoutput sysout">admin</samp>, in the server, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication (Users)</span></span>. To change the password for <samp class="ph systemoutput sysout">ucdpadmin</samp>, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Users</span></span> and select the <span class="ph uicontrol">Internal Authentication</span> authentication realm. </p><p class="p">Failed login attempts are
+stored in the database. Except for the default <samp class="ph systemoutput sysout">admin</samp> password,
+all passwords are stored in encrypted form in the database. After
+you change the default admin password, it is also stored in encrypted
+form.</p></section>
+<section class="section" id="c_securityover__SettingUpUserRolesAndAccess"><h2 id="c_securityover__SettingUpUserRolesAndAccess__title__1" class="title sectiontitle">Setting up user roles
+and access</h2><p class="p">You can create and delete users and add users to groups and teams in <span class="ph">Deploy</span>. To learn more, see <a class="xref" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a>. On the server, the superuser account with special
+                        security privileges is <samp class="ph systemoutput sysout">admin</samp>. </p></section>
+<section class="section" data-hd-otherprops="ibm" id="c_securityover__Cookies"><h2 id="c_securityover__Cookies__title__1" class="title sectiontitle">Privacy policy considerations</h2>
+
+<p class="p">Depending on the configurations that are deployed, this software offering might use cookies that
+                        can help you to collect personally identifiable information. <span class="ph" data-hd-otherprops="ibm">For information about this use of cookies, see the
+                                    <a class="xref" href="notices.html">Notices</a> topic.</span>
+                  </p>
+</section>
+</div>
+
+</article></main></body></html>

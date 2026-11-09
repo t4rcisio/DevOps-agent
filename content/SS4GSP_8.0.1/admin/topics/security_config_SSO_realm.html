@@ -1,0 +1,54 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="A single sign-on (SSO) authorization realm uses an external server for authorization."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_config.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_config_SSO_realm"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating an SSO authorization realm</title></head><body id="security_config_SSO_realm"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+	<h1 class="title topictitle1" id="ariaid-title1">Creating an SSO authorization realm</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-8b0a61b5-21d0-4c26-a6b0-c9abcc0e5de4">Edit online</a></span></div>
+	
+	<div class="body taskbody"><p class="shortdesc">A single sign-on (SSO) authorization realm uses an external server for
+		authorization.</p>
+		<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_config_SSO_realm__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the server, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authorization (Groups)</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Authorization Realm</span></span>. The <span class="keyword wintitle">Create Authorization Realm</span> dialog box opens.</span>
+</li><li class="li step stepexpand">
+				<span class="ph cmd">Enter a name in the <span class="ph uicontrol">Name</span> field.</span>
+			</li><li class="li step stepexpand">
+				<span class="ph cmd">Ensure that <span class="ph uicontrol">SSO</span> is selected in the <span class="ph uicontrol">Type</span>
+					list. </span>
+			</li><li class="li step stepexpand">
+				<span class="ph cmd">Specify these parameters:</span>
+				<div class="itemgroup info">
+					<table class="table"><caption><span class="table--title-label">Table 1. </span><span class="title">SSO properties</span></caption><colgroup><col style="width:21.69197396963124%"><col style="width:78.30802603036877%"></colgroup><thead class="thead">
+								<tr class="row">
+									<th class="entry align-left" id="security_config_SSO_realm__entry__1">Field</th>
+									<th class="entry align-left" id="security_config_SSO_realm__entry__2">Description</th>
+								</tr>
+							</thead><tbody class="tbody">
+								<tr class="row">
+									<td class="entry align-left" headers="security_config_SSO_realm__entry__1"><span class="ph uicontrol">Groups
+											Header</span></td>
+									<td class="entry align-left" headers="security_config_SSO_realm__entry__2">The name of the SSO server
+										parameter that contains the list of groups to which the user
+										belongs.</td>
+								</tr>
+								<tr class="row">
+									<td class="entry align-left" headers="security_config_SSO_realm__entry__1"><span class="ph uicontrol">Groups
+											Delimiter</span></td>
+									<td class="entry align-left" headers="security_config_SSO_realm__entry__2">The string that delimits
+										values that are found in the group header. Regular
+										expression special characters must be escaped with the
+										backslash (\) character.</td>
+								</tr>
+								<tr class="row">
+									<td class="entry align-left" headers="security_config_SSO_realm__entry__1"><span class="ph uicontrol">Groups
+											Regex</span></td>
+									<td class="entry align-left" headers="security_config_SSO_realm__entry__2">The regular expression that
+										is used to parse the values in the group header. If
+										specified, only the first matching group is used. If left
+										unspecified, all values in the group header are
+										used.</td>
+								</tr>
+							</tbody></table>
+				</div>
+				<div class="itemgroup info">The values in the group header that match the search criteria are used to create <span class="ph">IBM DevOps Deploy (Deploy)</span>
+					groups into which the user is placed.</div>
+			</li></ol></section>
+	</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_config.html" title="Use the Authorization Realms pane to create authorization realms and user groups for the server. Groups can be imported from external systems, such as LDAP.">Authorization realms</a></div></div></nav></article></main></body></html>

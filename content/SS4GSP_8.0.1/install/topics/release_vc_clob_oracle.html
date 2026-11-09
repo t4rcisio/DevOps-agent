@@ -1,0 +1,88 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can release the large object (LOB) storage in the Oracle databases."><meta name="DC.relation" scheme="URI" content="../../install/topics/release_vc_clob.html"><meta name="DC.relation" scheme="URI" content="upgrade_server.html#upgrade_server_int"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="release_vc_clob"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Releasing LOB space in Oracle databases</title></head><body id="release_vc_clob"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Releasing LOB space in Oracle databases</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-238e7979-5ace-4750-90c7-099ac4dc19eb">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can release the large object (LOB) storage in the Oracle databases.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrelease_vc_clob__prereq__1">Before you begin</h2></div>
+                  <p class="p"><strong class="ph b" data-hd-otherprops="ibm">Pre-requisite:</strong></p>
+<p class="p">Plan downtime for upgrading <span class="ph">IBM DevOps Deploy (Deploy)</span> and releasing LOB space.</p>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrelease_vc_clob__context__1">About this task</h2></div><p class="p"><strong class="ph b" data-hd-otherprops="ibm">Procedure:</strong></p>Run the following database commands to release LOB
+                  storage in Oracle databases. Releasing LOB storage in Oracle database requires
+                  different commands for <strong class="ph b">basicfile</strong> and <strong class="ph b">securefile</strong> file type. <p class="p">You
+                        can also refer to the Oracle instructions for reclaiming unused space here:
+                              <a class="xref" href="https://oracle-base.com/articles/misc/reclaiming-unused-space" target="_blank">https://oracle-base.com/articles/misc/reclaiming-unused-space</a>.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrelease_vc_clob__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+                        <span class="ph cmd">Set the <span class="keyword parmname">versioned_config.upgrade.enabled=true</span>
+                              parameter in the <span class="ph filepath">conf/server/installed.properties</span>
+                              file.</span>
+                  </li><li class="li step stepexpand">
+                        <span class="ph cmd">Restart the <span class="ph">Deploy</span> server.</span>
+                  </li><li class="li step stepexpand">
+                        <span class="ph cmd">Check on the progress of the conversion:</span>
+                        <div class="itemgroup info">
+                              <pre class="pre codeblock"><code>select count(*) from vc_persistent_record where persistent_data is not null</code></pre>
+                              <p class="p">The compression process is complete when the row count reported by
+                                    the query is 0.</p>
+                        </div>
+                  </li><li class="li step stepexpand">
+                        <span class="ph cmd">Check the database size:</span>
+                        <div class="itemgroup info">
+                              <pre class="pre codeblock" id="release_vc_clob__codeblock_gwr_l3d_25b"><code>select sum(bytes)/1024/1024 size_in_mb from dba_segments;</code></pre>
+                        </div>
+                  </li><li class="li step stepexpand">
+<span class="ph cmd">Release LOB storage by running the following commands for the appropriate Oracle file
+type.</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">For <strong class="ph b">securefile</strong> LOBs use these commands:
+                                          <pre class="pre codeblock"><code>select sum(bytes)/1024/1024 size_in_mb from dba_segments;
+ALTER TABLE vc_persistent_record MOVE TABLESPACE users;
+ALTER INDEX VC_PERSISTENT_REC_PATH_VER REBUILD TABLESPACE users;
+ALTER INDEX VC_PERSISTENT_RECORD_DIRECTORY REBUILD TABLESPACE users;
+ALTER INDEX SYS_XXXXXXX* REBUILD TABLESPACE users;
+ALTER INDEX VC_PERSIST_REC_COMMIT_PATH REBUILD TABLESPACE users;
+ALTER INDEX VC_PERSISTENT_RECORD_VERSION REBUILD TABLESPACE users;
+ALTER TABLE vc_persistent_record MOVE LOB(persistent_data) STORE AS (TABLESPACE users);
+select sum(bytes)/1024/1024 size_in_mb from dba_segments;</code></pre>
+                                    </li>
+<li class="li">For <strong class="ph b">basicfile</strong> LOBs use these commands:
+                                          <pre class="pre codeblock"><code>select sum(bytes)/1024/1024 size_in_mb from dba_segments;
+ALTER TABLE vc_persistent_record MOVE TABLESPACE users;
+ALTER INDEX VC_PERSISTENT_REC_PATH_VER REBUILD TABLESPACE users;
+ALTER INDEX VC_PERSISTENT_RECORD_DIRECTORY REBUILD TABLESPACE users;
+ALTER INDEX SYS_XXXXXXX* REBUILD TABLESPACE users;
+ALTER INDEX VC_PERSIST_REC_COMMIT_PATH REBUILD TABLESPACE users;
+ALTER INDEX VC_PERSISTENT_RECORD_VERSION REBUILD TABLESPACE users;
+ALTER TABLE VC_PERSISTENT_RECORD MODIFY LOB (persistent_data) (SHRINK SPACE);
+select sum(bytes)/1024/1024 size_in_mb from dba_segments;</code></pre></li>
+</ul>
+<div class="note note note_note"><span class="note__title">Note:</span> The database generates a <span class="ph filepath">SYS_XXXXXXX</span> index file. Check the indexes in the
+                                          <span class="ph filepath">vc_persistent_record</span> table for the
+                                    index name.</div>
+</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+                        <span class="ph cmd">Free the unused space so that it can be reused. Note that the process
+                              might not reduce the size of the underlying data files. To start the
+                              process of reclaiming disc storage space (if wanted), a database
+                              administrator must complete database maintenance tasks.</span>
+                        <div class="itemgroup info">
+                              <pre class="pre codeblock"><code>ALTER TABLE vc_persistent_record ENABLE ROW MOVEMENT;
+ALTER TABLE vc_persistent_record SHRINK SPACE;
+ALTER TABLE vc_persistent_record DISABLE ROW MOVEMENT;</code></pre>
+                        </div>
+                  </li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrelease_vc_clob__postreq__1">What to do next</h2></div>
+                  <p class="p"><strong class="ph b" data-hd-otherprops="ibm">Post-requisite:</strong></p>
+                  <ol class="ol" id="release_vc_clob__ol_phh_1s1_25b">
+                        <li class="li">Verify that the space is
+                              reduced:<pre class="pre codeblock" id="release_vc_clob__codeblock_bws_bs1_d5b"><code>select sum(bytes)/1024/1024 size_in_mb from dba_segments;</code></pre></li>
+                        <li class="li">Set the <span class="keyword parmname">versioned_config.upgrade.enabled</span> parameter
+                              back to <span class="keyword option">false</span> in the
+                                    <span class="ph filepath">conf/server/installed.properties</span> file.</li>
+                  </ol>
+            </section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/release_vc_clob.html" title="You can compress the amount of large object (LOB) storage space that Deploy uses in the vc_persistent_record database table.">Releasing VC LOB space</a></div></div><div class="linklist relinfo reltasks"><strong>Related tasks</strong><br><ul class="linklist"><li class="linklist"><a class="link" data-hd-otherprops="ibm" href="upgrade_server.html#upgrade_server_int" title="To upgrade the server, stop the server, and run the new installation program.">Upgrading the server in interactive mode</a></li></ul></div></nav>
+</article></main></body></html>

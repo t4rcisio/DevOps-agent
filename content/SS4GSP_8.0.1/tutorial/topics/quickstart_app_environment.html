@@ -1,0 +1,105 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="When you create an environment, you map resources to it that define where the parent application can run deployments."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/quickstart_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="quickstart_appEnvironment"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 4 Configure an application environment</title></head><body id="quickstart_appEnvironment"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 4 Configure an application environment</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a169021b-65e6-4a89-a6ca-ff7e6950832d">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">When you create an environment, you map resources to it that define where the parent
+    application can run deployments.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_appEnvironment__context__1">About this task</h2></div>An environment is a user-defined collection of resources that identify the components that
+can be deployed by the parent application, along with the agents that do the work. </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_appEnvironment__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Define the environment:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep">
+<span class="ph cmd">On the <span class="keyword wintitle">Application: hello Application</span> page, click
+<span class="ph uicontrol">Environments</span>.</span>
+</li>
+<li class="li substep">
+            <span class="ph cmd">Click <span class="ph uicontrol">Create Environment</span>.</span>
+          </li>
+<li class="li substep">
+<span class="ph cmd">Specify the name to be something like <kbd class="ph userinput">helloDeploy</kbd>.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Accept the default values in the other fields in this window, and click
+<span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">Add the resource group that contains the agent you created earlier to the
+          environment.</span>
+        <div class="itemgroup info">When you set up the agent, you added the agent as a resource to a resource group. </div>
+        <ol type="a" class="ol substeps" id="quickstart_appEnvironment__add-agent">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Click the environment name.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Using the <span class="ph uicontrol">Resources</span> tab for the environment, click
+                <span class="ph uicontrol">Add Base Resources</span>.</span>
+            <div class="itemgroup stepresult">The <span class="keyword wintitle">Add Resource to Environment </span> window shows all
+              available resources.</div>
+          </li>
+          <li class="li substep substepexpand">
+<span class="ph cmd">Select the check box next to resource group that you created earlier, <code class="ph codeph">helloWorld
+Tutorial</code>, and then click <span class="ph uicontrol">OK</span>.</span>
+<div class="itemgroup info">When you select the resource group, you automatically select the resources that are associated
+with it, such as the agent that you assigned to the group. Selecting an agent-type resource
+identifies the location, usually a computer, where deployments can occur.</div>
+</li>
+        </ol>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">Map the helloWorld component to this agent resource.</span>
+<ol type="a" class="ol substeps" id="quickstart_appEnvironment__add-components-to-agent">
+<li class="li substep substepexpand">
+<span class="ph cmd">As you hover the mouse over the row with the agent resource, click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Component</span></span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Select the <span class="ph uicontrol">helloWorld</span> component and then click
+<span class="ph uicontrol">Save</span>.</span>
+            <div class="itemgroup info">Only components added to the parent application are available to be mapped to the
+              agent resource. <div class="note note note_note"><span class="note__title">Note:</span> In order for a component to be deployed by an application, it
+                must be added to the application and also mapped to an agent-type resource. A
+                component that is added to an application but not mapped to an agent resource,
+                cannot be deployed by that application. Similarly, a component that is mapped to an
+                agent resource but not added to an application, cannot be deployed by that
+                application.</div></div>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+    <span class="ph cmd">Add a tag to the helloWorld component resource.</span>
+    <div class="itemgroup info">User-defined tags can identify resources and be referenced in application processes. </div>
+    <ol type="a" class="ol substeps">
+     <li class="li substep substepexpand">
+      <span class="ph cmd">Click the check box for the <span class="ph uicontrol">helloWorld</span> component.</span>
+     </li>
+     <li class="li substep substepexpand">
+      <span class="ph cmd">On the same row as the <span class="ph uicontrol">Add Base Resources</span> push button, click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Tag</span></span>.</span>
+      <div class="itemgroup info">The <span class="ph uicontrol">Add Tag</span> selection is shown in the following figure:<br><img class="image" src="../images/qs-plugin-design-10.gif" height="264" width="700" alt="The Actions &gt; Add Tag command"><br></div>
+     </li>
+     <li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Add New Tag</span> window, type something like
+<kbd class="ph userinput">blueCycle</kbd> in the <span class="ph uicontrol">Name</span> field, select a color for the
+tag, and then click <span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup info"> While you can select any color, blue is a good choice. Applications can be configured to use
+resources with a specific tag. For example, a continually running environment might take one group
+of <kbd class="ph userinput">blueCycle</kbd> tagged servers offline to update them, then put them back online
+and take another differently tagged group offline. You can also configure a process to deploy all
+components with a particular tag.</div>
+<div class="itemgroup stepresult">The finished resource with the <kbd class="ph userinput">blueCycle</kbd> tag is shown in the
+following figure:<br><img class="image" src="../images/qs-plugin-design-11.gif" height="270" width="700" alt="The finished resource with the blueCycle tag"><br></div>
+</li>
+    </ol>
+   </li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_appEnvironment__result__1">Results</h2></div>The new environment is displayed on the <span class="ph uicontrol">Environments</span> tab. After the
+environment is prepared, you can create the application process.<p class="p">In this lesson, you created an environment and added a resource group to it, then added a
+tag to the resource. </p>
+
+<p class="p">On the <span class="ph uicontrol">Resources</span> tab, you have the resource group with your agent
+and the <code class="ph codeph">helloWorld</code> component. </p>
+<p class="p">For more information about creating environments, see <a class="xref" href="../../user/topics/app_environment.html" title="An environment is a user-defined collection of resources that hosts an application.">Application environments</a>.</p></section>
+</div>
+
+
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_6.2.0 SS4GSP_8.0.1" href="../../tutorial/topics/quickstart_abstract.html" title="In this tutorial, you create a simple application with IBM DevOps Deploy (Deploy). You use standard plug-ins to create a component and define an application that deploys the component to an environment.">Create a simple helloWorld deployment</a></div></div></nav></article></main></body></html>

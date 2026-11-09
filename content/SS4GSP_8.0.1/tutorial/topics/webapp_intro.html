@@ -1,0 +1,60 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/webapp_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="webapp_intro"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Introduction</title></head><body id="webapp_intro"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Introduction</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-707898c5-0e4c-4d76-92f2-1d7b3d66cc3b">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">In this tutorial, you deploy a simple web application with <span class="ph">IBM DevOps Deploy (Deploy)</span>. You create
+        components, create an application that contains those components, and then deploy the
+        components to an environment.</p>
+<p class="p"><span class="ph">Deploy</span> helps
+you to plan and automate the deployment of complex applications to
+development, test, and production environments. It can deploy applications
+as often as needed, helping you to find problems early in the release
+cycle and provide predictability late in the release cycle.</p>
+<p class="p">The
+web application that you deploy in this tutorial is a simple three-tiered
+web application with a database, web interface, and application logic.
+You import these three components to the <span class="ph">Deploy</span> server
+and create a single application that deploys these three parts. Then,
+you create automation instructions that are called <dfn class="term">processes</dfn> that
+describe how to deploy each component. Finally, you use those processes
+to deploy the components automatically to a target system.</p>
+
+<p class="p">In
+later lessons, you update the components to a new version. Working
+with the sample application in this way demonstrates how you can manage
+a multipart application with <span class="ph">Deploy</span>.</p>
+
+
+<section class="section"><h2 id="webapp_intro__title__2" class="title sectiontitle">Learning objectives</h2>In
+this tutorial, you learn how to complete these tasks:<ul class="ul">
+<li class="li">Import artifacts from a build to create a component in <span class="ph">Deploy</span>.</li>
+<li class="li">Create component processes and application processes to automate
+deployment tasks.</li>
+<li class="li">Configure environments on which to deploy applications.</li>
+<li class="li">Run application processes to deploy the application components.</li>
+<li class="li">Update an application with new artifacts.</li>
+
+</ul></section>
+<section class="section"><h2 id="webapp_intro__title__3" class="title sectiontitle">Time required</h2>This tutorial takes 2 - 3 hours to finish. If you explore
+other concepts that are related to this tutorial, it could take longer to complete.</section>
+<section class="section"><h2 id="webapp_intro__title__4" class="title sectiontitle">System requirements</h2>To run this
+tutorial, you need the following resources:<ul class="ul">
+<li class="li">An installation of <span class="ph">Deploy</span>,
+                    version 7.x or later</li>
+<li class="li">Two computers, virtual images, or cloud instances to use as agents
+for the <span class="ph">Deploy</span> server</li>
+</ul> </section>
+<section class="section" id="webapp_intro__prereqs"><h2 id="webapp_intro__prereqs__title__1" class="title sectiontitle">Prerequisites</h2><ul class="ul">
+<li class="li">Make sure that you have access to an <span class="ph">Deploy</span> server. For information about installing a server, see <a class="xref" href="../../install/topics/serverInstall.html#serverinstall" title="The server provides services such as the user interface used to configure application deployments, the security service, and the artifact repository, among others. Installing the server involves specifying configuration information for the server, such as the ports that the server uses.">Installing the DevOps Deploy server</a>.</li>
+<li class="li">The server must have the Apache Tomcat, IBM UrbanCode DBUpgrader, and FileUtils plug-ins
+installed. If you do not have access permissions to install plug-ins, ask the system administrator
+to install these plug-ins. For instructions, see <a class="xref" href="../../admin/topics/settings_plugins.html#settings_plugins" title="Plug-ins can be installed at any time. You do not need to restart the server after you install a plug-in.">Installing plug-ins</a>. You can
+verify that the plug-ins are installed by clicking <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Plugins</span></span> and finding Tomcat, IBM Urbancode DBUpgrader, and FileUtils in the list of installed
+plug-ins. The FileUtils plug-in is installed by default.</li>
+<li class="li">You must have an account on the server with the permissions to
+create and edit applications, environments, and components, and to
+create and run processes.</li>
+</ul></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.1 SS4GSP_8.0.1" href="../../tutorial/topics/webapp_abstract.html" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">Deploying a simple web application</a></div></div></nav></article></main></body></html>

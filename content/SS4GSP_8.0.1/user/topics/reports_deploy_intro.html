@@ -1,0 +1,115 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="Deployment reports contain historical information about deployments, such as the total number of deployment runs and the average duration of those runs."><meta name="DC.relation" scheme="URI" content="../../user/topics/reports_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="deploymentReports.d12e2"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Deployment reports</title></head><body id="deploymentReports.d12e2"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Deployment reports</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-da316c4d-d0e6-4568-a964-8a95b0b72ddd">Edit online</a></span></div>
+
+
+<div class="body"><p class="shortdesc">Deployment reports contain historical information about
+deployments, such as the total number of deployment runs and the average
+duration of those runs. </p>
+    <p class="p">To run a deployment report, select the filters at the top of the report, including the date
+      range and application, and then click <span class="ph uicontrol">Run</span>.</p>
+    <dl class="dl">
+      
+        <dt class="dt dlterm">Deployment average duration</dt>
+        <dd class="dd">This report provides average deployment times for applications that ran during a
+          specified reporting period. The report provides both a tabular presentation and line graph
+          of the data. </dd>
+      
+      
+        <dt class="dt dlterm">Deployment total duration</dt>
+        <dd class="dd">This report provides total deployment times for applications that ran during a specified
+          reporting period. The report provides both a tabular presentation and line graph of the
+          data.</dd>
+      
+      
+        <dt class="dt dlterm">Deployment count</dt>
+        <dd class="dd">This report provides information about the number of deployments that ran during a
+          specified reporting period. The report provides both a tabular presentation and a line
+          graph of the data.</dd>
+      
+      
+        <dt class="dt dlterm">Deployment detail</dt>
+        <dd class="dd">This report shows all deployments for the specified applications, environments, and
+          users in the specified time period. Each report row represents a deployment that ran
+          during the reporting period and matches the filter conditions.</dd>
+      
+      
+        <dt class="dt dlterm" id="deploymentReports.d12e2__dt_e4x_yfq_wwb">z/OS search</dt>
+        <dd class="dd">This search feature helps you search for a file name or version name in z/OS components
+          in all environments and applications. Use this to search for a deployed artifact and find
+          historical deployment information about the artifact. You can also search artifacts in
+          rolled back versions using <span class="ph uicontrol">Deploy-datasets</span>/
+            <span class="ph uicontrol">rollback</span> step in the z/OS utility plug-in, which in its process
+          updates the database inventory of the affected artifacts. </dd>
+        <dd class="dd ddexpand">Refine your search result by using the following approaches:<ul class="ul" id="deploymentReports.d12e2__ul_slf_2qp_wwb">
+            <li class="li">Use wildcard syntax (*) after you enter a partial file or version name.</li>
+            <li class="li">Limit the search scope by selecting any one of the applications, environments or
+              components. The component filter is exclusive to an application or environment filter.
+            </li>
+          </ul><div class="note note note_note" id="deploymentReports.d12e2__note_myp_krc_xwb"><span class="note__title">Note:</span> 
+            <ul class="ul" id="deploymentReports.d12e2__ul_blg_3x2_mxb">
+              <li class="li">
+                <p class="p">The search report displays the deployments done in z/OS agent v7.3.1 and later,
+                  and plug-in z/OS-Utility v80 and later.</p>
+              </li>
+              <li class="li">By default, the search result shows active records that match the searched
+                criteria. You can include inactive records by selecting the <span class="ph uicontrol">Show Inactive
+                  Records</span> checkbox. </li>
+            </ul>
+          </div><div class="p">
+            <div class="note tip note_tip" id="deploymentReports.d12e2__note_uhs_3cq_wwb"><span class="note__title">Tip:</span> 
+              <ul class="ul" id="deploymentReports.d12e2__ul_xvn_jcq_wwb">
+                <li class="li">File name search is case-insensitive and version name search is
+                  case-sensitive.</li>
+                <li class="li">The <span class="ph uicontrol">File name</span> or <span class="ph uicontrol">Version name</span> are
+                  required fields for searches.</li>
+              </ul>
+            </div>
+          </div></dd>
+        <dd class="dd ddexpand">
+          <p class="p">The z/OS search report shows information in the columns below:</p>
+          <div class="p">
+            <table class="table frame-all" id="deploymentReports.d12e2__table_gyr_f1m_xwb"><caption><span class="table--title-label">Table 1. </span><span class="title">z/OS Search report columns</span></caption><colgroup><col style="width:22.98850574712644%"><col style="width:77.01149425287358%"></colgroup><thead class="thead">
+                  <tr class="row">
+                    <th class="entry colsep-1 rowsep-1" id="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__1">Column</th>
+                    <th class="entry colsep-1 rowsep-1" id="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__2">Description</th>
+                  </tr>
+                </thead><tbody class="tbody">
+                  <tr class="row">
+                    <td class="entry colsep-1 rowsep-1" headers="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__1"><span class="ph uicontrol">Filename</span>, <span class="ph uicontrol">Inputs</span>,
+                        <span class="ph uicontrol">Version Name</span>, and <span class="ph uicontrol">Deploy
+                      Type</span></td>
+                    <td class="entry colsep-1 rowsep-1" headers="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__2">Uses values from the version <span class="ph filepath">shiplist.xml</span>
+                      file.</td>
+                  </tr>
+                  <tr class="row">
+                    <td class="entry colsep-1 rowsep-1" headers="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__1"><span class="ph uicontrol">Component</span>, <span class="ph uicontrol">Version</span>,
+                        <span class="ph uicontrol">Deployment Time</span>, <span class="ph uicontrol">Application</span>,
+                        <span class="ph uicontrol">Environment</span>, <span class="ph uicontrol">Status</span></td>
+                    <td class="entry colsep-1 rowsep-1" headers="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__2">These columns provide you deployment information based on the deployment
+                      target.</td>
+                  </tr>
+                  <tr class="row">
+                    <td class="entry colsep-1 rowsep-1" headers="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__1"><span class="ph uicontrol">Target</span></td>
+                    <td class="entry colsep-1 rowsep-1" headers="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__2">Indicates the target PDS/PS or USS directory where the artifact is
+                      copied. </td>
+                  </tr>
+                  <tr class="row">
+                    <td class="entry colsep-1 rowsep-1" headers="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__1"><span class="ph uicontrol">Target Type</span></td>
+                    <td class="entry colsep-1 rowsep-1" headers="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__2">Specifies the type of artifacts.</td>
+                  </tr>
+                  <tr class="row">
+                    <td class="entry colsep-1 rowsep-1" headers="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__1"><span class="ph uicontrol">Operation Type</span></td>
+                    <td class="entry colsep-1 rowsep-1" headers="deploymentReports.d12e2__table_gyr_f1m_xwb__entry__2">Shows the nature of action performed on the artifact in the target. For
+                      example, DEPLOY for created and updated artifacts, and DELETE for deleted
+                      artifacts. </td>
+                  </tr>
+                </tbody></table>
+          </div>
+        </dd>
+      
+    </dl>
+    <p class="p">For information about saving and printing reports, see <a class="xref" href="reports_saving.html" title="You can print and save report data for all report types. In addition, you can save filter and sort order information for deployment-type reports.">Saving and printing reports</a>.</p>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/reports_ch.html" title="Provides several different deployment and security reports.">Reporting</a></div></div></nav></article></main></body></html>

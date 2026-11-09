@@ -1,0 +1,310 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Mixed Mode Licensing gives you the ability to use both Authorized Agent licenses and Floating licenses on the same IBM DevOps Deploy (Deploy) instance for greater flexibility."><meta name="DC.relation" scheme="URI" content="../../user/topics/licenseManage.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="mixed_mode_licensing"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Mixed mode licensing</title></head><body id="mixed_mode_licensing"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Mixed mode licensing</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-00b9428a-d413-47ea-a8d2-1d7322ba7919">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">Mixed Mode Licensing gives you the ability to use both Authorized Agent licenses and
+        Floating licenses on the same <span class="ph">IBM DevOps Deploy (Deploy)</span> instance for
+        greater flexibility. </p>
+<section class="section"><h2 id="mixed_mode_licensing__title__2" class="title sectiontitle">Automatic agent license type</h2>
+
+<ul class="ul">
+<li class="li">Go to <span class="ph uicontrol">Settings &gt; System Settings</span>, under the new Licensing field it
+displays the current server license mode.</li>
+<li class="li">To enable <span class="ph uicontrol">Automatic Agent License Type</span> click on drop down box which lists
+valid license types that you can set for the current server license mode. This will automatically
+set new agent license type to the specified type when they come online. </li>
+</ul>
+</section>
+<section class="section"><h2 id="mixed_mode_licensing__title__3" class="title sectiontitle">Set license type</h2>
+
+<ul class="ul">
+<li class="li"> Agent license types are displayed on the Agents page, <span class="ph uicontrol">Resources &gt;
+Agents</span>. </li>
+<li class="li">Select agents that you want to set license type for then under <span class="ph uicontrol">Actions</span>
+scroll down and click on <span class="ph uicontrol">Set License Type</span>.</li>
+<li class="li">You can set the license type of one or more agents at a time.</li>
+<li class="li">Only valid license types for the current server license mode are listed.</li>
+</ul>
+</section>
+<section class="section"><h2 id="mixed_mode_licensing__title__4" class="title sectiontitle">Agent license types</h2>
+
+<ol class="ol">
+<li class="li">Authorized - agents use the Authorized Agent License.</li>
+<li class="li">Floating - agents use Floating Agent (Simultaneous Session) licenses.</li>
+<li class="li">RDT - agents are z/OS development agents and do not require a license. The RDT license type is
+automatically set when the server detects the zOS-RDT property on the agent.  A RDT agent cannot
+change their type from RDT. </li>
+<li class="li">Unlicensed - agents have no license and cannot be used in deployments.</li>
+</ol>
+</section>
+<section class="section"><h2 id="mixed_mode_licensing__title__5" class="title sectiontitle">Server licensing modes</h2>
+
+<ol class="ol">
+<li class="li">PVU – Requires a Server PVU license. Any number of agents connected to a PVU licensed server may
+have the "PVU-Agent" license type, except for RDT agents – those will always be licensed. It is the
+responsibility of the user to not exceed any usage limitations they have from their licensing
+agreement with IBM. Additional information about PVU licensing may be found <a class="xref" href="https://www-03.ibm.com/software/sla/sladb.nsf/lilookup/627F88E77EC9516E8525829E0072B8AE?OpenDocument#ibm-top" target="_blank">here</a>.</li>
+<li class="li">Mixed – Requires an Authorized Server License. "Mixed" means we support Authorized and Floating
+agents simultaneously.</li>
+<li class="li">Floating – requires that the Rational License Key Server (RLKS) has a Floating Agent Feature. It
+only allows agents licensed with Floating licenses to be used.</li>
+<li class="li">Unlicensed – there are no valid server licenses (or floating agent licenses) in the license
+server and the server is running on a platform that supports the license library. Unlicensed servers
+cannot run deployments outside of the trial period.</li>
+<li class="li">Unavailable - the server is running on a system which does not support licensing, such as
+zLinux.</li>
+</ol>
+<p class="p"><span class="ph">Deploy</span> is configured
+                with a finite number of Server Agent licenses for an organization. When the maximum
+                number of licenses are in use, any additional agents configured will become
+                unlicensed and cannot run processes. Any processes that are running on an unlicensed
+                agent will log an error message. To resolve licensing warnings, additional licenses
+                must be obtained, or existing licenses must be reassigned among the agents.</p>
+</section>
+<section class="section"><h2 id="mixed_mode_licensing__title__6" class="title sectiontitle">Agent license types usable by servers with server license mode</h2>Only certain
+agent license types are available to be set on an agent depending on the server license mode. These
+are laid out in the following table:<table class="table frame-all" id="mixed_mode_licensing__table_k2k_tvp_2fb"><caption><span class="table--title-label">Table 1. </span><span class="title"> Agent License Types allowed to be used when using specific Server Licensing Mode</span></caption><colgroup><col style="width:16.666666666666664%"><col style="width:16.666666666666664%"><col style="width:16.666666666666664%"><col style="width:16.666666666666664%"><col style="width:16.666666666666664%"><col style="width:16.666666666666664%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_k2k_tvp_2fb__entry__1">Server Mode</th>
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_k2k_tvp_2fb__entry__2">Authorized Agent</th>
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_k2k_tvp_2fb__entry__3">Floating Agent</th>
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_k2k_tvp_2fb__entry__4">PVU-Agent</th>
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_k2k_tvp_2fb__entry__5">RDT</th>
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_k2k_tvp_2fb__entry__6">Unlicensed</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__1">PVU Server</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__2">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__3">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__4">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__5">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__6">YES</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__1">Floating Server</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__2">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__3">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__4">NO </td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__5">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__6">YES</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__1">Mixed Mode</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__2">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__3">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__4">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__5">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__6">YES</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__1">Unlicensed</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__2">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__3">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__4">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__5">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__6">YES</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__1">Unavailable</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__2">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__3">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__4">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__5">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_k2k_tvp_2fb__entry__6">YES</td>
+</tr>
+</tbody></table></section>
+<section class="section"><h2 id="mixed_mode_licensing__title__8" class="title sectiontitle">Valid agent license types for specific server licensing mode</h2>The Server
+License Mode will dictate which agents are allowed to run processes depending on what license type
+the agent has assigned to it. <table class="table frame-all" id="mixed_mode_licensing__table_ekt_vwp_2fb"><caption><span class="table--title-label">Table 2. </span><span class="title">License types allowed to be used for each Server License Mode are as follows:</span></caption><colgroup><col style="width:16.666666666666664%"><col style="width:16.666666666666664%"><col style="width:16.666666666666664%"><col style="width:16.666666666666664%"><col style="width:16.666666666666664%"><col style="width:16.666666666666664%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_ekt_vwp_2fb__entry__1">Server Mode</th>
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_ekt_vwp_2fb__entry__2">Authorized Agent</th>
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_ekt_vwp_2fb__entry__3">Floating Agent</th>
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_ekt_vwp_2fb__entry__4">PVU-Agent</th>
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_ekt_vwp_2fb__entry__5">RDT</th>
+<th class="entry colsep-1 rowsep-1" id="mixed_mode_licensing__table_ekt_vwp_2fb__entry__6">Unlicensed</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__1">PVU Server </td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__2">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__3">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__4">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__5">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__6">NO</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__1">Floating Server</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__2">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__3">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__4">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__5">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__6">NO</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__1">Mixed Mode</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__2">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__3">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__4">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__5">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__6">NO</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__1">Unlicensed</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__2">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__3">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__4">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__5">NO</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__6">NO</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__1">Unavailable</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__2">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__3">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__4">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__5">YES</td>
+<td class="entry colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ekt_vwp_2fb__entry__6">YES</td>
+</tr>
+</tbody></table></section>
+<section class="section"><h2 id="mixed_mode_licensing__title__10" class="title sectiontitle">Server licensing</h2>
+
+<ul class="ul">
+<li class="li">When a server starts it communicates with the IBM Rational Common Licensing  (RCL)  server, and
+the server's license mode will be set. </li>
+<li class="li">Updating the server licensing mode does not change the license type of any existing agents,
+instead, the server will restrict agents with an unsupported license type from running
+deployments.</li>
+<li class="li">If the server is on a platform that supports the licensing library, and if no licenses are
+available to the server, the server mode will remain unlicensed.</li>
+<li class="li">The server will attempt to checkout server licenses in the following order of priority:<ul class="ul">
+<li class="li">Authorized Server License</li>
+<li class="li">PVU License</li>
+</ul></li>
+</ul>
+<ul class="ul">
+<li class="li">The server will set the license mode on startup based on the server license it checked out. If
+there are no server licenses but there exists a floating agent license, the server license mode will
+be set to Floating.</li>
+<li class="li">If the license library is unsupported (for example, on zLinux or powerLE machines) then the
+server licensing mode will be set to Unavailable and all agent license types are allowed to be used
+/ set. </li>
+<li class="li">If a server is in Mixed Mode and the Rational License Key Server (RLKS) does not support
+Floating licenses, then a display message in the UI will state that there are no floating licenses
+loaded in the license server. </li>
+</ul>
+<table class="table frame-all" id="mixed_mode_licensing__table_ovs_y1q_2fb"><caption><span class="table--title-label">Table 3. </span><span class="title">Permutations of server license types available and the license mode that the system will
+choose:</span></caption><colgroup><col style="width:113.4pt"><col style="width:117.6pt"><col style="width:121.2pt"><col style="width:160.2pt"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-right colsep-1 rowsep-1" id="mixed_mode_licensing__table_ovs_y1q_2fb__entry__1">Authorized </th>
+<th class="entry align-right colsep-1 rowsep-1" id="mixed_mode_licensing__table_ovs_y1q_2fb__entry__2">PVU</th>
+<th class="entry align-right colsep-1 rowsep-1" id="mixed_mode_licensing__table_ovs_y1q_2fb__entry__3">Agent Floating </th>
+<th class="entry align-right colsep-1 rowsep-1" id="mixed_mode_licensing__table_ovs_y1q_2fb__entry__4">Server License Mode</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__1">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__2">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__3">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__4">Mixed</td>
+</tr>
+<tr class="row">
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__1">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__2">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__3"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__4">Mixed</td>
+</tr>
+<tr class="row">
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__1">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__2"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__3">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__4">Mixed</td>
+</tr>
+<tr class="row">
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__1">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__2"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__3"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__4">Mixed</td>
+</tr>
+<tr class="row">
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__1"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__2">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__3">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__4">PVU</td>
+</tr>
+<tr class="row">
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__1"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__2">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__3"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__4">PVU</td>
+</tr>
+<tr class="row">
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__1"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__2"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__3">x</td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__4">Floating</td>
+</tr>
+<tr class="row">
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__1"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__2"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__3"></td>
+<td class="entry align-right colsep-1 rowsep-1" headers="mixed_mode_licensing__table_ovs_y1q_2fb__entry__4">Unlicensed</td>
+</tr>
+</tbody></table>
+</section>
+<section class="section"><h2 id="mixed_mode_licensing__title__12" class="title sectiontitle">Server licensing in HA (high availability)</h2>
+
+<ul class="ul">
+<li class="li">The server license mode is stored such that each server in the cluster can reference the current
+license mode.</li>
+<li class="li">Each server will checkout licenses, they use a clustering ID to allow all servers in the cluster
+to consume the same license.</li>
+<li class="li">If a server cluster attempts to checkout a license that is already checked out from another
+server cluster – it will fail, and the servers will be Unlicensed. </li>
+<li class="li">The first server online in a cluster will determine the server licensing mode and propagate that
+information to the other servers in the cluster.</li>
+<li class="li">When a server is started, if the
+server:<pre class="pre codeblock"><code>is in HA:
+          n = countAuthAgents() 
+          CheckoutLicenses(Auth, n) 
+      else:
+          mark all agents offline 
+          Set all floating agents “licensed” column to false 
+          True-up other agents based on license type (ensure RDT agents are licensed, etc) </code></pre></li>
+</ul>
+</section>
+<section class="section"><h2 id="mixed_mode_licensing__title__13" class="title sectiontitle">Server evaluation mode</h2>
+
+<ul class="ul">
+<li class="li">The <span class="ph">Deploy</span> Server
+                    Evaluation Mode is available for sixty days.</li>
+<li class="li">While in evaluation mode, neither the server or agent are licensed.</li>
+<li class="li">Licenses are not required to run deployments during the evaluation period.</li>
+<li class="li">After the evaluation period concludes the server licensing mode will be set to Unlicensed.</li>
+<li class="li">After a connection to the IBM Rational License Key Server (RLKS) has been establish the
+evaluation period will end, and the server will set its license mode.</li>
+</ul>
+</section>
+<section class="section"><h2 id="mixed_mode_licensing__title__14" class="title sectiontitle">Agent licensing</h2>
+
+<ul class="ul">
+<li class="li">Agents require a license type to be specified.</li>
+<li class="li">All deployments using an unlicensed agent will fail with an error message.</li>
+<li class="li">When an agent's license type is changed the currently held license will be returned to the
+license server.</li>
+<li class="li">You will need an "edit license type" permission to successfully change the agent's license
+type.</li>
+<li class="li">Authorized licenses are acquired as soon as the agent's license type is set.</li>
+<li class="li">When a process is run on an agent with the Floating license type, the server will attempt to
+checkout a floating license. When that process concludes the floating license will be checked back
+into the license server.<ul class="ul">
+<li class="li">Agents will not fail if a floating license cannot be checked out at time of deployment, but a
+warning will be written to the server log.</li>
+</ul></li>
+<li class="li">Changing the license type of an agent while it is being used will have an undefined effect on
+any processes using that agent which are currently in progress.</li>
+</ul>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/licenseManage.html" title="IBM DevOps Deploy (Deploy) provides a 60-day license-free evaluation period. You must have a license to use all product features after the evaluation period.">Licensing</a></div></div></nav></article></main></body></html>

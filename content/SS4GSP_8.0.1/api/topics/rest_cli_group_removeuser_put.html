@@ -1,0 +1,57 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content=""><meta name="DC.subject" content="REST API, group resource, /removeUser PUT, PUT methods, /group/removeUser"><meta name="keywords" content="REST API, group resource, /removeUser PUT, PUT methods, /group/removeUser"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_group.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_group_removeuser_put"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Remove a user from a group</title></head><body id="rest_cli_group_removeuser_put"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Remove a user from a group</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-e70d77dc-0953-47b1-b0bb-97d70be3a8b1">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc"></p>
+<section class="section"><h2 id="rest_cli_group_removeuser_put__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>PUT https://{hostname}:{port}
+    /cli/group/removeUser?{parameters}
+Accept: {contentType}
+</code></pre><table class="table" id="rest_cli_group_removeuser_put__request_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Request parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_group_removeuser_put__request_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_group_removeuser_put__request_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_group_removeuser_put__request_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_group_removeuser_put__request_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_group_removeuser_put__request_params__entry__1"><span class="keyword parmname">user</span></td>
+<td class="entry" headers="rest_cli_group_removeuser_put__request_params__entry__2">string</td>
+<td class="entry" headers="rest_cli_group_removeuser_put__request_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_group_removeuser_put__request_params__entry__4">Name of the user</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="rest_cli_group_removeuser_put__request_params__entry__1"><span class="keyword parmname">group</span></td>
+<td class="entry" headers="rest_cli_group_removeuser_put__request_params__entry__2">string</td>
+<td class="entry" headers="rest_cli_group_removeuser_put__request_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_group_removeuser_put__request_params__entry__4">Name of the group</td>
+</tr>
+</tbody></table>
+<table class="table" id="rest_cli_group_removeuser_put__header_params"><caption><span class="table--title-label">Table 2. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_group_removeuser_put__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_group_removeuser_put__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_group_removeuser_put__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_group_removeuser_put__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_group_removeuser_put__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_group_removeuser_put__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_group_removeuser_put__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_group_removeuser_put__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+</section>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_removeuserfromgroup.html" title="Remove a user from a group">removeUserFromGroup</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_group.html">group resource</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You use the Job Monitor to submit jobs and to monitor the job status in your deployment. You must ensure that you have a Job Monitor task running and that you run the IBM DevOps Deploy (Deploy) process to submit or to monitor the job. Then, you must set up Job Monitor connection properties in your IBM DevOps Deploy (Deploy) environment."><meta name="DC.relation" scheme="URI" content="../../user/topics/deploying_zos.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="zos_using_job_monitor"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Deploying by using the Job Monitor</title></head><body id="zos_using_job_monitor"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Deploying by using the Job Monitor</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ee9c51b4-ec41-405b-9de5-56abb261abf1">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You use the Job Monitor to submit jobs and to monitor the job status in your deployment.
+        You must ensure that you have a Job Monitor task running and that you run the <span class="ph">IBM DevOps Deploy (Deploy)</span> process to
+        submit or to monitor the job. Then, you must set up Job Monitor connection properties in
+        your <span class="ph">IBM DevOps Deploy (Deploy)</span>
+        environment.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_using_job_monitor__context__1">About this task</h2></div>
+<div class="p">Install the following agent or product and use the Job Monitor that is bundled with it:<ul class="ul">
+<li class="li">z/OS agent </li>
+<li class="li">IBM Developer for IBM Z </li>
+<li class="li">IBM Rational Team Concert</li>
+</ul><div class="note note note_note"><span class="note__title">Note:</span> For the z/OS agent, the Job Monitor is installed automatically in the
+<span class="ph filepath">hlq.SBUZAUTH</span> data set. Also, the <span class="ph uicontrol">LOOPBACK_ONLY</span> property
+must be set to <span class="keyword option">OFF</span> in the <span class="ph filepath">Job Monitor</span> configuration
+file.<p class="p"><span class="ph filepath">The hlq.SBUZSAMP(BUZJJCL)</span> member has the sample PROC for starting JMON.
+The <span class="ph filepath">hlq.SBUZSAMP(BUZJCNFG)</span> member is the JMON configuration file that is
+referred to in the PROC. JMON installed for another product (for example,  IDz or IBM RTC) can be
+used, but the <span class="ph uicontrol">LOOPBACK_ONLY</span> property must be <span class="keyword option">OFF</span>
+</p></div>
+</div>
+<div class="p"><span class="ph uicontrol">Submitting and monitoring jobs in deployment processes</span><ol class="ol">
+<li class="li">Start the Job Monitor task and check that a task that is called <span class="ph uicontrol">JMON</span> is
+running.</li>
+<li class="li">To submit or to monitor jobs, run the process that uses the <span class="ph uicontrol">Submit Job</span> or
+<span class="ph uicontrol">Wait For Job</span> steps. </li>
+<li class="li">Set the following Job Monitor connection properties in the <span class="ph">Deploy</span> environment or
+resource:<pre class="pre codeblock"><code>jes.host=localhost
+jes.user=z/OS user ID
+jes.password=Password of the user. Set blank to use PassTicket authentication.
+jes.monitor.port=The port number for Job Monitor host server. The default port is 6715.
+</code></pre></li>
+</ol></div>
+<p class="p"><span class="ph uicontrol">Authenticating with a user ID and Password</span></p>
+<div class="p">To use a password to authenticate, store the password in the <var class="keyword varname">jes.password</var>
+property.<div class="note note note_note"><span class="note__title">Note:</span> As you complete the <span class="ph uicontrol">Submit Job</span> or <span class="ph uicontrol">Wait For
+Job</span> step, do not store the password directly in the <span class="ph uicontrol">Password </span>
+field. The <span class="ph uicontrol">Password </span> field contains plain text only and this field must be
+used to reference a property.</div></div>
+<p class="p"><span class="ph uicontrol">Authenticating with PassTickets</span></p>
+<p class="p">If you do not provide a password, the plug-in uses PassTickets authentication. You can use
+PassTickets authentication to eliminate the requirement to store user passwords in <span class="ph">Deploy</span>.</p>
+<p class="p">To configure your system to use PassTickets, complete the following steps: </p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_using_job_monitor__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Activate the <span class="ph filepath">RACF PTKTDATA</span> class if it is not already active. The
+following code shows sample RACF commands: </span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>SETROPTS GENERIC(PTKTDATA) SETROPTS CLASSACT(PTKTDATA) RACLIST(PTKTDATA) 
+RDEFINE PTKTDATA IRRPTAUTH.FEKAPPL.USER1 UACC(NONE) </code></pre>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To create a <span class="keyword cmdname">PTKTDATA</span> profile that defines the secret key and the application
+name to which it applies for the Job Monitor, complete the following steps: </span>
+<div class="itemgroup info">
+<ol class="ol" type="a">
+<li class="li">Define the application name as <span class="keyword cmdname">FEKAPPL</span>.</li>
+<li class="li">Define the key as a 64-bit number (16 hex characters). </li>
+<li class="li">Replace the key16 placeholder with a user-supplied 16 character hex string (characters 0-9 and
+A-F) as shown in the following sample <span class="keyword cmdname">RACF</span>
+commands:<pre class="pre codeblock"><code>RDEFINE PTKTDATA FEKAPPL UACC(NONE) SSIGNON(KEYMASKED(key16)) APPLDATA('NO REPLAY PROTECTION – DO NOT CHANGE') DATA('URBANCODE DEPLOY')</code></pre><div class="p">
+The following example shows the command with the key16 value
+replaced:<pre class="pre codeblock"><code>
+RDEFINE PTKTDATA FEKAPPL UACC(NONE) - DATA('URBANCODE DEPLOY') - APPLDATA('NO REPLAY PROTECTION - DO NOT CHANGE') - SSIGNON(KEYMASKED(0123456789ABCDEF))
+</code></pre></div>
+</li>
+<li class="li">Read the following scenarios:<ol class="ol" type="i">
+<li class="li">If the <span class="keyword cmdname">PTKTDATA</span> class is already defined, verify that it is defined as a
+generic class before you create the profile that was shown previously. The support for generic
+characters in the <span class="keyword cmdname">PTKTDATA</span> class is new in the z/OS V1.7 release, with the
+introduction of a Java interface to PassTickets.</li>
+<li class="li">If a cryptographic product is installed and available on the system, you can encrypt the secured
+sign-on application key for added protection. Use the <span class="keyword">KEYENCRYPTED </span> keyword
+instead of the <span class="keyword">KEYMASKED</span> keyword. For more information, see the Security Server
+RACF Security Administrator's Guide (SA22-7683).</li>
+<li class="li">If the Rational Developer for System z or the Rational Team Concert server components are
+already installed on the system, the <span class="keyword cmdname">PTKTDATA</span> profile might be defined
+already.</li>
+</ol></li>
+</ol>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To define a profile to generate a PassTicket, you must define the <span class="keyword cmdname">IRRPTAUTH</span>
+profile in the <span class="keyword cmdname">PTKTDATA</span> class. Then, this profile controls for which user ID a
+PassTicket is generated, as shown here:</span>
+<div class="itemgroup info">
+<table class="simpletable frame-all"><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead><tr class="sthead">
+<th class="stentry" scope="col">Operation</th>
+<th class="stentry" scope="col">Profile name</th>
+<th class="stentry" scope="col">Required access</th>
+</tr></thead><tbody><tr class="strow">
+<td class="stentry">Generate PassTicket</td>
+<td class="stentry"><code class="ph codeph">IRRPTAUTH.application.target-userid</code></td>
+<td class="stentry">Update</td>
+</tr></tbody></table>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To set permissions for the <span class="ph">Deploy</span> agent to generate a PassTicket so that the agent generates a PassTicket, the user ID of the agent
+or the impersonated ID must have <span class="keyword cmdname">UPDATE</span> access in the <span class="keyword cmdname">PTKTDATA</span>
+profile that you created in the previous step. For more information, see the following RACF
+commands:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>PERMIT IRRPTAUTH.FEKAPPL.USER1 CLASS(PTKTDATA) ID(AGNTUSR) ACCESS(UPDATE)</code></pre>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To refresh the <span class="keyword cmdname">PTKTDATA</span>  class for the new profiles and permissions to take
+effect, see the following commands: </span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>SETROPTS RACLIST (PTKTDATA) REFRESH
+</code></pre>
+</div>
+</li></ol></section>
+<section class="example"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_using_job_monitor__example__1">Example</h2></div>See the following PassTicket examples:<p class="p">Example 1. Agent is started by user AGNTUSR. In a
+deployment process, a Job needs to be submitted on behalf of user
+USER1.</p><pre class="pre codeblock"><code>RDEFINE PTKTDATA IRRPTAUTH.FEKAPPL.USER1 UACC(NONE) 
+PERMIT IRRPTAUTH.FEKAPPL.USER1 CLASS(PTKTDATA) ID(AGNTUSR) ACCESS(UPDATE) 
+SETROPTS RACLIST (PTKTDATA) REFRESH
+</code></pre><p class="p">Example
+2. Agent is started by user AGNTUSR. Allow this agent to submit jobs on behalf of any
+user.</p><pre class="pre codeblock"><code>RDEFINE PTKTDATA IRRPTAUTH.FEKAPPL.* UACC(NONE) 
+PERMIT IRRPTAUTH.FEKAPPL.* CLASS(PTKTDATA) ID(AGNTUSR) ACCESS(UPDATE) 
+SETROPTS RACLIST (PTKTDATA) REFRESH
+</code></pre><p class="p">Example
+3. Agent is started by user AGNTUSR. Allow this agent to submit job on behalf of user
+AGNTUSR:</p><pre class="pre codeblock"><code>RDEFINE PTKTDATA IRRPTAUTH.FEKAPPL.AGNTUSR UACC(NONE) 
+PERMIT IRRPTAUTH.FEKAPPL.AGNTUSR CLASS(PTKTDATA) ID(AGNTUSR) ACCESS(UPDATE) 
+SETROPTS RACLIST (PTKTDATA) REFRESH
+</code></pre></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_using_job_monitor__postreq__1">What to do next</h2></div>
+<p class="p">More JES security considerations are described in the IBM Developer for IBM Z documentation. For
+                more information, see <a class="xref" href="https://www.ibm.com/docs/en/zos/3.1.0?topic=jes-security-using-jesinterfacelevel-2" target="_blank">JES Security</a>.</p>
+<p class="p"><span class="ph uicontrol">Authenticating with Trusted IP</span></p>
+<p class="p">Starting with v2.9.17 or higher, JMON can authenticate client IP as a trusted source and process
+                client requests. This allows the <code class="ph codeph">Wait for Job</code> and <code class="ph codeph">Submit Job</code> plug-in steps to run with Agent User Id or Impersonation Id. The
+                User Id and password/pass-ticket that are usually needed for these steps are ignored
+                and hence can be left empty. If the client (z/OS UCD Agent in this case) is on the
+                same system as JMON then no changes are required. But if JMON is active on another
+                system in the SYSPLEX, TCPIP RACF profiles are required. </p>
+<p class="p">While it is recommended to execute JMON as a started task, it is also possible to execute it as a
+user job. When not active as a started task, JMON will query your security product for explicit
+permission to start. </p>
+<table class="table frame-all" id="zos_using_job_monitor__table_pmd_cxk_jrb"><caption></caption><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="zos_using_job_monitor__table_pmd_cxk_jrb__entry__1">Security profile</th>
+<th class="entry" id="zos_using_job_monitor__table_pmd_cxk_jrb__entry__2">Required access</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="zos_using_job_monitor__table_pmd_cxk_jrb__entry__1">BUZ.START.BATCH.<var class="keyword varname">jobName</var>.<var class="keyword varname">port</var></td>
+<td class="entry" headers="zos_using_job_monitor__table_pmd_cxk_jrb__entry__2">READ</td>
+</tr>
+</tbody></table>
+<p class="p">The security class where this profile resides can be specified with <var class="keyword varname">SAF_CLASS</var>
+variable in the <span class="ph filepath">BUZJCNFG</span> configuration file and is FACILITY by default. When
+the profile is not defined, or the class is not active, permission is denied, and batch startup will
+fail. </p>
+<p class="p">Use the following RACF commands to allow USER ID (IBMUSER in this case) to start JMON in batch
+with job name JMONJCL and port 6715: </p>
+<pre class="pre codeblock"><code>RDEFINE FACILITY BUZ.START.BATCH.JMONJCL.6715 UACC(NONE) 
+DATA('Start JMON in Batch') 
+PERMIT BUZ.START.BATCH.JMONJCL.6715 CLASS(FACILITY) ACCESS(READ) 
+ID(IBMUSER) 
+SETROPTS RACLIST(FACILITY) REFRESH </code></pre>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/deploying_zos.html" title="Use the toolkit to deploy to the IBM z/OS platform.">Deploying components to the z/OS platform</a></div></div></nav></article></main></body></html>

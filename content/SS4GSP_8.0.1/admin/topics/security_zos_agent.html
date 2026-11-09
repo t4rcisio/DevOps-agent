@@ -1,0 +1,76 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="If you run the agent from a UNIX command line, the agent user account is the account that you use to log in to the UNIX shell. If you run the agent as a started task, the agent user account is assigned by the Resource Access Control Facility (RACF) using the started procedures table (ICHRIN03) or the STARTED class. To learn more about RACF, see the z/OS Security Server RACF System Programmer's Guide, SA23-2287-00."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_zos.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_zos_agent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>IBM z/OS agent user accounts</title></head><body id="security_zos_agent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">
+<span class="keyword">IBM z/OS</span> agent user accounts</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-69197c6d-62c4-4e00-8e73-572de9d79274">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">If you run the agent from a UNIX™ command line, the
+agent user account is the account that you use to log in to the UNIX shell. If you run the agent as
+a started task, the agent user account is assigned by the Resource Access Control Facility (RACF®) using the started procedures table (ICHRIN03) or the
+STARTED class. To learn more about RACF, see the <cite class="cite">z/OS®
+Security Server RACF System Programmer's Guide,
+SA23-2287-00</cite>.</p>
+<section class="section">
+<div class="p">The agent user account must have the following:<ul class="ul">
+<li class="li">Access to the Time Sharing Option (TSO) and Interactive System Productivity Facility (ISPF)
+environments.</li>
+<li class="li">The ability to create temporary data sets. By default, <span class="ph">IBM DevOps Deploy (Deploy)</span>
+                        uses the data-set prefix that is stored in the TSO profile. Otherwise,
+                            <span class="ph">Deploy</span>
+                        uses the user ID as a temporary data-set prefix. You can specify a different
+                        prefix by setting the <span class="keyword parmname">BUZ_TMP_DSN_PREFIX</span> environment
+                        variable in <span class="ph filepath">agent_install_dir/bin/setenv-zos.sh</span>. </li>
+<li class="li">Sufficient virtual memory to run Java™ in the OMVS address
+space is required. The amount of required memory can vary based on which plug-ins are used in
+deployment processes. The following list includes typical values for RACF configuration parameters that specify virtual memory.<ul class="ul">
+<li class="li"><kbd class="ph userinput">ASSIZEMAX= 2147483647</kbd></li>
+<li class="li"><kbd class="ph userinput">FILEPROCMAX= 00524287</kbd></li>
+<li class="li"><kbd class="ph userinput">PROCUSERMAX= 00032767</kbd></li>
+<li class="li"><kbd class="ph userinput">THREADSMAX= 00100000</kbd></li>
+</ul></li>
+<li class="li">Sufficient virtual storage limits, if the agent is running as a started task. To set the virtual
+storage limits, specify the <span class="keyword parmname">REGION=0M</span> parameter in the <span class="keyword cmdname">EXEC
+PGM=BPXBATCH</span> statement.</li>
+<li class="li">A protected ID (which can not be used to log in) can be used as the agent ID. Because of the
+limitation of protected IDs, the ID cannot be used in steps that require a password or password
+phrase, for example, the Submit Job step or the CICS TS plug-in steps.</li>
+<li class="li">It is preferable for the installing ID to have read access to the BP.FILEATTR.APF resource in
+the FACILITY class profile to run the <span class="keyword cmdname">checkaccess</span> command.<div class="note note note_note"><span class="note__title">Note:</span> If read access is
+not granted, the following message might be
+displayed.<pre class="pre msgblock">chattr() error: rv=-1, errno=8B, rsn=0924041A</pre>Respond to this message
+with the following command that must be run immediately after the installation by an ID that has
+this access.<p class="p"><kbd class="ph userinput">extattr +a &lt; agent dir&gt;/auth/checkaccess</kbd></p></div> </li></ul></div>
+<div class="p"> The following properties are supported and can be used with a zOS agent. These properties
+needs to be specified in <span class="ph filepath">installed.properties</span>. The property names are case
+sensitive.<table class="table frame-all" id="security_zos_agent__table_vgt_g3v_mmb"><caption><span class="table--title-label">Table 1. </span><span class="title">Properties</span></caption><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry colsep-1 rowsep-1" id="security_zos_agent__table_vgt_g3v_mmb__entry__1">Property</th>
+<th class="entry colsep-1 rowsep-1" id="security_zos_agent__table_vgt_g3v_mmb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="security_zos_agent__table_vgt_g3v_mmb__entry__1">mvs.sysoutclass</td>
+<td class="entry colsep-1 rowsep-1" headers="security_zos_agent__table_vgt_g3v_mmb__entry__2">Accepts an one letter value that corresponds to the sysout class where the buztool /
+deployment outputs need to go. </td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="security_zos_agent__table_vgt_g3v_mmb__entry__1">mvs.tempvolser</td>
+<td class="entry colsep-1 rowsep-1" headers="security_zos_agent__table_vgt_g3v_mmb__entry__2">Specifies the serial number of an eligible direct access volume on which temporary data sets
+need to reside. For SMS managed datasets, BUZ_TMP_DSN_PREFIX specified in this page will be a better
+option. </td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="security_zos_agent__table_vgt_g3v_mmb__entry__1">mvs.tempunit</td>
+<td class="entry colsep-1 rowsep-1" headers="security_zos_agent__table_vgt_g3v_mmb__entry__2">
+<p class="p">Specifies the type of the unit to which temporary data set is to be allocated. You can specify an
+installation-defined group name, a generic device type, or a specific device number. For SMS managed
+datasets, BUZ_TMP_DSN_PREFIX specified in this page will be a better option. </p>
+</td>
+</tr>
+</tbody></table></div><div class="p"><strong class="ph b">For
+example:</strong><pre class="pre codeblock"><code>mvs.sysoutclass=X 
+mvs.tempunit=SYSALLDA 
+mvs.tempvolser=F$US01</code></pre></div>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_zos.html" title="Specific security definitions are used to secure IBM DevOps Deploy (Deploy) functions for the IBM z/OS environment. To deploy applications to an IBM z/OS environment, the user accounts on the agent computer must have adequate access permissions. You must also identify specific directories and data sets to the authorized program facility.">Security requirements on IBM z/OS computers</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="In the blueprint designer, teams map users to roles. Teams also include a list of resources that the team owns and cloud projects that the team can use."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_teams_bds"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring blueprint design server teams</title></head><body id="security_teams_bds"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring blueprint design server teams</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a5e7eea9-e99d-4627-8ee0-bcdad7516698">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">In the blueprint designer, teams map users to roles. Teams also include a list of
+resources that the team owns and cloud projects that the team can use.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_teams_bds__prereq__1">Before you begin</h2></div>Set up the users for the team in the blueprint designer and the roles to assign to those
+users.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_teams_bds__context__1">About this task</h2></div>To set up a team, you specify the members of the team, including users and groups. Then,
+you assign roles to the users and groups to specify their permissions. The blueprint design server
+creates a repository for the team on the local Git server that team members can use to share
+blueprints and configuration files.<p class="p">You can also set resource access for the team which limits the
+cloud resources team members can use in the blueprint designer palette, when provisioning images,
+and in the REST API.</p><div class="note note note_note"><span class="note__title">Note:</span> The teams for the blueprint design server are separate from the teams
+for the server.</div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_teams_bds__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">In the blueprint designer, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Teams</span></span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select a team or click <span class="ph uicontrol">Create New Team</span> to create a new team.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">On the <span class="ph uicontrol">Members</span> tab, use the <span class="ph uicontrol">Add User</span> or
+<span class="ph uicontrol">Add Group</span> lists to add users and groups to the team.</span>
+<div class="itemgroup info">You can filter users by selecting an authentication realm in the <span class="ph uicontrol">Realm</span>
+list.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Assign roles to the users and groups:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep">
+<span class="ph cmd">In the <span class="ph uicontrol">Members</span> list, select a user or group.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Under <span class="ph uicontrol">Roles</span>, select the roles for that user or group.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Give the team access to cloud projects that contain resources it can access:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Go to the <span class="ph uicontrol">Cloud Authorization</span> tab.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Add</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Select the cloud projects for the team and then click <span class="ph uicontrol">OK</span>.</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">To apply a filter to the list of clouds, enter text in the field and press Enter.</li>
+<li class="li">To grant access to all available clouds, select the check box by the field.</li>
+</ul>
+</div>
+</li>
+</ol>
+<div class="itemgroup stepresult">The team can access all of the resource types for all of regions that are defined by
+this cloud project.</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">For each cloud project, set the resource access.</span>
+<div class="itemgroup info">The resource access limits the resources that are available in the blueprint designer palette,
+when provisioning images, and in the REST API.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Authorization</span> list, select a cloud project.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Region</span> and <span class="ph uicontrol">Resource Type</span> lists, select
+the region and resource type to set access to.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Select the resources that the team can access.</span>
+<div class="itemgroup info">To search for a specific resource by name, click <span class="ph uicontrol">Show Filters</span>, enter
+the resource name, and press Enter.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In this way, set the resource access for each region and resource type.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_teams_bds__result__1">Results</h2></div>Now the users can work with all of the resources that they have access to. The roles that
+you selected for the users determine what the users can do with those resources. If you assigned
+cloud projects to the team, the users can use the functional IDs in those projects to deploy cloud
+instances. A clone of the team-based Git repository is created for each team member, and team
+members can change the shared files. See <a class="xref" href="blueprint_org.html#blueprint_org" title="When you work with blueprints, you can organize and share them by using the Git distributed version control system.">Sharing blueprints by using a Git repository</a>.</section>
+</div>
+</article></main></body></html>

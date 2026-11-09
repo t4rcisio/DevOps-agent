@@ -1,0 +1,70 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Components can have several types of properties. The server keeps track of changes to component properties as property versions."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_properties"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Component properties</title></head><body id="comp_properties"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Component properties</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b40532c8-a3e4-4a26-997f-d913c71f5687">Edit online</a></span></div>
+
+<div class="body refbody"><p class="shortdesc">Components can have several types of properties. The server keeps track of changes to
+    component properties as property versions.</p>
+<section class="section">
+      <p class="p">To define component properties, click the <span class="ph uicontrol">Components</span> tab, click the
+        component, and then go to the <span class="ph uicontrol">Configuration</span> tab. The following table
+        describes the types of properties that are available on components.</p>
+      <table class="table"><caption><span class="table--title-label">Table 1. </span><span class="title">Component properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+            <tr class="row valign-bottom">
+              <th class="entry" id="comp_properties__entry__1">Type</th>
+              <th class="entry" id="comp_properties__entry__2">Description</th>
+            </tr>
+          </thead><tbody class="tbody">
+            <tr class="row">
+              <td class="entry" headers="comp_properties__entry__1">Component properties</td>
+              <td class="entry" headers="comp_properties__entry__2">Component properties are values that are assigned on individual
+components. Referenced: <code class="ph codeph">${p:component/<var class="keyword varname">propertyName</var>}</code>.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry" headers="comp_properties__entry__1">Component properties that are inherited from component
+                templates</td>
+              <td class="entry" headers="comp_properties__entry__2">Components inherit custom properties from component templates.
+                These properties cannot be changed on the component. Referenced:
+                    <code class="ph codeph">${p:component/custom/<var class="keyword varname">propertyName</var>}</code>.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry" headers="comp_properties__entry__1">Component environment properties</td>
+              <td class="entry" headers="comp_properties__entry__2">Component environment properties are defined on components.
+However, the property value is not set until the component is deployed to an environment. In this
+way, a component environment property can have a different value for each deployed instance of the
+component. However, a value that is set on a component environment property does not override an
+environment property that has the same name. The environment property has precedence over the
+component environment property. Referenced:
+<code class="ph codeph">${p:environment/<var class="keyword varname">propertyName</var>}</code>.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry" headers="comp_properties__entry__1">Component version properties</td>
+              <td class="entry" headers="comp_properties__entry__2">Component version properties are defined on components. However,
+the property value is not set until a component version is created. In this way, a component version
+property can have a different value for each component version. Referenced:
+<code class="ph codeph">${p:version/<var class="keyword varname">propertyName</var>}</code>.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry" headers="comp_properties__entry__1">Component resource properties</td>
+              <td class="entry" headers="comp_properties__entry__2">Component resource properties are defined on components.
+However, the property value is not set until you map a component to an environment and create a
+component resource. The property value is set on this component resource. In this way, if you need
+to deploy multiple copies of a component to the same environment, you can set a different property
+value for each copy. Note that the component resource property and the resource property definitions
+are not resolved during deployment when the component is mapped in the Resource Tree using a
+Component Tag Resource. Component resource properties also generate resource roles on the component
+resources. Referenced: <code class="ph codeph">${p:resource/<var class="keyword varname">propertyName</var>}</code>.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry" headers="comp_properties__entry__1">Component property definitions</td>
+              <td class="entry" headers="comp_properties__entry__2">Aside from component template properties that become component
+                properties, component templates can also have component property definitions. These
+                properties appear on the component <span class="ph uicontrol">Basic Settings</span> tab.
+                Referenced:
+                <code class="ph codeph">${p:component/template/<var class="keyword varname">propertyName</var>}</code>. See <a class="xref" href="comp_template_properties.html" title="Component template properties ensure that every component created from a template has the same properties. The types of available properties are described in the following table.">Component template
+                  properties</a> for more information.</td>
+            </tr>
+          </tbody></table>
+    </section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_ch.html" title="Components represent deployable items along with user-defined processes that operate on them, usually by deploying them.">Components</a></div></div></nav></article></main></body></html>

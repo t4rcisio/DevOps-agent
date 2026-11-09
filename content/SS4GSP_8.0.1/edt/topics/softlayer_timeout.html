@@ -1,0 +1,69 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To accommodate variations in responsiveness of the SoftLayer cloud and to allow enough time for it to return resources to the blueprint designer, you can set a SoftLayer timeout value."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="softlayer_timeout"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring the timeout value for SoftLayer clouds</title></head><body id="softlayer_timeout"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring the timeout value for SoftLayer
+clouds</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-61f137bc-e59c-44dc-90e5-cf2a83c4c363">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To accommodate variations in responsiveness of the SoftLayer® cloud and to allow enough time for it to return resources to the blueprint designer,
+you can set a SoftLayer timeout value.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksoftlayer_timeout__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the computer that hosts the Heat engine, update the <span class="keyword parmname">timeout</span> value in
+the <span class="ph filepath">clouds_user_settings.conf</span> file.</span>
+<div class="itemgroup info">This file is in the <span class="ph filepath">/usr/lib/heat/ibm-cloud-ext/resources/</span> folder.</div>
+<div class="itemgroup info">For the <span class="keyword parmname">timeout</span> value, provide the amount of time, in seconds, that the
+Heat engine waits for SoftLayer cloud to provide
+resource information. For the <span class="keyword parmname">check_create_complete_timeout</span> value, provide the
+amount of time, in seconds, that the Heat engine waits for a virtual machine resource to complete.
+In the following example, the timeout value is set to 120 seconds, and the
+check_create_complete_timeout is set to 300
+seconds:<pre class="pre codeblock"><code>[softlayer]
+client:
+     {
+        "timeout": <var class="keyword varname">120</var>
+        "check_create_complete_timeout": 300
+     }</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">On the computer that hosts the cloud discovery service and the blueprint design server, create
+a configuration file.</span>
+<div class="itemgroup info">Use the following template for the
+file.<pre class="pre codeblock"><code>[softlayer]
+client:
+     {
+        "timeout": <var class="keyword varname">120</var>
+     }</code></pre><p class="p">For
+the <span class="keyword parmname">timeout</span> variable, provide the amount of time, in seconds, that the cloud
+discovery service waits for the SoftLayer cloud to
+provide resource information. In the previous template, the timeout value is set to 120
+seconds,</p></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Set the system variable <span class="keyword parmname">CDS_CLOUDS_SETTINGS_FILE</span> to the location of the
+file.</span>
+<div class="itemgroup info">The file can be in any location on the system that hosts the cloud discovery service.</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">In versions 6.2.1.1 and later that are installed on Red Hat Enterprise Linux™ version 7, provide the system variable to the cloud discovery service.</span>
+<div class="itemgroup info">In the <span class="keyword parmname">Service</span> section of the
+<span class="ph filepath">/usr/lib/systemd/system/ibm-cloud-discovery.service</span> file, add an
+<span class="keyword parmname">Environment</span> parameter that defines the location of the system variable.</div>
+<div class="itemgroup stepxmp">The configuration file resembles the following
+code:<pre class="pre codeblock"><code>[Unit]
+Description=IBM Cloud Discovery Service
+After=syslog.target network.target
+
+[Service]
+<strong class="ph b">Environment="CDS_CLOUDS_SETTINGS_FILE=/usr/lib/heat/ibm-cloud-ext/resources/clouds_user_settings.conf"</strong>
+Type=simple
+Restart=on-failure
+RestartSec=0
+ExecStart=/usr/bin/python -m clouddiscoveryservice.runserver
+
+[Install]
+WantedBy=network-online.target&nbsp;</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Restart the cloud discovery service.</span>
+<div class="itemgroup info"> See <a class="xref" href="../../user/topics/../../edt/topics/stop_patterns.html" title="To stop the blueprint designer and its associated services, you must stop the cloud discovery service, the blueprint design server, and the engine Heat services.">Stopping the blueprint designer, cloud discovery service, and engine</a> and <a class="xref" href="../../user/topics/../../edt/topics/start_patterns.html" title="To start the blueprint designer and its associated services, you must start the cloud discovery service, the blueprint design server, and the engine Heat services.">Starting the blueprint designer, cloud discovery service, and engine</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Start the cloud discovery service.</span>
+<div class="itemgroup info">See <a class="xref" href="start_patterns.html" title="To start the blueprint designer and its associated services, you must start the cloud discovery service, the blueprint design server, and the engine Heat services.">Starting the blueprint designer, cloud discovery service, and engine</a>.</div>
+</li></ol></section>
+</div>
+</article></main></body></html>

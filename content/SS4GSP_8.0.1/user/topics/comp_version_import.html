@@ -1,0 +1,24 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="If the component does not import new versions automatically, you can import versions manually."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_version.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_version_import"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Importing versions manually</title></head><body id="comp_version_import"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Importing versions manually</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-bb65c02b-6401-4341-bc9a-8b1a90b81afe">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">If the component does not import new versions automatically,
+you can import versions manually.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_version_import__context__1">About this task</h2></div>To set up a component to import versions manually, see <a class="xref" href="comp_create.html" title="A component consists of artifacts of a single source type and one or more processes. Component creation is the same for all source types, however; the content can be different.">Creating components</a>.<div class="note note note_note" id="comp_version_import__newest_keywords"><span class="note__title">Note:</span> Do not
+give component versions the name <code class="ph codeph">latest</code>, <code class="ph codeph">latestVersion</code>,
+or <code class="ph codeph">newest</code>. These names are reserved to represent
+the most recently created version for certain CLI commands, including <a class="xref" href="../../api/topics/udclient_requestapplicationprocess.html">requestApplicationProcess</a> and <a class="xref" href="../../api/topics/udclient_createsnapshot.html">createSnapshot</a>. You cannot use these keywords
+to represent component versions in the web interface.</div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_version_import__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Display the <span class="keyword wintitle">Version</span> pane for the component you want to use (<span class="ph menucascade"><span class="ph uicontrol">Components</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected component</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Versions</span></span>). </span>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Import New Versions</span>.</span><div class="itemgroup info">Depending
+on the source configuration type, you might see a window that prompts
+you for more information, such as the name of the version to import.</div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_version_import__result__1">Results</h2></div>The new version or versions appear in the table of versions.<div class="note note note_note"><span class="note__title">Note:</span> If the version import
+fails, check the logs in version import history. </div></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_version_import__postreq__1">What to do next</h2></div>The imported component version can now be compared with an existing version (if any),
+   copied, or deleted. You can also edit the component versions.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_version.html" title="Each time a component's artifacts are imported into the repository, including the first time, a separate version is stored in CodeStation. Versions can be assigned automatically by IBM DevOps Deploy (Deploy), applied manually, or come from a build server.">Component versions</a></div></div></nav></article></main></body></html>

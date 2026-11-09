@@ -1,0 +1,75 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="A trust store defines the roots of the certificate trust chain. Typically, these are the certificate authority root certificates that sign other certificates. It can also be end entity certificates that are directly trusted. Java includes a default trust store that contains certificate authority root certificates for many well-known authorities. This trust store is a file called cacerts and is contained in the Java installation. The file has the same format as a keystore, but it never contains a private key. It is possible to modify or replace this file to alter the trust roots with the keytool program. Otherwise, a custom trust store must be used instead."><meta name="DC.relation" scheme="URI" content="../../user/topics/SSLinstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_vrq_vq5_gfb"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Implementing custom trust stores</title></head><body id="concept_vrq_vq5_gfb"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Implementing custom trust stores</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-61f046f0-f60b-4ca0-8c73-31d7b06e6bd5">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">A trust store defines the roots of the certificate trust chain. Typically, these are the
+certificate authority root certificates that sign other certificates. It can also be end entity
+certificates that are directly trusted. Java® includes a default trust store that
+contains certificate authority root certificates for many well-known authorities. This trust store
+is a file called <span class="ph filepath">cacerts</span> and is contained in the Java installation. The file
+has the same format as a keystore, but it never contains a private key. It is possible to modify or
+replace this file to alter the trust roots with the keytool program. Otherwise, a custom trust store
+must be used instead. </p>
+<p class="p">A custom trust store is simply another keystore file containing the custom trust roots. It is
+even possible to copy <span class="ph filepath">cacerts</span> and modify the copy to expand the set of trust
+roots. Unlike with the default trust store, a configuration step is required enable use of a custom
+trust store. </p>
+<div class="p">You can turn on custom trust stores selectively. For example, you can configure agents to always
+verify the server without the server doing any verification, or you can have the servers verify each
+other only in the client role.<div class="note note note_note"><span class="note__title">Note:</span> Trust stores can be used with agents and servers, but not agent
+relays. The agent relay has no custom trust store support for web agent communication because it
+does not participate in authenticating communications.</div></div>
+<section class="section"><h2 id="concept_vrq_vq5_gfb__title__2" class="title sectiontitle">Agent</h2>
+
+<p class="p">For web agent communication, the agent permits a custom trust store for validating connections to
+the server. For the custom trust store to take effect, <span class="keyword parmname">verify.server.identity</span>
+must be set to <span class="keyword parmname">true</span>. This parameter can be configured in the installer (<a class="xref" href="../../install/topics/agent_properties.html" title="The agent properties in the installed.properties file control details about the agent, including how it connects to the server.">Agent installation properties</a>), although it can also be
+set without configuring a custom trust store. </p>
+<p class="p">By default, setting this property will use the default trust store in the
+<span class="ph filepath">cacerts</span> file. It also performs an extra hostname verification on the server
+certificate, which is the same as in a web browser.</p>
+<p class="p">A custom trust store is configured by setting <span class="keyword parmname">agentcomm.truststore</span> to the
+path of trust store file and setting <span class="keyword parmname">agentcomm.truststore.password</span> to the
+keystore file password. If unset, it will default to <span class="keyword parmname">changeit</span>.</p>
+<pre class="pre codeblock"><code>installed.properties:
+  verify.server.identity=true
+  agentcomm.truststore=&lt;path&gt;
+  agentcomm.truststore.password=&lt;password&gt;</code></pre>
+</section>
+<section class="section"><h2 id="concept_vrq_vq5_gfb__title__3" class="title sectiontitle">Server</h2><p class="p">The server's use of a trust store is similar to the agent, but has
+potentially two custom trust stores, depending on the role of the server in the connection. The
+trust stores are independent and can be selectively enabled, or both can be configured to share the
+same trust store file.</p><strong class="ph b">Server: Server Role</strong><p class="p">When the server is in the server role, it
+will authenticate clients, which are both agents and other servers in the same cluster. In this
+scenario, <span class="keyword parmname">verify.client.identity</span> must be set to <span class="keyword parmname">true</span>.
+</p><div class="p">The default cacerts trust store is used. There is no hostname verification step because
+client certificates do not contain a hostname. <span class="keyword parmname">agentcomm.serverTruststore</span> is
+set to the path of the trust store file. <span class="keyword parmname"> agentcomm.serverTruststore.password</span>
+is set to the trust store file password (<span class="keyword parmname">changeit</span> by default). Unlike the
+agent, the password property is stored in <span class="keyword parmname">secured-installed.properties</span> with
+other passwords.<div class="note note note_note"><span class="note__title">Note:</span> Although the trust store is configured for the server role, that server
+verifies the identity of clients. This explains the asymmetry in the names of this group of
+properties. When the server is in the client role, the naming is
+reversed.</div><pre class="pre codeblock"><code>installed.properties:
+  verify.client.identity=true
+  agentcomm.serverTruststore=&lt;path&gt;
+
+secured-installed.properties
+  agentcomm.serverTruststore.password=&lt;password&gt;</code></pre></div><strong class="ph b">Server:
+Client Role</strong><p class="p">When the server is the client role, it is only verifying the identity of the other
+server members of its cluster. In this scenario, <span class="keyword parmname">verify.server.identity</span> must be
+set to <span class="keyword parmname">true</span>. </p><p class="p">The default cacerts trust store is used. As required by the
+client role, a hostname verification step is also performed.
+<span class="keyword parmname">agentcomm.serverTruststore</span> is set to the path of the trust store file.
+<span class="keyword parmname"> agentcomm.serverTruststore.password</span> is set to the trust store file password
+(<span class="keyword parmname">changeit</span> by default).
+</p><pre class="pre codeblock"><code>installed.properties:
+  verify.server.identity=true
+  agentcomm.clientTruststore=&lt;path&gt;
+
+secured-installed.properties
+  agentcomm.clientTruststore.password=&lt;password&gt;</code></pre></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/SSLinstall.html" title="With Secure Sockets Layer (SSL) technology, clients and servers can communicate securely by encrypting all communications. Data is encrypted before it is sent and decrypted by the recipient. This communication cannot be deciphered or modified by third-parties. In addition to encryption, SSL can also support authentication.">SSL configuration</a></div></div></nav></article></main></body></html>

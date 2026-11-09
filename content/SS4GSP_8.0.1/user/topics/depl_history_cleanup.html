@@ -1,0 +1,133 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="abstract" content="You can clean up deployment history files to reduce database and file system storage that IBM DevOps Deploy (Deploy) uses."><meta name="description" content="You can clean up deployment history files to reduce database and file system storage that IBM DevOps Deploy (Deploy) uses."><meta name="DC.relation" scheme="URI" content="../../user/topics/storage_cleanup.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="proc_history_cleanup"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Cleaning up deployment history files</title></head><body id="proc_history_cleanup"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Cleaning up deployment history files</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-9c3b0a86-5441-4114-b707-c439dcd706d4">Edit online</a></span></div>
+
+
+<div class="body taskbody"><div class="abstract"><span class="shortdesc">You can clean up deployment history files to reduce database and file system
+            storage that <span class="ph">IBM DevOps Deploy (Deploy)</span> uses.
+        </span>The administrator can enable the deployment history cleanup and specify when the
+        cleanup process begins, the duration of the cleanup, and the number of days to retain the
+        process history. Administrators can also turn off deployment history cleanup. Other users,
+        depending on their privileges, can use the deployment history cleanup process for specific
+        environments. However, while the administrator has the <span class="ph uicontrol">Enable Deployment History
+            Cleanup</span> switch turned off, even when a user selects <span class="ph uicontrol">Use
+            Deployment History Cleanup</span> for an environment, the deployment history
+        cleanup process remains turned off. By default, the deployment history cleanup enablement
+        settings in both the administrator and environment settings are turned off. </div>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskproc_history_cleanup__context__1">About this task</h2></div>
+<div class="p">
+<div class="note important note_important"><span class="note__title">Important:</span> The deployment history cleanup process deletes all records in the database
+and the file system that are related to the deployments that you're deleting. The cleanup cannot be
+undone. Carefully choose the items that you delete. </div>
+<div class="note note note_note"><span class="note__title">Note:</span> Despite these settings, deployment cleanup will not happen when:<ul class="ul">
+<li class="li">the deployments are associated with active inventory of any type, such as deployed component
+version, resource, resource config, and environment properties.</li>
+<li class="li">the server is in an HA cluster and one of the instances is actively running a deployment history
+clean up job.</li>
+</ul></div>
+</div>
+<p class="p">To enable or disable deployment history cleanup and specify other settings, an administrator
+completes these steps:</p>
+<ol class="ol">
+<li class="li">In <span class="ph">Deploy</span>, click
+the <span class="ph uicontrol">Settings</span> tab, and then in the <span class="ph uicontrol">System</span> column, click
+<span class="ph uicontrol">System Settings</span>.</li>
+<li class="li">Scroll to the <span class="ph uicontrol">Process History Cleanup</span> area.</li>
+<li class="li">Set <span class="ph uicontrol">Enable Deployment History Cleanup</span> to <span class="ph uicontrol">On</span>.</li>
+<li class="li">In <span class="ph uicontrol">Daily Cleanup Start Time</span>, select the hour to start the daily cleanup
+process.</li>
+<li class="li">In <span class="ph uicontrol">Daily Cleanup Duration (hours)</span>, specify the number of hours for the
+cleanup process to run.</li>
+<li class="li">In <span class="ph uicontrol">Days to Retain Deployment History</span>, specify the default number of days
+to keep the deployment history before the cleanup process removes the history.</li>
+</ol>
+<div class="p">To enable deployment history cleanup for specific environments, users with the correct privileges
+                complete the following steps.<div class="note tip note_tip"><span class="note__title">Tip:</span> For the cleanup process to start and
+                    run according to specifications, the cleanup process must be turned on in
+                        <span class="ph uicontrol">Process History Cleanup</span> in <span class="keyword wintitle">System
+                        Settings</span> and <span class="ph uicontrol">Use Deployment History
+                        Cleanup</span> must be selected in environment settings. </div>For
+                example, Assume that you have two environments: Environment A and Environment B. In
+                the Environment B settings, the <span class="ph uicontrol">Use Deployment History
+                    Cleanup</span> check box is cleared. The check box is selected for
+                Environment A. When the cleanup process starts, the deployments that are associated
+                with Environment B are not removed.<table class="table frame-all" id="proc_history_cleanup__table_osz_qkv_tv"><caption><span class="table--title-label">Table 1. </span><span class="title">Enabling deployment history cleanup</span></caption><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead class="thead">
+                            <tr class="row">
+                                <th class="entry colsep-1 rowsep-1" id="proc_history_cleanup__table_osz_qkv_tv__entry__1"><span class="ph uicontrol">Enable Deployment History Cleanup</span>
+                                    switch in <span class="keyword wintitle">System Settings</span> (administrator's
+                                    setting)</th>
+                                <th class="entry colsep-1 rowsep-1" id="proc_history_cleanup__table_osz_qkv_tv__entry__2"><span class="ph uicontrol">Use Deployment History Cleanup</span> check
+                                    box in environment settings</th>
+                                <th class="entry colsep-1 rowsep-1" id="proc_history_cleanup__table_osz_qkv_tv__entry__3">Result</th>
+                            </tr>
+                        </thead><tbody class="tbody">
+                            <tr class="row">
+                                <td class="entry colsep-1 rowsep-1" headers="proc_history_cleanup__table_osz_qkv_tv__entry__1">On</td>
+                                <td class="entry colsep-1 rowsep-1" headers="proc_history_cleanup__table_osz_qkv_tv__entry__2">Selected</td>
+                                <td class="entry colsep-1 rowsep-1" headers="proc_history_cleanup__table_osz_qkv_tv__entry__3">Cleanup starts as specified for deployments that are
+                                    associated with this environment.</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry colsep-1 rowsep-1" headers="proc_history_cleanup__table_osz_qkv_tv__entry__1">On</td>
+                                <td class="entry colsep-1 rowsep-1" headers="proc_history_cleanup__table_osz_qkv_tv__entry__2">Cleared</td>
+                                <td class="entry colsep-1 rowsep-1" headers="proc_history_cleanup__table_osz_qkv_tv__entry__3">Cleanup does not start for deployments that are associated
+                                    for this environment.</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry colsep-1 rowsep-1" headers="proc_history_cleanup__table_osz_qkv_tv__entry__1">Off</td>
+                                <td class="entry colsep-1 rowsep-1" headers="proc_history_cleanup__table_osz_qkv_tv__entry__2">Selected</td>
+                                <td class="entry colsep-1 rowsep-1" headers="proc_history_cleanup__table_osz_qkv_tv__entry__3">Cleanup does not start for deployments that are associated
+                                    with this environment.</td>
+                            </tr>
+                        </tbody></table></div>
+<div class="p">
+<ol class="ol">
+<li class="li">In <span class="ph">Deploy</span>, click
+the main <span class="ph uicontrol">Applications</span> tab, and create an application or select a listed
+application.</li>
+<li class="li">Click <span class="ph uicontrol">Create Environment</span> or click the <span class="ph uicontrol">Change</span> icon
+<img class="image" src="../images/change.jpg" alt=""> for a selected application environment. </li>
+<li class="li">Complete the fields and make selections, and then select <span class="ph uicontrol">Use Deployment History
+Cleanup</span>. </li>
+<li class="li">Do one of these steps:<ol class="ol" type="a">
+<li class="li">Select <span class="ph uicontrol">Use Default Deployment History Retention</span> to keep deployment
+history details for the number of days that the administrator specified.</li>
+<li class="li">In <span class="ph uicontrol">Days to Retain Deployment History</span>, specify the number of days to keep
+deployment history details.</li>
+</ol></li>
+</ol>
+</div>
+</section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskproc_history_cleanup__result__1">Results</h2></div>When cleanup begins, a progress indicator shows details about the cleanup process.</section>
+<section class="example"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskproc_history_cleanup__example__1">Example</h2></div>
+<div class="p">If the date is 14 December 2016, and the following settings are used, cleanup removes the items
+that are listed.<ul class="ul">
+<li class="li"><span class="ph uicontrol">Enable Deployment History Cleanup</span> (System Settings:):
+<span class="ph uicontrol">On</span></li>
+<li class="li"><span class="ph uicontrol">Daily Cleanup Start Time</span> (System Settings): <span class="ph uicontrol">9:00
+PM</span></li>
+<li class="li"><span class="ph uicontrol">Daily Cleanup Duration  (hours)</span> (System Settings):
+<span class="ph uicontrol">3</span></li>
+<li class="li"><span class="ph uicontrol">Days to Retain Deployment History</span> (environment settings):
+<code class="ph codeph">15</code></li>
+<li class="li"><span class="ph uicontrol">Use Deployment History Cleanup</span> (environment settings): selected</li>
+<li class="li"><span class="ph uicontrol">Use Default Deployment History Retention</span> (environment settings):
+selected</li>
+</ul></div>
+<p class="p">At 9:00 PM on 14 December 2016, the deployment history begins to run for 3 hours. During the 3
+hours, all records of the deployment that are 15 days old or older are deleted, including records of
+component processes that are run and step logs from the processes. Three hours might be insufficient
+to delete all records that meet the cleanup criteria. In that case, cleanup resumes operations the
+next day as scheduled. If you need to clear more disk space, increase the cleanup duration.</p>
+<div class="note tip note_tip"><span class="note__title">Tip:</span> If the cleanup settings are changed before 9:00 PM 14 December, then items that are
+deleted are not be the same as in this example. The settings can changed after this date. The
+settings might be changed numerous times. At any time, the administrator or users with privileges
+can change whether the cleanup process runs, what cleanup removes, when cleanup starts, and how long
+cleanup runs.</div>
+<div class="note tip note_tip"><span class="note__title">Tip:</span> It is not recommended to cleanup all history at once. Example: If your goal is to
+only keep certain data for 10 days before it is cleaned up, you should slowly reduce the number of
+days to keep, so that you do not attempt to cleanup the last 4 years all at the same time.</div>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/storage_cleanup.html" title="If you have storage issues and feel that you need to cleanup some unnecessary stored data, you can use cleanup settings to cleanup your database and file system storage.">Cleaning up targets</a></div></div></nav></article></main></body></html>

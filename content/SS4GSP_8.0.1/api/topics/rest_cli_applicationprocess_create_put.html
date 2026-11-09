@@ -1,0 +1,223 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content=""><meta name="DC.subject" content="REST API, applicationProcess resource, /create PUT, PUT methods, /applicationProcess/create"><meta name="keywords" content="REST API, applicationProcess resource, /create PUT, PUT methods, /applicationProcess/create"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_applicationprocess.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_applicationprocess_create_put"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Create an application process</title></head><body id="rest_cli_applicationprocess_create_put"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Create an application process</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a853318f-e512-4762-9b3b-4cc074710655">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc"></p>
+<section class="section"><h2 id="rest_cli_applicationprocess_create_put__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>PUT https://{hostname}:{port}
+    /cli/applicationProcess/create
+Accept: {contentType}
+</code></pre><table class="table" id="rest_cli_applicationprocess_create_put__header_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_applicationprocess_create_put__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_applicationprocess_create_put__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_applicationprocess_create_put__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_applicationprocess_create_put__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_applicationprocess_create_put__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_applicationprocess_create_put__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_applicationprocess_create_put__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_applicationprocess_create_put__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+<div class="p" id="rest_cli_applicationprocess_create_put__template">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "application": "Application ID",
+  "description": "Description. This template includes one 
+  step, which deploys a component.",
+  "disableSnapshots": "When true, prevent deployments 
+  using any snapshot and this application process",
+  "inventoryManagementType": "The inventory management for 
+  the process request, such as AUTOMATIC",
+  "name": "Application process name",
+  "offlineAgentHandling": "PRE_EXECUTION_CHECK",
+  "propDefs": [{
+    "label": "Property label",
+    "name": "Property name",
+    "type": "TEXT"
+  }],
+  "properties": [{
+    "description": "Description",
+    "name": "Property name",
+    "secure": true,
+    "value": "Property value"
+  }],
+  "requiredRoleId": "Required Role Name or ID",
+  "rootActivity": {
+    "children": [
+      {
+        "children": [{
+          "children": [{
+            "allowFailure": false,
+            "children": [],
+            "componentName": "Component name",
+            "componentProcessName": "Component process 
+  name",
+            "name": "First step name",
+            "properties": {},
+            "type": "componentProcess"
+          }],
+          "componentName": "Component name",
+          "name": "inventoryVersionCheck",
+          "status": "Active",
+          "type": "inventoryVersionDiff"
+        }],
+        "componentName": "Component name",
+        "failFast": "false",
+        "maxIteration": "-1",
+        "name": "First step name",
+        "runOnlyOnFirst": "false",
+        "type": "componentEnvironmentIterator"
+      },
+      {
+        "children": [],
+        "name": "FINISH",
+        "type": "finish"
+      }
+    ],
+    "edges": [
+      {
+        "to": "First step name",
+        "type": "ALWAYS",
+        "value": ""
+      },
+      {
+        "from": "First step name",
+        "to": "FINISH",
+        "type": "ALWAYS",
+        "value": ""
+      }
+    ],
+    "name": "GRAPH",
+    "offsets": [
+      {
+        "name": "First step name",
+        "x": "-35",
+        "y": "210"
+      },
+      {
+        "name": "FINISH",
+        "x": "0",
+        "y": "420"
+      }
+    ],
+    "propDefs": [],
+    "type": "graph",
+    "versionPresets": []
+  }
+}
+</code></pre></div></section>
+<div class="example" data-hd-audience="all"><h2 id="rest_cli_applicationprocess_create_put__title__4" class="title sectiontitle">Example JSON request</h2><div class="p">To use an existing application process as a template, follow these steps:<ol class="ol"><li class="li">Open the application process in the editor.</li><li class="li">In your web browser, open the developer tools or install an extension that shows the
+              network traffic from your browser to the server.</li><li class="li">In the process editor, make a change to the application process. This change can be
+              a trivial change, such as moving a step slightly. The process must need to be
+              saved.</li><li class="li">Save the application process.</li><li class="li">In the web browser developer tools, find the REST PUT call to the endpoint
+                  <code class="ph codeph">https://<var class="keyword varname">hostName</var>:<var class="keyword varname">port</var>/rest/deploy/applicationProcess/<var class="keyword varname">applicationProcessID</var>/saveActivities</code>,
+              where <code class="ph codeph"><var class="keyword varname">hostname</var></code> and
+                <code class="ph codeph"><var class="keyword varname">port</var></code> are the host name and port of your server,
+              and <code class="ph codeph"><var class="keyword varname">applicationProcessID</var></code> is the ID of the
+              application process. This PUT call is the call that sends the new version of the
+              application process to the server.</li><li class="li">Find the JSON payload of the REST PUT call. This code describes the steps in the
+              process and the location of the steps on the editor. This payload starts with the code
+                <code class="ph codeph">{"type":"graph","layoutMode":</code>.</li><li class="li">Copy the content of the JSON payload into the <span class="keyword parmname">rootActivity</span>
+              property of your JSON request.</li><li class="li">Update the other properties of the JSON request, such as <span class="keyword parmname">name</span>
+              and <span class="keyword parmname">description</span>. </li></ol></div><p class="p">The following example request creates an application process that deploys a
+          component.</p><pre class="pre codeblock language-json"><code>{
+  "name": "My new application process",
+  "application": "79f33ffb-9d72-4967-9146-dc252eaea706",
+  "description": "New application process for command example",
+  "inventoryManagementType": "AUTOMATIC",
+  "offlineAgentHandling": "PRE_EXECUTION_CHECK",
+  "rootActivity": {
+    "type": "graph",
+    "name": "GRAPH",
+    "edges": [
+      {
+        "to": "Deploy component",
+        "type": "ALWAYS",
+        "value": ""
+      },
+      {
+        "to": "FINISH",
+        "from": "Deploy component",
+        "type": "ALWAYS",
+        "value": ""
+      }
+    ],
+    "offsets": [
+      {
+        "name": "Deploy component",
+        "x": "-35",
+        "y": "210"
+      },
+      {
+        "name": "FINISH",
+        "x": "0",
+        "y": "420"
+      }
+    ],
+    "children": [
+      {
+        "componentName": "Component Y",
+        "failFast": "false",
+        "runOnlyOnFirst": "false",
+        "maxIteration": "-1",
+        "type": "componentEnvironmentIterator",
+        "name": "Deploy component",
+        "children": [
+          {
+            "componentName": "Component Y",
+            "status": "Active",
+            "type": "inventoryVersionDiff",
+            "name": "inventoryVersionCheck",
+            "children": [
+              {
+                "componentName": "Component Y",
+                "componentProcessName": "Deploy Component Y",
+                "allowFailure": false,
+                "properties": {
+                },
+                "type": "componentProcess",
+                "name": "Deploy component",
+                "children": [
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "finish",
+        "name": "FINISH",
+        "children": [
+        ]
+      }
+    ],
+    "propDefs": [
+    ]
+  }
+}</code></pre></div><div class="example" data-hd-audience="all"><h2 id="rest_cli_applicationprocess_create_put__title__5" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "id": "80d98207-3012-4d9f-858e-0b3aea2ce489",
+  "name": "My new application process",
+  "description": "New application process for command example",
+  "active": true,
+  "inventoryManagementType": "AUTOMATIC",
+  "offlineAgentHandling": "PRE_EXECUTION_CHECK",
+  "versionCount": 1,
+  "version": 1,
+  "commit": 0,
+  "path": "applications/79f33ffb-9d72-4967-9146-dc252eaea706/processes/80d98207-3012-4d9f-858e-0b3aea2ce489"
+}</code></pre></div>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_createapplicationprocess.html" title="Create an application process">createApplicationProcess</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_applicationprocess.html">applicationProcess resource</a></div></div></nav></article></main></body></html>

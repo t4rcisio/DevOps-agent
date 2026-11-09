@@ -1,0 +1,83 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="A component process is a series of user-defined steps that operate on a component's artifacts. You create a component process in two steps: first, you configure basic information, such as name; second, you use the process editor to assemble the process."><meta name="DC.relation" scheme="URI" content="../../user/topics/intro_component_processes.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_process_configure"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating component processes</title></head><body id="comp_process_configure"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating component processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-9c817dc0-4fb6-4f04-a59e-99acc7f0e91b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">A component process is a series of user-defined steps that operate on a component's
+artifacts. You create a component process in two steps: first, you configure basic information, such
+as name; second, you use the process editor to assemble the process. </p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_process_configure__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Display the <span class="keyword wintitle">Create Process</span> dialog box  by clicking <span class="ph menucascade"><span class="ph uicontrol">Components</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected component</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Processes</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Process</span></span>. </span>
+</li><li class="li step stepexpand">
+    <span class="ph cmd">Provide the process details.</span>
+    <div class="itemgroup info">
+     <table class="table"><caption></caption><colgroup><col style="width:33.33333333333333%"><col style="width:66.66666666666666%"></colgroup><thead class="thead">
+        <tr class="row">
+         <th class="entry" id="comp_process_configure__entry__1">Field</th>
+         <th class="entry" id="comp_process_configure__entry__2">Description</th>
+        </tr>
+       </thead><tbody class="tbody">
+        <tr class="row">
+         <td class="entry" headers="comp_process_configure__entry__1">
+          <span class="ph uicontrol">Name</span>
+         </td>
+         <td class="entry" headers="comp_process_configure__entry__2">Identifies the process; appears in many UI elements. Required.
+           <div class="note note note_note"><span class="note__title">Note:</span> Name character limit is 255.</div></td>
+        </tr>
+        <tr class="row">
+         <td class="entry" headers="comp_process_configure__entry__1">
+          <span class="ph uicontrol">Description</span>
+         </td>
+         <td class="entry" headers="comp_process_configure__entry__2">The optional description can be used to convey more information about
+          the process. </td>
+        </tr>
+        <tr class="row">
+         <td class="entry" headers="comp_process_configure__entry__1">
+          <span class="ph uicontrol">Process Type</span>
+         </td>
+         <td class="entry" headers="comp_process_configure__entry__2">Defines the process type. Required. Selecting the correct process
+          type is critical for the associated application process to run correctly. <div class="note important note_important"><span class="note__title">Important:</span> If you are deploying components you must select the
+            <span class="ph uicontrol">Deployment</span> process type. If another type is selected for a
+           component that you plan to deploy with an application process, the application process
+           will fail. For more information, see <a class="xref" href="comp_process_types.html" title="Different types of component processes deploy, configure, or uninstall component versions.">Component process types</a>.</div></td>
+        </tr>
+        <tr class="row">
+         <td class="entry" headers="comp_process_configure__entry__1"><span class="ph uicontrol">Inventory Status</span>
+         </td>
+         <td class="entry" headers="comp_process_configure__entry__2">Status that is applied to component versions after being successfully
+          run by this process. <code class="ph codeph">Active</code> indicates that the component version is
+          deployed to its target resource. The status appears on the <span class="keyword wintitle">Inventory</span>
+          panes for the component itself and environments that ran the process. Required. </td>
+        </tr>
+        <tr class="row">
+         <td class="entry" headers="comp_process_configure__entry__1">
+          <span class="ph uicontrol">Default Working Directory</span>
+         </td>
+         <td class="entry" headers="comp_process_configure__entry__2">Defines the location that the agent uses to run the process (for
+          temporary files, and so on). The default value is
+           <kbd class="ph userinput">${p:resource/work.dir}/${p:component.name}</kbd>, where
+           <kbd class="ph userinput">${p:resource/work.dir}</kbd> is the default working directory for the
+          agent and <kbd class="ph userinput">${p:component.name}</kbd> is the component name. The default
+          value resolves to
+            <span class="ph filepath"><var class="keyword varname">agent_directory</var>\work\<var class="keyword varname">component_name_directory</var></span>
+          and is stored in the <kbd class="ph userinput">componentProcess.defaultWorkDir</kbd> property. The
+          default properties work for most components; you might need to change it if a component
+          process cannot be run at the agent's location. Required. </td>
+        </tr>
+        <tr class="row">
+         <td class="entry" headers="comp_process_configure__entry__1">
+          <span class="ph uicontrol">Required Role</span>
+         </td>
+         <td class="entry" headers="comp_process_configure__entry__2">Restricts who can run the process. The available options are derived
+          from the <span class="ph">IBM DevOps Deploy (Deploy)</span>
+          security system. The default value is <code class="ph codeph">None</code>, meaning anyone can run the
+          process. For information about security roles, see <a class="xref" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a>. </td>
+        </tr>
+       </tbody></table>
+    </div>
+   </li><li class="li step stepexpand"><span class="ph cmd">Save your work when you are finished. </span><div class="itemgroup stepresult">The
+process is listed on the <span class="keyword wintitle">Processes</span> pane for the
+associated component.</div></li></ol></section>
+<section class="section postreq" id="comp_process_configure__postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_process_configure__postreq">What to do next</h2></div>Edit the process in the process editor. See <a class="xref" href="comp_workflow_edit.html" title="In the process editor you organize the steps in a process, specify their properties, and connect them to each other.">Editing processes</a>.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/intro_component_processes.html" title="A component process is a series of user-defined steps that operate on a component's artifacts. Each component has at least one process that is defined for it and can have several.">Component processes</a></div></div></nav></article></main></body></html>

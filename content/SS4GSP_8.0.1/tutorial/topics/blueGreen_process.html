@@ -1,0 +1,95 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Create the application process used by the blue-green deployment."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/blueGreen_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueGreen_process"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 3: Create the application process</title></head><body id="blueGreen_process"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 3: Create the application process</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-45f01c4b-fbec-4105-83f1-ff36bae04b83">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Create the application process used by the blue-green deployment.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_process__prereq__1">Before you begin</h2></div>Before you begin the tutorial, complete the <a class="xref" href="blueGreen_intro.html#blueGreen_intro__prereqs">Prerequisites</a>. Make sure to add the component tags to the
+<a class="xref" href="blueGreen_configure.html#blueGreen-configLoadBalancer__componentTag">JPetStore
+application’s three components</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_process__context__1">About this task</h2></div> Now that you have the application, components, and environments set up, you design the
+automation for the Blue-Green deployment. The blue-green application deploys new version of the
+components, updates the load balancer, and verifies that everything is running properly.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_process__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create a process for the JPetStore application, and name it <kbd class="ph userinput">Blue-green</kbd>,
+or something similar. </span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">On the process designer, add a <span class="ph uicontrol">Switch</span> step that tests the
+<code class="ph codeph">activeEnvironment</code> property.</span>
+<div class="itemgroup info">There are several ways to ensure that the process is running on the correct environment, but
+this method easy to implement. The<a class="xref" href="../../user/topics/comp_process_switch.html#comp_process_switch" title="A switch step is a utility step that you use to branch process, based on the value of a property."> Switch step
+compares</a> the <code class="ph codeph">activeEnvironment</code> property to the name of the environment on
+which the process is running. If those names match, that means the process is running on the active
+environment, which is not what you want and the process ends. <div class="note note note_note"><span class="note__title">Note:</span> If the
+<code class="ph codeph">activeEnvironment</code> property is not on the <span class="ph uicontrol">Property Name</span> list,
+review the previous lesson in <a class="xref" href="blueGreen_createApp.html#environment-create" title="Prepare the blue-green environments.">Creating the environments</a>.</div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add an <span class="ph uicontrol">Install Multiple Components</span> step.</span>
+<div class="itemgroup info">This step uses the <code class="ph codeph">JPetStore</code> tag to deploy the JPetStore components. This
+step iterates over each component with the specified tag. If you use your own application, ensure
+that the component processes all have the same name. The components are deployed to the
+<code class="ph codeph">green-a</code> and <code class="ph codeph">green-b</code> resources in the currently inactive Green
+system. <div class="p">
+<br><img class="image" src="../images/process-multi-components.png" alt="Deploy multiple components step"><br>
+</div></div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Add the optional automated testing step.</span>
+<div class="itemgroup info">If you typically run tests on your deployments, this is a good place to add them. For
+simplicity, you might use a Shell step or a generic process to as a placeholder for processing
+flow.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a <span class="ph uicontrol">Rollback Multiple Components</span> step.</span>
+<div class="itemgroup info">If either the deployment step or the automated test fails, the process rolls back the newly
+deployed components to the version that was deployed at the beginning of this application process.
+As with the previous step, you might use a manual step or run a generic process step to represent
+the rollback feature. <p class="p">So far, the deployment is a typical multi-component deployment, and
+customers are unaware that an upgrade is in progress in the inactive system. In the next step, you
+define the <span class="ph uicontrol">For Each Tag</span> loop that contains the primary blue-green processing. </p><div class="p">
+<br><img class="image" src="../images/blue-green-process1.png" alt="Deploy multiple components step"><br>
+</div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a <span class="ph uicontrol">For Each Tag</span> utility step to the For Each Tag loop.</span>
+<div class="itemgroup info">
+<p class="p">By the time processing gets to this loop, the new version of the application is already deployed
+to the inactive environment. The purpose of this loop is to update the load balancer in stages. In
+the loop, the <kbd class="ph userinput">Canary</kbd> tag runs first, followed by the
+<kbd class="ph userinput">Main</kbd> tag. This works because the For Each Tag step lets you restrict
+processing to specific tags and control the order in which they are processed. When the <code class="ph codeph">Max
+Concurrent Tags</code> property is set to 1, only one node is processed at a time. In this case,
+the <kbd class="ph userinput">Canary</kbd>-tagged node is processed before the other nodes. </p>
+<div class="p">
+<br><img class="image" src="../images/for-each-tag.png" alt="For Each Tag step"><br>
+</div>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Within the loop, add the Load balancer component step.</span>
+<div class="itemgroup info"><a class="xref" href="blueGreen_configure.html#blueGreen-configLoadBalancer" title="Create a component to abstractly represent the load balancer.">This step changes a
+property on the load balancer component that represents the active port</a>. The component
+process can access the properties it needs directly, without accepting any passed values.<p class="p">Now
+customers are using the new version of the software for the first time on the canary node. However,
+on the first time through the loop, the process updates the port for only the canary
+node.</p></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the loop, add a test step.</span>
+<div class="itemgroup info">The process runs automated tests on the node that is affected by the tag. If those tests fail,
+another step reverts the load balancer.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the loop, add a rollback step.</span>
+<div class="itemgroup info">If the tests fail, this step reverts the load balancer to the last version.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a manual task step that you can use to verify the updated.</span>
+<div class="itemgroup info">
+<p class="p">The manual approval lets you verify that the canary node is working properly before the loop runs
+again and updates the other nodes. Your approval process is probably different, but the manual
+approval lets you verify that the deployment is running the way you expect for this example
+tutorial.</p>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click the new process to open it in the process editor.</span>
+<div class="itemgroup info">At the end of the process, the process updates the active environment property with the name
+of the newly active environment. I'm using a component process on the load balancer component for
+this, but there are other ways to change the application property.<br><img class="image" src="../images/blue-green-process.gif" alt="The complete process"><br></div>
+</li></ol></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.1.0 SS4GSP_8.0.1" href="../../tutorial/topics/blueGreen_abstract.html" title="In this tutorial, you setup a deployment with two identical production environments, referred to arbitrarily as Blue and Green. One environment is always live, and the other environment is inactive and available to host an upgraded version.">Blue-green deployments</a></div></div></nav></article></main></body></html>

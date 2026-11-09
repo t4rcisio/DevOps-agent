@@ -1,0 +1,37 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="You can store the versions in CodeStation or in Artifactory/Nexus. To store versions in Artifactory or Nexus, the artifactory details must be passed to the buztool.sh. Every z/OS agent that is used to deploy projects, stores backups of old artifacts so that a rollback can be done when required. Plan the agent directory to ensure there is sufficient space for backup."><meta name="DC.relation" scheme="URI" content="../../install/topics/zos_installing_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="codestation_choose_plan"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Planning storage</title></head><body id="codestation_choose_plan"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Planning storage</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-7b0ca0d2-935e-4fc9-a949-0254376d05cf">Edit online</a></span></div>
+
+
+
+<div class="body conbody"><p class="shortdesc">You can store the versions in CodeStation or in Artifactory/Nexus. To store versions in
+Artifactory or Nexus, the artifactory details must be passed to the <span class="ph filepath">buztool.sh</span>.
+Every z/OS agent that is used to deploy projects, stores backups of old artifacts so that a rollback
+can be done when required. Plan the agent directory to ensure there is sufficient space for
+backup.</p>
+<section class="section">
+<p class="p">CodeStation is part of the <span class="ph">IBM DevOps Deploy (Deploy)</span> server
+                and supports Windows, UNIX, and Linux artifacts download. CodeStation is default for
+                z/OS artifacts.</p>
+<p class="p">Artifacts in CodeStation can be downloaded to any deployment targets using the Download Artifacts
+for zOS plug-in. To download artifacts stored in Artifactory/Nexus use the External Artifact
+Repository plug-in. </p>
+<p class="p">Plan the agent directory to ensure there is sufficient space for the artifact versions in the
+backups. The space requirements vary depending on retention policies, application types, number of
+artifacts, and the number of deployments. For typical production environments, allocate 10 - 20 GB
+for storing deployment backups. A breakdown estimation follows:</p>
+
+<ul class="ul">
+<li class="li"><strong class="ph b">Agent installation directory</strong>: The agent install directory requires at least 500 MB
+space.</li>
+<li class="li"><strong class="ph b">Deploy backup directory</strong>: The location of the deploy backup is <span class="ph filepath"><var class="keyword varname">agent
+install dir</var>/var/deploy</span>. Estimate storage requirements by multiplying the
+average artifact size by the number of deployments that are performed per day, then multiply the
+preceding result by the average number of days before cleanup.</li>
+<li class="li"><strong class="ph b">MVS data sets</strong>: MVS data sets are used to store z/OS agent binary, configuration, samples
+and JCLs only. No additional space is needed in addition to the space that is allocated by the
+installation.</li>
+</ul>
+</section>
+</div><nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/zos_installing_ov.html" title="Before you deploy to the IBM z/OS platform, you must install the z/OS agent and configure the z/OS server for communication with IBM DevOps Deploy (Deploy). If the build process runs on a different logical partition (LPAR), then you must additionally install the agent on the build LPAR. You can install the z/OS agent and deployment tools by using the IBM System Modification Program Extended (SMP/E) or by extracting archive files to the z/OS UNIX file system.">Installing the z/OS agent</a></div></div></nav></article></main></body></html>

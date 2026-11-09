@@ -1,0 +1,109 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Many REST and command-line client commands have examples in their help topics. A few more examples using various programming languages and scenarios are provided here. The commands are similar for the server."><meta name="DC.relation" scheme="URI" content="../../reference/topics/rest_api_ref_overview.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_api_ref_examples"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Examples of REST API commands</title></head><body id="rest_api_ref_examples"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Examples of REST API commands</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3e88950b-237f-4df5-8e33-69bfa7f83292">Edit online</a></span></div>
+  
+  <div class="body refbody"><p class="shortdesc">Many REST and command-line client commands have examples in their help topics. A few
+more examples using various programming languages and scenarios are provided here. The commands are
+similar for the server.</p>
+    <section class="section"><h2 id="rest_api_ref_examples__title__2" class="title sectiontitle">Complete scenarios</h2>For complete examples of using several REST commands
+      together, see the following pages:<ul class="ul">
+        <li class="li"><a class="xref" href="rest_api_ref_example.html" title="The following example describes how to use the REST commands to deploy an application.">How-to: Deploy applications by using REST commands</a></li>
+        <li class="li" data-hd-otherprops="ibm"><a class="xref" href="rest_api_ref_provision_example.html" title="The following example describes how to use the REST commands to provision an environment through the blueprint design server and engine.">How-to: Provision environments by using REST commands</a></li>
+      </ul></section>
+    <section class="section"><h2 id="rest_api_ref_examples__title__3" class="title sectiontitle">Authentication</h2>To run commands, you must first authenticate to the
+      server. See <a class="xref" href="rest_api_ref_authenticating.html" title="The way that you authenticate to run REST commands depends on how the server is set up and the tool that you are using to run the commands.">Authenticating for REST commands</a>.</section>
+    <section class="section"><h2 id="rest_api_ref_examples__title__4" class="title sectiontitle">Running REST commands in process steps</h2>
+      
+      <div class="p">Plug-ins contain many steps that do the same tasks as REST API commands, but if you want to
+        run a REST command as part of a process, one way to do so is to use the Send HTTP Call step
+        in the Web Utilities plugin. To use the REST API with this step, add the step to a process
+        and specify the following information:<dl class="dl">
+          
+            <dt class="dt dlterm">Name</dt>
+            <dd class="dd">Specify a name for the step.</dd>
+          
+          
+            <dt class="dt dlterm">URL</dt>
+            <dd class="dd">Specify the complete URL of the command. For example, to use the command <a class="xref" href="../../api/topics/rest_cli_application_get.html" title="This command returns a JSON representation of all applications.">Get information about all applications on the server</a>, specify the
+              URL
+                <code class="ph codeph">https://<var class="keyword varname">deploy.example.com</var>:8443/cli/application</code>,
+              using the host name or IP address of your server for
+                  <code class="ph codeph"><var class="keyword varname">deploy-server.example.com</var></code>.</dd>
+          
+          
+            <dt class="dt dlterm">HTTP Method</dt>
+            <dd class="dd">Specify the method for the command, such as GET or PUT. For the method to use, see
+              the documentation for the command.</dd>
+          
+          
+            <dt class="dt dlterm">Headers</dt>
+            <dd class="dd">Specify any headers for the command, separated by line breaks. If the command
+              requires headers, the headers are listed in the documentation for the command. </dd>
+            <dd class="dd ddexpand">For example, <ul class="ul" id="rest_api_ref_examples__ul_ixw_n3q_nzb">
+                <li class="li">To send JSON data along with the command, add the following
+                  header:<pre class="pre codeblock" id="rest_api_ref_examples__codeblock_imh_p3q_nzb"><code>Content-Type: application/json</code></pre></li>
+                <li class="li">To receive YAML data along with commands for importing elements, add the
+                  following
+                  header:<pre class="pre codeblock" id="rest_api_ref_examples__codeblock_phn_s3q_nzb"><code>Accept: application/yaml</code></pre></li>
+                <li class="li">To send YAML data along with commands for exporting and GET requests, add the
+                  following
+                  header:<pre class="pre codeblock" id="rest_api_ref_examples__codeblock_scx_rnq_nzb"><code>Content-Type: application/yaml</code></pre></li>
+              </ul>The step automatically includes the headers Content-Length, Content-Type, Accept,
+              and Connection. You can override each of these headers by specifying them in the
+                <span class="ph uicontrol">Headers</span> field except for the Content-Length header. The
+              Accept and Content-Type headers are set by the value in the request Content-Type
+              field, but you can still override these headers in the <span class="ph uicontrol">Headers</span>
+              field. </dd>
+            <dd class="dd ddexpand"></dd>
+          
+          
+            <dt class="dt dlterm">Data / Data File</dt>
+            <dd class="dd">Specify the data payload to send along with the command or a file that contains the
+              data.</dd>
+          
+          
+            <dt class="dt dlterm">Request Content Type</dt>
+            <dd class="dd">Select the content type of the data. This field sets the value of the Accept and
+              Content-Type headers.</dd>
+          
+          
+            <dt class="dt dlterm">Allow Untrusted SSL Certs</dt>
+            <dd class="dd">Select the check box to ignore untrusted certifications, such as self-signed
+              certificates.</dd>
+          
+          
+            <dt class="dt dlterm">Username</dt>
+            <dd class="dd">Specify the user name with which to run the command. Running a command with the REST
+              API requires the same permissions as using the web interface.</dd>
+          
+          
+            <dt class="dt dlterm">Password</dt>
+            <dd class="dd">Specify the password with which to run the command.</dd>
+          
+          
+            <dt class="dt dlterm">Output file</dt>
+            <dd class="dd">Optionally, specify a file name to store the result of the command.</dd>
+          
+        </dl></div>
+    </section>
+    <section class="section"><h2 id="rest_api_ref_examples__title__5" class="title sectiontitle">Running REST commands in the command-line interface</h2>
+      
+      <p class="p">The Linux™ program <span class="keyword cmdname">curl</span> is one of many programs that can run REST
+        commands from the command line. For an example, see <a class="xref" href="rest_api_ref_using.html" title="Many different programs can run REST commands. To run the command, you call a method on a REST resource and pass parameters or a request in JSON format.">Running REST commands</a>.</p>
+    </section>
+    <section class="section"><h2 id="rest_api_ref_examples__title__6" class="title sectiontitle">Running REST commands in Java™</h2>
+      
+      <p class="p">For an example of running REST commands in Java, see <a class="xref" href="rest_api_ref_authenticating.html" title="The way that you authenticate to run REST commands depends on how the server is set up and the tool that you are using to run the commands.">Authenticating for REST commands</a>.</p>
+    </section>
+    <section class="section"><h2 id="rest_api_ref_examples__title__7" class="title sectiontitle">Running REST commands in Python</h2>
+      
+      <p class="p">For an example of running REST commands in Python, see <a class="xref" href="rest_api_ref_authenticating.html" title="The way that you authenticate to run REST commands depends on how the server is set up and the tool that you are using to run the commands.">Authenticating for REST commands</a>.</p>
+    </section>
+    <section class="section" data-hd-otherprops="ibm"><h2 id="rest_api_ref_examples__title__8" class="title sectiontitle">Running REST commands in a Groovy script</h2>
+      
+      <p class="p">For an example of running REST commands in a Groovy script, see the following page: <a class="xref" href="https://github.com/IBM-UrbanCode/groovy-sample-scripts-UCD" target="_blank">https://github.com/IBM-UrbanCode/groovy-sample-scripts-UCD</a></p>
+    </section>
+    
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/rest_api_ref_overview.html" title="You can use these REST interfaces to automate tasks.">REST API reference</a></div></div></nav></article></main></body></html>

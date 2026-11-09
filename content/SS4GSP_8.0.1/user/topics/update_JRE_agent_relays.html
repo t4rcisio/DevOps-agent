@@ -1,0 +1,55 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="If you upgrade the JRE and change the JRE location, you must also update the agent relays. If you do not change the location of the JRE, you do not have to update these files."><meta name="DC.relation" scheme="URI" content="../../user/topics/configure_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="update_JRE_agent_relays"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Updating the JRE location for agent relays</title></head><body id="update_JRE_agent_relays"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Updating the JRE location for agent relays</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcdb7086-f02b-4bb3-bb19-f19b9b6dc85d">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">If you upgrade the JRE and change the JRE location, you must also update the agent
+relays. If you do not change the location of the JRE, you do not have to update these
+files.</p>
+<section class="section prereq" data-hd-otherprops="ibm"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupdate_JRE_agent_relays__prereq__1">Before you begin</h2></div>Verify the supported Java version for agent relays. See <a class="xref" href="sysreq_prereqsw.html" title="You can find information about the software, licensing and web browser requirements for running the IBM DevOps Deploy (Deploy).">Prerequisite software</a>.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupdate_JRE_agent_relays__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">Stop the agent relay.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">In the installation folder, locate and open this file for editing:
+              <span class="ph filepath"><var class="keyword varname">install dir</var>/bin/agentrelay.cmd</span> (Windows) or
+              <span class="ph filepath"><var class="keyword varname">install dir</var>/bin/agentrelay</span> (Linux).</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">In the file, edit the line that begins <code class="ph codeph">set JAVA_HOME=</code> to point to your
+          JRE.</span>
+        <div class="itemgroup stepxmp">For example, <code class="ph codeph">set JAVA_HOME=<var class="keyword varname">C:\Program Files\Java\jre8</var></code> (Windows) or <code class="ph codeph">set JAVA_HOME=<var class="keyword varname">/opt/java/jre17</var></code> (Linux).</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">If you are running agent relays as a Windows™
+          service, follow these steps:</span>
+        <ol type="a" class="ol substeps">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Locate and open this file for editing: <span class="ph filepath"><var class="keyword varname">install
+                dir</var>/services/agentrelay.cmd</span>.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">In the <span class="ph filepath">agentrelay.cmd</span> file, edit the line that begins
+                <code class="ph codeph">set JAVA_HOME=</code> to point to your JRE.</span>
+            <div class="itemgroup stepxmp">For example, <code class="ph codeph">set JAVA_HOME=<var class="keyword varname">C:\Program Files\Java\jre8</var></code>.</div>
+          </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Open a command prompt as an administrator.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Go to the <span class="ph filepath"><var class="keyword varname">agentrelay_install</var>\bin\service</span> folder.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Remove the service.</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>agentrelay.cmd remove <var class="keyword varname">service_name</var></code></pre>
+</div>
+<div class="itemgroup info">
+<p class="p">To find the service name, open the services view, and find the service with the following format:
+<code class="ph codeph"><var class="keyword varname">service_name</var> Agent Relay</code>.</p>
+</div>
+</li>
+        </ol>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Start the agent relay.</span>
+      </li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/configure_agents.html" title="After you install an agent for IBM DevOps Deploy (Deploy), you can modify its configuration or create an agent relay to facilitate communication to remote relays.">Agents and agent relay configuration</a></div></div></nav></article></main></body></html>

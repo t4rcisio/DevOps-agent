@@ -1,0 +1,67 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Agent Configuration Templates allow you to migrate JMS agents on a server to Web agents with the ability to revert back to the original JMS configuration. This allows you to specify connection details for groups of agents."><meta name="DC.relation" scheme="URI" content="../../user/topics/configure_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="mass_agent_migration"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Migrating agents to Web</title></head><body id="mass_agent_migration"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Migrating agents to Web</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2eccabe6-8d4c-46e7-b06d-5b5c6dabc198">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">Agent Configuration Templates allow you to migrate JMS agents on a server to Web agents
+with the ability to revert back to the original JMS configuration.  This allows you to specify
+connection details for groups of agents.  </p>
+<section class="section"><h2 id="mass_agent_migration__title__2" class="title sectiontitle"> Prerequisites</h2>
+
+<p class="p">You must upgrade agents and server to <span class="ph">IBM DevOps Deploy (Deploy)</span> 7.0.1. For more
+    information see <a class="xref" href="../../install/topics/upgradeAgents.html#upgradeagents" title="In most cases, you upgrade agents from the server interface, but you can also upgrade the agents from the command line. Always upgrade agents and agent relays in addition to upgrading the server.">Upgrading agents</a> and <a class="xref" href="../../install/topics/upgradeInstall.html#upgradeinstall" title="You can upgrade the IBM DevOps Deploy (Deploy) server to incorporate to a later version.">Upgrading the server</a>. </p>
+</section>
+<section class="section"><h2 id="mass_agent_migration__title__3" class="title sectiontitle">About this task</h2>
+
+<div class="p"><span class="ph">Deploy</span> 7.0 introduced a new server/agent communication protocol which offers many performance
+improvements, and increased scalability. See <a class="xref" href="web_agents.html#web_agents" title="Web agents use WebSocket and HTTPS connections for communication. Web agents do not use JMS.">Web agent configuration</a>. <span class="ph">Deploy</span> 7.0.1 is extending this capability by adding Agent Configuration Templates which will allow you
+to define a reusable set of configuration that can be used to easily migrate existing JMS agents to
+WEB agents. After you migrate JMS agents to WEB agents you have the ability revert them back to the
+original JMS configuration. <div class="note note note_note"><span class="note__title">Note:</span> You can only revert back an agent to JMS if that agent was
+previously a JMS agent.</div>
+</div>
+</section>
+<section class="section"><h2 id="mass_agent_migration__title__4" class="title sectiontitle">Agent Configuration Templates</h2>
+
+<p class="p">Before you can migrate an agent from JMS to Web an Agent Configuration Template will need to be
+assigned to the agent or agents.</p>
+<div class="p"><ol class="ol">
+<li class="li">Click <span class="ph uicontrol">Resources</span> &gt;<span class="ph uicontrol">Agent Configuration
+Templates</span>.</li>
+<li class="li">Click on <span class="ph uicontrol">Create Agent Configuration Template</span> on the right side of the
+page. </li>
+<li class="li">Give the template a name and description in the designated boxes.</li>
+<li class="li">Add teams that you want to give access.</li>
+<li class="li">Enter the URLs of the servers or relays where you would like agents to connect. </li>
+<li class="li">Click <span class="ph uicontrol">Save</span>. </li>
+<li class="li">Click on the template name and click <span class="ph uicontrol">Add Agents</span> to apply agents to the
+specific template. </li>
+</ol>After agents are added to templates they can be migrated to the new Web type.</div>
+</section>
+<section class="section"><h2 id="mass_agent_migration__title__5" class="title sectiontitle">Agent Migration</h2>
+
+<p class="p">An Agent Configuration Template will need to be assigned to an agent before its type can be
+changed from JMS to Web. </p>
+<ol class="ol">
+<li class="li">Click <span class="ph uicontrol">Resources</span> &gt;<span class="ph uicontrol">Agents</span>. </li>
+<li class="li">Select the agents that you want to convert. </li>
+<li class="li">Click bulk <span class="ph uicontrol">Actions</span> menu.</li>
+<li class="li">From the <span class="ph uicontrol">Actions</span> drop down dialog you can select <span class="ph uicontrol">Migrate to
+Web</span> or <span class="ph uicontrol">Revert to JMS</span>. <div class="note note note_note"><span class="note__title">Note:</span>  Agents can only be reverted to JMS
+if they were originally JMS.</div>
+</li>
+</ol>
+<p class="p">If an agent is currently on a template there will be an icon next to <span class="ph uicontrol">Type</span>
+on the <span class="ph uicontrol">Agents</span> page. Clicking that icon will also prompt for agent
+migration.</p>
+<p class="p">A confirmation message will appear when the migration was successfully started on all agents.</p>
+<p class="p">The connection setting on newly migrated agents will be taken from the Agent Configuration
+Template that the agents belong to.</p>
+<p class="p">When migrating to web mode, the agents will perform a connection test that must pass for the
+migration to succeed. You can configure the threshold for the test to pass by providing an integer
+greater than one that specifies how many of the possible connection paths that have been configured.   </p>
+<div class="note note note_note"><span class="note__title">Note:</span>  If migration fails you can view the logs by clicking on the agent name and then clicking on
+the <span class="ph uicontrol">Logs</span> section of specified agent.</div>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/configure_agents.html" title="After you install an agent for IBM DevOps Deploy (Deploy), you can modify its configuration or create an agent relay to facilitate communication to remote relays.">Agents and agent relay configuration</a></div></div></nav></article></main></body></html>

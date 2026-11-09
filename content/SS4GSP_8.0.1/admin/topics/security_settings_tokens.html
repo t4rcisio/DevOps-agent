@@ -1,0 +1,55 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="abstract" content="Tokens provide authorization for agents, agent relays, users, and external systems or applications from the server. Agents use tokens when they run process steps and communicate with the IBM DevOps Deploy (Deploy) server and external services. In the Security settings area, you can set time limits for four tokens types."><meta name="description" content="Tokens provide authorization for agents, agent relays, users, and external systems or applications from the server. Agents use tokens when they run process steps and communicate with the IBM DevOps Deploy (Deploy) server and external services. In the Security settings area, you can set time limits for four tokens types."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_token.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_oc5_dmk_yy"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Token expiration settings</title></head><body id="concept_oc5_dmk_yy"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Token expiration settings</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a3792d84-e8e8-4b96-97e3-2b17175f6e93">Edit online</a></span></div>
+
+
+<div class="body conbody"><div class="abstract"><span class="shortdesc">Tokens provide authorization for agents, agent relays, users, and external
+            systems or applications from the server. Agents use tokens when they run process steps
+            and communicate with the <span class="ph">IBM DevOps Deploy (Deploy)</span> server and
+            external services. In the <span class="ph uicontrol">Security</span> settings area, you can set
+            time limits for four tokens types. </span>Two tokens types work with plug-ins that
+        enable discovering and applying configurations. The third type is used when component
+        versions are automatically imported. You can set the how much time elapses before the token
+        expires and if you want to use the default auth token restrictions.</div>
+<p class="p">The tokens are generated automatically when the steps are run. The first three
+            tokens use the built-in UC Auto Configure, UC Auto Discovery, and UC Version Import
+            users and their permissions. The plug-in token has the permissions of the user who
+            requests the process that plug-in runs from. These tokens are the same as those that you
+            can create in the user interface and a command-line interface. See <a class="xref" href="security_token.html#security_token" title="Tokens provide authorization for agents, agent relays, users, and external systems or applications from the server. Agents use tokens when they run process steps and communicate with the IBM DevOps Deploy (Deploy) server and external services.">Tokens</a>. </p>
+        <p class="p" data-hd-otherprops="ibm">Go to the <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/" target="_blank">Deploy Plug-ins</a> to access plug-ins that work with <span class="ph">Deploy</span> and provide
+            steps that create these tokens.</p>
+        
+
+<p class="p">To access the <span class="ph uicontrol">Security</span> settings area, click
+<span class="ph uicontrol">Settings</span>, click <span class="ph uicontrol">System Settings</span>, and then scroll
+down.</p>
+<p class="p">You can specify these expiration delays for tokens:</p>
+<dl class="dl">
+
+<dt class="dt dlterm">Discovery Auth Token Expiration Delay (seconds)</dt>
+<dd class="dd">Set the expiration delay in seconds for authorization tokens that are created for autodiscovery
+steps. You must specify at least 300 seconds. Typically, discoveries do not require more than 300
+seconds (5 minutes).</dd>
+
+
+<dt class="dt dlterm">Configure Auth Token Expiration Delay (seconds)</dt>
+<dd class="dd">Set the expiration delay in seconds for authorization tokens that are created for auto
+configuration steps. You must specify at least 300 seconds. Be sure to specify sufficient time for
+auto configuration, because the step processes stop when the token expires. </dd>
+
+
+<dt class="dt dlterm">Version Import Auth Token Expiration Delay (seconds)</dt>
+<dd class="dd">Set the expiration delay in seconds for authorization tokens that are created for version import
+steps. You must specify at least 300 seconds. The time required to import versions depends on
+component size.</dd>
+
+
+<dt class="dt dlterm">Plugin Step Auth Token Expiration Delay (seconds)</dt>
+<dd class="dd">Set the expiration delay in seconds for authorization tokens that are created for plug-in steps.
+You must specify at least 300 seconds. The time required to import versions depends on component
+size.</dd>
+
+</dl>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_token.html" title="Tokens provide authorization for agents, agent relays, users, and external systems or applications from the server. Agents use tokens when they run process steps and communicate with the IBM DevOps Deploy (Deploy) server and external services.">Tokens</a></div></div></nav></article></main></body></html>

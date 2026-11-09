@@ -1,0 +1,160 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To run an application process, specify the environment to use and the process to run. In many cases, you also specify the component versions to deploy."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_process.html"><meta name="DC.relation" scheme="URI" content="https://github.com/marketplace/actions/deploy-a-devops-deploy-application"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_process_run"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Running application processes</title></head><body id="app_process_run"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Running application processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-708196b0-85b6-4632-b303-178dd85a2bab">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To run an application process, specify the environment
+to use and the process to run. In many cases, you also specify the
+component versions to deploy.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_run__prereq__1">Before you begin</h2></div><ul class="ul">
+<li class="li">Create an environment.</li>
+<li class="li">Create an application process.</li>
+</ul></section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_run__context__1">About this task</h2></div>Run an application process with a specific component version.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_run__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Applications</span>, click the application, and then next to the
+environment, click <span class="ph uicontrol">Request Process</span>
+<img class="image" src="../images/request_process_icon.gif" height="27" width="27" alt="">.</span>
+<div class="itemgroup info">The <span class="keyword wintitle">Create Deployment</span> wizard opens.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Set the process details.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Re-select the application and environment names, if required.</span>
+<div class="itemgroup info">The <span class="ph uicontrol">Application</span> and <span class="ph uicontrol">Environment</span> fields are
+auto-filled based on the selection made in step 1.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">To skip component versions that have not changed since the previous deployment, enable the
+<span class="ph uicontrol">Only Changed Versions</span> option.</span>
+<div class="itemgroup info">If you do not select this option, all of the component versions that you select are deployed,
+even if they are already in the inventory.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Select the application process from the <span class="ph uicontrol">Process</span> list.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Choose the component versions or snapshot to deploy.</span>
+<div class="itemgroup info">If the process you selected deploys component versions, you must specify the component
+versions to deploy. You can use select a snapshot of component versions, or multiple component
+versions manually.</div>
+<ul class="ul choices">
+<li class="li choice">To use the component versions in a snapshot, specify the snapshot from the <span class="ph uicontrol">Select
+a Snapshot</span> list.</li>
+<li class="li choice">Specify component versions manually from the <span class="ph uicontrol">Choose Component Version</span>
+window. You can add the component versions using any one of these actions:<ul class="ul">
+<li class="li">To specify the versions for each component individually, click <span class="ph uicontrol">Add</span> next
+to a component in the table, and select versions to deploy from <span class="ph uicontrol">By Version
+Lookup</span>, and then choose any one of the following criteria:<table class="simpletable frame-all"><colgroup><col style="width:34.48275862068966%"><col style="width:65.51724137931035%"></colgroup><thead><tr class="sthead">
+<th class="stentry" scope="col">Option</th>
+<th class="stentry" scope="col">Description</th>
+</tr></thead><tbody><tr class="strow">
+<td class="stentry">Latest Available</td>
+<td class="stentry">Selects the most recent component version at the time that you make this selection
+regardless of when the process runs. If you schedule a process to run, for example, a week after you
+make this selection and you want to use the most recent version that is available then, click
+<span class="ph uicontrol">Latest Available at Execution Time</span>.</td>
+</tr><tr class="strow">
+<td class="stentry">Latest with Status</td>
+<td class="stentry">Selects the most recent component version at the time that you make this selection. If you
+schedule a process to run, for example, a week after you make this selection and you want to use the
+most recent version that has the specified status that is available at the later time, click
+<span class="ph uicontrol">Latest with Status at Execution Time</span>.</td>
+</tr><tr class="strow">
+<td class="stentry">Latest Available at Execution Time</td>
+<td class="stentry">Selects the latest component version that is available when the process starts. The version
+that is used might be generated after you make this selection.</td>
+</tr><tr class="strow">
+<td class="stentry">Latest with Status at Execution Time</td>
+<td class="stentry">Selects component that have a status that you specify in the next dialog box. The version
+that is used might be generated after you make this selection.</td>
+</tr><tr class="strow">
+<td class="stentry">Current Environment Inventory at Execution Time</td>
+<td class="stentry">Uses the environment inventory that is available when the process starts. The environment
+inventory might be different from the inventory that is available when you make this
+selection.</td>
+</tr></tbody></table></li>
+<li class="li">To specify versions for all the components at one time, click <span class="ph uicontrol">Select For
+All</span>, and then click one of the following options:<table class="simpletable frame-all"><colgroup><col style="width:29.585798816568047%"><col style="width:70.41420118343196%"></colgroup><thead><tr class="sthead">
+<th class="stentry" scope="col">Option</th>
+<th class="stentry" scope="col">Description</th>
+</tr></thead><tbody><tr class="strow">
+<td class="stentry">Latest Available</td>
+<td class="stentry">Select the most recent component version at the time that you make this selection
+regardless of when the process runs. If you schedule a process to run, for example, a week after you
+make this selection and you want to use the most recent version that is available then, click
+<span class="ph uicontrol">Latest Available at Execution Time</span>.</td>
+</tr><tr class="strow">
+<td class="stentry">Latest with Status</td>
+<td class="stentry">Select the most recent component version at the time that you make this selection. If you
+schedule a process to run, for example, a week after you make this selection and you want to use the
+most recent version that has the specified status that is available at the later time, click
+<span class="ph uicontrol">Latest with Status at Execution Time</span>.</td>
+</tr><tr class="strow">
+<td class="stentry">Versions With Name</td>
+<td class="stentry">Select the most recent component version whose name matches a string.</td>
+</tr><tr class="strow">
+<td class="stentry">Current Environment Inventory</td>
+<td class="stentry">Uses the versions that are listed for that environment when you select it. This selection
+is typically related to the last version that was deployed to a certain environment of each
+component. For example, say that you deployed component A, version 1, to your environment. Then, in
+a separate deployment, you deployed an incremental version 1.1 to the same environment. If you look
+at the current environment inventory in the <span class="keyword wintitle">Application</span> view, you see that the
+environment contains versions 1 and 1.1. Typically, you don't want to redeploy what is already
+there. However, this selection is useful when a deployment fails or is modified on the target
+computer itself, outside of <span class="ph">Deploy</span>. So if the deployment of version 1.1 succeeded on 10 agents but failed on two, you can schedule
+essentially a retry. Use of this selection is not common.</td>
+</tr><tr class="strow">
+<td class="stentry">Latest Available at Execution Time</td>
+<td class="stentry">select the latest component version that is available when the process starts. The version
+that is used might be generated after you make this selection.</td>
+</tr><tr class="strow">
+<td class="stentry">Latest with Status at Execution Time</td>
+<td class="stentry">Selects component that have a status that you specify in the next dialog box. The version
+might be generated after you make this selection.</td>
+</tr><tr class="strow">
+<td class="stentry">Current Environment Inventory at Execution Time</td>
+<td class="stentry">Uses the environment inventory that is available when the process starts. The environment
+inventory might be different from the inventory that is available when you make this
+selection.</td>
+</tr><tr class="strow">
+<td class="stentry">None (Clear All)</td>
+<td class="stentry">Clears your selection.</td>
+</tr></tbody></table></li>
+<li class="li">To filter the list of components to the components with new versions, select the <span class="ph uicontrol">Show
+only changed components</span> check box.</li>
+</ul><div class="note note note_note"><span class="note__title">Note:</span> If you select multiple versions for one component, the versions are installed in the
+order you select.</div><div class="note note note_note"><span class="note__title">Note:</span> Make sure to select a version for each component. If you do not select
+a version for a component, that component is not included in the application
+process.</div></li>
+</ul>
+</li><li class="li step stepexpand"><span class="ph cmd">If the process has properties, specify values for those
+properties.</span></li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Schedule the deployment for a later date by disabling <span class="ph uicontrol">Run Now</span> and then
+specify the date, time, and recurrence pattern of the deployment.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Review the deployment settings and click <span class="ph uicontrol">Submit Deployment</span>.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_run__result__1">Results</h2></div>The server runs the application process with the specified component versions. You can view
+the process requests by going to the <span class="ph uicontrol">History</span> tab for the environment or
+application. Typically, resources are mapped for each component version that is deployed by the
+application process. You can use the same application process for different environments, some of
+which do not have mappings for all components. If you run an application process on an environment
+where not all components are mapped, the resulting status for those components is <samp class="ph systemoutput sysout">Not
+Mapped</samp>.</section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_run__postreq__1">What to do next</h2></div>You can view the progress of the process by going to the <span class="ph uicontrol">History</span> tab
+and opening the View Request. <span class="ph" id="app_process_run__step_order">The application process request shows each step in
+the process. Within each process, the steps are not shown in the order that they run in. Instead,
+steps are shown in the order of appearance in the process editor, from the steps at the top of the
+canvas to the steps at the bottom of the canvas.</span><div class="p">You can also search an application process
+by filtering any of the columns from the <span class="ph uicontrol">History</span> tab:<ul class="ul">
+<li class="li">Environment</li>
+<li class="li">Snapshot</li>
+<li class="li">Scheduled For</li>
+<li class="li">By</li>
+<li class="li">Status</li>
+</ul></div></section>
+</div>
+ <nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_process.html" title="You can use application processes to deploy or to roll back components.">Application processes</a></div></div><div class="linklist relinfo"><strong>Related information</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="https://github.com/marketplace/actions/deploy-a-devops-deploy-application" target="_blank">GitHub Action: Request Application process in Devops-Deploy</a></li></ul></div></nav>
+</article></main></body></html>

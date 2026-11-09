@@ -1,0 +1,96 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content=""><meta name="DC.subject" content="REST API, environmentTemplate resource, /create POST, POST methods, /environmentTemplate/create"><meta name="keywords" content="REST API, environmentTemplate resource, /create POST, POST methods, /environmentTemplate/create"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_environmenttemplate.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_environmenttemplate_create_post"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Create a new environment template</title></head><body id="rest_cli_environmenttemplate_create_post"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Create a new environment template</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-25ce00b5-c79a-4023-bdfd-406d479969cc">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc"></p>
+<section class="section"><h2 id="rest_cli_environmenttemplate_create_post__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>POST https://{hostname}:{port}
+    /cli/environmentTemplate/create
+Accept: {contentType}
+</code></pre><table class="table" id="rest_cli_environmenttemplate_create_post__header_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_environmenttemplate_create_post__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_environmenttemplate_create_post__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_environmenttemplate_create_post__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_environmenttemplate_create_post__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_environmenttemplate_create_post__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_environmenttemplate_create_post__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_environmenttemplate_create_post__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_environmenttemplate_create_post__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+<div class="p" id="rest_cli_environmenttemplate_create_post__template">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "applicationTemplateId": "ID of the application template 
+  to which the environment template belongs",
+  "cleanupCountToKeep": "Number of most recently deployed 
+  versions to keep (Optional)",
+  "cleanupDaysToKeep": "Number of days to keep versions 
+  deployed to this environment (Optional)",
+  "color": "HTML color code for the environment template",
+  "description": "description of the template (Optional)",
+  "environmentType": "type of environment, leave blank for 
+  Standard Environment",
+  "exemptProcessesArray": "An array of process Ids. These 
+  processes will be exempt from approvals for this 
+  environment (Optional).",
+  "externalApprovalAgent": "Name or id of agent to run 
+  external approval processes on (Optional).",
+  "externalApprovalAgentPool": "Name or id of agent pool 
+  to run external approval processes on (Optional).",
+  "externalApprovalProcess": "Name or id of external 
+  approval process(Optional).",
+  "historyCleanupDaysToKeep": "Number of days to keep 
+  application process history for this environment 
+  (Optional)",
+  "lockSnapshots": "Whether snapshots will be locked when 
+  deployed to this environment (Optional)",
+  "name": "name of the environment template",
+  "noSelfApprovals": "When this option is selected, users 
+  that submit deployment requests cannot approve their own 
+  requests (Optional)",
+  "requireApprovals": "Whether approvals will be required 
+  (Optional)",
+  "requireSnapshot": "If enabled, all deployments must use 
+  a snapshot instead of loose versions (Optional)",
+  "resourceTemplate": "ID of the resource template to use",
+  "snapshotDaysToKeep": "Number of days to keep snapshots 
+  deployed to this environment (Optional)",
+  "snapshotLockType": "type of snapshot lock: ALL, 
+  VERSIONS, CONFIGURATION (Required with \"lockSnapshots\"",
+  "teamMappings": [
+    {
+      "resourceRoleId": "Id of Resource Type to apply to 
+  this team mapping (Optional, can specify either this or 
+  resourceRoleLabel",
+      "resourceRoleLabel": "Name of Resource Type to apply 
+  to this team mapping (Optional, can specify either this or 
+  resourceRoleId",
+      "teamId": "ID of a team, either this field or 
+  teamLabel are needed to specify a team",
+      "teamLabel": "Name of the team to map the 
+  environment to, either this field or teamId are needed to 
+  specify a team"
+    },
+    "(Optional)"
+  ],
+  "useSystemDefaultDays": "Whether or not to use the 
+  system default number of days to keep application process 
+  history for this environment (Optional)"
+}
+</code></pre></div></section>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_createenvironmenttemplate.html" title="Create a new environment template">createEnvironmentTemplate</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_environmenttemplate.html">environmentTemplate resource</a></div></div></nav></article></main></body></html>

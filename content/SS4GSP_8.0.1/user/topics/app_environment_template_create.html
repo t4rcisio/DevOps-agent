@@ -1,0 +1,132 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="When you create an application template, you can define environment templates that model environments for the applications that you create by using the application template."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_template.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_environment_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating environment templates</title></head><body id="app_environment_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating environment templates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fb640b1f-1445-4099-b67a-805328fcd835">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">When you create an application template, you can define environment templates that model
+environments for the applications that you create by using the application template.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_environment_create__prereq__1">Before you begin</h2></div>Ensure that you have a resource template that describes the resource tree for this
+   environment in the application. Include both the component tags that the application templates
+   uses and agent prototypes. See <a class="xref" href="resources_templates.html" title="A resource template is a model for a group of resources. The template contains a hierarchy of resources, groups, and agent prototypes that is a starting point for creating new resources.">Resource templates</a>.<p class="p">Some of the configuration
+        options might be resticted based on the role assigned to you. Check with your administator,
+        if you need a specific option enabled. </p><p class="p">Create environment
+    templates as follows:</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_environment_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" id="app_environment_create__create_env">
+<span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>, select your application template, and then click <span class="ph menucascade"><span class="ph uicontrol">Environment Templates</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Environment Template</span></span>.</span>
+</li><li class="li step stepexpand" id="app_environment_create__env_name">
+<span class="ph cmd">Specify the environment name.</span>
+<div class="itemgroup info">If you create an environment from this template, the environment is assigned this name by
+default. The name is used as part of the deployment process and typically corresponds to the target
+environment.</div>
+</li><li class="li step stepexpand" id="app_environment_create__env_info">
+<span class="ph cmd">Provide the following information:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Specify a description.</span>
+</li>
+<li class="li substep substepexpand"><strong>Required: </strong>
+<span class="ph cmd">In the <span class="ph uicontrol">Resource Template</span> list, select the resource template to use for
+the environment.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">To set the environment security type, from the <span class="ph uicontrol">Type</span> list, select the
+security type.</span>
+<div class="itemgroup info">The security type is automatically assigned to environments that you create when you create an
+application from a template. If you specify an environment template when you add an environment to
+an existing application, you must manually assign the security type.</div>
+</li>
+<li class="li substep substepexpand">
+      <span class="ph cmd">To grant teams access to the environment and set the security type for the environment
+       template, click <span class="ph uicontrol">Add Teams</span>, select values from the
+        <span class="ph uicontrol">Team</span> and <span class="ph uicontrol">Type</span> lists, and click
+        <span class="ph uicontrol">Add</span>.</span>
+     </li>
+     <li class="li substep substepexpand">
+            <span class="ph cmd">To ensure that components cannot be deployed to the environment without first being
+              approved, specify the <span class="ph uicontrol">Deployment Approvals</span> information. If
+              specified, <span class="ph">Deploy</span> enforces an
+              approval process before the deployment can be deployed to the environment. Initial
+              deployments are typically done in uncontrolled environments. After the deployment
+              works as designed, you can configure an approval process as the application moves
+              along the development pipeline. If you are setting up more than one environment,
+              consider creating an approval process for at least one of them.</span>
+            <div class="itemgroup info">You can apply two types of approvals to an environment, that is, external and
+              manual approvals.   </div>
+            <div class="itemgroup info">
+              <ul class="ul" id="app_environment_create__d194e175">
+                <li class="li">Specify a <span class="ph uicontrol">Resource Type to Run External Approval</span>. You can
+                  select <span class="ph uicontrol">System Default</span> for the values specified in the
+                  system settings, an <span class="ph uicontrol">Agent Pool</span> to specify a group of
+                  agents, or an <span class="ph uicontrol">Agent</span>.</li>
+                <li class="li">Choose an existing <span class="ph uicontrol">External Approval Process</span> to run. See
+                    <a class="xref" href="app_externalApprovalCreate.html" title="If you have a process step that requires validation on an external application before deployment, you can create an approval process and assign it to environments. With this approval process, the deployment runs automatically and only when it is approved.">Managing external approval processes</a> for information about how
+                  external approval processes are created.</li>
+                <li class="li">You can <span class="ph uicontrol">Exempt Processes</span> from approvals even if it is
+                  required by an environment. </li>
+                <li class="li">Enable <span class="ph uicontrol">Require Manual Approvals</span> to allow approvals from
+                  users in a role specified by the approval process created for the environment. See
+                    <a class="xref" href="app_approvalCreate.html" title="You can add approval requirements to deployments. The approval process identifies the deployment and the role of the approver. You respond to approval requests on the Work Items page, or, depending on the configuration, through email.">Creating an approval process</a> for information about how manual approval
+                  processes are created. To prohibit the user who makes an approval request from
+                  approving the same request, select <strong class="ph b">No Self-Approvals</strong>.</li>
+              </ul>
+            </div>
+          </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">To prevent changes to snapshots in this environment after you deploy them, select the
+<span class="ph uicontrol">Lock Snapshots</span> check box.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">If you selected the <span class="ph uicontrol">Lock Snapshots</span> check box, from the
+<span class="ph uicontrol">Snapshot Lock Type</span> list, select the lock type:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">To lock only component versions, select <span class="ph uicontrol">Only Component Versions</span>.</li>
+<li class="li">To lock snapshot configurations, select <span class="ph uicontrol">Only Configuration</span>.</li>
+<li class="li">To lock both component versions and configurations, select <span class="ph uicontrol">Component Versions and
+Configuration</span>.</li>
+<li class="li">To use the system default value, select <span class="ph uicontrol">System Default</span>. The default value
+is determined by the <span class="ph uicontrol">Default Snapshot Lock Type</span> field on the <span class="keyword wintitle">System
+Settings</span> page. For information about system settings, see <a class="xref" href="../../admin/topics/settings_system.html#settings_system" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>.</li>
+</ul>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Select a color to apply to the environment.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">To apply the cleanup values that are specified on the <span class="keyword wintitle">System Settings</span>
+page, select the <span class="ph uicontrol">Use Default Artifact Cleanup Settings</span> check box.</span>
+<div class="itemgroup info">If this check box is cleared, you must specify how long to keep snapshots and component
+       versions. <span class="ph">For more information
+                  about cleaning up component versions, see <a class="xref" href="settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a>.</span>
+       <span class="ph">For more information about cleaning up snapshots, see <a class="xref" href="app_snapshot_cleanup.html" title="You can configure the server to reduce the number of snapshots by deleting old snapshots. You can specify global cleanup settings and cleanup settings for specific environments.">Cleaning up snapshots</a>.</span></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">To use deployment history cleanup, select <span class="ph uicontrol">Use Deloyment History
+Retention</span>. </span>
+<div class="itemgroup info">You can use the default settings that are specified on the <span class="keyword wintitle">Systems
+Settings</span> page by clicking <span class="ph uicontrol">Use Default Deployment History
+Retention</span>, or in <span class="ph uicontrol">Days to Retain Deployment History</span> you can
+specify a number of days to retain deployment history records.</div>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup info">
+<div class="note note note_note" id="app_environment_create__note_off_dsq_tnb"><span class="note__title">Note:</span> 
+<ul class="ul">
+<li class="li">If you create an environment with an environment template and then add component mappings to the
+resource template, the new component mappings are added to the environment. However, if you remove
+component mappings from the resource template, the component mappings are not removed from the
+environment.</li>
+<li class="li">Changes in a resource template structure are automatically picked up by the resource sync
+service but any change in the role properties of a resource template will not be synchronized. </li>
+</ul>
+</div>
+</div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_environment_create__result__1">Results</h2></div>The <span class="ph uicontrol">Configuration</span> tab for the environment template is displayed. When
+you use the application template to create an application, you can create environments by using this
+environment template.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_template.html" title="With an application template, you can save and reuse a collection of resources, environments, processes, and tagged components or component templates to create a standardized application.">Application templates</a></div></div></nav></article></main></body></html>

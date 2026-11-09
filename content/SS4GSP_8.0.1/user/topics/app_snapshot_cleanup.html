@@ -1,0 +1,70 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can configure the server to reduce the number of snapshots by deleting old snapshots. You can specify global cleanup settings and cleanup settings for specific environments."><meta name="DC.relation" scheme="URI" content="../../user/topics/storage_cleanup.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_snapshot_cleanup"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Cleaning up snapshots</title></head><body id="app_snapshot_cleanup"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Cleaning up snapshots</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-641c61c5-2508-4e13-b133-d5ee6784a8c2">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can configure the server to reduce the number of snapshots by deleting old snapshots.
+You can specify global cleanup settings and cleanup settings for specific environments.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_snapshot_cleanup__context__1">About this task</h2></div>Snapshot cleanup runs daily, at the same time as component version cleanup. The server
+            deletes snapshots that do not meet any of the criteria for snapshots to keep. The effect
+            is the same as if you delete the snapshot manually. These snapshots are not archived and
+            are not recoverable. <p class="p">When cleaning up snapshots, the server retrieves the settings
+                from the <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Artifact Cleanup</span></span> options first. Then it retrieves the settings for individual
+                environments, which override the system settings. If any of these settings specify
+                to keep the snapshot, it is not deleted.</p><p class="p">The settings for snapshot cleanup
+                specify a number of days to keep snapshots. This time period is measured from the
+                day that the snapshot is no longer the most recently deployed snapshot in an
+                environment. For example, assume that the <span class="ph uicontrol">Default Application Snapshot
+                    Retention (days)</span> system setting is set to 30 days. If a snapshot is
+                deployed on day 1 and another snapshot is deployed on day 10, the first snapshot can
+                not be cleaned up until day 40.</p><p class="p">The system setting also refers to the number
+                of days since the snapshot was created. If a snapshot was created fewer days ago
+                than the <span class="ph uicontrol">Default Application Snapshot Retention (days)</span> system
+                setting, it is kept.</p><div class="p">The criteria for keeping or deleting snapshots are as
+                follows: <ul class="ul">
+                    <li class="li">If the snapshot is the most recently deployed snapshot in any environment,
+                        it is kept.</li>
+                    <li class="li">In any environment, if the snapshot was the most recently deployed snapshot
+                        within the number of days in the system setting or the environment setting,
+                        it is kept.</li>
+                    <li class="li">If the snapshot age in days is less than the system setting, it is
+                        kept.</li>
+                </ul>If none of these criteria are true, the snapshot is deleted, even if it was
+                deployed to an environment in the past.</div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_snapshot_cleanup__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Specify the system snapshot cleanup settings:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System Settings</span></span>.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Under <span class="ph uicontrol">Artifact Cleanup</span>, in the <span class="ph uicontrol">Default Application Snapshot
+Retention (days)</span> field, specify how long to retain snapshots, in days.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+<div class="itemgroup info">For information about the other settings in this section, see <a class="xref" href="settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a>.</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Specify cleanup settings for individual environments. </span>
+<div class="itemgroup info">These settings override the system settings.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">Applications</span>, click an application, click an environment, click
+<span class="ph uicontrol">Configuration</span>, and then click <span class="ph uicontrol">Basic Settings</span>.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Clear the <span class="ph uicontrol">Use Default Artifact Cleanup Settings</span> check box.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">In the <span class="ph uicontrol">Days to Retain Application Snapshots</span> field, specify how long to
+keep a snapshot after it is not the most recently deployed snapshot in the environment.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/storage_cleanup.html" title="If you have storage issues and feel that you need to cleanup some unnecessary stored data, you can use cleanup settings to cleanup your database and file system storage.">Cleaning up targets</a></div></div></nav></article></main></body></html>

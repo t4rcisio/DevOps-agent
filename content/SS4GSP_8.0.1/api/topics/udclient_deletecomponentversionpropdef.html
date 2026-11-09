@@ -1,0 +1,44 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Delete a component version property"><meta name="DC.subject" content="udclient commands, deleteComponentVersionPropDef, udclient command, command-line commands"><meta name="keywords" content="udclient commands, deleteComponentVersionPropDef, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_deletecomponentversionpropdef"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>deleteComponentVersionPropDef</title></head><body id="udclient_deletecomponentversionpropdef"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">deleteComponentVersionPropDef</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-944d2c0d-cb05-434c-9627-d8676d2b8d54">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Delete a component version property</p>
+<section class="section"><h2 id="udclient_deletecomponentversionpropdef__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  deleteComponentVersionPropDef [parameters]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_deletecomponentversionpropdef__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_deletecomponentversionpropdef__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_deletecomponentversionpropdef__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_deletecomponentversionpropdef__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_deletecomponentversionpropdef__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_deletecomponentversionpropdef__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_deletecomponentversionpropdef__composite_params__entry__1"><span class="keyword parmname">component</span></td>
+<td class="entry" headers="udclient_deletecomponentversionpropdef__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_deletecomponentversionpropdef__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_deletecomponentversionpropdef__composite_params__entry__4">Name or ID of the component</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_deletecomponentversionpropdef__composite_params__entry__1"><span class="keyword parmname">name</span></td>
+<td class="entry" headers="udclient_deletecomponentversionpropdef__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_deletecomponentversionpropdef__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_deletecomponentversionpropdef__composite_params__entry__4">Name of the property to delete</td>
+</tr>
+</tbody></table>
+
+</section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_deletecomponentversionpropdef__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  deleteComponentVersionPropDef 
+  -component JPetStore-APP 
+  -name Prop1</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_version_versionpropdefs_delete.html">Delete a component version property</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

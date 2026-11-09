@@ -1,0 +1,54 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="After you upgrade from a version of the blueprint design server earlier than version 6.1.1, you must move blueprints and configuration files from the file system to the Git repository."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="migrate_ov"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Moving blueprints and configuration files</title></head><body id="migrate_ov"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Moving blueprints and configuration files</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f49828e1-e378-4b8e-87ac-d352ca25472d">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">After you upgrade from a version of the blueprint design server earlier than version
+6.1.1, you must move blueprints and configuration files from the file system to the Git
+repository.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_ov__prereq__1">Before you begin</h2></div> <p class="p">To move the blueprints and configuration files, you must have administrative access to the
+blueprint designer. Complete the following steps after the blueprint design server is upgraded to
+version 6.1.1.</p> </section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_ov__context__1">About this task</h2></div>When you create blueprints and configuration files in versions of the blueprint designer
+earlier than version 6.1.1, the blueprints and configuration files are stored on the file system of
+the blueprint design server, in the <span class="ph filepath">workspace</span> folder in the blueprint design
+server installation directory. After you upgrade to the blueprint design server Version 6.1.1,
+blueprints and configuration files are stored in Git repositories in the
+<span class="ph filepath">repositories</span> folder in the blueprint design server installation directory.
+Existing blueprints and configuration files are not available until you move them from the file
+system to the Git repository. </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_ov__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Log in to the blueprint designer. Log in from the user account that you plan to use to work
+with the blueprints and configuration files.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Repositories</span>.</span></li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Repositories</span> in the list.</span>
+<div class="itemgroup stepresult"> The repository list opens and <samp class="ph systemoutput sysout">No Content</samp> is
+displayed.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Init Repository</span>, and then
+type <kbd class="ph userinput">default</kbd> for the <span class="ph uicontrol">New folder</span> name.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Submit</span>.</span>
+<div class="itemgroup stepresult"> The <span class="ph filepath">default</span> folder is created in a directory structure under the
+<span class="ph filepath">repositories</span> folder in the blueprint design server installation directory. The
+exact path is determined by the user name. For a user named user1, the <span class="ph filepath">default</span>
+folder is created in
+<span class="ph filepath"><var class="keyword varname">blueprint_design_server_installation_directory</var>/workspace/repositories/us/user1_id/OrionContent</span>.
+<span class="ph">The
+default installation directory is <span class="ph filepath">/opt/ibm-ucd-patterns</span> on Linux™ and <span class="ph filepath">C:\Program Files\ibm-ucd-patterns</span>
+on Windows™.</span></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Log in to a command line on the computer that is running the blueprint design server.</span>
+<div class="itemgroup info"> You must log in with administrator privileges.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Copy all files from
+<span class="ph filepath"><var class="keyword varname">blueprint_design_server_installation_directory</var>/workspace</span> to
+the <span class="ph filepath">default</span> folder that you created in step 5.</span>
+<div class="itemgroup info"> Additionally, ensure that the owner of the files and directories is the
+<samp class="ph systemoutput sysout">root</samp> account.</div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_ov__result__1">Results</h2></div>The blueprints and configuration files that were stored in
+the workspace folder are now available to the user account where you
+created the default repository.</section>
+</div>
+</article></main></body></html>

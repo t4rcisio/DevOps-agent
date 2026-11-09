@@ -1,0 +1,98 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="All servers that are configured for the HA feature must be on the same version. Thus, all servers must be upgraded at the same time."><meta name="DC.relation" scheme="URI" content="../../user/topics/c_node_upgrading.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ha_upgrading"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Upgrading high-availability installations</title></head><body id="ha_upgrading"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Upgrading high-availability installations</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fdd879aa-a8ef-4842-bb3e-6b163a73a7bb">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">All servers that are configured for the HA feature must
+be on the same version. Thus, all servers must be upgraded at the
+same time.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_upgrading__prereq__1">Before you begin</h2></div>
+<div class="note note note_note"><span class="note__title">Note:</span> During the upgrade of <span class="ph">IBM DevOps Deploy (Deploy)</span>, the contents of
+        the appdata/patches directory (including all .jar files) will be appended with
+          <span class="ph filepath">.off</span>, preventing the existing test fixes from being loaded once the
+          <span class="ph">Deploy</span> server
+        is started post-installation. All UI test fixes applied to the Tomcat directory will be
+        wiped by the upgrade and will not be recoverable.<p class="p">If a text fix received for a reported
+          defect is not fixed in the upgraded version, you may need to open a Support Case to
+          request a new build.</p></div>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_upgrading__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" data-hd-otherprops="ibm">
+                <span class="ph cmd">Back up the database and file system.</span>
+                <div class="itemgroup info">See <a class="xref" href="../../install/topics/backup_recover.html" title="You can back up and recover the contents of your IBM DevOps Deploy (Deploy) installation.">Backup and recover</a>.</div>
+            </li><li class="li step stepexpand" data-hd-otherprops="ibm">
+        <span class="ph cmd">Ensure that no application and generic processes are running.</span>
+        <div class="itemgroup info">Open the <span class="ph uicontrol">Dashboard</span> and confirm that no processes are running. If
+            processes are running, you can wait for them to complete or by clicking
+            <span class="ph uicontrol">Cancel</span> in the same row as each process, cancel them.
+            You can use the Message of the Day feature (<span class="ph menucascade"><span class="ph uicontrol">Settings &gt; System &gt; General Settings</span></span>) to notify users of the planned upgrade, and request that they do
+            not start new processes. </div>
+    </li><li class="li step stepexpand">
+        <span class="ph cmd"> Download and extract the installation package.</span>
+        <div class="itemgroup info">Upgrades are done with the same package used to perform new installations. </div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd"> Shut down the servers. </span>
+        <div class="itemgroup info">
+          <div class="note warning note_warning"><span class="note__title">Warning:</span> Ensure that all servers are stopped. If any servers are accessing the
+            database when the upgrade happens, the upgrade will cause errors.</div>
+        </div>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">Ensure that each server is stopped and unable to connect to the load balancer.</span>
+<ol type="a" class="ol substeps" data-hd-otherprops="ibm">
+<li class="li substep substepexpand">
+                        <span class="ph cmd">Check that there is no <span class="ph filepath">server.pid</span> file in the
+                                    <span class="ph filepath"><var class="keyword varname">server_install</var>/var</span>
+                            folder. </span>
+                    </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Check for running system processes.</span>
+                        <div class="itemgroup info">On Linux™, you can use the
+                                <span class="keyword cmdname">netstat</span> or <span class="keyword cmdname">ps</span> commands. For
+                            example, if the server is running on port 8443, use the command
+                                <code class="ph codeph">netstat -nap | grep 8443</code>. You can also run
+                                <code class="ph codeph">ps -ef | grep server</code> and look for the server system
+                            process in the results.</div>
+</li>
+<li class="li substep substepexpand">
+                        <span class="ph cmd">Stop any running server process.</span>
+                        <div class="itemgroup info" id="ha_upgrading__d733e141">If you try to upgrade with a running old server process, you get an
+                            error that says <samp class="ph systemoutput sysout">A previously installed version of Deploy
+                                is running. Please shutdown the running Deploy and start the
+                                installation again.</samp> .</div>
+                    </li>
+</ol>
+
+<div class="itemgroup info" data-hd-otherprops="ibm">If you try to upgrade with a running old server process, you get an
+                            error that says <samp class="ph systemoutput sysout">A previously installed version of Deploy
+                                is running. Please shutdown the running Deploy and start the
+                                installation again.</samp> .</div>
+
+</li><li class="li step stepexpand" data-hd-otherprops="ibm">
+        <span class="ph cmd">Update the network storage to match the folders in the new version.</span>
+        <div class="itemgroup info">For information about how to structure the folders, see <a class="xref" href="../../user/topics/server_install_clustered.html" title="To configure a high-availability cluster, you store shared files on network storage. Then, you configure multiple servers, set each server to access the same files and database, and configure a load balancer to distribute the traffic between the servers.">Setting up high-availability clusters</a>. <p class="p">Depending on
+            how you set up network storage for the high-availability cluster in the previous
+            version, you might need to move files and folders to put them in the place that the new
+            version of the server expects to find them. When you run the installation program,
+            specify the location of the <span class="ph filepath"><var class="keyword varname">app_data</var></span> folder in
+            the <span class="ph uicontrol">Where should the server store application data such as logs,
+plugins, and keystores?</span> prompt.</p><p class="p">For more information, see
+              <a class="xref" href="../../user/topics/server_install_clustered.html" title="To configure a high-availability cluster, you store shared files on network storage. Then, you configure multiple servers, set each server to access the same files and database, and configure a load balancer to distribute the traffic between the servers.">Setting up high-availability clusters</a>.</p></div>
+      </li><li class="li step stepexpand"><span class="ph cmd"> Run the server installation script. </span></li><li class="li step stepexpand" data-hd-otherprops="ibm">
+<span class="ph cmd">From the command line, run the server installer program. </span>
+<ul class="ul choices">
+<li class="li choice">On Windows™, run the
+<span class="ph filepath">install-server.bat</span> file.</li>
+<li class="li choice">On Linux, run
+<span class="ph filepath">./install-server.sh</span>.</li>
+</ul>
+<div class="itemgroup info">Depending on your system settings, you might need to run this file as an administrator.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">When prompted for the location of the installation directory,
+enter the path to one of the servers.</span><div class="itemgroup info">By specifying an existing installation, you are asked if you want to upgrade the current
+          installation. If you answer yes, the script leads you through the upgrade steps.</div></li><li class="li step stepexpand">
+        <span class="ph cmd">Restart the upgraded server. </span>
+        <div class="itemgroup info">Always use service scripts to start or stop the server. See <a class="xref" href="../../install/topics/run_server.html" title="To run the server, run the batch file or shell script for the server.">Starting and stopping the server</a>.</div>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">After the first server is back online, upgrade the other servers. After you upgrade the first
+node, you will not be prompted to upgrade the database when you upgrade the other nodes.</span>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/c_node_upgrading.html" title="Stay updated with latest features and functionalities by upgrading IBM DevOps Deploy (Deploy) server, agents, and relays. This section also provides instruction on how to migrate your Deploy instance.">Upgrading and Migrating</a></div></div><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a></div></div></nav></article></main></body></html>

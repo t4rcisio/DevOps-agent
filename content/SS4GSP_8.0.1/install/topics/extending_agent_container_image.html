@@ -1,0 +1,114 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To extend the containerized agents, you need to add this functionality to the IBM DevOps Deploy (Deploy) container agent."><meta name="DC.relation" scheme="URI" content="../../install/topics/agent_install_helm_chart.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="extending_an_engine_for_openstack"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Extending containerized agents</title></head><body id="extending_an_engine_for_openstack"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Extending containerized agents</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2508b9b0-0ecf-4266-93d2-0953a34e86db">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">To extend the containerized agents, you need to add this functionality to the <span class="ph">IBM DevOps Deploy (Deploy)</span> container
+  agent.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskextending_an_engine_for_openstack__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create Dockerfile for extended image.</span>
+<div class="itemgroup info">Extending the agent container image can be accomplished by specifying the agent build level
+that you wish to enhance as your base image and then invoking the docker entrypoint provided by the
+base image. Here is an example Dockerfile and shell script that can be used to add Python 3.8 to the
+7.1.2.1 agent image:</div>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">Dockerfile<pre class="pre codeblock"><code># Base image for 7.1.2.1 agent version
+ARG BASE_IMAGE=”cp.icr.io/cp/ibm-ucda@sha256:76ddedef53b5b5f6f5f72d1f14068967b133b04ad4018df014b1228f5eb259a3”
+FROM ${BASE_IMAGE}
+# Copy shell script into /tmp directory
+COPY artifacts/* /tmp/
+# Important: Need root access to install packages
+USER root
+# Install packages to extend agent functionality
+RUN bash /tmp/install-pkgs-extend.sh
+USER 1001
+# Important: Must invoke existing docker-entrypoint script provided by base image
+ENTRYPOINT [“/usr/local/bin/docker-entrypoint.sh”]
+</code></pre></li>
+<li class="li">install-pkgs-extend.sh<pre class="pre codeblock"><code>#!/bin/bash
+# List of packages to install
+PKG_LIST="python38"
+# Agent is based on RHEL8 ubi-minimal image which uses microdnf to install packages
+microdnf update -y
+microdnf install -y --nodocs ${PKG_LIST}
+microdnf clean all
+rm -rf /var/cache/microdnf
+rm -rf /var/tmp/microdnf-*</code></pre></li>
+</ul>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd"> Identify the agent base image.</span>
+<div class="itemgroup info">The base image that you use is based on the agent version that you wish to extend. The
+supported agent versions can be located in the <span class="ph filepath">templates/_ucd-chart-config.tpl</span>
+file of the agent Helm Chart. Here are some examples:
+<pre class="pre codeblock language-json"><code>{{- define "{{ .Chart.Name }}.imageSpec" -}}
+{{- if contains "extended" .Values.version -}}
+ {{ .Values.version }}
+{{- else if eq .Values.version "7.1.2.1" -}}
+ cp.icr.io/cp/ibm-ucda@sha256:76ddedef53b5b5f6f5f72d1f14068967b133b04ad4018df014b1228f5eb259a3
+{{- else if eq .Values.version "7.1.2.0" -}}
+ cp.icr.io/cp/ibm-ucda@sha256:366642772a2e84decfcbeda42745494f23a494d24248f838a00e8f2139a122d8
+{{- else if eq .Values.version "7.1.1.2" -}}
+ cp.icr.io/cp/ibm-ucda@sha256:0bf58dc592ca7127fec75148df8ba92f29a55e072c6b056e534ab1ab0695709c
+{{- else if eq .Values.version "7.1.1.1" -}}
+ cp.icr.io/cp/ibm-ucda@sha256:8a3c5815cdfc7852a74fb62ba5c4a954246a17a6947cefc561f29de2181081ae
+{{- else if eq .Values.version "7.1.1.0" -}}
+ cp.icr.io/cp/ibm-ucda@sha256:6b34cf4a0ce9b2f6398ea2bb41e8d614bba7befe8f5cbdce6d06d78c9207042d
+{{- else if eq .Values.version "7.1.0.3" -}}
+ cp.icr.io/cp/ibm-ucda:7.1.0.3.1069281
+{{- else -}}
+ cp.icr.io/cp/ibm-ucda:unknownProductVersion{{- end -}}
+{{- end -}}</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Authenticate to IBM Entitlement Registry prior to building the image.</span>
+<div class="itemgroup info">To pull the base image from the desired entitlement registry, you must perform a docker login
+prior to the running docker build command. Here is an example docker login command to use:
+<pre class="pre codeblock"><code>docker login cp.icr.io -u cp -p <var class="keyword varname">EntitlementKey</var></code></pre></div>
+<div class="itemgroup info">The <var class="keyword varname">EntitlementKey</var> can be obtained by logging into <a class="xref" href="https://myibm.ibm.com/products-services/containerlibrary" target="_blank">MyIBM
+Container Software Library</a> with your IBMid and password that are associated with the entitled
+software. In the Entitlement keys section, select <span class="ph uicontrol">Copy key</span> to copy the key to
+the clipboard and use it in your docker login command. </div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Update the agent Helm chart.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> This step is only required for agent releases prior to 7.2.0.0</div>
+</div>
+<div class="itemgroup info">In order to use the extended agent image, you will need to update the
+<span class="ph filepath">_ucd-chart-config.tpl</span> file to look something like
+this:<pre class="pre codeblock language-json"><code>{{- define "{{ .Chart.Name }}.imageSpec" -}}
+{{- if contains "extended" .Values.version -}}
+ {{ .Values.version }}
+{{- else if eq .Values.version "7.1.2.1" -}}
+ cp.icr.io/cp/ibm-ucda@sha256:76ddedef53b5b5f6f5f72d1f14068967b133b04ad4018df014b1228f5eb259a3
+{{- else if eq .Values.version "7.1.2.0" -}}
+ cp.icr.io/cp/ibm-ucda@sha256:366642772a2e84decfcbeda42745494f23a494d24248f838a00e8f2139a122d8
+{{- else if eq .Values.version "7.1.1.2" -}}
+ cp.icr.io/cp/ibm-ucda@sha256:0bf58dc592ca7127fec75148df8ba92f29a55e072c6b056e534ab1ab0695709c
+{{- else if eq .Values.version "7.1.1.1" -}}
+ cp.icr.io/cp/ibm-ucda@sha256:8a3c5815cdfc7852a74fb62ba5c4a954246a17a6947cefc561f29de2181081ae
+{{- else if eq .Values.version "7.1.1.0" -}}
+ cp.icr.io/cp/ibm-ucda@sha256:6b34cf4a0ce9b2f6398ea2bb41e8d614bba7befe8f5cbdce6d06d78c9207042d
+{{- else if eq .Values.version "7.1.0.3" -}}
+ cp.icr.io/cp/ibm-ucda:7.1.0.3.1069281
+{{- else -}}
+ cp.icr.io/cp/ibm-ucda:unknownProductVersion
+{{- end -}}
+{{- end -}}</code></pre></div>
+<div class="itemgroup info">Note that lines 2 and 3 are added to the logic.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify the new ImageSpec for deployment.</span>
+<div class="itemgroup info">To use the extended image, specify the imagespec in the version parameter of your values.yaml
+file. The tag for your image must include the word “extended” for this process to work. Here is an
+example values.yaml:
+<pre class="pre codeblock"><code># Agent Version
+version: "myregistry/agent:7.1.2.1-extended-amd64"</code></pre></div>
+<div class="itemgroup info">Update remaining parameters in <span class="ph filepath">values.yaml</span> for your modified helm chart
+and then run the helm install command.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Verify successful agent deployment.</span>
+<div class="itemgroup info">To verify your packages were installed successfully, you can run the <code class="ph codeph">kubectl exec -it &lt;podname&gt; -- /bin/sh</code> command to open a command prompt into the running agent.</div>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/agent_install_helm_chart.html" title="An agent is a light-weight software program that automates deployments. Agents facilitate rapid feedback and continuous delivery in agile development environments while providing the audit trails, versioning, and approvals needed in production.">Installing an agent in a Kubernetes cluster</a></div></div></nav></article></main></body></html>

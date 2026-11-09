@@ -1,0 +1,103 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To run the server, run the batch file or shell script for the server."><meta name="DC.relation" scheme="URI" content="../../install/topics/runProduct.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="run_server"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Starting and stopping the server</title></head><body id="run_server"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Starting and stopping the server</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ec08ad2d-d8d7-44fe-b140-b01f06f55eec">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">To run the server, run the batch file or shell script for
+the server.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrun_server__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Go to the <span class="ph filepath"><var class="keyword varname">server_installation</var>\bin</span> directory.</span>
+<div class="itemgroup info"><span class="ph" id="run_server__default_install_directory">The default server installation directory is
+                            <span class="ph filepath">/opt/devops-deploy/server</span> on Linux™ and <span class="ph filepath">C:\Program
+                            Files\devops-deploy\server</span> on Windows™.</span></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Run the <span class="ph filepath">run_server.cmd</span> batch file as an administrator (Windows), or <code class="ph codeph">./server start</code> (UNIX™ or Linux).</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">On Linux systems that use <code class="ph codeph">init.d</code>, you
+can run the server as a service by following these steps:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Make sure that the file <span class="ph filepath">/etc/rc.d/init.d/functions</span> has execute
+permissions.</span>
+<div class="itemgroup stepxmp">For example, you might run the following
+command:<pre class="pre codeblock"><code>chmod ugo+x /etc/rc.d/init.d/functions</code></pre></div>
+</li>
+<li class="li substep substepexpand">
+      <span class="ph cmd">Copy the <span class="ph">Deploy</span> server initialization file to the <span class="ph filepath">/etc/init.d</span> folder.</span>
+      <div class="itemgroup info">The server initialization file is
+                                <span class="ph filepath">/<var class="keyword varname">installation_location</var>/server/bin/init/server</span>,
+                            where <var class="keyword varname">installation_location</var> is the location that you
+                            installed the server. The default installation location is
+                                <span class="ph filepath">/opt/devops-deploy/</span>.</div>
+     </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Make the <span class="ph filepath">/etc/init.d/server</span> file executable. </span>
+<div class="itemgroup info">For example, you might run the following command:
+<pre class="pre codeblock"><code>chmod +x /etc/init.d/server</code></pre></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Open the file <span class="ph filepath">/etc/init.d/server</span> in a text editor and find the following
+lines of code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>SERVER_PROG="server"
+SERVER_HOME="/opt/devops-deploy/server"
+SERVER_USER=@SERVER_USER@
+SERVER_GROUP=@SERVER_GROUP@</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Replace <code class="ph codeph">@SERVER_USER@</code> with the name of the user with which you run the
+server.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Replace <code class="ph codeph">@SERVER_GROUP@</code> with the name of the group with which you run the
+server.</span>
+<div class="itemgroup stepxmp">For example, if you run the server as the root user, use the following
+                            code:<pre class="pre codeblock"><code>SERVER_PROG="server"
+SERVER_HOME="/opt/devops-deploy/server"
+SERVER_USER="root"
+SERVER_GROUP="root"</code></pre></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Save the file.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Install and configure the service with the following command: </span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>chkconfig --add server</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Test the service by running the following code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>service server start</code></pre>
+</div>
+</li>
+</ol>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrun_server__postreq__1">What to do next</h2></div>To access the server, see <a class="xref" href="access_server.html" title="You can access the IBM DevOps Deploy (Deploy) server with a Web browser.">Accessing DevOps Deploy</a>. If the <span class="ph">Deploy</span> server did
+            not connect to the licence server, you see an error message that says that the server is
+            unlicensed and cannot run deployments. To remove the error message, you must restore the
+            connection to the license server and restart the <span class="ph">Deploy</span>
+                server.<p class="p">To stop the server, return to the
+                        <span class="ph filepath"><var class="keyword varname">server_installation</var>\bin</span> directory.
+                Run the <span class="ph filepath">stop_server.cmd</span> batch file as an administrator (Windows) or <code class="ph codeph">./server stop</code>
+                    (UNIX or Linux).</p><div class="p" data-hd-otherprops="ibm">When you run the server for the first time, you might see an error message
+that says that no agent or tag is configured to import new component versions. To import component
+versions, including built artifacts, you must use an agent, and the server requires that you specify
+a default agent for this purpose. You can override this default setting when you create a component.
+Follow these steps to specify a default agent or agent tag:<ul class="ul">
+<li class="li">To specify a default agent, click <span class="ph menucascade"><span class="ph uicontrol">System</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System Settings</span></span> and under <span class="ph uicontrol">General Settings</span>, clear the <span class="ph uicontrol">Use Agent Tag
+For Integration</span> check box. Then, select an agent in the <span class="ph uicontrol">Agent for Version
+Imports</span> list. Then, at the bottom of the page, click <span class="ph uicontrol">Save</span>.</li>
+<li class="li">To specify a default agent tag, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System Settings</span></span> and under <span class="ph uicontrol">General Settings</span>, clear the <span class="ph uicontrol">Use Agent Tag
+For Integration</span> check box. Then, select an agent tag in the <span class="ph uicontrol">Agent Tag for
+version imports</span> list. Then, at the bottom of the page, click
+<span class="ph uicontrol">Save</span>. If no tags are listed, add a tag to one or more agents on the
+server.</li>
+</ul></div>
+            </section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/runProduct.html" title="Both UNIX and Windows installations require the IBM DevOps Deploy (Deploy) server and at least one agent. If you are using a database other than Derby, make sure that the appropriate driver is installed and configured.">Starting DevOps Deploy</a></div></div></nav></article></main></body></html>

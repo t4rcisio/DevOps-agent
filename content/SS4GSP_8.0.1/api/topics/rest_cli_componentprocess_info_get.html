@@ -1,0 +1,78 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="This command returns a JSON representation of a component process."><meta name="DC.subject" content="REST API, componentProcess resource, /info GET, GET methods, /componentProcess/info"><meta name="keywords" content="REST API, componentProcess resource, /info GET, GET methods, /componentProcess/info"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_componentprocess.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_componentprocess_info_get"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Get information about a component process</title></head><body id="rest_cli_componentprocess_info_get"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Get information about a component process</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-758a33a0-cda7-40a1-971a-96a946aa9d12">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">This command returns a JSON representation of a component process.</p>
+<section class="section"><h2 id="rest_cli_componentprocess_info_get__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>GET https://{hostname}:{port}
+    /cli/componentProcess/info?{parameters}
+Accept: {contentType}
+</code></pre><table class="table" id="rest_cli_componentprocess_info_get__request_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Request parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_componentprocess_info_get__request_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_componentprocess_info_get__request_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_componentprocess_info_get__request_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_componentprocess_info_get__request_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__1"><span class="keyword parmname">component</span></td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__2">string</td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__4">Name or ID of the component</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__1"><span class="keyword parmname">componentProcess</span></td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__2">string</td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__4">Name or ID of the component process</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__1"><span class="keyword parmname">draft</span></td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__2">boolean</td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__3">false</td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__request_params__entry__4">Whether to get the latest draft process. Default is false</td>
+</tr>
+</tbody></table>
+<table class="table" id="rest_cli_componentprocess_info_get__header_params"><caption><span class="table--title-label">Table 2. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_componentprocess_info_get__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_componentprocess_info_get__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_componentprocess_info_get__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_componentprocess_info_get__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_componentprocess_info_get__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_componentprocess_info_get__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+</section>
+<div class="example" data-hd-audience="all"><h2 id="rest_cli_componentprocess_info_get__title__5" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "id": "c59721d1-a02c-4b3f-9eb7-bde5358210d0",
+  "name": "Deploy application component",
+  "description": "",
+  "defaultWorkingDir": "${p:resource/work.dir}/${p:component.name}",
+  "takesVersion": true,
+  "inventoryActionType": "ADD",
+  "status": "Active",
+  "configActionType": "ADD",
+  "active": true,
+  "versionCount": 4,
+  "version": 4,
+  "commit": 32,
+  "path": "components/69a6a5bd-583b-4b40-bd47-54b28f5aa1e6/processes/c59721d1-a02c-4b3f-9eb7-bde5358210d0"
+}</code></pre></div>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_getcomponentprocess.html" title="Get information about a component process">getComponentProcess</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_componentprocess.html" title="Resources for working with component processes.">componentProcess resource</a></div></div></nav></article></main></body></html>

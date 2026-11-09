@@ -1,0 +1,78 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="After installation, you can change the CodeStation where version artifacts are stored. The IBM z/OS agent that is used to import version stores artifact versions when the choice of CodeStation is HFS. Every z/OS agent that is used to deploy projects stores backups of old artifacts so that a rollback can be done when required. Plan the agent directory to ensure there is sufficient space for CodeStation and backup."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="codestation_choose"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Choosing a CodeStation and planning storage</title></head><body id="codestation_choose"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Choosing a CodeStation and planning storage</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-df2ca132-aaa9-4443-9c86-2f27726bb58b">Edit online</a></span></div>
+
+
+<p class="shortdesc">After installation, you can change the CodeStation where version artifacts are stored.
+The IBM z/OS agent that is used to import version stores artifact versions when the choice of
+CodeStation is HFS. Every z/OS agent that is used to deploy projects stores backups of old artifacts
+so that a rollback can be done when required. Plan the agent directory to ensure there is sufficient
+space for CodeStation and backup. </p>
+<article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_syd_kcs_dz">
+<h2 class="title topictitle2" id="ariaid-title2">Choosing a CodeStation</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-df2ca132-aaa9-4443-9c86-2f27726bb58b">Edit online</a></span></div>
+<div class="body taskbody">
+<section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="tasktask_syd_kcs_dz__context__1">About this task</h3></div>When you deploy IBM z/OS artifacts by using z/OS components, you can select one of  two
+CodeStation choices to store version artifacts. The agent installer prompts you for the choice and
+setup accordingly. You can modify the setting in the <span class="ph filepath">installed.properties</span> file
+after installation.</section>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="tasktask_syd_kcs_dz__steps-unordered__1">Procedure</h3></div><div class="li stepsection">
+<figure class="fig fignone" id="task_syd_kcs_dz__fig_qyg_shs_dz"><figcaption><span class="fig--title-label">Figure 1. </span>The server CodeStation and the HFS CodeStation</figcaption>
+
+<br><img class="image" src="../images/choose_codestation.png"><br>
+</figure>
+</div><ul class="ul steps-unordered"><li class="li step stepexpand">
+<span class="ph cmd">You can select the default CodeStation type: Server Codestation.</span>
+<div class="itemgroup info">
+<p class="p">The server CodeStation is part of the <span class="ph">Deploy</span> server. It is the CodeStation for all Windows, UNIX and Linux artifacts. It is the default
+CodeStation for z/OS artifacts.</p>
+<p class="p">Artifacts in Server CodeStation can be downloaded to any deployment targets using secured
+connections and using the same process step.</p>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If you want to keep z/OS artifacts in the z/OS file system, use the HFS CodeStation.</span>
+<div class="itemgroup info">
+<p class="p">The HFS CodeStation is provided to users who want to keep z/OS artifacts on the z/OS file system.
+A z/OS HFS directory is used to store the version artifacts. A copy or FTP step must used to
+transfer the artifacts to the target LPAR for deployment. </p>
+<p class="p">The default location of the codestation is <span class="ph filepath"><var class="keyword varname">agent install
+dir</var>/var/repository</span>. You can use symbolic links to link it to another directory.
+</p>
+</div>
+</li></ul></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" id="task_og5_gcs_dz">
+<h2 class="title topictitle2" id="ariaid-title3">Planning storage</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-df2ca132-aaa9-4443-9c86-2f27726bb58b">Edit online</a></span></div>
+<div class="body taskbody">
+<section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="tasktask_og5_gcs_dz__context__1">About this task</h3></div>
+<p class="p">The z/OS agent that imports versions stores those artifact versions when the choice of
+CodeStation is HFS. Every z/OS agent that deploys projects stores backups of old artifacts so you
+can roll back to a previous version. </p>
+</section>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="tasktask_og5_gcs_dz__steps-unordered__1">Procedure</h3></div><div class="li step p">
+<span class="ph cmd">Plan the agent directory to ensure there is sufficient space for the artifact versions in the
+CodeStation and backups. The space requirements vary depending on retention policies, application
+types, number of artifacts, and the number of deployments. For typical production environments,
+allocate 10 - 20 GB for storing version artifacts and for storing deployment backups. A breakdown
+estimation follows:</span>
+<ul class="ul choices">
+<li class="li choice"><strong class="ph b">Agent installation directory</strong>: The agent install directory requires at least 500 MB
+space.</li>
+<li class="li choice"><strong class="ph b">HFS CodeStation directory</strong>: The default location of the HFS CodeStation is
+<span class="ph filepath"><var class="keyword varname">agent install dir</var>/var/repository</span>. Estimate storage
+requirements by multiplying the average artifact size by the number of versions that are imported
+per day, and then multiply the preceding result by the average number of days before cleanup. Add 20
+percent to account for metadata.</li>
+<li class="li choice"><strong class="ph b">Deploy backup directory</strong>: The location of the deploy backup is
+<span class="ph filepath"><var class="keyword varname">agent install dir</var>/var/deploy</span>. Estimate storage requirements
+by multiplying the average artifact size by the number of deployments that are performed per day,
+then multiply the preceding result by the average number of days before cleanup.</li>
+<li class="li choice"><strong class="ph b">MVS data sets</strong>: MVS data sets are used to store z/OS agent binary, configuration,
+samples and JCLs only. No additional space is needed in addition to the space that is allocated by
+the installation.</li>
+</ul>
+</div></section>
+</div>
+</article>
+</article></main></body></html>

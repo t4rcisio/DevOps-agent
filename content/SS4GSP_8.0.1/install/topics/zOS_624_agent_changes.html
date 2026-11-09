@@ -1,0 +1,81 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content=""><meta name="DC.relation" scheme="URI" content="../../install/topics/upgrade_zOS_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="zOS_624_agent_changes"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>IBM z/OS agent changes in version 6.2.4</title></head><body id="zOS_624_agent_changes"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1"><span class="keyword">IBM z/OS</span> agent changes in version 6.2.4</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-00202658-78e5-4c1d-815e-978bbc9cbf69">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc"></p>
+<p class="p">Version 6.2.4 includes several changes to make installing and using the <span class="keyword">z/OS®</span>
+                  agent easier.</p>
+<dl class="dl">
+
+<dt class="dt dlterm"><strong class="ph b"><span class="keyword">z/OS</span> deployment tools are packaged and installed with the agent</strong></dt>
+<dd class="dd">
+<p class="p"><span class="keyword">IBM® z/OS</span> deployment tools are a set of programs in both the UNIX™ file system and MVS™ data sets. The tools are used to import artifacts to <span class="keyword">z/OS</span> component versions and to deploy these versions. In version 6.2.3 and earlier, <span class="keyword">z/OS</span> deployment tools must be downloaded and installed in addition to the agent installation. In
+version 6.2.4, the <span class="keyword">z/OS</span> deployment tools are packaged with the <span class="keyword">z/OS</span> agent. The agent installer is updated to install both the agent and the <span class="keyword">z/OS</span> deployment tools in one process.</p>
+<p class="p">The number of steps to install the product have been reduced if you install it interactively in
+the command-line interface. If you install the product in silent mode, review the new
+<span class="ph filepath">example.agent.install.properties</span> file, and make sure you have the <span class="keyword">z/OS</span> deployment tools properties in this file too.</p>
+</dd>
+
+
+<dt class="dt dlterm">Properties are consolidated into the <span class="ph filepath">installed.properties</span> file</dt>
+<dd class="dd">
+<p class="p">In versions 6.2.3 and earlier, a profile data set is used to store properties such as the
+high-level qualifier (HLQ) of the product, the CodeStation selection, and the security token. In
+version 6.2.4 and later, these properties are consolidated into the
+<span class="ph filepath">installed.properties</span> file, which is located in the <span class="ph filepath"><var class="keyword varname">agent
+install dir</var>/conf/agent</span>. The upgrade installer automatically migrates the
+properties to the new location. </p>
+<p class="p"> The token that is stored in the <span class="ph filepath">installed.properties</span> file is encrypted
+after its first use. </p>
+</dd>
+
+
+<dt class="dt dlterm">Directories for repositories, deployments, and logs</dt>
+<dd class="dd">
+<div class="p">In version 6.2.4, the installer does not request the repository directory location, deployment
+directory, or ISPF log directory. The following default values are used: <ul class="ul">
+<li class="li"><span class="ph filepath"><var class="keyword varname">agent install dir</var>/var/repository</span></li>
+<li class="li"><span class="ph filepath"><var class="keyword varname">agent install dir</var>/var/deploy</span></li>
+<li class="li"><span class="ph filepath"><var class="keyword varname">agent install dir</var>/var/log/ispf</span></li>
+</ul></div>
+<p class="p">If you must use different directories, you can use symbolic links to link to the target
+directories. The upgrade installer automatically creates the symbolic links if the previous
+installation uses different directories.</p>
+</dd>
+
+
+<dt class="dt dlterm">A new test script to verify version imports</dt>
+<dd class="dd">
+<p class="p">A new <span class="keyword cmdname">test-create-version.sh</span> script is provided to test the version import
+after agent installation. When the version import succeeds, the script creates two versions of the
+component that is called MYCOMP by using sample ship lists. To use the test script, you have to
+create a <span class="keyword">z/OS</span> type component called MYCOMP. </p>
+<p class="p">The test script is located in <span class="ph filepath"><var class="keyword varname">agent install
+dir</var>/bin/test-create-version.sh</span>.</p>
+<p class="p">The ship lists are located in <span class="ph filepath"><var class="keyword varname">agent install
+dir</var>/zossamples</span> folder.</p>
+</dd>
+
+
+<dt class="dt dlterm">A new required BUZTOOL parameter to use when you are running the tool in JCL</dt>
+<dd class="dd">
+<p class="p">To run BUZTOOL in JCL to import versions, a new parameter -agent must be provided with the value
+of the agent installation directory. See following for example:</p>
+<p class="p">
+<p class="lines"><code class="ph codeph">//SYSTSIN DD * ISPSTART CMD(BUZTOOL "createzosversion" - "-c" "ComponentName" - "-s" "ShipListPathname" - <strong class="ph b">"-agent" "/opt/install-dir/agent"</strong>) /*</code></p>
+</p>
+</dd>
+
+
+<dt class="dt dlterm">The <span class="keyword">z/OS</span> File Source Config plug-in is installed by default</dt>
+<dd class="dd">
+<p class="p">The <span class="keyword">z/OS</span> File Source Config plug-in automates uploading data sets, UNIX files, and generic artifacts from a <span class="keyword">z/OS</span> system into a component version. It provides a Web UI to run the <span class="keyword">z/OS</span> deployment tools commands. To import a version by using the <span class="keyword">z/OS</span> File Source Config plug-in, configure your component to use the Source Config plug-in, and then
+click the <span class="ph uicontrol">Import New Versions</span> push button in the versions view to start a new
+import.</p>
+</dd>
+
+</dl>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/upgrade_zOS_agents.html" title="You can upgrade IBM z/OS agents. However, you must upgrade the server before you upgrade the agents.">Upgrading IBM z/OS agents</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To deploy the tutorial component, or any component, you must have an agent. An agent is a lightweight process that runs on a target computer and does the actual work of deploying components."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/quickstart_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="quickstart_configure"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configure the helloWorld tutorial system</title></head><body id="quickstart_configure"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configure the helloWorld tutorial system</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2c38fccf-a300-461b-b87a-6dee5969563b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To deploy the tutorial component, or any component, you
+must have an <dfn class="term">agent</dfn>. An agent is a lightweight process
+that runs on a target computer and does the actual work of deploying
+components.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_configure__prereq__1">Before you begin</h2></div>Before you begin the tutorial, make sure that you completed
+the <a class="xref" href="quickstart_intro.html#quickstart_intro__prereqs">Prerequisites</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_configure__context__1">About this task</h2></div>To complete the tutorial, you must have an agent that is
+running on a target computer system. This target computer can be a
+virtual image, or a physical computer, including the one where the
+server is installed. You must have access to this computer and be
+able to install the agent on it. In addition, you must create several
+directories on the file system where the server is located. These
+directories contain the artifacts that you deploy. <p class="p">To prepare the
+tutorial system:</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_configure__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Provision a computer for use as the target computer.</span>
+<div class="itemgroup info" data-hd-otherprops="ibm">This computer must meet the system requirements in <a class="xref" href="../../user/topics/system_requirements.html" title="This document includes information about the hardware, containers, prerequisite software, supported operating system, and database requirements with component level detail for the IBM DevOps Deploy (Deploy).">System Requirements</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Install an agent on the target computer.</span>
+<div class="itemgroup info">You can install the agent from the <span class="ph">IBM DevOps Deploy (Deploy)</span> web
+               interface as described in <a class="xref" href="../../user/topics/agent_installremote.html#agent_installremote" title="You can install agents by using the IBM DevOps Deploy (Deploy) web application.">Installing agents remotely</a>. You can
+               install the agent from the command line as described in <a class="xref" href="../../install/topics/agentInstall.html#agentinstall" title="Installing an agent from the command line involves running a batch file or shell script and specifying information about how the agent connects to the server or agent relay.">Installing agents from the command line</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Designate the agent for importing versions.</span>
+<div class="itemgroup info">By default, one system-wide agent is designated to import component versions. If you skip this
+step or if another agent is already designated, you can still use the new agent when you import your
+component version. To designate the agent, see <a class="xref" href="../../admin/topics/settings_system.html#settings_system" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>. </div>
+</li><li class="li step stepexpand"><span class="ph cmd">On the <span class="ph">Deploy</span> server,
+verify that the agent is installed by clicking <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agents</span></span>. Your agent must be included
+in the list of agents with a status of <samp class="ph systemoutput sysout">Online</samp>,
+as shown in the following figure:</span><div class="itemgroup info"> <br><img class="image" id="quickstart_configure__agent_online" src="../images/webapp_configure_a.gif" alt="The agent in the list of agents; the Status column shows that the agent is online"><br> </div></li><li class="li step stepexpand"><span class="ph cmd">Add the agent as a resource:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">To the left of the <span class="ph uicontrol">Agents</span> tab, click the <span class="ph uicontrol">Resource
+Tree</span> tab.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Create Top-Level Group</span>,
+give the new group a name such as <kbd class="ph userinput">helloWorld Tutorial</kbd> and
+click <span class="ph uicontrol">Save</span>.</span><div class="itemgroup info">This group is a container
+for resources, such as agents and components.</div></li>
+<li class="li substep substepexpand">
+                  <span class="ph cmd">On the same line as the resource group, click <img class="image" src="../../user/images/options_icon.gif"><span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Agent</span></span>, as shown in the following figure:</span>
+               </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Resource</span> window, select the agent in the
+<span class="ph uicontrol">Agent</span> list, and click <span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">The agent is displayed as a child of the resource group. <br><img class="image" src="../images/quickstart-resources-online.gif" alt="Agent added to the resource group"><br></div>
+</li><li class="li step stepexpand"><span class="ph cmd">On the computer where you installed the agent, add files
+that represent deployable artifacts to the file system.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Create a directory and give it a name such as <span class="ph filepath">helloWorld</span> on
+the file system where the agent is located.</span></li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph filepath">helloWorld</span> directory, create a subdirectory that is named
+<span class="ph filepath">1.0</span>. </span>
+<div class="itemgroup info">The source configuration the tutorial uses treats each subdirectory in the target directory as
+a different component version.</div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph filepath">1.0</span> directory, place several
+files with any name and extension. </span><div class="itemgroup info">The files represent the artifacts that the agent deploys by using the processes that you
+create. For the exercise, the number of files and their type is irrelevant, but, for best
+performance, limit their number and size.<div class="note note note_note"><span class="note__title">Note:</span> If z/OS® is used on your target computer, convert text-type files that are used for artifacts to IBM®-1047 encoding. </div></div>
+</li>
+</ol>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_configure__result__1">Results</h2></div>The server and agent are configured for the tutorial, and
+the files that represent artifacts are ready to use. If you installed
+the agent on a remote system, you must know the credentials and locations
+that you specified.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_6.2.0 SS4GSP_8.0.1" href="../../tutorial/topics/quickstart_abstract.html" title="In this tutorial, you create a simple application with IBM DevOps Deploy (Deploy). You use standard plug-ins to create a component and define an application that deploys the component to an environment.">Create a simple helloWorld deployment</a></div></div></nav></article></main></body></html>

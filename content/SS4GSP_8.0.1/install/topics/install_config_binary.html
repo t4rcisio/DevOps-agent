@@ -1,0 +1,49 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="By default, the agent installer installs the binary and config files into the same directory. You can customize the installation so that these files are installed into different directories. Also, multiple agent configurations can share the same copy of binary files which makes security control and product upgrading easier."><meta name="DC.relation" scheme="URI" content="../../install/topics/zos_installing_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="install_config_binary"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Installing the binary and config files to different directories</title></head><body id="install_config_binary"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Installing the binary and config files to different directories</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5a2c20ee-f72e-412e-bb3d-de7260ac3490">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">By default, the agent installer installs the binary and config files into the same
+directory. You can customize the installation so that these files are installed into different
+directories. Also, multiple agent configurations can share the same copy of binary files which makes
+security control and product upgrading easier. </p>
+<section class="section"><h2 id="install_config_binary__title__2" class="title sectiontitle">Installing agent binary files</h2>
+
+<p class="p">Agent binary files are installed by running the <span class="ph filepath">install-agent.sh</span> script with
+the <span class="ph uicontrol">-binary</span> parameter. Note that all agent data sets are considered binary
+files. Depending on the installation method, agent data sets are either installed by the SMP/E
+process or by submitting the <span class="keyword cmdname">BUZEXPD</span> job.</p>
+<p class="p">After the binary files are installed, they can be used by multiple agents. Typically, they are
+installed to a shared volume and made accessible by multiple systems in read-only mode.</p>
+</section>
+<section class="section"><h2 id="install_config_binary__title__3" class="title sectiontitle">Installing agent config files</h2>
+
+<p class="p">Agent config files are installed by running the <span class="ph filepath">install-agent.sh</span> script with
+the <span class="ph uicontrol">-config</span> parameter. The installation program prompts you to specify the
+directory of the agent binary before installation the process can start. You should specify a
+different directory for the agent config.</p>
+<p class="p">The backup directory is also located in the agent config directory. The storage space calculation
+described in the <a class="xref" href="codestation_choose_plan.html" title="After installation, you can change the CodeStation where version artifacts are stored. The IBM z/OS agent that is used to import version stores artifact versions when the choice of CodeStation is HFS. Every z/OS agent that is used to deploy projects stores backups of old artifacts so that a rollback can be done when required. Plan the agent directory to ensure there is sufficient space for CodeStation and backup.">Planning storage</a>
+topic applies to the agent config directory.</p>
+</section>
+<section class="section"><h2 id="install_config_binary__title__4" class="title sectiontitle">Upgrading agent</h2>
+
+<p class="p">In the binary and config installation mode, only the agent binary needs to be upgraded.  When
+needed the agent config is automatically upgraded, when you start the agent or run the
+<span class="ph filepath">buztool.sh</span> script.</p>
+</section>
+<section class="section"><h2 id="install_config_binary__title__5" class="title sectiontitle">Limitations</h2>
+
+<div class="p">The following are limitations related to the binary and config installation mode.<ul class="ul">
+<li class="li">Upgrading agents from the Web user interface is not supported for agents installed using the
+binary and config mode.</li>
+<li class="li">The binary and config installation mode can only be used when installing new agents.</li>
+<li class="li">Silent mode installation using <span class="ph filepath">install-agent-from-file.sh</span> does not support
+binary and config mode. </li>
+<li class="li">Config files must be installed using the <span class="ph filepath">install-agent.sh</span> script. It is not
+supported to copy files or data sets to other locations.</li>
+</ul></div>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/zos_installing_ov.html" title="Before you deploy to the IBM z/OS platform, you must install the z/OS agent and configure the z/OS server for communication with IBM DevOps Deploy (Deploy). If the build process runs on a different logical partition (LPAR), then you must additionally install the agent on the build LPAR. You can install the z/OS agent and deployment tools by using the IBM System Modification Program Extended (SMP/E) or by extracting archive files to the z/OS UNIX file system.">Installing the z/OS agent</a></div></div></nav></article></main></body></html>

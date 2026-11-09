@@ -1,0 +1,44 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To create an application blueprint, map the components of the application to a resource template."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_blueprint.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_blueprint_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating application blueprints</title></head><body id="app_blueprint_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating application blueprints</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-491bf26d-2c48-442b-9dc8-720bb8b299f8">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To create an application blueprint, map the components
+of the application to a resource template.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_blueprint_create__prereq__1">Before you begin</h2></div>Create a resource template as described in <a class="xref" href="resources_templates_create.html#resources_templates_create" title="To create a resource template, specify the contents and organization of the template, including resources, groups, and agent prototypes.">Creating resource templates</a>. </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_blueprint_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Applications</span>, click your application,
+and then click <span class="ph uicontrol">Blueprints</span>.</span></li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Create Blueprint</span>.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Specify a name for the blueprint and select the resource
+template.</span></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span><div class="itemgroup stepresult">The
+new blueprint opens, showing the contents of the template, including
+the agent prototypes.</div></li><li class="li step stepexpand" id="app_blueprint_create__map_components">
+        <span class="ph cmd">Map the components of the application to the agent prototypes:</span>
+        <ol type="a" class="ol substeps">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Hover the mouse over an agent prototype and then click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Component</span></span>.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">In the window that opens, select a component, specify its information, and click
+                <span class="ph uicontrol">Save</span>.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Repeat this process to add the application components to the agent prototypes. </span>
+            <div class="itemgroup info">Depending on how your application is organized, you can add the same component to
+              multiple agent prototypes or multiple components to the same agent prototype.</div>
+          </li>
+        </ol>
+        <div class="itemgroup info">
+          <div class="note note note_note"><span class="note__title">Note:</span> If you create an environment from this blueprint and then add component mappings to
+the blueprint, the component mappings are also added to the environment. However, if you remove
+component mappings from the blueprint, the component mappings are not removed from the
+environment.</div>
+        </div>
+      </li></ol></section>
+<section class="section result" id="app_blueprint_create__result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_blueprint_create__result">Results</h2></div>The complete application blueprint shows how the components are mapped to the
+      agent prototypes. The following example shows a simple blueprint. The resource template
+      contains two agent prototypes. In the blueprint, one component is mapped to each agent
+        prototype.<br><img class="image" id="app_blueprint_create__blueprint_screencap" src="../images/app_blueprint_create_a.gif" alt="A simple blueprint that was created from a two-node resource template"><br></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_blueprint_create__postreq__1">What to do next</h2></div>Create environments that are based on this blueprint.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_blueprint.html" title="An application blueprint maps application components to a resource template. When you create an environment or provision one from the cloud, you can use the blueprint as a model.">Application blueprints</a></div></div></nav></article></main></body></html>

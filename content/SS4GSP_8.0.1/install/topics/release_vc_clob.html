@@ -1,0 +1,27 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can compress the amount of large object (LOB) storage space that Deploy uses in the vc_persistent_record database table."><meta name="DC.relation" scheme="URI" content="../../user/topics/managing_data.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/release_vc_clob_oracle.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/release_vc_clob_mysql.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/release_vc_clob_sqlserver.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/release_vc_clob_db2.html"><meta name="DC.relation" scheme="URI" content="upgrade_server.html#upgrade_server_int"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="release_vc_clob"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Releasing VC LOB space</title></head><body id="release_vc_clob"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Releasing VC LOB space</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-61a94e49-88d0-4116-8c74-fda16f8ba3d7">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can compress the amount of large object (LOB) storage space that <span class="ph">Deploy</span> uses in the
+   <span class="ph filepath">vc_persistent_record</span> database table. </p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrelease_vc_clob__prereq__1">Before you begin</h2></div>
+   <p class="p">Releasing the LOB storage space is optional. If you don't release the space, it is reused when
+    new records are added. You can decide whether you want to release the LOB storage space for the
+    following reasons: </p>
+   <ul class="ul" id="release_vc_clob__ul_eww_1n1_d5b">
+    <li class="li">You can reduce storage space by 75%.<div class="p">Reduce the size of one of the largest tables in
+       <span class="ph">Deploy</span> where the
+      text data decreases by 50-75%. <ul class="ul" id="release_vc_clob__ul_wk4_jh1_d5b">
+       <li class="li">A 2-byte character to an average of 1-byte per UTF-8 character which is up to 50%
+        reduction.</li>
+       <li class="li">XML might compress by 87% or more because XML data contains many repeated keywords.</li>
+      </ul></div></li>
+   </ul>
+   <ul class="ul" id="release_vc_clob__ul_dhv_jn1_d5b">
+    <li class="li">You can achieve up to a 50% reduction in read time.</li>
+   </ul>
+  </section>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../install/topics/release_vc_clob_oracle.html">Releasing LOB space in Oracle databases</a></strong><br>You can release the large object (LOB) storage in the Oracle databases.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../install/topics/release_vc_clob_mysql.html">Releasing LOB space in MySQL or Maria databases</a></strong><br>You can release the large object (LOB) storage in the MySQL or Maria             databases.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../install/topics/release_vc_clob_sqlserver.html">Releasing LOB space in Microsoft SQL Server databases</a></strong><br>You can release the large object (LOB) storage in the Microsoft SQL Server             database.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../install/topics/release_vc_clob_db2.html">Releasing LOB space in DB2 databases</a></strong><br>You can release the large object (LOB) storage in the DB2 database.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/managing_data.html">Managing data</a></div></div><div class="linklist relinfo reltasks"><strong>Related tasks</strong><br><ul class="linklist"><li class="linklist"><a class="link" data-hd-otherprops="ibm" href="upgrade_server.html#upgrade_server_int" title="To upgrade the server, stop the server, and run the new installation program.">Upgrading the server in interactive mode</a></li></ul></div></nav>
+</article></main></body></html>

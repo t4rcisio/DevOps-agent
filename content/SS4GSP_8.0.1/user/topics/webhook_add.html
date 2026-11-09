@@ -1,0 +1,50 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can add a webhook template to an application, and generic processes."><meta name="DC.relation" scheme="URI" content="../../user/topics/webhooks_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="webhook_add"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Adding webhooks to process</title></head><body id="webhook_add"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Adding webhooks to process</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a8c0524b-6add-42a0-84cb-6fb48d8f9207">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can add a webhook template to an application, and generic processes.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebhook_add__prereq__1">Before you begin</h2></div><p class="p"><strong class="ph b">Prerequisite</strong></p>Before you add a webhook to application, make sure that you have
+created an environment for the application and have resources added to
+it.<p class="p"><strong class="ph b">Procedure</strong></p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebhook_add__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the webhook configuration UI using any of the below methods:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">To add webhook to an application, go to <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">application name</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Webhooks</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Webhook</span></span>.</li>
+<li class="li">To add webhook to a process, go to <span class="ph menucascade"><span class="ph uicontrol">Processes</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">process name</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Webhooks</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Webhook</span></span>.</li>
+</ul>
+</div>
+<div class="itemgroup info">The <span class="keyword wintitle">Add Webhook</span> window is displayed.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Copy the generated webhook URL and paste it in the <span class="ph uicontrol">URL</span> field.</span>
+<div class="itemgroup info">Refer to the <a class="xref" href="c_node_tutorialsHowTo.html#tutorialsHoeTo" title="Instructions for specific features.">How-tos</a> section for
+information about how you can get this URL.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify an <span class="ph uicontrol">Event Type</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select a template name from the <span class="ph uicontrol">Webhook Template</span> field.</span>
+<div class="itemgroup info">See <a class="xref" href="settings_webhook_template_create.html#settings_webhooks_create" title="Manage a webhook template for the events your webhook will listen to and push notifications to your messaging platform.">Managing webhook template</a> for more
+information.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If you are adding the webhook to an application, specify the environment name from the
+<span class="ph uicontrol">Environments</span> field.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Submit your changes.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebhook_add__result__1">Results</h2></div>The webhook template is added to the application. In the event when a process runs, the
+notifications will appear in your configured messaging platform app.<div class="note note note_note"><span class="note__title">Note:</span> 
+<ul class="ul">
+<li class="li">Notifications can be out-of-order in few of the cases. One of the case can be when:<ol class="ol">
+<li class="li">Message A is sent and fails to complete for a reason, for example, the remote server has an
+error.</li>
+<li class="li">Message B is sent and completes.</li>
+<li class="li">The remote server error is now resolved.</li>
+<li class="li">The message A is resent, and completes.</li>
+</ol></li>
+<li class="li">When you export or import an application or a generic process, the webhooks are also
+imported/exported with them.</li>
+</ul>
+</div></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/webhooks_ch.html" title="Using the webhooks, you can send text-based responses to users in messaging platform such as MS Teams and Slack when a specific event occurs during deployment process.">Webhooks</a></div></div></nav></article></main></body></html>

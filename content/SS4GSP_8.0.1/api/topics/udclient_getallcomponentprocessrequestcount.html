@@ -1,0 +1,42 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Get all component process requests submitted after a certain time"><meta name="DC.subject" content="udclient commands, getAllComponentProcessRequestCount, udclient command, command-line commands"><meta name="keywords" content="udclient commands, getAllComponentProcessRequestCount, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_getallcomponentprocessrequestcount"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>getAllComponentProcessRequestCount</title></head><body id="udclient_getallcomponentprocessrequestcount"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">getAllComponentProcessRequestCount</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6ab59b55-e43d-4334-9775-958af3c1cfe5">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Get all component process requests submitted after a certain time</p>
+<section class="section">
+This command returns a count of all the component process requests submitted after a certain time.
+</section>
+<section class="section"><h2 id="udclient_getallcomponentprocessrequestcount__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  getAllComponentProcessRequestCount [parameters]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_getallcomponentprocessrequestcount__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_getallcomponentprocessrequestcount__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_getallcomponentprocessrequestcount__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_getallcomponentprocessrequestcount__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_getallcomponentprocessrequestcount__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_getallcomponentprocessrequestcount__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_getallcomponentprocessrequestcount__composite_params__entry__1"><span class="keyword parmname">submittedAfter</span></td>
+<td class="entry" headers="udclient_getallcomponentprocessrequestcount__composite_params__entry__2">long</td>
+<td class="entry" headers="udclient_getallcomponentprocessrequestcount__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_getallcomponentprocessrequestcount__composite_params__entry__4">A timestamp, in milliseconds from the UNIX epoch. If you specify this parameter, the server counts all CPRs that were created after the specified timestamp.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_getallcomponentprocessrequestcount__composite_params__entry__1"><span class="keyword parmname">includeGhosted</span></td>
+<td class="entry" headers="udclient_getallcomponentprocessrequestcount__composite_params__entry__2">boolean</td>
+<td class="entry" headers="udclient_getallcomponentprocessrequestcount__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_getallcomponentprocessrequestcount__composite_params__entry__4">True or false, whether to include ghosted components in the result.</td>
+</tr>
+</tbody></table>
+
+</section>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_componentprocessrequest_countall_get.html" title="This command returns a count of all the component process requests submitted after a certain time.">Get all component process requests submitted after a certain time</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

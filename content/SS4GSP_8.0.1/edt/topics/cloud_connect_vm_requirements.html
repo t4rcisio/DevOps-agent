@@ -1,0 +1,31 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="concept"><meta name="description" content="You must configure images to work with the blueprint designer."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="cloud_connect_vm_requirements"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring images for use with the blueprint designer</title></head><body id="cloud_connect_vm_requirements"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring images for use with the blueprint designer</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-23b91298-1698-441d-b908-67dc266043ba">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">You must configure images to work with the blueprint designer.</p>
+<section class="section"><h2 id="cloud_connect_vm_requirements__title__2" class="title sectiontitle">Requirements for all cloud systems</h2>
+
+<div class="p">To use images with the blueprint designer, you must do the following with each image:<ul class="ul">
+<li class="li">Ensure that Linux™ images have the <span class="keyword cmdname">tar</span>
+and <span class="keyword cmdname">curl</span> programs installed.</li>
+<li class="li">Ensure that Windows™ Server 2008 images have version 2.0
+or higher of the PowerShell program installed.
+</li>
+<li class="li">To apply Chef roles to images, configure the images as described in <a class="xref" href="integrate_chef_images.html" title="To use images with Chef and the blueprint designer, you must create the images with certain prerequisites.">Creating Chef-compatible images</a>.</li>
+</ul></div>
+<div class="p">Configure the images for the target cloud:<ul class="ul">
+<li class="li">To use an image on OpenStack, see <a class="xref" href="cloud_connect_openstack_images.html" title="Before you can use images on an OpenStack or OpenStack-based cloud with the blueprint designer, you must configure cloud-init on those images.">Configuring OpenStack images</a>.</li>
+<li class="li">To use an image on Amazon AWS, register it with the cloud discovery service. See <a class="xref" href="integrate_ec2_image.html" title="To use the blueprint designer to model environments on Amazon Web Services, you must register Amazon Elastic Compute Cloud (EC2) images with the cloud discovery service.">Registering Amazon EC2 images with the cloud discovery service</a>.</li>
+<li class="li">To use an image on the SoftLayer® cloud, configure it
+as described in <a class="xref" href="cloud_connect_softlayer_images.html" title="Before you use SoftLayer private (custom) images with the blueprint designer, you can install the cloud-init package on those images. If you want to run Chef roles on the image, you must use the cloud-init package.">Configuring private SoftLayer images</a>.</li>
+<li class="li">To use an image on VMware vCenter, see <a class="xref" href="cloud_connect_vmware_images.html" title="Before you can use VMware vCenter images with the blueprint designer, you must install VMware Tools and a virtual CD-ROM drive on those images.">Configuring VMware vCenter images</a>.</li>
+<li class="li">To use an image on Microsoft™ Azure, register it with
+the cloud discovery service. See <a class="xref" href="integrate_azure_image.html" title="To use Microsoft Azure marketplace images in the blueprint designer, you must register images with the cloud discovery service.">Registering Azure marketplace images with the cloud discovery service</a>. To create and use custom
+images on Microsoft Azure, see <a class="xref" href="integrate_azure_private.html" title="To use Microsoft Azure custom images in the blueprint designer, you must register the images with the cloud discovery service.">Registering Azure custom images with the cloud discovery service</a>.</li>
+<li class="li">To use a custom image on Google Cloud Platform, configure it as described in <a class="xref" href="cloud_connect_google_cloud_images.html#cloud_connect_google_cloud_images" title="You can configure a custom image to use in your Google Cloud Platform environments.">Configuring Google Cloud Platform images</a>.</li>
+</ul><div class="note note note_note"><span class="note__title">Note:</span> Configuration for some cloud and image type combinations must be completed in the
+blueprint. See <a class="xref" href="blueprint_edit_clouds.html#blueprint_edit_clouds" title="To model environments for clouds that you connect to through OpenStack Heat, create blueprints on the blueprint design server.">Modeling environments for clouds through OpenStack Heat</a>.</div></div>
+</section>
+</div>
+</article></main></body></html>

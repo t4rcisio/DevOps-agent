@@ -1,0 +1,159 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="A component consists of artifacts of a single source type and one or more processes. Component creation is the same for all source types, however; the content can be different."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_ch.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/getstart_component_create.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_create_filesystem.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_create_scm.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_create_buildTools.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_create_udclient.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/zos_runtools.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_import.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_export.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating components</title></head><body id="comp_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating components</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-86a93997-7b85-42b9-ab24-5acbd9d9a19f">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">A component consists of artifacts of a single source type and one or more processes.
+Component creation is the same for all source types, however; the content can be
+different.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create__context__1">About this task</h2></div>
+<p class="p">Components can be created manually, by using a template, or imported.  This topic includes the
+steps for creating a component manually.  See <a class="xref" href="comp_template.html" title="With a component template, you can save and reuse component processes and properties and create components from them; template-based components inherit the template's properties and process.">Component templates</a> and <a class="xref" href="comp_import.html" title="Importing and exporting can be especially useful if you have multiple IBM DevOps Deploy (Deploy) servers, for example, and must quickly move or update components.">Importing components</a> for the other methods.</p>
+<p class="p">Several fields in the <span class="keyword wintitle">Create Component</span> window are the same for every source
+    type, while others depend on the source that is selected from the <span class="ph uicontrol">Source
+     Configuration Type</span> list. The graphic below show the <span class="keyword wintitle">Create
+     Component</span> window with the common fields for all configuration types.</p>
+   <p class="p">Some of the configuration
+        options might be resticted based on the role assigned to you. Check with your administator,
+        if you need a specific option enabled. </p>
+   <div class="p">
+    <br><img class="image" id="comp_create__image_ffn_rvm_lzb" src="../images/comp_create_a1.png" height="718" width="308" alt="The Create Component window"><br>
+   </div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the <span class="keyword wintitle">Components</span> page, click <span class="ph uicontrol">Create Component</span>.
+</span>
+</li><li class="li step stepexpand">
+    <span class="ph cmd">To use a template for the new component, select a template from the <span class="ph uicontrol">Component
+      Template</span> list.</span>
+    <div class="itemgroup info">
+     <p class="p">When using a template, the component inherits source configuration, properties, and
+      processes from the template. A component can have a single template associated with it. The
+      default value is none.</p>
+     <p class="p">If you select a template, the <span class="ph uicontrol">Template Version</span> field is displayed
+      which is used to select a template version. By controlling the version, you can roll out
+      template changes as needed. The default value is <code class="ph codeph">Latest Version</code>, which means
+      that the component uses the newest version which is based on creation date.</p>
+     <div class="note note note_note" id="comp_create__note_rxl_45m_lzb"><span class="note__title">Note:</span>  If you select a template that includes a source type, the dialog
+      box changes to reflect values that are defined for the template. Several fields, including the
+       <span class="ph uicontrol">Source Configuration Type</span> field are populated and locked. </div>
+     <p class="p">For information about templates, see <a class="xref" href="comp_template.html" title="With a component template, you can save and reuse component processes and properties and create components from them; template-based components inherit the template's properties and process.">Component templates</a>.</p>
+    </div>
+   </li><li class="li step stepexpand">
+<span class="ph cmd">Type a name and description for the component.</span>
+<div class="itemgroup info">The name identifies the component throughout the product user interface.  The description
+conveys more information about the component. If the component is used by more than one application,
+for example, entering <kbd class="ph userinput">Used in applications A and B</kbd> can help identify how the
+component is used. The <span class="ph uicontrol">Name</span> field is required and must contain a
+value.</div>
+</li><li class="li step stepexpand">
+    <span class="ph cmd">Specify one or more teams that can manage the component.</span>
+    <div class="itemgroup info">Click <span class="ph uicontrol">Add Teams</span> and select from the list of previously defined
+     teams. For information about teams, see <a class="xref" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a>.</div>
+   </li><li class="li step stepexpand">
+<span class="ph cmd">Select the component type in the <span class="ph uicontrol">Component Type</span> field.</span>
+<div class="itemgroup info">Select <span class="ph uicontrol">z/OS</span> if the component is based on <span class="keyword">IBM® z/OS®</span> artifacts, otherwise
+     use the default value of <code class="ph codeph">Standard</code>. If you select <span class="ph uicontrol">z/OS</span>,
+     the source configuration controls are not available. Artifacts that are stored in <span class="keyword">z/OS</span> do not use source
+     configurations. To learn more about configuring and deploying <span class="keyword">z/OS</span> components, see
+      <a class="xref" href="deploying_zos.html" title="Use the toolkit to deploy to the IBM z/OS platform.">Deploying components to the z/OS platform</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Source Configuration Type</span> list, select type of source for which
+the component is being defined. This field defines the source type for the component's
+artifacts.</span>
+<div class="itemgroup info">
+<p class="p">Sources are defined with source configuration plug-ins. If you do not see a desired source type,
+verify that the source-type plug-in is installed.</p>
+<p class="p">All artifacts must have the same source type. Selecting a source type shows the fields that are
+associated with the plug-in. Source-dependent fields are used to identify and configure the
+component's artifacts.</p>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Complete common properties that configure how and when artifact versions are imported.</span>
+<div class="itemgroup info">
+<dl class="dl">
+
+<dt class="dt dlterm">Import Versions Automatically</dt>
+<dd class="dd">If selected, the source location is periodically polled for new versions. Found versions are
+automatically imported. The default polling period is 300 seconds, which can be changed with the
+<span class="ph uicontrol">Automatic Version Import Check Period</span> setting on the <span class="keyword wintitle">System
+Settings</span> pane. If left cleared, you can manually create versions by using the
+<span class="keyword wintitle">Versions</span> pane. By default, the box is cleared. </dd>
+
+
+<dt class="dt dlterm">Copy to CodeStation</dt>
+<dd class="dd">If selected, imported artifacts are copied to a CodeStation repository which is a tamper-proof
+embedded artifact repository. If cleared, only metadata about the artifacts is imported. For
+additional information, see <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>.</dd>
+
+
+<dt class="dt dlterm">Default Version Type</dt>
+<dd class="dd">Defines how component versions are imported into CodeStation. The <code class="ph codeph">Full</code> value
+means that the version is comprehensive and contains all artifacts. The <code class="ph codeph">Incremental</code>
+value means that the version contains only the artifacts that were modified from the previous
+version. The default value is <code class="ph codeph">Full</code>.</dd>
+
+</dl>
+</div>
+</li><li class="li step stepexpand">
+    <span class="ph cmd">Select the type of versions to create by default on version imports.</span>
+    <div class="itemgroup info">You can import full version or increment type during version import and specify the
+     additional import configuration: </div>
+    <div class="itemgroup info">
+     <dl class="dl">
+      
+       <dt class="dt dlterm">Use the system's default version import agent/tag</dt>
+       <dd class="dd">If selected, the agent or tag that you specified on the <span class="keyword wintitle">System
+         Settings</span> page is used to import component artifacts. The agent or tagged agents
+        must have access to the system where the artifacts are located. See <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a></dd>
+      
+      
+       <dt class="dt dlterm">Import new component versions using a single agent</dt>
+       <dd class="dd">If selected, use the <span class="ph uicontrol">Agent for Version Imports </span> field to designate
+        the agent that imports artifacts into the component. The agent must have access to the
+        system where the artifacts are located. To import artifacts from the server location,
+        install an agent in the same location and specify that agent.</dd>
+      
+      
+       <dt class="dt dlterm">Import new component versions using any agent with the specified tag</dt>
+       <dd class="dd">If selected, use the <span class="ph uicontrol">Agent Tag for Version Imports </span> field to
+        designate the tag that is used to identify the agents that can import artifacts into the
+        component. Tagged agents must have access to the system where the artifacts are
+        located.</dd>
+      
+     </dl>
+    </div>
+   </li><li class="li step stepexpand">
+<span class="ph cmd">Configure common cleanup properties.</span>
+<div class="itemgroup info"><dl class="dl">
+
+<dt class="dt dlterm">Inherit Cleanup Settings</dt>
+<dd class="dd">Specify whether to use the values specified in the system settings for artifact cleanup or
+specified them for this component.  If this check box is cleared, you must specify values for the
+following settings:<dl class="dl">
+
+<dt class="dt dlterm">Days to Retain Versions</dt>
+<dd class="dd">The number of days to retain component versions after they are created. For example, if you
+specify 30, component versions are archived when they are older than 30 days and have no other
+setting that keeps them. To retain component versions indefinitely, enter - 1. To use the system
+default retention value, enter 0.</dd>
+
+
+<dt class="dt dlterm">Number of Versions to Retain</dt>
+<dd class="dd">The number of versions to retain for each component. For example, if you specify 10, the server
+keeps the 10 most recently created component versions. To retain all component versions, enter -1.
+To use the system default retention value, enter 0.</dd>
+
+</dl></dd>
+
+</dl>For more information about cleaning up component versions, see <a class="xref" href="settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a>. </div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Complete properties based on the source configuration type selected.</span>
+<div class="itemgroup info">Each source configuration has a unique set of required and optional properties that are
+displayed after the configuration type is selected. For details on these properties, refer to the
+plug-in used to integrate the source type.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup info">Saved components are listed in the <span class="keyword wintitle">Components</span> pane.</div>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/getstart_component_create.html">Getting started with creating components</a></strong><br>Components are the centerpiece of the <span class="ph">IBM DevOps Deploy (Deploy)</span> deployment engine.   Components associate deployable items (artifacts) with processes that deploy them.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_create_filesystem.html">Creating components from the file system</a></strong><br>You can create components by importing artifacts from the file system on the <span class="ph">IBM DevOps Deploy (Deploy)</span> server. You can import a   single version or automatically import versions as they are added to the file system.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_create_scm.html">Creating components from source-code management systems</a></strong><br>You can create components from the artifacts in various source-code management systems.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_create_buildTools.html">Creating components from build integration tools</a></strong><br>You can create components from the artifacts in various build integration tools.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_create_udclient.html">Creating component versions with the command-line client</a></strong><br>If <span class="ph">IBM DevOps Deploy (Deploy)</span> does     not have a source configuration type for your external tool, you can use the       <span class="keyword cmdname">udclient</span> command-line client to manage components.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/zos_runtools.html">Creating z/OS component versions</a></strong><br>You can create z/OS component version by running the <span class="keyword cmdname">buztool.sh</span> command from job control language (JCL) or from the <span class="keyword">z/OS</span> UNIX™ System Services command line. You can also create z/OS component version by using the <span class="keyword">z/OS</span> File Source Config plug-in.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_import.html">Importing components</a></strong><br>Importing and exporting can be especially useful if you have multiple <span class="ph">IBM DevOps Deploy (Deploy)</span> servers, for example,   and must quickly move or update components.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_export.html">Exporting components</a></strong><br>Importing and exporting can be especially useful if you have multiple <span class="ph">IBM DevOps Deploy (Deploy)</span> servers, for example,   and must quickly move or update components.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_ch.html" title="Components represent deployable items along with user-defined processes that operate on them, usually by deploying them.">Components</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The for-each-agent application process step lets you run a process for each agent in an environment."><meta name="DC.subject" content="PAC, application process step, for-each-agent"><meta name="keywords" content="PAC, application process step, for-each-agent"><meta name="DC.relation" scheme="URI" content="../../reference/topics/pac_application_process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="pac_step_for_each_agent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>for-each-agent</title></head><body id="pac_step_for_each_agent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">for-each-agent</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-c41bfb28-6c3d-49b9-bdbd-ac25ea4cf664">Edit online</a></span></div>
+
+
+
+<div class="body refbody"><p class="shortdesc">The for-each-agent application process step lets you run a process for each agent in an
+environment. </p>
+<section class="section"><h2 id="pac_step_for_each_agent__title__2" class="title sectiontitle">Format</h2>
+
+<p class="p"></p>
+<pre class="pre codeblock"><code>for-each-agent step "loop1" is
+    -- define target resource tags; optional, repeatable
+    -- before 7.1.1.0, the tag must be specified by internal database ID
+    tag "res-tag-1"
+    tag "res-tag-2"
+
+    -- maximum number of agents to target concurrently; optional
+    -- default is unlimited
+    max-concurrent-agents unlimited
+
+    -- must contain an embedded 'start' block that works like the top-level version
+    start is
+        start "install-c1"
+    end
+
+    -- contains one or more embedded steps of any type except for other for-each steps
+    install-component step "install-c1" is
+        component "c1"
+        process "deploy"
+        without-status "Active"
+        fail-fast true
+        ignore-child-warnings true
+        max-concurent-processes 43
+
+    -- on success/failure/complete reference steps inside the for-each
+    -- 'finish' refers to the implied finish step inside the for-each
+    on success
+        finish
+    end
+
+-- on success/failure/complete outside an embedded step reference steps in the top-level process
+on success
+    start "next-step"
+end</code></pre>
+</section>
+<section class="section"><h2 id="pac_step_for_each_agent__title__3" class="title sectiontitle">Properties</h2>
+
+<table class="table" id="pac_step_for_each_agent__table_c3p_yzn_knb"><caption><span class="table--title-label">Table 1. </span><span class="title">For Each Agent properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+            <tr class="row">
+              <th class="entry align-left" id="pac_step_for_each_agent__table_c3p_yzn_knb__entry__1">Field</th>
+              <th class="entry align-left" id="pac_step_for_each_agent__table_c3p_yzn_knb__entry__2">Description</th>
+            </tr>
+          </thead><tbody class="tbody">
+            <tr class="row">
+              <td class="entry align-left" headers="pac_step_for_each_agent__table_c3p_yzn_knb__entry__1"><span class="ph uicontrol">Name</span></td>
+              <td class="entry align-left" headers="pac_step_for_each_agent__table_c3p_yzn_knb__entry__2"><span class="ph" id="pac_step_for_each_agent__d531e76">A name for the iteration
+                  container.</span></td>
+            </tr>
+            <tr class="row">
+              <td class="entry align-left" headers="pac_step_for_each_agent__table_c3p_yzn_knb__entry__1"><span class="ph uicontrol">Limit to Resource
+                Tags</span></td>
+              <td class="entry align-left" headers="pac_step_for_each_agent__table_c3p_yzn_knb__entry__2">A list of resource tags that limit the container.
+                The subprocess runs only on the agent resources that have one or more of the
+                specified resource tags.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry align-left" headers="pac_step_for_each_agent__table_c3p_yzn_knb__entry__1"><span class="ph uicontrol">Maximum number of concurrent
+                  processes</span></td>
+              <td class="entry align-left" headers="pac_step_for_each_agent__table_c3p_yzn_knb__entry__2">The maximum number of agents that run the
+                subprocess at a time. To run the subprocess on every agent at once, specify
+                  <code class="ph codeph">-1</code>. To limit the number of agents to deploy to at once, as in
+                blue/green deployments or rolling deployments, specify an integer. <p class="p">The server attempts to resolve the value to an integer. If the value does
+      not resolve to an integer, then the <code class="ph codeph">-1</code> value is used by default. You can use
+      a property in this field, as long as the property resolves to an integer.</p></td>
+            </tr>
+          </tbody></table>
+</section>
+<div class="example"><h2 id="pac_step_for_each_agent__title__5" class="title sectiontitle">Example</h2>
+
+<pre class="pre codeblock"><code>start is
+    start A
+    start B
+end
+
+for-each-agent step A is
+    tag "res-tag-a1"
+    tag "res-tag-a2"
+    tag "res-tag-a3"
+
+    max-concurrent-agents 42
+
+    start is
+        start A1
+    end
+
+    set-final-process-status step A1 is
+        status success
+    on success
+        finish
+    end
+on complete
+    finish
+end
+
+for-each-agent step B is
+    start is
+        start B1
+    end
+
+    set-final-process-status step B1 is
+        status success
+    on success
+        finish
+    end
+on complete
+    finish
+end</code></pre>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/pac_application_process_steps.html" title="Lists the various application steps that can be used in a process.">Application process steps</a></div></div></nav></article></main></body></html>

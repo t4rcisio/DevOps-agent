@@ -1,0 +1,122 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To use Microsoft Azure custom images in the blueprint designer, you must register the images with the cloud discovery service."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="integrate_azure_private"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Registering Azure custom images with the cloud discovery service</title></head><body id="integrate_azure_private"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Registering Azure custom images with the cloud discovery service</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f86575bf-4d9c-4e34-a02d-dd357a4c3238">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To use Microsoft™ Azure custom images in the
+blueprint designer, you must register the images with the cloud discovery service.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_azure_private__prereq__1">Before you begin</h2></div>
+<ul class="ul">
+<li class="li">Configure the cloud discovery service. See <a class="xref" href="../../user/topics/cds_configure.html" title="The cloud discovery service provides information about available images, regions, and flavors to the blueprint design server. This service runs with a default set of options, but you can customize these options so your images, regions and flavors are shown in the blueprint designer.">Setting up images, regions, and flavors for the cloud discovery service and engine</a>.</li>
+<li class="li">Create one or more Azure Resource Manager templates from Linux or Windows images. See <a class="xref" href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-capture-image/" target="_blank">https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-capture-image/</a>.</li>
+<li class="li">Ensure that the Azure account in the blueprint designer cloud connection has access to the Azure
+Resource Manager templates.</li>
+<li class="li">Ensure that the Azure resource group that each custom image is stored in contains appropriate
+networks and standard storage accounts. <span class="ph">Blueprints must contain custom images, networks, and storage accounts from the
+same resource group. </span> You can determine which
+resource group contains these resources through the Azure web portal or command-line client.</li>
+</ul>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_azure_private__context__1">About this task</h2></div>Custom images are Azure Resource Manager templates for virtual machines. You can
+preconfigure these images with software and configuration settings, and then store them as a
+template to reuse in the blueprint designer. Storing an image as a template removes information such
+as IP addresses and host names that can conflict with other images. In this way, you can create
+multiple images from this template without creating conflicts.<p class="p">Only Azure Resource Manager
+templates are supported; classic deployment model templates are not supported.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_azure_private__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Obtain the following information for each custom image that you want to use in the blueprint
+designer:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">The resource group that the custom image is stored in.</li>
+<li class="li">The storage account that the custom image is stored in.</li>
+<li class="li">The name of the Blob container that the custom image VHD file is stored in. To find the name of
+the Blob container, in the Azure web portal, open the storage container and then open the Blob
+service. The data in the Blob service is stored in folders that are called containers. You need only
+the name of the top-level Blob container that stores the VHD file, even if the files are in
+subfolders.</li>
+</ul>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Open the cloud discovery service configuration file in a text editor.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If the cloud discovery service configuration file does not have an Azure section, create the
+Azure section: </span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">To the <code class="ph codeph">CLOUD_SETTINGS</code> section, add a section that looks like the following
+code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>"azure": {
+    "private_images": [
+        
+    ]
+}
+</code></pre>
+</div>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To the Azure section of the cloud discovery service configuration file, add entries for the
+Blob containers that have templates that you want to use.</span>
+<div class="itemgroup info">Each entry follows this format:<pre class="pre codeblock"><code>"resource_group":"<var class="keyword varname">resourceGroup</var>",
+"storage_account":"<var class="keyword varname">storageAccount</var>",
+"container_list":[<var class="keyword varname">containerList</var>]</code></pre><ul class="ul">
+<li class="li">For <code class="ph codeph"><var class="keyword varname">resourceGroup</var></code>, specify the resource group.</li>
+<li class="li">For <code class="ph codeph"><var class="keyword varname">storageAccount</var></code>, specify the storage account.</li>
+<li class="li">For <code class="ph codeph"><var class="keyword varname">containerList</var></code>, specify a comma-separated list of Blob
+containers, in quotes.</li>
+</ul></div>
+<div class="itemgroup stepxmp">For example, the following code includes Blob containers that are named
+<code class="ph codeph">container1</code> and
+<code class="ph codeph">container2</code>:<pre class="pre codeblock"><code>"azure": {
+    "private_images": [
+        {
+            "resource_group": "myResourceGroup",
+            "storage_account": "myStorageAccount",
+            "container_list": ["container1","container2"]
+        }
+    ]
+}
+</code></pre>The
+complete section looks like the following
+example:<pre class="pre codeblock"><code>"azure": {
+    "private_images": [{
+          "resource_group": "myResourceGroup",
+          "storage_account": "myStorageAccount",
+          "container_list": ["container1","container2"]
+}],
+    "images": [
+        {
+            "publisher": "openlogic",
+            "sku": ["6.5","6.6","6.7","7.0","7.1","7.2"],
+            "offer": "CentOS",
+            "display_name" : "CentOS"
+        },
+        {
+            "publisher": "Canonical",
+            "sku": ["12.04.5-LTS","14.04.4-LTS","15.10"],
+            "offer": "UbuntuServer",
+            "display_name": "Ubuntu Server"
+        },
+        {
+            "publisher": "MicrosoftWindowsServer",
+            "sku": ["2012-R2-Datacenter","2008-R2-SP1"],
+            "offer": "WindowsServer",
+            "display_name": "Windows Server"
+        }
+    ]
+}
+</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the file and restart the cloud discovery service.</span>
+<div class="itemgroup info">To restart the cloud discovery service, see <a class="xref" href="start_patterns.html" title="To start the blueprint designer and its associated services, you must start the cloud discovery service, the blueprint design server, and the engine Heat services.">Starting the blueprint designer, cloud discovery service, and engine</a> and <a class="xref" href="stop_patterns.html" title="To stop the blueprint designer and its associated services, you must stop the cloud discovery service, the blueprint design server, and the engine Heat services.">Stopping the blueprint designer, cloud discovery service, and engine</a>.</div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_azure_private__result__1">Results</h2></div>Now you can add the images to blueprints. When you add a custom image to a blueprint, the
+blueprint designer asks whether the image is a Windows or Linux image. Custom images appear in a
+separate drawer in the palette; this drawer appears only if the cloud discovery service successfully
+loads at least one custom image. If the drawer is not visible, ensure that the cloud discovery
+service configuration file has the correct format and the correct information about the
+images.</section>
+</div>
+</article></main></body></html>

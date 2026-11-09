@@ -1,0 +1,368 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="In interactive mode, you install the server by typing configuration information on the command line."><meta name="DC.relation" scheme="URI" content="../../install/topics/serverInstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="server_install_interactive"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Installing the server in interactive mode</title></head><body id="server_install_interactive"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Installing the server in interactive mode</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-7f4df1f9-fb22-4d7d-9132-878c46e67a9f">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">In interactive mode, you install the server by typing configuration information on the
+command line.</p>
+<section class="section prereq" id="server_install_interactive__prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_interactive__prereq">Before you begin</h2></div><ul class="ul">
+<li class="li" id="server_install_interactive__license_server">If installing in a production environment, make sure that you have a license
+          server with available licenses. See <a class="xref" href="../../user/topics/licenseManage.html" title="IBM DevOps Deploy (Deploy) provides a 60-day license-free evaluation period. You must have a license to use all product features after the evaluation period.">Licensing</a>
+          for more information.</li>
+<li class="li">Ensure that the system that you are installing the server on meets the system requirements. See
+            <a class="xref" href="../../user/topics/system_requirements.html" title="This document includes information about the hardware, containers, prerequisite software, supported operating system, and database requirements with component level detail for the IBM DevOps Deploy (Deploy).">System Requirements</a>.</li>
+<li class="li" id="server_install_interactive__ibm_jre_requirement_server">Ensure that a supported version of Java™ Runtime Environment (JRE) or Java Development Kit (JDK) is installed on the computer on which you are
+          installing the <span class="ph">Deploy</span> server. For a list of supported Java versions, see <a class="xref" href="../../user/topics/sysreq_prereqsw.html#sysreq_prereqsw__section_bgb_xc5_m1c">Java distributions</a> or
+          you can refer to the <a class="xref" href="https://www.ibm.com/software/reports/compatibility/clarity/index.html" target="_blank">SPCR for Deploy</a>.<div class="note important note_important" id="server_install_interactive__note_rpn_3rx_wgc"><span class="note__title">Important:</span> You must choose a Java version above the minimum supported level
+            for your <span class="ph">Deploy</span>
+            installation. This ensures maximum flexibility for future software upgrades, letting you
+            update <span class="ph">Deploy</span> and
+            Java in separate steps rather than simultaneously. For instance, <span class="ph">Deploy</span> 8.0.x
+            supports Java 11 (minimum), 17, and 21, installing Java 17 prevents a mandatory
+            concurrent Java upgrade when moving to the next major <span class="ph">Deploy</span>
+            release.</div><div class="note important note_important" data-hd-otherprops="ibm" id="server_install_interactive__use_ibm_jre"><span class="note__title">Important:</span> 
+            <p class="p" id="server_install_interactive__IBM_jre1">For best results, download and use the latest available version of the IBM®
+              Java Runtime Environment (JRE) for the <span class="ph">Deploy</span> server and
+              agent relays. An IBM JRE is available as a
+              separate download. See the <a class="xref" href="https://www.ibm.com/developerworks/java/jdk/" target="_blank">IBM developer
+                kits</a> page to get the latest version. Install the IBM JRE according to the documentation on the page. Be sure to set
+              the <span class="keyword parmname">JAVA_HOME</span> system variable to the location of the IBM JRE. If you are updating or changing the JRE
+              to the latest version, see <a class="xref" href="../../user/topics/jre_change.html#jre_change" title="You can change the JRE of active servers by editing their configuration files.">Changing or updating the JRE of servers</a>, <a class="xref" href="../../user/topics/jre_change_agent.html" title="If you upgrade the JRE and change the JRE location on agents, you must also update the JRE location in the agent Java configuration file.">Updating the JRE location for agents</a>, and <a class="xref" href="../../user/topics/update_JRE_agent_relays.html#update_JRE_agent_relays" title="If you upgrade the JRE and change the JRE location, you must also update the agent relays. If you do not change the location of the JRE, you do not have to update these files.">Updating the JRE location for agent relays</a> for instructions. For
+              documentation on the IBM JRE, see <a class="xref" href="https://www.ibm.com/support/knowledgecenter/SSYKE2/welcome_javasdk_family.html" target="_blank">IBM SDK, Java Technology Edition</a>.</p>
+          </div></li>
+<li class="li">If you are installing the server in a production environment, install and configure the server
+database before you install the server. See <a class="xref" href="DBinstall.html" title="IBM DevOps Deploy (Deploy) requires a database. You can use the following database types for an evaluation or production server.">Installing the server database</a>. If you are not installing
+in a production environment, you can install an instance of Apache Derby during the installation
+steps. You can migrate the database to a different database system later, as described in <a class="xref" href="migrate_database.html" title="The server installation files include a script that migrates the server database from Derby to another database system. You can not migrate from any database other than Derby.">Migrating the server database</a>.</li>
+<li class="li">If you are using a database other than Apache Derby for the server, place the JAR file for the
+database driver in the <span class="ph filepath">lib/ext</span> folder of the installation program.</li>
+<li class="li" id="server_install_interactive__aix_unzip">If you are installing the server on AIX®
+          platform, the <span class="keyword cmdname">unzip</span> program is required.</li>
+<li class="li" id="server_install_interactive__configure_firewall">Make sure that your networks and firewalls allow communication on the
+required ports. See <a class="xref" href="agent_firewalls.html" title="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication.">Firewall and communication configuration</a>.</li>
+<li class="li">To install and run the server on Linux™ as a non-root
+user, create a user to use when you install and run the server. Also, ensure that the user has read
+and write permission to the folder to which you are installing the server.</li>
+<li class="li" id="server_install_interactive__ulimit">Ensure that there is no limit on the maximum memory size and virtual memory size.
+For example, on most Linux systems, you can run the
+<code class="ph codeph">ulimit -m</code> and <code class="ph codeph">ulimit -v</code> commands and ensure that both return the
+value <code class="ph codeph">unlimited</code>. To find out how to remove the limit on the maximum memory size and
+virtual memory size, see the documentation for the operating system.</li>
+</ul>If you are adding the server to a high-availability cluster, including as a cold standby server:<ul class="ul">
+<li class="li">Configure the high-availability cluster; see <a class="xref" href="../../user/topics/server_install_clustered.html" title="To configure a high-availability cluster, you store shared files on network storage. Then, you configure multiple servers, set each server to access the same files and database, and configure a load balancer to distribute the traffic between the servers.">Setting up high-availability clusters</a>.</li>
+<li class="li">Ensure that the system on which you are installing the new server has a connection to the
+cluster network storage and that the system can connect to the database that the cluster is
+using.</li>
+<li class="li" id="server_install_interactive__same_version">Each server in the cluster must run the same version of <span class="ph">Deploy</span>.</li>
+</ul>For information about high-availability clusters, see <a class="xref" href="../../user/topics/ha_config_ov.html" title="You can configure clustered IBM DevOps Deploy (Deploy) servers, and agents for high availability. You can also configure agents and agent relays for failover.">High availability and failover</a>. For information about
+cold standby, see <a class="xref" href="server_install_cold.html#server_install_cold" title="You can add cold standby servers to serve as a backup server or for disaster recovery. You must start the secondary server or servers when the active server fails, and network traffic is routed to the secondary servers.">Adding cold standby servers</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_interactive__context__1">About this task</h2></div>
+<p class="p">Install the server in interactive mode:</p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_interactive__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" id="server_install_interactive__download">
+<span class="ph cmd">Download and extract the installation files for <span class="ph">Deploy</span>.</span>
+<div class="itemgroup info">These files are available for download from the <a class="xref" href="https://www.ibm.com/software/passportadvantage/pao_customer.html" target="_blank">IBM
+            Passport Advantage® website</a>. </div>
+</li><li class="li step stepexpand" id="server_install_interactive__database_jar">
+<span class="ph cmd">If you are using a database other than Apache Derby, place the JAR file for the database in the
+<span class="ph filepath">lib/ext</span> folder of the installation files.</span>
+</li><li class="li step stepexpand" id="server_install_interactive__installer_program">
+<span class="ph cmd">From the command line, run the server installer program. </span>
+<ul class="ul choices">
+<li class="li choice">On Windows™, run the
+<span class="ph filepath">install-server.bat</span> file.</li>
+<li class="li choice">On Linux, run
+<span class="ph filepath">./install-server.sh</span>.</li>
+</ul>
+<div class="itemgroup info">Depending on your system settings, you might need to run this file as an administrator.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify the configuration information as the installation program prompts you. </span>
+<div class="itemgroup info">
+<dl class="dl parml">
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the directory of the server to upgrade(leave blank for installing to a clean
+directory).</span></dt>
+<dd class="dd pd">To install <span class="ph">Deploy</span>, press Enter.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the home directory for the JRE/JDK that the new server or already installed
+server uses.</span></dt>
+<dd class="dd pd">Specify the location of the JRE or JDK for the server. The default value is the value of the
+<span class="keyword parmname">JAVA_HOME</span> system variable.</dd>
+
+</dl>
+</div>
+</li><li class="li step stepexpand" id="server_install_interactive__license">
+<span class="ph cmd">Read the license agreements for the software package. Press Enter to show one page at a time,
+or press F and then press Enter to show the entire license at once.</span>
+</li><li class="li step stepexpand" id="server_install_interactive__agree">
+<span class="ph cmd">If you agree to the terms of all of the license agreements, press Y and then press Enter.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify the following information as the installation program prompts you.</span>
+<div class="itemgroup info">Accept the default values (displayed within brackets) by pressing Enter. If two options are
+given, such as <code class="ph codeph">[Y/n]</code>, the capitalized option is the default value. <dl class="dl parml">
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the directory where the Deploy server should be installed.</span></dt>
+<dd class="dd pd">Specify the installation directory for the server. <span class="ph">The default server installation directory is
+                            <span class="ph filepath">/opt/devops-deploy/server</span> on Linux and <span class="ph filepath">C:\Program
+                            Files\devops-deploy\server</span> on Windows.</span><div class="note note note_note" id="server_install_interactive__shell_expansions"><span class="note__title">Note:</span> Do not use any shell expansions or abbreviations, such as
+                  the tilde character (<code class="ph codeph">~</code>).</div></dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">The specified directory does not exist. Do you want to create it?</span></dt>
+<dd class="dd pd">Press Y to create the installation directory.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Will this server be used as a node in a high availability cluster?</span></dt>
+<dd class="dd pd">Press Y to add the server to a high-availability (HA) cluster, including cold standby clusters.
+Selecting this option sets the property
+<span class="keyword parmname">com.urbancode.ds.UDeployServer.multiserver</span> to true on the new server, which
+indicates that it is part of a high-availability installation.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol" id="server_install_interactive__app_data_prompt">Where should the server store application data such as logs,
+plugins, and keystores?</span></dt>
+<dd class="dd pd">Type the name of the application data directory. The directory must be accessible to the server,
+                and you must have the appropriate permissions. If you are installing a node in a
+                high-availability cluster, this directory must be on the cluster network storage.
+                  <span class="ph" data-hd-otherprops="ibm">The
+                  default application data folder is
+                    <span class="ph filepath">/opt/devops-deploy/server/appdata</span> on Linux and <span class="ph filepath">C:\Program
+                    Files\devops-deploy\server\appdata</span> on Windows.</span><p class="p">Depending on whether the shared folder exists or is empty,
+                  you are prompted with one of the following options:</p><ul class="ul">
+                  <li class="li">If the folder does not exist, you are prompted with the following option:
+                      <span class="ph uicontrol">The specified directory for application data doesn't exist. Do you
+                      want to create it?</span>. Press Y to create the application data
+                    directory. If you select <code class="ph codeph">N</code>, the installation process ends.</li>
+                  <li class="li">If the shared folder exists and is not empty, you are prompted with the
+                    following option: <span class="ph uicontrol">The specified directory for shared resources
+                      already exists and is non-empty. Do you want to use the existing
+                      data?</span>. Press Y to use the data. If you select <code class="ph codeph">N</code>,
+                    the installation process ends; in this case, you must manually clear the
+                    application data folder to use it.</li>
+                  <li class="li">If the shared folder exists but is empty, the folder is used and you are not
+                    prompted to use the existing data.</li>
+                </ul><div class="note note note_note"><span class="note__title">Note:</span> Do not use any shell expansions or abbreviations, such as the tilde
+                  character (<code class="ph codeph">~</code>).</div></dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">What host name will users access the web UI at?</span></dt>
+<dd class="dd pd"><span class="ph" id="server_install_interactive__public_url">If you are installing a stand-alone server, specify the host name of the
+computer that hosts the server. If you are installing a stand-alone server in a production
+environment, consider specifying a host name that is not tied to the physical computer. By
+specifying such a host name, you can expand the server to a high-availability system later. If you
+are installing a server in a high-availability cluster, specify the host name of the load balancer
+for the cluster.</span></dd>
+<dd class="dd pd ddexpand">
+<p class="p">The server listens on all IP addresses that are available to it, not just this host name or IP
+address.</p>
+</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Do you want the Web UI to always use secure connections using SSL?</span></dt>
+<dd class="dd pd">Press Y to use secure connections to the server. If you select this option, you must configure a
+certificate for the server; see <a class="xref" href="../../user/topics/ssl_config.html" title="The steps for configuring secure HTTPS connections with the IBM DevOps Deploy (Deploy) server are similar to the steps for any Java Platform, Enterprise Edition server.">Configuring SSL on Apache Tomcat and LDAP servers</a>.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the port on which the Web UI should listen for secure HTTPS
+requests.</span></dt>
+<dd class="dd pd"><span class="ph" id="server_install_interactive__https_port">Specify the HTTPS port for the server. The default value is
+                    <code class="ph codeph">8443</code>. <span class="ph" id="server_install_interactive__different_ports">If you are installing <span class="ph">Deploy</span>,
+                      <span class="keyword">IBM DevOps
+                                        Velocity</span>, and
+                      <span class="keyword">IBM DevOps
+                                        Release</span>, be
+                    sure to use a different port for each product. If you are installing multiple
+                    instances of <span class="ph">Deploy</span> on
+                    the same computer, be sure to use a different port for each instance.
+                </span></span></dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the port on which the Web UI should redirect unsecured HTTP
+requests.</span></dt>
+<dd class="dd pd"><span class="ph" id="server_install_interactive__http_port">Specify the HTTP port for the server. The default value is
+<code class="ph codeph">8080</code>.<span class="ph">If you are installing <span class="ph">Deploy</span>,
+                      <span class="keyword">IBM DevOps
+                                        Velocity</span>, and
+                      <span class="keyword">IBM DevOps
+                                        Release</span>, be
+                    sure to use a different port for each product. If you are installing multiple
+                    instances of <span class="ph">Deploy</span> on
+                    the same computer, be sure to use a different port for each instance.
+                </span></span></dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the initial password for the admin user.</span></dt>
+<dd class="dd pd"><span class="ph" id="server_install_interactive__admin_password">Specify the starting password for the administrator account on the
+server. The administrator user name is <code class="ph codeph">admin</code>.</span> Then, type the password again to
+verify it.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the web agent communication URL for this server.</span></dt>
+<dd class="dd pd">The WebSocket secure URL must have the format <code class="ph codeph">wss://host-or-ip:port</code>. For
+example, <code class="ph codeph">wss://examplehost:7919</code>. The default WebSocket port is
+<code class="ph codeph">7919</code>. Each server must have a unique URL, and every server in a HA cluster must be
+able to connect to this URL. Web agents use this URL to communicate with the sever. </dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the RCL server path(s).</span></dt>
+<dd class="dd pd">
+                <ul class="ul" id="server_install_interactive__ul_l3w_p2y_lyb">
+                  <li class="li">Specify the connection information for the license server. <span class="ph" id="server_install_interactive__rcl_path">You can specify the port and host name or IP address for the license server,
+                      such as <code class="ph codeph">27000@RCLServer.example.com</code>. To avoid problems when a
+                      license server is not available, you can specify multiple license servers. In
+                      this case, separate each address with colons on Linux and UNIX™
+                      or semicolons on Windows, as in the
+                      following example: <code class="ph codeph">27000@RCLServer.example.com; 27000@backupRCLServer.example.com</code>. For more complicated license
+                      server scenarios, see this <a class="xref" href="https://www.ibm.com/docs/en/common-licensing/9.0.0" target="_blank">document</a>. <span class="ph" data-hd-otherprops="ibm">For information about setting up a IBM Common
+                License server and applying licenses, see <a class="xref" href="https://www.ibm.com/docs/en/common-licensing/9.0.0?topic=overview-getting-started-common-licensing" target="_blank">Getting started with IBM Common Licensing</a>.
+            </span></span>. <span class="ph" id="server_install_interactive__rcl_license"> For more information about
+                      licensing, see <a class="xref" data-hd-otherprops="ibm" href="../../user/topics/licenseManage.html" title="IBM DevOps Deploy (Deploy) provides a 60-day license-free evaluation period. You must have a license to use all product features after the evaluation period.">Licensing</a>.</span>
+                    <div class="note note note_note" id="server_install_interactive__note_wn4_lfy_lyb"><span class="note__title">Note:</span> If you add the server to an existing
+                      high-availability cluster, you are not prompted to provide information about a
+                      license server.</div></li>
+                  <li class="li">Alternatively, you may leave this blank to explore <span class="ph">Deploy</span>
+                    features without a license for 60 days. To continue using <span class="ph">Deploy</span>,
+                    specify <span class="keyword parmname">license.server.url</span> property in the server
+                    installation properties file. See <a class="xref" href="server_properties.html" title="The server properties in the installed.properties file control details about the server, such as what ports it uses.">Server installation properties</a> for more
+                    information.</li>
+                </ul>
+              </dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Create database
+schema?</span></dt>
+<dd class="dd pd">In most cases, press Y to create new schema definitions in the database. However, if you have a
+pre-populated database, such as if you are adding a server to a cluster, press N. If you are adding
+the server to a high-availability cluster, press N unless the server is the first node in the
+cluster.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the database type to use.</span></dt>
+<dd class="dd pd">Specify the type of database. If you select <code class="ph codeph">derby</code>, the installation program
+                installs a new instance of Apache Derby for the server to use. Depending on the type
+                of database that you select, new fields appear for information about the database.
+                  <span class="ph" id="server_install_interactive__database_types">Valid values are <code class="ph codeph">derby</code>,
+                    <code class="ph codeph">mysql</code>, <code class="ph codeph">oracle</code>, <code class="ph codeph">sqlserver</code>, and
+                    <code class="ph codeph">db2</code>.</span><div class="note warning note_warning" id="server_install_interactive__derby_eval"><span class="note__title">Warning:</span> Derby is for
+                  evaluation purposes only; do not use Derby for a production server. In addition,
+                  if you install the server as a node in a high-availability cluster, you cannot use
+                  Derby.</div></dd>
+<dd class="dd pd ddexpand">
+<div class="p">If you specify a type other than <code class="ph codeph">derby</code>, specify the following database-related parameters:<dl class="dl parml">
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the database driver.</span></dt>
+<dd class="dd pd">Specify the class name of the database driver.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Please place the jar file containing the driver for your database inside the lib/ext
+                          directory in the Deploy installer.</span></dt>
+<dd class="dd pd">Verify that you placed the JAR file for the database driver in the <span class="ph filepath">lib/ext</span>
+folder of the installation program and then press
+Enter.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the database connection
+string.</span></dt>
+<dd class="dd pd">Specify the complete connection string for the database, such as the following
+                        string:<pre class="pre codeblock"><code>jdbc:db2://localhost:50000/deploydb</code></pre></dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the database schema name.</span></dt>
+<dd class="dd pd">Specify the name of the database schema to create or use. This field is required on Windows if the user has the database administrator role. This
+field applies only to Oracle databases.</dd>
+
+</dl></div>
+</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the database username.</span></dt>
+<dd class="dd pd">Specify the user name for the database. If you are creating the database schema, this user must
+have permission to create tables in the database.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the database password.</span></dt>
+<dd class="dd pd">Specify the password for the database.</dd>
+
+</dl></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If you are installing on Windows, the installation
+program prompts you with the following questions after a pause:</span>
+<div class="itemgroup info">
+<dl class="dl parml">
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Do you want to install the Server as Windows service?</span></dt>
+<dd class="dd pd">Press Y to install the server as a Windows service.
+</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter a unique service name. No spaces allowed.</span></dt>
+<dd class="dd pd">Specify a name for the Windows service. The default
+                service name is <code class="ph codeph">DevOps Deploy Server</code>. The name must be unique on
+                the system and must not contain spaces.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Enter the user account name including domain path to run the service</span></dt>
+<dd class="dd pd">Specify the user account with which to run the service, including the domain path. Prefix local
+accounts with a period, such as <kbd class="ph userinput">.\localsystem</kbd>.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Do you want to start the service automatically?</span></dt>
+<dd class="dd pd">Press Y to start the server automatically. Otherwise, you can start and stop the server
+manually. See <a class="xref" href="run_server.html" title="To run the server, run the batch file or shell script for the server.">Starting and stopping the server</a>.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">User account password</span></dt>
+<dd class="dd pd">Specify the password for the user account.</dd>
+
+</dl>
+</div>
+</li></ol></section>
+<section class="section result" id="server_install_interactive__result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_interactive__result">Results</h2></div>The installation program installs the server. The properties that are set during
+      installation are recorded in the file
+        <span class="ph filepath"><var class="keyword varname">server_install</var>/conf/server/installed.properties</span> on
+      the server.<p class="p">If you install the server as a node in high-availability cluster, the installer
+        loads the existing encryption keystore that is in the shared storage folder by using the
+        default settings. If the default password is incorrect, you are prompted for the password.
+        If after three attempts you do not enter the correct password, the installation process
+        stops. If the keystore has more than one alias, you are prompted to specify an
+      alias.</p></section>
+<section class="section postreq" id="server_install_interactive__postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_interactive__postreq">What to do next</h2></div>To start the server, see <a class="xref" href="run_server.html" title="To run the server, run the batch file or shell script for the server.">Starting and stopping the server</a>.<div class="p" id="server_install_interactive__no_default_agent">When you run the server for the first time, you might see an error message
+that says that no agent or tag is configured to import new component versions. To import component
+versions, including built artifacts, you must use an agent, and the server requires that you specify
+a default agent for this purpose. You can override this default setting when you create a component.
+Follow these steps to specify a default agent or agent tag:<ul class="ul">
+<li class="li">To specify a default agent, click <span class="ph menucascade"><span class="ph uicontrol">System</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System Settings</span></span> and under <span class="ph uicontrol">General Settings</span>, clear the <span class="ph uicontrol">Use Agent Tag
+For Integration</span> check box. Then, select an agent in the <span class="ph uicontrol">Agent for Version
+Imports</span> list. Then, at the bottom of the page, click <span class="ph uicontrol">Save</span>.</li>
+<li class="li">To specify a default agent tag, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System Settings</span></span> and under <span class="ph uicontrol">General Settings</span>, clear the <span class="ph uicontrol">Use Agent Tag
+For Integration</span> check box. Then, select an agent tag in the <span class="ph uicontrol">Agent Tag for
+version imports</span> list. Then, at the bottom of the page, click
+<span class="ph uicontrol">Save</span>. If no tags are listed, add a tag to one or more agents on the
+server.</li>
+</ul></div><p class="p">If you see "Out of memory" errors, increase the amount of memory that is available to
+the <span class="ph">Deploy</span> service. See <a class="xref" href="../../user/topics/server_memory.html" title="If you see &#34;Out of memory&#34; errors or are using the server at high capacity, increase the amount of system memory that is available to the server.">Increasing the amount of memory that is available to the server</a>.</p><div class="p" id="server_install_interactive__derby_permissions">If you are using Derby, you might see the following error in the results of
+the installation
+program:<pre class="pre codeblock"><code>[echo]     waiting for db to start - 6 seconds remaining
+[echo]     waiting for db to start - 3 seconds remaining
+[echo] Could not start database
+[echo] Stopping embedded database ...
+[java] Tue Feb 04 09:11:25 EST 2014 : Could not connect 
+  to Derby Network Server on host localhost, port 11377: 
+  Connection refused</code></pre>If
+you see this error, you must change the default security settings for the Java installation on the server:<ol class="ol">
+<li class="li">Open the Java security policy file in a text editor. If
+you are using a Java Runtime Environment (JRE), this file is
+at the location <span class="ph filepath"><var class="keyword varname">JAVA_HOME</var>/lib/security/java.policy</span>, where
+<var class="keyword varname">JAVA_HOME</var> is the base folder of the Java
+installation. If you are using a Java Development Kit (JDK),
+the file is at the location
+<span class="ph filepath"><var class="keyword varname">JAVA_HOME</var>/jre/lib/security/java.policy</span>.</li>
+<li class="li">In the <span class="ph filepath">java.policy</span> file, in the section that is labeled <code class="ph codeph">// default permissions granted to all domains</code>, within the <code class="ph codeph">grant{}</code> block, add the
+following
+code:<pre class="pre codeblock"><code>permission java.net.SocketPermission "localhost:11377", "listen";</code></pre></li>
+<li class="li">Run the installation program again.</li>
+</ol></div></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/serverInstall.html" title="The server provides services such as the user interface used to configure application deployments, the security service, and the artifact repository, among others. Installing the server involves specifying configuration information for the server, such as the ports that the server uses.">Installing the DevOps Deploy server</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Two or more z/OS component versions can be merged from a snapshot into one component version to simplify the deployment to the next environment. Merging component versions in this way avoids deploying intermediate programs into production."><meta name="DC.relation" scheme="URI" content="../../user/topics/zos_runtools.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="zos_merge_comp"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Merging z/OS component versions</title></head><body id="zos_merge_comp"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Merging z/OS component versions</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-28ef0a9e-4e1c-4645-8655-5ca7a2689aae">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">Two or more z/OS component versions can be merged from a snapshot into one component
+version to simplify the deployment to the next environment. Merging component versions in this way
+avoids deploying intermediate programs into production. </p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_merge_comp__prereq__1">Before you begin</h2></div>Note the following items when you merge z/OS components.<ul class="ul">
+<li class="li">Only incremental versions of z/OS components can be merged.</li>
+<li class="li">Only versions stored in the CodeStation can be merged. The merged version is also stored in the
+CodeStation.</li>
+<li class="li">Merging of versions is not supported when any of the z/OS versions have HFS artifact (shiplist
+type as directory and file).</li>
+<li class="li">Only data sets are merged into the new version.</li>
+<li class="li">When two or more versions contain the same artifact, the artifact from the latest version in the
+snapshot is used.</li>
+<li class="li">All customer properties on containers are added to the container in the merged version. This
+might lead to deployment failures if the deployment process relies on properties on containers.</li>
+<li class="li">The merged version has version properties from the last version in the snapshot.</li>
+</ul><img class="image" src="../images/merge_versions.jpg" alt="Merge z/OS component versions workflow"></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_merge_comp__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create a snapshot from an new or existing environment.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add or delete versions in the snapshot's Component Versions view. The
+<span class="ph uicontrol">Component</span> column lists the merged artifacts from all the selected versions.
+The <span class="ph uicontrol">Versions</span> column displays all the versions that contain the
+artifacts.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Actions</span> menu, click <span class="ph uicontrol">Merge</span> for the
+selected components and supply a name for the merged version. Click <span class="ph uicontrol">Save</span>. A
+new version is created from the merged content of the selected versions.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Artifacts</span> view, click <span class="ph uicontrol">Show SYS properties</span>.
+The source version name and ID are displayed.</span>
+<div class="itemgroup info"><img class="image" src="../images/merge_components.jpg" height="799" width="1408" alt="Snapshot Merge for Components"></div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_merge_comp__result__1">Results</h2></div>The following outcomes apply to merged versions.<ul class="ul">
+<li class="li">Deployment, backup, and restore actions of merged versions proceed like any other version. No
+change is required in the deployment process.</li>
+<li class="li">Deleting or archiving the original version has no impact on the merged version.</li>
+<li class="li">A merged version can be merged with other versions again.</li>
+<li class="li">Properties that you set on a Partitioned Data Set (PDS) are added from all versions to the PDS
+in the merged version for the same properties. The later value for the property overwrites the
+former value.<div class="note note note_note"><span class="note__title">Note:</span> Overwriting PDS properties might lead to deployment failures if your deployment
+process relies on the properties that you set in the PDS.</div></li>
+</ul></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/zos_runtools.html" title="You can create z/OS component version by running the buztool.sh command from job control language (JCL) or from the z/OS UNIX System Services command line. You can also create z/OS component version by using the z/OS File Source Config plug-in.">Creating z/OS component versions</a></div></div></nav></article></main></body></html>

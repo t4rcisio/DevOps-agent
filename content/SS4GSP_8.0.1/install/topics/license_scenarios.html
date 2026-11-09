@@ -1,0 +1,133 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="After the evaluation period, you must acquire a license before you can use all product features. Several different license scenarios are available. Depending on the scenario, you might need to apply licenses to IBM DevOps Deploy (Deploy) servers, agents, or both."><meta name="DC.relation" scheme="URI" content="../../user/topics/licenseManage.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="license_scenarios"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>License scenarios</title></head><body id="license_scenarios"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">License scenarios</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-cfedd893-b822-4672-bc69-31f187d8703b">Edit online</a></span></div>
+    
+
+<div class="body conbody"><p class="shortdesc">After the evaluation period, you must acquire a license before you can use all product
+        features. Several different license scenarios are available. Depending on the scenario, you
+        might need to apply licenses to <span class="ph">IBM DevOps Deploy (Deploy)</span> servers,
+        agents, or both.</p>
+<div class="note important note_important"><span class="note__title">Important:</span> 
+<ul class="ul">
+<li class="li">The <span class="ph">Deploy</span> server
+                    uses one persistent connection to the <span class="keyword">Common Licensing</span>
+                    server.</li>
+<li class="li">In case of floating license scenario, each active agent requires a connection from each server
+to the <span class="keyword">Common Licensing</span>
+server. Therefore, the license server must be able to have enough open connections for your
+topology. The total number of connections to the license server depends on how many agents and
+servers are running. For floating licenses, the agent holds a license during the deployment plus the
+waiting time.</li>
+</ul>
+</div>
+<p class="p">If you are using the <span class="keyword">IBM® License Metric Tool</span> to monitor license usage, you must ensure that agents are connected to the server so that the
+correct license usage is reported. The agents get their license type from the connection to the
+<span class="ph">Deploy</span> server. Therefore, if the agents cannot connect to the <span class="ph">Deploy</span> server, the <span class="ph filepath">.swtag</span> files in the agent directory might be incorrect, and as a
+result, the license usage reports from the <span class="keyword">IBM License Metric Tool</span> might not reflect actual usage. Check firewalls and other agent connectivity issues to be sure
+that licenses are available and accurately accounted for.</p>
+<p class="p"><span class="ph" data-hd-otherprops="ibm">The <span class="ph">Deploy</span> server
+                is supported on z/Linux. While the licensing component is not supported on z/Linux,
+                    <span class="ph">Deploy</span>
+                tracks agent usage, called agent high-water marks. You can use these records to
+                estimate license use on your z/Linux installation. See <a class="xref" href="../../user/topics/license_agentTracking.html" title="You can track daily agent usage. Agent usage can provide a rough estimate of agent license use.">Tracking agent usage</a>.</span></p>
+<p class="p">The following license scenarios are available. </p>
+<section class="section"><h2 id="license_scenarios__title__2" class="title sectiontitle">Virtual server and managed virtual server (Server Agent) licensing</h2>In this
+            scenario, the server and agents require separate licenses. You apply the <code class="ph codeph">IBM URBANCODE DEPLOY SERVER AGENT VIRTUAL SERVER</code> license to the server and
+                <code class="ph codeph">IBM URBANCODE DEPLOY SERVER AGENT MANAGED VIRTUAL SERVER</code> licenses
+            to the agents. If an agent does not have a license, it cannot run processes. <p class="p">In this
+                scenario, you can either allow the server to assign licenses to agents automatically
+                or you can assign licenses to agents manually. See <a class="xref" href="license_apply.html" title="To use licenses, you install a Common Licensing server, import your license keys, and link the IBM DevOps Deploy (Deploy) servers or agents to the license server.">Applying licenses to servers and agents</a>. The licenses are released when the agents are deleted.</p><p class="p"><span class="ph">Deploy</span> is
+                configured with a finite number of Server Agent licenses for an organization. When
+                the maximum number of licenses are in use, any additional agents configured becomes
+                unlicensed and cannot run processes. Any process run on an unlicensed agent will log
+                an error message. To resolve licensing warnings, additional licenses must be
+                obtained, or existing licenses must be reassigned among the agents.</p></section>
+<section class="section"><h2 id="license_scenarios__title__3" class="title sectiontitle">Processor value unit (PVU) licensing</h2>In this scenario, you apply the
+                <code class="ph codeph">IBM URBANCODE DEPLOY MANAGED CAPACITY PVU LIC</code> license to the <span class="ph">Deploy</span> server.
+            Then, the server can run processes. In this case, the agents do not require a separate
+            license file; instead, each PVU license allows the server to use some agents
+            concurrently. The number of concurrent agents might be limited or unlimited, depending
+            on the terms of the PVU license. If you are using this license scenario and the license
+            server does not have any PVU licenses for an <span class="ph">Deploy</span> server, the
+            server cannot run processes.<p class="p">You can track your use of the PVU licenses with the
+                    <span class="keyword">IBM License Metric Tool</span>. See <a class="xref" href="https://www.ibm.com/docs/en/odm/8.12.0?topic=metering-license-metric-tool" target="_blank">IBM License Metric
+                    Tool</a>.</p></section>
+<section class="section"><h2 id="license_scenarios__title__4" class="title sectiontitle">Virtual Processor Core value unit (VPC) licensing</h2>
+
+<p class="p">In this scenario, you apply the PVU license to the <span class="ph">Deploy</span> server.
+                Then, the server can run processes. The most common scenario is running <span class="ph">Deploy</span> as a
+                container in IBM Cloud Private or OpenShift. In this case, the agents do not require
+                a separate license file; instead, each PVU license allows the server to use some
+                agents concurrently. The number of concurrent agents might be limited or unlimited,
+                depending on the terms of the PVU license. If you are using this license scenario
+                and the license server does not have any PVU licenses for <span class="ph">Deploy</span> server,
+                the server cannot run processes. For this type of licensing, the Server License Type
+                field shows Managed Capacity. You can track your use of the PVU licenses with the
+                IBM License Metric Tool. <span class="ph">Deploy</span> server
+                VPC activity can be tracked through IBM Cloud Private metering capabilities. See
+                    <a class="xref" href="https://www.ibm.com/docs/en/odm/8.12.0?topic=metering-license-metric-tool" target="_blank">IBM License Metric
+                    Tool</a></p>
+</section>
+<section class="section"><h2 id="license_scenarios__title__5" class="title sectiontitle">Concurrent sessions (floating licenses)</h2>In this scenario, the <code class="ph codeph">IBM URBANCODE DEPLOY SESSION PER SIMULTANEOUS SESSION LIC</code> license is available
+            to the agents. When an agent runs a process, the <span class="ph">Deploy</span> server
+            retrieves a license from a license server. If the first license server does not have
+            available licenses, the <span class="ph">Deploy</span> server
+            attempts to retrieve a license from the other license servers. Regardless of whether the
+            process succeeds or fails, 15 minutes after the process is complete, the server returns
+            the license to the license server. The same agent that ran the process can reuse that
+            license immediately; however, the license is not available to any other agent until the
+            15-minute waiting period, also called linger time, is complete.<p class="p">In this scenario, the
+                    <span class="ph">Deploy</span>
+                server does not require a separate license. </p><p class="p" id="license_scenarios__nolicense_24hrs">Although
+                session-based licensing is provided to accommodate fluctuations in application
+                processing demands, peak processing demands result in more requested licenses than
+                available. In order to avoid interruptions in deployments when a license server or
+                servers run out of licenses, the agent is permitted to run the process and an entry
+                is made in the error log. It is the customer's responsibility to monitor session
+                usage and adjust licensing needs as required.</p></section>
+<section class="section"><h2 id="license_scenarios__title__6" class="title sectiontitle">Concurrent sessions (token licenses)</h2>In this scenario, the <code class="ph codeph">IBM URBANCODE DEPLOY SESSION INITIAL TOKEN 2 YEAR</code> license is available to the
+            agents. When an agent runs a process, the <span class="ph">Deploy</span> server
+            retrieves some token licenses from a license server. If the first license server does
+            not have enough available licenses, the <span class="ph">Deploy</span> server
+            attempts to retrieve licenses from the other license servers. Each agent requires
+            twenty-two tokens to run a deployment. 15 minutes after the process is complete, the
+            server returns the licenses to the license server. In this scenario, the server does not
+            require a license.<p class="p">Although
+                session-based licensing is provided to accommodate fluctuations in application
+                processing demands, peak processing demands result in more requested licenses than
+                available. In order to avoid interruptions in deployments when a license server or
+                servers run out of licenses, the agent is permitted to run the process and an entry
+                is made in the error log. It is the customer's responsibility to monitor session
+                usage and adjust licensing needs as required.</p></section>
+<section class="section"><h2 id="license_scenarios__title__7" class="title sectiontitle">Licenses for use with high-availability servers</h2>If you use a
+            high-availability server configuration, you might require a different license server
+            configuration. See <a class="xref" href="https://www.ibm.com/support/pages/high-availability-options-rational-license-key-server" target="_blank"> High-availability options for Rational® License Key Server</a>. <p class="p">If you have a <span class="ph">Deploy</span>
+                Clustered HA configuration, each of the <span class="ph">Deploy</span> servers
+                in that configuration must have the <code class="ph codeph">IBM URBANCODE DEPLOY SERVER AGENT VIRTUAL SERVER</code> license available for it. </p></section>
+<section class="section"><h2 id="license_scenarios__title__8" class="title sectiontitle">Licensing for upgraded servers</h2>When you upgrade the server from a licensed
+            version, the <span class="ph uicontrol">Server License Mode</span> field is set to
+                <code class="ph codeph">Disabled</code> until you install a license server and configure a
+            license. </section>
+<section class="section" id="license_scenarios__systemz"><h2 id="license_scenarios__systemz__title__1" class="title sectiontitle">Licensing for z/OS®</h2>Agents
+            on z/OS are licensed similarly to non-z/OS agents, but require specific z/OS scoped licenses. (Agents on z/Linux™ use the same licensing scenarios as agents
+            on distributed systems.) Each agent requires a license, even if multiple agents are
+            running on a single LPAR. One agent is required on each environment, even if the
+            environments are on a single sysplex.
+                    <p class="p"><strong class="ph b">Server-Agent</strong></p><ul class="ul">
+                <li class="li">Agent: <code class="ph codeph">IBM URBANCODE DEPLOY AGENT FOR Z/OS WORKLOADS PER MVS LIC</code></li>
+                <li class="li">Server: <code class="ph codeph">IBM URBANCODE DEPLOY VIRTUAL SERVER</code><p class="p">To run <span class="ph">Deploy</span>
+                        with the Server-Agent licensing scheme with agents installed on z/OS, the <code class="ph codeph">IBM URBANCODE DEPLOY AGENT FOR Z/OS WORKLOADS PER MVS LIC</code> agent license must
+                        be available in the Common License key server. In order to use agents that
+                        consume this license, the server must be licensed with the <code class="ph codeph">IBM DEVOPS DEPLOY VIRTUAL SERVER</code> license.</p></li>
+            </ul><p class="p"><strong class="ph b">Floating Agents</strong></p><ul class="ul">
+                <li class="li">Agent: <code class="ph codeph">IBM URBANCODE DEPLOY SESSION PER SIMULTANEOUS SESSION SYS Z LIC</code></li>
+                <li class="li">Agent, but via tokens: <code class="ph codeph">IBM URBANCODE DEPLOY SESSION FOR SIMULTANEOUS SESSION FOR Z/OSWORKLOADS LIC</code>: <p class="p">z/OS agents can similarly use Simultaneous Session or Token based
+                        licenses by consuming either the <code class="ph codeph">IBM URBANCODE DEPLOY SESSION PER SIMULTANEOUS SESSION SYS Z LIC</code> or <code class="ph codeph">IBM URBANCODE DEPLOY SESSION FOR SIMULTANEOUS SESSION FOR Z/OSWORKLOADS LIC</code>
+                        respectively. The z/OS token license
+                        is worth 155 tokens and both the Simultaneous Session and Token licenses are
+                        held by agents for 15 minutes after deployment complete before being
+                        returned to the server.</p></li>
+            </ul></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/licenseManage.html" title="IBM DevOps Deploy (Deploy) provides a 60-day license-free evaluation period. You must have a license to use all product features after the evaluation period.">Licensing</a></div></div></nav></article></main></body></html>

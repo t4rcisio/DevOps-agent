@@ -1,0 +1,119 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="IBM DevOps Deploy (Deploy) includes several systems, including a server and one or more agents. You can configure multiple topologies, including ones that use high availability, disaster recovery, and so on, to meet your needs."><meta name="DC.relation" scheme="URI" content="../../user/topics/intro_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ov_systems"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Systems and topology overview</title></head><body id="ov_systems"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Systems and topology overview</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ab293807-bbf9-4901-b64a-eb501414f97f">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc"><span class="ph">IBM DevOps Deploy (Deploy)</span> includes several systems, including a server and one or more agents. You can configure multiple
+topologies, including ones that use high availability, disaster recovery, and so on, to meet your
+needs.</p>
+<section class="section">
+<p class="p">The following system topologies, including diagrams, are shown. For explanation of the system
+components, see the <a class="xref" href="#ov_systems__description_system">Description of
+systems</a>.</p>
+<ul class="ul">
+<li class="li"><a class="xref" href="#ov_systems__core">Core topology</a></li>
+<li class="li"><a class="xref" href="#ov_systems__multi_region">Multi-region topology</a></li>
+<li class="li"><a class="xref" href="#ov_systems__ha_cluster">High-availability clustered topologies</a></li>
+<li class="li"><a class="xref" href="#ov_systems__disaster_recovery">Disaster recovery topologies</a></li>
+<li class="li"><a class="xref" href="#ov_systems__default_ports">Default ports</a></li>
+<li class="li"><a class="xref" href="#ov_systems__description_system">Description of systems</a></li>
+</ul>
+</section>
+<section class="section" id="ov_systems__core"><h2 id="ov_systems__core__title__1" class="title sectiontitle">Core topology</h2>The core installation of <span class="ph">Deploy</span> includes a
+            server, agents, and a license server. Clients access the server through web browsers,
+            the REST API, or the command-line client. Agents can be installed on cloud environments,
+            virtual machines (VMs), containers, or physical systems; the agents are shown on cloud
+            systems in the following diagrams, but they can be installed on many different
+                systems.<p class="p">With this topology, the server can create environments on clouds that use
+                virtual system patterns (VSPs), such as <span class="keyword">IBM® Cloud Orchestrator</span> and
+                    <span class="keyword">IBM PureApplication® System</span>. </p><p class="p">For more information about supported clouds that use VSPs, see <a class="xref" href="../../install/topics/cloud_configure.html" title="To create dynamic environments on a cloud system that uses virtual system patterns, you must install a script package on your cloud system.">Configuring virtual system pattern-based clouds</a>. </p><br><img class="image" src="../images/ov_systems_a.gif" alt="A simple topology that consists of the server, agents, a license server, a cloud, and the interfaces to the server, including web browsers, the command-line client, and the REST API"><br><p class="p">To install the core components, see <a class="xref" href="../../install/topics/install_ch.html#install_ch" title="An IBM DevOps Deploy (Deploy) installation consists of a Deploy server, a database server, and at least one agent.">Installing DevOps Deploy</a>.</p></section>
+<section class="section" id="ov_systems__multi_region"><h2 id="ov_systems__multi_region__title__1" class="title sectiontitle">Multi-region topology</h2>
+
+<div class="p">If your environment has multiple security zones that are divided by firewalls, you can use agent
+relays to connect agents to the server through the firewalls. For example, if your <span class="ph">Deploy</span> server is within a firewall, but your target environments are outside the firewall, the agents on
+those target environments cannot connect directly to the server. In this case, you install an agent
+relay outside the firewall to allow the agents to connect to the server through the firewall, as
+shown in the following diagram.<br><img class="image" src="../images/ov_systems_d.gif" alt="A topology that includes an agent relay; the relay allows agents to communicate with the server through firewalls"><br></div>
+<p class="p">To install and configure an agent relay, see <a class="xref" href="../../install/topics/agentRelayInstall.html" title="An agent relay is a communication proxy for agents that are located behind a firewall or in another network location. You can install agent relays in interactive mode or in silent mode.">Installing agent relays</a>.</p>
+</section>
+<section class="section" id="ov_systems__ha_cluster"><h2 id="ov_systems__ha_cluster__title__1" class="title sectiontitle">High-availability clustered topologies</h2>High-availability
+            topologies use multiple servers. These servers can all be running at the same time to
+            share the load (as in a clustered topology), or they can be waiting for another server
+            to fail (as in a cold standby topology). The following diagram shows a clustered
+            topology in which a load balancer distributes connections to three servers. Users
+            connect directly to the load balancer, which sends them to an active server. Agents
+            connect via HTTP and HTTPS to the load balancer. The servers store their files on a
+            shared database and file system.<br><img class="image" src="../images/ov_systems_e2.gif" alt="A clustered high-availability topology, in which most communication to the multiple servers goes through a load balancer"><br><p class="p">To configure a cluster of servers, see <a class="xref" href="ha_config_server.html#ha_config_server" title="To configure a cluster of servers, set up a shared database and file system for the servers to use.">Setting up clusters of servers</a>.</p></section>
+<section class="section" id="ov_systems__disaster_recovery"><h2 id="ov_systems__disaster_recovery__title__1" class="title sectiontitle">Disaster recovery topologies</h2>One way to prepare for
+            disaster recovery is to have a cold standby system, including a stopped server and a
+            replicated copy of the database and file system. The following diagram shows a simple
+            topology with a cold standby server and related resources on standby.<br><img class="image" src="../images/ov_systems_h2.gif" alt="A topology that includes a cold standby system"><br><p class="p">To configure a cold standby system for the server, see <a class="xref" href="../../install/topics/server_install_cold.html#server_install_cold" title="You can add cold standby servers to serve as a backup server or for disaster recovery. You must start the secondary server or servers when the active server fails, and network traffic is routed to the secondary servers.">Adding cold standby servers</a>.</p></section>
+<section class="section" id="ov_systems__default_ports"><h2 id="ov_systems__default_ports__title__1" class="title sectiontitle">Default ports</h2>
+
+<p class="p" id="ov_systems__port_diagram">The following diagram shows the default port numbers that <span class="ph">Deploy</span> uses
+                for communication. You can change most of these ports, depending on your choices
+                during installation. The following diagram is only a summary of the default port
+                numbers.</p>
+            <p class="p"><img class="image" id="ov_systems__image_h5f_sj1_w1c" src="../../install/images/urbancode_deployports2.png" alt="A topology that shows the ports that each part of Deploy uses for communication"></p>
+<p class="p">For more information about ports, see <a class="xref" href="system_requirements.html" title="This document includes information about the hardware, containers, prerequisite software, supported operating system, and database requirements with component level detail for the IBM DevOps Deploy (Deploy).">System Requirements</a>.</p>
+</section>
+<section class="section" id="ov_systems__description_system"><h2 id="ov_systems__description_system__title__1" class="title sectiontitle">Description of systems</h2>
+
+<dl class="dl">
+
+<dt class="dt dlterm"><span class="ph">Deploy</span> server</dt>
+<dd class="dd">The <span class="ph">Deploy</span> server stores components, processes, and other elements with which you model automated
+application deployments. You run automated deployments from the server.</dd>
+
+
+<dt class="dt dlterm">Web browsers</dt>
+<dd class="dd">Web browsers are the main way that users interact with the server. The <span class="ph">Deploy</span>
+                        browser-based GUI is a Rich Internet Application (RIA) that maintains much
+                        of its functionality in the browser. Clients interact with RESTful
+                        (representational state transfer) services on the server as needed. </dd>
+
+
+<dt class="dt dlterm">Command-line client</dt>
+<dd class="dd">The command-line client provides access to the server through the command line. It can automate
+functions on the server, such as creating components and applications, and provides most of the
+features that are found in the browser-based GUI. The command-line client is also built on top of
+RESTful services. See <a class="xref" href="../../reference/topics/cli_ch.html" title="CLI is a command-line interface that provides access to the IBM DevOps Deploy (Deploy) server. It can be used to find or set properties and to run numerous functions.">Command-line client (CLI) reference</a>.</dd>
+
+
+<dt class="dt dlterm">REST API</dt>
+<dd class="dd">The REST API provides access to the server through HTTP. Like the command-line client, it can
+automate functions on the server, such as creating components and applications.</dd>
+<dd class="dd ddexpand">Each command in the server REST API has an equivalent command in the command-line client. See
+                            <a class="xref" href="c_node_extending.html" title="Learn how to extend the function of IBM DevOps Deploy (Deploy).">Extending Product Function</a>.</dd>
+
+
+<dt class="dt dlterm">Agents</dt>
+<dd class="dd">The agents run processes on target systems. Agents can run on physical computers, virtual
+systems, or cloud systems. See <a class="xref" href="resources_agents.html#resources_agents" title="An agent is a lightweight process that runs on a deployment-target host and communicates with the IBM DevOps Deploy (Deploy) server.">Agents</a>.</dd>
+
+
+<dt class="dt dlterm">Agent relays</dt>
+<dd class="dd">An agent relay is a communication proxy for agents that are located behind a firewall or in
+another network location. See <a class="xref" href="arch_agent_relays.html#arch_agent_relays" title="Agent relays coordinate communication between agents and the IBM DevOps Deploy (Deploy) server. Agent relays improve the performance of communication between the server and agents. Relays also allow agents to communicate through firewalls.">Agent relays</a>.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword">Common Licensing</span>
+License server </dt>
+<dd class="dd">The license server provides licenses to the server. </dd>
+<dd class="dd ddexpand">For more information on the license server, see <a class="xref" href="https://www.ibm.com/docs/en/common-licensing/9.0.0" target="_blank">IBM
+                            <span class="keyword">Common Licensing</span></a>.</dd>
+
+
+<dt class="dt dlterm">Clouds</dt>
+<dd class="dd">The clouds host virtual resources. When you create environments with the server, provisions
+                        resources on the target clouds. </dd>
+
+
+<dt class="dt dlterm">CodeStation</dt>
+<dd class="dd">CodeStation stores component versions and artifacts. It is part of the <span class="ph">Deploy</span> server.</dd>
+
+</dl>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/intro_ch.html" title="Use IBM DevOps Deploy (Deploy) to standardize and simplify the process of deploying software components to each environment in your development cycle.">Overview of DevOps Deploy</a></div></div></nav></article></main></body></html>

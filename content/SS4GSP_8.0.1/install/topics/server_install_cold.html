@@ -1,0 +1,62 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can add cold standby servers to serve as a backup server or for disaster recovery. You must start the secondary server or servers when the active server fails, and network traffic is routed to the secondary servers."><meta name="DC.relation" scheme="URI" content="../../user/topics/c_node_configuring.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="server_install_cold"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Adding cold standby servers</title></head><body id="server_install_cold"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Adding cold standby servers</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6ec1cd01-c024-45d4-9494-c616d1fd3fca">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">You can add cold standby servers to serve as a backup server or for disaster recovery.
+You must start the secondary server or servers when the active server fails, and network traffic is
+routed to the secondary servers. </p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_cold__prereq__1">Before you begin</h2></div>
+<ul class="ul">
+        <li class="li">Make sure that the server is connected to a license server with available licenses.</li>
+<li class="li">Set up a cluster as described in <a class="xref" href="../../user/topics/ha_config_server.html" title="To configure a cluster of servers, set up a shared database and file system for the servers to use.">Setting up clusters of servers</a>. Your cluster must contain at least
+one running server.</li>
+</ul>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_cold__context__1">About this task</h2></div>
+<p class="p">To set up a cold standby system, you install two or more servers on separate systems and connect
+the servers to the same database and network storage. Then, you configure a method to distribute the
+traffic to secondary servers if the primary servers fail. In most cases, you must manually start the
+secondary servers after the primary servers fail. </p>
+      <p class="p"><span class="ph">During failover, the
+secondary server reestablishes connections with all agents, runs recovery, and proceeds with any
+queued processes. <span class="ph">Deploy</span> has no
+automatic process for failover, but it can be managed by using your load balancer or DNS.</span></p>
+<p class="p">You can use cold standby servers with or without a load balancer. If you use a load balancer,
+        instead of accessing the servers directly, users access the load balancer URL. To the users,
+        that URL appears to host a single instance of the server with high capacity; the users are
+        not aware of the multiple servers.</p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_cold__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Install the cold standby server:</span>
+<div class="itemgroup info"><span class="ph" data-hd-otherprops="ibm">Install the server as described in <a class="xref" href="server_install_interactive.html" title="In interactive mode, you install the server by typing configuration information on the command line.">Installing the server in interactive mode</a> with the
+                                    following details:</span></div>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">When the installation program asks for database information, specify the database that the
+cluster servers are using. </li>
+<li class="li">If you are using a load balancer, when the installation program asks for the host name that
+users will access, specify the host name of the load balancer.</li>
+<li class="li">When the installation program asks if the server is part of a high-availability cluster, say
+yes.</li>
+<li class="li">When the installation program asks for the location of the application data, specify the same
+folder on the network storage that the other cluster servers are using.</li>
+</ul>
+<div class="note note note_note"><span class="note__title">Note:</span> Do not start the server.</div>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Set the new server to use the same security certificate as the existing servers.</span>
+          <div class="itemgroup info">For example, you can copy the certificate in the
+            <span class="ph filepath">/opt/tomcat/conf/tomcat.keystore</span> file to the other servers. Edit
+          the <var class="keyword varname">tomcat.key.alias </var>property in
+            <span class="ph filepath">installed.properties</span> file to specify the alias in the keystore that
+          contains the certificate to use as
+          follows:<pre class="pre codeblock" id="server_install_cold__d699e106"><code>tomcat.key.alias=<var class="keyword varname">alias_of_your_certificate_in_tomcat_keystore</var></code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Set a method to route traffic to the cold standby server after failover.</span>
+<div class="itemgroup info">Depending on your network configuration, you might configure a DNS server routing path,
+Virtual IP, cluster connection, or load balancer to swap traffic. </div>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/c_node_configuring.html" title="Learn how to administer settings in IBM DevOps Deploy (Deploy) elements and communication between the elements.">Administering</a></div></div></nav></article></main></body></html>

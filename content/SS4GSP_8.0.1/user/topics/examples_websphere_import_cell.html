@@ -1,0 +1,33 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can import information about a WebSphere Application Server cell into resources and then use those resources in an environment."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_environment.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="examples_websphere_import_cell"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating environments from WebSphere Application Server cells</title></head><body id="examples_websphere_import_cell"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating environments from <span class="keyword">WebSphere Application Server</span>
+cells</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-984f4732-2329-4157-b8bb-799d7155ef44">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can import information about a <span class="keyword">WebSphere® Application Server</span> cell
+into resources and then use those resources in an environment.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskexamples_websphere_import_cell__prereq__1">Before you begin</h2></div>You must have a <span class="keyword">WebSphere Application Server</span> cell and an application
+   in the <span class="ph">IBM DevOps Deploy (Deploy)</span>
+   server.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskexamples_websphere_import_cell__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Import resources from the <span class="keyword">WebSphere Application Server</span> cell
+as described in <a class="xref" href="resources_import_was.html" title="Use the WebSphere Application Server - Deploy plug-in to import information about an IBM WebSphere Application Server system into a collection of resources. Typically, importing information by using the plug-in takes less time than manually creating resources to match the IBM WebSphere Application Server.">Importing resources from WebSphere Application Server</a>.</span><div class="itemgroup stepresult">When you are finished, you
+have a collection of resources that represent the cell and the nodes,
+servers, and other artifacts in the cell. These resources are under
+the agent resource for the <span class="keyword">WebSphere Application Server</span> system.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph">Deploy</span> server,
+create an application environment.</span></li><li class="li step stepexpand"><span class="ph cmd">Add the resources to the environment:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep"><span class="ph cmd">Open the environment and go to the <span class="ph uicontrol">Resources</span> tab.</span>
+</li>
+<li class="li substep"><span class="ph cmd">Click <span class="ph uicontrol">Add Base Resources</span>.</span>
+</li>
+<li class="li substep"><span class="ph cmd">Select the agent resource and click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskexamples_websphere_import_cell__postreq__1">What to do next</h2></div>Now you can run application processes on the environment,
+including processes that contain steps in the <span class="keyword">WebSphere Application Server</span> -
+Deploy plug-in.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_environment.html" title="An environment is a user-defined collection of resources that hosts an application.">Application environments</a></div></div></nav></article></main></body></html>

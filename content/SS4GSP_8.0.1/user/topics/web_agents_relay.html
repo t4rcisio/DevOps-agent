@@ -1,0 +1,49 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Relays can be configured to support web agents exclusively."><meta name="DC.subject" content="Web agent, Web agent relay, agent limit, WebSocket"><meta name="keywords" content="Web agent, Web agent relay, agent limit, WebSocket"><meta name="DC.relation" scheme="URI" content="../../user/topics/web_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="web_agents_relay"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Web agent relay configuration</title></head><body id="web_agents_relay"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Web agent relay configuration</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-7179c75a-e106-40bc-a364-f9c66136810d">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">Relays can be configured to support web agents exclusively.</p>
+<div class="p">You must upgrade relays for agents with web communication enabled and associate with the relay
+   from the UI. However, a successful agent communication does not require any configuration. The
+   following web communication parameters are defined in the
+     <span class="ph filepath"><var class="keyword varname">relayInstallDir</var>/conf/agentrelay.properties</span> file:
+   <pre class="pre codeblock"><code>agentcomm.enabled=true
+agentcomm.server.uri=random:(wss://deploy1.example.org:7919,wss://deploy2.example.org:7919)</code></pre></div>
+<section class="section"><h2 id="web_agents_relay__title__2" class="title sectiontitle">Agent relay limits</h2>
+
+<div class="p">The maximum number of agents that can be assigned to a relay is limited in each of the releases.
+    See to the following table to check the number of agents that are allowed for a relay for your
+     installed<span class="ph">IBM DevOps Deploy (Deploy)</span>
+     version.<table class="table frame-all" id="web_agents_relay__table_m5k_2xm_r4b"><caption></caption><colgroup><col style="width:172.2pt"><col style="width:130.2pt"><col style="width:137.4pt"><col style="width:107.4pt"></colgroup><thead class="thead">
+       <tr class="row">
+        <th class="entry" id="web_agents_relay__table_m5k_2xm_r4b__entry__1">Version</th>
+        <th class="entry" id="web_agents_relay__table_m5k_2xm_r4b__entry__2">Relay mode</th>
+        <th class="entry" id="web_agents_relay__table_m5k_2xm_r4b__entry__3">Agent type</th>
+        <th class="entry" id="web_agents_relay__table_m5k_2xm_r4b__entry__4">Limit with default proxy</th>
+       </tr>
+      </thead><tbody class="tbody">
+       <tr class="row">
+        <td class="entry" headers="web_agents_relay__table_m5k_2xm_r4b__entry__1">7.0.4.0 to 7.0.5.0</td>
+        <td class="entry" headers="web_agents_relay__table_m5k_2xm_r4b__entry__2">Web mode</td>
+        <td class="entry" headers="web_agents_relay__table_m5k_2xm_r4b__entry__3">Web Agents</td>
+        <td class="entry" headers="web_agents_relay__table_m5k_2xm_r4b__entry__4">1K</td>
+       </tr>
+       <tr class="row">
+        <td class="entry" headers="web_agents_relay__table_m5k_2xm_r4b__entry__1">7.0.5.0 or later</td>
+        <td class="entry" headers="web_agents_relay__table_m5k_2xm_r4b__entry__2">Web mode</td>
+        <td class="entry" headers="web_agents_relay__table_m5k_2xm_r4b__entry__3">Web Agents</td>
+        <td class="entry" headers="web_agents_relay__table_m5k_2xm_r4b__entry__4">10K</td>
+       </tr>
+      </tbody></table></div>
+<p class="p">In Linux, use the following utilities to reach the design limit of 10K concurrent agents:</p>
+<ul class="ul">
+<li class="li">sysctl: <pre class="pre codeblock"><code>fs.file-max &gt;= 40000</code></pre></li>
+<li class="li">ulimit: <pre class="pre codeblock"><code>nofile &gt;= 40000</code></pre></li>
+<li class="li">sysctl: <pre class="pre codeblock"><code>net.ipv4.ip_local_port_range &gt;= "10000 65000"</code></pre></li>
+</ul>
+</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/web_agents.html" title="Web agents use WebSocket and HTTPS connections for communication. Web agents do not use JMS.">Web agent configuration</a></div></div></nav></article></main></body></html>

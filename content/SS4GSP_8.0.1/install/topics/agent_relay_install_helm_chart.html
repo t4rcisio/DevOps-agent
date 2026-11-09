@@ -1,0 +1,31 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="An agent relay automates application deployments through your environments. relays are especially good for coordinating environments with numerous agents. You can connect several agents outside the firewall to the server with a single relay."><meta name="DC.relation" scheme="URI" content="../../install/topics/agentRelayInstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_relay_install_helm_chart"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Installing an agent relay in a Kubernetes cluster</title></head><body id="agent_relay_install_helm_chart"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Installing an agent relay in a Kubernetes cluster</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b5d607bc-24b8-4083-9191-ec85c208fc1d">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">An agent relay automates application deployments through your environments. relays are
+                especially good for coordinating environments with numerous agents. You can connect
+                several agents outside the firewall to the server with a single relay.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_relay_install_helm_chart__prereq__1">Before you begin</h2></div>
+<div class="p">Ensure that you complete the following prerequisite tasks:<ul class="ul" id="agent_relay_install_helm_chart__ul_nyp_lzt_txb">
+                    <li class="li">Set up a working Red Hat OpenShift/Kubernetes cluster.</li>
+                    <li class="li">Create a project/namespace where the <span class="ph">IBM DevOps Deploy (Deploy)</span> agent relay will run.</li>
+                </ul></div>
+                        <p class="p">For more information, refer to the README topics below.</p>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_relay_install_helm_chart__context__1">About this task</h2></div>
+            <p class="p">You can install a containerized version of <span class="ph">Deploy</span> agent relay in an OpenShift/Kubernetes cluster. Install the
+                                        <span class="ph">Deploy</span> agent relay by using a Helm chart or Helm based operator.</p>
+            <ul class="ul" id="agent_relay_install_helm_chart__ul_btv_qzt_txb">
+                <li class="li">To install using a Helm chart, see <a class="xref" href="https://github.com/IBM/charts/blob/master/repo/ibm-helm/ibm-ucd-prod.md" target="_blank">README</a> for
+                                        Helm charts.</li>
+                <li class="li">To install using an operator, see <a class="xref" href="https://github.com/IBM/cloud-pak/blob/master/repo/case/ibm-ucdr-case/README.md#urbancode-deploy-agent-relay---case-bundle" target="_blank">README</a> for the
+                                        case bundle.</li>
+            </ul>
+        </section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_relay_install_helm_chart__postreq__1">What to do next</h2></div>
+            <p class="p">Set agent relay properties to control details about the installed agent relays. See,
+                    <a class="xref" href="agent_relay_properties.html" title="You can find the list of IBM DevOps Deploy (Deploy) agent relay properties that are used during the installation process.">Agent relay installation properties</a>.</p>
+        </section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/agentRelayInstall.html" title="An agent relay is a communication proxy for agents that are located behind a firewall or in another network location. You can install agent relays in interactive mode or in silent mode.">Installing agent relays</a></div></div></nav></article></main></body></html>

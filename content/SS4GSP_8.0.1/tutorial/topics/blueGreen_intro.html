@@ -1,0 +1,60 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="In this tutorial, you setup a deployment with two identical production environments, referred to arbitrarily as Blue and Green. One environment is always live, and the other environment is inactive and available to host an upgraded version."><meta name="DC.subject" content="blue-green deplyment, canary deployment, blue-green topology, blue-green tutorial"><meta name="keywords" content="blue-green deplyment, canary deployment, blue-green topology, blue-green tutorial"><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/blueGreen_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueGreen_intro"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Introduction</title></head><body id="blueGreen_intro"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Introduction</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-c4b8066c-5b21-45dc-99e3-5a8ab28914bb">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">In this tutorial, you setup a deployment with two identical production
+environments, referred to arbitrarily as Blue and Green. One environment is always live, and the
+other environment is inactive and available to host an upgraded version. </p>
+<p class="p">Business-critical multinode installations that must always remain in production require advanced
+updating strategies. <em class="ph i">Blue-green deployments</em> fit this requirement because they provide smooth
+transitions between versions, zero-downtime deployments, and quick rollbacks. </p>
+<p class="p">A blue-green deployment uses two identical production environments. After verifying that an
+update in the inactive environment is working with a new version, you switch traffic to the new
+version. If anything goes wrong, you can quickly switch back to the old version. </p>
+<p class="p">This graphic illustrates a two-node production topology. While customers use the nodes in the
+active blue environment, you update the inactive green environment with the new version. You can
+perform as many tests as required in the inactive green environment. When everything is ready, you
+only need to update the load balancer to switch production environments.</p>
+<div class="p">
+<br><img class="image" src="../images/blue-green1active.jpg" alt="Basic blue-green deployment topology"><br>
+</div>
+<p class="p">One approach is to switch traffic to a single updated node and validate it before switching the
+other nodes. Testing one node in this way is called a canary deployment. If the canary node fails,
+traffic remains uninterrupted because the non-updated nodes continue to serve customers. </p>
+<br><img class="image" src="../images/blue-green1.jpg" alt="Blue-green canary deployment"><br>
+<p class="p">If the update is successful, you direct the load balancer to switch all the remaining traffic to
+the other updated nodes. </p>
+<br><img class="image" src="../images/blue-green2active.jpg" alt="Completed blue-green deployment"><br>
+<p class="p">When you are ready for the next release, you start the cycle over using the now-interactive blue
+environment.</p>
+<section class="section"><h2 id="blueGreen_intro__title__2" class="title sectiontitle">Learning objectives</h2>In
+this tutorial, you learn how to complete these tasks:<ul class="ul">
+<li class="li">Use tags to design resources for multiple-node environments <span class="ph">Deploy</span>.</li>
+<li class="li">Configure environments for no-downtime deployments.</li>
+<li class="li">Create application processes to deploy multiple components to multiple nodes.</li>
+<li class="li">Configure user approvals for production deployments .</li>
+</ul></section>
+<section class="section"><h2 id="blueGreen_intro__title__3" class="title sectiontitle">Time required</h2>This tutorial takes 2 - 3 hours to finish. If you explore other
+concepts that are related to this tutorial, it could take longer to complete.</section>
+<section class="section"><h2 id="blueGreen_intro__title__4" class="title sectiontitle">System requirements</h2>To run this tutorial, you need the following resources:<ul class="ul">
+<li class="li">An installation of <span class="ph">Deploy</span>, version 7.0.0 or later.</li>
+<li class="li">A <span class="ph">Deploy</span> agent installed in your environment.</li>
+<li class="li">While not required, you can use multiple computers, virtual images, or cloud instances to use
+for agents in the tutorial.</li>
+</ul>
+</section>
+<section class="section" id="blueGreen_intro__prereqs"><h2 id="blueGreen_intro__prereqs__title__1" class="title sectiontitle">Prerequisites</h2>
+
+<ul class="ul">
+<li class="li">This tutorial assumes familiarity with <span class="ph">Deploy</span>. If you new to the product, you might benefit from completing the <a class="xref" href="../../user/topics/c_node_tutorialsNew.html#tutorialsNew" title="Tutorials for new users.">Basic</a> or <a class="xref" href="../../user/topics/c_node_tutorialsInter.html#tutorialsInter" title="Tutorials for experienced users.">Intermediate</a> tutorials.</li>
+<li class="li">You must have an <span class="ph">Deploy</span> account with the permissions to create and edit applications, environments, and components, and
+to create and run processes.</li>
+<li class="li">This tutorial uses the application created in the <a class="xref" href="webapp_abstract.html#webapp_abstract" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">JPetStore tutorial</a>. You can also download some of
+the resources created in the JPetStore tutorial. If you did not complete the JPetStore tutorial, you
+can use any multi-component application that you have sufficient permissions to update and modify. </li>
+</ul>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.1.0 SS4GSP_8.0.1" href="../../tutorial/topics/blueGreen_abstract.html" title="In this tutorial, you setup a deployment with two identical production environments, referred to arbitrarily as Blue and Green. One environment is always live, and the other environment is inactive and available to host an upgraded version.">Blue-green deployments</a></div></div></nav></article></main></body></html>

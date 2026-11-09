@@ -1,0 +1,491 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="You can find information about the hardware requirements for different operating systems that support IBM DevOps Deploy (Deploy)."><meta name="DC.subject" content="System requirements, Hardware, AIX, Linux, Mac OS, Solaris, Windows, z/OS"><meta name="keywords" content="System requirements, Hardware, AIX, Linux, Mac OS, Solaris, Windows, z/OS"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="hardware"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Hardware</title></head><body id="hardware"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Hardware</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-357719b8-def3-4483-af5a-710e3b0e1d02">Edit online</a></span></div>
+    
+    
+    
+    <div class="body conbody"><p class="shortdesc">You can find information about the hardware requirements for different operating
+        systems that support <span class="ph">IBM DevOps Deploy (Deploy)</span>.</p>
+        <p class="p"><strong class="ph b">Contents</strong></p>
+        <div class="p">
+            <ul class="ul" id="hardware__ul_dnb_nxj_fmb">
+                <li class="li"><a class="xref" href="#hardware__section_hl2_w53_wyb">AIX</a></li>
+                <li class="li"><a class="xref" href="#hardware__lin_hw">Linux</a></li>
+                <li class="li"><a class="xref" href="#hardware" title="You can find information about the hardware requirements for different operating systems that support IBM DevOps Deploy (Deploy).">Mac OS</a></li>
+                <li class="li"><a class="xref" href="#hardware__section_xbd_ngx_wyb">Solaris</a></li>
+                <li class="li"><a class="xref" href="#hardware__win_hw">Windows</a></li>
+                <li class="li"><a class="xref" href="#hardware__section_mmk_wgx_wyb">z/OS</a></li>
+            </ul>
+        </div>
+        <section class="section" id="hardware__section_hl2_w53_wyb"><h2 id="hardware__section_hl2_w53_wyb__title__1" class="title sectiontitle">AIX</h2>
+            
+            <div class="p">The hardware requirements to run the <span class="ph">Deploy</span>
+                components on the AIX operating system are as follows:<table class="table frame-all" id="hardware__table_lsc_cv3_wyb"><caption></caption><colgroup><col style="width:23.696682464454973%"><col style="width:33.41232227488151%"><col style="width:42.8909952606635%"></colgroup><thead class="thead">
+                            <tr class="row">
+                                <th class="entry align-left colsep-1 rowsep-1" id="hardware__table_lsc_cv3_wyb__entry__1">Hardware</th>
+                                <th class="entry align-left colsep-1 rowsep-1" id="hardware__table_lsc_cv3_wyb__entry__2">Components</th>
+                                <th class="entry align-left colsep-1 rowsep-1" id="hardware__table_lsc_cv3_wyb__entry__3">Requirement</th>
+                            </tr>
+                        </thead><tbody class="tbody">
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__1">Disk space</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__2">
+                                    <ul class="ul" id="hardware__ul_yxg_pq5_shc">
+                                        <li class="li">Agent</li>
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__3">Minimum of 2 GB.</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__1" rowspan="2">Memory</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__2">Agent</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__3">Minimum of 2 GB.</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__2">
+                                    <ul class="ul" id="hardware__ul_vhy_tq5_shc">
+                                        <li class="li">Server</li>
+                                        <li class="li">Relay</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__3">Java Heap requirements:<p class="p">A minimum of 2 GB is required for
+                                            <strong class="ph b">evaluation</strong> purposes, such as a proof of concept
+                                        (POC) instance or a small demo environment.</p><div class="p">The Xmx
+                                        setting must be increased for <strong class="ph b">production</strong> purposes as
+                                            follows:<ul class="ul" id="hardware__ul_t4d_qx3_wyb">
+                                            <li class="li">&lt;500 agents: ~4 GB</li>
+                                            <li class="li">500-5000 agents: ~13 GB</li>
+                                            <li class="li">5000-15000 agents: ~24 GB</li>
+                                        </ul></div><p class="p">Native memory:</p><p class="p">The minimum required memory
+                                        is 4 GB for POC, 4 GB for production, for the additional
+                                        memory required beyond the Java Heap.</p></td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__1">Network: adapters, drivers, protocols</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__2">
+                                    <ul class="ul" id="hardware__ul_jgs_xq5_shc">
+                                        <li class="li">Agent</li>
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__3">Gigabit (1000) Ethernet with low-latency to the
+                                    database.</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__1" rowspan="2">Processor</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__2">
+                                    <ul class="ul" id="hardware__ul_qsc_1r5_shc">
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__3">The server requires approximately double the CPU capacity of
+                                    a relay. So, given the number of agents (800) and 2 cores per
+                                    500 agents on the relay, use an 8-core machine available for the
+                                    server.</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__2">Agent</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__3">2-Core processor <p class="p">For z/OS: The <span class="ph">Deploy</span> agent for z/OS runs on <span class="ph" data-hd-otherprops="ibm">IBM</span> System zEnterprise EC12 or
+                                        zEnterprise BC12 machines and later that support the
+                                        required z/OS operating system</p></td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__1">Product specific</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__2">
+                                    <ul class="ul" id="hardware__ul_lb5_cr5_shc">
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__3">Agent relay minimum system requirements.<div class="p">Without artifact
+                                            caching:<ul class="ul" id="hardware__ul_t4b_31j_wyb">
+                                            <li class="li">HDD - 2 GB</li>
+                                            <li class="li">CPU - 2</li>
+                                            <li class="li">RAM - 2 GB</li>
+                                        </ul>With artifact caching, use the formula:<div class="div equation-block" id="hardware__equation-block_o4w_41j_wyb">HDD - 2GB + the cache
+                                            size *2</div></div></td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__1">Storage hardware</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__2">
+                                    <ul class="ul" id="hardware__ul_pbk_fr5_shc">
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_lsc_cv3_wyb__entry__3">Individual requirements depend on usage, retention policies,
+                                    and application types. In general, the larger the number of
+                                    artifacts kept in <span class="ph" data-hd-otherprops="ibm">IBM</span>
+                                    <span class="ph">Deploy</span>'s artifact repository (CodeStation), the more storage is
+                                        required.<div class="note note note_note" id="hardware__note_fqm_1bj_wyb"><span class="note__title">Note:</span>  CodeStation is
+                                        installed when the <span class="ph">Deploy</span> server is installed.</div>For production environments,
+                                    use the following guidelines to determine storage
+                                        requirements:<ul class="ul" id="hardware__ul_gqm_1bj_wyb">
+                                        <li class="li">200-400 GB of database storage is typically sufficient
+                                            for most environments.</li>
+                                        <li class="li">To calculate CodeStation storage requirements, use the
+                                            following formula:<div class="div equation-block" id="hardware__equation-block_hqm_1bj_wyb"><em class="ph i">average artifact
+                                                  size * number of versions imported per day *
+                                                  average number of days before
+                                                cleanup</em></div></li>
+                                        <li class="li">Approximately 1 MB per deployment of database storage;
+                                            varies based on local requirements.</li>
+                                    </ul></td>
+                            </tr>
+                        </tbody></table><div class="note note note_note" id="hardware__note_xzd_54v_11c"><span class="note__title">Note:</span>  The AIX hardware requirement applies to all
+                    supported <a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__section_h4m_2rm_vyb">AIX
+                        operating systems.</a></div></div>
+        </section>
+        <section class="section" id="hardware__lin_hw"><h2 id="hardware__lin_hw__title__1" class="title sectiontitle">Linux</h2>
+            
+            <div class="p">The hardware requirements to run the <span class="ph">Deploy</span>
+                components on the Linux operating systems are as follows:<table class="table frame-all" id="hardware__table_hnl_vbm_ymb"><caption></caption><colgroup><col style="width:32.07070707070707%"><col style="width:25.252525252525253%"><col style="width:42.676767676767675%"></colgroup><thead class="thead">
+                            <tr class="row">
+                                <th class="entry align-left colsep-1 rowsep-1 valign-top" id="hardware__table_hnl_vbm_ymb__entry__1">Hardware</th>
+                                <th class="entry align-left colsep-1 rowsep-1" id="hardware__table_hnl_vbm_ymb__entry__2">Components</th>
+                                <th class="entry align-left colsep-1 rowsep-1" id="hardware__table_hnl_vbm_ymb__entry__3">Requirement</th>
+                            </tr>
+                        </thead><tbody class="tbody">
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__1">Disk space</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__2">
+                                    <ul class="ul" id="hardware__ul_ulj_pr5_shc">
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__3">Minimum of 2 GB.</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__1" rowspan="2">Memory</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__2">Agent</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__3">Minimum of 2 GB.</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__2">
+                                    <ul class="ul" id="hardware__ul_evz_qr5_shc">
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__3">Java Heap requirements:<p class="p">A minimum of 2 GB is required for
+                                            <strong class="ph b">evaluation</strong> purposes, such as proof of concept
+                                        (POC) instance or a small demo environment.</p><div class="p">Xmx
+                                        setting must be increased for <strong class="ph b">production</strong> purposes as
+                                            follows:<ul class="ul" id="hardware__ul_gf4_fqh_h1c">
+                                            <li class="li">&lt;500 agents: ~4 GB</li>
+                                            <li class="li">500-5000 agents: ~13 GB</li>
+                                            <li class="li">5000-15000 agents: ~24 GB</li>
+                                        </ul></div><p class="p">Native memory:</p><p class="p">The minimum required memory
+                                        is 4 GB for POC, 4 GB for production, for the additional
+                                        memory required beyond the Java Heap.</p></td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__1">Network: adapters, drivers, protocols</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__2">
+                                    <ul class="ul" id="hardware__ul_ymb_tr5_shc">
+                                        <li class="li">Agent</li>
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__3">Gigabit (1000) Ethernet with low-latency to the
+                                    database.</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__1" rowspan="2">Processor</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__2">Agent</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__3">A 2-core processor.<p class="p">For z/OS: <span class="ph">Deploy</span> agent for z/OS runs on IBM System zEnterprise EC12 or
+                                        zEnterprise BC12 server platforms and later that support the
+                                        required z/OS operating system.</p></td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__2">
+                                    <ul class="ul" id="hardware__ul_pf3_yr5_shc">
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__3">The server requires approximately double the CPU capacity of
+                                    a relay, so, given the number of agents (800) and 2 cores per
+                                    500 agents on the relay, use an 8-core machine available for the
+                                    server.</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__1">Product specific</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__2">
+                                    <ul class="ul" id="hardware__ul_mzg_bs5_shc">
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__3">Agent relay minimum system requirements.<div class="p">Without artifact
+                                            caching:<ul class="ul" id="hardware__ul_rjz_s2f_vzb">
+                                            <li class="li">HDD - 2 GB</li>
+                                            <li class="li">CPU - 2</li>
+                                            <li class="li">RAM - 2 GB</li>
+                                        </ul>With artifact caching, use the formula:<div class="div equation-block" id="hardware__equation-block_sjz_s2f_vzb">HDD - 2 GB + the cache
+                                            size *2</div></div></td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__1">Storage hardware</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__2">
+                                    <ul class="ul" id="hardware__ul_hb4_1s5_shc">
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="hardware__table_hnl_vbm_ymb__entry__3">Individual requirements depend on usage, retention policies,
+                                    and application types. In general, the larger the number of
+                                    artifacts kept in <span class="ph" data-hd-otherprops="ibm">IBM </span>
+                                    <span class="ph">Deploy</span>'s artifact repository (CodeStation), the more storage is
+                                        required.<div class="note note note_note" id="hardware__note_znl_yl3_wyb"><span class="note__title">Note:</span>  CodeStation is
+                                        installed when the <span class="ph">Deploy</span> server is installed.</div><div class="p">Follow these guidelines to
+                                        determine storage requirements for production
+                                            environments:<ul class="ul" id="hardware__ul_vx2_cm3_wyb">
+                                            <li class="li">200-400 GB of database storage is typically
+                                                sufficient for most environments.</li>
+                                            <li class="li">To calculate CodeStation storage requirements, use
+                                                the following formula:<div class="div equation-block" id="hardware__equation-block_kbf_hm3_wyb"><em class="ph i">average
+                                                  artifact size * number of versions imported per
+                                                  day * average number of days before
+                                                  cleanup</em></div></li>
+                                            <li class="li">Approximately 1 MB per deployment of database
+                                                storage; varies based on local requirements.</li>
+                                        </ul></div></td>
+                            </tr>
+                        </tbody></table><div class="note note note_note" id="hardware__note_khf_r4v_11c"><span class="note__title">Note:</span>  The Linux hardware requirement applies to all
+                    supported <a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__lin">Linux
+                        operating systems</a>.</div></div>
+        </section>
+        <section class="section" id="hardware__mac_hw"><h2 id="hardware__mac_hw__title__1" class="title sectiontitle">Mac OS</h2>
+            
+            <div class="p">The hardware requirements to run the <span class="ph">Deploy</span> agents
+                on the Mac OS are as follows:<table class="table frame-all" id="hardware__table_ih5_wyj_z4b"><caption></caption><colgroup><col style="width:39.0625%"><col style="width:60.9375%"></colgroup><thead class="thead">
+                            <tr class="row rowsep-1 valign-middle">
+                                <th class="entry align-left colsep-1 rowsep-1 valign-middle" id="hardware__table_ih5_wyj_z4b__entry__1">Hardware</th>
+                                <th class="entry align-left colsep-1 rowsep-1 valign-middle" id="hardware__table_ih5_wyj_z4b__entry__2">Requirement</th>
+                            </tr>
+                        </thead><tbody class="tbody">
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ih5_wyj_z4b__entry__1">Disk space</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ih5_wyj_z4b__entry__2" rowspan="2">Minimum of
+                                    2 GB.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ih5_wyj_z4b__entry__1">Memory</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ih5_wyj_z4b__entry__1">Network: adapters,
+                                    drivers, protocols</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ih5_wyj_z4b__entry__2">Gigabit (1000) Ethernet
+                                    with low-latency to the database.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ih5_wyj_z4b__entry__1">Processor</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ih5_wyj_z4b__entry__2">A 2-core
+                                    processor.</td>
+                            </tr>
+                        </tbody></table><div class="note note note_note" id="hardware__note_oqv_zqv_11c"><span class="note__title">Note:</span>  The Mac OS hardware requirement applies to all
+                    supported <a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__mac">Mac OS
+                        operating systems</a>.</div></div>
+        </section>
+        <section class="section" id="hardware__section_xbd_ngx_wyb"><h2 id="hardware__section_xbd_ngx_wyb__title__1" class="title sectiontitle">Solaris</h2>
+            
+            <div class="p">The hardware requirements to run the <span class="ph">Deploy</span> agents
+                on the Solaris operating system are as follows:<table class="table frame-all" id="hardware__table_ybd_ngx_wyb"><caption></caption><colgroup><col style="width:40%"><col style="width:60%"></colgroup><thead class="thead">
+                            <tr class="row rowsep-1 valign-middle">
+                                <th class="entry align-left colsep-1 rowsep-1 valign-middle" id="hardware__table_ybd_ngx_wyb__entry__1">Hardware</th>
+                                <th class="entry align-left colsep-1 rowsep-1 valign-middle" id="hardware__table_ybd_ngx_wyb__entry__2">Requirement</th>
+                            </tr>
+                        </thead><tbody class="tbody">
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ybd_ngx_wyb__entry__1">Disk space</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ybd_ngx_wyb__entry__2" rowspan="2">Minimum of
+                                    2 GB.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ybd_ngx_wyb__entry__1">Memory</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ybd_ngx_wyb__entry__1">Network: adapters,
+                                    drivers, protocols</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ybd_ngx_wyb__entry__2">Gigabit (1000) Ethernet
+                                    with low-latency to the database.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ybd_ngx_wyb__entry__1">Processor</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_ybd_ngx_wyb__entry__2">A 2-core
+                                    processor.</td>
+                            </tr>
+                        </tbody></table><div class="note note note_note" id="hardware__note_myz_n4v_11c"><span class="note__title">Note:</span>  The Solaris hardware requirement applies to all
+                    supported <a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__win">Solaris
+                        operating systems</a>.</div></div>
+        </section>
+        <section class="section" id="hardware__win_hw"><h2 id="hardware__win_hw__title__1" class="title sectiontitle">Windows</h2>
+            
+            <div class="p">The hardware requirements to run the <span class="ph">Deploy</span>
+                components on the Windows operating system are as follows:<table class="table frame-all" id="hardware__table_nxr_4rl_1nb"><caption></caption><colgroup><col style="width:22.22222222222222%"><col style="width:31.77777777777778%"><col style="width:46%"></colgroup><thead class="thead">
+                            <tr class="row rowsep-1 valign-middle">
+                                <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="hardware__table_nxr_4rl_1nb__entry__1">Hardware</th>
+                                <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="hardware__table_nxr_4rl_1nb__entry__2">Components</th>
+                                <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="hardware__table_nxr_4rl_1nb__entry__3">Requirement</th>
+                            </tr>
+                        </thead><tbody class="tbody">
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__1">Disk space</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__2">
+                                    <ul class="ul" id="hardware__ul_cgh_4s5_shc">
+                                        <li class="li">Agent</li>
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__3">Minimum of 2 GB.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__1" rowspan="2">Memory</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__2">Agent</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__3">Minimum of 2 GB.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__2">
+                                    <ul class="ul" id="hardware__ul_wvl_ps5_shc">
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__3">Java Heap requirements:<p class="p">A minimum of 2 GB
+                                        is required for <strong class="ph b">evaluation</strong> purposes, such a as proof
+                                        of concept (POC) instance or a small demo
+                                        environment.</p><div class="p">The Xmx setting must be increased for
+                                            <strong class="ph b">production</strong> purposes as follows:<ul class="ul" id="hardware__ul_ckk_hqh_h1c">
+                                            <li class="li">&lt;500 agents: ~4 GB</li>
+                                            <li class="li">500-5000 agents: ~13 GB</li>
+                                            <li class="li">5000-15000 agents: ~24 GB</li>
+                                        </ul></div><p class="p">Native memory:</p><p class="p">The minimum required memory
+                                        is 4 GB for POC, 4 GB for production, for the additional
+                                        memory required beyond the Java Heap.</p></td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__1">Network: adapters, drivers, protocols</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__2">
+                                    <ul class="ul" id="hardware__ul_eb4_rs5_shc">
+                                        <li class="li">Agent</li>
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__3">Gigabit (1000) Ethernet with low-latency to
+                                    the database.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__1" rowspan="2">Processor</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__2">Agent</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__3">A 2-core processor.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__2">
+                                    <ul class="ul" id="hardware__ul_xfq_ss5_shc">
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__3">The server requires approximately double the
+                                    CPU capacity of a relay. So, given the number of agents (800)
+                                    and a 2-cores per 500 agents on the relay, use an 8-core machine
+                                    available for the server.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__1">Product specific</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__2">
+                                    <ul class="ul" id="hardware__ul_vmv_5s5_shc">
+                                        <li class="li">Agent</li>
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__3">Agent relay minimum system
+                                        requirements<div class="p">Without artifact caching:<ul class="ul" id="hardware__ul_xjz_s2f_vzb">
+                                            <li class="li">HDD - 2 GB</li>
+                                            <li class="li">CPU - 2</li>
+                                            <li class="li">RAM - 2 GB</li>
+                                        </ul>With artifact caching, use the formula:<div class="div equation-block" id="hardware__equation-block_yjz_s2f_vzb">HDD - 2 GB + the cache
+                                            size *2</div></div></td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__1">Storage hardware</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__2">
+                                    <ul class="ul" id="hardware__ul_gbr_xs5_shc">
+                                        <li class="li">Relay</li>
+                                        <li class="li">Server</li>
+                                    </ul>
+                                </td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nxr_4rl_1nb__entry__3">Individual requirements depend on usage,
+                                    retention policies, and application types. In general, the
+                                    larger number of artifacts kept in <span class="ph" data-hd-otherprops="ibm">IBM</span>
+                                    <span class="ph">Deploy</span>'s artifact repository (CodeStation), the more storage is
+                                        required.<div class="note note note_note" id="hardware__note_zjz_s2f_vzb"><span class="note__title">Note:</span> CodeStation is
+                                        installed when the <span class="ph">Deploy</span> server is installed.</div><div class="p">Follow these guidelines to
+                                        determine storage requirements for production
+                                            environments:<ul class="ul" id="hardware__ul_akz_s2f_vzb">
+                                            <li class="li">200-400 GB of database storage is typically
+                                                sufficient for most environments.</li>
+                                            <li class="li">To calculate CodeStation storage requirements, use
+                                                the following formula:<div class="div equation-block" id="hardware__equation-block_bkz_s2f_vzb"><em class="ph i">average
+                                                  artifact size * number of versions imported per
+                                                  day * average number of days before
+                                                  cleanup</em></div></li>
+                                            <li class="li">Approximately 1 MB per deployment of database
+                                                storage, which varies based on local
+                                                requirements.</li>
+                                        </ul></div></td>
+                            </tr>
+                        </tbody></table><div class="note note note_note" id="hardware__note_vlb_j4v_11c"><span class="note__title">Note:</span>  The Windows hardware requirement applies to all
+                    supported <a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__mob">Windows
+                        operating systems</a>.</div></div>
+        </section>
+        <section class="section" id="hardware__section_mmk_wgx_wyb"><h2 id="hardware__section_mmk_wgx_wyb__title__1" class="title sectiontitle">z/OS</h2>
+            
+            <div class="p">The hardware requirements to run <span class="ph">Deploy</span> agents
+                on the z/OS operating system are as follows:<table class="table frame-all" id="hardware__table_nmk_wgx_wyb"><caption></caption><colgroup><col style="width:40.65040650406504%"><col style="width:59.34959349593496%"></colgroup><thead class="thead">
+                            <tr class="row rowsep-1 valign-middle">
+                                <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="hardware__table_nmk_wgx_wyb__entry__1">Hardware</th>
+                                <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="hardware__table_nmk_wgx_wyb__entry__2">Requirement</th>
+                            </tr>
+                        </thead><tbody class="tbody">
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nmk_wgx_wyb__entry__1">Disk space</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nmk_wgx_wyb__entry__2" rowspan="2">Minimum of
+                                    2 GB.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nmk_wgx_wyb__entry__1">Memory</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nmk_wgx_wyb__entry__1">Network: adapters,
+                                    drivers, protocols</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nmk_wgx_wyb__entry__2">Gigabit (1000) Ethernet
+                                    with low-latency to the database.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nmk_wgx_wyb__entry__1">Processor</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="hardware__table_nmk_wgx_wyb__entry__2">A 2-core
+                                        processor.<p class="p">For z/OS: <span class="ph">Deploy</span> agent for z/OS runs on IBM System zEnterprise EC12 or
+                                        zEnterprise BC12 server platforms and later that support the
+                                        required z/OS operating system.</p></td>
+                            </tr>
+                        </tbody></table><div class="note note note_note" id="hardware__note_jkm_d4v_11c"><span class="note__title">Note:</span> The z/OS hardware requirements apply to all
+                    supported <a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__section_rcv_swb_wyb">z/OS
+                        operating systems</a>.</div></div>
+            <p class="p" data-hd-otherprops="ibm"><span class="ph" data-hd-otherprops="ibm">For more details on system requirements, see
+                        <a class="xref" href="https://www.ibm.com/software/reports/compatibility/clarity/index.html" target="_blank">Software product compatibility
+                    report</a>.</span></p>
+        </section>
+    </div>
+</article></main></body></html>

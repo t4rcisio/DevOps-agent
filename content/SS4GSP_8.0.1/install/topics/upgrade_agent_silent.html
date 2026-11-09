@@ -1,0 +1,61 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can upgrade agents by specifying the installation properties in a text file."><meta name="DC.subject" content="Upgrading agents, Upgrading agents in silent mode, Silent mode"><meta name="keywords" content="Upgrading agents, Upgrading agents in silent mode, Silent mode"><meta name="DC.relation" scheme="URI" content="../../install/topics/upgradeAgents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="upgrade_agent_silent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Upgrading agents in silent mode</title></head><body id="upgrade_agent_silent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Upgrading agents in silent mode</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-7a728479-c6ab-4027-86c3-8d573cb57f87">Edit online</a></span></div>
+  
+  
+  
+  <div class="body taskbody"><p class="shortdesc">You can upgrade agents by specifying the installation properties in a text
+    file.</p>
+    <section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupgrade_agent_silent__prereq__1">Before you begin</h2></div>
+      <ul class="ul" id="upgrade_agent_silent__ul_bpt_jvn_tbc">
+        <li class="li">To ensure compatibility and optimal performance, run the same version of the <span class="ph">IBM DevOps Deploy (Deploy)</span> server and
+          agents. Server and agents of different versions may result in unexpected behavior. In such
+          case, you must update or roll back the server and agents so that they run the same
+          versions.</li>
+        <li class="li">You must upgrade the server before you upgrade the agents. </li>
+        <li class="li" data-hd-otherprops="ibm">You must have the permissions <span class="keyword parmname">Edit Basic Settings</span>
+          and <span class="keyword parmname">View Agents</span> on the agents that you are upgrading.</li>
+        <li class="li" data-hd-otherprops="ibm">The user account performing the upgrade must have access to all working
+          directories that are used in the upgrade process. Specifically, permissions for execute,
+          read and write the <span class="ph filepath">air-agentupgrade.jar</span> file to
+            <span class="ph filepath">&lt;AGENT_HOME&gt;/bin</span> are required.</li>
+      </ul>
+      <p class="p">To upgrade an agent in silent mode:</p>
+    </section>
+    <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupgrade_agent_silent__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">From the new version of the server, download the agent installer for the new agent
+          version.</span>
+        <ul class="ul choices">
+<li class="li choice">To download the installer, log in to the server and click the <span class="ph uicontrol">Help</span>
+                        icon <img class="image" src="../images/help_button.gif" height="31" width="27" alt=""> at the upper right of any page on the server, and click
+                            <span class="ph uicontrol">Tools</span>. Then, click <span class="ph">DevOps Deploy</span> Agent, and download and extract the file.</li>
+<li class="li choice">To find the installer on the server with the command line, go to the following location, and
+                        copy the file to the target computer:
+                                <span class="ph filepath"><var class="keyword varname">installation_folder</var>/opt/tomcat/webapps/ROOT/tools/devops-deploy-agent.zip</span></li>
+</ul>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Transfer the new agent installation package to the system that hosts the agent and
+          extract the package.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Create a new or update the agent installation properties file.</span>
+        <div class="itemgroup info">For more information, see <a class="xref" href="agent_properties.html" title="The agent properties in the installed.properties file control details about the agent, including how it connects to the server.">Agent installation properties</a>. When you add the below
+          property to the new agent properties file, the installer picks up the properties from the
+          existing agent properties
+          file:<pre class="pre codeblock" id="upgrade_agent_silent__codeblock_jrr_jrc_nwb"><code>locked/agent.home=<var class="keyword varname">current_installed_agent_path</var></code></pre></div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Stop the agent.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Run the installation file with the <span class="keyword cmdname">install-agent-from-file.bat</span>
+          command on Windows™ or the
+            <span class="keyword cmdname">./install-agent-from-file.sh</span> command on Linux™. Provide the properties file as a command-line
+          argument.</span>
+        <div class="itemgroup stepxmp">On Windows, if the properties file is
+          named <span class="ph filepath">install.properties</span>, type the following
+          command:<pre class="pre codeblock"><code>install-agent-from-file install.properties</code></pre></div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Restart the agent.</span>
+      </li></ol></section>
+    <section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupgrade_agent_silent__postreq__1">What to do next</h2></div>On the server, click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agents</span></span> and verify that the agent shows the new version.</section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/upgradeAgents.html" title="In most cases, you upgrade agents from the server interface, but you can also upgrade the agents from the command line. Always upgrade agents and agent relays in addition to upgrading the server.">Upgrading agents</a></div></div></nav></article></main></body></html>

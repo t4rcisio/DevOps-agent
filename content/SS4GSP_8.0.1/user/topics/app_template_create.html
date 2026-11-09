@@ -1,0 +1,105 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Define application templates so that users can create applications that contain the types of components, the environments, and the resource tree that you specify."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_template.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_template_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating application templates</title></head><body id="app_template_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating application templates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f2b191ec-7f47-4630-86b6-7c4bd1ce889c">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Define application templates so that users can create applications that contain the types
+of components, the environments, and the resource tree that you specify.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_template_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Application Template</span></span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd"> Define the application template:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd"> Enter a name and description, and select the teams that can access the application
+template.</span>
+</li>
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd"> From the <span class="ph uicontrol">Notification Scheme </span> list, select a notification scheme.</span>
+</li>
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd">To require that a version be provided for each component when a snapshot is created, select
+<span class="ph uicontrol">Enforce Complete Snapshots</span>.</span>
+</li>
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd">To set the tags that components must use to be assigned to an application during creation,
+select tags from the <span class="ph uicontrol">Required Component Tags</span> list. You specify the minimum,
+maximum, or exact number of components that contain the tag that the user must select.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> 
+<p class="p">By selecting component tags, you limit only the components that a user can assign to an
+application during its creation. If they have permission, users can add other components to an
+application after they exit the wizard.</p>
+</div>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd"> Define application properties.</span>
+<div class="itemgroup info">The application properties that you define are included in all applications that use this
+application template.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep">
+<span class="ph cmd"> Click <span class="ph uicontrol">Configuration</span>. This <span class="ph uicontrol">Configuration</span> tab is
+associated with the application template that you created, not the main
+<span class="ph uicontrol">Configuration</span> tab.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd"> Click <span class="ph uicontrol">Application Property Definitions</span>.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">Add Property</span>, define the property, and click
+<span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Create an application process.</span>
+<div class="itemgroup info">The application process that you define is included in all applications that use this
+application template.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd"> Click <span class="ph uicontrol">Processes</span>. This <span class="ph uicontrol">Processes</span> tab is
+associated with the application template that you created, not the main
+<span class="ph uicontrol">Processes</span> tab.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd"> Click <span class="ph uicontrol">Create Process</span> to open the <span class="keyword wintitle">Create an Application
+Process</span> dialog box, and create the application process. See <a class="xref" href="app_process_create.html" title="You can use application processes to deploy or to roll back components.">Creating application
+processes</a>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd"> Edit the process in the process editor. See <a class="xref" href="comp_workflow_edit.html" title="In the process editor you organize the steps in a process, specify their properties, and connect them to each other.">Editing processes</a>.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> In the process editor, you can select only a limited number of process steps, such as the
+<span class="ph uicontrol">Install Multiple Components</span> and <span class="ph uicontrol">Run Operational Process for
+Multiple Components</span> steps.</div>
+</div>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Create environment templates.</span>
+<div class="itemgroup info">The environments that you define can be used by all applications that use this application
+template. When applications are created from application templates, multiple environments can be
+created from each environment template. You must assign a resource template to an environment
+template.</div>
+<div class="itemgroup info">See <a class="xref" href="app_environment_template_create.html#app_environment_create" title="When you create an application template, you can define environment templates that model environments for the applications that you create by using the application template.">Creating environment templates</a>.<div class="note note note_note"><span class="note__title">Note:</span> To
+minimize additional steps after you create an application from this template, ensure that the
+resource template that you select specifies both agent prototypes and the component tags that you
+selected.</div><div class="note note note_note"><span class="note__title">Note:</span> If you create an environment with an environment template
+and then add component mappings to the resource template used by the template, the new component
+mappings are added to the environment. However, if you remove component mappings from the resource
+template, the component mappings are not removed from the environment.</div></div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Create environment gates.</span>
+<div class="itemgroup info">The environments gates that you define must be used by all applications that use this
+application template and cannot be removed from these applications.</div>
+<div class="itemgroup info">See <a class="xref" href="app_gate_create.html" title="Create gates that specify the conditions that must be met before a component version or snapshot is deployed to the environment. The conditions are defined on the component version statuses and snapshot statuses.">Creating environment gates</a>.</div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_template_create__postreq__1">What to do next</h2></div> By using team object mapping, grant the team access to application template, agents,
+component instances, component templates, environment templates, and resource templates. See <a class="xref" href="../../admin/topics/security_teams_mapping.html" title="In addition to assigning a team to an object (such as a component or application), when you create the object, you can use the Teams page on the server to map teams to objects.">Mapping teams to
+objects</a>.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_template.html" title="With an application template, you can save and reuse a collection of resources, environments, processes, and tagged components or component templates to create a standardized application.">Application templates</a></div></div></nav></article></main></body></html>

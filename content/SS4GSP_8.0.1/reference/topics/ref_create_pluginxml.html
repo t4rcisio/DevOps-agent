@@ -1,0 +1,75 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="An automation plug-in is defined with the plugin.xml file."><meta name="DC.relation" scheme="URI" content="../../reference/topics/reference_plugins_create.html"><meta name="DC.relation" scheme="URI" content="../../reference/topics/ref_create_header.html"><meta name="DC.relation" scheme="URI" content="../../reference/topics/ref_create_javaopts.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="thePluginxmlFile.d12e80"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>The plugin.xml file for automation plug-ins</title></head><body id="thePluginxmlFile.d12e80"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">The <span class="ph filepath">plugin.xml</span> file for automation plug-ins</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-29eb4306-075b-4a0b-b9f2-cac4d5022d1d">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">An automation plug-in is defined with the <span class="ph filepath">plugin.xml</span> file.</p>
+<p class="p">The structure of this file consists of a <code class="ph codeph">header</code> element
+and one or more <code class="ph codeph">step-type</code> elements. The <code class="ph codeph">header</code> element
+identifies the plug-in. Each <code class="ph codeph">step-type</code> element defines
+a step. Steps are available to users in the process editor and are
+used to construct component processes.</p>
+<p class="p">After the document type declaration, the <code class="ph codeph">plugin</code> root
+element identifies the XML schema type, PluginXMLSchema_v1.xsd, which
+all plug-ins use. The following code sample presents the basic structure
+of the <span class="ph filepath">plugin.xml</span> file for automation plug-ins:</p>
+<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;header&gt;
+    &lt;identifier id="plugin_id" version="version_number" name="Plug-in Name"/&gt;
+    &lt;description/&gt;
+    &lt;tag&gt;Plugin type/Plugin subtype/Plugin name&lt;/tag&gt;
+  &lt;/header&gt;
+  &lt;step-type name="Step_Name"&gt;
+    &lt;description/&gt;
+    &lt;properties&gt;
+      &lt;property name="property_name" required="true"&gt;
+         &lt;property-ui type="textBox" label="Driver Jar" 
+             description="The full path to the jdbc driver jar to use." 
+             default-value="${p:resource/sqlJdbc/jdbcJar}"/&gt;
+      &lt;/property&gt;
+    &lt;/properties&gt;
+    &lt;post-processing&gt;
+      &lt;![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put("Status", "Failure");
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]&gt;
+    &lt;/post-processing&gt;
+
+    &lt;command program="${path_to_tool"&gt;
+      &lt;arg value="parameters_passed_to_tool"/&gt;
+      &lt;arg path="${p:jdbcJar}"/&gt;
+      &lt;arg file="command_to_run"/&gt;
+      &lt;arg file="${PLUGIN_INPUT_PROPS}"/&gt;
+      &lt;arg file="${PLUGIN_OUTPUT_PROPS}"/&gt;
+    &lt;/command&gt;
+  &lt;/step-type&gt;
+&lt;/plugin&gt;</code></pre>
+<div class="p">The <code class="ph codeph">&lt;tag&gt;</code> tag specifies the location of the steps in the process editor
+      palette. This is a required tag and the tag value cannot be null. For example, the following
+      code specifies that the steps are in the <code class="ph codeph">MyPlugins/PluginA</code>
+      folder.<pre class="pre codeblock"><code>&lt;tag&gt;MyPlugins/PluginA&lt;/tag&gt;</code></pre>When the plug-in is installed,
+      the steps appear in the specified folder in the palette, as shown in the following
+        figure.<br><img class="image" src="../images/ref_create_pluginxml_a.gif" alt="The step palette, showing the steps in the MyPlugins/PluginA folder"><br>You can further organize specific steps into sub-folders. For example, assume that the
+        <span class="ph filepath">plugin.xml</span> file puts steps in the <code class="ph codeph">MyPlugins/PluginA</code>
+      folder, as in the previous example. The following code puts a step in the
+        <code class="ph codeph">MyPlugins/PluginA/Subgroup1</code>
+      sub-folder:<pre class="pre codeblock"><code>&lt;step-type name="Step one"&gt;
+  &lt;server:sub-tag&gt;Subgroup1&lt;/server:sub-tag&gt;
+</code></pre></div>
+<div class="p">To organize steps into sub-folders in this way, you must add the
+namespace <code class="ph codeph">xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1"</code> to
+the <code class="ph codeph">&lt;plugin&gt;</code> tag that is at the root of the <span class="ph filepath">plugin.xml</span> file,
+as in the following example:<pre class="pre codeblock"><code>&lt;plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1"
+  xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;</code></pre></div>
+<p class="p">For information about the structure of <span class="ph filepath">plugin.xml</span> for
+source plug-ins, see <a class="xref" href="ref_create_pluginsrc.html#plugin_createsource" title="Source-type plug-ins are defined the same way that automation-type plug-ins are defined except for some modifications to the plugin.xml file.">Creating source plug-ins</a>.</p>
+</div>
+
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../reference/topics/ref_create_header.html">The header element</a></strong><br>The mandatory <code class="ph codeph">header</code> element identifies the plug-in and contains three mandatory child elements and one optional child element: </li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../reference/topics/ref_create_javaopts.html">The plugin-javaopts.conf file</a></strong><br>The <span class="ph filepath">plugin-javaopts.conf</span> file can be used to set the <var class="keyword varname">JAVA_OPTS</var> environment variable for automation plug-ins that use Groovy.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/reference_plugins_create.html" title="You can create your own plug-ins for use with IBM DevOps Deploy (Deploy). A plug-in consists of XML files and supporting script files that the plug-in requires.">Creating plug-ins</a></div></div></nav></article></main></body></html>

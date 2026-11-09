@@ -1,0 +1,69 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Create agent resources for a multi-node deployment."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/blueGreen_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueGreen_changeMe"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 1 Define resources</title></head><body id="blueGreen_changeMe"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 1 Define resources</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-0930c980-2143-4563-8de8-f7b5f435758f">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Create agent resources for a multi-node deployment. </p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_changeMe__prereq__1">Before you begin</h2></div>Before you begin the lesson, complete the <a class="xref" href="blueGreen_configure.html#blueGreen_configure" title="Configure the resources to define the blue and green systems.">Configuring the tutorial system</a> topic.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_changeMe__context__1">About this task</h2></div>
+<p class="p">In this tutorial you create two systems that are logically separate, but, for ease of use, run on
+the same hardware. The two environments behave in the same way and have the same dependencies.</p>
+<p class="p">To simulate separate physical environments, you can run the Blue and Green environments on the
+same server. If you have multiple servers available, of course you can use those. The Green
+resources run on one port, and the Blue resources run on another. This way, you can simply change
+the port to direct traffic to a different environment.</p>
+<p class="p"><span class="ph">Deploy</span> provides several loop-type steps that you can use to deploy multiple components. The For Each
+Agent loop, for instance, lets you control which agents run automated tasks. This way, even if you
+have a large number of agents, you can run tasks on specific agent groups by tagging agents and
+running tasks only on agents with those tags. The For Each Tag loop, which is similar, runs once for
+each of the resource tags that you specify. So you can organize the resources in your environment by
+tag, and then control which tags to use. For example, you can deploy to canary nodes first and all
+remaining nodes second, all in the same process. </p> <p class="p">Follow these steps to create the resource groups that represent the blue-green systems:</p> </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_changeMe__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create a top-level resource for the blue system.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">On the <span class="keyword wintitle">Resources</span> page, click the <span class="ph uicontrol">Resource Tree</span> tab,
+and then click <span class="ph uicontrol">Create Top-Level Group</span>, and name the group <kbd class="ph userinput">Blue
+System</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Add an agent resource to <kbd class="ph userinput">Blue System</kbd> and name it
+<kbd class="ph userinput">blue-A</kbd></span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Add the <span class="ph uicontrol">JPetStore</span> component tag to <kbd class="ph userinput">blue-A</kbd> agent
+resource.</span>
+<div class="itemgroup info">The single component tag references all three components in the JPetStore application.<div class="note note note_note"><span class="note__title">Note:</span> If
+you use you own application, make sure to tag the components and then use that tag.</div></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Create agent the <kbd class="ph userinput">blue-B</kbd> agent resource and add to it the
+<span class="ph uicontrol">JPetStore</span> component tag.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Add the <kbd class="ph userinput">Load balancer</kbd> component to the <kbd class="ph userinput">blue-A</kbd> and
+<kbd class="ph userinput">blue-B</kbd> resources.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Add tag</span> for the <kbd class="ph userinput">blue-A</kbd> agent resource, and
+select the <kbd class="ph userinput">Canary</kbd> tag, creating a new tag if necessary.</span>
+<div class="itemgroup info">The canary node always gets updated first. You update the other node when you're satisfied
+that the canary node is working properly.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Add tag</span> for the <kbd class="ph userinput">blue-B</kbd> agent resource, and
+select the <kbd class="ph userinput">Main</kbd> tag, creating a new tag if necessary.</span>
+<div class="itemgroup info">All agent resources that are not Canary nodes use the <kbd class="ph userinput">Main</kbd> tag.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create a top-level resource for the green system by duplicating the actions in the previous
+steps.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create a top-level resource for the load balancer, and add the <kbd class="ph userinput">Load
+balancer</kbd> component to it.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_changeMe__result__1">Results</h2></div>The complete resource trees look like the following figure:<br><img class="image" src="../images/blue-green-resource1.png" alt="The blue-green resource tree"><br><p class="p">In this lesson, you created agent resources required by the blue-green topology.
+</p></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.1.0 SS4GSP_8.0.1" href="../../tutorial/topics/blueGreen_abstract.html" title="In this tutorial, you setup a deployment with two identical production environments, referred to arbitrarily as Blue and Green. One environment is always live, and the other environment is inactive and available to host an upgraded version.">Blue-green deployments</a></div></div></nav></article></main></body></html>

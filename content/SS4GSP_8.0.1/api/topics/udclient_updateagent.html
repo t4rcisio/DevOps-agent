@@ -1,0 +1,55 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Update agent settings"><meta name="DC.subject" content="udclient commands, updateAgent, udclient command, command-line commands"><meta name="keywords" content="udclient commands, updateAgent, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_updateagent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>updateAgent</title></head><body id="udclient_updateagent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">updateAgent</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ab4263c7-5ebf-4413-b43c-0070ad38a223">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Update agent settings</p>
+<section class="section"><h2 id="udclient_updateagent__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  updateAgent [parameters] [JSON file]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_updateagent__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_updateagent__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_updateagent__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_updateagent__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_updateagent__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_updateagent__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_updateagent__composite_params__entry__1"><span class="keyword parmname">agent</span></td>
+<td class="entry" headers="udclient_updateagent__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_updateagent__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_updateagent__composite_params__entry__4">Name or ID of the agent</td>
+</tr>
+</tbody></table>
+
+</section>
+<section class="section"><h2 id="udclient_updateagent__title__5" class="title sectiontitle">Template</h2>
+<div class="p">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "configurationTemplate": "Name or id of the Agent 
+  Configuration Template to set for this agent",
+  "description": "The description of the agent",
+  "impersonationForce": "Force impersonation. When set to 
+  true, do not allow steps or resource configuration to 
+  change impersonation settings",
+  "impersonationGroup": "Default group to use for 
+  impersonation",
+  "impersonationPassword": "Password to use for 
+  impersonation (only applicable for Windows)",
+  "impersonationUseSudo": "Use sudo for impersonation 
+  (only applicable for *nix)",
+  "impersonationUser": "Default user to use for 
+  impersonation",
+  "licenseType": "License type to use for this agent",
+  "name": "Name of the agent"
+}
+</code></pre></div></section>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_agentcli_put.html">Update agent settings</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

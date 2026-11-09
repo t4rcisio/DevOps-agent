@@ -1,0 +1,86 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Use the toolkit to deploy to the IBM z/OS platform."><meta name="DC.relation" scheme="URI" content="../../user/topics/deployment_ov.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/zos_shiplistfiles.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/zos_using_job_monitor.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/zos_jobmonitor.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/zos_search_inventory.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="deploying_zos"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Deploying components to the z/OS platform</title></head><body id="deploying_zos"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Deploying components to the <span class="keyword">z/OS</span> platform</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-68312162-33a0-44da-b283-85e7fd04d160">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Use the toolkit to deploy to the <span class="keyword">IBM® z/OS®</span> platform. </p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdeploying_zos__prereq__1">Before you begin</h2></div>Deploying components to the <span class="keyword">IBM z/OS</span> platform is similar to deploying to other platforms. Create an application, components,
+environments, and resources. Import versions of artifacts to the components, and then create an
+application process that deploys the components to a target environment. </section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdeploying_zos__context__1">About this task</h2></div>
+<p class="p">When you create a component for z/OS artifacts, select <span class="ph uicontrol"><span class="keyword">z/OS</span></span> as the component type.</p>
+<p class="p">Versions can be imported to a z/OS component by using the z/OS File source configuration plug-in
+or by using the <span class="keyword cmdname">buztool</span> command line from an z/OS agent.</p>
+<p class="p">Two or more z/OS component versions can also be merged from a snapshot into one to simplify the
+deployment to the next environment. Refer to <a class="xref" href="zos_merge_comp.html#zos_merge_comp" title="Two or more z/OS component versions can be merged from a snapshot into one component version to simplify the deployment to the next environment. Merging component versions in this way avoids deploying intermediate programs into production.">Merging z/OS component versions</a>.</p>
+<p class="p">In your application process with the components to deploy, configure the <span class="ph uicontrol">Deploy Data
+Set</span> process step as either a <span class="ph uicontrol">FULL</span>,
+<span class="ph uicontrol">INVENTORY</span>, or <span class="ph uicontrol">RUNTIME</span> deployment for z/OS data sets
+and HFS files.<img class="image" src="../images/deploy_types.jpg" alt="z/OS Data Set Deployment Types"></p>
+<p class="p">A <span class="ph uicontrol">FULL</span> deployment type replaces all artifacts with artifacts in the
+current component version. </p>
+<p class="p">An <span class="ph uicontrol">INVENTORY</span> deployment type, or delta deployment, reduces deployment time
+significantly by deploying only the changes between artifacts.</p>
+<p class="p">A <span class="ph uicontrol">RUNTIME</span> deployment type is a delta deployment that uses checksum logic
+to compare artifacts to be deployed with the same artifacts in the target environment. This check is
+done for every artifact. Only artifacts with checksums that don't match are considered as changed
+and used for deployment.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> Two artifacts are considered the same when at least one attribute can be used for comparison
+and all attributes that are used for comparison match exactly.</div>
+<p class="p">For each artifact in a delta deployment, the following attributes are compared to the latest
+inventory version of the same artifact.</p>
+<table class="table" id="deploying_zos__table_h1b_lzm_wgb"><caption></caption><colgroup><col style="width:259.2pt"><col style="width:100%"><col style="width:430.2pt"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="deploying_zos__table_h1b_lzm_wgb__entry__1"><strong class="ph b">Parameter</strong></th>
+<th class="entry" id="deploying_zos__table_h1b_lzm_wgb__entry__2"><strong class="ph b">Where Used</strong></th>
+<th class="entry" id="deploying_zos__table_h1b_lzm_wgb__entry__3"><strong class="ph b">Description</strong></th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="deploying_zos__table_h1b_lzm_wgb__entry__1"><span class="keyword parmname">Last Modified Timestamp</span></td>
+<td class="entry" headers="deploying_zos__table_h1b_lzm_wgb__entry__2"><span class="ph uicontrol">INTENTORY</span><span class="ph uicontrol">RUNTIME</span></td>
+<td class="entry" headers="deploying_zos__table_h1b_lzm_wgb__entry__3"><span class="ph">Deploy</span> reads the <span class="keyword parmname">Last Modified Timestamp</span> value when the version is packaged. All
+load modules that are build by RTC have <span class="keyword parmname">Last Modified Timestamp</span> values stored
+in SSI. If SSI has no <span class="keyword parmname">Last Modified Timestamp</span> values,
+<span class="keyword parmname">ZLM4DATE</span>, <span class="keyword parmname">ZLMTIME</span> and <span class="keyword parmname">ZLMSEC</span>
+statistical values are read from ISPF. Note that the JCL-built or third-party tool load modules have
+a <span class="keyword parmname">Last Modified Timestamp</span> value of <span class="keyword parmname">NO</span>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="deploying_zos__table_h1b_lzm_wgb__entry__1">Custom properties starting with <span class="keyword parmname">SYS.id</span> (aka identification
+properties)</td>
+<td class="entry" headers="deploying_zos__table_h1b_lzm_wgb__entry__2"><span class="ph uicontrol">INVENTORY</span><span class="ph uicontrol">RUNTIME</span></td>
+<td class="entry" headers="deploying_zos__table_h1b_lzm_wgb__entry__3">These properties provide an open framework for the customer or provider to add additional
+attributes to indicate whether two artifacts are the same. For example, with these properties you
+can add hash or binder information in the future. Two artifacts are considered the same when all
+attributes that are used for comparison match exactly.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="deploying_zos__table_h1b_lzm_wgb__entry__1"><span class="keyword parmname">checksum</span></td>
+<td class="entry" headers="deploying_zos__table_h1b_lzm_wgb__entry__2"><span class="ph uicontrol">RUNTIME</span></td>
+<td class="entry" headers="deploying_zos__table_h1b_lzm_wgb__entry__3">The checksum value is determined when the version is packaged. During a
+<span class="ph uicontrol">RUNTIME</span> deployment, the checksum is calculated for the artifact in the target
+environment and compared with the checksum calculated during the version creation.</td>
+</tr>
+</tbody></table>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdeploying_zos__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Install the <span class="keyword">z/OS</span> agent. See <a class="xref" href="../../install/topics/zos_installing_ov.html#zos_installing_ov" title="Before you deploy to the IBM z/OS platform, you must install the z/OS agent and configure the z/OS server for communication with IBM DevOps Deploy (Deploy). If the build process runs on a different logical partition (LPAR), then you must additionally install the agent on the build LPAR. You can install the z/OS agent and deployment tools by using the IBM System Modification Program Extended (SMP/E) or by extracting archive files to the z/OS UNIX file system.">Installing the z/OS agent</a>.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Create a ship list file.</span><div class="itemgroup info">See <a class="xref" href="zos_shiplistfiles.html" title="The ship list file describes the files from the build to include in the new component version to deploy. Ship list files can also use generic artifacts to describe changes that are not physical files, such as configuration changes.">Ship list files</a>.</div></li><li class="li step stepexpand"><span class="ph cmd">Create a deployable component version.</span><div class="itemgroup info">See <a class="xref" href="zos_runtools.html" title="You can create z/OS component version by running the buztool.sh command from job control language (JCL) or from the z/OS UNIX System Services command line. You can also create z/OS component version by using the z/OS File Source Config plug-in.">Creating z/OS component versions</a>.</div></li><li class="li step stepexpand">
+<span class="ph cmd">Create component processes and application processes as you would for any other deployment, by
+using the <span class="keyword">z/OS</span> Utility plug-in for process steps that retrieve and deploy <span class="keyword">z/OS</span> artifacts.</span>
+<div class="itemgroup stepxmp">For example, use <span class="keyword cmdname">Download Artifacts for z/OS</span> process steps to retrieve
+<span class="keyword">z/OS</span> artifacts. Configure the <span class="keyword cmdname">Deploy Data Set</span> process step for either a
+<span class="ph uicontrol">FULL</span>, <span class="ph uicontrol">INVENTORY</span> or <span class="ph uicontrol">RUNTIME</span>
+deployment of the <span class="keyword">z/OS</span> data sets and HFS files.</div>
+<div class="itemgroup info">The <span class="keyword">z/OS</span> Utility plug-in also includes process steps for rolling back data sets, for running commands from
+the time sharing option (TSO) command line, and for running ISPF commands. For best results, create
+components by using the MVSCOMPONENT template which has built-in deploy processes.</div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdeploying_zos__postreq__1">What to do next</h2></div>
+<p class="p" data-hd-otherprops="ibm">To learn more about the <span class="keyword">z/OS</span> Utility plug-in, see
+    the IBM <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/" target="_blank">plug-in site</a>. </p>
+
+</section>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../user/topics/zos_shiplistfiles.html">Ship list files</a></strong><br>The ship list file describes the files from the build to include in the new component version to deploy. Ship list files can also use generic artifacts to describe changes that are not physical files, such as configuration changes.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../install/topics/zos_using_job_monitor.html">Deploying by using the Job Monitor</a></strong><br>You use the Job Monitor to submit jobs and to monitor the job status in your deployment.         You must ensure that you have a Job Monitor task running and that you run the <span class="ph">IBM DevOps Deploy (Deploy)</span> process to         submit or to monitor the job. Then, you must set up Job Monitor connection properties in         your <span class="ph">IBM DevOps Deploy (Deploy)</span>         environment.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../user/topics/zos_jobmonitor.html">Job Monitor customization</a></strong><br>The Job Monitor binary is installed with the <span class="keyword">IBM z/OS</span> deployment tools in the hlq.SBUZAUTH data set. You need the assistance of a security administrator and a TCP/IP administrator to complete this customization task.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../user/topics/zos_search_inventory.html">Searching the z/OS environment inventory</a></strong><br>The z/OS search feature is available for any application that contains a z/OS type component. Search is performed for a specific file in the artifacts belonging to the z/OS components deployed to that environment.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/deployment_ov.html" title="Learn how to deploy applications in IBM DevOps Deploy (Deploy).">Deploying</a></div></div></nav></article></main></body></html>

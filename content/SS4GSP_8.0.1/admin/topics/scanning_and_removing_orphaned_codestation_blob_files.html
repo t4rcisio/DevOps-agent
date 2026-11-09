@@ -1,0 +1,77 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The csorphanscan tool in the /bin directory scans for orphaned Codestation blob files and relocates them to an orphan’s directory."><meta name="DC.relation" scheme="URI" content="../../user/topics/managing_data.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="scanning_and_removing_orphaned_codestation_blob_files"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Scanning and removing orphaned Codestation blob files</title></head><body id="scanning_and_removing_orphaned_codestation_blob_files"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Scanning and removing orphaned Codestation blob files</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3b54fa30-4043-48ef-ac1b-558b0907f15f">Edit online</a></span></div>
+    
+    <div class="body taskbody"><p class="shortdesc">The <span class="keyword cmdname">csorphanscan</span> tool in the <span class="ph filepath">/bin</span> directory
+        scans for orphaned Codestation blob files and relocates them to an orphan’s directory. </p>
+        <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskscanning_and_removing_orphaned_codestation_blob_files__context__1">About this task</h2></div>
+            <p class="p">An orphaned Codestation blob file is a file that contains data for a component
+                version that is no longer referred to by any component version currently recorded in
+                the database. Such files use disk space but can never be accessed by a deployment
+                process.</p>
+            <p class="p">By default, the tool runs in a dry-run mode such that the file system is not modified
+                and the tool only reports statistics. The tool requires some time to execute.</p>
+            <p class="p">The <span class="keyword cmdname">csorphanscan</span> tool supports only disk-based blob storage. S3
+                storage is unsupported.</p>
+            <p class="p">The <span class="keyword cmdname">csorphanscan</span> tool can run while the server is online. In an HA
+                cluster, it must be run on only one cluster member.</p>
+            <p class="p">To scan and remove orphaned Codestation blob files:</p>
+        </section>
+        <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskscanning_and_removing_orphaned_codestation_blob_files__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+                <span class="ph cmd">Run the <span class="keyword cmdname">csorphanscan</span> command without the
+                        <span class="keyword cmdname">--move-orphans</span> argument to report statistics. </span>
+                <div class="itemgroup info">
+                    <p class="p">This run takes some time. In an HA cluster, all members share the same
+                        database and Codestation storage, so run the csorphanscan tool on only one
+                        cluster member.</p>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Run the <span class="keyword cmdname">csorphanscan</span> command with the
+                        <span class="keyword cmdname">--move-orphans</span> argument to relocate orphans.</span>
+                <div class="itemgroup info">This process takes some time. The orphan files are relocated to the
+                        <code class="ph codeph">&lt;appdata&gt;/var/repository/blob/orphans</code> folder. In an HA
+                    cluster, all members share the same database and Codestation storage, so run the
+                        <span class="keyword cmdname">csorphanscan</span> tool on only one cluster member.<p class="p">You can
+                        also use the following flags with the <span class="keyword cmdname">csorphanscan</span>
+                        tool:</p><table class="table" id="scanning_and_removing_orphaned_codestation_blob_files__table_ukw_5yx_x5b"><caption></caption><colgroup><col style="width:159pt"><col style="width:236.25pt"></colgroup><tbody class="tbody">
+                                <tr class="row">
+                                    <td class="entry"><strong class="ph b">Option</strong></td>
+                                    <td class="entry"><strong class="ph b">Description</strong></td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="entry"><code class="ph codeph">--orphan-list-file &lt;<em class="ph i">path</em>&gt;</code></td>
+                                    <td class="entry">Write a list of orphaned files to a file in the specified
+                                        path.</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="entry"><code class="ph codeph">--workers N</code></td>
+                                    <td class="entry">
+                                        <p class="p">Set the number of concurrent workers. The default number
+                                            is 4, and the minimum number is 1.</p>
+                                        <p class="p">Values greater than 4 might not reduce tool run time.</p>
+                                    </td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="entry"><code class="ph codeph">--memory N[k|m|g]</code></td>
+                                    <td class="entry">Set the amount of heap memory. The default size is 2 GB.
+                                        Instances with very large numbers of component versions
+                                        stored in Codestation might require additional memory. The
+                                        default value is sufficient for at least 400K component
+                                        versions.</td>
+                                </tr>
+                            </tbody></table></div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Back up the
+                        <code class="ph codeph">&lt;appdata&gt;/var/repository/blob/orphans</code> file and delete it
+                    to free the disk space. You must use the file deletion tools of your operating
+                    system. In an HA cluster, all members share the same Codestation storage, so
+                    perform this procedure on only one cluster member.</span>
+                <div class="itemgroup info">
+                    <div class="note note note_note" id="scanning_and_removing_orphaned_codestation_blob_files__note_oyh_1qt_fwb"><span class="note__title">Note:</span>  You must never manually delete any other
+                            <code class="ph codeph">&lt;appdata&gt;</code> content outside the orphan's
+                        directory.</div>
+                </div>
+            </li></ol></section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/managing_data.html">Managing data</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can set up agents to run as system services."><meta name="DC.relation" scheme="URI" content="../../install/topics/agent_install_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_install_service_AIX"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Running agents as services on IBM AIX</title></head><body id="agent_install_service_AIX"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Running agents as services on IBM AIX</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6b51596a-17d2-4b7b-b325-4ea5ffff3a10">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can set up agents to run as system services.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_install_service_AIX__prereq__1">Before you begin</h2></div>Install an agent.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_install_service_AIX__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Change the owner of the agent installation folder to the user that runs the agent.</span>
+<div class="itemgroup stepxmp">For example, if the user <code class="ph codeph">agentuser1</code> runs the agent and the agent
+     installation folder is <span class="ph filepath">/opt/devops-deploy/agent</span>, run the following
+     command:<pre class="pre codeblock"><code>chown -R agentuser /opt/devops-deploy/agent/</code></pre></div>
+<div class="itemgroup info">You can find the user that runs the agent by looking at the <span class="keyword parmname">USER</span> property
+on the agent.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Similarly, change the group of the agent installation folder to the group that is associated
+with the user.</span>
+<div class="itemgroup stepxmp">For example, if the agent is installed in the folder
+      <span class="ph filepath">/opt/devops-deploy/agent</span>, run the following
+     command:<pre class="pre codeblock"><code>chgrp -R agentgroup /opt/devops-deploy/agent/</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Make a copy of the file <span class="ph filepath"><var class="keyword varname">agent-install</var>/bin/init/agent</span>,
+where <span class="ph filepath"><var class="keyword varname">agent-install</var></span> is the installation folder of the agent. </span>
+<div class="itemgroup info">If you are running multiple agents on the system, give the file a unique name, such as
+      <span class="ph filepath">deployagent-A</span>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In a text editor, edit the file:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">Set the property <span class="keyword parmname">AGENT_USER</span> to the name of the user that runs the
+agent.</li>
+<li class="li">Set the property <span class="keyword parmname">AGENT_GROUP</span> to the name of the group that is associated
+with that user.</li>
+<li class="li">Set the property <span class="keyword parmname">SCRIPT</span> to the location of the agent executable file. The
+       default location is <span class="ph filepath">/opt/devops-deploy/agent/bin/agent</span>.</li>
+</ul>
+</div>
+<div class="itemgroup stepxmp">The file might look like the following
+     example:<pre class="pre codeblock"><code><span class="ph">AGENT_HOME="/opt/devops-deploy/agent"   
+AGENT_USER="agentuser"   
+AGENT_GROUP="agentgroup"   
+
+ # == END INSTALL MODIFICATIONS ===================
+
+ANT_HOME="$AGENT_HOME/opt/apache-ant-1.8.4"   
+GROOVY_HOME="$AGENT_HOME/opt/groovy-1.8.8"   
+SCRIPT="/opt/devops-deploy/agent/bin/agent"</span></code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Configure the agent to run when the system starts.</span>
+<div class="itemgroup info">The steps depend on how your IBM®
+AIX® system manages services.</div>
+<div class="itemgroup stepxmp">For example, for IBM
+AIX systems that use <code class="ph codeph">init.d</code>, follow these steps:<ol class="ol" type="a">
+<li class="li">Copy the file to the folder <span class="ph filepath">/etc/rc.d/init.d/</span>.</li>
+<li class="li">Add the file to run level 2. For example, if the file is named <span class="ph filepath">deployagent</span>,
+       run the following
+       command:<pre class="pre codeblock"><code>ln -s /etc/rc.d/init.d/deployagent /etc/rc.d/rc2.d/S98deployagent</code></pre></li>
+</ol>For more information on modifying the /etc/inittab file, see <a class="xref" href="https://www.ibm.com/support/knowledgecenter/en/ssw_aix_71/com.ibm.aix.osdevice/modetc.htm" target="_blank">https://www.ibm.com/support/knowledgecenter/en/ssw_aix_71/com.ibm.aix.osdevice/modetc.htm</a></div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_install_service_AIX__result__1">Results</h2></div>The agent runs as a service. To verify that the agent is running as a service, run the
+   following command and verify that two processes from the agent are
+   running:<pre class="pre codeblock"><code>ps -ef | grep <var class="keyword varname">installFolder</var></code></pre>For
+     <code class="ph codeph"><var class="keyword varname">installFolder</var></code>, specify the installation folder of the
+   agent, such as <span class="ph filepath">/opt/devops-deploy/agent</span>.</section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_install_service_AIX__postreq__1">What to do next</h2></div>For information about the way that IBM AIX handles services, see <a class="xref" href="https://www.ibm.com/support/docview.wss?uid=isg3T1000661" target="_blank">Starting and Stopping Software via RC Directories</a>.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/agent_install_ov.html" title="You can install agents from the server or from the command line on the agent system. To configure a failover server for an agent, you must install the agent from the command line.">Installing agents</a></div></div></nav></article></main></body></html>

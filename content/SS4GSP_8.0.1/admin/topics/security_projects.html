@@ -1,0 +1,281 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="A cloud project for the blueprint designer represents a tenant or project on a cloud system. You can give users access to cloud systems through cloud projects."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_projects"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating cloud projects for the blueprint designer</title></head><body id="security_projects"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating cloud projects for the blueprint designer</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ae3ba54b-1799-4773-bed7-95e5566ea863">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">A <dfn class="term">cloud project</dfn> for the blueprint designer represents a tenant or project on
+a cloud system. You can give users access to cloud systems through cloud projects.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_projects__prereq__1">Before you begin</h2></div><ul class="ul">
+<li class="li">Connect the blueprint design server to a cloud. </li>
+<li class="li">On that cloud system, create one or more accounts and configure their access. The blueprint
+designer users use these functional IDs to access the cloud. You can create multiple functional IDs
+for each cloud and grant the functional IDs appropriate access for each team that you configure on
+the blueprint designer.</li>
+<li class="li">If you do not use the Keystone server that was supplied with the engine, create one or more
+Keystone accounts. You can create one account with all permissions, including creating instances, or
+you can create separate accounts with different permissions. The accounts must be members of the
+administrative tenant. If you create one account, you can define access to resources for each
+team.<div class="note note note_note"><span class="note__title">Note:</span> If you use the Keystone server that is supplied with engine, you can use the default
+account on the administrative tenant. The <span class="ph">The Keystone server's
+default administrative tenant user name is <code class="ph codeph">admin</code> and the default password is
+<code class="ph codeph">openstack1</code>.</span></div></li>
+</ul></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_projects__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Log in to the blueprint designer as a user with the following <span class="ph uicontrol">System</span>
+permissions:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">Configure Security</li>
+<li class="li">Manage Users &amp; Groups</li>
+</ul>
+</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Clouds</span></span>.</span></li><li class="li step stepexpand"><span class="ph cmd">Select the cloud connection to use.</span></li><li class="li step stepexpand"><span class="ph cmd">On the <span class="ph uicontrol">Authorization</span> tab, click <span class="ph uicontrol">Add
+Project</span>.</span></li><li class="li step stepexpand"><span class="ph cmd">Specify the following information, depending on the type of cloud:</span><div class="itemgroup info">
+<table class="table"><caption><span class="table--title-label">Table 1. </span><span class="title">Properties for OpenStack cloud projects</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="security_projects__entry__1">Property</th>
+<th class="entry" id="security_projects__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_projects__entry__1"><span class="ph uicontrol">Name (Project name from OpenStack)</span></td>
+<td class="entry" id="security_projects__openstack" headers="security_projects__entry__2">For OpenStack Keystone version 3, specify the OpenStack project
+name. For Keystone version 2, specify the tenant name. If you use the Keystone server that is
+provided with the engine, the default value is <kbd class="ph userinput">admin</kbd>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__1"><span class="ph uicontrol">Functional ID</span></td>
+<td class="entry" headers="security_projects__entry__2"><span class="ph" id="security_projects__functional_id">Enter the ID of the functional account on the OpenStack
+system. If you use the Keystone server that is provided with the engine, the default value is
+<code class="ph codeph">admin</code>.</span></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__1"><span class="ph uicontrol">Password</span></td>
+<td class="entry" headers="security_projects__entry__2"><span class="ph" id="security_projects__functional_pw">Enter the password for the functional account. If you
+use the Keystone server that is provided with the engine, the default value is
+<code class="ph codeph">openstack1</code>.</span></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__1"><span class="ph uicontrol">Domain</span></td>
+<td class="entry" headers="security_projects__entry__2"><span class="ph" id="security_projects__domain">If your OpenStack identity service uses the Identity API v3,
+enter the domain that the project is on. If you use the Keystone server that is provided with the
+engine, the default value is <code class="ph codeph">default</code>.</span></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__1"><span class="ph uicontrol">Identity URL</span></td>
+<td class="entry" headers="security_projects__entry__2">Specify the location of the identity service, such as
+<code class="ph codeph">http://example.com:5000/v2.0</code> or <code class="ph codeph">http://example.com:5000/v3</code>. Do not
+include a trailing slash.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__1"><span class="ph uicontrol">Timeout in Mins</span></td>
+<td class="entry" headers="security_projects__entry__2">Specify the amount of time in minutes to wait for a provision request to be
+completed. If you deploy <span class="ph">Deploy</span> components, allow sufficient time for the cloud to provision your instance, the agent to come
+online, and all processes to run.</td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 2. </span><span class="title">Properties for SoftLayer® cloud
+projects</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="security_projects__entry__15">Property</th>
+<th class="entry" id="security_projects__entry__16">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_projects__entry__15"><span class="ph uicontrol">Name</span></td>
+<td class="entry" headers="security_projects__entry__16">Specify the name of the SoftLayer cloud project.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__15"><span class="ph uicontrol">Default Orchestration Service</span></td>
+<td class="entry" headers="security_projects__entry__16">Select the orchestration service.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__15"><span class="ph uicontrol">SoftLayer User ID</span></td>
+<td class="entry" headers="security_projects__entry__16">Enter the account ID for SoftLayer.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__15"><span class="ph uicontrol">SoftLayer API Key</span></td>
+<td class="entry" headers="security_projects__entry__16">Enter The API key for SoftLayer.</td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 3. </span><span class="title">Properties for Amazon Web Services (AWS) cloud projects</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="security_projects__entry__25">Property</th>
+<th class="entry" id="security_projects__entry__26">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_projects__entry__25"><span class="ph uicontrol">Name</span></td>
+<td class="entry" headers="security_projects__entry__26">Specify the name of the Amazon cloud project.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__25"><span class="ph uicontrol">Default Orchestration Service</span></td>
+<td class="entry" headers="security_projects__entry__26">Select the orchestration service.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__25"><span class="ph uicontrol">Amazon Access ID</span></td>
+<td class="entry" headers="security_projects__entry__26">Enter the ID for AWS.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__25"><span class="ph uicontrol">Amazon Secret Key</span></td>
+<td class="entry" headers="security_projects__entry__26">Enter the password for AWS.</td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 4. </span><span class="title">Properties for VMware vCenter cloud projects</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="security_projects__entry__35">Property</th>
+<th class="entry" id="security_projects__entry__36">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_projects__entry__35"><span class="ph uicontrol">Name</span></td>
+<td class="entry" headers="security_projects__entry__36">Specify the name of the VMware vCenter cloud project.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__35"><span class="ph uicontrol">Default Orchestration Service</span></td>
+<td class="entry" headers="security_projects__entry__36">Select the orchestration service.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__35"><span class="ph uicontrol">VMware vCenter User ID</span></td>
+<td class="entry" headers="security_projects__entry__36">Enter the user ID for VMware vCenter.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__35"><span class="ph uicontrol">VMware vCenter Password</span></td>
+<td class="entry" headers="security_projects__entry__36">Enter the password for VMware vCenter.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__35"><span class="ph uicontrol">VMware vCenter Host</span></td>
+<td class="entry" headers="security_projects__entry__36">Enter the host name of the VMware vSphere API for vCenter server. This is the
+host name portion of the property <code class="ph codeph">VirtualCenter.VimApiUrl</code>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__35"><span class="ph uicontrol">VMware vCenter Port</span></td>
+<td class="entry" headers="security_projects__entry__36">Enter the port of the VMware vSphere API for vCenter server. This is the port
+portion of the property <code class="ph codeph">VirtualCenter.VimApiUrl</code>.</td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 5. </span><span class="title">Properties for VMware vRealize Automation Enterprise cloud projects</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="security_projects__entry__49">Property</th>
+<th class="entry" id="security_projects__entry__50">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_projects__entry__49"><span class="ph uicontrol">Name</span></td>
+<td class="entry" headers="security_projects__entry__50">Specify the name of the VMware vRealize cloud project.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__49"><span class="ph uicontrol">Default Orchestration Service</span></td>
+<td class="entry" headers="security_projects__entry__50">Select the orchestration service.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__49"><span class="ph uicontrol">VRA User ID</span></td>
+<td class="entry" headers="security_projects__entry__50">Enter the user ID for VMware vRealize Automation.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__49"><span class="ph uicontrol">VRA Password</span></td>
+<td class="entry" headers="security_projects__entry__50">Enter the password for VMware vRealize Automation.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__49"><span class="ph uicontrol">VRA Host</span></td>
+<td class="entry" headers="security_projects__entry__50">Enter the URL that hosts the VMware vRealize Automation server.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__49"><span class="ph uicontrol">VRA Tenant Name</span></td>
+<td class="entry" headers="security_projects__entry__50">Enter the tenant name from the VMware vRealize Automation server.</td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 6. </span><span class="title">Properties for Azure cloud projects</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="security_projects__entry__63">Property</th>
+<th class="entry" id="security_projects__entry__64">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_projects__entry__63"><span class="ph uicontrol">Name</span></td>
+<td class="entry" headers="security_projects__entry__64">Specify the name of the Azure cloud project.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__63"><span class="ph uicontrol">Default Orchestration Service</span></td>
+<td class="entry" headers="security_projects__entry__64">Select the orchestration service.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__63"><span class="ph uicontrol">Azure Subscription ID</span></td>
+<td class="entry" headers="security_projects__entry__64">Enter the subscription ID to use. You can find this information in the Azure
+web portal or by running the CLI command <span class="keyword cmdname">azure account list</span>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__63"><span class="ph uicontrol">Azure Client ID</span></td>
+<td class="entry" headers="security_projects__entry__64">Enter the ID of the application to associate the connection with. You can
+create a temporary application with the <span class="keyword cmdname">azure ad app create</span> command.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__63"><span class="ph uicontrol">Azure Client Secret</span></td>
+<td class="entry" headers="security_projects__entry__64">Enter the password of the application. You specified this password when you
+created the application with the <span class="keyword cmdname">azure ad app create</span> command.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__63"><span class="ph uicontrol">Azure Tenant ID</span></td>
+<td class="entry" headers="security_projects__entry__64">Enter the tenant ID to use. You can find this information by running the CLI
+command <span class="keyword cmdname">azure account list</span>.</td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 7. </span><span class="title">Properties for Google Cloud Platform cloud projects</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="security_projects__entry__77">Property</th>
+<th class="entry" id="security_projects__entry__78">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_projects__entry__77"><span class="ph uicontrol">Name</span></td>
+<td class="entry" headers="security_projects__entry__78">Specify the name of the Google Cloud Platform cloud project.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__77"><span class="ph uicontrol">Default Orchestration Service</span></td>
+<td class="entry" headers="security_projects__entry__78">Select the orchestration service.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__77"><span class="ph uicontrol">Upload your Google Cloud credentials</span></td>
+<td class="entry" headers="security_projects__entry__78">Upload the file for your Google Cloud service account key that contains your
+API key credentials. Only JSON key files are supported. <ol class="ol" type="a" id="security_projects__ol_hxj_3wn_hz">
+<li class="li">Click <span class="ph uicontrol">Choose File</span>.</li>
+<li class="li">Select the JSON key file on your computer, and click <span class="ph uicontrol">Open</span>. The JSON file
+name is in this format:
+<code class="ph codeph"><var class="keyword varname">service_account_name</var>-<var class="keyword varname">12_digits_of_its_private_key_id</var></code></li>
+</ol></td>
+</tr>
+</tbody></table>
+</div></li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If your VMware cloud requires NSX networking types, select the <span class="ph uicontrol">Configure NSX
+access</span> check box and specify the following information:</span>
+<div class="itemgroup info">
+<table class="table"><caption><span class="table--title-label">Table 8. </span><span class="title">Properties for VMWare cloud projects that require NSX access</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="security_projects__entry__85">Property</th>
+<th class="entry" id="security_projects__entry__86">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_projects__entry__85"><span class="ph uicontrol">NSX User ID</span></td>
+<td class="entry" headers="security_projects__entry__86">Enter the NSX user ID.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__85"><span class="ph uicontrol">NSX Password</span></td>
+<td class="entry" headers="security_projects__entry__86">Enter the password for the NSX user ID.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_projects__entry__85"><span class="ph uicontrol">NSX Host</span></td>
+<td class="entry" headers="security_projects__entry__86">Enter the VMWare NSX API host IP address and port number.</td>
+</tr>
+</tbody></table>
+</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Test Connection</span> to verify
+that the connection information is correct.</span></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span></li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_projects__postreq__1">What to do next</h2></div>Assign the cloud project to a team: <ol class="ol">
+<li class="li">Click <span class="ph uicontrol">Teams</span>, and then select a team.</li>
+<li class="li">Go to the <span class="ph uicontrol">Cloud Authorization</span> tab, and
+click <span class="ph uicontrol">Add</span>.</li>
+        <li class="li">Click <span class="ph uicontrol">Save</span>.</li>
+</ol></section>
+</div>
+</article></main></body></html>

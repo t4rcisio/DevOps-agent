@@ -1,0 +1,166 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="From the blueprint designer, you can set component environment properties and component resource properties in blueprint source code."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="env_props_BDS"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Passing properties from blueprints to the resource tree</title></head><body id="env_props_BDS"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Passing properties from blueprints to the resource tree </h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-cebcb5af-4cf5-4b16-ac75-456d4967ed17">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">From the blueprint designer, you can set component environment properties and component
+resource properties in blueprint source code.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskenv_props_BDS__prereq__1">Before you begin</h2></div>Connect the blueprint designer to the server. See <a class="xref" href="p_integrate.html" title="In most cases, you connect the blueprint design server to the server at installation time, but you can also connect them later.">Connecting the blueprint design server to the server</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskenv_props_BDS__context__1">About this task</h2></div>You can pass the following properties from a blueprint to the resource tree:<ul class="ul">
+        <li class="li">Component resource properties</li>
+        <li class="li">Component environment properties</li>
+        <li class="li">Secure component resource properties</li>
+        <li class="li">Secure environment resource properties</li>
+        <li class="li">Environment properties</li>
+      </ul>Blueprints can create environment properties, but component resource properties and
+      component environment properties must exist on a component before you can pass values to them.
+      If you do not provide values for these properties from the blueprint designer, the properties
+      use the default values that were set in the <span class="ph">IBM DevOps Deploy (Deploy)</span>.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskenv_props_BDS__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">In the blueprint designer, open a blueprint.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add one or more virtual images to the blueprint.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To pass component environment properties, follow these steps:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">On the server, on the <span class="ph uicontrol">Configuration</span> tab for a component, create one or
+more component environment properties.</span>
+<div class="itemgroup info"> For example, the following figure shows a component with two component environment
+properties:<br><img class="image" src="../images/env_props_BDS_a.gif" alt="The Configuration tab for the component, showing two component environment properties"><br></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the blueprint designer, from the <span class="ph uicontrol">Components</span> drawer, add the component
+to a virtual image.</span>
+<div class="itemgroup stepresult">On the <code class="ph codeph">IBM::UrbanCode::SoftwareConfig::UCD</code> resource, in the
+<code class="ph codeph">inputs</code> section, the component environment properties appear as name-value pairs.
+The properties also appear on the <span class="ph uicontrol">Properties</span> tab of the editor. The following
+example code shows two component environment
+properties:<pre class="pre codeblock"><code>component1_sw_config:
+  type: IBM::UrbanCode::SoftwareConfig::UCD
+  properties: 
+    name: "component1"
+    component_process: "Deploy component1"
+    component_process_timeout: "300"
+    ucd_server_url: { get_param: ucd_server_url }
+    ucd_username: { get_param: ucd_user }
+    ucd_password: { get_param: ucd_password }
+    application: { get_attr: [resource_tree, application_name] }
+    environment_name: { get_attr: [resource_tree, environment_name] }
+    inputs:
+      <strong class="ph b">CompEnvProp1 : "Default value for CompEnvProp1"
+      CompEnvProp2 : "Default value for CompEnvProp2"</strong></code></pre></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Specify values for the component environment properties in the blueprint.</span>
+<div class="itemgroup info" id="env_props_BDS__specify_values_info">You can specify literal values, or you can use the
+<span class="keyword cmdname">get_attr</span> and <span class="keyword cmdname">get_param</span> functions to retrieve attribute and
+parameter values.</div>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To pass component resource properties, follow these steps:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">On the server, on the <span class="ph uicontrol">Configuration</span> tab for a component, create one or
+more component resource properties.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the blueprint editor, from the <span class="ph uicontrol">Components</span> drawer, add the component
+to a virtual image.</span>
+<div class="itemgroup stepresult">On the <code class="ph codeph">IBM::UrbanCode::SoftwareDeploy::UCD</code> resource, in the
+<code class="ph codeph">inputs</code> section, the component resource properties appear as name-value pairs. The
+properties also appear on the <span class="ph uicontrol">Properties</span> tab of the editor. The following
+example code shows a component resource
+property:<pre class="pre codeblock"><code>component1:
+  type: IBM::UrbanCode::SoftwareDeploy::UCD
+  properties:
+    apply_config: { get_resource: component1_sw_config }
+    server: my_server
+    version: LATEST
+    agent_timeout: "360"
+    inputs:
+      <strong class="ph b">CompResourceProp1 : "Default value for CompResourceProp1"</strong></code></pre></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Specify values for the component resource properties in the blueprint.</span>
+<div class="itemgroup info">You can specify literal values, or you can use the
+<span class="keyword cmdname">get_attr</span> and <span class="keyword cmdname">get_param</span> functions to retrieve attribute and
+parameter values.</div>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To pass environment properties, follow these steps:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">In the blueprint editor, from the <span class="ph uicontrol">Components</span> drawer, add at least one
+component to a virtual image.</span>
+<div class="itemgroup info">This step is necessary to create and populate the <code class="ph codeph">resource_tree</code> resource in
+the blueprint code.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">On the <code class="ph codeph">resource_tree</code> resource, in the <code class="ph codeph">properties</code> section, add
+environment properties and specify values for them.</span>
+<div class="itemgroup stepxmp">For example, the following code shows an environment property that is named
+<code class="ph codeph">tomcat_port</code>:<pre class="pre codeblock"><code>
+resource_tree:
+ properties:
+  inputs:
+   tomcat_port : "8443"</code></pre></div>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To modify the value of a secure component resource or component environment properties, follow
+these steps:</span>
+<div class="itemgroup info">
+<div class="note restriction note_restriction"><span class="note__title">Restriction:</span> You cannot modify the value of these secure properties in the blueprint
+source code.</div>
+</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">On the server, on the <span class="ph uicontrol">Configuration</span> tab for a component, create one or
+more component resource properties.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the blueprint editor, from the <span class="ph uicontrol">Components</span> drawer, add the component
+to a virtual image.</span>
+<div class="itemgroup stepresult">On the <code class="ph codeph">IBM::UrbanCode::SoftwareDeploy::UCD</code> resource, in the
+<code class="ph codeph">inputs</code> section, the secure properties appear as name and
+<span class="keyword cmdname">get_param</span> function pairs. Because the value of the property is secure, it is not
+displayed in the blueprint. The properties also appear on the <span class="ph uicontrol">Properties</span> tab
+of the editor. The secure property names are appended with <code class="ph codeph">-SECURE-PROPERTY</code>, as
+shown in the following
+example:<pre class="pre codeblock"><code>component1:
+  type: IBM::UrbanCode::SoftwareDeploy::UCD
+  properties:
+    apply_config: { get_resource: component1_sw_config }
+    server: my_server
+    version: LATEST
+    agent_timeout: "360"
+    inputs:
+      <strong class="ph b"><var class="keyword varname">SecurePropertyName</var>-SECURE-PROPERTY : {get_param: <var class="keyword varname">SecurePropertyName</var>_secure_property}</strong></code></pre>In
+the <code class="ph codeph">parameters</code> section of the blueprint, the definition of each secure property is
+displayed. The secure property names are appended with <code class="ph codeph">_secure_property</code>, and the
+description of each secure property and a placeholder string for the password are displayed, as
+shown in the following
+example:<pre class="pre codeblock"><code><var class="keyword varname">SecurePropertyName</var>_secure_property
+  type: string
+  description: 'Secure property definition'
+  default: 'DefaultComponentPasswordValue'
+  hidden: <strong class="ph b">true</strong></code></pre></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">When you provision the blueprint, specify values for the secure properties.</span>
+<div class="itemgroup info" data-hd-otherprops="ibm">See <a class="xref" href="../../edt/topics/env_provision_edt.html#env_provision_edt" title="If you connect to the target cloud through OpenStack Heat, you can provision an environment directly from the blueprint designer.">Provisioning environments from the blueprint designer (through OpenStack Heat)</a>.</div>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the blueprint.</span>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskenv_props_BDS__postreq__1">What to do next</h2></div>After you provision the environment, the blueprint designer passes the property values in
+the blueprint source code to the properties on the server. In processes, you can refer to the
+properties in the same format as referring to any other property. For example, you can refer to
+environment properties in this format:
+<code class="ph codeph">${p:environment/<var class="keyword varname">property_name</var>}</code>.</section>
+</div>
+</article></main></body></html>

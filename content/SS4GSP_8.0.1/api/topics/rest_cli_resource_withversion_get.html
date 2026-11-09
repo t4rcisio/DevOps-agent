@@ -1,0 +1,75 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="This command returns a JSONArray representation of all resources that have the specified component version installed."><meta name="DC.subject" content="REST API, resource resource, /withVersion GET, GET methods, /resource/withVersion"><meta name="keywords" content="REST API, resource resource, /withVersion GET, GET methods, /resource/withVersion"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_resource.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_resource_withversion_get"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>List resources that have a specified component version</title></head><body id="rest_cli_resource_withversion_get"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">List resources that have a specified component version</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ebc1ca93-21b7-43d8-ae81-88a079464923">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">This command returns a JSONArray representation of all resources that have the specified component version installed.</p>
+<section class="section"><h2 id="rest_cli_resource_withversion_get__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>GET https://{hostname}:{port}
+    /cli/resource/withVersion?{parameters}
+Accept: {contentType}
+</code></pre><table class="table" id="rest_cli_resource_withversion_get__request_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Request parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_resource_withversion_get__request_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_resource_withversion_get__request_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_resource_withversion_get__request_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_resource_withversion_get__request_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_resource_withversion_get__request_params__entry__1"><span class="keyword parmname">component</span></td>
+<td class="entry" headers="rest_cli_resource_withversion_get__request_params__entry__2">string</td>
+<td class="entry" headers="rest_cli_resource_withversion_get__request_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_resource_withversion_get__request_params__entry__4">Name or ID of the component</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="rest_cli_resource_withversion_get__request_params__entry__1"><span class="keyword parmname">version</span></td>
+<td class="entry" headers="rest_cli_resource_withversion_get__request_params__entry__2">string</td>
+<td class="entry" headers="rest_cli_resource_withversion_get__request_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_resource_withversion_get__request_params__entry__4">Version name</td>
+</tr>
+</tbody></table>
+<table class="table" id="rest_cli_resource_withversion_get__header_params"><caption><span class="table--title-label">Table 2. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_resource_withversion_get__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_resource_withversion_get__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_resource_withversion_get__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_resource_withversion_get__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_resource_withversion_get__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_resource_withversion_get__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_resource_withversion_get__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_resource_withversion_get__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+</section>
+<div class="example" data-hd-audience="all"><h2 id="rest_cli_resource_withversion_get__title__5" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>[
+  {
+    "id": "53b4b54f-5b3f-4fef-91dd-dea8ffe15dc3",
+    "name": "JPetStore-APP",
+    "path": "/JPetStore agents/vm192-168/JPetStore-APP",
+    "active": true,
+    "description": "",
+    "inheritTeam": true,
+    "impersonationPassword": "****",
+    "impersonationUseSudo": false,
+    "impersonationForce": false,
+    "type": "subresource",
+    "status": "ONLINE",
+    "hasAgent": true,
+    "tags": [
+    ]
+  }
+]</code></pre></div>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_getresourceswithcomponentversion.html" title="List resources that have a specified component version">getResourcesWithComponentVersion</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_resource.html">resource resource</a></div></div></nav></article></main></body></html>

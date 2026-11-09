@@ -1,0 +1,158 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command."><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="commandFormat.d12e28"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Command format</title></head><body id="commandFormat.d12e28"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Command format</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-9179eb74-fee7-47af-b8de-0a11508acc96">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">To run a command, open a command-line window and specify
+the command and its parameters. In some cases, you must pass a JSON
+string with information for a command.</p>
+<div class="p">Commands have the following format:<pre class="pre codeblock"><code>udclient [global-args...] [global-flags...] &lt;command&gt; [args...]</code></pre></div>
+<div class="note note note_note"><span class="note__title">Note:</span> You must enter CLI commands on one line.</div>
+<div class="note note note_note"><span class="note__title">Note:</span> CLI commands and parameters are case-sensitive.</div>
+<div class="note note note_note" id="commandFormat.d12e28__permissions"><span class="note__title">Note:</span> Using CLI commands requires the same permissions
+as using the web interface. For information about permissions, see <a class="xref" href="../../admin/topics/security_roles.html" title="A role is a list of permissions that users have on the IBM DevOps Deploy (Deploy) server. These permissions include the ability to create, edit, and delete objects, such as applications, environments, and components. The permission also includes the parts of the server interface that users can access.">Roles and permissions</a>.</div>
+    <section class="section"><h2 id="commandFormat.d12e28__title__2" class="title sectiontitle">Authenticating</h2>You can authenticate to the server in any of the following ways:<ul class="ul">
+        <li class="li">You can specify a user name and password in the <span class="keyword parmname">username</span> and
+            <span class="keyword parmname">password</span> parameters, and the location of the server in the
+            <span class="keyword parmname">weburl</span> parameter, as shown in the following examples.</li>
+        <li class="li">You can specify a user name and password in the <span class="keyword parmname">DS_USERNAME</span> and
+            <span class="keyword parmname">DS_PASSWORD</span> system variables, and the location of the server in the
+            <span class="keyword parmname">DS_WEB_URL</span> system variable.</li>
+        <li class="li">You can specify a token in the <span class="keyword parmname">authtoken</span> parameter or in the
+            <span class="keyword parmname">DS_AUTH_TOKEN</span> system variable.</li>
+        <li class="li">You can use the <a class="xref" href="../../api/topics/udclient_login.html" title="Log in to the server">login</a> command to create a temporary authentication to the server.</li>
+      </ul></section>
+<section class="section"><h2 id="commandFormat.d12e28__title__3" class="title sectiontitle">Passing parameters</h2>Most commands require one
+or more parameters. Parameters can change how the server interprets
+the command.<div class="p">For example, if you do not pass any parameters to the <span class="keyword cmdname">getResources</span> command
+(except the required global parameters), the server lists the top-level
+resources:<pre class="pre codeblock"><code>udclient -weburl http://ucdserver.example.com:8080 
+  -username admin 
+  -password admin 
+  getResources</code></pre></div><div class="p">However, if you pass the path or
+ID of a resource in the <span class="keyword parmname">parent</span> parameter, the
+command returns the resources that are under that resource, as in
+the following example:<pre class="pre codeblock"><code>udclient -weburl http://ucdserver.example.com:8080 
+  -username admin 
+  -password admin 
+  getResources
+  -parent "/My Agents"</code></pre></div></section>
+<section class="section"><h2 id="commandFormat.d12e28__title__4" class="title sectiontitle">Passing JSON strings</h2>Some commands require
+a JSON string or file instead of or in addition to the parameters. <div class="p">For
+example, the <span class="keyword cmdname">createApplication</span> command creates
+an application. To use this command, you must pass a valid JSON string
+that specifies the name, description, and some properties of the new
+application. The JSON string for this command must follow this template:<pre class="pre codeblock language-json"><code>{
+  "description": "Description",
+  "enforceCompleteSnapshots": "Specify true to require 
+     an explicit version for each component",
+  "name": "Application name or ID",
+  "notificationScheme": "Notification scheme"
+}</code></pre><div class="note note note_note"><span class="note__title">Note:</span> To see the JSON template that a command requires,
+run the command with the <code class="ph codeph">-t</code> switch, as in the following
+example:<pre class="pre codeblock"><code>udclient -weburl http://ucdserver.example.com:8080 
+  -username admin 
+  -password admin 
+  createApplication
+  -t</code></pre></div>This template is also listed in the reference
+information for the command; see <a class="xref" href="../../api/topics/udclient_createapplication.html" title="Create an application from a JSON file">createApplication</a>.</div><div class="p">For example, the following JSON string
+represents an application that is named <code class="ph codeph">My Application</code>:<pre class="pre codeblock language-json"><code>{
+  "description": "My new application",
+  "enforceCompleteSnapshots": "false",
+  "name": "My Application",
+  "notificationScheme": "Default Notification Scheme"
+}</code></pre>To pass this JSON string, save the string to a file and
+pass the file to the command. For example, if you save the string
+to a file that is named <span class="ph filepath">newApplication.json</span>,
+the command looks like the following example:<pre class="pre codeblock"><code>udclient -weburl http://ucdserver.example.com:8080 
+  -username admin 
+  -password admin 
+  createApplication
+  newApplication.json</code></pre></div><div class="note note note_note"><span class="note__title">Note:</span> The
+string that you pass to the command must be a valid JSON string. </div></section>
+<section class="section"><h2 id="commandFormat.d12e28__title__5" class="title sectiontitle">Global parameters and flags</h2><p class="p" id="commandFormat.d12e28__global-args">The
+following table lists the global parameters for the commands. These
+global parameters are listed as <code class="ph codeph">[global-args...]</code> in
+code examples.</p><table class="table frame-all"><caption><span class="table--title-label">Table 1. </span><span class="title">Global parameters</span></caption><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="commandFormat.d12e28__entry__1">Argument</th>
+<th class="entry" id="commandFormat.d12e28__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="commandFormat.d12e28__entry__1"><span class="keyword parmname">-authtoken</span>, <span class="keyword parmname">--authtoken</span></td>
+<td class="entry" headers="commandFormat.d12e28__entry__2">Optional. Can be set with the <span class="keyword parmname">DS_AUTH_TOKEN</span> environment
+variable. An authentication token (authtoken) that is generated by
+the server. Either an authtoken or a user name and password are required.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="commandFormat.d12e28__entry__1"><span class="keyword parmname">-password</span>, <span class="keyword parmname">--password</span></td>
+<td class="entry" headers="commandFormat.d12e28__entry__2">Optional. Can be set with the <span class="keyword parmname">DS_PASSWORD</span> environment
+variable. A password to authenticate with the server. Either an authtoken
+or a user name and password are required.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="commandFormat.d12e28__entry__1"><span class="keyword parmname">-proxyHost</span>, <span class="keyword parmname">--proxyHost</span></td>
+<td class="entry" headers="commandFormat.d12e28__entry__2">Optional. Can be set with the <span class="keyword parmname">proxyHost</span> environment
+variable. The host name of a proxy (for example, an agent relay) to
+use instead of a direct connection to the server.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="commandFormat.d12e28__entry__1"><span class="keyword parmname">-proxyPassword</span>, <span class="keyword parmname">--proxyPassword</span></td>
+<td class="entry" headers="commandFormat.d12e28__entry__2">Optional. Can be set with the <span class="keyword parmname">proxyPassword</span> environment
+variable. A password to use to authenticate with the proxy.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="commandFormat.d12e28__entry__1"><span class="keyword parmname">-proxyPort</span>, <span class="keyword parmname">--proxyPort</span></td>
+<td class="entry" headers="commandFormat.d12e28__entry__2">Optional. Can be set with the <span class="keyword parmname">proxyPort</span> environment
+variable. The proxy port to use if a proxy host name is specified.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="commandFormat.d12e28__entry__1"><span class="keyword parmname">-proxyUser</span>, <span class="keyword parmname">--proxyUser</span></td>
+<td class="entry" headers="commandFormat.d12e28__entry__2">Optional. Can be set with the <span class="keyword parmname">proxyUser</span> environment
+variable. A user name to use to authenticate with the proxy.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="commandFormat.d12e28__entry__1"><span class="keyword parmname">-username</span>, <span class="keyword parmname">--username</span></td>
+<td class="entry" headers="commandFormat.d12e28__entry__2"> Optional. Can be set with the <span class="keyword parmname">DS_USERNAME</span> environment
+variable. A user name to authenticate with the server. Either an authtoken
+or a user name and password are required.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="commandFormat.d12e28__entry__1"><span class="keyword parmname">-weburl</span>, <span class="keyword parmname">--weburl</span></td>
+<td class="entry" headers="commandFormat.d12e28__entry__2">Required. Can be set with the <span class="keyword parmname">DS_WEB_URL</span> environment
+variable. The base URL of the <span class="ph">Deploy</span> server.
+For example, http://ds.example.com:8585.</td>
+</tr>
+</tbody></table><p class="p" id="commandFormat.d12e28__global-flags">The following table shows the global
+flags. These global flags are listed as <code class="ph codeph">[global-flags...]</code> in
+code examples.</p><table class="table frame-all"><caption><span class="table--title-label">Table 2. </span><span class="title">Global flags</span></caption><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="commandFormat.d12e28__entry__19">Flag</th>
+<th class="entry" id="commandFormat.d12e28__entry__20">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="commandFormat.d12e28__entry__19"><span class="keyword parmname">-t</span>, <span class="keyword parmname">--getTemplate</span></td>
+<td class="entry" headers="commandFormat.d12e28__entry__20">Show the JSON template for the command instead of running the
+command. If a file argument is provided, the template is output to
+the specified file.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="commandFormat.d12e28__entry__19"><span class="keyword parmname">-h</span>, <span class="keyword parmname">--help</span></td>
+<td class="entry" headers="commandFormat.d12e28__entry__20">Print the full description and help of the command instead
+of running the command.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="commandFormat.d12e28__entry__19"><span class="keyword parmname">-v</span>, <span class="keyword parmname">--verbose</span></td>
+<td class="entry" headers="commandFormat.d12e28__entry__20">Print extra information.</td>
+</tr>
+</tbody></table><p class="p">When you specify objects such as applications, components,
+agents, and resources on the command line, you can use the name of
+the object or the object ID. The ID of an object is part of the URL
+that is displayed when you inspect the object in <span class="ph">Deploy</span>.
+For example, if you browse to a specific component and the URL is <samp class="ph systemoutput sysout">https://ucdeploy.example.com:8443/#component/2f153e93-00c3-44ef-a7fd-87e544e698d4</samp>,
+then the ID of the component is <samp class="ph systemoutput sysout">2f153e93-00c3-44ef-a7fd-87e544e698d4</samp>.</p><div class="p">This
+example shows the <span class="keyword cmdname">getResources</span> command:<pre class="pre codeblock"><code>udclient -weburl http://localhost:8080 -username admin -password admin getResources</code></pre></div></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_ch.html" title="CLI is a command-line interface that provides access to the IBM DevOps Deploy (Deploy) server. It can be used to find or set properties and to run numerous functions.">Command-line client (CLI) reference</a></div></div></nav></article></main></body></html>

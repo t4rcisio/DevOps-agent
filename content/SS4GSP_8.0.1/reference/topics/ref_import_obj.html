@@ -1,0 +1,35 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="You can add objects to plug-ins so that they are automatically imported when the plug-in is installed or upgraded. Objects include applications, components, component templates, and processes. For example, you can add a component template that implements a standard process to a plug-in, so that the plug-in user does not have to create the component template."><meta name="DC.relation" scheme="URI" content="../../reference/topics/reference_plugins_create.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ref_import_obj"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Automatically importing objects from plug-ins</title></head><body id="ref_import_obj"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Automatically importing objects from plug-ins</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3600b4dc-5e94-40cd-93b4-343a9b684ca6">Edit online</a></span></div>
+
+<div class="body refbody"><p class="shortdesc">You can add objects to plug-ins so that they are automatically
+imported when the plug-in is installed or upgraded. Objects include
+applications, components, component templates, and processes. For
+example, you can add a component template that implements a standard
+process to a plug-in, so that the plug-in user does not have to create
+the component template.</p>
+<section class="section"><p class="p">To automatically import objects from plug-ins, place the
+JSON representation of the object in the plug-in archive file, in
+the appropriate directory. The JSON files must have the <span class="ph filepath">.json</span> extension.
+For example, if you have an application in a JSON file, the file must
+be in the <span class="ph filepath">imports/applications</span> folder of the
+archive file.</p><p class="p">The following table lists the locations for each
+object type.</p><table class="simpletable"><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead><tr class="sthead">
+<th class="stentry" scope="col">Object type</th>
+<th class="stentry" scope="col">Location</th>
+</tr></thead><tbody><tr class="strow">
+<td class="stentry">Applications</td>
+<td class="stentry"><span class="ph filepath">imports/applications/</span></td>
+</tr><tr class="strow">
+<td class="stentry">Components</td>
+<td class="stentry"><span class="ph filepath">imports/components/</span></td>
+</tr><tr class="strow">
+<td class="stentry">Component templates</td>
+<td class="stentry"><span class="ph filepath">imports/componenttemplates/</span></td>
+</tr><tr class="strow">
+<td class="stentry">Processes</td>
+<td class="stentry"><span class="ph filepath">imports/processes/</span></td>
+</tr></tbody></table></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/reference_plugins_create.html" title="You can create your own plug-ins for use with IBM DevOps Deploy (Deploy). A plug-in consists of XML files and supporting script files that the plug-in requires.">Creating plug-ins</a></div></div></nav></article></main></body></html>

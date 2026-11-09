@@ -1,0 +1,80 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content=""><meta name="DC.subject" content="REST API, application resource, /create PUT, PUT methods, /application/create"><meta name="keywords" content="REST API, application resource, /create PUT, PUT methods, /application/create"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_application.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_application_create_put"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Create an application from a JSON file</title></head><body id="rest_cli_application_create_put"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Create an application from a JSON file</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-aa60c1be-6fa2-4cba-a466-7541805b0353">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc"></p>
+<section class="section"><h2 id="rest_cli_application_create_put__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>PUT https://{hostname}:{port}
+    /cli/application/create
+Accept: {contentType}
+</code></pre><table class="table" id="rest_cli_application_create_put__header_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_application_create_put__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_application_create_put__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_application_create_put__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_application_create_put__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_application_create_put__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_application_create_put__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_application_create_put__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_application_create_put__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+<div class="p" id="rest_cli_application_create_put__template">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "description": "Description",
+  "enforceCompleteSnapshots": "Specify true to require an 
+  explicit version for each component",
+  "name": "Application name or ID",
+  "notificationScheme": "Notification scheme",
+  "onlyChangedVersions": "If true, the 'Only Deploy 
+  Changed Versions' deployment option will be checked by 
+  default (default: true)",
+  "teamMappings": [{
+    "resourceRoleId": "Id of Resource Type to apply to 
+  this team mapping (optional, can specify either this or 
+  resourceRoleLabel",
+    "resourceRoleLabel": "Name of Resource Type to apply 
+  to this team mapping (optional, can specify either this or 
+  resourceRoleId",
+    "teamId": "ID of a team, either this field or 
+  teamLabel are needed to specify a team",
+    "teamLabel": "Name of the team to map the environment 
+  to, either this field or teamId are needed to specify a 
+  team"
+  }],
+  "useWizard": "Specify true to use the Deployment Wizard 
+  when submitting application process request (default: 
+  false)"
+}
+</code></pre></div></section>
+<div class="example" data-hd-audience="all"><h2 id="rest_cli_application_create_put__title__4" class="title sectiontitle">Example JSON request</h2><pre class="pre codeblock language-json"><code>{
+  "name": "My new application",
+  "description": "New application for command example",
+  "notificationScheme": "Default Notification Scheme",
+  "enforceCompleteSnapshots": "false"
+}</code></pre></div><div class="example" data-hd-audience="all"><h2 id="rest_cli_application_create_put__title__5" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "id": "5064e2b5-08aa-4e79-b0d5-9b63ba218d48",
+  "name": "My new application",
+  "description": "New application for command example",
+  "created": 1390504790883,
+  "enforceCompleteSnapshots": false,
+  "active": true,
+  "tags": [
+  ],
+  "user": "admin"
+}</code></pre></div>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_createapplication.html" title="Create an application from a JSON file">createApplication</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_application.html" title="Resources for working with applications, including manipulating the components and environments that are associated with applications.">application resource</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="The cloud discovery service provides information about available images, regions, and flavors to the blueprint design server. This service runs with a default set of options, but you can customize these options so your images, regions and flavors are shown in the blueprint designer."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="cds_configure"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Setting up images, regions, and flavors for the cloud discovery service and engine</title></head><body id="cds_configure"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Setting up images, regions, and flavors for the cloud discovery service and engine</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b98f9182-15ad-4db5-9f9d-6938d7fc523d">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">The cloud discovery service provides information about available images, regions, and
+flavors to the blueprint design server. This service runs with a default set of options, but you can
+customize these options so your images, regions and flavors are shown in the blueprint
+designer.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcds_configure__context__1">About this task</h2></div>While you can use the default settings for the cloud discovery service, you can also
+configure it with information about the specific regions, flavors, and images, as applicable, that
+you use with your clouds. If you configure the cloud discovery service, you must provide the same
+information about regions and flavors to your engine. </section>
+</div>
+<article class="topic task nested1" aria-labelledby="ariaid-title2" id="cds_configure_cds">
+<h2 class="title topictitle2" id="ariaid-title2">Setting up images, regions, and flavors on the cloud discovery service</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b98f9182-15ad-4db5-9f9d-6938d7fc523d">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">If you customize the cloud discovery service to provide an accurate list of regions and
+flavors in the blueprint designer, add them to the cloud discovery service configuration file. When
+you customize some clouds, you must also list the specific images that you use.</p>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskcds_configure_cds__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the computer that hosts the cloud discovery service and the blueprint design server, create
+a configuration file or update the existing configuration file.</span>
+<div class="itemgroup info">To create a configuration file, copy the template in the file
+<span class="ph filepath">/usr/lib/python2.7/site-packages/clouddiscoveryservice/default_settings.py</span>. The
+blueprint design server displays images, regions, and flavors based on the contents of this
+configuration file. You must provide the images, regions, and flavors for your clouds in the
+configuration file.</div>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> The flavor and region information in this configuration file must match the
+information in the
+<span class="ph filepath">/usr/lib/heat/ibm-cloud-ext/resources/ibm-cloud-discovery.conf</span> file on the Heat
+engine. For example, if you are using vCenter, the flavors for that cloud are listed in the
+<span class="ph filepath">ibm-cloud-discovery.conf</span> file. In this case, these flavors must match the
+flavors in the cloud discovery service configuration file. If the flavor and region information in
+the <span class="ph filepath">ibm-cloud-discovery.conf</span> file does not match the information in the cloud
+discovery service file, then the images that the Heat engine provisions might not match the images
+that are displayed in the blueprint designer.</div>
+</div>
+<div class="itemgroup stepxmp">The configuration file has separate sections for each cloud type. The format and content of
+each section differs, depending on the cloud type: <ul class="ul">
+<li class="li">For EC2, you must register regions and images in the cloud discovery service file. You must also
+register the instance types that you provision with the cloud discovery service. See <a class="xref" href="../../edt/topics/integrate_ec2_image.html" title="To use the blueprint designer to model environments on Amazon Web Services, you must register Amazon Elastic Compute Cloud (EC2) images with the cloud discovery service.">Registering Amazon EC2 images with the cloud discovery service</a>.</li>
+<li class="li">For Azure, you must register images in the cloud discovery service file. See <a class="xref" href="../../edt/topics/integrate_azure_image.html" title="To use Microsoft Azure marketplace images in the blueprint designer, you must register images with the cloud discovery service.">Registering Azure marketplace images with the cloud discovery service</a> and <a class="xref" href="../../edt/topics/integrate_azure_private.html" title="To use Microsoft Azure custom images in the blueprint designer, you must register the images with the cloud discovery service.">Registering Azure custom images with the cloud discovery service</a>. </li>
+<li class="li">For vRealize Automation, you must register flavors in the cloud discovery service file. See
+<a class="xref" href="../../edt/topics/cloud_connect_vra_flavors.html#cloud_connect_vra_flavors" title="Flavors represent the capacity of images, including memory, storage space, and processor capacity. You must configure a set of flavors for VMware vRealize Automation Enterprise.">Configuring VMware vRealize Automation image flavors</a>. </li>
+<li class="li">For vCenter, you must register flavors in the cloud discovery service file. See <a class="xref" href="../../edt/topics/cloud_connect_vmware_flavors.html" title="Flavors represent the capacity of images, including memory, storage space, and processor capacity. You must configure a set of flavors for VMware vCenter.">Configuring VMware vCenter image flavors</a>. </li>
+<li class="li">For SoftLayer, you must register flavors in the cloud discovery service file. See <a class="xref" href="../../edt/topics/cloud_connect_softlayer_flavors.html" title="Flavors represent the capacity of images, including memory, storage space, and processor capacity. You must configure a set of flavors for the SoftLayer cloud.">Configuring SoftLayer image flavors</a>. </li>
+<li class="li">For Google Cloud Platform, you must register image in the cloud discovery service file. See
+<a class="xref" href="../../edt/topics/cloud_connect_google_cloud_cds.html" title="To use Google Cloud Platform public images in the blueprint designer, you must register image project types and families with the cloud discovery service.">Registering Google Cloud Platform public images</a>. </li>
+<li class="li">Also, at the bottom of the file, a section lists the default regions for
+the system. These regions are used only when you are connected to a cloud that does not have regions
+defined.<pre class="pre codeblock"><code>regions: [
+    {
+        "id": "RegionOne",
+        "name": "RegionOne"
+    }]</code></pre></li>
+</ul>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Set the system variable <span class="keyword parmname">CLOUDDISCOVERYSERVICE_SETTINGS_FILE</span> to the
+location of the cloud discovery service configuration file.</span>
+<div class="itemgroup info">The file can be in any location on the system that hosts the cloud discovery service.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If the cloud discovery service and blueprint design server are installed on Red Hat Enterprise
+Linux™ version 7, provide the location of the cloud discovery
+service configuration file to the <code class="ph codeph">systemd</code> service.</span>
+<div class="itemgroup info"> To do this, add the location of the file to the <code class="ph codeph">systemd</code> service
+configuration file. In the <span class="keyword parmname">Service</span> section of the
+<span class="ph filepath">/usr/lib/systemd/system/ibm-cloud-discovery.service</span> file, add an
+<span class="keyword parmname">Environment</span> parameter. This parameter must set the
+<span class="keyword parmname">CLOUDDISCOVERYSERVICE_SETTINGS_FILE</span> system variable to the location of the
+cloud discovery service configuration file.</div>
+<div class="itemgroup stepxmp">For example, if the cloud discovery service configuration file is named
+<span class="ph filepath">/home/ec2-user/cloud_discovery_customizations.conf</span>, the
+<code class="ph codeph">systemd</code> service configuration file resembles the following
+code:<pre class="pre codeblock"><code>[Unit]
+Description=IBM Cloud Discovery Service
+After=syslog.target network.target
+
+[Service]
+<strong class="ph b">Environment="CLOUDDISCOVERYSERVICE_SETTINGS_FILE=/home/ec2-user/cloud_discovery_customizations.conf"</strong>
+Type=simple
+Restart=on-failure
+RestartSec=0
+ExecStart=/usr/bin/python -m clouddiscoveryservice.runserver
+
+[Install]
+WantedBy=network-online.target&nbsp;</code></pre></div>
+</li><li class="li step stepexpand" id="cds_configure_cds__cds_stop">
+<span class="ph cmd">Restart the cloud discovery service.</span>
+<div class="itemgroup info"> See <a class="xref" href="../../edt/topics/stop_patterns.html" title="To stop the blueprint designer and its associated services, you must stop the cloud discovery service, the blueprint design server, and the engine Heat services.">Stopping the blueprint designer, cloud discovery service, and engine</a> and <a class="xref" href="../../edt/topics/start_patterns.html" title="To start the blueprint designer and its associated services, you must start the cloud discovery service, the blueprint design server, and the engine Heat services.">Starting the blueprint designer, cloud discovery service, and engine</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If you have other cloud discovery services, copy the file to them and configure the system
+variables in the same way. Then, restart each other cloud discovery service.</span>
+</li></ol></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" id="cds_configure_engine">
+<h2 class="title topictitle2" id="ariaid-title3">Setting up regions and flavors on the engine</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b98f9182-15ad-4db5-9f9d-6938d7fc523d">Edit online</a></span></div>
+
+<div class="body taskbody"><div class="abstract"><span class="shortdesc">Now that you set up the regions and flavors on the cloud discovery service, you
+must also configure them on the engine.</span>The heat engine does not need a list of available
+image names to provision instances of those images.</div>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskcds_configure_engine__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the computer that hosts the Heat engine, make a backup copy of the
+<span class="ph filepath">ibm-cloud-discovery.conf</span> file.</span>
+<div class="itemgroup info">This file is in the <span class="ph filepath">/usr/lib/heat/ibm-cloud-ext/resources</span> folder. </div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph filepath">ibm-cloud-discovery.conf</span> file, add regions and flavors.</span>
+<div class="itemgroup info">This file provides information for the Heat engine about regions and flavors on the target
+clouds. <div class="note note note_note"><span class="note__title">Note:</span> The information in this file does not support wildcards such as asterisks
+(*).</div>Different clouds require different information:<ul class="ul">
+<li class="li">For Amazon EC2, Azure, and Google Cloud Platform, no information is needed in this file. You do
+not configure image names or families on the engine.</li>
+<li class="li">For OpenStack and OpenStack-based clouds, no information is needed in this file.</li>
+<li class="li">For VMware vRealize Automation Enterprise, list the flavors to use. See <a class="xref" href="../../edt/topics/cloud_connect_vra_flavors.html#cloud_connect_vra_flavors" title="Flavors represent the capacity of images, including memory, storage space, and processor capacity. You must configure a set of flavors for VMware vRealize Automation Enterprise.">Configuring VMware vRealize Automation image flavors</a>.</li>
+<li class="li">For vCenter, list the flavors to use. See <a class="xref" href="../../edt/topics/cloud_connect_vmware_flavors.html" title="Flavors represent the capacity of images, including memory, storage space, and processor capacity. You must configure a set of flavors for VMware vCenter.">Configuring VMware vCenter image flavors</a>. </li>
+<li class="li">For SoftLayer, list the flavors to use. See <a class="xref" href="../../edt/topics/cloud_connect_softlayer_flavors.html" title="Flavors represent the capacity of images, including memory, storage space, and processor capacity. You must configure a set of flavors for the SoftLayer cloud.">Configuring SoftLayer image flavors</a>.</li>
+<li class="li" id="cds_configure_engine__default_regions">Also, at the bottom of the file, a section lists the default regions for
+the system. These regions are used only when you are connected to a cloud that does not have regions
+defined.<pre class="pre codeblock"><code>regions: [
+    {
+        "id": "RegionOne",
+        "name": "RegionOne"
+    }]</code></pre></li>
+</ul></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Restart the engine.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If you are using more than one engine, copy the <span class="ph filepath">ibm-cloud-discovery.conf</span>
+to the other engines and restart them.</span>
+</li></ol></section>
+</div>
+</article>
+</article></main></body></html>

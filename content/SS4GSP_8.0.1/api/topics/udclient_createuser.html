@@ -1,0 +1,48 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Create a user"><meta name="DC.subject" content="udclient commands, createUser, udclient command, command-line commands"><meta name="keywords" content="udclient commands, createUser, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_createuser"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>createUser</title></head><body id="udclient_createuser"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">createUser</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a9216ae7-4664-4c25-bee9-8b9e5a3fd415">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Create a user</p>
+<section class="section"><h2 id="udclient_createuser__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  createUser [JSON file]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_createuser__title__3" class="title sectiontitle">Parameters</h2>
+None.</section>
+<section class="section"><h2 id="udclient_createuser__title__4" class="title sectiontitle">Template</h2>
+<div class="p">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "authenticationRealm": "Authentication realm ID",
+  "email": "Email address",
+  "name": "User name",
+  "password": "Password"
+}
+</code></pre></div></section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_createuser__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  createUser 
+  newUser.json</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_createuser__title__6" class="title sectiontitle">Example JSON request</h2><pre class="pre codeblock language-json"><code>{
+  "name": "jsmith",
+  "password": "password",
+  "actualName": "Jane Smith",
+  "email": "jsmith@example.org",
+  "authenticationRealm": "Internal Security"
+}</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_createuser__title__7" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "id": "2507eaaf-c98e-46ee-936d-bc538bee9dc4",
+  "name": "jsmith",
+  "actualName": "Jane Smith",
+  "displayName": "Jane Smith (jsmith)",
+  "email": "jsmith@example.org",
+  "deleted": false,
+  "deletedDate": 0,
+  "authenticationRealm": "20000000000000000000000000000001",
+  "isLockedOut": false,
+  "isDeletable": true
+}</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_user_create_put.html">Create a user</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The acquire-lock step allows acquisition of a process lock."><meta name="DC.subject" content="PAC, generic process step, acquire-lock"><meta name="keywords" content="PAC, generic process step, acquire-lock"><meta name="DC.relation" scheme="URI" content="../../reference/topics/pac_generic_process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="pac_step_acquire_lock"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>acquire-lock</title></head><body id="pac_step_acquire_lock"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">acquire-lock</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-679afe1c-0e2c-41eb-86f7-3a2b13656ed6">Edit online</a></span></div>
+
+
+
+<div class="body refbody"><p class="shortdesc">The <code class="ph codeph">acquire-lock</code> step allows acquisition of a process lock.</p>
+<section class="section"><h2 id="pac_step_acquire_lock__title__2" class="title sectiontitle">Format</h2>
+
+<pre class="pre codeblock"><code>acquire-lock step "foo" is
+    -- define the name of the lock; required
+    lock "${p:component.name}-${p:componentProcess.name}-${p:resource.name}"
+on success
+    start "bar"
+end
+</code></pre>
+</section>
+<section class="section"><h2 id="pac_step_acquire_lock__title__3" class="title sectiontitle">Properties</h2>
+
+<div class="p">
+<table class="table" id="pac_step_acquire_lock__table_hfr_wwl_knb"><caption><span class="table--title-label">Table 1. </span><span class="title">Acquire lock properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left" id="pac_step_acquire_lock__table_hfr_wwl_knb__entry__1">Field</th>
+<th class="entry align-left" id="pac_step_acquire_lock__table_hfr_wwl_knb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="pac_step_acquire_lock__table_hfr_wwl_knb__entry__1"><span class="ph uicontrol">Lock Name</span></td>
+<td class="entry align-left" headers="pac_step_acquire_lock__table_hfr_wwl_knb__entry__2"><span class="ph">A string value that identifies the lock.</span>
+<div class="note note note_note"><span class="note__title">Note:</span>  Lock Name character limit is 4000. </div></td>
+</tr>
+</tbody></table>
+</div>
+</section>
+<div class="example"><h2 id="pac_step_acquire_lock__title__5" class="title sectiontitle">Example</h2>
+
+<pre class="pre codeblock"><code>start is
+    start "A"
+end
+
+acquire-lock step "A" is
+    lock "lock-name"
+on success
+    finish
+end</code></pre>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/pac_generic_process_steps.html" title="Lists the various generic steps that can be used in a process.">Generic process steps</a></div></div></nav></article></main></body></html>

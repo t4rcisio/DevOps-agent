@@ -1,0 +1,23 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="IBM DevOps Deploy (Deploy) can use user impersonation when an agent must run a command for which it might not otherwise have permission, or when a specific user must be employed for a process."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_workflow.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/arch_appx_sudo_using.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/arch_appx_impersonation_windows.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/arch_appx_impersonation_zos.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="arch_appx_sudo"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>User impersonation for process steps</title></head><body id="arch_appx_sudo"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">User impersonation for process steps</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6497fcfe-c7e7-4392-86fe-5c26505db5aa">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc"><span class="ph">IBM DevOps Deploy (Deploy)</span> can use
+   <dfn class="term">user impersonation</dfn> when an agent must run a command for which it might not otherwise
+  have permission, or when a specific user must be employed for a process. </p>
+<p class="p">On UNIX™ and Linux™ systems, the <span class="keyword cmdname">su</span> and <span class="keyword cmdname">sudo</span> commands
+are used to impersonate users; on Windows™ <span class="ph">Deploy</span> provides
+a utility program to handle impersonation. You implement impersonation
+when you configure a component's plug-in process step or resource.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> 
+<p class="p">When using impersonation, the user running the agent needs to have read, write, and execute
+        access to the <span class="ph filepath"><var class="keyword varname">&lt;DEPLOY_AGENT_HOME&gt;</var>/var/work</span>
+        directory.</p>
+<p class="p"> The user starting the plugin as impersonating user needs to also have read, write, and execute
+        access to the <span class="ph filepath"><var class="keyword varname">&lt;DEPLOY_AGENT_HOME&gt;</var>/var/work</span>
+        directory.</p>
+</div>
+</div>
+
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/arch_appx_sudo_using.html">Impersonation on Linux and UNIX systems</a></strong><br>The <span class="keyword cmdname">su</span> command (as used by <span class="ph">IBM DevOps Deploy (Deploy)</span>) enables a user         to start a shell as another user (process steps can be considered individual         shells).</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/arch_appx_impersonation_windows.html">Impersonation on Windows systems</a></strong><br>For agents that are running on Windows, <span class="ph">IBM DevOps Deploy (Deploy)</span> provides             a program that handles impersonation.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/arch_appx_impersonation_zos.html">Impersonation on z/OS systems</a></strong><br>The <span class="keyword cmdname">su</span> command is used to impersonate users on agent computers that are running <span class="keyword">IBM® z/OS®</span>.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a></div></div></nav></article></main></body></html>

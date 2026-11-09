@@ -1,0 +1,151 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="IBM DevOps Deploy (Deploy) provides several ways to refer to properties."><meta name="DC.relation" scheme="URI" content="../../user/topics/ud_properties_overview.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="reference_shs_glx_xl"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Referring to properties</title></head><body id="reference_shs_glx_xl"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Referring to properties</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-367e8396-5de0-4d69-80c1-84ff2bfa13b6">Edit online</a></span></div>
+
+<div class="body refbody"><p class="shortdesc"><span class="ph">IBM DevOps Deploy (Deploy)</span>
+    provides several ways to refer to properties.</p>
+<section class="section"><h2 id="reference_shs_glx_xl__title__2" class="title sectiontitle">Referring to properties</h2><div class="p">Normally, properties can be referred to without
+        scope; but some properties, such as stepoutput properties, are referred to by scope. The
+        scope is the type of artifact that contains the property, such as the environment or
+        component. You refer to a property by scope this
+          way:<pre class="pre codeblock"><code>${p:<var class="keyword varname">scope</var>/<var class="keyword varname">propertyName</var>}</code></pre><div class="draft-comment" translate="no" style="background-color: #99FF99; border: 1pt black solid;"><strong>Draft comment: </strong><br>Why
+          would customers refer to properties by scope or without scope? When?
+          Where?</div>You refer to a property without scope this way:
+        <pre class="pre codeblock"><code>${p:<var class="keyword varname">propertyName</var>}</code></pre> For example, if you create an
+        environment variable that is named <kbd class="ph userinput">UAT</kbd>, you can refer to it this
+        way:<pre class="pre codeblock"><code>${p:environment/UAT}</code></pre></div> You can refer to the same environment
+      variable without scope this way:<pre class="pre codeblock"><code>${p:UAT}</code></pre>In the same way, you can refer
+      to many types of properties, such as application properties, system properties, and resource
+        properties.<div class="note warning note_warning"><span class="note__title">Warning:</span> In some cases, you can refer to a property without the
+          <code class="ph codeph">p:</code> prefix, such as in the code <code class="ph codeph">${myProperty}</code>. This
+        method for referring to properties is deprecated and should not be used. Referring to
+        properties in this way can conflict with shell script variables or other
+        values.</div><div class="p">Use the <code class="ph codeph">?</code> syntax if you are not sure about a property
+        name:<pre class="pre codeblock"><code>${p?:propertyName}</code></pre>This syntax returns a blank if the property is
+        not found, and avoids the undefined property error.</div></section>
+<section class="section"><h2 id="reference_shs_glx_xl__title__3" class="title sectiontitle">Properties in application processes and component
+processes</h2><p class="p">When you create or edit process steps for applications
+and components, you can use the autocomplete feature to determine
+which properties are available in a particular context. When you are
+editing an input field for a process step, if you type <kbd class="ph userinput">${p:</kbd>,
+a list of the available property scopes is displayed. Select a scope
+from the list. The list of all available properties in that scope
+is then displayed. Select the property to use from the list.</p></section>
+<section class="section"><h2 id="reference_shs_glx_xl__title__4" class="title sectiontitle">Secure properties</h2><p class="p">When you create a property, you can specify whether it is secure. Secure properties are stored in
+        encrypted form. Secure properties are encrypted with an Advanced Encryption Standard (AES)
+        algorithm and a 128-bit key. Secure properties are displayed in obscured form in the user
+        interface.</p><p class="p">If you create a custom plug-in that uses
+secure properties, the property value is displayed in obscured form
+in the user interface. For example, if your plug-in prints the property
+value to standard output and you examine the standard output in the
+user interface, the property value is displayed in obscured form.</p><p class="p">If
+your custom plug-in writes the property value to a file, then the
+property value is not obscured.</p>
+<div class="p">
+<div class="note note note_note"><span class="note__title">Note:</span> Use strong and complex values for secure properties. Because the secure property value is
+obscured in the output log, any other text that matches the secure property value is also
+obscured.</div>
+</div></section>
+<section class="section"><h2 id="reference_shs_glx_xl__title__5" class="title sectiontitle">Property order of precedence</h2>  <p class="p">If a property
+is defined in multiple places, its value is determined by the <dfn class="term">property
+order of precedence</dfn>. The following list defines the order of
+precedence from highest to lowest:</p> <table class="simpletable frame-none"><colgroup><col style="width:100%"></colgroup><tbody><tr class="strow">
+<td class="stentry">Process</td>
+</tr><tr class="strow">
+<td class="stentry">Component version</td>
+</tr><tr class="strow">
+<td class="stentry">Resource</td>
+</tr><tr class="strow">
+<td class="stentry">Agent</td>
+</tr><tr class="strow">
+<td class="stentry">Environment</td>
+</tr><tr class="strow">
+<td class="stentry">Component</td>
+</tr><tr class="strow">
+<td class="stentry">Application</td>
+</tr><tr class="strow">
+<td class="stentry">System</td>
+</tr></tbody></table> <p class="p">If you have an environment property that is named <code class="ph codeph">${p:environment/db.hostname}</code> and
+a resource property with the same name, you can refer to the resource
+property by using <code class="ph codeph">${p:db.hostname}</code> or <code class="ph codeph">${p:resource/db.hostname}</code>.
+Because the resource property is higher on the order of precedence
+than the environment property, in this case you must refer to the
+environment property by using the scoped format: <code class="ph codeph">${p:environment/db.hostname}</code>.</p> </section>
+<table class="table" id="reference_shs_glx_xl__table_whg_n35_pgb"><caption></caption><colgroup><col></colgroup><tbody class="tbody">
+<tr class="row">
+<td class="entry"><strong class="ph b">Example: Overriding server locations</strong> Consider this example: Initially you have one
+Tomcat server. To store the location of that server, you create an application property with the
+name <code class="ph codeph">Tomcat.server.url</code> and the location of that server. Your environments refer to
+that property to know where the Tomcat server is. Then, suppose that you add a second Tomcat server.
+This Tomcat server is intended for use only by specific environments. So on those specific
+environments, you create an environment property with the same name
+<code class="ph codeph">Tomcat.server.url</code> and the location of the second server. Now the environment has
+two properties with the same name: one system property and one environment property. The order of
+precedence determines which property value is used. Environment properties come before system
+properties in the order of precedence. Therefore, the environment uses the value of the environment
+property instead of the system property. In this way, you can use system properties to set defaults
+and then you can override those properties in specific contexts.</td>
+</tr>
+</tbody></table>
+<table class="table" id="reference_shs_glx_xl__table_lhp_rt5_pgb"><caption></caption><colgroup><col></colgroup><tbody class="tbody">
+<tr class="row">
+<td class="entry"><strong class="ph b">Example: Defining properties in a step</strong><p class="p">Consider a process that defines properties in
+a step.</p><p class="p">In this example, create a component process with a <span class="ph uicontrol">Replace
+Tokens</span> step. Edit the step to reference a property list, using the <span class="ph uicontrol">Property
+List</span> field. When the process runs, the normal order of precedence is not used. Instead,
+the order of properties in the property list is used to replace the tokens.</p></td>
+</tr>
+</tbody></table>
+<table class="table" id="reference_shs_glx_xl__table_alj_lgs_4nb"><caption></caption><colgroup><col></colgroup><tbody class="tbody">
+<tr class="row">
+<td class="entry"><strong class="ph b">Example: Component Environment Properties Override Environment Properties</strong><p class="p">In current
+precedence model, the environment properties overrides component environment properties with the
+same name. If there are a large number of components, larger environments, or a combination of the
+both, this precedence model will require several edits on multiple resources. To reduce this effort,
+you can make component environment property override environment properties.</p><p class="p">In this example,
+name the component environment property <code class="ph codeph">${p:propName}</code> as opposed to
+<code class="ph codeph">${p:environment/propName}</code>. Enable the <span class="ph uicontrol">Component Environment Properties
+Override Environment Properties</span> settings from the Legacy Configuration Options in the
+System Settings page. When the process runs, the order of precedence takes place as: Component &gt;
+Component Environment Properties &gt; Environment.</p></td>
+</tr>
+</tbody></table>
+<section class="section"><h2 id="reference_shs_glx_xl__title__6" class="title sectiontitle">Setting multiple component properties by environment</h2>  <p class="p">When
+components share a property, you can save time by setting the property
+value on the environment instead of setting it on every component.
+To use this feature:</p> <ol class="ol">
+<li class="li"> Click <span class="ph menucascade"><span class="ph uicontrol">Components</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected component</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Environment Property
+Definitions</span></span>. </li>
+<li class="li">On the <span class="keyword wintitle">Environment Property Definitions</span> page,
+define the property.</li>
+<li class="li">Repeat the process for each effected component.</li>
+<li class="li">On the environment that uses the components, click <span class="ph menucascade"><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Environment Properties</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Set a Single Value</span></span>. </li>
+<li class="li">Set the property value.</li>
+</ol> </section>
+<section class="section"><h2 id="reference_shs_glx_xl__title__7" class="title sectiontitle">Component version properties</h2>  <p class="p">Properties
+can be defined for component versions. Each version can have a unique
+property value. To use this feature:</p> <ol class="ol">
+<li class="li"> Click <span class="ph menucascade"><span class="ph uicontrol">Components</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected component</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Version Property Definitions</span></span>. </li>
+<li class="li">On the <span class="keyword wintitle">Version Property Definitions</span> page,
+define the property. By default, this value is applied to every version
+that is created for this component.</li>
+<li class="li">To override a component version property with a unique value,
+click <span class="ph menucascade"><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Version
+Properties</span></span> for the version. </li>
+<li class="li">Set the property value.</li>
+</ol> </section>
+<section class="section"><h2 id="reference_shs_glx_xl__title__8" class="title sectiontitle">Using the ? wildcard in property references</h2>  <div class="p">The
+question mark character, <code class="ph codeph">?</code>, can be used to reference
+properties. The syntax is:<pre class="pre codeblock"><code>${p?:propertyName}</code></pre></div> <div class="p">For
+example:<pre class="pre codeblock"><code>${p?:agent/wsadmin.path}</code></pre>returns the
+value of the property if it exists, otherwise it returns an empty
+string.</div> </section>
+<section class="section"><h2 id="reference_shs_glx_xl__title__9" class="title sectiontitle">Escaped characters</h2>  <div class="p"><span class="ph">Deploy</span> escapes the
+        following characters:<pre class="pre codeblock"><code>\
+=
+,</code></pre></div> <p class="p">You must replace the character <code class="ph codeph">\</code> with <code class="ph codeph"><strong class="ph b">\\</strong></code>, character
+          <code class="ph codeph">=</code> with <code class="ph codeph"><strong class="ph b">\=</strong></code>, and character <code class="ph codeph">,</code> with
+            <code class="ph codeph"><strong class="ph b">\,</strong></code>.</p> </section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/ud_properties_overview.html" title="Properties are variables that store information about many different elements, including components, environments, processes, and applications. You can also set global properties for the system.">Properties</a></div></div></nav></article></main></body></html>

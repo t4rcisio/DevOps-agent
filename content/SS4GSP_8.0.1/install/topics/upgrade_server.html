@@ -1,0 +1,99 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To upgrade the server, stop the server, and run the new installation program."><meta name="DC.relation" scheme="URI" content="../../install/topics/upgradeInstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="upgrade_server_int"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Upgrading the server in interactive mode</title></head><body id="upgrade_server_int"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Upgrading the server in interactive mode</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3675b1c0-3dce-469e-8cb6-e8457ccb456d">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To upgrade the server, stop the server, and run the new installation program. </p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupgrade_server_int__context__1">About this task</h2></div>
+            <div class="note note note_note"><span class="note__title">Note:</span> During the upgrade , the contents of the appdata/patches directory (including all
+                .jar files) will be appended with <span class="ph filepath">.off</span>, preventing the existing
+                test fixes from being loaded once the server is started post-installation. All UI
+                test fixes applied to the Tomcat directory will be wiped by the upgrade and will not
+                be recoverable.<p class="p">If a text fix received for a reported defect is not fixed in the
+                    upgraded version, you may need to open a Support Case to request a new
+                    build.</p></div>
+        </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupgrade_server_int__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" id="upgrade_server_int__download">
+                <span class="ph cmd">Download and extract the installation files for <span class="ph">IBM DevOps Deploy (Deploy)</span>.</span>
+                <div class="itemgroup info">
+                    <p class="p">These files are available for download from the <a class="xref" href="https://www.ibm.com/software/passportadvantage/pao_customer.html" target="_blank">IBM®
+                            Passport Advantage®
+                            website</a>. </p>
+                </div>
+            </li><li class="li step stepexpand" id="upgrade_server_int__cancel">
+        <span class="ph cmd">Ensure that no application and generic processes are running.</span>
+        <div class="itemgroup info">Open the <span class="ph uicontrol">Dashboard</span> and confirm that no processes are running. If
+            processes are running, you can wait for them to complete or by clicking
+            <span class="ph uicontrol">Cancel</span> in the same row as each process, cancel them.
+            You can use the Message of the Day feature (<span class="ph menucascade"><span class="ph uicontrol">Settings &gt; System &gt; General Settings</span></span>) to notify users of the planned upgrade, and request that they do
+            not start new processes. </div>
+    </li><li class="li step stepexpand">
+<span class="ph cmd">Stop the server.</span>
+<div class="itemgroup info">
+<div class="note warning note_warning"><span class="note__title">Warning:</span> If you are upgrading a high-availability installation, stop all of the servers.
+If any servers are accessing the database when the upgrade happens, the upgrade will cause errors.
+See <a class="xref" href="../../admin/topics/ha_upgrading.html" title="All servers that are configured for the HA feature must be on the same version. Thus, all servers must be upgraded at the same time.">Upgrading high-availability installations</a>.</div>
+</div>
+</li><li class="li step stepexpand" id="upgrade_server_int__ensure_stopped">
+<span class="ph cmd">Ensure that the server is stopped:</span>
+<ol type="a" class="ol substeps" id="upgrade_server_int__ensure_stopped_substeps">
+<li class="li substep substepexpand">
+                        <span class="ph cmd">Check that there is no <span class="ph filepath">server.pid</span> file in the
+                                    <span class="ph filepath"><var class="keyword varname">server_install</var>/var</span>
+                            folder. </span>
+                    </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Check for running system processes.</span>
+                        <div class="itemgroup info">On Linux™, you can use the
+                                <span class="keyword cmdname">netstat</span> or <span class="keyword cmdname">ps</span> commands. For
+                            example, if the server is running on port 8443, use the command
+                                <code class="ph codeph">netstat -nap | grep 8443</code>. You can also run
+                                <code class="ph codeph">ps -ef | grep server</code> and look for the server system
+                            process in the results.</div>
+</li>
+<li class="li substep substepexpand">
+                        <span class="ph cmd">Stop any running server process.</span>
+                        <div class="itemgroup info" id="upgrade_server_int__ensure_stopped_info">If you try to upgrade with a running old server process, you get an
+                            error that says <samp class="ph systemoutput sysout">A previously installed version of Deploy
+                                is running. Please shutdown the running Deploy and start the
+                                installation again.</samp> .</div>
+                    </li>
+</ol>
+</li><li class="li step stepexpand" id="upgrade_server_int__backup">
+                <span class="ph cmd">Back up the database and file system.</span>
+                <div class="itemgroup info">See <a class="xref" href="backup_recover.html" title="You can back up and recover the contents of your IBM DevOps Deploy (Deploy) installation.">Backup and recover</a>.</div>
+            </li><li class="li step stepexpand" id="upgrade_server_int__java_8">
+                <span class="ph cmd">Upgrade the version of Java on the server to version 11 or later.</span>
+                <div class="itemgroup info">See <a class="xref" href="../../user/topics/jre_change.html" title="You can change the JRE of active servers by editing their configuration files.">Changing or updating the JRE of servers</a>.</div>
+            </li><li class="li step stepexpand">
+<span class="ph cmd">From the command line, run the server installer program. </span>
+<ul class="ul choices">
+<li class="li choice">On Windows™, run the
+<span class="ph filepath">install-server.bat</span> file.</li>
+<li class="li choice">On Linux, run
+<span class="ph filepath">./install-server.sh</span>.</li>
+</ul>
+<div class="itemgroup info">Depending on your system settings, you might need to run this file as an administrator.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Read the license agreements for the software package. Press Enter to show one page at a time,
+or press F and then press Enter to show the entire license at once.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If you agree to the terms of all of the license agreements, press Y and then press Enter.</span>
+</li><li class="li step stepexpand">
+                <span class="ph cmd">At the prompt that says <span class="ph uicontrol">Enter the directory where the DevOps Deploy
+                        server should be installed.</span>, specify the folder of the existing
+                    installation and press Enter.</span>
+            </li><li class="li step stepexpand">
+<span class="ph cmd">At the prompt that says <span class="ph uicontrol">A previous version exists in the specified directory. Do you
+want to upgrade the currently installed version?</span> press Y and then press Enter.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Verify that the server is stopped and then press Enter to start the upgrade process.</span>
+</li><li class="li step stepexpand">
+                <span class="ph cmd">Start the server and verify that the server has been upgraded.</span>
+                If you get the error <code class="ph codeph">Shutdown file is present! Is the server running?</code>, check that you are using Java 11. If so, remove
+                    the <code class="ph codeph">-Djava.endorsed.dirs=&lt;PATH&gt;</code> from the JAVA_OPTS variable
+                    in the set_env file. 
+            </li></ol></section>
+        <section class="section postreq" id="upgrade_server_int__postreq_fbf_nw5_zfc"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupgrade_server_int__postreq_fbf_nw5_zfc">What to do next</h2></div>You must perform the post-upgrade tasks. See <a class="xref" href="post_upgrade_tasks.html" title="After you upgrade the Deploy server, you must review all post-upgrade tasks and perform them as required.">Post-upgrade tasks</a>.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/upgradeInstall.html" title="You can upgrade the IBM DevOps Deploy (Deploy) server to incorporate to a later version.">Upgrading the server</a></div></div></nav></article></main></body></html>

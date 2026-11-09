@@ -1,0 +1,95 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To deploy environments to non-OpenStack clouds, such as Amazon Web Services, SoftLayer, VMware, Google Cloud, and Microsoft Azure, you install the blueprint design server and Heat engine through IBM DevOps Deploy (Deploy). You can install the engine in interactive mode or in silent mode."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="install_engine_standalone"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Installing a standalone engine</title></head><body id="install_engine_standalone"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Installing a standalone engine</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-cfcc2c7d-0b0d-4d3d-85cc-9823700f7bcf">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">To deploy environments to non-OpenStack clouds, such as Amazon Web Services, SoftLayer,
+VMware, Google Cloud, and Microsoft Azure, you install the blueprint design server and Heat engine
+through <span class="ph">IBM DevOps Deploy (Deploy)</span>. You can install the engine in interactive mode or in silent
+mode.</p>
+<section class="section prereq" id="install_engine_standalone__prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskinstall_engine_standalone__prereq">Before you begin</h2></div>
+<ul class="ul">
+<li class="li">Do not install an engine with these steps to connect to an OpenStack or OpenStack-based cloud.
+Instead, to extend an existing engine on the OpenStack-based cloud, see <a class="xref" href="extending_an_engine_for_openstack.html" title="To connect the blueprint design server to an OpenStack-based cloud, extend the Heat orchestration engine that is associated with the cloud. By extending the engine, you add custom types to it so that you can use it with the blueprint design server.">Extending an existing OpenStack engine</a>.</li>
+<li class="li">The <span class="keyword cmdname">upgrade-standalone-ucd-heat-engine.sh</span> script can only be used with the
+provided heat engine that comes with <span class="ph">Deploy</span> blueprint designer. It installs both the <span class="ph">Deploy</span> plug-in and the <samp class="ph systemoutput sysout">ibm-cloud-ext</samp> package.</li>
+</ul>
+<p class="p"> Before you install the engine, ensure that you do the following steps:</p>
+<ol class="ol">
+<li class="li">You must install the engine on a host that runs a specific version of Red Hat
+Enterprise Linux™ (RHEL).<ul class="ul">
+<li class="li">The <span class="ph">Deploy</span> installer
+                            can install engines for the blueprint design server only on RHEL version
+                            7. No other operating system is supported, including RHEL version 6 or
+                            earlier. </li>
+</ul><span class="ph">To use a different operating system, you can install an OpenStack Heat engine manually on
+that operating system and then extend that engine for use with the blueprint design server; see
+<a class="xref" href="extending_an_engine_for_openstack.html" title="To connect the blueprint design server to an OpenStack-based cloud, extend the Heat orchestration engine that is associated with the cloud. By extending the engine, you add custom types to it so that you can use it with the blueprint design server.">Extending an existing OpenStack engine</a>.</span></li>
+<li class="li">The engine installer installs only a specific version of the OpenStack Heat
+orchestration engine.<ul class="ul">
+<li class="li">The installer installs only OpenStack Kilo engines.</li>
+</ul><span class="ph">To use a different version of the OpenStack Heat orchestration engine, you can extend an
+existing engine of that version; see <a class="xref" href="extending_an_engine_for_openstack.html" title="To connect the blueprint design server to an OpenStack-based cloud, extend the Heat orchestration engine that is associated with the cloud. By extending the engine, you add custom types to it so that you can use it with the blueprint design server.">Extending an existing OpenStack engine</a>. You can
+extend OpenStack <span class="ph">Icehouse, Juno, Kilo, Liberty, and Mitaka</span> engines for use with the
+blueprint design server.</span></li>
+<li class="li"><span class="ph">The operating system must have the most recent package updates.
+For more information, see <a class="xref" href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/part-Installing_and_Managing_Software.html" target="_blank">Installing and Managing Software</a> in the Red Hat Enterprise Linux customer portal.</span></li>
+<li class="li">Ensure that there is no limit on the maximum memory size and virtual memory size.
+For example, on most Linux systems, you can run the
+<code class="ph codeph">ulimit -m</code> and <code class="ph codeph">ulimit -v</code> commands and ensure that both return the
+value <code class="ph codeph">unlimited</code>. To find out how to remove the limit on the maximum memory size and
+virtual memory size, see the documentation for the operating system.</li>
+<li class="li" id="install_engine_standalone__root_required">Root access is required for installation.</li>
+<li class="li">The engine installs a MariaDB database automatically. You must install the engine on a system on
+which MariaDB is not installed. If the database is already installed on the system, the engine
+installation fails.</li>
+<li class="li" id="install_engine_standalone__package_manager">The operating system must be configured with required packages and
+dependencies before you install the engine. The system might need network access to install these
+packages. Make sure that the system is connected to a package manager, such as a Yum server.</li>
+<li class="li" id="install_engine_standalone__sysreqs">Make sure that your system meets the system requirements. See <a class="xref" href="sysRequire.html" title="The IBM DevOps Deploy (Deploy) server runs on Windows and UNIX systems. Following some guidelines can improve the performance of the server and agents.">System requirements and performance considerations</a>.</li>
+<li class="li">Make sure that your networks and firewalls allow communication on the
+required ports. See <a class="xref" href="../../install/topics/agent_firewalls.html" title="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication.">Firewall and communication configuration</a>.</li>
+<li class="li">Install the following packages:<ul class="ul">
+<li class="li"><code class="ph codeph">gcc</code></li>
+<li class="li"><code class="ph codeph">genisoimage</code></li>
+<li class="li"><code class="ph codeph">libffi-devel</code></li>
+<li class="li"><code class="ph codeph">python-devel</code></li>
+<li class="li"><code class="ph codeph">openssl-devel</code></li>
+</ul>For example, the command to install these packages might resemble the following
+code:<pre class="pre codeblock"><code>yum install -y gcc genisoimage libffi-devel python-devel openssl-devel</code></pre></li>
+<li class="li" id="install_engine_standalone__opt_repos">Enable the optional "rhel-7-server-optional-rpms" repository.<ul class="ul">
+<li class="li">On RHEL systems that use the Red Hat Network subscription-based package manager, use the
+following
+command:<pre class="pre codeblock"><code>subscription-manager repos --enable=rhel-7-server-optional-rpms</code></pre></li>
+<li class="li">On virtual machines that are hosted on Amazon Web Services, run the following command:<ul class="ul">
+<li class="li">For RHEL 7.6 and earlier:
+<pre class="pre codeblock"><code>yum-config-manager --enable rhui-REGION-rhel-server-optional</code></pre></li>
+<li class="li">For RHEL 7.7 and later:
+<pre class="pre codeblock"><code>yum-config-manager --enable rhui-rhel-7-server-rhui-optional-rpms</code></pre></li>
+</ul></li>
+</ul></li>
+<li class="li" id="install_engine_standalone__akonadi_check">Determine whether the <code class="ph codeph">akonadi</code> package is installed on the
+system. <pre class="pre codeblock"><code>rpm -ql akonadi</code></pre></li>
+<li class="li" id="install_engine_standalone__akonadi">If the <code class="ph codeph">akonadi</code> package is installed, remove
+it:<pre class="pre codeblock"><code>yum remove -y akonadi</code></pre></li>
+<li class="li" id="install_engine_standalone__qpid_status">Determine whether the program <code class="ph codeph">qpid</code> is installed on the system. <ul class="ul">
+<li class="li">On RHEL version 7, run the following
+command:<pre class="pre codeblock"><code>systemctl status qpidd.service</code></pre></li>
+</ul></li>
+<li class="li" id="install_engine_standalone__qpid_stop">If the program <code class="ph codeph">qpid</code> is running on the system, stop its service.<ul class="ul">
+<li class="li">On RHEL version 7, run the following
+command:<pre class="pre codeblock"><code>systemctl stop qpidd.service</code></pre></li>
+</ul></li>
+<li class="li">Gather the URL and account information for the OpenStack Keystone service, if available.<span class="ph"> Rather than having its own list of users, the blueprint design server
+imports accounts from authentication realms, including OpenStack Keystone services and LDAP
+servers.</span> This
+Keystone service is required regardless of the type of cloud you are using. If you do not have a
+Keystone server, you can install one that uses Identity API v3 during the engine installation.</li>
+</ol>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskinstall_engine_standalone__context__1">About this task</h2></div>
+<p class="p">Choose to install the engine in interactive mode or in silent mode:</p>
+</section>
+</div>
+</article></main></body></html>

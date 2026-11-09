@@ -1,0 +1,115 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="In the process editor you organize the steps in a process, specify their properties, and connect them to each other."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_workflow.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_workflow_edit"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Editing processes</title></head><body id="comp_workflow_edit"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Editing processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f86014f4-5333-4c02-829a-f6c99fc26751">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">In the process editor you organize the steps in a process,
+specify their properties, and connect them to each other.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_workflow_edit__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the component process in the process editor.</span>
+<ul class="ul choices">
+<li class="li choice">To open a component process, click <span class="ph uicontrol">Components</span>, click the component,
+click the <span class="ph uicontrol">Processes</span> tab for the component, and click the process.</li>
+<li class="li choice">To open an application process, click <span class="ph uicontrol">Applications</span>, click the
+<span class="ph uicontrol">Processes</span> tab for the application, and click the process.</li>
+<li class="li choice">To open a generic process, click <span class="ph uicontrol">Processes</span>, and click the
+process.</li>
+</ul>
+<div class="itemgroup stepresult">The process editor opens. The editor is similar for each type of process, but the list
+                              of available steps is different for each type of process.<br><img class="image" src="../images/process_editor.gif" height="421" width="700" alt="The process editor, showing the editing area and the list of available steps"><br><p class="p" data-hd-otherprops="ibm">When the <span class="keyword wintitle">Process
+                                          Design</span> pane opens, the
+                                          <span class="keyword wintitle">Design</span> view is displayed. Processes
+                                    are assembled with the <span class="keyword wintitle">Design</span> view.
+                                    Available steps are listed at the left of the window. <span class="ph">IBM DevOps Deploy (Deploy)</span> provides several utility steps and plug-ins. More plug-ins
+                                    and documentation for those plug-ins are available in the <a class="xref" href="https://developer.ibm.com/urbancode/plugins/ibm-urbancode-deploy" target="_blank">Deploy plug-ins</a> site.</p><div class="p">In
+                                    addition to the process editor, the following two pages provide
+                                    information about the process:<ul class="ul">
+                                          <li class="li">The <span class="ph uicontrol">Configuration</span> page shows
+                                                the properties and settings for the process.</li>
+                                          <li class="li">The <span class="ph uicontrol">Changes</span> page shows a record
+                                                of every change to the process, addition or deletion
+                                                of a property, and save or deletion of the
+                                                process.</li>
+                                    </ul></div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To add a step:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">From the list of steps at the left of the window, drag the step to use onto the design space. </span>
+<div class="itemgroup stepresult"><br><img class="image" src="../images/steptool.gif" height="415" width="655" alt="Adding a step by dragging it from the list of steps to the design space"><br>To open the <span class="keyword wintitle">Edit Properties</span>
+                                          window, click the edit properties icon <img class="image" src="../images/edit_proc_step.gif" alt="The edit properties icon">. When you drag the first property on the design
+                                          pane, you can place the step anywhere on the design space.
+                                          Connection links are automatically created from the Start
+                                          node to the step and from the step to the Finish node.
+                                          When you add more steps, drag them and position them so
+                                          that they highlight the connection link between stesps so
+                                          that the step is inserted and connection links are
+                                          automatically created between the steps. Steps can be
+                                          dragged and positioned at any time. However, you must
+                                          delete the connection links from the step by clicking the
+                                          delete connection icon <img class="image" src="../images/edit_proc_connex.gif" alt="delete connection icon">, and then reconnect the moved steps.<br><img class="image" src="../images/comp_workflow_edit_a.gif" height="469" width="300" alt="A typical Edit Properties window, showing the properties for the step"><br>Configuration dialogs boxes are tailored to the
+                                          selected step. Only parameters that are associated with
+                                          the step type are displayed.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Specify the properties for the step.</span>
+<div class="itemgroup info">Each step has different properties.  See <a class="xref" href="../../reference/topics/plugin_ch.html" title="The Deploy plug-ins provide tools for creating component processes and integrations. IBM provides plug-ins for several common deployment processes, and others are available to integrate with a wide variety of tools, such as middleware tools, databases, and servers.">Plug-ins</a> for information
+about configuring specific steps.</div>
+</li>
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd">To add or change the post-processing script, select a script in the <span class="ph uicontrol">Post Processing
+Script</span> list.</span>
+<div class="itemgroup info">For more information, see <a class="xref" href="comp_postProcess.html" title="Post-processing scripts run after a step finishes. Typically, post-processing scripts ensure that expected results occurred.">Post-processing scripts</a>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">After you configure the step properties, save the step by clicking
+<span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">The step is in the design space and is connected to other steps. If you change your
+mind, click <span class="ph uicontrol">Cancel</span> to remove the step from the design space. </div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Verify that the step connections create the required process flow:</span>
+<div class="itemgroup info">Connections control the process flow. The originating step runs before the target step. If you
+move steps or do not highlight a connection link when you place a step, creating a connection
+between steps is a simple process. You drag a connection from the originating step to the target
+step. Connections are typically formed automatically. However when you create them manually,
+connections are formed one at a time between two steps, the originating step and the target step. To
+create connections manually:</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Hover the cursor over the step to use as the origin of the connection.</span>
+<div class="itemgroup stepresult">The connection tool is displayed.<br><img class="image" src="../images/connectiontool.gif" alt="The connection tool"><br></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Drag the connection tool over the target step. </span>
+<div class="itemgroup stepresult">The step beneath the connection tool is highlighted.<br><img class="image" src="../images/proposedlink.gif" alt="Dragging a connection to a step"><br></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Release the connection tool over the target step to complete the connection. </span>
+</li>
+</ol>
+<div class="itemgroup stepresult">
+<br><img class="image" src="../images/conditionalflag.gif" alt="The connection between two steps and the conditional flag for the connection"><br>
+<p class="p">Each connection has a connection delete tool, <dfn class="term">conditional flag</dfn>, and might have other
+tools depending on the originating step. Remove a connection by clicking the delete tool.</p>
+</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Add more steps to the process, connect them, and arrange
+them in the process editor.</span><div class="itemgroup info">You can drag steps to move them around the process. In this way, you can arrange the steps in
+a meaningful arrangement on the process editor canvas.<div class="note tip note_tip"><span class="note__title">Tip:</span> To move more than one step at
+a time, hold the Ctrl or Command key and click two or more steps to select them. Then, drag the
+steps to a different place in the editor.</div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Verify that the flow of steps is correct.</span>
+<div class="itemgroup info">Each process starts with the Start step and continues until it reaches the Finish step.
+Therefore, the Start step must connect to the first step or steps to run. Similarly, the last steps
+must connect to the Finish step, or else the process does not finish correctly.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">When you are finished with your work on the process, click <span class="ph uicontrol">Save</span>. </span>
+<div class="itemgroup info">If comments are required, the <span class="keyword wintitle">Process Change Comment</span> window opens. Type a
+comment, and then click <span class="ph uicontrol">Save</span>. The server settings control whether comments
+are required. To learn more about system settings, see <a class="xref" href="settings_ch.html" title="After you install IBM DevOps Deploy (Deploy), you can modify the server configuration and configure more options.">Server settings and configuration</a>.</div>
+</li></ol></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a></div></div></nav></article></main></body></html>

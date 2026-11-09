@@ -1,0 +1,70 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="DC.relation" scheme="URI" content="../../user/topics/resources_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_runner_command_lines"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Agent executable command-line commands</title></head><body id="agent_runner_command_lines"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Agent executable command-line commands</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-eb827762-a7ac-4ad4-80b2-848998cf9af2">Edit online</a></span></div>
+    
+    <div class="body">
+        <p class="p">These are the command-lines that compact agent executable file accepts. The agent
+            executables are the UNIX script or the Windows executable file.</p>
+        <table class="table" id="agent_runner_command_lines__table_c2j_fqt_v5b"><caption></caption><colgroup><col style="width:127.5pt"><col style="width:409.5pt"></colgroup><thead class="thead">
+                    <tr class="row">
+                        <th class="entry" id="agent_runner_command_lines__table_c2j_fqt_v5b__entry__1"><strong class="ph b">Command</strong></th>
+                        <th class="entry" id="agent_runner_command_lines__table_c2j_fqt_v5b__entry__2"><strong class="ph b">Description</strong></th>
+                    </tr>
+                </thead><tbody class="tbody">
+                    <tr class="row">
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__1"><span class="keyword cmdname">run</span></td>
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__2">
+                            <p class="p">Runs the agent from the console.</p>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__1"><span class="keyword cmdname">start [&lt;pidfile&gt;]</span></td>
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__2">
+                            <p class="p">Runs the agent in the background.</p>
+                            <p class="p">UNIX: The <span class="keyword option">pidfile</span> argument is optional but is
+                                typically used when it runs from an init script. </p>
+                            <p class="p">Windows: The <span class="keyword option">pidfile</span> argument is not used.</p>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__1"><span class="keyword cmdname">stop</span></td>
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__2">
+                            <p class="p">Stops the agent. </p>
+                            <p class="p">It creates the "var/shutdown" file. The agent itself monitors for the
+                                existence of this file and terminates itself if it is detected. This
+                                means the user must have sufficient permission to write that
+                                file.</p>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__1">
+                            <p class="p"><span class="keyword cmdname">install-service</span></p>
+                            <p class="p"> </p>
+                        </td>
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__2">
+                            <p class="p">Windows-only command. This command installs the windows service. It
+                                must be run as an administrator with elevated privileges.</p>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__1"><span class="keyword cmdname">uninstall-service</span></td>
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__2">Windows-only command. This command uninstalls the windows service. It
+                            must be run as an administrator with elevated privileges.</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__1"><span class="keyword cmdname">start-service</span></td>
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__2">Windows-only command. This command starts the windows service. It
+                            must be run as an administrator with elevated privileges.</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__1"><span class="keyword cmdname">stop-service</span></td>
+                        <td class="entry" headers="agent_runner_command_lines__table_c2j_fqt_v5b__entry__2">Windows-only command. This command stops the windows service. It must
+                            be run as an administrator with elevated privileges. This command does
+                            not directly use the mechanism of the "stop" command. It requests the
+                            Windows service control manager (SCM) for the service to stop.</td>
+                    </tr>
+                </tbody></table>
+        <p class="p"> </p>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/resources_agents.html" title="An agent is a lightweight process that runs on a deployment-target host and communicates with the IBM DevOps Deploy (Deploy) server.">Agents</a></div></div></nav></article></main></body></html>

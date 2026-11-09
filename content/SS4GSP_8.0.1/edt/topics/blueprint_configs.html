@@ -1,0 +1,74 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="Configuration files are lists of properties and values. You can use configuration files to provision the same blueprint on multiple cloud systems."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueprint_configs"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Editing configuration files</title></head><body id="blueprint_configs"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Editing configuration files</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-4851d3ca-a814-49f1-ab41-2f8b00851fc2">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Configuration files are lists of properties and values. You can use configuration files
+to provision the same blueprint on multiple cloud systems.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_configs__prereq__1">Before you begin</h2></div>Create a blueprint. Configuration files apply only to blueprints that you create in the
+      blueprint designer, not blueprints that you create with the <span class="ph">IBM DevOps Deploy (Deploy)</span> server.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_configs__context__1">About this task</h2></div><p class="p">In most cases, you create a blueprint with a default set of properties. Then, you use
+one or more configuration files to customize provisioning for specific clouds or specific
+situations. Since blueprints use only the properties in the configuration file that apply to it, you
+can also use a configuration file with more than one blueprint.</p><span class="ph" id="blueprint_configs__configs_clouds">Configuration files are not necessary if you are deploying to OpenStack and OpenStack-based clouds.
+If you are deploying to any other supported cloud, you must use a configuration file.</span><p class="p">The
+editor for configuration files is similar to the editor for blueprint source code. You can specify
+properties in a configuration file and substitute those properties when you provision the
+environment. </p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_configs__steps__1">Procedure</h2></div><div class="li stepsection">Follow these steps to create a configuration file:</div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">In the blueprint editor, click <span class="ph uicontrol">New</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Add a New File</span> window, specify a name and description for the
+configuration file.</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If your workspace contains multiple repositories, select a project from
+the <span class="ph uicontrol">Repository</span> list.</span>
+<div class="itemgroup info"> If your workspace contains one repository, the <span class="ph uicontrol">Repository</span> list is not
+displayed.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Type</span> list, select the configuration file type.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>. </span>
+<div class="itemgroup stepresult">The new configuration file opens in the editor. By default, if you created a
+configuration file for a cloud other than OpenStack, the configuration file includes resource type
+mappings. These resource type mappings translate the OpenStack resource types in the blueprint to
+the appropriate resource types for the target cloud. For example, if you created a configuration
+file for SoftLayer® clouds, the file maps the OpenStack
+resource type <code class="ph codeph">OS::Nova::Server</code> to the SoftLayer resource type <code class="ph codeph">IBM::SoftLayer::Server</code>, as shown in the following
+configuration file:<br><img class="image" src="../images/blueprint_configs_b.gif" alt="A new configuration file for SoftLayer, showing the type mapping"><br></div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">To import properties from a blueprint, click <span class="ph uicontrol">Add</span>
+<img class="image" src="../images/icons/add.gif" alt="">, then select the blueprint, and then click <span class="ph uicontrol">OK</span>.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> You can import properties from more than one blueprint. In this case, the editor shows
+warnings on properties that exist in one blueprint but not in another. When you provision a
+blueprint, the blueprint uses only the properties in the configuration file that apply to
+it.</div>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the configuration file, specify the properties for the deployment on the target cloud.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_configs__result__1">Results</h2></div>Now you can use this configuration file when you provision the environment. You can create
+multiple configuration files to customize blueprints for different situations or clouds.</section>
+<section class="example"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_configs__example__1">Example</h2></div>
+<div class="p">For example, suppose that your cloud systems provide different virtual images. Start by creating
+virtual images from one of the clouds in a blueprint, or use referenced images to represent generic
+images. Then, externalize each of the properties in the virtual images. In the following figure, the
+flavor, image ID, and name of the virtual image are bound to properties that are named
+<code class="ph codeph">image_flavor</code>, <code class="ph codeph">image_ID</code>, and <code class="ph codeph">image_name</code>.<br><img class="image" src="../images/blueprint_configs_a.gif" alt="A blueprint in the editor that shows a virtual image with externalized properties"><br>The code for the blueprint shows the property names rather than literal values, as in the
+following example
+code:<pre class="pre codeblock"><code>virtual-image:
+  type: OS::Nova::Server
+  properties:
+    flavor: { get_param: image_flavor }
+    image: { get_param: image_ID }
+    name: { get_param: image_name }</code></pre></div>
+<div class="p">Then, create a different configuration file for each cloud, import these properties, and specify
+values for a specific cloud system, as in the following example of a configuration
+file.<pre class="pre codeblock"><code>parameters:
+  image_name: virtual-image
+  image_ID: aea5549c-892f-4c67-a3c9-9f494f1c7ead
+  image_flavor: m1.small</code></pre></div>
+</section>
+</div>
+</article></main></body></html>

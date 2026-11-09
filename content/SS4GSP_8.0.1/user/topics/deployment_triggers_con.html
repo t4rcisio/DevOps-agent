@@ -1,0 +1,55 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Starting with v7.1.0, deployment triggers replace the run process after a version is created feature."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_environment.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/deployment_triggers.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="deployment_triggers_con"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Deployment triggers</title></head><body id="deployment_triggers_con"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Deployment triggers</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-698a3d47-4ad9-4318-ba03-8b9a13253a16">Edit online</a></span></div>
+
+
+
+
+<div class="body conbody"><p class="shortdesc">Starting with v7.1.0, deployment triggers replace the run process after a version is
+        created feature. </p>
+<p class="p">Deployment Triggers are ways for environments to subscribe to certain components. A trigger
+            consists of a specified component, deployment process, and user. Whenever a component
+            finishes importing a version, the server will automatically execute all deployment
+            triggers relevant to that component and will run configured deployment processes against
+            the triggers’ environment, using the newly imported version as the deployment payload.
+            With deployment triggers, development environments can be configured to get the latest
+            build artifacts deployed as soon as they are received by the <span class="ph">IBM DevOps Deploy (Deploy)</span> server. </p>
+<p class="p"> When you create a deployment trigger, you have to specify a user who has the run deployment
+triggers permission, but you do not require that permission yourself. Run deployment triggers is a
+system level permission that governs whether the a user is allowed to run the process that is the
+trigger specifies</p>
+<p class="p">The user who runs the deployment trigger also must have all permissions that are required to run
+an application process. Like the run deployment triggers permission, these permissions are also
+asserted at process run time and not when the trigger is created.</p>
+<p class="p">The default audit view is as follows:</p>
+<ul class="ul">
+<li class="li">When the deployment trigger is created and who created it </li>
+<li class="li">When the deployment trigger is deleted and who deleted it</li>
+</ul>
+<p class="p"><img class="image" src="../images/audit_trail_dt.JPG" alt="Audit trail"><img class="image" src="../images/audit_dt.JPG" alt="Audit trail"></p>
+<p class="p"><strong class="ph b">Migration</strong></p>
+<p class="p">Database upgrades transfer existing deployment triggers to a new table and remove the current
+constraints, indexes, and columns from the component table.</p>
+<p class="p">The specified user for these rows is admin by default.</p>
+<p class="p"><strong class="ph b">Importing and exporting</strong></p>
+<p class="p">Applications and snapshots that are imported or exported retain information about their
+deployment triggers.</p>
+<p class="p">Importing application snapshots that include component versions do not activate deployment
+triggers.</p>
+<p class="p">Copying an environment retains information about deployment triggers.</p>
+<p class="p"><strong class="ph b">Approvals</strong></p>
+<div class="p">An application process that requires approvals is still kicked off when a deployment trigger runs
+            the process.<div class="note note note_note"><span class="note__title">Note:</span> When you update component versions on the command-line interface, a
+                deployment trigger runs when the import is finished. </div></div>
+<div class="p">Before the deployment trigger request submission succeeds submitted, these conditions must be met:<ul class="ul">
+<li class="li">The component must be mapped to the application when the deployment trigger submits the process
+request.</li>
+<li class="li">The application process and component must not be deleted. </li>
+<li class="li">The user who runs the deployment must have run deployment triggers permission when deployment
+trigger runs. </li>
+</ul><div class="note note note_note"><span class="note__title">Note:</span> If the user who runs a deployment trigger does not have the required role for a process,
+then the application process cannot start the deployment by using the deployment trigger.
+</div></div>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/deployment_triggers.html">Creating deployment triggers</a></strong><br> With the new deployment trigger feature, you can run an application process automatically on a specified environment after component versions have been added. Deployment Triggers also allow for user specification.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_environment.html" title="An environment is a user-defined collection of resources that hosts an application.">Application environments</a></div></div></nav></article></main></body></html>

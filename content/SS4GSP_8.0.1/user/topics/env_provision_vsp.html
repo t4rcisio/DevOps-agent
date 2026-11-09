@@ -1,0 +1,210 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can provision environments on a cloud system as part of creating an application environment on the IBM DevOps Deploy (Deploy) server."><meta name="DC.relation" scheme="URI" content="../../user/topics/integrat_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="env_provision_vsp"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Provisioning environments through the server (through virtual system patterns)</title></head><body id="env_provision_vsp"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Provisioning environments through the server (through virtual system patterns)</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-405b7844-5bb7-4b39-bc48-d1bdeb223659">Edit online</a></span></div>
+  
+  
+  <div class="body taskbody"><p class="shortdesc">You can provision environments on a cloud system as part of creating an application
+    environment on the <span class="ph">IBM DevOps Deploy (Deploy)</span> server.</p>
+    <section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskenv_provision_vsp__prereq__1">Before you begin</h2></div>
+      <p class="p">This method works for blueprints that were created on the server to provision environments
+        on virtual system pattern-based clouds.</p>
+      <ul class="ul">
+        <li class="li">Connect to a cloud system and create blueprints for that cloud. See <a class="xref" href="cloud_integrate_vsp_ov.html" title="The IBM DevOps Deploy (Deploy) server can use virtual system patterns from cloud systems such as IBM Cloud Orchestrator to create dynamic environments.">Connecting to clouds through DevOps Deploy</a>.</li>
+        <li class="li">Ensure that you have at least one base resource to associate with the new environment.
+          See <a class="xref" href="resources_ch.html" title="A resource is a logical deployment target that typically resolves to an agent and a user-defined construct that is based on the architectural model of IBM DevOps Deploy (Deploy).">Resources</a>.</li>
+      </ul>
+    </section>
+    
+    <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskenv_provision_vsp__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">Click <span class="ph uicontrol">Applications</span>, click your application's name, and click
+            <span class="ph uicontrol">Create Environment</span>.</span>
+        <div class="itemgroup stepresult">The <span class="keyword wintitle">Create Environment</span> dialog box opens.</div>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">Specify the environment name.</span>
+<div class="itemgroup info">The name is used as part of the deployment process and typically corresponds to the target
+environment.</div>
+<div class="itemgroup stepxmp"> If you deploy to an integration environment, you might name the environment
+<code class="ph codeph">SIT</code>.</div>
+<div class="itemgroup info">
+<div class="note restriction note_restriction" data-hd-otherprops="ibm"><span class="note__title">Restriction:</span> If you provision this environment to a cloud that uses
+            virtual system patterns, the environment name cannot contain asterisk (*), backslash
+            (\), or forward slash (/) characters.</div>
+</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+        <span class="ph cmd">Provide the following information:</span>
+        <ol type="a" class="ol substeps">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Specify a description.</span>
+          </li>
+          <li class="li substep substepexpand" data-hd-otherprops="ibm">
+            <span class="ph cmd">In the <span class="ph uicontrol">Blueprint</span> list, select the blueprint to use for the
+              environment.</span>
+            <div class="itemgroup info">Next to <span class="ph uicontrol">Base Resource</span> click <span class="ph uicontrol">Set</span>,
+              select an agent from the <span class="keyword wintitle">Select Resource</span> dialog box, and then
+              click <span class="ph uicontrol">OK</span>. This field appears only if you are using a blueprint
+              that is managed on the <span class="ph">IBM DevOps Deploy (Deploy)</span> server. </div>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Assign teams to the environment and set its security type. Click <span class="ph uicontrol">Add
+                Team</span>, select values from the <span class="ph uicontrol">Team</span> and
+                <span class="ph uicontrol">Type</span> lists, and click <span class="ph uicontrol">Add</span>.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Enable the <span class="ph uicontrol">Show Compliancy on Load</span> option to load the
+              environment's compliancy automatically on the application environment page.</span>
+            <div class="itemgroup info">If disabled, the <span class="ph uicontrol">Load Compliancy</span> option will still be
+              available that allows you to load the environment's compliancy on demand.</div>
+          </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">If you created the application from an application template, in the <span class="ph uicontrol">Environment
+Template</span> list, select the environment template to use for the environment.</span>
+<div class="itemgroup info">You can assign any security type to this environment.</div>
+</li>
+          <li class="li substep substepexpand" id="env_provision_vsp__d194e160">
+            <span class="ph cmd">To ensure that components cannot be deployed to the environment without first being
+              approved, specify the <span class="ph uicontrol">Deployment Approvals</span> information. If
+              specified, <span class="ph">Deploy</span> enforces an
+              approval process before the deployment can be deployed to the environment. Initial
+              deployments are typically done in uncontrolled environments. After the deployment
+              works as designed, you can configure an approval process as the application moves
+              along the development pipeline. If you are setting up more than one environment,
+              consider creating an approval process for at least one of them.</span>
+            <div class="itemgroup info">You can apply two types of approvals to an environment, that is, external and
+              manual approvals.   </div>
+            <div class="itemgroup info">
+              <ul class="ul" id="env_provision_vsp__d194e175">
+                <li class="li">Specify a <span class="ph uicontrol">Resource Type to Run External Approval</span>. You can
+                  select <span class="ph uicontrol">System Default</span> for the values specified in the
+                  system settings, an <span class="ph uicontrol">Agent Pool</span> to specify a group of
+                  agents, or an <span class="ph uicontrol">Agent</span>.</li>
+                <li class="li">Choose an existing <span class="ph uicontrol">External Approval Process</span> to run. See
+                    <a class="xref" href="app_externalApprovalCreate.html" title="If you have a process step that requires validation on an external application before deployment, you can create an approval process and assign it to environments. With this approval process, the deployment runs automatically and only when it is approved.">Managing external approval processes</a> for information about how
+                  external approval processes are created.</li>
+                <li class="li">You can <span class="ph uicontrol">Exempt Processes</span> from approvals even if it is
+                  required by an environment. </li>
+                <li class="li">Enable <span class="ph uicontrol">Require Manual Approvals</span> to allow approvals from
+                  users in a role specified by the approval process created for the environment. See
+                    <a class="xref" href="app_approvalCreate.html" title="You can add approval requirements to deployments. The approval process identifies the deployment and the role of the approver. You respond to approval requests on the Work Items page, or, depending on the configuration, through email.">Creating an approval process</a> for information about how manual approval
+                  processes are created. To prohibit the user who makes an approval request from
+                  approving the same request, select <strong class="ph b">No Self-Approvals</strong>.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">To prevent changes to snapshots in this environment after you deploy them, select
+              the <span class="ph uicontrol">Lock Snapshots</span> check box.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">If you selected the <span class="ph uicontrol">Lock Snapshots</span> check box, from the
+                <span class="ph uicontrol">Snapshot Lock Type</span> list, select the lock type:</span>
+            <div class="itemgroup info">
+              <ul class="ul">
+                <li class="li">To lock only component versions, select <span class="ph uicontrol">Only Component
+                    Versions</span>.</li>
+                <li class="li">To lock snapshot configurations, select <span class="ph uicontrol">Only
+                    Configuration</span>.</li>
+                <li class="li">To lock both component versions and configurations, select <span class="ph uicontrol">Component
+                    Versions and Configuration</span>.</li>
+                <li class="li">To use the system default value, select <span class="ph uicontrol">System Default</span>.
+                  The default value is determined by the <span class="ph uicontrol">Default Snapshot Lock
+                    Type</span> field on the <span class="keyword wintitle">System Settings</span> page. For
+                  information about system settings, see <a class="xref" href="../../admin/topics/settings_system.html#settings_system" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>.</li>
+              </ul>
+            </div>
+          </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Select <span class="ph uicontrol">Require Snapshot</span> to require that snapshots are deployed to the
+environment.</span>
+<div class="itemgroup info">When this option is selected, only snapshots can be deployed to the environment.</div>
+</li>
+          <li class="li substep substepexpand">
+<span class="ph cmd">Select a color to apply to the environment. Default is Bright Cerulean (Blue).</span>
+</li>
+          <li class="li substep substepexpand">
+<span class="ph cmd">To apply the component version and snapshot cleanup settings that are specified on the
+<span class="keyword wintitle">System Settings</span> page, select the <span class="ph uicontrol">Use Default Artifact Cleanup
+Settings</span> check box.</span>
+<div class="itemgroup info">If this check box is cleared, you must specify how long to keep snapshots and component
+versions. <span class="ph" id="env_provision_vsp__d194e310">For more information about cleaning up snapshots, see <a class="xref" href="app_snapshot_cleanup.html" title="You can configure the server to reduce the number of snapshots by deleting old snapshots. You can specify global cleanup settings and cleanup settings for specific environments.">Cleaning up snapshots</a>.</span>
+<p class="p">To apply the component version cleanup settings that are specified on the <span class="keyword wintitle">System
+Settings</span> page, select the <span class="ph uicontrol">Use Default Artifact Cleanup Settings</span>
+check box. If this check box is cleared, you must specify how long to keep component versions. For
+more information about cleaning up component versions, see <a class="xref" href="settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a>.</p></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">To use deployment history cleanup, select <span class="ph uicontrol">Use Deloyment History
+Retention</span>. </span>
+<div class="itemgroup info">You can use the default settings that are specified on the <span class="keyword wintitle">Systems
+Settings</span> page by clicking <span class="ph uicontrol">Use Default Deployment History
+Retention</span>, or in <span class="ph uicontrol">Days to Retain Deployment History</span> you can
+specify a number of days to retain deployment history records.</div>
+</li>
+        </ol>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Click <span class="ph uicontrol">Next</span>.</span>
+        <div class="itemgroup stepresult">On the next page, you can customize the properties for each virtual node in the
+          resource request, such as starting user names and passwords.<img class="image" data-hd-otherprops="ibm" src="../images/app_environment_create_a.gif" height="768" width="277" alt="The Environment Blueprint Properties window, which shows the name of the new environment and links to customize the properties for each node"></div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">On this page, specify the following information about the cloud resource request:</span>
+        <ol type="a" class="ol substeps">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">In the <span class="ph uicontrol">Cloud Connection</span> field, make sure that the connection
+              to your cloud system is listed. This list shows connections that you have access to,
+              based on the security settings for those connections. </span>
+            <div class="itemgroup info" data-hd-otherprops="ibm">This list shows only connections to clouds that use virtual
+              system patterns; to provision environments on clouds through OpenStack Heat.</div>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">In the <span class="ph uicontrol">Choose Location</span> field, specify where to store the
+              virtual nodes and how to allocate IP addresses to those nodes. Select <span class="ph uicontrol">Cloud
+                Group</span> to store the virtual nodes on one of the hypervisors in a cloud
+              group. Select <span class="ph uicontrol">Environment Profile</span> to provision the virtual
+              nodes according to an environment profile. For more information about cloud groups and
+              environment profiles, see the documentation for your cloud system.</span>
+            <div class="itemgroup info">
+              <div class="note note note_note"><span class="note__title">Note:</span> If you have to specify both the environment profile and the IP group, first
+                specify the environment profile on this page. Then, on the properties page for each
+                node, specify the IP group for each node.</div>
+              <div class="note note note_note"><span class="note__title">Restrictions:</span> 
+                <ul class="ul">
+                  <li class="li">For <span class="keyword">IBM PureApplication® System</span>, you
+                    must use an environment profile; cloud groups are not supported.</li>
+                  <li class="li" data-hd-otherprops="ibm"><span class="ph" data-hd-otherprops="ibm">To provision resources with the
+						<span class="ph uicontrol">Use VSys.Next patterns</span> option, you must select an
+					environment profile; you cannot use a cloud group.</span></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">If you selected <span class="ph uicontrol">Cloud Group</span>, select a cloud group in the
+                <span class="ph uicontrol">Cloud Group</span> field.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">If you selected <span class="ph uicontrol">Environment Profile</span>, select an environment
+              profile in the <span class="ph uicontrol">Environment Profile</span> field.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Under <span class="ph uicontrol">Set property values for nodes to be created for this
+                environment</span>, you can customize the properties for the request. To
+              customize these properties, click the node. A window opens that shows the properties
+              for the node, including virtual image properties such as memory, number of processors,
+              and starting passwords. The window also shows the properties for each script package
+              on the node.</span>
+            <div class="itemgroup info">
+              <div class="note note note_note"><span class="note__title">Note:</span> In some cases, you must specify certain properties before you can submit the
+                request. In this case, when you click <span class="ph uicontrol">Save</span>, a dialog box
+                lists the required properties that are not specified.</div>
+            </div>
+          </li>
+        </ol>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Click <span class="ph uicontrol">Create</span> to submit the request.</span>
+      </li></ol></section>
+    <section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskenv_provision_vsp__result__1">Results</h2></div>The new environment is displayed in the <span class="ph uicontrol">Environments</span> pane and the
+      server submits the cloud resource request. When the cloud resources are ready, the agents
+      contact the server and are added to the environment. You can see the cloud resources by
+      opening the console for your cloud system.</section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/integrat_ov.html" title="IBM DevOps Deploy (Deploy) supports integrations with other IBM products, products from others, and certain cloud systems.">Overview of integrations</a></div></div></nav></article></main></body></html>

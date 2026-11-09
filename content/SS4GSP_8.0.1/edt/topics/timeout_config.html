@@ -1,0 +1,85 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="You can create a configuration file to store the default timeout values for the blueprint designer to use with IBM DevOps Deploy (Deploy) agent, process, and server communication variables."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="timeout_config"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating a DevOps Deploy timeout configuration file</title></head><body id="timeout_config"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating a <span class="ph">DevOps Deploy</span>
+    timeout configuration file</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-12f064f8-4569-47f7-bccf-abc3c20cc723">Edit online</a></span></div>
+  
+
+<div class="body taskbody"><p class="shortdesc">You can create a configuration file to store the default timeout values for the blueprint
+    designer to use with <span class="ph">IBM DevOps Deploy (Deploy)</span> agent, process, and
+    server communication variables.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasktimeout_config__context__1">About this task</h2></div>When you provision images that contain <span class="ph">Deploy</span> components, you must allow time for the server to respond. You provide timeout values to specify
+how long to wait for agents to install, for component processes to complete, and for the <span class="ph">Deploy</span> server to return REST API calls to the blueprint designer. You can create a configuration file to
+store these timeout values, and the values that you set are applied to each blueprint that you
+provision. If you do not create a configuration file, you can specify these timeout values in the
+<span class="ph">Deploy</span> resources of each blueprint that you provision. See <a class="xref" href="../../edt-heat-reference/topics/ref_heat_types_ucd_ov.html#ref_heat_types_ucd_ov" title="These Heat resource types represent elements on the server.">Deploy resource types</a>. If you create a configuration file and specify timeout values in the blueprint, when you
+provision, the blueprint designer uses the timeout values that you specify in the
+blueprint.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasktimeout_config__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the computer that hosts the Heat engine, create a configuration file.</span>
+<div class="itemgroup info">In the <span class="ph filepath">/usr/lib/heat/ibm-sw-orch/heat/</span> folder, create a file that is
+named <span class="ph filepath">user_settings.conf</span>. Use the following template for the
+file.<pre class="pre codeblock"><code>[user-settings]
+timeout:
+  {
+    "agent": 300,
+    "component_process": 300,
+    "ucd_client": 300,
+    "agent_subgroup": 30,
+    "sleep_delay": 10,
+    "application_process":480
+  }
+</code></pre><div class="p">Provide
+appropriate values, in seconds, for the parameters. In the previous example, the values for the
+<span class="keyword parmname">agent</span>, <span class="keyword parmname">component_process</span>, and <span class="keyword parmname">ucd_client
+timeout</span> timeouts are each set to 300 seconds.<ul class="ul">
+<li class="li">For the <span class="keyword parmname">agent</span> value, specify the amount of time to wait for the agent to
+install. If you specify a value for the <code class="ph codeph">agent_timeout</code> property on the
+<code class="ph codeph">IBM::UrbanCode::SoftwareDeploy::UCD</code> resource in a blueprint, it replaces the
+<span class="keyword parmname">agent</span> value.</li>
+<li class="li">For the <span class="keyword parmname">component_process</span> value, specify the total amount of time to allow
+for all the component deployment processes to complete. If you specify a value for the
+<code class="ph codeph">component_process_timeout</code> property on the
+<code class="ph codeph">IBM::UrbanCode::SoftwareConfig::UCD</code> resource in a blueprint, it replaces the
+<span class="keyword parmname">component_process</span> value.</li>
+<li class="li">For the <span class="keyword parmname">ucd_client</span> value, specify the amount of time to allow for the
+return of REST API calls from the server. If you specify a value for the
+<code class="ph codeph">ucd_client_timeout</code> property on the
+<code class="ph codeph">IBM::UrbanCode::SoftwareDeploy::UCD</code> or
+<code class="ph codeph">IBM::UrbanCode::ResourceTree</code> resource in a blueprint, it replaces the
+<span class="keyword parmname">ucd_client</span> value.</li>
+<li class="li">For the <span class="keyword parmname">agent_subgroup</span> value, specify the amount of
+time to allow for the server to create groups that are attached to an agent. This value is used only
+if you use the <span class="keyword">WebSphere® Application Server</span> - Deployment plug-in to locate <span class="keyword">WebSphere Application Server</span> cells during automatic discovery. To learn more about automatic discovery, see <a class="xref" href="../../user/topics/resources_import_was.html#resources_import_was" title="Use the WebSphere Application Server - Deploy plug-in to import information about an IBM WebSphere Application Server system into a collection of resources. Typically, importing information by using the plug-in takes less time than manually creating resources to match the IBM WebSphere Application Server.">Importing resources from WebSphere Application Server</a>.</li>
+<li class="li">For the <span class="keyword parmname">sleep_delay</span> value, specify the amount of time to delay processes if
+the agent that runs the process is not connected.<div class="note note note_note"><span class="note__title">Note:</span> For best processor performance, set this
+parameter to <code class="ph codeph">10</code>.</div></li>
+<li class="li">For the <span class="keyword parmname">application_process</span> value, specify the amount of time to wait for
+the agent to complete an application process request. If you specify a value for the
+<code class="ph codeph">ucd_client_timeout</code> property on the
+<code class="ph codeph">IBM::UrbanCode::ApplicationProces::UCD</code> resource in a blueprint, it replaces the
+<span class="keyword parmname">application_process</span> value.</li>
+</ul></div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Update the timeout for your cloud projects.</span>
+<div class="itemgroup info">If the sum of the <span class="keyword parmname">agent</span> and <span class="keyword parmname">component_process</span> values
+is greater than the stack timeout value for a cloud project, you must update the stack
+timeout.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Clouds</span></span>.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Select a cloud.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">In the <span class="ph uicontrol">Timeout in Mins</span> field, specify the amount of time in minutes to
+wait for a provision request to be completed.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+</li></ol></section>
+</div>
+</article></main></body></html>

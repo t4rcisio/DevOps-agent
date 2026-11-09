@@ -1,0 +1,47 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Output properties are specialized properties that process steps generate. You use output properties to pass parameters to subsequent steps in a process."><meta name="DC.relation" scheme="URI" content="../../user/topics/ud_properties_overview.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="output_properties"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Output properties</title></head><body id="output_properties"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Output properties</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-c57dbb6b-b6d8-4cd4-9097-f6c827ba6a34">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">Output properties are specialized properties that process steps generate. You use output
+    properties to pass parameters to subsequent steps in a process.</p>
+    <p class="p">You can use output properties in component processes and generic processes.</p>
+    <div class="p">In the JavaScript™ code for your postprocessing
+steps, you can establish output properties. See <a class="xref" href="comp_postprocess_examples.html#comp_postprocess_examples" title="Post-processing scripts are written in JavaScript.">Examples of post-processing scripts</a>. You set an output property for a
+step by assigning it a name and a value in the postprocessing script. For example, the following
+code from the Check If BLA Exists step in the <span class="keyword">IBM® WebSphere® Application Server</span> Deployment plug-in establishes three possible values for the <code class="ph codeph">blaExists</code>
+output property:
+<pre class="pre codeblock"><code>
+def exitCodeChecker = { exitCode -&gt;
+    if (exitCode == 0) {
+        properties.setProperty("blaExists", "true");
+        exitValue = 0;
+    }
+    else if (exitCode == 30) {
+        properties.setProperty("blaExists", "false");
+        exitValue = 0;
+    }
+    else {
+        properties.setProperty("blaExists", "unknown");
+        exitValue = 1;
+    }
+</code></pre></div>
+    <div class="p">In the same way, you can create your own output properties by adding them in post-processing
+            scripts. Use the format
+                    <code class="ph codeph">properties.setProperty("<var class="keyword varname">propName</var>",<var class="keyword varname">propValue</var>);</code>,
+            where <code class="ph codeph"><var class="keyword varname">propName</var></code> is the name of the property and
+                    <code class="ph codeph"><var class="keyword varname">propValue</var></code> is the value of the property. For
+            example:<pre class="pre codeblock"><code>properties.setProperty("url", "http://example.com"); </code></pre></div>
+    <div class="p">Then, you can refer to these output properties in other steps in a process. To do so, you
+      must know the name of the step that contains the output property that you use. For example,
+      your process might require different actions if a BLA exists. In this case, you could use a
+      Switch step to branch the process for each case. In the following figure, the Switch step
+      checks the value o f the <code class="ph codeph">blaExists</code> output property by using the code
+        <code class="ph codeph">${p:Check If BLA Exists/blaExists}</code>:<br><img class="image" src="../images/output_properties_a.gif" alt="Using an output property value as the input for a Swtich step"><br></div>
+    <p class="p">You can use output properties in other postprocessing scripts, step preconditions, step
+      properties, or the code of steps themselves. Passing property values among processes,
+      resources, and steps helps limit the requirement to provide input manually and to maintain
+      accuracy and reliability.</p>
+        
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/ud_properties_overview.html" title="Properties are variables that store information about many different elements, including components, environments, processes, and applications. You can also set global properties for the system.">Properties</a></div></div></nav></article></main></body></html>

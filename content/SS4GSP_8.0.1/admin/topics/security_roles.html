@@ -1,0 +1,37 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="A role is a list of permissions that users have on the IBM DevOps Deploy (Deploy) server. These permissions include the ability to create, edit, and delete objects, such as applications, environments, and components. The permission also includes the parts of the server interface that users can access."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_ch.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_roles_create.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_system.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_roles_permission_ref.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/app_template_ref.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_roles"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Roles and permissions</title></head><body id="security_roles"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Roles and permissions</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2c29fd09-e686-4ccb-91f9-341fb6f1f367">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">A <dfn class="term">role</dfn> is a list of permissions that users have on the <span class="ph">IBM DevOps Deploy (Deploy)</span> server. These
+		permissions include the ability to create, edit, and delete objects, such as applications,
+		environments, and components. The permission also includes the parts of the server interface
+		that users can access.</p>
+<p class="p">When you assign users to a role, they get all permissions that are granted to the role. However,
+			these permissions apply only to the team on which the user has the role. For example, if a
+			user has the Developer role on team A, that user has the role permissions on the environments,
+			applications, and components that are assigned to team A. The user does not have any
+			permissions on the environments, applications, and components that are assigned to team B
+			unless you assign that user a role on team B.</p>
+		<p class="p">You can assign permissions to a user only by giving that user a role on a team. You cannot
+			assign a user to a role without also putting that user on a team. Similarly, you cannot assign
+			a user to a team without giving that user a role on the team.</p>
+		<p class="p">Typically, the permissions that are granted to a role define a particular activity that a user
+			might do, such as running deployments. Users can be assigned to more than one role, and users
+			can have different roles on different teams. You decide the number of roles and their
+			permissions that you assign to users. Initially, <span class="ph">Deploy</span>
+			provides one role, the Administrator role, which has all possible permissions granted to
+			it.</p>
+<div class="note note note_note" id="security_roles__create_permission"><span class="note__title">Note:</span> If a role grants the Create permission for some object type, such as
+components, it is important that the role also grant the Edit Basic Settings and Manage Teams
+permissions for that type. Otherwise, the options for creating the object are limited.</div>
+		<p class="p">The Create permission is different from other permission types. The create type is not scoped
+to a specific resource but is more broadly scoped. Team members with a create-type permission can
+create resources of the related type without team members first being attached to a specific
+resource. To continue the environment example, users with the create environment permission can
+create environments even if their team is not attached to a specific environment.</p>
+		<p class="p">Most objects have the create, view, and edit permissions that most object types. Environments
+and processes have an execute permission. This permission controls the ability to run processes.</p>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_roles_create.html">Creating roles and assigning permissions</a></strong><br>You can create roles on the server and assign permissions to them.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_system.html">Setting server configuration security</a></strong><br>Set the server configuration permissions to define what users can do with the <span class="ph">IBM DevOps Deploy (Deploy)</span> server 		security, also referred to as system security. Typically, these permissions are granted to 		administrative roles.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_roles_permission_ref.html">Permission reference</a></strong><br>This table lists the permissions on the server that you can assign to roles.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/app_template_ref.html">Permissions reference for using application templates</a></strong><br>Permissions for roles that create applications from templates.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a></div></div></nav></article></main></body></html>

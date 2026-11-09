@@ -1,0 +1,35 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can uninstall components by using an Uninstall Component step in an application process."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_process.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_process_deploy_uninstall"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Uninstalling components with an application process</title></head><body id="app_process_deploy_uninstall"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Uninstalling components with an application process</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ccb0c756-1f72-4442-a484-6948688184a9">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can uninstall components by using an Uninstall Component step in an application
+process.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_deploy_uninstall__prereq__1">Before you begin</h2></div>
+<ul class="ul">
+<li class="li">Create an uninstall-type component process for each component version to remove. This process is
+run by the Uninstall Component step in an application process.</li>
+<li class="li">If you intend to uninstall the component as part of a rollback process, create an application
+snapshot that contains the component versions to restore.</li>
+</ul>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_deploy_uninstall__context__1">About this task</h2></div>There are several ways to uninstall a component. To replace an existing component version,
+you can install another version over it by running an application process that contains a deployment
+process for the component. To remove a component version, you run an application process that
+includes the Uninstall Component step.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_deploy_uninstall__steps__1">Procedure</h2></div><div class="li stepsection">To uninstall a component version, complete these steps:</div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create an application process that contains the Uninstall Component step.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the Uninstall Component step, select the component to remove and the uninstall-type
+component process that is defined for it.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd"> In the <span class="ph uicontrol">Uninstall Type</span> field, specify <span class="ph uicontrol">All
+Existing</span> to remove all versions of the component from the environment's inventory.
+Otherwise, specify <span class="ph uicontrol">All Selected For Process</span> to remove only the versions that
+you select when you run the application process.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Run the application process. </span>
+<div class="itemgroup stepresult">The selected component versions are no longer in the environment inventory.</div>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_process.html" title="You can use application processes to deploy or to roll back components.">Application processes</a></div></div></nav></article></main></body></html>

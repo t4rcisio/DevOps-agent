@@ -1,0 +1,80 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="abstract" content="A lock ensures that processes do not interfere with one another. Normally, locks are released after they are no longer needed. Sometimes, a lock is not released, and its associated process is unable to complete."><meta name="description" content="A lock ensures that processes do not interfere with one another. Normally, locks are released after they are no longer needed. Sometimes, a lock is not released, and its associated process is unable to complete."><meta name="DC.relation" scheme="URI" content="../../user/topics/settings_ch.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="settings_locks_managing"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Managing locks</title></head><body id="settings_locks_managing"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Managing locks</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ff82eaf4-f81a-4418-b9e8-41831d4abed6">Edit online</a></span></div>
+
+<div class="body taskbody"><div class="abstract"><span class="shortdesc">A <dfn class="term">lock</dfn> ensures that processes do not interfere with one another.
+Normally, locks are released after they are no longer needed. Sometimes, a lock is not released, and
+its associated process is unable to complete. </span>The lock management feature helps you to
+identify and resolve abnormal lock conditions.</div>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksettings_locks_managing__context__1">About this task</h2></div>Follow these steps to view and resolve locks.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksettings_locks_managing__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">A running process with a lock, like all active processes,
+is shown on the <span class="keyword wintitle">Dashboard</span> tab with a status of <code class="ph codeph">Running</code>.
+ If a locked process takes longer to complete than expected, you can
+cancel the process from the <span class="keyword wintitle">Dashboard</span>, or investigate
+it fully with the <span class="keyword wintitle">Settings</span> tab.</span></li><li class="li step stepexpand"><span class="ph cmd">Display the <span class="keyword wintitle">Locks</span> pane by clicking
+the <span class="ph uicontrol">Locks</span> link on the <span class="keyword wintitle">Settings</span> tab
+(<span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Locks</span></span>). </span><div class="itemgroup stepresult">The <span class="keyword wintitle">Locks</span> pane
+displays the following information:<table class="table"><caption><span class="table--title-label">Table 1. </span><span class="title">Lock fields</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left" id="settings_locks_managing__entry__1">Field</th>
+<th class="entry align-left" id="settings_locks_managing__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="settings_locks_managing__entry__1">Name</td>
+<td class="entry align-left" headers="settings_locks_managing__entry__2">The name identifies the lock. The
+displayed name is a concatenation of the component or application
+name (depending on type) + process name + resource name.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_locks_managing__entry__1">Type</td>
+<td class="entry align-left" headers="settings_locks_managing__entry__2">Indicates whether the process that
+created the lock is a component or application type. Locks can be
+applied only to component or application processes.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_locks_managing__entry__1">Component/Application</td>
+<td class="entry align-left" headers="settings_locks_managing__entry__2">Displays the name of the component
+or application that contains the lock. Clicking an item displays (depending
+on the type) the <span class="keyword wintitle">Component</span> pane, or <span class="keyword wintitle">Application</span> pane,
+where you can investigate the lock.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_locks_managing__entry__1">Resource/Environment</td>
+<td class="entry align-left" headers="settings_locks_managing__entry__2">Displays the name of the resource
+or environment that contains the lock. Clicking an item displays (depending
+on the type) the <span class="keyword wintitle">Resource</span> pane, or <span class="keyword wintitle">Environment</span> pane.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_locks_managing__entry__1">Process</td>
+<td class="entry align-left" headers="settings_locks_managing__entry__2">Displays the name of the process
+that contains the lock. Clicking an item displays the process in the
+process editor.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_locks_managing__entry__1">Actions</td>
+<td class="entry align-left" headers="settings_locks_managing__entry__2">Lists the available actions.</td>
+</tr>
+</tbody></table></div></li><li class="li step stepexpand"><span class="ph cmd">Resolve the lock by selecting an action: </span><div class="itemgroup info"><table class="table"><caption><span class="table--title-label">Table 2. </span><span class="title">Lock actions</span></caption><colgroup><col><col></colgroup><thead class="thead">
+        <tr class="row">
+         <th class="entry align-left" id="settings_locks_managing__entry__15">Action</th>
+         <th class="entry align-left" id="settings_locks_managing__entry__16">Description</th>
+        </tr>
+       </thead><tbody class="tbody">
+        <tr class="row">
+         <td class="entry align-left" headers="settings_locks_managing__entry__15">View Request</td>
+         <td class="entry align-left" headers="settings_locks_managing__entry__16">Displays the process log for the process that contains
+          the lock. You can use the <span class="ph uicontrol">Actions</span> field on the displayed pane to
+          see the name of the process step that is causing the lock.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left" headers="settings_locks_managing__entry__15">Release</td>
+         <td class="entry align-left" headers="settings_locks_managing__entry__16">Releases the lock, which enables the associated process
+          to continue processing.</td>
+        </tr>
+       </tbody></table>If the <span class="ph">IBM DevOps Deploy (Deploy)</span> server and or agents go down while a locked process is running, <span class="ph">Deploy</span> automatically
+     restores any interrupted processes along with any locks they might contain after service is
+     restored.</div></li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/settings_ch.html" title="After you install IBM DevOps Deploy (Deploy), you can modify the server configuration and configure more options.">Server settings and configuration</a></div></div><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a></div></div></nav></article></main></body></html>

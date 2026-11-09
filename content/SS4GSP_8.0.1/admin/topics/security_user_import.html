@@ -1,0 +1,24 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="On the server, LDAP authentication realm users are imported from external LDAP systems."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_auth.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_user_import"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Importing LDAP users</title></head><body id="security_user_import"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+	<h1 class="title topictitle1" id="ariaid-title1">Importing LDAP users</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-c34571ac-25b6-4089-8838-167ebd9707eb">Edit online</a></span></div>
+	
+	<div class="body taskbody"><p class="shortdesc">On the server, LDAP authentication realm users are imported from external LDAP
+systems.</p>
+		<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_user_import__context__1">About this task</h2></div>LDAP authentication realms are searched whenever an unknown user attempts to log on to
+			the server. If the user is found, a corresponding record is created in <span class="ph">IBM DevOps Deploy (Deploy)</span>. Because
+			LDAP users cannot be assigned to groups and teams until they have corresponding <span class="ph">Deploy</span> accounts,
+			you can import users directly from LDAP systems.</section>
+		<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_user_import__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the server, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication (Users)</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected LDAP realm</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Import User</span></span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Import Users</span> dialog box, enter a name or pattern to search in the
+<span class="ph uicontrol">Username or Pattern</span> field.</span>
+<div class="itemgroup info">The asterisk character (<code class="ph codeph">*</code>) can be used as a wildcard in the pattern. If you
+use an asterisk by itself, you import all users for the selected LDAP realm.</div>
+</li><li class="li step stepexpand">
+				<span class="ph cmd">Click <span class="ph uicontrol">Save</span> to start the search.</span>
+				<div class="itemgroup info"></div>
+			</li></ol></section>
+	</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_auth.html" title="Authentication realms manage users and determine user identity within authorization realms for the server.">Authentication realms</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="Add all of the components in an application to a blueprint so that when you provision environments from the blueprint, the engine automatically installs the application."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueprint_deploy_app"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Deploying applications with blueprints</title></head><body id="blueprint_deploy_app"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Deploying applications with blueprints</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ac65c9b8-de28-43a8-b8e5-03cb26071f88">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Add all of the components in an application to a blueprint so that when you provision
+environments from the blueprint, the engine automatically installs the application.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_deploy_app__prereq__1">Before you begin</h2></div>
+<ul class="ul">
+<li class="li">On the <span class="ph">IBM DevOps Deploy (Deploy)</span> server,
+          create an application, add components to it, and create an application process that
+          deploys the components. See <a class="xref" href="../../user/topics/app_process.html#app_process" title="You can use application processes to deploy or to roll back components.">Application processes</a>.</li>
+<li class="li">Create a blueprint for the target cloud, including adding virtual images:<ul class="ul">
+                        <li class="li"><a class="xref" href="blueprint_edit_softlayer.html#blueprint_edit_softlayer" title="To model a SoftLayer environment, log in with a SoftLayer cloud project and specify the information that is specific to SoftLayer in a blueprint.">Modeling environments for SoftLayer</a></li>
+                        <li class="li"><a class="xref" href="blueprint_edit_ec2.html" title="To model an Amazon Web Services (AWS) environment, log in with an AWS cloud project and specify the AWS-specific information in a blueprint.">Modeling environments for Amazon Web Services</a></li>
+                        <li class="li"><a class="xref" href="blueprint_edit_vc.html" title="To model a VMware vCenter environment, log in with a VCenter cloud project and specify the VCenter-specific information in a blueprint.">Modeling environments for VMware vCenter</a></li>
+                        <li class="li"><a class="xref" href="blueprint_edit_vra.html" title="To model a VMware vRealize Automation Enterprise (vRA) environment, log in with a vRealize Automation cloud project and specify the vRealize Automation-specific information in a blueprint.">Modeling environments for VMware vRealize Automation</a></li>
+                        <li class="li"><a class="xref" href="blueprint_edit_os.html" title="To model an OpenStack environment, log in with an OpenStack cloud project and use resources from your cloud system in a blueprint.">Modeling environments for OpenStack and OpenStack-based clouds</a></li>
+                        <li class="li"><a class="xref" href="blueprint_edit_azure.html" title="To model a Microsoft Azure environment, log in with an Azure cloud project and specify the Azure-specific information in a blueprint.">Modeling environments for Microsoft Azure</a>.</li>
+                        <li class="li"><a class="xref" href="blueprint_edit_google_cloud.html" title="To model a Google Cloud Platform environment, log in with a Google Cloud cloud project and specify the Google Cloud-specific information in a blueprint.">Modeling environments for Google Cloud Platform</a></li>
+                    </ul></li>
+</ul>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_deploy_app__context__1">About this task</h2></div>You can use the blueprint designer to model environments for your applications. You use an
+existing application process to deploy the components that it contains. Then, you can provision the
+environment from the blueprint designer. Each time you provision the blueprint, you create a new
+<span class="ph">Deploy</span> environment for the application. You also create agents on images that contain <span class="ph">Deploy</span> that deploy the components.<p class="p">You can also use the blueprint designer to create new application
+processes to deploy components in an application. See <a class="xref" href="blueprint_deploy_env.html#blueprint_deploy_env" title="Add components to a blueprint so that when you provision environments from the blueprint, the engine automatically installs the components.">Deploying components with blueprints</a>.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_deploy_app__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Log in to the blueprint designer as a user who has the permissions to create and edit
+blueprints and to access components.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> The components that you can see in the blueprint editor depend on your permissions. If your
+blueprint design server account is connected to an account on the <span class="ph">Deploy</span> server, you see the components that you have access to on that server. If your blueprint design
+server account is not connected to an account on the <span class="ph">Deploy</span> server, you see the components that are associated with the token or user account that is on the
+<span class="ph uicontrol">System Settings</span> page. </div>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Open the blueprint that you created for the target cloud.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add components to the virtual images in the blueprint:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">From the palette, in the <span class="ph uicontrol">Component</span> drawer, drag a component to a virtual
+image in the blueprint.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Choose Application</span> window, specify the application, as in the
+following image.</span>
+<div class="itemgroup info">The window shows a check box for each application that the component currently belongs to.
+<br><img class="image" src="../images/blueprint_deploy_env_a.gif" alt="Specifying the application that a component belongs to"><br>Each additional component that you add to the blueprint must be part of the same
+application.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Application Process</span> list, select an application process that
+deploys components.</span>
+</li>
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd">In the <span class="ph uicontrol">Application Snapshot</span> list, select an application snapshot.</span>
+<div class="itemgroup info">Application snapshots define the specific versions of components and processes to use when an
+application process runs. See <a class="xref" href="../../user/topics/app_snapshot.html#app_snapshot" title="A snapshot is a collection of specific versions of components and processes. Typically, a snapshot represents a set of component versions that are known to work together. In most cases, snapshots include all of the components in an application.">Snapshots</a>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Base Resource Group</span> list, select the resource group that contains
+the resources in the blueprint.</span>
+<div class="itemgroup info">If no resource groups are on the server, select <span class="ph uicontrol">Default</span> to create a
+resource group.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Team</span> list, select the team to assign to the component or
+component tag.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">OK</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">If the application process deploys multiple components, add the other components that are
+deployed by the application process to images.</span>
+<div class="itemgroup info">All of the components that the application contains are listed at the top of the
+<span class="ph uicontrol">Components</span> drawer. The names of the components that you must add to the
+blueprint are shown in red text. Until you add all the components that the application process
+deploys to the blueprint, the error icon <img class="image" src="../images/icons/error.gif" alt=""> is displayed.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Specify the version of each component in either the diagram editor or the blueprint source
+code:</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> If you selected an application snapshot, you do not define the component versions to
+provision.</div>
+<ul class="ul">
+<li class="li">From the diagram editor, in the lower left of an image, click <span class="ph uicontrol">LATEST</span>,
+which is the most recent component version. From the <span class="keyword wintitle">Choose Component Version</span>
+dialog box, select the version of the component, and then click <span class="ph uicontrol">OK</span>.</li>
+<li class="li">From the source code view, in the deployment instance resource, in the <code class="ph codeph">version</code>
+property, specify the version of each component. For example, the following code specifies version
+1.0 of the <code class="ph codeph">JPetStore-APP</code>
+component.<pre class="pre codeblock"><code>JPetStore-APP:
+  type: IBM::UrbanCode::SoftwareDeploy::UCD
+  properties:
+    apply_config: { get_resource: JPetStore-APP_sw_config }
+    server: basic_compute_node
+    <strong class="ph b">version: "1.0"</strong>
+    agent_timeout: "360"</code></pre>The
+component version name is in double quotation marks. To use the most recent version of a component,
+specify <code class="ph codeph">"LATEST"</code>.</li>
+</ul>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">If the components contain component environment properties, specify values for those properties
+in the <code class="ph codeph">input</code> section of the
+<span class="keyword parmname">IBM::UrbanCode::SoftwareConfig::UCD</span> resource.</span>
+<div class="itemgroup info">Component environment properties are one of two types of properties that you can pass from a
+blueprint to the <span class="ph">Deploy</span> in this way. </div>
+<div class="itemgroup stepxmp">For example, the following code shows component environment properties that are named
+<code class="ph codeph"><var class="keyword varname">ServerName</var></code> and
+<code class="ph codeph"><var class="keyword varname">IntegerValue</var></code>:<pre class="pre codeblock"><code>ComponentA_config:
+  type: IBM::UrbanCode::SoftwareConfig::UCD
+  properties: 
+    name: ComponentA
+    component_process: deploy
+    ucd_server_url: { get_param: ucd_server_url } 
+    ucd_username: { get_param: ucd_user }
+    ucd_password: { get_param: ucd_password }
+    application: { get_attr: [resource_tree, application_name] }
+    inputs:
+      ServerName : { get_param: Referenced_Image_server_name }
+      IntegerValue : 25</code></pre></div>
+<div class="itemgroup info">The engine passes these properties to the server at provisioning time. You can use these
+properties in processes.</div>
+<div class="itemgroup stepxmp">For example, to refer to the <code class="ph codeph"><var class="keyword varname">ServerName</var></code> property in a
+component process, use this code: <code class="ph codeph">${p:environment/ServerName}</code>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">If the application process contains application process properties, specify values for those
+properties in the <code class="ph codeph">input</code> section of the
+<span class="keyword parmname">IBM::UrbanCode::SoftwareConfig::UC</span> resource.</span>
+<div class="itemgroup info">Application process properties are one of two types of properties that you can pass from a
+blueprint to the <span class="ph">Deploy</span> in this way. <div class="note restriction note_restriction"><span class="note__title">Restriction:</span> You can provide only string values for application process
+properties, and you must include the values in double quotation marks.</div></div>
+<div class="itemgroup stepxmp">For example, the following code shows application process properties that are named
+<code class="ph codeph"><var class="keyword varname">Username</var></code> and
+<code class="ph codeph"><var class="keyword varname">Password</var></code>:<pre class="pre codeblock"><code>application_request:
+  type: IBM::UrbanCode::ApplicationProcess::UCD
+  properties:
+    ucd_server_url: { get_param: ucd_server_url }
+    ucd_username: { get_param: ucd_user }
+    ucd_password: { get_param: ucd_password }
+    application_process: Deploy-application
+    application: { get_attr: [resource_tree, application_name] }
+    environment: { get_attr: [resource_tree, environment_name] }
+    inputs:     # application process properties
+<strong class="ph b">      Username : "user"
+      Password : "password"</strong></code></pre></div>
+<div class="itemgroup info">The engine passes these properties to the server at provisioning time. </div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">If the component maps to a <span class="keyword">WebSphere® Application Server</span> cell and you use the <span class="keyword">WebSphere Application Server</span> - Deploy plug-in, add the <code class="ph codeph">subgroup</code> property to the <code class="ph codeph">properties</code>
+section and set the <code class="ph codeph">subgroup</code> property to the name of the cell.</span>
+<div class="itemgroup stepxmp">For example, the following code shows a subgroup property that is set to
+<code class="ph codeph">WebSphereCell</code>:<pre class="pre codeblock"><code>ComponentA_config:
+  type: IBM::UrbanCode::SoftwareConfig::UCD
+  properties: 
+    subgroup: WebSphereCell</code></pre></div>
+<div class="itemgroup info">After the automatic discovery process runs, the component is nested in the resource tree under
+the <span class="keyword">WebSphere Application Server</span> cell resource. To learn more about automatic discovery, see <a class="xref" href="../../user/topics/resources_import_was.html#resources_import_was" title="Use the WebSphere Application Server - Deploy plug-in to import information about an IBM WebSphere Application Server system into a collection of resources. Typically, importing information by using the plug-in takes less time than manually creating resources to match the IBM WebSphere Application Server.">Importing resources from WebSphere Application Server</a>. </div>
+</li>
+</ol>
+</li><li class="li step stepexpand" id="blueprint_deploy_app__agent_name"><strong>Optional: </strong>
+<span class="ph cmd">If the image that contains your <span class="ph">Deploy</span> components is attached to multiple networks, change the agent name.</span>
+<div class="itemgroup info">
+To
+ensure that you can access the agent, you can modify the blueprint to use this agent name pattern:
+<code class="ph codeph"><var class="keyword varname">application_name</var>.<var class="keyword varname">environment_name</var>.<var class="keyword varname">image_key</var></code>.
+To customize the provisioned image name and the agent name, you can modify the image's
+<span class="keyword parmname">key</span> parameter value in the blueprint properties.</div>
+<ol type="a" class="ol substeps" id="blueprint_deploy_app__substeps_hy1_3hd_3z">
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <code class="ph codeph">IBM::UrbanCode::SoftwareDeploy::UCD</code> resource, add the
+<code class="ph codeph">agent_naming_scheme</code> property.</span>
+<div class="itemgroup info">The resource resembles the following
+code:<pre class="pre codeblock"><code>  ComponentName:
+    type: IBM::UrbanCode::SoftwareDeploy::UCD
+    properties:
+      apply_config: { get_resource: ComponentName_sw_config }
+      server: server_key
+      version: LATEST
+      agent_timeout: "360"
+      <strong class="ph b">agent_naming_scheme:</strong></code></pre></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">From the blueprint diagram, select the component.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the component properties, for <span class="ph uicontrol">Agent Naming Scheme</span>, provide the
+following value: <kbd class="ph userinput">server-name</kbd>.</span>
+</li>
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Select the image and modify the <span class="ph uicontrol">Key</span> value.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">If you add multiple components to an image, repeat these steps for each component.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd" id="blueprint_deploy_app__d280e427">To connect the agents on the virtual images to an agent relay, specify the URL
+of the agent relay in the <span class="keyword parmname">ucd_relay_url</span> parameter.</span>
+<div class="itemgroup info">
+<p class="p">By default, the blueprint design server installs an agent on each virtual machine in the
+environment. By default, these agents connect directly to the server. If the server is behind a
+firewall, inside a VPN, or otherwise inaccessible, you must connect the agents to an agent relay.
+</p>
+</div>
+<div class="itemgroup stepxmp">For example, if the URL of the agent relay is <code class="ph codeph">http://relay.example.com</code>,
+the parameter looks like the following
+code:<pre class="pre codeblock"><code>  ucd_relay_url:
+    type: string
+    default: "http://relay.example.com"</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the blueprint.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_deploy_app__result__1">Results</h2></div>You can deploy the application to your cloud by provisioning the blueprint. See <a class="xref" href="env_provision_ov.html" title="You can provision an environment from the server. Several different scenarios for provisioning cloud environments are available.">Provisioning cloud environments</a>.</section>
+</div>
+</article></main></body></html>

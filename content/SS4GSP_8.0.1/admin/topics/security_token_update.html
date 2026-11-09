@@ -1,0 +1,37 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The authentication token password for the agent relay is specified during installation of the agent relay. You can update the authentication token and provide a password for the token by updating the agent relay properties file."><meta name="DC.subject" content="agent relay"><meta name="keywords" content="agent relay"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_token.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_types_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Updating the agent relay authentication token password</title></head><body id="security_types_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Updating the agent relay authentication token password</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-c5d349c3-4448-4496-934f-fadebe63bb43">Edit online</a></span></div>
+
+
+
+<div class="body taskbody"><p class="shortdesc">The authentication token password for the agent relay is specified during installation of
+the agent relay. You can update the authentication token and provide a password for the token by
+updating the agent relay properties file.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_types_create__prereq__1">Before you begin</h2></div>
+<p class="p">The new authentication token for the server must be available before changing the password. For
+information about creating a token, see <a class="xref" href="security_token.html" title="Tokens provide authorization for agents, agent relays, users, and external systems or applications from the server. Agents use tokens when they run process steps and communicate with the IBM DevOps Deploy (Deploy) server and external services.">Tokens</a>.</p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_types_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the <span class="ph filepath">agentrelay.properties</span> file located in
+<span class="ph filepath"><var class="keyword varname">agent_relay_home</var>/conf</span> directory.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Change the value for the <span class="ph uicontrol">agentrelay.codestation.server_password</span> property
+to the new password value.</span>
+<div class="itemgroup info">The  following is from the sample <span class="ph filepath">agentrelay.properties</span> file. The
+password shown is
+encrypted.<pre class="pre codeblock"><code>agentrelay.codestation.server_password=pbe{UlfTbYJYm2i7VIN4D0/8dYeqI6T54heliAURNECl0p4l8/3h72Fv2n3G3yylWwdCnRY57wXcLT8=}</code></pre>
+Specify the new password. The new password is encrypted when the agent relay is
+started.<pre class="pre codeblock"><code>agentrelay.codestation.server_password=<var class="keyword varname">new_password</var></code></pre>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save your changes and close the file.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Stop the agent relay.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Start agent relay .</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Verify that the agents connected through the changed agent relay are connecting.</span>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_token.html" title="Tokens provide authorization for agents, agent relays, users, and external systems or applications from the server. Agents use tokens when they run process steps and communicate with the IBM DevOps Deploy (Deploy) server and external services.">Tokens</a></div></div></nav></article></main></body></html>

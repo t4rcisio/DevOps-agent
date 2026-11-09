@@ -1,0 +1,45 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Create a new webhook template"><meta name="DC.subject" content="udclient commands, createWebhookTemplate, udclient command, command-line commands"><meta name="keywords" content="udclient commands, createWebhookTemplate, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_createwebhooktemplate"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>createWebhookTemplate</title></head><body id="udclient_createwebhooktemplate"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">createWebhookTemplate</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-914c33b6-8bbd-4816-a761-7a86735d9a5f">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Create a new webhook template</p>
+<section class="section"><h2 id="udclient_createwebhooktemplate__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  createWebhookTemplate [JSON file]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_createwebhooktemplate__title__3" class="title sectiontitle">Parameters</h2>
+None.</section>
+<section class="section"><h2 id="udclient_createwebhooktemplate__title__4" class="title sectiontitle">Template</h2>
+<div class="p">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "body": "The webhook template body specified with Apache 
+  Velocity template syntax",
+  "description": "Description (Optional)",
+  "name": "Name of the new webhook template",
+  "teamMappings": [{
+    "resourceRoleId": "Id of Resource Type to apply to 
+  this team mapping (optional, can specify either this or 
+  resourceRoleLabel",
+    "resourceRoleLabel": "Name of Resource Type to apply 
+  to this team mapping (optional, can specify either this or 
+  resourceRoleId",
+    "teamId": "ID of a team, either this field or 
+  teamLabel are needed to specify a team",
+    "teamLabel": "Name of the team to map the webhook 
+  template to, either this field or teamId are needed to 
+  specify a team"
+  }],
+  "type": "Webhook template type [PROCESS_SUCCESS, 
+  PROCESS_FAILURE, PROCESS_STARTED, APPROVAL_COMPLETED, 
+  APPROVAL_FAILED, EXTERNAL_APPROVAL_COMPLETED, 
+  EXTERNAL_APPROVAL_FAILED, SCHEDULED_PROCESS_NOT_STARTED, 
+  TASK_CREATED]"
+}
+</code></pre></div></section>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_webhooktemplate_post.html">Create a new webhook template</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

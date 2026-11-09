@@ -1,0 +1,60 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="A manual task interrupts an application process until manual intervention is done. A task-interrupted process remains suspended until the targeted user or users respond. Typically, manual tasks are removed after the process is tested or automated."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_processSteps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_processsteps_manual"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Manual Application Task (Utility)</title></head><body id="app_processsteps_manual"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Manual Application Task (Utility)</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-215f65a3-fb92-4f9f-adf2-1ee11b237fcc">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">A manual task interrupts an application
+process until manual intervention is done. A task-interrupted process
+remains suspended until the targeted user or users respond. Typically,
+manual tasks are removed after the process is tested or automated.</p>
+<section class="section">
+<div class="note tip note_tip"><span class="note__title">Tip:</span> 
+<p class="p"><span class="ph"> Applications, components, and generic processes share some process steps.
+This step applies to application processes, component processes, and generic processes. This step
+applies to application processes that are associated with application templates.</span> However, the
+generic process step includes the <span class="ph uicontrol">Comment Prompt </span> field.</p>
+</div><p class="p" id="app_processsteps_manual__intro">Similar to approvals, triggered tasks alert
+targeted users. Alerts are associated with environment- or application-defined
+user roles.  Affected users can respond (approve) by using the <span class="keyword wintitle">Work
+Items</span> pane (see <a class="xref" href="app_approvals_workitems.html" title="If a deployment requires approval, create an approval process that generates an approval request. Approvers respond to the requests on the Work Items tab where they approve or deny requests. You can also allow approvers to respond to requests through email.">Responding to approval requests</a>).
+Unlike approvals, manual tasks can be incorporated within an application
+process.</p><p class="p">For information on using manual tasks in application
+processes, see <a class="xref" href="app_tasks_creating.html" title="A manual application task interrupts an application process until manual intervention is done. To create a manual task, add a manual step to an application process and select a notification template.">Manual application tasks</a>.</p><table class="table frame-all" id="app_processsteps_manual__manual_application_task_properties"><caption><span class="table--title-label">Table 1. </span><span class="title">Manual Application Task properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left colsep-1 rowsep-1" id="app_processsteps_manual__manual_application_task_properties__entry__1">Field</th>
+<th class="entry align-left colsep-1 rowsep-1" id="app_processsteps_manual__manual_application_task_properties__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__1"><span class="ph uicontrol">Name</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__2">The name for the manual task.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__1"><span class="ph uicontrol">Only Allow Deploying User To Complete</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__2">Restrict approval to the user who started the deployment.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__1"><span class="ph uicontrol">Notification Template</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__2">Specify a notification template. The individual tasks map to the
+notification scheme used by the application (see <a class="xref" href="notify_create.html" title="Notifications are defined in a notification scheme. The notification scheme is assigned to an application and the notifications are sent during the deployment of that application.">Creating Notifications in a Notification Scheme</a>).
+If you do not want notifications created for the task, select <span class="ph uicontrol">None</span>.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__1"><span class="ph uicontrol">Properties</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__2">Optionally, add one or more properties to the task.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__1"><span class="ph uicontrol">Require Comment</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__2">Select to require that users must add a comment about this manual
+task.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__1"><span class="ph uicontrol">Comment Prompt</span></td>
+<td class="entry align-left colsep-1 rowsep-1" headers="app_processsteps_manual__manual_application_task_properties__entry__2"><div class="note note note_note"><span class="note__title">Note:</span> This field applies only to generic process steps.</div>Enter the
+text that requests users to add a comment about this manual task.</td>
+</tr>
+</tbody></table></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_processSteps.html" title="Application processes, component processes, and generic processes are created with the process editor.">Process steps: Reference</a></div></div></nav></article></main></body></html>

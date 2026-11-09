@@ -1,0 +1,44 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To promote the snapshot to an environment, apply the snapshot when you run the application process."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/snapshot_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="snapshot_deploy"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 3: Deploying the snapshots</title></head><body id="snapshot_deploy"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 3: Deploying the snapshots</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-bbc42753-52ea-440b-8b94-ebb2ae3fc95f">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To promote the snapshot to an environment, apply the snapshot when you run the
+application process.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_deploy__context__1">About this task</h2></div>In this lesson, you apply a snapshot to your new environment to quickly promote the
+components to a new environment. When you request the application process, you select the snapshot
+to deploy a selected set of components to an environment.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_deploy__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the application page by clicking <span class="ph uicontrol">Applications</span> and then clicking
+<kbd class="ph userinput">JPetStore</kbd>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the same row as your new environment, click the <span class="ph uicontrol">Request Process</span>
+<img class="image" src="../images/request_process.gif" alt=""> icon, as shown in the following figure.</span>
+<div class="itemgroup info">
+<br><img class="image" src="../images/snapshot_deploy_i.gif" alt="Clicking Request Process on an environment"><br>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Run Process</span> window, in the <span class="ph uicontrol">Process</span> list,
+select the <kbd class="ph userinput">Deploy JPetStore</kbd> process.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Snapshot</span> list, select the <kbd class="ph userinput">Version 1.1</kbd>
+snapshot.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Submit</span>.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_deploy__result__1">Results</h2></div>The web page shows you the progress of the application process request, and you can watch as
+the processes run. If the process finishes, the request shows that each component process is
+finished, as in the following figure:<br><img class="image" src="../images/snapshot_deploy_b.gif" alt="The log for the application process request, showing that the component processes ran successfully"><br>You can view the running application at the following URL by substituting the host name of
+your target system for <var class="keyword varname">hostname</var>. This is the host name of the agent that you
+configured in <a class="xref" href="webapp_configure_agent.html" title="To deploy applications with IBM DevOps Deploy (Deploy), you need one or more agents. The server uses the agents to deploy the application components on target systems.">Configuring the agent and target system</a>. In the URL, specify the
+<var class="keyword varname">tomcat.contextroot</var> value that you entered for this environment after the port
+number.<pre class="pre codeblock"><code>http://<var class="keyword varname">hostname</var>:8081/JPetStoreProd</code></pre>The application
+shows a simple online shopping site in the form of a pet store. The following figure shows the home
+page:<br><img class="image" src="../images/webapp_deploy_e.gif" alt="The home page of the JPetStore application, showing a link to enter the store"><br>If you browse to the Dogs category, you see that the Bichon section is present. As you saw
+in the previous tutorial, this entry indicates that the JPetStore-DB component deployed both the 1.0
+and 1.1 versions. <br><img class="image" src="../images/webapp_update_d.gif" alt="The Dogs category, showing the new item"><br></section><section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_deploy__postreq__1">What to do next</h2></div>This application process installed all components in the application by running their
+component processes. You defined the versions of the component processes in the snapshot. <p class="p">You used a snapshot to quickly apply a compatible set of component processes to an
+application environment and viewed the deployed web page.</p></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_6.2.0 SS4GSP_8.0.1" href="../../tutorial/topics/snapshot_abstract.html" title="In this tutorial, you deploy a simple web application to a new environment with IBM DevOps Deploy (Deploy). You create a snapshot of the components in an application, and then deploy the snapshot to an environment.">Creating and deploying snapshots</a></div></div></nav></article></main></body></html>

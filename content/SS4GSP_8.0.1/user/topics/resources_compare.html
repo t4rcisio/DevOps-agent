@@ -1,0 +1,69 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can compare the contents of a resource group to another group or a resource template and then apply changes to the group or template."><meta name="DC.relation" scheme="URI" content="../../user/topics/resource_tree_modify.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="resources_compare"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Comparing and synchronizing resources</title></head><body id="resources_compare"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Comparing and synchronizing resources</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ec864d7d-db1b-4c05-9d76-77b3ef832b56">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can compare the contents of a resource group to another group or a resource template
+and then apply changes to the group or template.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_compare__context__1">About this task</h2></div>You can compare a group in the resource tree to another group or a resource template. You
+can apply changes, including properties and their values, from the first group that you select to
+the resource tree or second group. </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_compare__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the <span class="keyword wintitle">Resource Tree</span> page.</span>
+<div class="itemgroup info">In addition to the <span class="keyword wintitle">Resource Tree</span> page, resources might be displayed in
+     several ways, such as by adding resources to an environment.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Display the <span class="ph uicontrol">Action</span> menu for the folder that contains the source group
+and click <span class="ph uicontrol">Compare or Synchronize</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Compare the contents of a resource to either a resource template or another resource.</span>
+<ul class="ul choices">
+<li class="li choice">To compare the contents of the resource to the contents of a resource template, take the
+following actions:<ol class="ol" type="a">
+<li class="li">From the <span class="keyword wintitle">Compare Resources</span> window, select <span class="ph uicontrol">Compare With Resource
+Template</span>.</li>
+<li class="li">From the <span class="ph uicontrol">Resource Template</span> list, select the name of the target resource
+template.</li>
+<li class="li">Click <span class="ph uicontrol">Save</span>.</li>
+</ol></li>
+<li class="li choice">To compare the contents of the resource to the contents of another resource, take the
+following actions:<ol class="ol" type="a">
+<li class="li">From the <span class="keyword wintitle">Compare Resources</span> window, select <span class="ph uicontrol">Compare With
+Resource</span>.</li>
+<li class="li">From the <span class="keyword wintitle">Compare Resources</span> list, click <span class="ph uicontrol">Set</span>.</li>
+<li class="li">From the <span class="keyword wintitle">Select Resource</span> window, select the target resource. You can expand
+resources and select a nested resource for the comparison.</li>
+<li class="li">Click <span class="ph uicontrol">OK</span>.</li>
+<li class="li">Click <span class="ph uicontrol">Save</span>.</li>
+</ol></li>
+</ul>
+</li><li class="li step stepexpand">
+<span class="ph cmd">On the <span class="keyword wintitle">Resource Comparison</span> page, expand both resource trees.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Clear <span class="ph uicontrol">Only show changes</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select each different resource from the left-hand, or source, resource to apply to the
+right-hand, or target, resource.</span>
+<div class="itemgroup info">The differences between the two resource trees are displayed. Each line of the resource tree
+can be one of the following states: <span class="keyword parmname">Children Changed</span>,
+<span class="keyword parmname">Added</span>, <span class="keyword parmname">Deleted</span>, or <span class="keyword parmname">No Change</span>.</div>
+<div class="itemgroup stepxmp">For example, the following image shows that the source resource tree contains three more
+     agents than the target resource tree. All three additional agents will be added to the
+     right-hand, or target, resource tree.<br><img class="image" src="../images/resources_compare_a.gif" height="176" width="543" alt="The Resource Comparison page displays two resource trees. One contains an agent and four components, and the other contains an agent and one component. The statuses of the three additional agents in the Difference column are Added, and these agents are selected."><br></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To review your changes, click <span class="ph uicontrol">Continue</span>.</span>
+<div class="itemgroup stepresult">The changes to the right-hand resource tree are displayed in the <span class="keyword wintitle">Preview
+Changes</span> window.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Apply Changes</span>.</span>
+<div class="itemgroup stepresult">An <span class="keyword wintitle">Alert</span> window confirms that the resource changes were applied
+successfully.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Close</span>.</span>
+<div class="itemgroup stepresult">The <span class="keyword wintitle">Resource Comparison</span> page displays the updated status of the
+     right-hand resource tree, as shown in the following image.<br><img class="image" src="../images/resources_compare_b.gif" height="177" width="543" alt="The Resource Comparison page displays two resource trees. Each contains the same agent and components, so the statuses in the Difference column are all No Change."><br>Since the contents of the groups are now identical, the statuses in the
+      <span class="ph uicontrol">Difference</span> column are all <span class="ph uicontrol">No
+     Change</span>.</div>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/resource_tree_modify.html" title="You can create, delete, and modify the contents of the resource tree.">Modifying the resource tree</a></div></div></nav></article></main></body></html>

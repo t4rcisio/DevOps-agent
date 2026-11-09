@@ -1,0 +1,38 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Test fixes are provided to correct specific issues. They are applied to the server as patches."><meta name="DC.relation" scheme="URI" content="../../install/topics/install_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="server_install_testfix"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Installing and uninstalling test fixes (patches) from the server</title></head><body id="server_install_testfix"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Installing and uninstalling test fixes (patches) from the server</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-91413f5a-52d4-4d2a-9ed7-feb4dfe0b6d5">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Test fixes are provided to correct specific issues. They are applied to the server as
+patches.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_testfix__prereq__1">Before you begin</h2></div>Ensure that you have the correct version of the server installed, as listed in the readme
+file for the test fix.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_testfix__context__1">About this task</h2></div>
+<p class="p">In most cases, test fixes come with specific instructions. In general, these instructions look
+                like the following steps. However, always use the instructions in the readme file or
+                the instructions that are provided by <span class="ph">IBM DevOps Deploy (Deploy)</span>
+                support.</p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_testfix__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Stop the server.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Download the file or files for the test fix.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Copy the files from the archive file to the folder
+<span class="ph filepath"><var class="keyword varname">app_data</var>/patches</span> folder, where
+<span class="ph filepath"><var class="keyword varname">appdata</var></span> is the application data folder. </span>
+<div class="itemgroup info"><span class="ph">The
+                  default application data folder is
+                    <span class="ph filepath">/opt/devops-deploy/server/appdata</span> on Linux™ and <span class="ph filepath">C:\Program
+                    Files\devops-deploy\server\appdata</span> on Windows™.</span></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Start the server.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Log in to the server.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Patches</span></span> and verify that the test fix is installed.</span>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_install_testfix__postreq__1">What to do next</h2></div>To uninstall the test fix, stop the server, remove the files from the
+<span class="ph filepath">patches</span> folder, and restart the server.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/install_ch.html" title="An IBM DevOps Deploy (Deploy) installation consists of a Deploy server, a database server, and at least one agent.">Installing DevOps Deploy</a></div></div></nav></article></main></body></html>

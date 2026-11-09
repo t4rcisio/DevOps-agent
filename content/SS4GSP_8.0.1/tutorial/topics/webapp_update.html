@@ -1,0 +1,75 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="In the first lesson, you deleted certain versions of the components. In this lesson, you add those versions again to simulate deploying a new version of the components."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/webapp_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="webapp_update"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 6: Updating the application</title></head><body id="webapp_update"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 6: Updating the application</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d8ce5936-24f9-4fff-aec1-ea15e1b43ba0">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">In the first lesson, you deleted certain versions of the
+components. In this lesson, you add those versions again to simulate
+deploying a new version of the components.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_update__context__1">About this task</h2></div>The web application that you deployed in the previous lesson included version 1 of the web
+            component and database component. Version 1.1 of these components includes a new item
+            for the online store: a Bichon in the Dogs category.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_update__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Verify that <code class="ph codeph">Bichon</code> is not available in
+the Dogs category:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Open the application by opening a web browser to the
+following URL:</span><div class="itemgroup info"><pre class="pre codeblock"><code>http://<var class="keyword varname">hostname</var>:8081/JPetStoreDev</code></pre></div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Enter the Store</span>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Browse the Dogs category and verify that <code class="ph codeph">Bichon</code> is
+not available.</span><div class="itemgroup info">The following figure shows some of the dogs
+in this category:<br><img class="image" src="../images/webapp_update_a.gif" alt="The Dogs category, showing some of the dogs that are available; Bichon is not in the list"><br></div></li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Import the new version of the database component:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">On the <span class="ph">Deploy</span> server,
+click the <span class="ph uicontrol">Components</span> tab and then click the
+JPetStore-DB component.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click the <span class="ph uicontrol">Versions</span> tab and then
+click <span class="ph uicontrol">Import New Versions</span>.</span><div class="itemgroup stepresult">Now,
+version 1.1 is shown in the list of versions, as shown in the following
+figure:<br><img class="image" src="../images/webapp_update_b.gif" alt="The Versions tab for the JPetStore-DB component, showing versions 1.0 and 1.1"><br></div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click the new version of the database component to open
+its information page.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click the <span class="ph uicontrol">Configuration</span> tab.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Under <span class="ph uicontrol">Basic Settings</span>, in the <span class="ph uicontrol">Type</span> list,
+select <span class="ph uicontrol">Incremental</span> and then click <span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">This version is set to be an incremental upgrade rather
+than a new version. Full versions are installed directly, without
+installing prior versions first. Incremental upgrades start with prior
+versions, and then the new version is installed over the prior versions.
+The new database version is only an addition to the database, so it
+requires the prior version of the component.</div></li><li class="li step stepexpand"><span class="ph cmd">In the same way, import version 1.1 of the web component
+without changing the <span class="ph uicontrol">Type</span> setting.</span><div class="itemgroup info">The
+application component does not have any additional versions.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Applications</span> and then click
+the JPetStore application to get back to the list of environments.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">On the environment, run the application process again.</span>
+<div class="itemgroup info">In the <span class="keyword wintitle">Run Process</span> window, be sure to select
+the latest version for each of the components by clicking <span class="ph uicontrol">Choose
+Versions</span> and then clicking <span class="ph menucascade"><span class="ph uicontrol">Select
+For All</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Latest Available</span></span>.
+Optionally, you can select the <span class="ph uicontrol">Only Changed Versions</span> check
+box so that the server deploys only the components with new versions.
+In this case, the server runs the component processes only for the
+web and database components.<br><img class="image" src="../images/webapp_update_c.gif" alt="Running the application process to deploy the new versions of the web and database components"><br></div>
+</li><li class="li step stepexpand"><span class="ph cmd">In your web browser, reload the web application and explore
+the Dogs category to see the new <code class="ph codeph">Bichon</code>, as shown
+in the following figure:</span><div class="itemgroup info"><br><img class="image" src="../images/webapp_update_d.gif" alt="The Dogs category, showing the new item"><br>This new item demonstrates
+that the database component is updated to version 1.1</div></li><li class="li step stepexpand"><span class="ph cmd">Click the Product ID for <code class="ph codeph">Bichon</code> and then
+the Item ID to see the product page for <code class="ph codeph">Bichon</code>.</span>
+<div class="itemgroup info">The new graphic for this item demonstrates that the web component
+is updated to version 1.1.<br><img class="image" src="../images/webapp_update_e.gif" alt="The new item, including a new graphic from the web component"><br></div></li></ol></section><section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_update__result__1">Results</h2></div><p class="p">Now the application includes the new versions of the components. </p><p class="p">In a production scenario, new versions of components
+might become available frequently. You can run the application process
+as often as necessary to update the deployed components. You can also
+configure the application process to run automatically when new versions
+of the components are available.</p><p class="p">Now that you have completed this
+tutorial, you can continue learning about how to deploy components
+by using snapshots. See the tutorial <a class="xref" href="snapshot_abstract.html" title="In this tutorial, you deploy a simple web application to a new environment with IBM DevOps Deploy (Deploy). You create a snapshot of the components in an application, and then deploy the snapshot to an environment.">Creating and deploying snapshots</a>.</p></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.1 SS4GSP_8.0.1" href="../../tutorial/topics/webapp_abstract.html" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">Deploying a simple web application</a></div></div></nav></article></main></body></html>

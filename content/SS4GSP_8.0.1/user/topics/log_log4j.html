@@ -1,0 +1,67 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can add loggers to the root log and set their logging level to keep track of errors and some activities."><meta name="DC.subject" content="logging, log-level, logger, log4j2"><meta name="keywords" content="logging, log-level, logger, log4j2"><meta name="DC.relation" scheme="URI" content="../../user/topics/log_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="log_log4j"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Managing loggers</title></head><body id="log_log4j"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Managing loggers</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ec6cf71a-0f6a-404c-9498-67d6c6948a70">Edit online</a></span></div>
+  
+  
+  
+  <div class="body taskbody"><p class="shortdesc">You can add loggers to the root log and set their logging level to keep track of errors
+    and some activities.</p>
+    <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasklog_log4j__context__1">About this task</h2></div>Starting with version 7.2.3.0, <span class="ph">IBM DevOps Deploy (Deploy)</span> uses Apache Log4j
+      version 2.x (Log4j2) to manage system logs. Loggers track system events, errors, and
+      diagnostic activities, outputting information into the server's primary log file
+        (<code class="ph codeph">deployserver.out</code>). <p class="p">For more information about customizing the Log4j2
+        output, see <a class="xref" href="https://logging.apache.org/log4j/2.x/manual/configuration.html" target="_blank">Log4j2 Configuration</a>. </p><div class="p">You can manage the
+        logging settings of the server from the web UI or by editing the
+          <span class="ph filepath">&lt;DEPLOY_SERVER_HOME&gt;/appdata/conf/server/log4j2.xml</span> file.<div class="note note note_note" id="log_log4j__note_nfw_p3m_zjc"><span class="note__title">Note:</span> Editing the <code class="ph codeph">log4j2.xml</code> file
+          directly is recommended only for debugging purposes or when the web UI is inaccessible.
+          Any changes made to the <code class="ph codeph">log4j2.xml</code> file may be overwritten by changes
+          applied through the web UI, CLI commands, or during a server version upgrade. For
+          persistent logging configuration, use the web UI or CLI.</div></div><p class="p">You can manage the
+        agent log settings by editing the
+          <span class="ph filepath">&lt;DEPLOY_AGENT_HOME&gt;/conf/log4j2.xml</span> file and the agent relay log
+        settings by editing the <span class="ph filepath">&lt;DEPLOY_AGENTRELAY_HOME&gt;/conf/log4j2.xml</span>
+        file. </p></section>
+    <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasklog_log4j__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">Open the Logging page by clicking <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Logging</span></span>.</span>
+        <div class="itemgroup info">Loggers are listed in hierarchical order. The first one is the root logger, which is
+          indicated by an <code class="ph codeph">*</code> in the UI. It typically has no name in the logging
+          library. The other default loggers and log classes are as follows:
+          <pre class="pre codeblock" id="log_log4j__codeblock_sgk_n1w_ztb"><code>com.sun.jersey.server.impl.application.WebApplicationImpl
+com.sun.jersey.spi.container.ContainerResponse
+com.urbancode.air.diagnostics
+com.urbancode.air.vc
+com.urbancode.container.tomcat
+com.urbancode.ds
+com.urbancode.encryption.keystore
+net.schmizz
+org.apache.tomcat
+org.hibernate.cache.ReadWriteCache
+org.hibernate.engine.jdbc.spi.SqlExceptionHelper
+org.hibernate.orm.deprecation
+com.urbancode.ds.cleanup</code></pre>Each logger has a level drop-down that allows you to
+          change the logging level. The following log level types are available: <ul class="ul" id="log_log4j__ul_tgk_n1w_ztb">
+            <li class="li">ALL</li>
+            <li class="li">TRACE</li>
+            <li class="li">DEBUG</li>
+            <li class="li">INFO</li>
+            <li class="li">WARN</li>
+            <li class="li">ERROR</li>
+            <li class="li">FATAL</li>
+            <li class="li">OFF</li>
+          </ul></div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">To edit multiple loggers simultaneously, select the loggers from the selection column,
+          click <span class="ph uicontrol">Bulk Actions</span>, set the level as required, and save your
+          changes.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">To add a logger, click <span class="ph uicontrol">Add Logger</span>, specify
+          the logger name, it's logging level, and confirm your changes.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">To delete a custom logger use the actions column or to delete
+          multiple loggers, use <span class="ph uicontrol">Bulk Actions</span>. The root and default loggers
+          cannot be deleted. Removing a logger reverts the logger to the logging level defined by
+          its superior in the hierarchy.</span>
+      </li></ol></section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/log_ov.html" title="The server maintains logs for auditing and troubleshooting.">Logging</a></div></div></nav></article></main></body></html>

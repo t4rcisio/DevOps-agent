@@ -1,0 +1,91 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="abstract" content="Before you can use VMware vCenter images with the blueprint designer, you must install VMware Tools and a virtual CD-ROM drive on those images."><meta name="description" content="Before you can use VMware vCenter images with the blueprint designer, you must install VMware Tools and a virtual CD-ROM drive on those images."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="cloud_connect_vmware_images"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring VMware vCenter images</title></head><body id="cloud_connect_vmware_images"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring VMware vCenter images</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-28c829d4-2435-4b3c-bf3b-540754c5818b">Edit online</a></span></div>
+
+
+<div class="body taskbody"><div class="abstract"><span class="shortdesc">Before you can use VMware vCenter images with the blueprint designer, you must
+install VMware Tools and a virtual CD-ROM drive on those images.</span>To configure images that
+are compatible with Chef roles, see <a class="xref" href="cloud_connect_vmware_images_chef.html#cloud_connect_vmware_images_chef" title="Before you can use VMware vCenter images that run Chef roles with the blueprint designer, you must install cloud-init and a virtual CD-ROM drive on those images.">Configuring VMware vCenter images for Chef roles</a>.</div>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_connect_vmware_images__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Install VMware Tools on the image and create a customization specification for it.</span>
+<div class="itemgroup info">See the VMware documentation.</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">On a Linux™ image, enable password access through SSH for
+the root user:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Open the file <span class="ph filepath">/etc/cloud/cloud.cfg</span> in a text editor.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Remove any lines of code that begin with <code class="ph codeph">disable_root</code>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Add the following line of code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>disable_root: 0</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Save your changes to the file.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">On a Linux image, enable sudo access for a different
+user name.</span>
+<div class="itemgroup info">By default, the blueprint designer accesses vCenter virtual images by using the root password.
+To use a different user name, you must enable sudo access for it and disable password access for
+users in the sudo user group.</div>
+<ol type="a" class="ol substeps" id="cloud_connect_vmware_images__substeps_vp3_gyj_3z">
+<li class="li substep substepexpand">
+<span class="ph cmd">Create the user name and enable sudo access for it.</span>
+<div class="itemgroup info">For example, see <a class="xref" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/managing-sudo-access_configuring-basic-system-settings" target="_blank">Managing sudo Access</a>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">From the command line, open the sudo configuration file that is located at
+<span class="ph filepath">/etc/sudoers</span> by running this command: <code class="ph codeph">visudo</code>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the file, add the following line of code to disable password access for users in the sudo
+user group: </span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>%sudo ALL=(ALL) NOPASSWD:ALL</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Save your changes to the file.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">On a Windows™ image, create an initial user name and
+password for the image.</span>
+<div class="itemgroup info">See the VMware documentation.</div>
+</li><li class="li step stepexpand" id="cloud_connect_vmware_images__open_ports">
+<span class="ph cmd">Open ports that are required to communicate with your <span class="ph">Deploy</span> server.</span>
+<div class="itemgroup info">By default, open ports 8080 and 8843 to communicate with the server and port 7918 to allow the
+agent that the blueprint designer installs to communicate with the server. See <a class="xref" href="../../install/topics/agent_firewalls.html#agent_firewalls" title="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication.">Firewall and communication configuration</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Install a virtual CD-ROM drive on your image.</span>
+<div class="itemgroup info">See <a class="xref" href="https://docs.vmware.com/en/VMware-Remote-Console/12.0/com.vmware.vmrc.vsphere.doc/GUID-F0240BB4-8C1C-4CE7-9C50-9710C8FAB9E5.html" target="_blank">Add a DVD or CD-ROM Drive to a Virtual
+                        Machine</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Capture the image as a template for the cloud system:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Shut down the image.</span>
+<div class="itemgroup stepxmp">For example, on a Linux image, run the following
+command: <pre class="pre codeblock"><code>shutdown -h now</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">From the VMware vSphere Web Client, find your instance.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Right-click the instance and then click <span class="ph uicontrol">Clone to Template</span> and follow the
+steps to create a template from your image.</span>
+</li>
+</ol>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_connect_vmware_images__postreq__1">What to do next</h2></div>You can use the image with the blueprint designer. See <a class="xref" href="blueprint_edit_vc.html" title="To model a VMware vCenter environment, log in with a VCenter cloud project and specify the VCenter-specific information in a blueprint.">Modeling environments for VMware vCenter</a>.</section>
+</div>
+</article></main></body></html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can use tagging to group target servers for organized deployments."><meta name="DC.relation" scheme="URI" content="../../user/topics/tags_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="groupingtags_tsk"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Grouping servers by using tags</title></head><body id="groupingtags_tsk"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Grouping servers by using tags</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-08a023eb-bd9b-425a-993a-16c23c1435cb">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can use tagging to group target servers for organized deployments.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskgroupingtags_tsk__context__1">About this task</h2></div>By using tags and filtering, you can separate resources that
+represent production servers into two logical groups. If you tag half
+the resources with a blue tag and half with a green tag, then you
+can run deployments in a fashion that is sometimes called blue-green
+deployment. When you plan to deploy a new version of an application
+to a production environment, deploy it to the blue group first. Meanwhile,
+the green group of servers still provides the older version of the
+application. After the new version of the application is deployed
+to the blue group, repeat the process with the green group. In this
+way, you can deploy a new version of software while still providing
+uninterrupted service in your production environment.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskgroupingtags_tsk__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Tag resources, which represent target servers, in two groups.</span>
+<div class="itemgroup info">To learn more about tagging, see <a class="xref" href="addingtags_tsk.html" title="Add tags to objects to simplify object management, to improve object sorting, and to facilitate task execution by tag.">Adding tags to objects</a>. If you have resources that are organized in groups, you can apply a tag to a
+top-level group.</div>
+<div class="itemgroup stepxmp">For example, create top-level groups for the Blue servers and the Green servers. If you tag
+the two top-level groups as <kbd class="ph userinput">Blue</kbd> and <kbd class="ph userinput">Green</kbd>, then all
+resources that a particular group contains are included in deployment steps when you limit
+deployment to a specific tag.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Create two application deployment processes that correspond
+to the two tags.</span><div class="itemgroup info">When you add an <samp class="ph systemoutput sysout">Install
+Component</samp> step to an application process, you can use
+the <span class="ph uicontrol">Limit to Tag</span> field to restrict the deployment
+to resources that have a specific tag.</div></li><li class="li step stepexpand"><span class="ph cmd">Deploy the new version of an application by using the first
+application deployment process.</span><div class="itemgroup stepxmp">For example, deploy
+the application to a group of servers that are tagged as <kbd class="ph userinput">Blue</kbd> servers.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Check that the new version of the application is running
+as expected.</span></li><li class="li step stepexpand"><span class="ph cmd">Deploy the new version of an application by using the other
+application deployment process.</span><div class="itemgroup stepxmp">For example, deploy
+the application to a group of servers that are tagged as <kbd class="ph userinput">Green</kbd> servers.</div>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/tags_ch.html" title="A tag is a user-defined, shared, short label that you use to classify, view, and conduct operations on objects such as applications, components, agents, and resources.">Tags</a></div></div></nav></article></main></body></html>

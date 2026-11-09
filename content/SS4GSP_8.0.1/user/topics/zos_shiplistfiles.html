@@ -1,0 +1,185 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="The ship list file describes the files from the build to include in the new component version to deploy. Ship list files can also use generic artifacts to describe changes that are not physical files, such as configuration changes."><meta name="DC.relation" scheme="URI" content="../../user/topics/deploying_zos.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="zos_shiplistfiles"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Ship list files</title></head><body id="zos_shiplistfiles"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Ship list files</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-61a98e41-deb1-4214-8968-fa11e30af65e">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">The ship list file describes the files from the build to include in the new component
+version to deploy. Ship list files can also use generic artifacts to describe changes that are not
+physical files, such as configuration changes.</p>
+<p class="p"> You must create a ship list file before you run the <span class="keyword">IBM® z/OS®</span> deployment
+tools. Typically, you write a script that works with your build engine
+to create a ship list file from the build output. Ship list files
+are XML files that contain a list of file specifiers.</p>
+<section class="section"><h2 id="zos_shiplistfiles__title__2" class="title sectiontitle">Partitioned data sets</h2><p class="p">Partitioned data set
+(PDS) members are identified by the <span class="keyword parmname">PDS</span> container
+type and the <span class="keyword parmname">PDSmember</span> resource type. You can
+use an asterisk (*) as a wildcard for the resource name, if you want
+all members in a partitioned data set to be included in a package.</p><div class="p">For
+example, to package the BLZCPBTK member from the BLD.JCL PDS and all
+of the members in the BLD.LOAD1 PDS and the ORDRSET and RDBKC01 members
+from the BLD.LOAD2 PDS, the ship list file might contain the following
+lines:<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="CP037"?&gt;
+&lt;manifest type="MANIFEST_SHIPLIST"&gt;
+    &lt;container name="BLD.JCL" type="PDS"&gt;
+        &lt;resource name="BLZCPBTK" type="PDSMember"/&gt;
+    &lt;/container&gt;
+    &lt;container name="BLD.LOAD1" type="PDS"&gt;
+        &lt;resource name="*" type="PDSMember"/&gt;
+    &lt;/container&gt;
+    &lt;container name="BLD.LOAD2" type="PDS"&gt;
+        &lt;resource name="ORDRSET" type="PDSMember"/&gt;
+        &lt;resource name="RDBKC01" type="PDSMember"/&gt;
+    &lt;/container&gt;
+&lt;/manifest&gt;</code></pre></div></section>
+<section class="section"><h2 id="zos_shiplistfiles__title__3" class="title sectiontitle">Sequential data sets</h2><p class="p">Sequential data sets
+are identified by the <span class="keyword parmname">sequential</span> container type.</p><div class="p">For
+example, to package the BLD.DATA1 sequential data set, the ship list
+file might contain the following lines:<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="CP037"?&gt;
+&lt;manifest type="MANIFEST_SHIPLIST"&gt;
+    &lt;container name=" BLD.DATA1" type="sequential"&gt;
+    &lt;/container&gt;
+&lt;/manifest&gt;</code></pre></div></section>
+    <section class="section"><h2 id="zos_shiplistfiles__title__4" class="title sectiontitle">HFS files</h2>
+      
+      <p class="p">Hierarchical file system (HFS) files used in z/OS UNIX are identified by the directory
+        container type and the file resource type. Both container name and resource name support the
+        Ant file include pattern. (For more information about Ant, see <a class="xref" href="https://ant.apache.org/" target="_blank">https://ant.apache.org/</a>.) Each directory container
+        must use the <span class="keyword parmname">rootDir</span> attribute to identify the root directory to
+        resolve files from. Only files in that root directory are considered. </p>
+      <div class="p">For example, to package <span class="ph filepath">*.wsbind</span> files and <span class="ph filepath">*.wsdl</span>
+        files from the <span class="ph filepath">wsbind</span> directory and the  <span class="ph filepath">wsdl</span>
+        directory within the root directory <span class="ph filepath">/u/dave/cicsfiles</span>, the ship list
+        file might contain the following
+        lines:<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="CP037"?&gt;
+&lt;manifest type="MANIFEST_SHIPLIST"&gt;
+    &lt;container name="wsbind" rootDir="/u/dave/cicsfiles" type="directory"&gt;
+        &lt;resource name="*.wsbind" type="file"/&gt;
+    &lt;/container&gt;
+    &lt;container name="wsdl" rootDir="/u/dave/cicsfiles" type="directory"&gt;
+        &lt;resource name="*.wsdl" type="file"/&gt;
+    &lt;/container&gt;
+&lt;/manifest&gt;</code></pre></div>
+      <div class="p">To package everything from the root directory <span class="ph filepath">/u/dave/cicsfiles</span>, the
+        ship list file might contain the following
+        lines:<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="CP037"?&gt;
+&lt;manifest type="MANIFEST_SHIPLIST"&gt;
+    &lt;container name="." rootDir="/u/dave/cicsfiles" type="directory"&gt;
+        &lt;resource name="**/*" type="file"/&gt;
+    &lt;/container&gt;	
+ &lt;/manifest&gt;</code></pre></div>
+      <p class="p">To deploy HFS files, use the same plug-in steps as you use to deploy data sets. HFS files
+        and data sets can be put into the same version and deployed or rolled back together. </p>
+    </section>
+<section class="section"><h2 id="zos_shiplistfiles__title__5" class="title sectiontitle">Deployment types</h2><div class="p">You can set the <span class="keyword parmname">deployType</span> attribute
+on containers and resources. The <span class="keyword parmname">deployType</span> attribute
+is used to identify different types of artifacts so that they can
+be processed differently during a deployment. The following ship list
+file shows <span class="keyword parmname">deployType</span> attributes that are added
+to the previous PDS example:<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="CP037"?&gt;
+&lt;manifest type="MANIFEST_SHIPLIST"&gt;
+    &lt;container name="BLD.JCL" type="PDS" deployType="JCL"&gt;
+        &lt;resource name="BLZCPBTK" type="PDSMember"/&gt;
+    &lt;/container&gt;
+    &lt;container name="BLD.LOAD1" type="PDS" deployType="CICS LOAD"&gt;
+        &lt;resource name="*" type="PDSMember"/&gt;
+    &lt;/container&gt;
+    &lt;container name="BLD.LOAD2" type="PDS"&gt;
+        &lt;resource name="ORDRSET" type="PDSMember" deployType="CICS LOAD"/&gt;
+        &lt;resource name="RDBKC01" type="PDSMember" deployType="CICS LOAD"/&gt;
+    &lt;/container&gt;
+&lt;/manifest&gt;</code></pre></div></section>
+<section class="section"><h2 id="zos_shiplistfiles__title__6" class="title sectiontitle">Custom properties</h2><div class="p">You can add custom properties
+to containers and resources. The properties are displayed in the <span class="keyword wintitle">Version
+Artifacts</span> view and can be used by plug-in steps. For example,
+properties can be used by the <span class="keyword cmdname">Generate Artifact Information</span> step
+in the <span class="keyword">IBM z/OS</span> Utility
+plug-in. The following ship list file shows an example of custom properties.<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="CP037"?&gt;
+&lt;manifest type="MANIFEST_SHIPLIST"&gt;
+    &lt;container name="BLD.DBRM" type="PDS"&gt;
+        &lt;property name="COLLID" value="C001"/&gt;
+        &lt;resource name="MOD01" type="PDSMember"&gt;
+            &lt;property name="devowner" value="Martin"/&gt;
+        &lt;/resource&gt;
+    &lt;/container&gt;
+&lt;/manifest&gt;</code></pre></div>
+<p class="p">You can add custom properties  to the manifest element. When a property is the child of the
+manifest element, it is created as a component version property. If the value of the property is a
+URL, a link is added to the version.</p>
+<p class="p">To learn more about using custom properties, see "Using custom properties in deployments" in the
+<a class="xref" href="https://developer.ibm.com/urbancode/plugindoc/ibmucd/zos-utility-plug/1-2/usage/" target="_blank">z/OS Utility Plug-in</a>.</p></section>
+<section class="section"><h2 id="zos_shiplistfiles__title__7" class="title sectiontitle">Deletions</h2><p class="p">You can mark PDS members, sequential data sets, or HFS files for deletion by specifying the
+        containers inside a <span class="keyword parmname">deleted</span> element. Data sets or HFS files that are
+        marked for deletion are deleted from the target environment when the deployment process
+        runs. The deleted artifacts can be rolled back if the backup option is enabled in the
+        deployment step. If you use the ship list file to delete data sets, you can roll back the
+        deletions as needed.</p><div class="p">For example, the following ship list deploys PGM1 and
+PGM2 and deletes PGM3 from the target environment:<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="CP037"?&gt;
+&lt;manifest type="MANIFEST_SHIPLIST"&gt;
+    &lt;container name="BLD.LOAD1" type="PDS"&gt;
+        &lt;resource name="PGM1" type="PDSMember"/&gt;
+        &lt;resource name="PGM2" type="PDSMember"/&gt;
+    &lt;/container&gt;
+&lt;deleted&gt;
+    	&lt;container name="BLD.LOAD1" type="PDS"&gt;
+        	&lt;resource name="PGM3" type="PDSMember"/&gt;
+	&lt;/container&gt;
+&lt;/deleted&gt;
+&lt;/manifest&gt;</code></pre></div></section>
+<section class="section"><h2 id="zos_shiplistfiles__title__8" class="title sectiontitle">Generic artifacts</h2>
+
+<p class="p">Use generic artifacts to describe changes to deploy that are not physical files. For example, use
+generic artifacts to deploy system configuration changes or middleware configuration changes that
+are not associated with standard artifacts. Generic artifacts have the <code class="ph codeph">GENERIC</code>
+container type.</p>
+<p class="p">For example, the following ship list describes two message queues to deploy to the target
+environment:</p>
+<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="CP037"?&gt;
+&lt;manifest type="MANIFEST_SHIPLIST"&gt;
+&lt;container name="QLOCAL" type="GENERIC" deployType=""&gt;
+  &lt;resource name="LCQ1"&gt;
+    &lt;property name="maxdepth" value="5000"/&gt;
+  &lt;/resource&gt;
+  &lt;resource name="LCQ2"&gt;
+    &lt;property name="maxdepth" value="200000"/&gt;
+  &lt;/resource&gt;
+&lt;/container&gt;
+&lt;/manifest&gt;</code></pre>
+<p class="p">To deploy generic artifacts, use the <span class="keyword cmdname">Generate Artifact Information</span> step from the z/OS Utility plug-in to generate commands for deploying the artifacts. Then, use an appropriate command step to run the commands. Steps that you can use to run commands include the <span class="keyword cmdname">Submit
+Job</span> step, the <span class="keyword cmdname">Shell</span> step, and the <span class="keyword cmdname">TSO/ISPF Command</span>
+step. Other plug-ins can also use the output of the <span class="keyword cmdname">Generate Artifact Information</span>
+step to deploy changes.</p>
+</section>
+<section class="section"><h2 id="zos_shiplistfiles__title__9" class="title sectiontitle">Source information</h2>
+
+<p class="p">You can add source information to PDS members and sequential data sets to build traceability from
+                deployable artifacts to the source code version. The source information is displayed
+                in appropriate views in the <span class="ph">IBM DevOps Deploy (Deploy)</span>
+                server.</p>
+<p class="p">In following example, the source information in the <code class="ph codeph">&lt;inputs&gt;</code> and
+<code class="ph codeph">&lt;input&gt;</code> elements indicate <code class="ph codeph">BLD.LOAD(ORDRSET)</code> is compiled from
+two source code files, a main program ORDERSET and a copybook ORDRDATA. The version of the source
+code is identified by the version attribute.</p>
+<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="CP037"?&gt;
+&lt;manifest type="MANIFEST_SHIPLIST"&gt;
+    &lt;container name="BLD.LOAD" type="PDS"&gt;
+        &lt;resource name="ORDRSET" type="PDSMember"&gt;
+&lt;inputs url=""&gt;
+&lt;input name="ORDRSET" version="3" compileType="Main" url = ""/&gt;
+                &lt;input name="ORDRDATA" version="1" compileType="Copybook" url = ""/&gt;
+             &lt;/inputs&gt;
+	&lt;/resource&gt;
+    &lt;/container&gt;
+&lt;/manifest&gt;
+</code></pre>
+<div class="note note note_note"><span class="note__title">Note:</span> 
+<ul class="ul">
+<li class="li">The ship list file must be encoded in CP037 format. </li>
+<li class="li">In deletions, wildcards must not be used for directory or file names.</li>
+<li class="li">If a data set member name contains invalid characters, the characters are replaced by % to match
+any characters. Valid data set member name characters are <code class="ph codeph"> 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$</code>.</li>
+</ul>
+</div>
+</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/deploying_zos.html" title="Use the toolkit to deploy to the IBM z/OS platform.">Deploying components to the z/OS platform</a></div></div></nav></article></main></body></html>

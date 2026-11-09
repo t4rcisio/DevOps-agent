@@ -1,0 +1,28 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To restore a backup of the server, stop the server and replace the existing files and databases with the backup files and databases."><meta name="DC.relation" scheme="URI" content="../../install/topics/backup_recover.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="arch_data_recovery"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Restoring a backup</title></head><body id="arch_data_recovery"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Restoring a backup</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-cfb8194a-2e26-44ea-b2ee-034246f226b3">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To restore a backup of the server, stop the server and replace the existing files and
+    databases with the backup files and databases.</p>
+    <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskarch_data_recovery__context__1">About this task</h2></div>You can restore the server, and the app data all at once.<p class="p">Restore a backup of the
+                server as follows:</p></section>
+        <section id="arch_data_recovery__steps_jf4_cd3_d1c"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskarch_data_recovery__steps_jf4_cd3_d1c">Procedure</h2></div><ol class="ol steps" id="arch_data_recovery__steps_jf4_cd3_d1c"><li class="li step stepexpand">
+                <span class="ph cmd">Stop the server.</span>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Copy the server files from the backup to the application data directory,
+                    overwriting the current files.</span>
+                <div class="itemgroup info">You must restore the backup files to the same location as the existing files
+                    because configuration files include system paths.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Restore the database from the backup.</span>
+                <div class="itemgroup info">
+                    <div class="note important note_important" id="arch_data_recovery__note_kf4_cd3_d1c"><span class="note__title">Important:</span> You must restore the database from
+                        a backup that was taken at the same time as the backup of the application
+                        data directory.</div>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Restart the server.</span>
+            </li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/backup_recover.html" title="You can back up and recover the contents of your IBM DevOps Deploy (Deploy) installation.">Backup and recover</a></div></div></nav></article></main></body></html>

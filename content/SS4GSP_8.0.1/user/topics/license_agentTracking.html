@@ -1,0 +1,26 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="You can track daily agent usage. Agent usage can provide a rough estimate of agent license use."><meta name="DC.relation" scheme="URI" content="../../user/topics/licenseManage.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="license_agentTracking"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Tracking agent usage</title></head><body id="license_agentTracking"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Tracking agent usage</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f36a0d2b-0028-4e84-9cec-cdcf7adedb87">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">You can track daily agent usage. Agent usage can provide a rough estimate of agent
+license use.</p>
+<p class="p"><span class="ph">IBM DevOps Deploy (Deploy)</span> records the
+            number of agents online and the maximum number of agents deploying at a time. Both
+            measurements are referred to as the agent high-water mark. The records are updated very
+            10 minutes and are aggregated at the end of the day. </p>
+<p class="p">Although the agent usage records do not correspond precisely to agent license use, they can
+provide useful estimates of agent license use. These estimates can be especially useful for
+installations of <span class="ph">Deploy</span> on z/Linux™. If you are using z/Linux, review your agent
+high-water totals quarterly. If you discover that you significantly or routinely exceed your
+licenses, contact your sales representative to ensure that your installation remains compliant.</p>
+<p class="p">The agent usage records can be accessed at the following REST API endpoint:</p>
+<pre class="pre codeblock"><code>https://{hostname}:{port}/cli/agentCLI/usage</code></pre>
+<p class="p">The REST endpoint returns a JSON object with both the highest number of agents online for the
+day, and the maximum number of agents deploying at a time. A typical JSON object returned by the
+command is shown in the following example:
+<code class="ph codeph">{"onlineAgents":5,"agentsrunningDeployments":4}</code>. </p>
+<p class="p">Both measurements are referred to as the agent high-water mark. For information about the CLI
+command, see <a class="xref" href="../../api/topics/udclient_gethighwatermarks.html" title="Return high watermarks for agent usage">getHighWatermarks</a>. For information about the REST API method, see <a class="xref" href="../../api/topics/rest_cli_agentcli_usage_get.html">Return high watermarks for agent usage</a>.</p>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/licenseManage.html" title="IBM DevOps Deploy (Deploy) provides a 60-day license-free evaluation period. You must have a license to use all product features after the evaluation period.">Licensing</a></div></div></nav></article></main></body></html>

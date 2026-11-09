@@ -1,0 +1,113 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The keyrotate tool uses the primary encryption key to re-encrypt database secure data that was encrypted with other keys."><meta name="DC.relation" scheme="URI" content="../../admin/topics/managing_encryption_keys.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rotating_an_encryption_key"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Rotating an encryption key</title></head><body id="rotating_an_encryption_key"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Rotating an encryption key</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-08895c2b-a145-4bf0-a1ca-5f758d0fc098">Edit online</a></span></div>
+    
+    <div class="body taskbody"><p class="shortdesc">The <strong class="ph b"><code class="ph codeph">keyrotate</code></strong> tool uses the primary encryption key to
+        re-encrypt database secure data that was encrypted with other keys. </p>
+        <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrotating_an_encryption_key__context__1">About this task</h2></div>
+            <p class="p">You can run the keyrotate tool in dry-run mode such that the database is not
+                modified, and the tool only demonstrates the changes. The
+                    <span class="keyword cmdname">--change-database</span> argument is required if you want to carry
+                out the changes in the database.  You must take a backup of the database before you
+                use the <span class="keyword cmdname">--change-database</span> argument. </p>
+            <p class="p">The keyrotate tool can be run while the server is online. In an HA cluster, all
+                members share the same database, so you must run the keyrotate tool on only one
+                cluster member.</p>
+            <div class="p">The keytool cannot detect if all members of an HA cluster are using the same primary
+                key. If some servers are using different keys, the tool cannot guarantee that all
+                data has been re-encrypted with the current primary key. To resolve this, update the
+                misconfigured cluster members and re-run the tool by using the following
+                    procedure:<ol class="ol" id="rotating_an_encryption_key__ol_ztk_gvx_x5b">
+                    <li class="li">
+                        <p class="p">Edit the <code class="ph codeph">installed.properties</code> file and set the
+                                    <strong class="ph b"><code class="ph codeph">encryption.keystore.alias</code></strong> property to
+                            the correct alias. </p>
+                        <p class="p">In an HA cluster, each member has its own
+                                <code class="ph codeph">installed.properties</code> file, so each must be edited
+                            individually.</p>
+                    </li>
+                    <li class="li">
+                        <p class="p">Restart the updated server. </p>
+                        <p class="p">The server loads keys and the primary key setting only at startup. In an
+                            HA cluster, you must restart each updated member.</p>
+                    </li>
+                </ol><div class="div"><strong class="ph b">Runtime</strong>
+                </div><div class="div">Generally, the keyrotate tool in dry-run mode requires a significant
+                    amount of time to run. Running the tool with
+                        <span class="keyword cmdname">--change-database</span> argument might take much longer than
+                    the dry-run mode as writes are typically slower than reads. It's important to
+                    note that the run times involved with rotating and deleting the keys depends on
+                    the resources available in the database, and the amount of data that needs to be
+                    processed.</div><div class="div"><strong class="ph b">Rotating 3DES keys</strong>
+                </div><div class="div">When rotating encryption keys, the keyrotate tool displays below error
+                    when a 3DES key is found:</div><div class="div"><samp class="ph systemoutput sysout">Cannot upgrade the server: a
+                        3DES property encryption key was detected. 3DES keys are no longer
+                        supported. Before you can upgrade the server, you must first upgrade to a
+                        7.2.3 release and use the 'keyrotate' tool to replace references to 3DES
+                        keys in your database. Then remove those keys from your property encryption
+                        keystore with 'keydelete' or with your JVM 'keytool'
+                    utility.</samp></div></div>
+            <p class="p">To rotate a secure property encryption key:</p>
+        </section>
+        <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrotating_an_encryption_key__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+                <span class="ph cmd">Create and configure a new primary encryption key. See <a class="xref" href="creating_an_encryption_key.html" title="Use the keycreate tool to create a key for secure property encryption without removing previous keys or changing the primary encryption key.">Creating an encryption key</a> for the procedure.</span>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Dry-run the <span class="keyword cmdname">keyrotate</span> command and verify that the encryption
+                    key is rotating. </span>
+                <div class="itemgroup info">You can use the following supported arguments with the keyrotate
+                        command:<table class="simpletable frame-all" id="rotating_an_encryption_key__simpletable_n1p_hkd_pzb"><colgroup><col style="width:34.602076124567475%"><col style="width:65.39792387543253%"></colgroup><thead><tr class="sthead">
+                            <th class="stentry" scope="col">Supported arguments</th>
+                            <th class="stentry" scope="col">Description</th>
+                        </tr></thead><tbody><tr class="strow">
+                            <td class="stentry"><code class="ph codeph">--workers N</code></td>
+                            <td class="stentry">Sets the number of concurrent workers. The default value is
+                                    <code class="ph codeph">2</code>, and the minimum required value is
+                                    <code class="ph codeph">1</code>. The database must accept N+1 concurrent
+                                connections. Values greater than <code class="ph codeph">8</code> might not reduce
+                                tool execution time.</td>
+                        </tr><tr class="strow">
+                            <td class="stentry">
+                                <p class="p"><code class="ph codeph">--status-interval-secs N</code></p>
+                            </td>
+                            <td class="stentry">
+                                <p class="p">Prints the status of keyrotation every <code class="ph codeph">N</code>
+                                    seconds. The default is <code class="ph codeph">5</code> seconds. You can set
+                                    the interval to <code class="ph codeph">0</code> to disable printing.</p>
+                                <p class="p">Changes are logged into the <span class="ph filepath">stdout</span> file. To
+                                    troubleshoot errors, check the <span class="ph filepath">stderr</span> log
+                                    file.</p>
+                            </td>
+                        </tr></tbody></table></div>
+                <div class="itemgroup stepresult">The output demonstrates the changes without making actual changes to the
+                    database.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">For a real-run execution, run <span class="keyword cmdname">keyrotate</span> with the
+                        <span class="keyword cmdname">--change-database</span> argument to rotate the encryption keys. </span>
+                <div class="itemgroup info">Running the keyrotate tool with the <code class="ph codeph">--change-database</code> flag
+                    enables modification of the database.</div>
+                <div class="itemgroup info">
+                    <pre class="pre codeblock" id="rotating_an_encryption_key__codeblock_imh_zsz_vyb"><code>./keyrotate --product-home "/opt/devops-deploy/server" --change-database</code></pre>
+                </div>
+                <div class="itemgroup info">
+                    <div class="p">
+                        <div class="note note note_note" id="rotating_an_encryption_key__note_is5_p3b_rzb"><span class="note__title">Note:</span> Use the same arguments for both the steps to
+                            ensure that the dry-run is as close as the real run.</div>
+                    </div>
+                </div>
+                <div class="itemgroup stepresult">The keyrotate tool lists the keys in keystore, the keynames, and their
+                    rotation status. An example output is shown
+                        below:<pre class="pre codeblock" id="rotating_an_encryption_key__codeblock_qwx_myz_vyb"><code>key=[desedekey&lt;<var class="keyword varname">key1</var>&gt;] refs=0 replaced=0
+key=[aes128key&lt;<var class="keyword varname">key2</var>&gt;] refs=2 replaced=2
+key=[aes128key&lt;<var class="keyword varname">key3</var>&gt;] refs=0 replaced=0
+key=[aes128key&lt;<var class="keyword varname">key4</var>&gt;] refs=12953555 replaced=0
+key=[desedekey&lt;<var class="keyword varname">key5</var>&gt;] refs=0 replaced=0
+unknown=[desedekey&lt;<var class="keyword varname">key6</var>&gt; refs=10</code></pre><div class="note note note_note" id="rotating_an_encryption_key__note_knj_qyz_vyb"><span class="note__title">Note:</span> For best results, do not delete
+                        previous keys. You might require them to decrypt older data that was
+                        encrypted with the previous keys. See <a class="xref" href="deleting_an_encryption_key.html" title="The keydelete command removes a key for secure property encryption.">Deleting an encryption key</a> for the procedure and an
+                        explanation for why this is not recommended. However, you must delete any
+                        3DES keys to be able to use 7.3.0 or newer versions. The keyname in output
+                        can be used to delete the 3DES keys.</div></div>
+            </li></ol></section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/managing_encryption_keys.html" title="Using the encryption key tools, you can manage your encryption keys.">Encryption key tools</a></div></div></nav></article></main></body></html>

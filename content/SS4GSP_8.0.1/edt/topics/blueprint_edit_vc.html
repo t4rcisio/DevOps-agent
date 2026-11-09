@@ -1,0 +1,263 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To model a VMware vCenter environment, log in with a VCenter cloud project and specify the VCenter-specific information in a blueprint."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueprint_edit_vc"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Modeling environments for VMware vCenter</title></head><body id="blueprint_edit_vc"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Modeling environments for VMware vCenter</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-8c98da1e-7a55-4cc3-b77a-191bb59e35fc">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To model a VMware vCenter environment, log in with a VCenter cloud project and specify
+the VCenter-specific information in a blueprint.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit_vc__prereq__1">Before you begin</h2></div>
+<ul class="ul">
+<li class="li">Login to the Blueprint Designer.</li>
+<li class="li">For Heat blueprints only:<ul class="ul" id="blueprint_edit_vc__d362e27">
+<li class="li">Connect the blueprint design server to a cloud system. See <a class="xref" href="security_cloud_connection.html" title="To create a connection to a cloud to use with the blueprint designer, you use OpenStack Heat. You specify the location of the identity server and the engine to use. The steps are different for each type of cloud.">Connecting to clouds through the blueprint designer</a></li>
+<li class="li">Make sure that your user account is authenticated to a cloud system. See <a class="xref" href="../../admin/topics/security_auth_bds.html" title="You can provide users of the blueprint designer the permissions to access clouds in two ways. You can provide functional IDs through cloud projects, or you can use accounts on an OpenStack cloud that already have permissions.">Setting up access to clouds in the blueprint designer</a>.</li>
+<li class="li" id="blueprint_edit_vc__d362e38"><span class="ph" id="blueprint_edit_vc__d362e39">Connect the blueprint design server to the server. See
+<a class="xref" href="../../user/topics/p_integrate.html" title="In most cases, you connect the blueprint design server to the server at installation time, but you can also connect them later.">Connecting the blueprint design server to the server</a>.</span></li>
+<li class="li">At the top of the page, select the cloud project and region to use.</li>
+</ul></li>
+</ul>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit_vc__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create the blueprint.</span>
+<div class="itemgroup info">See <a class="xref" href="blueprint_edit.html#blueprint_edit" title="You can create projects, blueprints, configuration files, folders, and many other type of the files in the blueprint designer.">Creating files</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add resources from the palette to the blueprint, such as virtual images.</span>
+<div class="itemgroup info">The palette shows resources from the currently connected cloud, which is shown in the
+upper-right corner of the page. For more information on working with the blueprint designer, see
+<a class="xref" href="blueprint_diagram.html" title="You can edit Terraform blueprints in a graphical editor.">Editing Terraform blueprint diagram</a> and <a class="xref" href="blueprint_source.html" title="You can edit the Heat Orchestration Template (HOT) source code of blueprints directly.">Editing blueprint source code</a>.</div>
+</li><li class="li step stepexpand" id="blueprint_edit_vc__custom_spec">
+<span class="ph cmd">Specify the property for the customization specification.</span>
+<div class="itemgroup info">VMware Tools must be installed on the image to specify the customization spec. In the
+<span class="keyword parmname">OS::Nova::Server</span> resource for the image, add and define the
+<span class="keyword parmname">customization_spec</span> extended property, as shown in the following
+code:<pre class="pre codeblock"><code>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:
+    vmware_properties:
+      <strong class="ph b">customization_spec: your-customization-spec-name
+      use_cloudinit: False
+      init_password: password
+      init_username: user_name</strong></code></pre><div class="p">In
+the <code class="ph codeph">vmware_properties</code> property, specify the following properties:<dl class="dl">
+
+<dt class="dt dlterm"><span class="keyword parmname">customization_spec</span></dt>
+<dd class="dd">The name of an existing vCenter customization specification.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">use_cloudinit</span></dt>
+<dd class="dd">Whether to use cloud-init. In most cases, the value of this property is
+<kbd class="ph userinput">False</kbd>. Set this value to <kbd class="ph userinput">True</kbd> only if you apply Chef
+roles to images.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">init_password</span></dt>
+<dd class="dd">The password for the user name. For Linux™ images, you
+must provide a value. For Windows™ images, you do not
+provide a value.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">init_username</span></dt>
+<dd class="dd">The user name for the virtual image. For Linux images,
+provide a value if you are not using <kbd class="ph userinput">root</kbd>. For Windows images, you do not provide a value.</dd>
+
+</dl></div></div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">To provision the images in a specific folder on the cloud, add a
+<span class="keyword parmname">destination_folder</span> extended property to each image, as in the following example
+code.</span>
+<div class="itemgroup info">The target folder must already exist on the vCenter system.</div>
+<div class="itemgroup stepxmp">
+<pre class="pre codeblock"><code>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:
+    vmware_properties:
+      destination_folder: "/MyImageFolder/MyNewImages"</code></pre>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify whether to provision the images on a cluster or on a resource pool.</span>
+<ul class="ul choices">
+<li class="li choice">To provision the images on a cluster, the cluster must have enabled support for DRS
+(Distributed Resource Scheduler). Then, on each image, specify the <span class="keyword parmname">cluster</span>
+extended property on the image, as in the following example. You can specify a literal value or you
+can make this property a parameter and specify it at provisioning
+time.<pre class="pre codeblock"><code>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:
+    vmware_properties:
+      cluster: { get_param: cluster }</code></pre></li>
+<li class="li choice">To provision the images on a resource pool, specify the <span class="keyword parmname">resource_pool</span>
+extended property, as in the following example. You can specify a literal value or you can make this
+property a parameter and specify it at provisioning
+time.<pre class="pre codeblock"><code>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:
+    vmware_properties:
+      resource pool: { get_param: resourcePool }</code></pre></li>
+</ul>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> Do not specify both the <span class="keyword parmname">cluster</span> and <span class="keyword parmname">resource_pool</span>
+extended properties. If you do, the environment fails to provision.</div>
+</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">To provision Linux images to a static network in a
+cloud, specify the properties for the network.</span>
+<div class="itemgroup info">In the <span class="keyword parmname">OS::Neutron::Port</span> resource for the image, add and define the
+<span class="keyword parmname">fixed_ips</span> property and the <span class="keyword parmname">vmware_properties</span> extended
+properties, as shown in the following
+code:<pre class="pre codeblock"><code>
+linux_image_A__to__myNetwork__port:
+      type: OS::Neutron::Port 
+      properties:
+          <strong class="ph b">fixed_ips:
+               - ip_address: 10.10.10.212</strong>
+          network_id: { get_param: network-id__for__myNetwork }
+          replacement_policy: AUTO
+      metadata:
+          <strong class="ph b">vmware_properties:
+          gateway: 10.10.10.1
+          dns: ['11.110.135.31', '11.110.135.52']
+          subnet_mask: 255.255.255.0
+          hostname: your-host-name
+          domain_name: your-domain-name.com</strong>
+</code></pre><div class="p">In
+the <code class="ph codeph">fixed_ips</code> property, specify the following properties:<dl class="dl">
+
+<dt class="dt dlterm"><span class="keyword parmname">ip_address</span></dt>
+<dd class="dd"> The IP address that is wanted in the subnet for this port.</dd>
+
+</dl></div><div class="p">In the <code class="ph codeph">vmware_properties</code> metadata, specify the following properties:<dl class="dl">
+
+<dt class="dt dlterm"><span class="keyword parmname">gateway</span></dt>
+<dd class="dd">The IP address of the gateway.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">dns</span></dt>
+<dd class="dd">A list of DNS name servers to be used.</dd>
+
+</dl><dl class="dl">
+
+<dt class="dt dlterm"><span class="keyword parmname">subnet_mask</span></dt>
+<dd class="dd">The subnet mask defines a range of IP addresses available within a network and limits the number
+of valid IPs for a specific network.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">hostname</span></dt>
+<dd class="dd">The hostname of the instance.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">domain_name</span></dt>
+<dd class="dd">The domain name of the DHCP pool.</dd>
+
+</dl></div></div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If you configured your provisioned virtual image for SSH, to access to the virtual image
+through SSH, you must add resources to the blueprint source code.</span>
+<div class="itemgroup info"></div>
+<ul class="ul choices">
+<li class="li choice">If your virtual image does not contain a component, add the
+<code class="ph codeph">OS::Heat::MultipartMime</code> and <code class="ph codeph">OS::Heat::CloudConfig</code> resources:<pre class="pre codeblock"><code>  <var class="keyword varname">multipart</var>:
+    type: OS::Heat::MultipartMime
+    properties:
+      parts:
+        - config: {get_resource: <var class="keyword varname">cloud_config</var>}
+        subtype: cloud-config
+
+  <var class="keyword varname">cloud_config</var>:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        users:
+          - default
+          - name: "<var class="keyword varname">user_ID</var>"
+            lock-passwd: true
+            sudo: ALL=(ALL) NOPASSWD:ALL
+            ssh-authorized-keys:
+              - { get_param: key_name }</code></pre><ul class="ul">
+<li class="li">For the <var class="keyword varname">user_ID</var>, specify the login ID for the virtual image.</li>
+<li class="li">Ensure that the resource name of the <code class="ph codeph">OS::Heat::CloudConfig</code> resource is
+specified in the <kbd class="ph userinput">- config: {get_resource: <var class="keyword varname">cloud_config</var>}</kbd>
+property in the <code class="ph codeph">OS::Heat::MultipartMime</code> resource.</li>
+<li class="li">The <kbd class="ph userinput">key_name</kbd> parameter must be in the following form:
+<pre class="pre codeblock"><code>parameters:
+  key_name: "ssh-rsa s1AAB3Nza45yc2EA27AADAQADDABAQC jsmith@example.com"</code></pre></li>
+</ul><div class="p">Additionally, the <code class="ph codeph">OS::Nova::Server</code> resource must contain the
+<code class="ph codeph">user_data_format</code> and <code class="ph codeph">user_data</code> properties. For example, if your
+virtual image name is <kbd class="ph userinput">linux_image_B</kbd>, the <code class="ph codeph">OS::Nova::Server</code>
+resource contains the following
+code:<pre class="pre codeblock"><code>linux_image_B:
+  type: OS::Nova::Server
+  properties:
+    user_data_format: SOFTWARE_CONFIG
+    user_data: {get_resource: <var class="keyword varname">multipart</var>}</code></pre></div><p class="p">Ensure
+that the resource name of the <code class="ph codeph">OS::Heat::MultipartMime</code> resource is specified in the
+<kbd class="ph userinput">user_data: {get_resource: <var class="keyword varname">multipart</var>}</kbd> property in the
+<code class="ph codeph">OS::Nova::Server</code> resource.</p></li>
+<li class="li choice">If your virtual image does contain a component, add the
+<code class="ph codeph">OS::Heat::CloudConfig</code> resource: <pre class="pre codeblock"><code>  cloud_config:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        users:
+          - default
+          - name: "<var class="keyword varname">user_ID</var>"
+            lock-passwd: true
+            sudo: ALL=(ALL) NOPASSWD:ALL
+            ssh-authorized-keys:
+              - { get_param: key_name }
+            </code></pre><ul class="ul">
+<li class="li">For the <var class="keyword varname">user_ID</var>, specify the login ID for the virtual machine.</li>
+<li class="li">The <kbd class="ph userinput">key_name</kbd> parameter must be in the following form:
+<pre class="pre codeblock"><code>parameters:
+  key_name: "ssh-rsa s1AAB3Nza45yc2EA27AADAQADDABAQC jsmith@example.com"</code></pre></li>
+</ul>Additionally, the <code class="ph codeph">OS::Heat::MultipartMime</code> must contain the <code class="ph codeph">- config:
+{get_resource: cloud_config}</code> resource. For example, if your virtual image name is
+<kbd class="ph userinput">linux_image_B</kbd>, the <code class="ph codeph">OS::Heat::MultipartMime</code> resource
+resembles the following
+code:<pre class="pre codeblock"><code>  linux_image_B_cloudinit_mime:
+    type: OS::Heat::MultipartMime
+    properties:
+      parts:
+        - config: {get_resource: ucd_agent_install_linux }
+        - config: {get_resource: cloud_config}
+        subtype: cloud-config</code></pre></li>
+<li class="li choice">If you configured a virtual image for SSH and later added a component to it, you must add
+the following property to the <code class="ph codeph">OS::Heat::MultipartMime</code> resource: <code class="ph codeph">- config:
+{get_resource: ucd_agent_install_linux }</code><p class="p">The <code class="ph codeph">OS::Heat::MultipartMime</code>
+resource resembles the following
+code:</p><pre class="pre codeblock"><code>  multipart:
+    type: OS::Heat::MultipartMime
+    properties:
+      parts:
+        - config: {get_resource: cloud_config}
+        subtype: cloud-config
+        - config: {get_resource: ucd_agent_install_linux }</code></pre></li>
+</ul>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create a configuration file and externalize properties to the file.</span>
+<div class="itemgroup info">See <a class="xref" href="blueprint_configs.html" title="Configuration files are lists of properties and values. You can use configuration files to provision the same blueprint on multiple cloud systems.">Editing configuration files</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the configuration file, ensure that the core OpenStack types are mapped to VMware vCenter
+types.</span>
+<div class="itemgroup info">The configuration file must have mapping similar to the following
+code:<pre class="pre codeblock"><code>resource_registry:
+  OS::Nova::Server : IBM::VCenter::Server
+  OS::Neutron::Port : IBM::VCenter::Port
+  OS::Neutron::Net : IBM::VCenter::Network</code></pre></div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit_vc__postreq__1">What to do next</h2></div>
+<p class="p">Add the components of your application to the blueprint. See <a class="xref" href="blueprint_deploy_env.html" title="Add components to a blueprint so that when you provision environments from the blueprint, the engine automatically installs the components.">Deploying components with blueprints</a>.</p>
+</section>
+</div>
+</article></main></body></html>

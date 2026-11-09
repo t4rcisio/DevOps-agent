@@ -1,0 +1,80 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="This document includes information about the hardware, containers, prerequisite software, supported operating system, and database requirements with component level detail for the IBM DevOps Deploy (Deploy)."><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="system_requirements"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>System Requirements</title></head><body id="system_requirements"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">System Requirements</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-cae50e85-9097-42b4-9ece-d45d853d78d7">Edit online</a></span></div>
+    
+    <div class="body conbody"><p class="shortdesc">This document includes information about the hardware, containers, prerequisite
+        software, supported operating system, and database requirements with component level detail
+        for the <span class="ph">IBM DevOps Deploy (Deploy)</span>.</p>
+        <section class="section" id="system_requirements__section_iy5_dq4_wzb"><h2 id="system_requirements__section_iy5_dq4_wzb__title__1" class="title sectiontitle">Contents</h2>
+            
+            <ul class="ul" id="system_requirements__ul_dpb_5q4_wzb">
+                <li class="li"><a class="xref" href="hardware.html" title="You can find information about the hardware requirements for different operating systems that support IBM DevOps Deploy (Deploy).">Hardware</a><ul class="ul" id="system_requirements__ul_szr_bsx_g1c">
+                        <li class="li"><a class="xref" href="hardware.html#hardware__section_hl2_w53_wyb">AIX</a></li>
+                        <li class="li"><a class="xref" href="hardware.html#hardware__lin_hw">Linux</a></li>
+                        <li class="li"><a class="xref" href="hardware.html#hardware__mac_hw">Mac OS</a></li>
+                        <li class="li"><a class="xref" href="hardware.html#hardware__section_xbd_ngx_wyb">Solaris</a></li>
+                        <li class="li"><a class="xref" href="hardware.html#hardware__win_hw">Windows</a></li>
+                        <li class="li"><a class="xref" href="hardware.html#hardware__section_mmk_wgx_wyb">z/OS</a></li>
+                    </ul></li>
+                <li class="li"><a class="xref" href="sys_req_hypervisors.html" title="You can find information about the operating system requirements for hypervisors to run IBM DevOps Deploy (Deploy).">Hypervisors</a><ul class="ul" id="system_requirements__ul_zgd_qsx_g1c">
+                        <li class="li"><a class="xref" href="sys_req_hypervisors.html#sys_req_hypervisors__section_mtq_mgp_wzb">AIX</a></li>
+                        <li class="li"><a class="xref" href="sys_req_hypervisors.html#sys_req_hypervisors__section_ebh_kjp_wzb">Linux</a></li>
+                        <li class="li"><a class="xref" href="sys_req_hypervisors.html#sys_req_hypervisors__section_xvy_kjp_wzb">Windows</a></li>
+                    </ul></li>
+                <li class="li"><a class="xref" href="Sys_Req_container.html" title="You can find information about hardware and embedded software requirements for containers to run the IBM DevOps Deploy (Deploy).">Containers</a></li>
+                <li class="li"><a class="xref" href="sys_req_sw.html">Prerequisite software</a><ul class="ul" id="system_requirements__ul_b5f_zsx_g1c">
+                        <li class="li"><a class="xref" href="sysreq_prereqsw.html#sysreq_prereqsw__section_bgb_xc5_m1c">Java distributions</a></li>
+                        <li class="li"><a class="xref" href="sysreq_prereqsw.html#sysreq_prereqsw__section_cdg_tbp_d1c">Licensing requirements</a></li>
+                        <li class="li"><a class="xref" href="sysreq_prereqsw.html#sysreq_prereqsw__section_rkl_tbp_d1c">Web browsers</a></li>
+                    </ul></li>
+                <li class="li"><a class="xref" href="sysreq_operating_systems.html" title="You can find the operating systems that IBM DevOps Deploy (Deploy) supports. They are organized by operating-system family.">Operating
+                        systems</a><ul class="ul" id="system_requirements__ul_hbq_gtx_g1c">
+                        <li class="li"><a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__section_tcs_rtl_wnb">Bit version support</a></li>
+                        <li class="li"><a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__section_h4m_2rm_vyb">AIX</a></li>
+                        <li class="li"><a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__lin">Linux</a></li>
+                        <li class="li"><a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__mac">Mac
+                                OS</a></li>
+                        <li class="li"><a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__win">Solaris</a></li>
+                        <li class="li"><a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__mob">Windows</a></li>
+                        <li class="li"><a class="xref" href="sysreq_operating_systems.html#sys_req_ui_os__section_rcv_swb_wyb">z/OS</a></li>
+                    </ul></li>
+                <li class="li"><a class="xref" href="SysReq_database.html" title="You can find information about the database requirements for IBM DevOps Deploy (Deploy).">Database</a></li>
+            </ul>
+        </section>
+        
+        <section class="section" data-hd-otherprops="ibm" id="system_requirements__section_amm_3rx_g1c"><h2 id="system_requirements__section_amm_3rx_g1c__title__1" class="title sectiontitle">Disclaimers</h2>
+            
+            <p class="p">This report is subject to the Terms of Use <a class="xref" href="https://www.ibm.com/legal/us/en/" target="_blank">(https://www.ibm.com/legal/us/en/</a>) and the following disclaimers:</p>
+            <p class="p">The information contained in this report is provided for informational purposes only.
+                While efforts were made to verify the completeness and accuracy of the information
+                contained in this publication, it is provided AS IS without warranty of any kind,
+                express or implied, including but not limited to the implied warranties of
+                merchantability, non-infringement, and fitness for a particular purpose. In
+                addition, this information is based on IBM’s current product plans and strategy,
+                which are subject to change by IBM without notice. IBM shall not be responsible for
+                any direct, indirect, incidental, consequential, special or other damages arising
+                out of the use of, or otherwise related to, this report or any other materials.
+                Nothing contained in this publication is intended to, nor shall have the effect of,
+                creating any warranties or representations from IBM or its suppliers or licensors,
+                or altering the terms and conditions of the applicable license agreement governing
+                the use of IBM software.</p>
+            <p class="p">References in this report to IBM products, programs, or services do not imply that
+                they will be available in all countries in which IBM operates. Product release dates
+                and/or capabilities referenced in this presentation may change at any time at IBM’s
+                sole discretion based on market opportunities or other factors, and are not intended
+                to be a commitment to future product or feature availability in any way. The
+                underlying database used to support these reports is refreshed on a weekly basis.
+                Discrepancies found between reports generated using this web tool and other IBM
+                documentation sources may or may not be attributed to different publish and refresh
+                cycles for this tool and other sources. Nothing contained in this report is intended
+                to, nor shall have the effect of, stating or implying that any activities undertaken
+                by you will result in any specific sales, revenue growth, savings or other results.
+                You assume sole responsibility for any results you obtain or decisions you make as a
+                result of this report.</p>
+            <p class="p">Notwithstanding the Terms of Use (<a class="xref" href="https://www.ibm.com/legal/us/en/" target="_blank">https://www.ibm.com/legal/us/en/</a>), users
+                of this site are permitted to copy and save the reports generated from this tool for
+                such users own internal business purpose. No other use shall be permitted.</p>
+        </section>
+    </div>
+</article></main></body></html>

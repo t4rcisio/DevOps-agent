@@ -1,0 +1,289 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Depending on the context of the notification, you can insert parameters into the notification template. When the notification is sent, these parameters are replaced with values such as the names and information about applications, components, and processes."><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="notification_params"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Parameters for notification templates</title></head><body id="notification_params"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Parameters for notification templates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ed386c14-b1bd-496b-ae02-7e8c5e30277f">Edit online</a></span></div>
+
+<div class="body refbody"><p class="shortdesc">Depending on the context of the notification, you can insert
+parameters into the notification template. When the notification is
+sent, these parameters are replaced with values such as the names
+and information about applications, components, and processes.</p>
+<section class="section"><div class="note note note_note"><span class="note__title">Note:</span> Not all parameters are available in all contexts. For
+example, when you run a generic process, parameters that are related
+to applications are not available.</div></section>
+<table class="table"><caption><span class="table--title-label">Table 1. </span><span class="title">General parameters</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="notification_params__entry__1">Parameter</th>
+<th class="entry" id="notification_params__entry__2">Description</th>
+<th class="entry" id="notification_params__entry__3">Example</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="notification_params__entry__1"><span class="keyword parmname">$externalUrl()</span></td>
+<td class="entry" headers="notification_params__entry__2">The URL of the server</td>
+<td class="entry" headers="notification_params__entry__3"><code class="ph codeph">http://myserver.example.com:8443</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__1"><span class="keyword parmname">$request</span></td>
+<td class="entry" headers="notification_params__entry__2">The request that caused the notification, such
+as an application process request</td>
+<td class="entry" headers="notification_params__entry__3"><code class="ph codeph">ApplicationProcessRequest#74ae3853-3444-4d7d-a0f3-68107f47b29f</code></td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 2. </span><span class="title">Application parameters</span><span class="desc tabledesc">When the notification
+has an application in scope, such as when an application process runs,
+these parameters provide information about that application.</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="notification_params__entry__10">Parameter</th>
+<th class="entry" id="notification_params__entry__11">Description</th>
+<th class="entry" id="notification_params__entry__12">Example</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="notification_params__entry__10"><span class="keyword parmname">$application.getName()</span></td>
+<td class="entry" headers="notification_params__entry__11">The name of the application</td>
+<td class="entry" headers="notification_params__entry__12"><code class="ph codeph">My application</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__10"><span class="keyword parmname">$application.getId()</span></td>
+<td class="entry" headers="notification_params__entry__11">The ID of the application</td>
+<td class="entry" headers="notification_params__entry__12"><code class="ph codeph">b37054b7-7b20-49b6-973d-fd0ee0b1b62b</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__10"><span class="keyword parmname">$application.getDescription()</span></td>
+<td class="entry" headers="notification_params__entry__11">The description of the application</td>
+<td class="entry" headers="notification_params__entry__12"><code class="ph codeph">This is my application</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__10"><span class="keyword parmname">$application.getPath()</span></td>
+<td class="entry" headers="notification_params__entry__11">The URL path of the application</td>
+<td class="entry" headers="notification_params__entry__12"><code class="ph codeph">applications/b37054b7-7b20-49b6-973d-fd0ee0b1b62b</code></td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 3. </span><span class="title">Application process parameters</span><span class="desc tabledesc">When the
+notification is responding to an application process, these parameters
+provide information about that application process.</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="notification_params__entry__25">Parameter</th>
+<th class="entry" id="notification_params__entry__26">Description</th>
+<th class="entry" id="notification_params__entry__27">Example</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="notification_params__entry__25"><span class="keyword parmname">$applicationProcess.getId()</span></td>
+<td class="entry" headers="notification_params__entry__26">The ID of the application process</td>
+<td class="entry" headers="notification_params__entry__27"><code class="ph codeph">50d5bca2-d8d9-47f2-a0ce-5b75b3f24d3b</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__25"><span class="keyword parmname">$applicationProcess.getName()</span></td>
+<td class="entry" headers="notification_params__entry__26">The name of the application process</td>
+<td class="entry" headers="notification_params__entry__27"><code class="ph codeph">Deploy application</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__25"><span class="keyword parmname">$appRequest.getPropSheet().getPropValue()</span></td>
+<td class="entry" headers="notification_params__entry__26">The name of the application process property.</td>
+<td class="entry" headers="notification_params__entry__27"><code class="ph codeph">property_name</code></td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 4. </span><span class="title">Environment parameters</span><span class="desc tabledesc">When the notification
+is responding to an application process, these parameters provide
+information about the environment on which the process ran.</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="notification_params__entry__37">Parameter</th>
+<th class="entry" id="notification_params__entry__38">Description</th>
+<th class="entry" id="notification_params__entry__39">Example</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="notification_params__entry__37"><span class="keyword parmname">$environment.getId()</span></td>
+<td class="entry" headers="notification_params__entry__38">The ID of the application</td>
+<td class="entry" headers="notification_params__entry__39"><code class="ph codeph">072a54df-8c3a-4b23-a660-323cf205c86c</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__37"><span class="keyword parmname">$environment.getName()</span></td>
+<td class="entry" headers="notification_params__entry__38">The name of the environment</td>
+<td class="entry" headers="notification_params__entry__39"><code class="ph codeph">Environment 1</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__37"><span class="keyword parmname">$environment.getDescription()</span></td>
+<td class="entry" headers="notification_params__entry__38">The description of the environment</td>
+<td class="entry" headers="notification_params__entry__39"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__37"><span class="keyword parmname">$environment.getColor()</span></td>
+<td class="entry" headers="notification_params__entry__38">The color that is assigned to the environment
+in the table of environments</td>
+<td class="entry" headers="notification_params__entry__39"><code class="ph codeph">#00B2EF</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__37"><span class="keyword parmname">$environment.isRequireApprovals()</span></td>
+<td class="entry" headers="notification_params__entry__38">True if the environment requires approvals</td>
+<td class="entry" headers="notification_params__entry__39"></td>
+</tr>
+
+</tbody></table>
+<section class="section">You can retrieve an array of application process versions
+with the parameter <span class="keyword parmname">$versions</span>. For the size of
+the array, use the parameter <span class="keyword parmname">$versions.size()</span>.
+To access individual versions within this array, access them with
+a loop as in the following example:<pre class="pre codeblock"><code>&lt;div class="data-table-container"&gt;
+#if ($versions.size() &gt; 0)
+  &lt;h3&gt;Versions Included:&lt;/h3&gt;
+  &lt;table class="data-table" cellpadding="4" cellspacing="1" width="100%"&gt;
+   &lt;thead class="data-table-head"&gt;
+      &lt;th style="text-align:left;" scope="col" valign="middle"&gt;Component&lt;/th&gt;
+      &lt;th style="text-align:left;" scope="col" valign="middle"&gt;Version&lt;/th&gt;
+      &lt;th style="text-align:left;" scope="col" valign="middle"&gt;Description&lt;/th&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+    #foreach ($version in $versions)
+      #if ($velocityCount % 2 == 1)
+          #set ($rowClass = "odd")
+      #else
+          #set ($rowClass = "even")
+      #end
+      &lt;tr class="$rowClass"&gt;
+       &lt;td&gt;$version.getComponent().getName()&lt;/td&gt;
+       &lt;td&gt;$version.getName()&lt;/td&gt;
+       &lt;td&gt;
+         #if ($version.getDescription())
+           $version.getDescription()
+         #end
+       &lt;/td&gt;
+     &lt;/tr&gt;
+    #end
+   &lt;/tbody&gt;
+  &lt;/table&gt;
+#else
+  &lt;h3&gt;No Versions Included&lt;/h3&gt;
+#end
+&lt;/div&gt;</code></pre>Within the loop, you can access information about
+the individual versions with the parameters in the following table:<table class="table"><caption><span class="table--title-label">Table 5. </span><span class="title">Version parameters</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="notification_params__entry__55">Parameter</th>
+<th class="entry" id="notification_params__entry__56">Description</th>
+<th class="entry" id="notification_params__entry__57">Example</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="notification_params__entry__55"><span class="keyword parmname">$version.getName()</span></td>
+<td class="entry" headers="notification_params__entry__56">The name of the component version</td>
+<td class="entry" headers="notification_params__entry__57"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__55"><span class="keyword parmname">$version.getComponent()</span></td>
+<td class="entry" headers="notification_params__entry__56">The component</td>
+<td class="entry" headers="notification_params__entry__57"></td>
+</tr>
+</tbody></table></section>
+<table class="table"><caption><span class="table--title-label">Table 6. </span><span class="title">Snapshot parameters</span><span class="desc tabledesc">When you run a deployment
+with a snapshot, these parameters return information about that snapshot.</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="notification_params__entry__64">Parameter</th>
+<th class="entry" id="notification_params__entry__65">Description</th>
+<th class="entry" id="notification_params__entry__66">Example</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="notification_params__entry__64"><span class="keyword parmname">$snapshot.getId()</span></td>
+<td class="entry" headers="notification_params__entry__65">The ID of the snapshot</td>
+<td class="entry" headers="notification_params__entry__66"><code class="ph codeph">5d95883f-be45-4abe-8664-3ca6a7635a12</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__64"><span class="keyword parmname">$snapshot.getName()</span></td>
+<td class="entry" headers="notification_params__entry__65">The name of the snapshot</td>
+<td class="entry" headers="notification_params__entry__66"><code class="ph codeph">My snapshot</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__64"><span class="keyword parmname">$snapshot.getDescription()</span></td>
+<td class="entry" headers="notification_params__entry__65">The description of the snapshot</td>
+<td class="entry" headers="notification_params__entry__66"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__64"><span class="keyword parmname">$snapshot.getCreatedDate()</span></td>
+<td class="entry" headers="notification_params__entry__65">The creation date of the snapshot</td>
+<td class="entry" headers="notification_params__entry__66"><code class="ph codeph">Fri Mar 20 09:56:42 EDT 2015</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__64"><span class="keyword parmname">$snapshot.getCreatedTime()</span></td>
+<td class="entry" headers="notification_params__entry__65">The creation time of the snapshot in UNIX™ format</td>
+<td class="entry" headers="notification_params__entry__66"><code class="ph codeph">1418136059500</code></td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 7. </span><span class="title">User parameters</span><span class="desc tabledesc">These parameters return
+information about the user that requested a process.</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="notification_params__entry__82">Parameter</th>
+<th class="entry" id="notification_params__entry__83">Description</th>
+<th class="entry" id="notification_params__entry__84">Example</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="notification_params__entry__82"><span class="keyword parmname">$user.getId()</span></td>
+<td class="entry" headers="notification_params__entry__83">The ID of the user</td>
+<td class="entry" headers="notification_params__entry__84"><code class="ph codeph">20000000000000000000000001000000</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__82"><span class="keyword parmname">$user.getName()</span></td>
+<td class="entry" headers="notification_params__entry__83">The user name</td>
+<td class="entry" headers="notification_params__entry__84"><code class="ph codeph">jsmith</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__82"><span class="keyword parmname">$user.getActualName()</span></td>
+<td class="entry" headers="notification_params__entry__83">The full name of the user</td>
+<td class="entry" headers="notification_params__entry__84"><code class="ph codeph">Joe Smith</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__82"><span class="keyword parmname">$user.getEmail()</span></td>
+<td class="entry" headers="notification_params__entry__83">The email address of the user</td>
+<td class="entry" headers="notification_params__entry__84"><code class="ph codeph">jsmith@example.com</code></td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 8. </span><span class="title">Approval parameters</span><span class="desc tabledesc">These parameters are
+available for approvals.</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="notification_params__entry__97">Parameter</th>
+<th class="entry" id="notification_params__entry__98">Description</th>
+<th class="entry" id="notification_params__entry__99">Example</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="notification_params__entry__97"><span class="keyword parmname">$processname</span></td>
+<td class="entry" headers="notification_params__entry__98">The name of the requested process</td>
+<td class="entry" headers="notification_params__entry__99"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__97"><span class="keyword parmname">$scheduledDate</span></td>
+<td class="entry" headers="notification_params__entry__98">The date for which the process is scheduled</td>
+<td class="entry" headers="notification_params__entry__99"><code class="ph codeph">Fri Apr 10 13:16:53 EDT 2015</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__97"><span class="keyword parmname">$appRequest.getDescription()</span></td>
+<td class="entry" headers="notification_params__entry__98">The description of the application process request</td>
+<td class="entry" headers="notification_params__entry__99"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__97"><span class="keyword parmname">$requestType</span></td>
+<td class="entry" headers="notification_params__entry__98">The type of request</td>
+<td class="entry" headers="notification_params__entry__99"><code class="ph codeph">applicationProcessRequest</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__97"><span class="keyword parmname">$roles</span></td>
+<td class="entry" headers="notification_params__entry__98">The roles that a user must have to approve the
+request</td>
+<td class="entry" headers="notification_params__entry__99"><code class="ph codeph">[Role: Administrator]</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="notification_params__entry__97"><span class="keyword parmname">$appRequest</span></td>
+<td class="entry" headers="notification_params__entry__98">For application process requests, the application
+process request ID</td>
+<td class="entry" headers="notification_params__entry__99"><code class="ph codeph">ApplicationProcessRequest#81701a8b-332c-47dd-8efe-87aab8fa2dfd</code></td>
+</tr>
+</tbody></table>
+
+
+
+
+
+
+</div>
+</article></main></body></html>

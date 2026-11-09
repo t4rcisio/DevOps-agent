@@ -1,0 +1,687 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Example templates are provided that helps you to create message cards to use with MS Teams integration."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/howto-integrate-msteams.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="howto_teams_templates"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Teams message card templates</title></head><body id="howto_teams_templates"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Teams message card templates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d2d8f459-6980-4dde-98cf-8ad604a8ed1e">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Example templates are provided that helps you to create message cards to use with MS
+Teams integration.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskhowto_teams_templates__context__1">About this task</h2></div>Message layouts are available for the following events:<ul class="ul">
+<li class="li"><a class="xref" href="#task_en1_rf1_2rb">Application Deployment Failure JSON body</a></li>
+<li class="li"><a class="xref" href="#task_o4k_vf1_2rb">Application Deployment Success JSON body</a></li>
+<li class="li"><a class="xref" href="#task_uzb_bg1_2rb">Application Process Request Started JSON body</a></li>
+<li class="li"><a class="xref" href="#task_fw5_dg1_2rb">Approval Completed JSON body</a></li>
+<li class="li"><a class="xref" href="#task_qhg_hg1_2rb">Approval Failed JSON body</a></li>
+<li class="li"><a class="xref" href="#task_jg3_4g1_2rb">External Approval Completed JSON body</a></li>
+<li class="li"><a class="xref" href="#task_uk4_qg1_2rb">External Approval Failed JSON body</a></li>
+<li class="li"><a class="xref" href="#task_iym_tg1_2rb">Generic Process Completed JSON body</a></li>
+<li class="li"><a class="xref" href="#task_om2_wg1_2rb">Generic Process Request Started JSON body</a></li>
+<li class="li"><a class="xref" href="#task_f3q_yg1_2rb">Scheduled Process Not Started JSON body</a></li>
+</ul>You can customize these available message card as per your team requirement. See <a class="xref" href="https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-cards" target="_blank">MS Teams documentation</a> for more information.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../tutorial/topics/howto-integrate-msteams.html" title="Integrate Microsoft Teams with IBM DevOps Deploy (Deploy) to post notifications automatically to your Teams channel whenever a specific deployment event happens.">How-to: Integrate MS Teams</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_en1_rf1_2rb">
+<h2 class="title topictitle2" id="ariaid-title2">Application Deployment Failure JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d2d8f459-6980-4dde-98cf-8ad604a8ed1e">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## PROPERTY Content-Type: application/json
+
+#set ( $Q = '\\"' )
+
+#set ( $themeColor = "#E88686" )
+#set ( $warningCount = $workflowTrace.WarningCount)
+
+#macro (showSummary $analysis $level )
+  #set ($indentPixels = $level * 20)
+  #set ($trace = $analysis.Trace)
+
+  #set ( $text = "${text} &lt;tr&gt;" )
+  #set ( $text = "${text} &lt;td style=${Q}padding-left: ${indentPixels}px;${Q}&gt;$trace.Name&lt;/td&gt;&lt;td&gt;" )
+  #set ($activityResource = $trace.getPropertyValue("activity.resource.id"))
+  #if ($activityResource)
+    #set ( $text = "${text} $resourceFactory.getResourceForId($fn.getUUID($activityResource)).Path" )
+  #else
+    #set ( $text = "${text} $trace.getPropertyValue(\"resourcePath\")" )
+  #end
+  #set ( $text = "${text} &lt;/td&gt;&lt;td&gt;" )
+  #if ($trace.StartedOn)
+    #set ( $text = "${text} $fn.formatDate($trace.StartedOn)" )
+  #else
+    #set ( $text = "${text} Activity not started" )
+  #end
+  #set ( $text = "${text} &lt;/td&gt;&lt;td&gt;" )
+  #if ($trace.StartedOn &amp;&amp; $trace.EndedOn)
+    #set ( $text = "${text} $fn.duration($trace.StartedOn, $trace.EndedOn)s" )
+  #end
+  #set ( $text = "${text} &lt;/td&gt;&lt;td&gt;$fn.getStatusDisplayName($trace.Result)&lt;/td&gt;" )
+  #set ( $text = "${text} &lt;/tr&gt;" )
+  #foreach ($child in $analysis.Children)
+    #set ($nextLevel = $level + 1)
+    #showSummary ($child, $nextLevel)
+  #end
+#end
+
+ #macro (showFailure $analysis $level)
+   #set ($indentPixels = $level * 20)
+   #set ( $text = "${text} &lt;tr background-color=${Q}white${Q}&gt;&lt;td style=${Q}padding-left: ${indentPixels}px; font-weight: bold; color: #A84F4F${Q}&gt;$analysis.Trace.Name &lt;/td&gt;&lt;/tr&gt;" )
+   #if ($analysis.Children.isEmpty())
+     #set ($indentPixels = $indentPixels + 20)
+     #set ( $text = "${text} &lt;td style=${Q}padding-left: ${indentPixels}px; white-space: pre-wrap${Q}&gt;$analysis.FailureMessage&lt;/td&gt;" )
+   #end
+   #foreach ($child in $analysis.Children)
+     #set ($nextLevel = $level + 1)
+     #showFailure ($child, $nextLevel)
+   #end
+ #end
+
+
+
+#set( $text = "" )
+#set( $text = "${text} &lt;h2&gt;A process on $application.Name started&lt;/h2&gt;" )
+#set( $text = "${text} &lt;table&gt; " )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Application:&lt;/td&gt;&lt;td&gt;$application.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Process:&lt;/td&gt;&lt;td&gt;$applicationProcess.Name&lt;/td&gt;&lt;/tr&gt;" )
+#if ($snapshot)
+  #set( $text = " ${text} &lt;tr&gt;&lt;td&gt;Snapshot:&lt;/td&gt;&lt;td&gt;$snapshot.Name&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Environment:&lt;/td&gt;&lt;td&gt;$environment.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested by:&lt;/td&gt;&lt;td&gt;$user.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested on:&lt;/td&gt;&lt;td&gt;$fn.formatDate(${request.SubmittedDate})&lt;/td&gt;&lt;/tr&gt;" )
+#if (! $request.Description.isEmpty())
+    #set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Description:&lt;/td&gt;&lt;td&gt;${request.Description}&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Warning Count:&lt;/td&gt;&lt;td&gt;${workflowTrace.WarningCount}&lt;/td&gt;&lt;/tr&gt;" )
+#if ($workflowTrace.ChildWarningMessages)
+  #set( $text = " ${text} &lt;tr&gt;&lt;td&gt;Warnings:&lt;/td&gt;&lt;td&gt;&lt;ul&gt;" )
+  #foreach ($message in $workflowTrace.ChildWarningMessages )
+    #set ($messageOverLimit = $message.length() &gt; 100)
+    #if ($messageOverLimit)
+      #set ( $text = "${text} &lt;li&gt;$message.substring(0,100)...&lt;/li&gt;" )
+    #else
+      #set ( $text = "${text} &lt;li&gt;$message&lt;/li&gt;" )
+    #end
+    #set ($remainingWarnings = $warningCount - $workflowTrace.ChildWarningMessages.size())
+    #if ($remainingWarnings &gt; 0)
+      #set ( $text = "${text} &lt;li&gt;+ $remainingWarnings From Child Workflows&lt;/li&gt;" )
+    #end
+  #end
+  #set( $text = " ${text} &lt;/ul&gt;&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text} &lt;/table&gt;" )
+
+#set( $text = " ${text} &lt;div&gt;" )
+#set( $text = " ${text} &lt;h3&gt;Process summary:&lt;/h3&gt;" )
+#set( $text = " ${text} &lt;table cellpadding=${Q}4${Q} cellspacing=${Q}1${Q} width=${Q}100%${Q}&gt;" )
+#set( $text = " ${text}  &lt;thead&gt;" )
+#set( $text = " ${text}     &lt;th style=${Q}text-align:left;${Q}&gt;Process&lt;/th&gt;" )
+#set( $text = " ${text}     &lt;th style=${Q}text-align:left;${Q}&gt;Resource&lt;/th&gt;" )
+#set( $text = " ${text}     &lt;th style=${Q}text-align:left;${Q}&gt;Start&lt;/th&gt;" )
+#set( $text = " ${text}     &lt;th style=${Q}text-align:left;${Q}&gt;Duration&lt;/th&gt;" )
+#set( $text = " ${text}     &lt;th style=${Q}text-align:left;${Q}&gt;Status&lt;/th&gt;" )
+#set( $text = " ${text}  &lt;/thead&gt;" )
+#set( $text = " ${text}  &lt;tbody&gt;" )
+  #foreach ($child in $analysis.RootAnalyses)
+    #showSummary ($child 0)
+  #end
+#set( $text = " ${text}  &lt;/tbody&gt;" )
+#set( $text = " ${text} &lt;/table&gt;" )
+#set( $text = " ${text} &lt;/div&gt;" )
+
+#set( $text = " ${text} &lt;div&gt;&lt;h3&gt;Failure details:&lt;/h3&gt;" )
+#set( $text = " ${text}   &lt;table cellpadding=${Q}2${Q} cellspacing=${Q}1${Q} width=${Q}100%${Q}&gt;" )
+#set( $text = " ${text}     &lt;table-body&gt;" )
+                              #foreach ($child in $failureAnalysis.RootAnalyses)
+                                #showFailure ($child 0)
+                              #end
+#set( $text = " ${text}  &lt;/tbody&gt;" )
+#set( $text = " ${text} &lt;/table&gt;" )
+#set( $text = " ${text} &lt;/div&gt;" )
+
+
+#set( $text = " ${text} &lt;div&gt;" )
+#if ($versions.size() &gt; 0)
+  #set( $text = " ${text} &lt;h3&gt;Included versions&lt;/h3&gt;" )
+  #set( $text = " ${text} &lt;table cellpadding=${Q}4${Q} cellspacing=${Q}1${Q} width=${Q}100%${Q}&gt;" )
+   #set( $text = " ${text} &lt;thead&gt;" )
+      #set( $text = " ${text} &lt;th style=${Q}text-align:left;${Q}&gt;Component&lt;/th&gt;" )
+      #set( $text = " ${text} &lt;th style=${Q}text-align:left;${Q}&gt;Version&lt;/th&gt;" )
+      #set( $text = " ${text} &lt;th style=${Q}text-align:left;${Q}&gt;Description&lt;/th&gt;" )
+   #set( $text = " ${text} &lt;/thead&gt;" )
+   #set( $text = " ${text} &lt;tbody&gt;" )
+    #foreach ($version in $versions)
+      #set( $text = " ${text} &lt;tr&gt;" )
+       #set( $text = " ${text} &lt;td&gt;$version.Component.Name&lt;/td&gt;" )
+       #set( $text = " ${text} &lt;td&gt;$version.Name&lt;/td&gt;" )
+       #set( $text = " ${text} &lt;td&gt;$version.Description&lt;/td&gt;" )
+     #set( $text = " ${text} &lt;/tr&gt;" )
+    #end
+#set( $text = " ${text}    &lt;/tbody&gt;" )
+#set( $text = " ${text}   &lt;/table&gt;" )
+#else
+#set( $text = " ${text}   &lt;h3&gt;No versions included&lt;/h3&gt;" )
+#end
+#set( $text = " ${text} &lt;/div&gt;" )
+
+#set( $text = "${text} &lt;br&gt;Click &lt;strong&gt;View Details&lt;/strong&gt; for more information." )
+
+
+{
+    "@context": "https://schema.org/extensions",
+    "@type": "MessageCard",
+    "themeColor": "$themeColor",
+    "title": "A process on $fn.escapeJson($application.Name) failed",
+    "text": "$fn.escapeJson($text).trim()",
+    "potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View Details",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "$fn.escapeJson($externalUrl)#applicationProcessRequest/${request.Id}"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" id="task_o4k_vf1_2rb">
+<h2 class="title topictitle2" id="ariaid-title3">Application Deployment Success JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d2d8f459-6980-4dde-98cf-8ad604a8ed1e">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## PROPERTY Content-Type: application/json
+
+#set ( $Q = '\\"' )
+
+#set ( $themeColor = "#0072c6" )
+#set ( $warningCount = $workflowTrace.WarningCount)
+
+#macro (showSummary $analysis $level )
+  #set ($indentPixels = $level * 20)
+  #set ($trace = $analysis.Trace)
+
+  #set ( $text = "${text} &lt;tr&gt;" )
+  #set ( $text = "${text} &lt;td style=${Q}padding-left: ${indentPixels}px;${Q}&gt;$trace.Name&lt;/td&gt;&lt;td&gt;" )
+  #set ($activityResource = $trace.getPropertyValue("activity.resource.id"))
+  #if ($activityResource)
+    #set ( $text = "${text} $resourceFactory.getResourceForId($fn.getUUID($activityResource)).Path" )
+  #else
+    #set ( $text = "${text} $trace.getPropertyValue(\"resourcePath\")" )
+  #end
+  #set ( $text = "${text} &lt;/td&gt;&lt;td&gt;" )
+  #if ($trace.StartedOn)
+    #set ( $text = "${text} $fn.formatDate($trace.StartedOn)" )
+  #else
+    #set ( $text = "${text} Activity not started" )
+  #end
+  #set ( $text = "${text} &lt;/td&gt;&lt;td&gt;" )
+  #if ($trace.StartedOn &amp;&amp; $trace.EndedOn)
+    #set ( $text = "${text} $fn.duration($trace.StartedOn, $trace.EndedOn)s" )
+  #end
+  #set ( $text = "${text} &lt;/td&gt;&lt;td style=${Q}background-color: $fn.getStatusColor($trace.Result)${Q}&gt;$fn.getStatusDisplayName($trace.Result)&lt;/td&gt;" )
+  #set ( $text = "${text} &lt;/tr&gt;" )
+  #foreach ($child in $analysis.Children)
+    #set ($nextLevel = $level + 1)
+    #showSummary ($child, $nextLevel)
+  #end
+#end
+
+
+#set( $text = "" )
+#set( $text = "${text} &lt;h2&gt;A process on $application.Name started&lt;/h2&gt;" )
+#set( $text = "${text} &lt;table&gt; " )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Application:&lt;/td&gt;&lt;td&gt;$application.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Process:&lt;/td&gt;&lt;td&gt;$applicationProcess.Name&lt;/td&gt;&lt;/tr&gt;" )
+#if ($snapshot)
+  #set( $text = " ${text} &lt;tr&gt;&lt;td&gt;Snapshot:&lt;/td&gt;&lt;td&gt;$snapshot.Name&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Environment:&lt;/td&gt;&lt;td&gt;$environment.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested by:&lt;/td&gt;&lt;td&gt;$user.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested on:&lt;/td&gt;&lt;td&gt;$fn.formatDate(${request.SubmittedDate})&lt;/td&gt;&lt;/tr&gt;" )
+#if (! $request.Description.isEmpty())
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Description:&lt;/td&gt;&lt;td&gt;${request.Description}&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Warning Count:&lt;/td&gt;&lt;td&gt;${workflowTrace.WarningCount}&lt;/td&gt;&lt;/tr&gt;" )
+#if ($workflowTrace.ChildWarningMessages)
+  #set( $text = " ${text} &lt;tr&gt;&lt;td&gt;Warnings:&lt;/td&gt;&lt;td&gt;&lt;ul&gt;" )
+  #foreach ($message in $workflowTrace.ChildWarningMessages )
+    #set ($messageOverLimit = $message.length() &gt; 100)
+    #if ($messageOverLimit)
+      #set ( $text = "${text} &lt;li&gt;$message.substring(0,100)...&lt;/li&gt;" )
+    #else
+      #set ( $text = "${text} &lt;li&gt;$message&lt;/li&gt;" )
+    #end
+    #set ($remainingWarnings = $warningCount - $workflowTrace.ChildWarningMessages.size())
+    #if ($remainingWarnings &gt; 0)
+      #set ( $text = "${text} &lt;li&gt;+ $remainingWarnings From Child Workflows&lt;/li&gt;" )
+    #end
+  #end
+  #set( $text = " ${text} &lt;/ul&gt;&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text} &lt;/table&gt;" )
+
+#set( $text = " ${text} &lt;div&gt;" )
+#set( $text = " ${text} &lt;h3&gt;Process summary:&lt;/h3&gt;" )
+#set( $text = " ${text} &lt;table cellpadding=${Q}4${Q} cellspacing=${Q}1${Q} width=${Q}100%${Q}&gt;" )
+#set( $text = " ${text}  &lt;thead&gt;" )
+#set( $text = " ${text}     &lt;th style=${Q}text-align:left;${Q}&gt;Process&lt;/th&gt;" )
+#set( $text = " ${text}     &lt;th style=${Q}text-align:left;${Q}&gt;Resource&lt;/th&gt;" )
+#set( $text = " ${text}     &lt;th style=${Q}text-align:left;${Q}&gt;Start&lt;/th&gt;" )
+#set( $text = " ${text}     &lt;th style=${Q}text-align:left;${Q}&gt;Duration&lt;/th&gt;" )
+#set( $text = " ${text}     &lt;th style=${Q}text-align:left;${Q}&gt;Status&lt;/th&gt;" )
+#set( $text = " ${text}  &lt;/thead&gt;" )
+#set( $text = " ${text}  &lt;tbody&gt;" )
+  #foreach ($child in $analysis.RootAnalyses)
+    #showSummary ($child 0)
+  #end
+#set( $text = " ${text}  &lt;/tbody&gt;" )
+#set( $text = " ${text} &lt;/table&gt;" )
+#set( $text = " ${text} &lt;/div&gt;" )
+
+#set( $text = " ${text} &lt;div&gt;" )
+#if ($versions.size() &gt; 0)
+  #set( $text = " ${text} &lt;h3&gt;Included versions&lt;/h3&gt;" )
+  #set( $text = " ${text} &lt;table cellpadding=${Q}4${Q} cellspacing=${Q}1${Q} width=${Q}100%${Q}&gt;" )
+   #set( $text = " ${text} &lt;thead&gt;" )
+      #set( $text = " ${text} &lt;th style=${Q}text-align:left;${Q}&gt;Component&lt;/th&gt;" )
+      #set( $text = " ${text} &lt;th style=${Q}text-align:left;${Q}&gt;Version&lt;/th&gt;" )
+      #set( $text = " ${text} &lt;th style=${Q}text-align:left;${Q}&gt;Description&lt;/th&gt;" )
+   #set( $text = " ${text} &lt;/thead&gt;" )
+   #set( $text = " ${text} &lt;tbody&gt;" )
+    #foreach ($version in $versions)
+      #set( $text = " ${text} &lt;tr&gt;" )
+       #set( $text = " ${text} &lt;td&gt;$version.Component.Name&lt;/td&gt;" )
+       #set( $text = " ${text} &lt;td&gt;$version.Name&lt;/td&gt;" )
+       #set( $text = " ${text} &lt;td&gt;$version.Description&lt;/td&gt;" )
+     #set( $text = " ${text} &lt;/tr&gt;" )
+    #end
+#set( $text = " ${text}    &lt;/tbody&gt;" )
+#set( $text = " ${text}   &lt;/table&gt;" )
+#else
+#set( $text = " ${text}   &lt;h3&gt;No versions included&lt;/h3&gt;" )
+#end
+#set( $text = " ${text} &lt;/div&gt;" )
+
+#set( $text = "${text} &lt;br&gt;Click &lt;strong&gt;View Details&lt;/strong&gt; for more information." )
+
+
+{
+    "@context": "https://schema.org/extensions",
+    "@type": "MessageCard",
+    "themeColor": "$themeColor",
+    "title": "A process on $fn.escapeJson($application.Name) completed successfully",
+    "text": "$fn.escapeJson($text).trim()",
+    "potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View Details",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "$fn.escapeJson($externalUrl)#applicationProcessRequest/${request.Id}"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+</div>
+</article>
+
+
+<article class="topic task nested1" aria-labelledby="ariaid-title4" id="task_uzb_bg1_2rb">
+<h2 class="title topictitle2" id="ariaid-title4">Application Process Request Started JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d2d8f459-6980-4dde-98cf-8ad604a8ed1e">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## PROPERTY Content-Type: application/json
+
+#set ( $themeColor = "#0072c6" )
+
+#set( $text = "" )
+#set( $text = "${text} &lt;h2&gt;A process on $application.Name started&lt;/h2&gt;" )
+#set( $text = "${text} &lt;table&gt; " )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Application:&lt;/td&gt;&lt;td&gt;$application.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Process:&lt;/td&gt;&lt;td&gt;$applicationProcess.Name&lt;/td&gt;&lt;/tr&gt;" )
+#if ($snapshot)
+  #set( $text = " ${text} &lt;tr&gt;&lt;td&gt;Snapshot:&lt;/td&gt;&lt;td&gt;$snapshot.Name&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Environment:&lt;/td&gt;&lt;td&gt;$environment.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested by:&lt;/td&gt;&lt;td&gt;$user.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested on:&lt;/td&gt;&lt;td&gt;$fn.formatDate(${request.SubmittedDate})&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text} &lt;/table&gt;" )
+#set( $text = "${text} &lt;br&gt;Click &lt;strong&gt;View Details&lt;/strong&gt; for more information." )
+{
+    "@context": "https://schema.org/extensions",
+    "@type": "MessageCard",
+    "themeColor": "$themeColor",
+    "title": "A process on $fn.escapeJson($application.Name) started",
+    "text": "$fn.escapeJson($text).trim()",
+    "potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View Details",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "$fn.escapeJson($externalUrl)#applicationProcessRequest/${request.Id}"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title5" id="task_fw5_dg1_2rb">
+<h2 class="title topictitle2" id="ariaid-title5">Approval Completed JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d2d8f459-6980-4dde-98cf-8ad604a8ed1e">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## PROPERTY Content-Type: application/json
+
+
+#set ( $themeColor = "#0072C6" )
+#if ( $appRequest )
+    #set ( $processName = $appRequest.getApplicationProcess().getName() )
+#end
+#if ( $compRequest )
+    #set ( $processName = $compRequest.getComponentProcess().getName() )
+#end
+
+#set( $text = "" )
+#set( $text = "${text} &lt;h2&gt;<span class="ph">IBM DevOps Deploy (Deploy)</span> Process: $processName&lt;/h2&gt;" )
+#set( $text = "${text} &lt;table&gt; " )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Application:&lt;/td&gt;&lt;td&gt;${application.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Environment:&lt;/td&gt;&lt;td&gt;${environment.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#if ($snapshot)
+  #set( $text = "${text} &lt;tr&gt;&lt;td&gt;Snapshot:&lt;/td&gt;&lt;td&gt;${snapshot.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested by:&lt;/td&gt;&lt;td&gt;${requester.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Scheduled for:&lt;/td&gt;&lt;td&gt;${scheduledDate}&lt;/td&gt;&lt;/tr&gt;" )
+#if (!$appRequest.getDescription().isEmpty())
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Description:&lt;/td&gt;&lt;td&gt;${appRequest.getDescription()}&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text} &lt;/table&gt;" )
+#set( $text = "${text} &lt;br&gt;Click &lt;strong&gt;View Details&lt;/strong&gt; for more information." )
+{
+    "@context": "https://schema.org/extensions",
+    "@type": "MessageCard",
+    "themeColor": "$themeColor",
+    "title": "An approval was completed for the $fn.escapeJson($application.Name) application on the $fn.escapeJson($environment.Name) environment",
+    "text": "$fn.escapeJson($text).trim()",
+    "potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View Details",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "$fn.escapeJson($externalUrl)#$requestType/$processId"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title6" id="task_qhg_hg1_2rb">
+<h2 class="title topictitle2" id="ariaid-title6">Approval Failed JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d2d8f459-6980-4dde-98cf-8ad604a8ed1e">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## PROPERTY Content-Type: application/json
+
+#set( $themeColor = "#E88686" )
+#if ( $appRequest )
+    #set ( $processName = $appRequest.getApplicationProcess().getName() )
+#end
+#if ( $compRequest )
+    #set ( $processName = $compRequest.getComponentProcess().getName() )
+#end
+
+#set( $text = "" )
+#set( $text = "${text} &lt;h2&gt;<span class="ph">IBM DevOps Deploy (Deploy)</span> Process $processName was rejected during its approval process&lt;/h2&gt;" )
+#set( $text = "${text} &lt;table&gt; " )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Application:&lt;/td&gt;&lt;td&gt;${application.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Environment:&lt;/td&gt;&lt;td&gt;${environment.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#if ($snapshot)
+  #set( $text = "${text} &lt;tr&gt;&lt;td&gt;Snapshot:&lt;/td&gt;&lt;td&gt;${snapshot.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested by:&lt;/td&gt;&lt;td&gt;${requester.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Scheduled for:&lt;/td&gt;&lt;td&gt;${scheduledDate}&lt;/td&gt;&lt;/tr&gt;" )
+#if (!$appRequest.getDescription().isEmpty())
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Description:&lt;/td&gt;&lt;td&gt;${appRequest.getDescription()}&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text} &lt;/table&gt;" )
+#set( $text = "${text} &lt;br&gt;Click &lt;strong&gt;View Details&lt;/strong&gt; for more information." )
+{
+    "@context": "https://schema.org/extensions",
+    "@type": "MessageCard",
+    "themeColor": "$themeColor",
+    "title": "An approval failed for the $fn.escapeJson($application.Name) application on the $fn.escapeJson($environment.Name) environment",
+    "text": "$fn.escapeJson($text).trim()",
+    "potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View Details",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "$fn.escapeJson($externalUrl)#$requestType/$processId"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title7" id="task_jg3_4g1_2rb">
+<h2 class="title topictitle2" id="ariaid-title7">External Approval Completed JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d2d8f459-6980-4dde-98cf-8ad604a8ed1e">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## PROPERTY Content-Type: application/json
+
+#set( $themeColor = "#0072C6")
+#if ( $appProcRequest )
+    #set ( $description = $appProcRequest.getDescription() )
+#end
+#if ( $compProcRequest )
+    #set ( $description = $compProcRequest.getDescription() )
+#end
+
+#set( $text = "" )
+#set( $text = "${text} &lt;h2&gt;An external approval process was successful&lt;/h2&gt;" )
+#set( $text = "${text} &lt;table&gt; " )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Application:&lt;/td&gt;&lt;td&gt;${application.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Environment:&lt;/td&gt;&lt;td&gt;${environment.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#if ($snapshot)
+  #set( $text = "${text} &lt;tr&gt;&lt;td&gt;Snapshot:&lt;/td&gt;&lt;td&gt;${snapshot.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested by:&lt;/td&gt;&lt;td&gt;${requester.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Scheduled for:&lt;/td&gt;&lt;td&gt;${scheduledDate}&lt;/td&gt;&lt;/tr&gt;" )
+#if ($description &amp;&amp; !$description.isEmpty())
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Description:&lt;/td&gt;&lt;td&gt;${description}&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text} &lt;/table&gt;" )
+#set( $text = "${text} &lt;br&gt;Click &lt;strong&gt;View Details&lt;/strong&gt; for more information." )
+{
+    "@context": "https://schema.org/extensions",
+    "@type": "MessageCard",
+    "themeColor": "$themeColor",
+    "title": "An external approval was completed for the $fn.escapeJson($application.Name) application on the $fn.escapeJson($environment.Name) environment",
+    "text": "$fn.escapeJson($text).trim()",
+    "potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View Details",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "$fn.escapeJson($externalUrl)#$requestType/$processId"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title8" id="task_uk4_qg1_2rb">
+<h2 class="title topictitle2" id="ariaid-title8">External Approval Failed JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d2d8f459-6980-4dde-98cf-8ad604a8ed1e">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## PROPERTY Content-Type: application/json
+
+#set( $themeColor = "#E88686" )
+#if ( $appProcRequest )
+    #set ( $description = $appProcRequest.getDescription() )
+#end
+#if ( $compProcRequest )
+    #set ( $description = $compProcRequest.getDescription() )
+#end
+
+#set( $text = "" )
+#set( $text = "${text} &lt;h2&gt;An application process was rejected during its external approval process&lt;/h2&gt;" )
+#set( $text = "${text} &lt;table&gt; " )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Application:&lt;/td&gt;&lt;td&gt;${application.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Environment:&lt;/td&gt;&lt;td&gt;${environment.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#if ($snapshot)
+  #set( $text = "${text} &lt;tr&gt;&lt;td&gt;Snapshot:&lt;/td&gt;&lt;td&gt;${snapshot.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested by:&lt;/td&gt;&lt;td&gt;${requester.Name}&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Scheduled for:&lt;/td&gt;&lt;td&gt;${scheduledDate}&lt;/td&gt;&lt;/tr&gt;" )
+#if ($description &amp;&amp; !$description.isEmpty())
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Description:&lt;/td&gt;&lt;td&gt;${description}&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text} &lt;/table&gt;" )
+#set( $text = "${text} &lt;br&gt;Click &lt;strong&gt;View Details&lt;/strong&gt; for more information." )
+{
+    "@context": "https://schema.org/extensions",
+    "@type": "MessageCard",
+    "themeColor": "$themeColor",
+    "title": "An external approval failed for the $fn.escapeJson($application.Name) application on the $fn.escapeJson($environment.Name) environment",
+    "text": "$fn.escapeJson($text)",
+    "potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View Details",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "$fn.escapeJson($externalUrl)#$requestType/$processId"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title9" id="task_iym_tg1_2rb">
+<h2 class="title topictitle2" id="ariaid-title9">Generic Process Completed JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d2d8f459-6980-4dde-98cf-8ad604a8ed1e">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## PROPERTY Content-Type: application/json
+
+#set( $themeColor = $fn.getStatusColor( $request.Result ) )
+#if ( $themeColor.contains("#FFFFFF") )
+  #set ( $themeColor = "#0072C6" )
+#end
+
+#set( $text = "" )
+#set( $text = "${text} &lt;h2&gt;<span class="ph">IBM DevOps Deploy (Deploy)</span> Process $process.Name $fn.getStatusDisplayName($request.Result)&lt;/h2&gt;" )
+#set( $text = "${text} &lt;table&gt; " )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Process:&lt;/td&gt;&lt;td&gt;$process.Name&lt;/td&gt;&lt;/tr&gt;" )
+#if ($resourceName)
+  #set( $text = " ${text} &lt;tr&gt;&lt;td&gt;Resource:&lt;/td&gt;&lt;td&gt;$resourceName&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested by:&lt;/td&gt;&lt;td&gt;$user.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Requested on:&lt;/td&gt;&lt;td&gt;$scheduledDate&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = "${text} &lt;/table&gt;" )
+#set( $text = "${text} &lt;br&gt;Click &lt;strong&gt;View Details&lt;/strong&gt; for more information" )
+{
+    "@context": "https://schema.org/extensions",
+    "@type": "MessageCard",
+    "themeColor": "$themeColor",
+    "title": "<span class="ph">IBM DevOps Deploy (Deploy)</span> Process $fn.escapeJson($process.Name) $fn.getStatusDisplayName($request.Result)",
+    "text": "$fn.escapeJson($text).trim()",
+    "potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View Details",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "$fn.escapeJson($externalUrl)#$requestType/$processId"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title10" id="task_om2_wg1_2rb">
+<h2 class="title topictitle2" id="ariaid-title10">Generic Process Request Started JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d2d8f459-6980-4dde-98cf-8ad604a8ed1e">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## PROPERTY Content-Type: application/json
+
+#set ( $themeColor = "#0072c6" )
+
+#set( $text = "" )
+#set( $text = "${text} &lt;h2&gt;<span class="ph">IBM DevOps Deploy (Deploy)</span> Process $process.Name started&lt;/h2&gt;" )
+#set( $text = "${text} &lt;table&gt; " )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Process:&lt;/td&gt;&lt;td&gt;$process.Name&lt;/td&gt;&lt;/tr&gt;" )
+#if ($resourceName)
+  #set( $text = " ${text} &lt;tr&gt;&lt;td&gt;Resource:&lt;/td&gt;&lt;td&gt;$resourceName&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = " ${text}   &lt;tr&gt;&lt;td&gt;Requested by:&lt;/td&gt;&lt;td&gt;$user.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = " ${text}   &lt;tr&gt;&lt;td&gt;Requested on:&lt;/td&gt;&lt;td&gt;$scheduledDate&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = " ${text} &lt;/table&gt;" )
+#set( $text = "${text} &lt;br&gt;Click &lt;strong&gt;View Details&lt;/strong&gt; for more information" )
+{
+    "@context": "https://schema.org/extensions",
+    "@type": "MessageCard",
+    "themeColor": "$themeColor",
+    "title": "<span class="ph">IBM DevOps Deploy (Deploy)</span> Process $fn.escapeJson($process.Name) started",
+    "text": "$fn.escapeJson($text).trim()",
+    "potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View Details",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "$fn.escapeJson($externalUrl)#$requestType/$processId"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title11" id="task_f3q_yg1_2rb">
+<h2 class="title topictitle2" id="ariaid-title11">Scheduled Process Not Started JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d2d8f459-6980-4dde-98cf-8ad604a8ed1e">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## PROPERTY Content-Type: application/json
+
+#set ( $themeColor = "#E88686" )
+
+#set( $text = "" )
+#set( $text = "${text} &lt;h2&gt;<span class="ph">IBM DevOps Deploy (Deploy)</span> Process $process.Name failed to start&lt;/h2&gt;" )
+#set( $text = "${text} &lt;table&gt; " )
+#set( $text = "${text}   &lt;tr&gt;&lt;td&gt;Process:&lt;/td&gt;&lt;td&gt;$process.Name&lt;/td&gt;&lt;/tr&gt;" )
+#if ($resourceName)
+  #set( $text = " ${text} &lt;tr&gt;&lt;td&gt;Resource:&lt;/td&gt;&lt;td&gt;$resourceName&lt;/td&gt;&lt;/tr&gt;" )
+#end
+#set( $text = " ${text}   &lt;tr&gt;&lt;td&gt;Requested by:&lt;/td&gt;&lt;td&gt;$user.Name&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = " ${text}   &lt;tr&gt;&lt;td&gt;Requested on:&lt;/td&gt;&lt;td&gt;$scheduledDate&lt;/td&gt;&lt;/tr&gt;" )
+#set( $text = " ${text} &lt;/table&gt;" )
+#set( $text = " ${text} &lt;br&gt;The process failed to start because the server is in maintenance mode. You can request the process again when maintenance is complete." )
+#set( $text = "${text} &lt;br&gt;Click &lt;strong&gt;View Details&lt;/strong&gt; for more information." )
+{
+    "@context": "https://schema.org/extensions",
+    "@type": "MessageCard",
+    "themeColor": "$themeColor",
+    "title": "<span class="ph">IBM DevOps Deploy (Deploy)</span> Process $fn.escapeJson($process.Name) failed to start",
+    "text": "$fn.escapeJson($text).trim()",
+    "potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View Details",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "$fn.escapeJson($externalUrl)#$requestType/$processId"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+</div>
+</article>
+</article></main></body></html>

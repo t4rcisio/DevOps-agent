@@ -1,0 +1,88 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="The properties element is a container for properties, which are defined with the property tag."><meta name="DC.relation" scheme="URI" content="../../reference/topics/ref_create_steptype.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="stepPropertiesthePropertiesElement.d12e314"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Step properties: the properties element</title></head><body id="stepPropertiesthePropertiesElement.d12e314"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Step properties: the <code class="ph codeph">properties</code> element</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a80b1a15-2859-469d-938f-ff2a36f49bf6">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">The <code class="ph codeph">properties</code> element is a container
+for properties, which are defined with the <code class="ph codeph">property</code> tag.</p>
+<p class="p">Each step has a single <code class="ph codeph">properties</code> element; a <code class="ph codeph">properties</code> element
+can contain any number of <code class="ph codeph">property</code> child elements.</p>
+<p class="p">A <code class="ph codeph">property</code> tag has a mandatory <code class="ph codeph">name</code> attribute,
+optional <code class="ph codeph">required</code> attribute, and two child elements, <code class="ph codeph">property-ui</code> and <code class="ph codeph">value</code>,
+which are defined in the following table.</p>
+<table class="table frame-all"><caption><span class="table--title-label">Table 1. </span><span class="title">The <code class="ph codeph">&lt;property&gt;</code> element</span></caption><colgroup><col style="width:33.33333333333333%"><col style="width:66.66666666666666%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="stepPropertiesthePropertiesElement.d12e314__entry__1"> <code class="ph codeph">&lt;property&gt;</code> Child Elements</th>
+<th class="entry" id="stepPropertiesthePropertiesElement.d12e314__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="stepPropertiesthePropertiesElement.d12e314__entry__1"><code class="ph codeph">&lt;property-ui&gt;</code> </td>
+<td class="entry" headers="stepPropertiesthePropertiesElement.d12e314__entry__2">Defines how the property is presented to users in the <span class="ph">IBM DevOps Deploy (Deploy)</span> editor.
+              This element has several attributes: <ul class="ul">
+                <li class="li">
+                  <p class="p"><code class="ph codeph">label</code></p>
+                  <p class="p">Identifies the property in the editor's <span class="keyword wintitle">Edit Properties</span>
+                    dialog box.</p>
+                </li>
+                <li class="li">
+                  <p class="p"><code class="ph codeph">description</code></p>
+                  <p class="p">Text that is displayed to users in the associated roll-over help box.</p>
+                </li>
+                <li class="li">
+                  <p class="p"><code class="ph codeph">default-value</code></p>
+                  <p class="p">Property value that is displayed when the <span class="keyword wintitle">Edit Properties</span>
+                    dialog box is displayed; used if unchanged.</p>
+                </li>
+                <li class="li">
+                  <p class="p"><code class="ph codeph">type</code></p>
+                  <div class="p">Identifies the type of widget that is displayed to users. Possible values are: <ul class="ul">
+                      <li class="li">
+                        <p class="p"><code class="ph codeph">textBox</code></p>
+                        <p class="p">Enables users to enter an arbitrary amount of text, limited to 4064
+                          characters.</p>
+                      </li>
+                      <li class="li">
+                        <p class="p"><code class="ph codeph">textAreaBox</code></p>
+                        <p class="p">Enables users to enter an arbitrary amount of text (larger input area
+                          than textBox), limited to limited to 4064 characters.</p>
+                      </li>
+                      <li class="li">
+                        <p class="p"><code class="ph codeph">secureBox</code></p>
+                        <p class="p">Used for passwords. Similar to textBox except values are redacted.</p>
+                      </li>
+                      <li class="li">
+                        <p class="p"><code class="ph codeph">checkBox</code></p>
+                        <p class="p">Displays a check box. If checked, a value of true is used; otherwise the
+                          property is not set.</p>
+                      </li>
+                      <li class="li">
+                        <p class="p"><code class="ph codeph">selectBox</code></p>
+                        <p class="p">Requires a list of one or more values, which are displayed in a list.
+                          Configuring a value is described below.</p>
+                      </li>
+                    </ul></div>
+                </li>
+              </ul>
+            </td>
+</tr>
+<tr class="row">
+<td class="entry" headers="stepPropertiesthePropertiesElement.d12e314__entry__1"><code class="ph codeph">&lt;value&gt;</code> </td>
+<td class="entry" headers="stepPropertiesthePropertiesElement.d12e314__entry__2">Used to specify values for a selectBox. Each value has a mandatory <code class="ph codeph">label</code> attribute,
+which is displayed to users, and a value that is used by the property
+when selected. Values are displayed in the order they are defined. </td>
+</tr>
+</tbody></table>
+<p class="p">Here is a sample <code class="ph codeph">&lt;property&gt;</code> definition:</p>
+<div class="p"><pre class="pre codeblock"><code>&lt;property name="onerror" required="true"&gt;
+  &lt;property-ui type="selectBox"
+    default-value="abort"
+    description="Action to perform when statement fails: continue, stop, abort."
+    label="Error Handling"/&gt;
+  &lt;value label="Abort"&gt;abort&lt;/value&gt;
+  &lt;value label="Continue"&gt;continue&lt;/value&gt;
+  &lt;value label="Stop"&gt;stop&lt;/value&gt;
+&lt;/property&gt;
+</code></pre></div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/ref_create_steptype.html" title="You define plug-in steps with the step-type element; each step-type element represents a single step in the IBM DevOps Deploy (Deploy) process editor.">Plug-in steps: The step-type element</a></div></div></nav></article></main></body></html>

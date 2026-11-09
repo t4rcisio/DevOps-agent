@@ -1,0 +1,79 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Server, agents, and agent relays keystores are used for a secured web communication between servers and agents."><meta name="DC.subject" content="Web agent, public key pin, keystore"><meta name="keywords" content="Web agent, public key pin, keystore"><meta name="DC.relation" scheme="URI" content="../../user/topics/SSLinstall.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/upgrade_key_strength.html"><meta name="DC.relation" scheme="URI" content="agent_metadata.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="web_agents_security"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Keystores configuration</title></head><body id="web_agents_security"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+ <h1 class="title topictitle1" id="ariaid-title1">Keystores configuration</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-0d10dcdd-97d2-4c3f-8cf8-65acf105ec98">Edit online</a></span></div>
+ 
+ 
+ <div class="body conbody"><p class="shortdesc">Server, agents, and agent relays keystores are used for a secured web communication
+  between servers and agents.</p>
+  <section class="section">
+   <p class="p" id="web_agents_security__web-agent-secure">Web agents come with and use Public Key Pinning for strong security.
+    Agents and servers identify each other with SSL certificates. The public keys in the
+    certificates are pinned on the initial connection. When a public key is pinned, any certificate
+    that asserts the same identity must be generated with the same public and private key pair that
+    was used to create the original certificate. Connections from clients or servers that do not
+    correctly identify themselves are closed. </p>
+   <p class="p"><span class="ph">Deploy</span> supports pinning
+    multiple server public keys on an agent. Server public key pin information and limit is
+    available in the agent's metadata. To use a new key, generate a key, and deploy the key to the
+    agent. See <a class="xref" href="../../api/topics/rest_cli_agentcliaddserverpin_post.html" title="This command requests the agent add a public key pin for a server host, but does not wait for or report the result. The returned maintenance task can be used to query the result.">Add public key pin for a server host to an agent</a> for more
+    information. Atleast one key must be deployed to an agent. </p>
+  </section>
+  <section class="section"><h2 id="web_agents_security__title__2" class="title sectiontitle">Server keystores</h2><p class="p">Server keystore locations are defined in the
+   <code class="ph codeph">installed.properties</code> file. </p><div class="p">
+    <table class="table frame-all" id="web_agents_security__table_xdy_grv_54b"><caption></caption><colgroup><col style="width:28.985507246376812%"><col style="width:71.01449275362319%"></colgroup><thead class="thead">
+       <tr class="row">
+        <th class="entry" id="web_agents_security__table_xdy_grv_54b__entry__1">Server keystore</th>
+        <th class="entry" id="web_agents_security__table_xdy_grv_54b__entry__2">Description</th>
+       </tr>
+      </thead><tbody class="tbody">
+       <tr class="row">
+        <td class="entry" headers="web_agents_security__table_xdy_grv_54b__entry__1"><code class="ph codeph">agentcomm.keystore</code></td>
+        <td class="entry" headers="web_agents_security__table_xdy_grv_54b__entry__2">The keystore contains the certificate and public and private key pair that the server uses to
+         identify itself as the client. Keys are stored in the
+         <span class="ph filepath"><var class="keyword varname">serverInstallDir</var>/conf/server/s2s-client-identity.keystore</span>
+         file. These keys are not shared in high-availability environments. The server uses its web
+         certificate to identify itself as the server in a connection. The subject DN must be in this format:
+         <code class="ph codeph">CN=ucd-server-<var class="keyword varname">EndpointID</var></code>.</td>
+       </tr>
+       <tr class="row">
+        <td class="entry" headers="web_agents_security__table_xdy_grv_54b__entry__1"><code class="ph codeph">encryption.keystore</code></td>
+        <td class="entry" headers="web_agents_security__table_xdy_grv_54b__entry__2">Server property encryption secret keys are stored in the
+         <span class="ph filepath"><var class="keyword varname">serverInstallDir</var>/appdata/conf/encryption.keystore</span> file.
+         These keys are shared in high-availability environments. </td>
+       </tr>
+       <tr class="row">
+        <td class="entry" headers="web_agents_security__table_xdy_grv_54b__entry__1"><code class="ph codeph">server.keystore</code></td>
+        <td class="entry" headers="web_agents_security__table_xdy_grv_54b__entry__2">The <code class="ph codeph">server.keystore</code> property points to the server keystore that
+         contains the certificate and public and private key pair that the server uses to identify
+         itself as the server. Keys are stored in the
+          <span class="ph filepath"><var class="keyword varname">serverInstallDir</var>/appdata/conf/server.keystore</span>
+         file. These keys are shared in high-availability environments. </td>
+       </tr>
+       <tr class="row">
+        <td class="entry" headers="web_agents_security__table_xdy_grv_54b__entry__1"><code class="ph codeph">tomcat.keystore</code></td>
+        <td class="entry" headers="web_agents_security__table_xdy_grv_54b__entry__2">The keystore points to server UI/API HTTP server certificate and key. Keys are stored in the
+         <span class="ph filepath"><var class="keyword varname">serverInstallDir</var>/opt/tomcat/conf/tomcat.keystore</span> file. These
+         keys are not shared in high-availability environments. </td>
+       </tr>
+      </tbody></table>
+    <div class="note important note_important"><span class="note__title">Important:</span> Do not lose the server public/private key. Recovery requires manually
+     clearing the server certificate pins for every web agent. To help prevent loss, make a secure backup
+     of all server keystores.</div>
+   </div>To override any of the server keystore passwords, see <a class="xref" href="keystore_change_password.html" title="You can change the Java KeyStore password for the server.">Changing passwords for the server KeyStore</a>.</section>
+  
+  <section class="section"><h2 id="web_agents_security__title__3" class="title sectiontitle">Web agent relay keystores</h2>
+   
+   <p class="p">Each agent relay contains two keystores. The <span class="keyword parmname">agentrelay</span> keystore controls
+    the web connection between the agent relay and the server and agents. The
+    <span class="keyword parmname">codestation</span> keystore controls HTTPS connections to the agent relay and is used
+    with server identity verification. See <a class="xref" href="../../install/topics/ssl_addl_security.html#ssl_addl_security" title="You can enable extra security to configure the agents to verify the identity of the server for communication that uses the HTTPS protocol.">Enabling server identity verification</a>.</p>
+   <p class="p">The <span class="keyword parmname">agentrelay</span> keystore stores web agent communication client certificate
+    and keys (alias <code class="ph codeph">ucd-agentrelay-id</code>). The subject DN must be in this format:
+    <code class="ph codeph">CN=ucd-agentRelay-<var class="keyword varname">EndpointID</var></code>.</p>
+   <div class="note note note_note"><span class="note__title">Note:</span> For more information about changing relay keystore password, see <a class="xref" href="keystore_agentrelay_change_password.html" title="You can change the Java keystore passwords for the agent relay.">Changing passwords for the agent relay keystores</a></div>
+  </section>
+ </div>
+ <nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/SSLinstall.html" title="With Secure Sockets Layer (SSL) technology, clients and servers can communicate securely by encrypting all communications. Data is encrypted before it is sent and decrypted by the recipient. This communication cannot be deciphered or modified by third-parties. In addition to encryption, SSL can also support authentication.">SSL configuration</a></div></div><div class="linklist relinfo reltasks"><strong>Related tasks</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="../../install/topics/upgrade_key_strength.html" title="When you upgrade the server, you can upgrade the SSL encryption.">Upgrading encryption key strength</a></li></ul></div><div class="linklist relinfo"><strong>Related information</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="agent_metadata.html" title="The Agent Metadata tab provides additional information about the agent.">Agent metadata</a></li></ul></div></nav>
+ 
+</article></main></body></html>

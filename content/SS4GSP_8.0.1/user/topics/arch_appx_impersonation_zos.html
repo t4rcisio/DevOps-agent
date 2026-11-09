@@ -1,0 +1,28 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="The su command is used to impersonate users on agent computers that are running IBM z/OS."><meta name="DC.relation" scheme="URI" content="../../user/topics/arch_appx_sudo.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="arch_appx_impersonation_zos"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Impersonation on z/OS systems</title></head><body id="arch_appx_impersonation_zos"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Impersonation on <span class="keyword">z/OS</span> systems</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-1822e15e-07f3-4f11-8f33-a84286eed510">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">The <span class="keyword cmdname">su</span> command is used to impersonate
+users on agent computers that are running <span class="keyword">IBM® z/OS®</span>.</p>
+<p class="p">The <span class="keyword cmdname">su</span> command starts a shell as a different
+user. Process steps can be considered individual shells. When you
+configure a process step, you can specify that the step uses impersonation
+by selecting the <span class="ph uicontrol">Use Impersonation</span> check box.
+To learn more, see <a class="xref" href="comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a>. On <span class="keyword">z/OS</span> agent
+computers, the <span class="ph uicontrol">Group</span>, <span class="ph uicontrol">Password</span>,
+and <span class="ph uicontrol">Use Sudo</span> fields that are displayed when
+you click <span class="ph uicontrol">Use Impersonation</span> are ignored.</p>
+<p class="p">To configure impersonation, supply the user name that is required
+by the target computer. When the process step that is configured for
+impersonation runs, the <span class="keyword cmdname">su</span> command runs the step
+as the impersonated user. You can configure user impersonation independently
+for each process step. You can also define user impersonation credentials
+for a resource. To learn more, see <a class="xref" href="resources_impersonation.html" title="You can define default user impersonation credentials for a resource.">Defining default user impersonation credentials</a>.</p>
+<div class="p">You must configure a Resource Access Control Facility (RACF®) profile so that the <span class="keyword cmdname">su</span> command can start a shell as a different user without specifying a password. The following RACF profile grants authority to user X to impersonate user Y without entering a password:<pre class="pre codeblock"><code>RDEFINE SURROGAT BPX.SRV.Y UACC(NONE)
+PERMIT BPX.SRV.Y CLASS(SURROGAT) ID(X) ACCESS(READ)
+SETROPTS RACLIST(SURROGAT) REFRESH</code></pre>For more information
+about the <span class="keyword cmdname">su</span> command, see the <cite class="cite"><span class="keyword">z/OS</span> UNIX™ Systems Services</cite> help.</div>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/arch_appx_sudo.html" title="IBM DevOps Deploy (Deploy) can use user impersonation when an agent must run a command for which it might not otherwise have permission, or when a specific user must be employed for a process.">User impersonation for process steps</a></div></div></nav></article></main></body></html>

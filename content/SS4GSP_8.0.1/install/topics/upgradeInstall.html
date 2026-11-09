@@ -1,0 +1,51 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="You can upgrade the IBM DevOps Deploy (Deploy) server to incorporate to a later version."><meta name="DC.relation" scheme="URI" content="../../user/topics/c_node_upgrading.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/upgrade_notes.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/upgrade_server.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/upgrade_server_silent.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/post_upgrade_tasks.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="upgradeinstall"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Upgrading the server</title></head><body id="upgradeinstall"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Upgrading the server</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d253d502-c1f0-4057-8872-5f8d1704f167">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">You can upgrade the <span class="ph">IBM DevOps Deploy (Deploy)</span> server to
+        incorporate to a later version. </p>
+        <p class="p">Upgrading the <span class="ph">Deploy</span> server is performed using the same methods as an initial installation. However, there
+            are some considerations that must be taken into account during an upgrade. The following
+            table lists some of the considerations you must read before performing an upgrade:</p>
+        <table class="simpletable frame-all"><colgroup><col style="width:26.525198938992045%"><col style="width:73.47480106100795%"></colgroup><thead><tr class="sthead">
+                <th class="stentry" scope="col">Consideration</th>
+                <th class="stentry" scope="col">Description</th>
+            </tr></thead><tbody><tr class="strow">
+                <td class="stentry">Upgrade all components</td>
+                <td class="stentry">
+                    <p class="p">For optimal performance and access to all new features, you must always
+                        upgrade agents and agent relays whenever you upgrade your server. While each
+                        component—the server, agents, and agent relays—can be upgraded
+                        independently, using an older agent or relay with a newer server may result
+                        in missing functionalities. Therefore, it's crucial to keep all components
+                        up-to-date to ensure full system capability.</p>
+                    <p class="p">You must upgrade in the following order: <code class="ph codeph">Server → Relays / Agents</code></p>
+                </td>
+            </tr><tr class="strow">
+                <td class="stentry">Plug-ins</td>
+                <td class="stentry">When you upgrade the server, only plug-ins that are shipped with the
+                    product are upgraded to newer versions. The updated plug-ins are not necessarily
+                    compatible with an earlier version. When you upgrade, previous versions of the
+                    plug-ins are kept on the server. You cannot create processes with previous
+                    versions of plug-ins, but you can deploy snapshots that use the old versions of
+                    the plug-ins. </td>
+            </tr><tr class="strow">
+                <td class="stentry">Directory user permissions</td>
+                <td class="stentry">When you upgrade, the directory structure is recreated and ownership is
+                    assigned to the user who performed the upgrade. You may require to manage the
+                    permissions of these directories to prevent access issues. For example, if you
+                    upgrade as the root user, the server’s <span class="ph filepath">opt/tomcat</span> directory
+                    and the <span class="ph filepath">deployserver.out</span> log file may be owned by the root
+                    user. Consequently, if you start the server with another user or using a UNIX or
+                    Linux service that starts Deploy with the normal user, the server startup fails
+                    as the files are owned by root. <p class="p">To prevent this issue, you must upgrade using
+                        the same user account that was used for the initial installation.
+                        Alternatively, you can grant the necessary permissions to the appropriate
+                        user after the upgrade using the <code class="ph codeph">chmod</code> and
+                            <code class="ph codeph">chgrp</code> commands to ensure they can access and execute
+                        the required files and directory.</p></td>
+            </tr></tbody></table>
+        <div class="note note note_note"><span class="note__title">Note:</span> The upgrade process is a complete replacement of the server. </div>
+    </div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../install/topics/upgrade_notes.html">Upgrade notes and blockers</a></strong><br>While upgrading to a new version, beware of the changes specific to a build version         and take appropriate action for any blockers. </li><li class="link ulchildlink" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../install/topics/upgrade_server.html">Upgrading the server in interactive mode</a></strong><br>To upgrade the server, stop the server, and run the new installation program. </li><li class="link ulchildlink" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../install/topics/upgrade_server_silent.html">Upgrading the server in silent mode</a></strong><br>Use silent mode to upgrade without command-line prompts. To upgrade the server, stop the         server, edit the properties file, and run the new installation program. </li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../install/topics/post_upgrade_tasks.html">Post-upgrade tasks</a></strong><br>After you upgrade the <span class="ph">Deploy</span> server, you         must review all post-upgrade tasks and perform them as required. </li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/c_node_upgrading.html" title="Stay updated with latest features and functionalities by upgrading IBM DevOps Deploy (Deploy) server, agents, and relays. This section also provides instruction on how to migrate your Deploy instance.">Upgrading and Migrating</a></div></div></nav></article></main></body></html>

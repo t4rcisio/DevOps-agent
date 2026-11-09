@@ -1,0 +1,83 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="If you have a process step that requires validation on an external application before deployment, you can create an approval process and assign it to environments. With this approval process, the deployment runs automatically and only when it is approved."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_approval.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_approvalCreate"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Managing external approval processes</title></head><body id="app_approvalCreate"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Managing external approval processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-614e3cd1-44e7-437e-bd6c-0107e7b0b09f">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">If you have a process step that requires validation on an external application before
+deployment, you can create an approval process and assign it to environments. With this approval
+process, the deployment runs automatically and only when it is approved.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_approvalCreate__prereq__1">Before you begin</h2></div>Ensure that the:<ul class="ul" id="app_approvalCreate__ul_iv3_45w_v2c">
+                <li class="li">Notification templates such as Approval Created, Approval Failed, and Approval
+                    Completed exist for use in the approval process. For information about how to
+                    create notification templates, see <a class="xref" href="notify_create.html#task_ejx_d32_kfb" title="Notifications are defined in a notification scheme. The notification scheme is assigned to an application and the notifications are sent during the deployment of that application.">Creating Notifications in a Notification Scheme</a>.</li>
+                <li class="li"><span class="ph uicontrol">External Approval Settings</span> in the <span class="ph uicontrol">System
+                        Settings</span> are configured to use an agent or an agent pool for the
+                    external approval process.</li>
+            </ul></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_approvalCreate__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Processes</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">External Approval Process</span></span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Create</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Enter a name for the approval process and specify the working directory.</span>
+<div class="itemgroup info">Optionally, you can provide a process description and add teams to the process.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the process editor, configure the steps that require approval. For help on the process
+editor, see <a class="xref" href="comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a>.</span>
+<div class="itemgroup info">The external approval process definition is complete.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Assign the external approval process to an environment.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">application name</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Environments</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Environment: <var class="keyword varname">environment name</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span></span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Enable <span class="ph uicontrol">Require Approvals</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Enable <span class="ph uicontrol">No Self-Approvals</span> to prevent yourself from approving the
+process.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Activate <span class="ph uicontrol">Use Agent Pool for External Approvals</span> to run the approval
+process on a group of agents.</span>
+<div class="itemgroup info">If you turn on this option, specify an agent pool in the <span class="ph uicontrol">Agent Pool for External
+Approvals</span> field.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Select the external approval process to use.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Specify an agent for the approval process in the <span class="ph uicontrol">Agent for External
+Approvals</span> field.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Exclude other processes of the environment from the approval process by choosing processes in
+the <span class="ph uicontrol">Exempt Processes</span> list.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Save your changes.</span>
+</li>
+</ol>
+<div class="itemgroup info">The approval process is assigned to the environment.</div>
+
+<div class="itemgroup stepresult">When an application process runs on the environment, the approver gets an e-mail
+notification and can approve or reject the request via e-mail. Subsequently, when the request is
+approved or rejected, the requestor is notified with an email. An example of a default
+<span class="ph uicontrol">Approval Completed</span> notification template follows.<p class="p"><img class="image" src="../images/NotifyTemp_EXapprovalpending.jpg" width="532" alt="Example Approval Completed Notification Template"></p><p class="p">The deployment starts immediately when the request is approved or runs at the
+scheduled time. If a request is rejected or failed, open the <span class="keyword wintitle">Application Process
+Request</span> by clicking <span class="ph uicontrol">View Request</span> and check comments on the
+approval by clicking the Comment icon in the <span class="ph uicontrol">Actions</span> column.</p></div></li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_approvalCreate__postreq__1">What to do next</h2></div>You can verify the status of the request by using any of these methods:<ul class="ul">
+<li class="li">Go to the <span class="ph uicontrol">Deployment Detail</span> pane on the <span class="ph uicontrol">Reports</span>
+tab.</li>
+<li class="li">Check the environment history.</li>
+</ul><p class="p">An approved request status is displayed with a <code class="ph codeph">Success</code> label. A rejected
+request is shown with a <code class="ph codeph">External Approval Failed</code> label.</p><div class="note note note_note"><span class="note__title">Note:</span> While you export
+or import an application, the approval processes are also included in the export or
+import.</div><p class="p">You can also export and import external approval process individually. While
+importing, select <span class="ph uicontrol">Upgrade Process</span> to import an updated and existing approval
+process.</p></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_approval.html" title="You can add approval requirements to deployments. Deployments with approvals cannot be completed until all approvers respond. Approvers can respond to requests on the Work Items tab, or by email.">Approval Process</a></div></div></nav></article></main></body></html>

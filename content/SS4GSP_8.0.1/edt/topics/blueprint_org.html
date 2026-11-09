@@ -1,0 +1,84 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="When you work with blueprints, you can organize and share them by using the Git distributed version control system."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueprint_org"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Sharing blueprints by using a Git repository</title></head><body id="blueprint_org"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Sharing blueprints by using a Git repository</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2c11cb14-968a-4703-a8d5-751fadf27ed1">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">When you work with blueprints, you can organize and share them by using the Git
+distributed version control system.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_org__prereq__1">Before you begin</h2></div>Create a blueprint that is stored in a team-based repository. See <a class="xref" href="blueprint_edit.html#blueprint_edit" title="You can create projects, blueprints, configuration files, folders, and many other type of the files in the blueprint designer.">Creating files</a>.</section>
+
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_org__context__1">About this task</h2></div>
+<p class="p">The blueprint design server stores projects, blueprints, configuration files, folders, and many
+other types of files in Git repositories. The blueprint design server creates a Git repository for
+each team and a clone of that repository for each member of the team. To share blueprints and
+configuration files with other team members, associate the files with the repository for that team
+when you create them. Complete your changes to the files in your cloned repository, and then share
+the files by using Git commands.</p>
+<p class="p"><span class="ph">You can
+access the contents of a team-based repository only if you are a member of that team. If you are
+removed from a team, your clone of the team repository is deleted, along with any changed files that
+you did not push to the team repository.</span></p>
+
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_org__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">To minimize conflicts between the commits that you make and the commits that you download from
+the repository, sync your workspace with the repository before you change files.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Repositories</span>.</span>
+<div class="itemgroup stepresult"> The <span class="keyword wintitle">Repositories</span> page opens.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">REPOSITORY</span> list, select the repository that contains the
+files.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Sync</span>.</span>
+<div class="itemgroup info">The <span class="ph uicontrol">Sync</span> command downloads commits by using the
+<span class="keyword cmdname">fetch</span> command, reorders the commits by using the <span class="keyword cmdname">rebase</span>
+command, and moves your commits to the repository by using the <span class="keyword cmdname">push</span>
+command.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Enter the user name and password that you use to access the blueprint designer, and then click
+<span class="ph uicontrol">Submit</span>.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">All commits that you loaded are shown in the <span class="keyword wintitle">HISTORY</span>
+pane.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">When your repository is up to date, make changes to blueprints in the blueprint designer as
+usual.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">After you complete your changes, commit all the files in the working directory to your Git
+repository.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">REPOSITORY</span> list, select the repository that contains the
+files.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Working Directory Changes</span> pane, type a commit message in the text
+box.</span>
+<div class="itemgroup stepxmp">For example, type <kbd class="ph userinput">Adding second Ubuntu image</kbd>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">more</span>, and then specify names and email addresses for
+<span class="ph uicontrol">Author</span> and <span class="ph uicontrol">Committer</span>.</span>
+</li>
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Select <span class="ph uicontrol">Save</span> to save the author and committer information for future
+commits.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Select <span class="ph uicontrol">Select All</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Commit</span>.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">All files in the working directory are committed to the Git repository. The commit is
+shown in the <span class="keyword wintitle">OUTGOING</span> pane.</div>
+</li></ol></section>
+</div>
+</article></main></body></html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Notification templates are the basis for emails that the server sends to users after an event occurs on the server. You can create customized notification templates by modifying the default templates provided, or by creating new templates of your own."><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="notification_ov"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating notification templates</title></head><body id="notification_ov"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating notification templates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-7ff40dfd-cba2-426c-9519-7b225cb20de6">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Notification templates are the basis for emails that the server sends to users after an
+event occurs on the server. You can create customized notification templates by modifying the
+default templates provided, or by creating new templates of your own.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasknotification_ov__context__1">About this task</h2></div><p class="p">Notification templates are in Apache Velocity format.
+You can use this format to put together a message template with scripts
+and parameters that are specified when the notification happens. For
+example, the template can include information about a process that
+started, succeeded, or failed. For more information about creating
+templates with Velocity, see <a class="xref" href="https://velocity.apache.org/" target="_blank">https://velocity.apache.org/</a>.</p>
+<p class="p">Notifications templates are in XML format. The XML references application-specific parameters
+that are used by Java code to produce the notification email sent to the user. The
+application-specific parameters that can be used to customize the XML templates are provided in the
+topic <a class="xref" href="notification_params.html" title="Depending on the context of the notification, you can insert parameters into the notification template. When the notification is sent, these parameters are replaced with values such as the names and information about applications, components, and processes.">Parameters for notification templates</a>.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasknotification_ov__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">Duplicate an existing template.</span>
+        <div class="itemgroup info">The application templates are in the folder
+                                          <span class="ph filepath"><var class="keyword varname">application_data</var>/conf/server/notification-templates</span>,
+                              where <span class="ph filepath"><var class="keyword varname">application_data</var></span> is the
+                              application data folder. The default location is
+                                    <span class="ph filepath">/opt/install-dir/server/appdata/conf/server/notification-templates</span>
+                              on Linux™ and
+                                    <span class="ph filepath">C:\Program
+                                    Files\devops-deploy\server\appdata\conf\server\notification-templates</span>
+                              on Windows™.</div>
+      </li><li class="li step stepexpand"><span class="ph cmd">Open the new template in a text editor.</span></li><li class="li step stepexpand"><span class="ph cmd">In the <code class="ph codeph">&lt;name&gt;</code> tag, give the new template
+a unique name.</span><div class="itemgroup info">Each template must have a unique name.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">In the template, add parameters and other information.</span>
+<div class="itemgroup info"><p class="p">To use information from the event that created the notification,
+use the parameters in <a class="xref" href="notification_params.html" title="Depending on the context of the notification, you can insert parameters into the notification template. When the notification is sent, these parameters are replaced with values such as the names and information about applications, components, and processes.">Parameters for notification templates</a>.</p></div>
+<div class="itemgroup stepxmp">For example, if you are creating a notification for an application
+process, you can use the parameter <span class="keyword parmname">$applicationProcess.getName()</span> to
+get the name of the process.</div><div class="itemgroup stepxmp"><div class="p">You can also refer
+to properties just like you can in process steps. For example,  to
+refer to the property <span class="keyword parmname">environment.name</span>, use the
+following code:<pre class="pre codeblock"><code>$properties.get("environment.name")</code></pre></div><div class="p">Similarly,
+if the step <code class="ph codeph">myStep</code> creates the output property <code class="ph codeph">outputProperty1</code>,
+you can refer to the property in the notification template with the
+following code:<pre class="pre codeblock"><code>$properties.get("myStep/outputProperty1")</code></pre></div>
+          <div class="p">You use the same syntax to refer to other properties, too. For example, if an
+application has an application property that is named <code class="ph codeph">myApplicationProp</code>, you can
+refer to that property with the following
+code:<pre class="pre codeblock"><code>$properties.get("application/myApplicationProp")</code></pre>Similarly, you can refer
+to environment properties with code that is similar to the following
+example:<pre class="pre codeblock"><code>$properties.get("environment/myEnvironmentProp")</code></pre></div></div>
+</li><li class="li step stepexpand"><span class="ph cmd">Restart the server.</span><div class="itemgroup info">The server loads notification
+templates at start time, so when you change a template, you must restart
+the server before you can use it.</div></li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasknotification_ov__postreq__1">What to do next</h2></div>Now you can use this template as part of a notification scheme. See <a class="xref" href="../../user/topics/notify_create.html" title="Notifications are defined in a notification scheme. The notification scheme is assigned to an application and the notifications are sent during the deployment of that application.">Creating Notifications in a Notification Scheme</a>.</section>
+</div>
+</article></main></body></html>

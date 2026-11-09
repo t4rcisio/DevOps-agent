@@ -1,0 +1,159 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Permissions for roles that create applications from templates."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_roles.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_template_ref"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Permissions reference for using application templates</title></head><body id="app_template_ref"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Permissions reference for using application templates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-64d446f0-dda7-4c2c-bb54-5fd23dc068d3">Edit online</a></span></div>
+
+<div class="body refbody"><p class="shortdesc">Permissions for roles that create applications from templates.</p>
+<section class="section">Application templates can contain information about the components and environments that
+are initially available to applications that are created from the templates. The composition of the
+application template determines which role permissions are needed to create an application from a
+template.<div class="note note note_note"><span class="note__title">Note:</span> The role permissions in the following tables are only the permissions that are
+required to create the application from a template. More permissions are necessary to add elements
+to an application, run processes, or complete a deployment.</div></section>
+<section class="section">To create an application from a template, the user's role must have the following minimum
+permissions.<div class="note note note_note"><span class="note__title">Note:</span> The user cannot select components or create environments for the
+application.</div><table class="table frame-all" id="app_template_ref__table_td5_cfv_4t"><caption><span class="table--title-label">Table 1. </span><span class="title">Permissions for role that creates applications from an application template</span></caption><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="app_template_ref__table_td5_cfv_4t__entry__1">Product area</th>
+<th class="entry" id="app_template_ref__table_td5_cfv_4t__entry__2">Permissions</th>
+<th class="entry" id="app_template_ref__table_td5_cfv_4t__entry__3">Subpermissions</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="app_template_ref__table_td5_cfv_4t__entry__1">Application</td>
+<td class="entry" headers="app_template_ref__table_td5_cfv_4t__entry__2">
+<ul class="ul">
+<li class="li"><span class="ph uicontrol">View Applications</span></li>
+</ul>
+</td>
+<td class="entry" headers="app_template_ref__table_td5_cfv_4t__entry__3">Edit<ul class="ul">
+<li class="li"><span class="ph uicontrol">Edit Basic Settings</span></li>
+<li class="li"><span class="ph uicontrol">Manage Properties</span></li>
+<li class="li"><span class="ph uicontrol">Manage Teams</span></li>
+</ul>Create<ul class="ul">
+<li class="li"><span class="ph uicontrol">Create Applications From Template</span></li>
+</ul></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="app_template_ref__table_td5_cfv_4t__entry__1">Application Template</td>
+<td class="entry" headers="app_template_ref__table_td5_cfv_4t__entry__2">
+<ul class="ul">
+<li class="li"><span class="ph uicontrol">View Application Templates</span></li>
+</ul>
+</td>
+<td class="entry" headers="app_template_ref__table_td5_cfv_4t__entry__3"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="app_template_ref__table_td5_cfv_4t__entry__1">Resource</td>
+<td class="entry" headers="app_template_ref__table_td5_cfv_4t__entry__2">
+<ul class="ul">
+<li class="li"><span class="ph uicontrol">Create Resources</span></li>
+</ul>
+</td>
+<td class="entry" headers="app_template_ref__table_td5_cfv_4t__entry__3">Edit<ul class="ul">
+<li class="li"><span class="ph uicontrol">Manage Teams</span></li>
+</ul></td>
+</tr>
+</tbody></table><div class="sectiondiv"> To assign existing components to an application from the application template
+wizard, the user's role must also have the following permissions.<div class="note note note_note" id="app_template_ref__table_1"><span class="note__title">Note:</span> To create an
+application from the application template wizard, the user's role must also have the permissions
+that are listed in Table 1.</div><table class="table" id="app_template_ref__table_wyb_2rz_bv"><caption><span class="table--title-label">Table 2. </span><span class="title">More permissions that are required to specify components</span></caption><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="app_template_ref__table_wyb_2rz_bv__entry__1">Product area</th>
+<th class="entry" id="app_template_ref__table_wyb_2rz_bv__entry__2">Permissions</th>
+<th class="entry" id="app_template_ref__table_wyb_2rz_bv__entry__3">Subpermissions</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="app_template_ref__table_wyb_2rz_bv__entry__1">Application</td>
+<td class="entry" headers="app_template_ref__table_wyb_2rz_bv__entry__2"></td>
+<td class="entry" headers="app_template_ref__table_wyb_2rz_bv__entry__3">Edit<ul class="ul">
+<li class="li"><span class="ph uicontrol">Manage Components</span></li>
+</ul></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="app_template_ref__table_wyb_2rz_bv__entry__1">Component</td>
+<td class="entry" headers="app_template_ref__table_wyb_2rz_bv__entry__2">
+<ul class="ul">
+<li class="li"><span class="ph uicontrol">View Components</span></li>
+</ul>
+</td>
+<td class="entry" headers="app_template_ref__table_wyb_2rz_bv__entry__3"></td>
+</tr>
+</tbody></table></div><div class="sectiondiv">To create environments for an application from the application
+template wizard, the user's role must also have the following permissions. To map resources to the
+environments from the application wizard, the role must also have the permissions in Table 2.<div class="note note note_note"><span class="note__title">Note:</span> To create an
+application from the application template wizard, the user's role must also have the permissions
+that are listed in Table 1.</div><table class="table" id="app_template_ref__table_g3v_dqz_bv"><caption><span class="table--title-label">Table 3. </span><span class="title">Permissions to create environments and map resources to them</span></caption><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="app_template_ref__table_g3v_dqz_bv__entry__1">Product area</th>
+<th class="entry" id="app_template_ref__table_g3v_dqz_bv__entry__2">Permissions</th>
+<th class="entry" id="app_template_ref__table_g3v_dqz_bv__entry__3">Subpermissions</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__1">Agent</td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__2">
+<ul class="ul">
+<li class="li"><span class="ph uicontrol">View Agents</span></li>
+</ul>
+</td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__3"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__1">Application</td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__2"></td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__3">Edit<ul class="ul">
+<li class="li"><span class="ph uicontrol">Manage Approvals</span></li>
+<li class="li"><span class="ph uicontrol">Manage Environments</span></li>
+</ul></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__1">Environment</td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__2">
+<ul class="ul">
+<li class="li"><span class="ph uicontrol">View Environments</span></li>
+</ul>
+</td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__3">Edit<ul class="ul">
+<li class="li"><span class="ph uicontrol">Edit Basic Settings</span></li>
+<li class="li"><span class="ph uicontrol">Manage Base Resources</span></li>
+<li class="li"><span class="ph uicontrol">Manage Properties</span></li>
+</ul>Create<ul class="ul">
+<li class="li"><span class="ph uicontrol">Create Environments From Template</span></li>
+</ul></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__1">Environment Template</td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__2">
+<ul class="ul">
+<li class="li"><span class="ph uicontrol">View Environment Templates</span></li>
+</ul>
+</td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__3"></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__1">Resource</td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__2">
+<ul class="ul">
+<li class="li"><span class="ph uicontrol">View Resources</span></li>
+</ul>
+</td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__3">Edit<ul class="ul">
+<li class="li"><span class="ph uicontrol">Manage Children</span></li>
+<li class="li"><span class="ph uicontrol">Map to Environments</span></li>
+<li class="li"><span class="ph uicontrol">Manage Teams</span></li>
+</ul></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__1">Resource Template</td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__2">
+<ul class="ul">
+<li class="li"><span class="ph uicontrol">View Resource Templates</span></li>
+</ul>
+</td>
+<td class="entry" headers="app_template_ref__table_g3v_dqz_bv__entry__3"></td>
+</tr>
+</tbody></table></div></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_roles.html" title="A role is a list of permissions that users have on the IBM DevOps Deploy (Deploy) server. These permissions include the ability to create, edit, and delete objects, such as applications, environments, and components. The permission also includes the parts of the server interface that users can access.">Roles and permissions</a></div></div></nav></article></main></body></html>

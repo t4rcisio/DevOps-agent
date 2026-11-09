@@ -1,0 +1,99 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="You can find information about the operating system requirements for hypervisors to run IBM DevOps Deploy (Deploy)."><meta name="DC.subject" content="Hypervisors, Hypervisor requirement, AIX requirements, Linux requirements, Windows requirement"><meta name="keywords" content="Hypervisors, Hypervisor requirement, AIX requirements, Linux requirements, Windows requirement"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="sys_req_hypervisors"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Hypervisors</title></head><body id="sys_req_hypervisors"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Hypervisors</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-9ebeb1bd-32fd-49a8-b7ee-abfbaacbdaba">Edit online</a></span></div>
+    
+    
+    <div class="body conbody"><p class="shortdesc">You can find information about the operating system requirements for hypervisors to
+        run <span class="ph">IBM DevOps Deploy (Deploy)</span>. </p>
+        <div class="p">The operating system requirements for the hypervisors to run the <span class="ph">Deploy</span> server are
+            as follows:<ul class="ul" id="sys_req_hypervisors__ul_w4z_dfp_wzb">
+                <li class="li"><a class="xref" href="#sys_req_hypervisors__section_mtq_mgp_wzb">AIX</a></li>
+                <li class="li"><a class="xref" href="#sys_req_hypervisors__section_ebh_kjp_wzb">Linux</a></li>
+                <li class="li"><a class="xref" href="#sys_req_hypervisors__section_xvy_kjp_wzb">Windows</a></li>
+            </ul></div>
+        <section class="section" id="sys_req_hypervisors__section_mtq_mgp_wzb"><h2 id="sys_req_hypervisors__section_mtq_mgp_wzb__title__1" class="title sectiontitle">AIX</h2>
+            
+            <div class="p">The hypervisor requirements to run the <span class="ph">Deploy</span> server
+                on the AIX operating system are as follows:<table class="table frame-all" id="sys_req_hypervisors__table_rzx_mhp_wzb"><caption></caption><colgroup><col style="width:63.63636363636363%"><col style="width:36.36363636363637%"></colgroup><thead class="thead">
+                            <tr class="row rowsep-1">
+                                <th class="entry align-left colsep-1 rowsep-1 valign-middle" id="sys_req_hypervisors__table_rzx_mhp_wzb__entry__1">Hypervisor</th>
+                                <th class="entry align-left colsep-1 rowsep-1 valign-middle" id="sys_req_hypervisors__table_rzx_mhp_wzb__entry__2">Notes</th>
+                            </tr>
+                        </thead><tbody class="tbody">
+                            <tr class="row rowsep-1">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="sys_req_hypervisors__table_rzx_mhp_wzb__entry__1">IBM PowerVM Hypervisor (LPAR,
+                                    DPAR, micro-partition), all supported versions</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="sys_req_hypervisors__table_rzx_mhp_wzb__entry__2">Application tier only.</td>
+                            </tr>
+                        </tbody></table></div>
+            <div class="note note note_note" id="sys_req_hypervisors__note_npx_4sv_11c"><span class="note__title">Note:</span>  There are no guest operating system restrictions.</div>
+        </section>
+        <section class="section" id="sys_req_hypervisors__section_ebh_kjp_wzb"><h2 id="sys_req_hypervisors__section_ebh_kjp_wzb__title__1" class="title sectiontitle">Linux</h2>
+            
+            <div class="p">The hypervisor requirements to run the <span class="ph">Deploy</span> server
+                on the Linux operating system are as follows:<table class="table frame-all" id="sys_req_hypervisors__table_kdy_ljp_wzb"><caption></caption><colgroup><col style="width:63.63636363636363%"><col style="width:36.36363636363637%"></colgroup><thead class="thead">
+                            <tr class="row rowsep-1 valign-middle">
+                                <th class="entry align-left colsep-1 rowsep-1 valign-middle" id="sys_req_hypervisors__table_kdy_ljp_wzb__entry__1">Hypervisor</th>
+                                <th class="entry align-left colsep-1 rowsep-1 valign-middle" id="sys_req_hypervisors__table_kdy_ljp_wzb__entry__2">Notes</th>
+                            </tr>
+                        </thead><tbody class="tbody">
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="sys_req_hypervisors__table_kdy_ljp_wzb__entry__1">IBM PR/SM
+                                    any version</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="sys_req_hypervisors__table_kdy_ljp_wzb__entry__2" rowspan="2">Application tier only.</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="sys_req_hypervisors__table_kdy_ljp_wzb__entry__1">IBM
+                                    PowerVM Hypervisor (LPAR, DPAR, micro-partition), all supported
+                                    versions</td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="sys_req_hypervisors__table_kdy_ljp_wzb__entry__1">KVM in
+                                    SUSE Linux Enterprise Server (SLES) 12</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="sys_req_hypervisors__table_kdy_ljp_wzb__entry__2"></td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="sys_req_hypervisors__table_kdy_ljp_wzb__entry__1">Red Hat
+                                    KVM as delivered with Red Hat Enterprise Linux (RHEL) and its
+                                    Red Hat Enterprise Virtualization (RHEV) equivalent 7.0</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="sys_req_hypervisors__table_kdy_ljp_wzb__entry__2"></td>
+                            </tr>
+                            <tr class="row rowsep-1 valign-middle">
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="sys_req_hypervisors__table_kdy_ljp_wzb__entry__1">VMware
+                                    ESXi 7.0</td>
+                                <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="sys_req_hypervisors__table_kdy_ljp_wzb__entry__2"></td>
+                            </tr>
+                        </tbody></table></div>
+            <div class="note note note_note" id="sys_req_hypervisors__note_pqt_rsv_11c"><span class="note__title">Note:</span>  There are no guest operating system restrictions.</div>
+        </section>
+        <section class="section" id="sys_req_hypervisors__section_xvy_kjp_wzb"><h2 id="sys_req_hypervisors__section_xvy_kjp_wzb__title__1" class="title sectiontitle">Windows</h2>
+            
+            <div class="p">The hypervisor requirements to run the <span class="ph">Deploy</span> server
+                on the Windows operating system are as follows: <table class="table frame-all" id="sys_req_hypervisors__table_hnj_mjp_wzb"><caption></caption><colgroup><col style="width:70%"><col style="width:30%"></colgroup><thead class="thead">
+                            <tr class="row">
+                                <th class="entry align-left colsep-1 rowsep-1" id="sys_req_hypervisors__table_hnj_mjp_wzb__entry__1">Hypervisor</th>
+                                <th class="entry align-left colsep-1 rowsep-1" id="sys_req_hypervisors__table_hnj_mjp_wzb__entry__2">Component support</th>
+                            </tr>
+                        </thead><tbody class="tbody">
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="sys_req_hypervisors__table_hnj_mjp_wzb__entry__1">KVM in SUSE Linux Enterprise Server (SLES) 12</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="sys_req_hypervisors__table_hnj_mjp_wzb__entry__2">Server</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="sys_req_hypervisors__table_hnj_mjp_wzb__entry__1">Red Hat KVM as delivered with Red Hat Enterprise Linux (RHEL)
+                                    and its Red Hat Enterprise Virtualization (RHEV) equivalent
+                                    7.0</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="sys_req_hypervisors__table_hnj_mjp_wzb__entry__2">Server</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry align-left colsep-1 rowsep-1" headers="sys_req_hypervisors__table_hnj_mjp_wzb__entry__1">VMware ESXi 7.0</td>
+                                <td class="entry align-left colsep-1 rowsep-1" headers="sys_req_hypervisors__table_hnj_mjp_wzb__entry__2">Server</td>
+                            </tr>
+                        </tbody></table></div>
+            <div class="note note note_note" id="sys_req_hypervisors__note_up4_ssv_11c"><span class="note__title">Note:</span>  There are no guest operating system restrictions.</div>
+            <p class="p"><span class="ph" data-hd-otherprops="ibm">For more details on system requirements, see <a class="xref" href="https://www.ibm.com/software/reports/compatibility/clarity/index.html" target="_blank">Software product compatibility
+                    report</a></span>.</p>
+        </section>
+    </div>
+</article></main></body></html>

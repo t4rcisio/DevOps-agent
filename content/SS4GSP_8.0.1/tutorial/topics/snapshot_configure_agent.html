@@ -1,0 +1,253 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Modify the IBM DevOps Deploy (Deploy) server that you used in the previous tutorial. Create another agent resource and incorporate a new environment property to allow for easy reuse."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/snapshot_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="snapshot_configure_agent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring the server and target system</title></head><body id="snapshot_configure_agent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring the server and target system</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-0526a633-b51d-48bf-b30a-c98e04c782d1">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Modify the <span class="ph">IBM DevOps Deploy (Deploy)</span> server
+that you used in the previous tutorial. Create another agent resource and incorporate a new
+environment property to allow for easy reuse.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_configure_agent__prereq__1">Before you begin</h2></div>Before you begin the tutorial, make sure that you completed the <a class="xref" href="snapshot_intro.html#snapshot_intro__prereqs">Prerequisites</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_configure_agent__context__1">About this task</h2></div>To work through this tutorial, you must use the target system that you configured in the
+<a class="xref" href="webapp_abstract.html#webapp_abstract" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">Deploying a simple web application</a> tutorial.<p class="p">This system hosts the following
+items that are associated with your <span class="ph">Deploy</span> JPetStore
+application:</p><ul class="ul">
+<li class="li">An <span class="ph">Deploy</span>
+agent</li>
+<li class="li">A MySQL database</li>
+<li class="li">An instance of Apache Tomcat</li>
+</ul>You must have MySQL and Apache Tomcat installed on the system. Follow these steps to set up an
+agent resource, create a new MySQL database, and redeploy your application to your
+environment:</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_configure_agent__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create another resource and add the existing agent to it.</span>
+<div class="itemgroup info">To reuse the agent with another environment on the same <span class="ph">Deploy</span> server,
+you must associate the agent with another resource. </div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">On the <span class="ph">Deploy</span> server,
+click the <span class="ph uicontrol">Resources</span> tab.</span>
+<div class="itemgroup info">Be sure to click the <span class="ph uicontrol">Resources</span> tab at the top of the page.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Resource Tree</span> tab that is displayed, click <span class="ph uicontrol">Create
+Top-Level Group</span>. </span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Resource</span> window, provide the new group with a name such as
+<kbd class="ph userinput">Prod JPetStore agents</kbd> and click <span class="ph uicontrol">Save</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">On the same row as the new resource group, click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Agent</span></span>, as shown in the following figure:</span>
+<div class="itemgroup info">
+<br><img class="image" src="../images/snapshot_configure_c.gif" alt="Adding an agent to the resource group"><br>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Resource</span> window, select the agent in the
+<span class="ph uicontrol">Agent</span> field and click <span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">The agent is listed as a child of both resource groups. By associating the agent with
+both resource groups, you can use the same agent with your existing environment and the one that you
+create in a later lesson.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create an empty database for the application to use in another environment:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Log in to the MySQL command line as the MySQL root user.</span>
+<div class="itemgroup stepxmp">For example, if you installed MySQL as the root user, run this command from the command
+line:<pre class="pre codeblock"><code>mysql -u root</code></pre></div>
+<div class="itemgroup stepresult">The command line shows a prompt that looks like this
+prompt:<pre class="pre codeblock"><code>mysql&gt;</code></pre></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Create the database with the following command:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>create database jpetstoreprod;</code></pre>
+</div>
+<div class="itemgroup stepresult">If the command runs correctly, you see this message: <code class="ph codeph">Query OK, 1 row
+affected</code>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Give the existing database user access rights to the database.</span>
+<div class="itemgroup info">The database user that has access to the <code class="ph codeph">jpetstoredev</code> database must have
+access to the new database too. If you used the default user name in the <a class="xref" href="webapp_abstract.html" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">Deploying a simple web application</a> tutorial, create another database by using the following
+command:</div>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>grant all privileges on jpetstoreprod.* to 'jpetstore'@'host-or-ip';</code></pre>
+<div class="note note note_note"><span class="note__title">Note:</span> If you used the default settings when you configured the original database, the password for
+user <code class="ph codeph">jpetstore</code> is <code class="ph codeph">jppwd</code>. </div>
+</div>
+<div class="itemgroup stepresult">If the command runs correctly, you see this message: <code class="ph codeph">Query OK, 0 rows
+affected</code>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Type <kbd class="ph userinput">quit</kbd> to exit the MySQL command line.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Verify that the user can access the database:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">From the command line, log in to MySQL as the existing user:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>mysql -u jpetstore -pjppwd</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Run the following command to list the databases on the system:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>show databases;</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Verify that both the <code class="ph codeph">jpetstoreprod</code> and <code class="ph codeph">jpetstoredev</code> databases
+appear in the list, as shown in the following figure:</span>
+<div class="itemgroup stepresult">
+<br><img class="image" src="../images/snapshot_configure_b.gif" alt="The list of databases on the system, including the jpetstoreprod database"><br>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Type <kbd class="ph userinput">quit</kbd> to exit the MySQL command line.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Before you deploy your application, confirm that all environment properties contain the correct
+values:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Applications</span> tab of your <span class="ph">Deploy</span> server,
+click the <kbd class="ph userinput">JPetStore</kbd> application.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Open the environment by clicking the environment name.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Open the environment properties by clicking <span class="ph uicontrol">Configuration</span> and then
+clicking <span class="ph uicontrol">Environment Properties</span>.</span>
+<div class="itemgroup info">Be sure to click the <span class="ph uicontrol">Configuration</span> tab for your application, not the
+<span class="ph uicontrol">Configuration</span> tab at the top of the page.</div>
+</li>
+</ol>
+<div class="itemgroup stepresult">The environment properties are displayed as shown in the following table: <table class="table" id="snapshot_configure_agent__env_props"><caption><span class="table--title-label">Table 1. </span><span class="title">Properties for the environment</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="snapshot_configure_agent__env_props__entry__1">Property</th>
+<th class="entry" id="snapshot_configure_agent__env_props__entry__2">Description</th>
+<th class="entry" id="snapshot_configure_agent__env_props__entry__3">Example Value</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__1"><code class="ph codeph">tomcat.home</code></td>
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__2">The Tomcat home folder on the target computer</td>
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__3"><span class="ph filepath">/opt/apache-tomcat-9.0.100</span> on Linux™ or <span class="ph filepath">C:\apache-tomcat-9.0.100</span>
+                    on Windows™</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__1"><code class="ph codeph">tomcat.contextroot</code></td>
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__2">The Tomcat webapp folder on the target computer, which is an identifier in the
+application URL</td>
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__3">For both Tomcat version 9, specify <code class="ph codeph">JPetStoreDev</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__1"><code class="ph codeph">db.url</code></td>
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__2">The URL to the MySQL database, relative to the target system</td>
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__3">If you installed MySQL on the same system as the agent and used the
+database name <code class="ph codeph">jpetstore</code>, the URL looks like the following example:
+<code class="ph codeph">jdbc:mysql://host-or-ip:3306/jpetstore</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__1"><code class="ph codeph">tomcat.manager.url</code></td>
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__2">The location of the Tomcat manager application</td>
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__3">For Tomcat version 9, specify
+                      <code class="ph codeph">http://host-or-ip:8081/manager/text</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__1"><code class="ph codeph">tomcat.start</code></td>
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__2">The location of the startup script for Tomcat</td>
+<td class="entry" headers="snapshot_configure_agent__env_props__entry__3"><span class="ph filepath">/opt/apache-tomcat-9.0.100/bin/startup.sh</span> on Linux or
+                      <span class="ph filepath">C:\apache-tomcat-9.0.100\bin\startup.bat</span> on Windows</td>
+</tr>
+</tbody></table></div>
+</li><li class="li step stepexpand" id="snapshot_configure_agent__increment">
+<span class="ph cmd">To ensure that the <kbd class="ph userinput">JPetStore-DB</kbd> component is deployed correctly, confirm
+that component version <kbd class="ph userinput">1.1</kbd> is an incremental version.</span>
+<div class="itemgroup info">An incremental component version contains only the changes that are associated with that
+version. For the component to be complete, you must deploy the previous versions of the component as
+well.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Components</span> tab, click the <kbd class="ph userinput">JPetStore-DB</kbd>
+component.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click the <span class="ph uicontrol">Versions</span> tab to display the available component versions, and
+then click <kbd class="ph userinput">1.1</kbd> to display its attributes.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click the <span class="ph uicontrol">Configuration</span> tab. Make sure to click the
+<span class="ph uicontrol">Configuration</span> tab that is within the component, not the
+<span class="ph uicontrol">Configuration</span> tab at the top of the page.</span>
+</li>
+<li class="li substep substepexpand">
+                                                <span class="ph cmd">On the <span class="ph uicontrol">Basic Settings</span>
+                                                  panel, confirm that
+                                                  <kbd class="ph userinput">Incremental</kbd> is selected
+                                                  from the <span class="ph uicontrol">Type</span> list, as
+                                                  shown in the figure:</span>
+                                                <div class="itemgroup info"><img class="image" id="snapshot_configure_agent__image_sts_psz_qzb" src="../images/snapshot_configure_a.gif"></div>
+                                        </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">If <kbd class="ph userinput">JPetStore-DB</kbd> version <code class="ph codeph">1.1</code> is not set to
+<span class="ph uicontrol">Incremental</span>, from the <span class="ph uicontrol">Type</span> list, select
+<span class="ph uicontrol">Incremental</span>, and then click <span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To confirm that you configured your environment and component correctly, redeploy the
+application to your environment:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Click the <span class="ph uicontrol">Applications</span> tab, and then click the
+<kbd class="ph userinput">JPetStore</kbd> application.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the same row as your environment, click the <span class="ph uicontrol">Request Process</span>
+icon.</span>
+<div class="itemgroup stepresult">The <span class="keyword wintitle">Run Process</span> window opens.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Clear the <span class="ph uicontrol">Only Changed Versions</span> check box.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Process</span> list, select <kbd class="ph userinput">Deploy
+JPetStore</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Choose Versions</span>.</span>
+<div class="itemgroup info">The <span class="keyword wintitle">Component Versions</span> window opens.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Select For All</span> list, click <span class="ph uicontrol">Latest
+Available</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the same row as <code class="ph codeph">JPetStore-DB</code>, click <span class="ph uicontrol">Add</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">From the displayed list, select <kbd class="ph userinput">1.0</kbd>.</span>
+<div class="itemgroup stepresult">Your list of <span class="ph uicontrol">Versions to Deploy</span> is displayed.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">To record your version selections, click <span class="ph uicontrol">OK</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">To deploy your application, click <span class="ph uicontrol">Submit</span>.</span>
+<div class="itemgroup stepresult"><span class="ph">Deploy</span> runs the application process, and your application is deployed.</div>
+</li>
+</ol>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksnapshot_configure_agent__result__1">Results</h2></div>The agent and the target system are configured for your work with the sample application.
+You need the password that you used and locations that you specified in this lesson later.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_6.2.0 SS4GSP_8.0.1" href="../../tutorial/topics/snapshot_abstract.html" title="In this tutorial, you deploy a simple web application to a new environment with IBM DevOps Deploy (Deploy). You create a snapshot of the components in an application, and then deploy the snapshot to an environment.">Creating and deploying snapshots</a></div></div></nav></article></main></body></html>

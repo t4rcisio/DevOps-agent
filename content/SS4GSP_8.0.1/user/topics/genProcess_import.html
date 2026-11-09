@@ -1,0 +1,53 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can move generic processes between servers by exporting and importing them."><meta name="DC.relation" scheme="URI" content="../../user/topics/genProcess_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_genProcess"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Importing and exporting generic processes</title></head><body id="app_genProcess"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Importing and exporting generic processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-11a03b01-a2e9-40ae-856a-4247a2627c92">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can move generic processes between servers by exporting and importing
+them.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_genProcess__context__1">About this task</h2></div>
+<p class="p">Exporting a generic process from the <span class="ph uicontrol">Processes</span> page creates a JSON file
+    (with a <span class="ph filepath">json</span> file extension) that contains the process and the properties
+    that are associated with the process. However, you can export a generic process to a YAML format
+    using REST command. See <a class="xref" href="../../reference/topics/rest_api_ref_exim_example.html" title="The following example task describes how to export and import elements with YAML configuration.">How-to: Export and import elements with YAML configuration</a> for
+    an example procedure.</p>
+<p class="p">When you export components, applications, processes, or templates, and then
+import them on a different computer, the same versions of the same plug-ins must be installed on
+both computers.</p>
+<p class="p">Importing a generic process makes the exported version of the process available from another
+server.</p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_genProcess__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the first server, click <span class="ph uicontrol">Processes</span> to open the
+<span class="ph uicontrol">Processes</span> tab.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Export</span> in the <span class="ph uicontrol">Actions</span> column to export the
+process.</span>
+<div class="itemgroup info"> You can load the file into a text editor or save it.<div class="note important note_important"><span class="note__title">Important:</span> You must create
+      the JSON file that contains the process definition from a server that uses the same version of
+       <span class="ph">IBM DevOps Deploy (Deploy)</span> as the
+      destination server.</div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the file.</span>
+<div class="itemgroup info">A file is created with the same name as the selected process.</div>
+<div class="itemgroup stepxmp">The file name takes the form of this example:
+<span class="ph filepath">exampleprocess.json</span>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Make the file available to the second server.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">On the second server, click <span class="ph menucascade"><span class="ph uicontrol">Processes</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Import Process</span></span> to open the <span class="keyword wintitle">Import Process</span> window.</span>
+</li><li class="li step stepexpand">
+                <span class="ph cmd">Click <span class="ph uicontrol">Choose File</span>, and then select the JSON file that
+                    contains the process definition.</span>
+                <div class="itemgroup info"></div>
+            </li><li class="li step stepexpand">
+<span class="ph cmd">To upgrade an existing process, select <span class="ph uicontrol">Upgrade Process</span>.</span>
+<div class="itemgroup info">If the name of the process in the JSON file matches an existing process, the process
+                    parameters are updated with new values. If the process name is not found, the
+                    command has no effect.<div class="note note note_note"><span class="note__title">Note:</span>  An existing process must match the name of the
+                        process in the JSON file, not the name of the file itself. The process name
+                        is the first parameter in the JSON file. The following text is the JSON
+                        representation of a process named <code class="ph codeph">Post-process test</code>.<pre class="pre codeblock language-json"><code>"name": "Post-process test",</code></pre></div></div>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Submit</span>.</span></li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/genProcess_ch.html" title="Generic processes are not specific to a particular component and can be used in any number of applications. They are like general purpose processes. You can use generic processes to download and install packages on the system or perform other configuration management related tasks such as configuring SSH or completing FTP tasks. With a generic process, for example, you can update Linux agents that were recently installed by using SSH to run as a service on a Linux computer. Linux agents cannot be updated in this way during a remote installation.">Generic processes</a></div></div></nav></article></main></body></html>

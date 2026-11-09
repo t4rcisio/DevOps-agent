@@ -1,0 +1,86 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can upload, install, and manage Java packages on compact agent using the web UI."><meta name="DC.relation" scheme="URI" content="../../user/topics/configure_agents.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_javapackage_addjavapackage_post.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_agentcliinstalljava_post.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_agentclisetjavahome_post.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_agentcli_restart_put.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="settings_locks_managing"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Managing Java packages on an agent</title></head><body id="settings_locks_managing"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Managing Java packages on an agent</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ce550f21-3e8c-4d1c-b2eb-f6da76c0db8e">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can upload, install, and manage Java packages on compact agent using the web UI. </p>
+    <section class="section prereq" id="settings_locks_managing__prereq_eyg_q3m_2yb"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksettings_locks_managing__prereq_eyg_q3m_2yb">Before you begin</h2></div>
+      <div class="note important note_important" id="settings_locks_managing__note_en4_rqt_fyb"><span class="note__title">Important:</span> 
+        <ul class="ul" id="settings_locks_managing__ul_y22_1sv_fyb">
+          <li class="li">The agents support Java 11 and later versions.</li>
+          <li class="li">The procedure in this section is applicable only for the operating systems that have
+            compact agents. Agents on operating systems like z/OS and AIX cannot be updated with
+            this procedure.</li>
+        </ul>
+      </div>
+    </section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksettings_locks_managing__context__1">About this task</h2></div>
+      <p class="p">You must upgrade Java when you have unsupported Java versions on your agents.</p>
+      <p class="p"><span class="ph">IBM DevOps Deploy (Deploy)</span> identifies
+        which agents must have an updated Java version or patches applied, and determines that
+        status by using the real-time status of the connected agents. Java packages can be uploaded
+        and then applied on different devices and architectures in your environment.</p>
+      <p class="p">To manage the Java package on an agent:</p>
+    </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksettings_locks_managing__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" id="settings_locks_managing__uploadJava">
+        <span class="ph cmd">Upload the required Java package.</span>
+        <ol type="a" class="ol substeps" id="settings_locks_managing__substeps_gjw_zhf_2yb">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Manage Java Packages</span></span>.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Upload a Java package by clicking <span class="ph uicontrol">Add Package</span>.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Provide a name for the Java package to upload.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Click <span class="ph uicontrol">Choose File</span>, select the Java package to upload and
+              click <span class="ph uicontrol">Submit</span>.</span>
+            <div class="itemgroup info">
+              <div class="note note note_note" id="settings_locks_managing__note_n4j_jqz_qxb"><span class="note__title">Note:</span> The <span class="ph filepath">.zip</span>, <span class="ph filepath">.tar</span>,
+                  <span class="ph filepath">.tar.gz</span>, <span class="ph filepath">.tgz</span>,
+                  <span class="ph filepath">.tar.bz2</span>, and <span class="ph filepath">.tbz2</span> file extensions are
+                compatible.</div>
+            </div>
+            <div class="itemgroup info">The Java package is uploaded into the system.</div>
+          </li>
+        </ol>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Install the uploaded Java package on an agent.</span>
+        <ol type="a" class="ol substeps" id="settings_locks_managing__substeps_jkp_53f_2yb">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"> Agents</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">agent_name</var></span></span>.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Click the menu option on the right of the agent for which you want to install the
+              uploaded Java package.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Select <span class="ph uicontrol">Install Java Package</span> and specify the Java package
+              name.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Click <span class="ph uicontrol">Install</span>.</span>
+            <div class="itemgroup stepresult">A message indicates that the Java package is being installed on the agent.
+              When the installation finishes, the agent's Maintenance page displays the installed
+              Java package information.</div>
+          </li>
+        </ol>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Go to the <span class="ph uicontrol">Agents</span> page and set JAVA_HOME on the agent by
+          selecting the <strong class="ph b">Set Java Home</strong> menu option.</span>
+        <div class="itemgroup info">
+          <p class="p">This location must be an absolute path, which is accessible to the agent.</p>
+        </div>
+        <div class="itemgroup stepresult">The agent restarts and runs with your new Java version. </div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">See all Java versions installed for that agent from the agent's
+          Metadata page.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Remove unsupported Java package versions from the
+            <span class="ph uicontrol">Uninstall Java Package</span> menu option. </span>
+      </li></ol></section>
+</div>
+  <nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/configure_agents.html" title="After you install an agent for IBM DevOps Deploy (Deploy), you can modify its configuration or create an agent relay to facilitate communication to remote relays.">Agents and agent relay configuration</a></div></div><div class="linklist relinfo relref"><strong>Related reference</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="../../api/topics/rest_cli_javapackage_addjavapackage_post.html">Upload a Java package.</a></li><li class="linklist"><a class="link" href="../../api/topics/rest_cli_agentcliinstalljava_post.html" title="This command requests the agent install Java, but does not wait for or report the result. The returned maintenance task can be used to query the result.">Install a Java package as a new managed Java installation</a></li><li class="linklist"><a class="link" href="../../api/topics/rest_cli_agentclisetjavahome_post.html" title="This command requests the agent set JAVA_HOME, but does not wait for or report the result. The new JAVA_HOME will not take effect until the agent is restarted. The returned maintenance task can be used to query the result.">Set the configured JAVA_HOME of an agent</a></li><li class="linklist"><a class="link" href="../../api/topics/rest_cli_agentcli_restart_put.html">Restart an agent</a></li></ul></div></nav>
+</article></main></body></html>

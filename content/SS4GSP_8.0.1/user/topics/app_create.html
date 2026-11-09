@@ -1,0 +1,66 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can create an application from scratch or import an existing one."><meta name="DC.relation" scheme="URI" content="../../user/topics/applications_ch.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/app_import.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/app_export.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating applications</title></head><body id="app_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating applications</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-372ac695-22f1-4a9b-801c-9f13f7a41afd">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can create an application from scratch or import an
+existing one.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_create__prereq__1">Before you begin</h2></div>Before you configure an application, ensure that at least one agent is installed in a target
+   environment. For evaluation purposes, the agent can be on the same system as the server. See
+    <a class="xref" href="resources_ch.html" title="A resource is a logical deployment target that typically resolves to an agent and a user-defined construct that is based on the architectural model of IBM DevOps Deploy (Deploy).">Resources</a>.<p class="p">Some of the configuration
+        options might be resticted based on the role assigned to you. Check with your administator,
+        if you need a specific option enabled. </p></section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_create__context__1">About this task</h2></div>See <a class="xref" href="app_import.html" title="If you exported an application, you can import the application on a different server. When you import an application, you can create a new application or upgrade an existing application.">Importing applications</a> for information
+about importing applications. </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Display the <span class="keyword wintitle">Create Application</span> dialog box <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Application</span></span>, and enter the following information:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">Typically the <span class="ph uicontrol">Name</span> and <span class="ph uicontrol">Description</span> correspond to
+the application you plan on deploying.<div class="note restriction note_restriction"><span class="note__title">Restriction:</span> If you deploy this application to a
+cloud that uses virtual system patterns, the application name cannot contain asterisk (*), backslash
+(\), or forward slash (/) characters. </div></li>
+<li class="li">To grant teams access to the application and set its security type, click the <span class="ph uicontrol">plus
+sign</span> icon by <span class="ph uicontrol">Teams</span>, select values from the
+<span class="ph uicontrol">Team</span> and <span class="ph uicontrol">Type</span> lists, and click
+<span class="ph uicontrol">Add</span>.</li>
+<li class="li">To create an application from a template, from the <span class="ph uicontrol">Application Template</span>
+list, select the application template name. Then, from the <span class="ph uicontrol">Application Template
+Version</span> list, select either the application template version number or to ensure that
+the application always meets the latest requirements of the template, <span class="ph uicontrol">Always Use
+Latest</span>. See <a class="xref" href="app_template_using.html#app_template_using" title="Create an application from a template to apply a set of tagged components, environments, and the specified resource tree to the application.">Creating applications from application templates</a>.</li>
+<li class="li"><span class="ph uicontrol">Notification Scheme</span>. <span class="ph">IBM DevOps Deploy (Deploy)</span> includes
+       integrations with LDAP and email servers that enable it to send out <dfn class="term">notifications that
+        are based</dfn> on events. For example, the default notification scheme sends out an email
+       when an application deployment fails or succeeds. Notifications also play a role in approving
+       deployments: <span class="ph">Deploy</span> can be configured to send out an email to either a single individual or to a group or
+       people (based on their security role) notifying them that they must approve a requested
+       deployment. See <a class="xref" href="notify_create.html" title="Notifications are defined in a notification scheme. The notification scheme is assigned to an application and the notifications are sent during the deployment of that application.">Creating Notifications in a Notification Scheme</a>.</li>
+<li class="li">If you want the application to require that every component is versioned, click the
+<span class="ph uicontrol">Enforce Complete Snapshots</span> check box.</li>
+<li class="li">If you want the application to only deploy changed versions by default, click the
+<span class="ph uicontrol">Only Changed Versions Default</span> check box. </li>
+</ul>
+</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span><div class="itemgroup stepresult">The
+new application opens.</div></li><li class="li step stepexpand"><span class="ph cmd">Add one or more components to the application:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Within the application, click the <span class="ph uicontrol">Components</span> tab,
+which is not to be confused with the global <span class="ph uicontrol">Components</span> tab.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Add Component</span>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="keyword wintitle">Add a Component</span> window,
+expand the <span class="ph uicontrol">Select a Component</span> list and select
+the check boxes next to one or more components, as shown in the following
+figure.</span><div class="itemgroup stepxmp"><br><img class="image" src="../images/app_create_a.gif" height="214" width="300" alt="Selecting components to add to the application"><br></div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span></li>
+</ol>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_create__postreq__1">What to do next</h2></div>After you create an application, you: <ul class="ul">
+<li class="li">Create an environment (<a class="xref" href="app_environment_create.html" title="Before you can run a deployment, you must define at least one application environment that associates components with an agent on the target host.">Creating environments</a>)</li>
+<li class="li">Associate an agent with the environment (<a class="xref" href="app_environment_mapping.html" title="You can specify where components are deployed by adding a resource or resource group to the environment. Then, map the components to those resources.">Mapping resources and components to environments</a>)</li>
+<li class="li">Create an application process (<a class="xref" href="app_process.html" title="You can use application processes to deploy or to roll back components.">Application processes</a>)</li>
+</ul></section>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/app_import.html">Importing applications</a></strong><br>If you exported an application, you can import the application on a different server.         When you import an application, you can create a new application or upgrade an existing         application.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/app_export.html">Exporting applications</a></strong><br>Exporting applications creates a JSON file (file extension <span class="ph filepath">json</span>) that contains the properties, components (and their associated properties and processes), and processes of the applications.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/applications_ch.html" title="Applications are responsible for bringing together all the components that must be deployed together.">Applications</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="This step iterates over resource tags in application processes."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_processSteps.html"><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/blueGreen_abstract.html#blueGreen_abstract"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_process_every_tag"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>For Each Tag</title></head><body id="app_process_every_tag"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">For Each Tag</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-32b53f80-4f9a-45a6-8288-ebf0de94752e">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">This step iterates over resource tags in application processes. </p>
+<section class="section">
+      <div class="note tip note_tip"><span class="note__title">Tip:</span> 
+        <p class="p"><span class="ph">Applications, components, and generic processes share some process
+steps. This step applies only to application processes, including application processes that are
+associated with application templates.</span></p>
+      </div>
+      <div class="p">This step iterates over one or more resource tags. If you have many agent resources mapped
+to an environment, you can use this step to choose which resources to run steps on. For example, if
+you are running a rolling deployment, you can use this step to deploy to a few resources first, and
+then run automated tests on those resources before deploying on the other resources. Also, if you
+are running a blue/green deployment, you can use this step to limit the deployment to the blue nodes
+or green nodes. Finally, you can select the order of the tags to iterate over, such as if you want
+to update specific canary nodes before all other nodes. For a tutorial of Blue/Green deployments,
+see Blue/Green deployments.<div class="note note note_note"><span class="note__title">Note:</span> If the process fails in a <span class="keyword cmdname">For each tag</span> step for
+any agent or agent pool, no new agents will have the process run for them and the step will fail.
+</div></div>
+      <p class="p">Like the For Each Agent step, this step creates an iteration container for subprocesses.
+        You specify one or more resource tags, and the order of those resource tags, and the step
+        runs the subprocess once for each resource tag. The workflow in the container has its own
+        context, and its own start and finish steps, as shown in the following figure. You can use
+        any application process step in the subprocess. An iteration container can connect to any
+        step, even other iteration containers, but you cannot include other iteration containers
+        within an iteration container.</p>
+      <br><img class="image" src="../images/app_process_every_tag_a.gif" alt="A process that includes a For Each Tag step"><br>
+      <div class="p">To make it easier to control which resources you deploy to, such as in a staged, rolling,
+        or blue/green deployment scenario, you can set the tags on the fly when you request the
+        process. In the <span class="keyword wintitle">Request Process</span> window, the list of tags for the
+        container is shown. You can add or remove tags here, or change the order of the tags. This
+        way, you can use one process to deploy in different scenarios. For example, if you want to
+        deploy to a canary node first, put that resource tag first, and then follow with the other
+        tags. The following figure shows a process request to a canary node first, and to the rest
+        of the resources next.<br><img class="image" src="../images/app_process_every_tag_d.gif" alt="Requesting a process and selecting the tags to use in the For Each Tag step"><br></div>
+      <table class="table" id="app_process_every_tag__table_for_each_tag"><caption><span class="table--title-label">Table 1. </span><span class="title">For Each Tag properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+            <tr class="row">
+              <th class="entry align-left" id="app_process_every_tag__table_for_each_tag__entry__1">Field</th>
+              <th class="entry align-left" id="app_process_every_tag__table_for_each_tag__entry__2">Description</th>
+            </tr>
+          </thead><tbody class="tbody">
+            <tr class="row">
+              <td class="entry align-left" headers="app_process_every_tag__table_for_each_tag__entry__1"><span class="ph uicontrol">Name</span></td>
+              <td class="entry align-left" headers="app_process_every_tag__table_for_each_tag__entry__2"><span class="ph">A name for the iteration
+                  container.</span></td>
+            </tr>
+            <tr class="row">
+              <td class="entry align-left" headers="app_process_every_tag__table_for_each_tag__entry__1"><span class="ph uicontrol">Tags</span></td>
+              <td class="entry align-left" headers="app_process_every_tag__table_for_each_tag__entry__2">A list of resource tags to use in the container.
+                The subprocess runs once for each resource tag. You can order the resource tags by
+                dragging and dropping them.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry align-left" headers="app_process_every_tag__table_for_each_tag__entry__1"><span class="ph uicontrol">Max Concurrent Tags</span></td>
+              <td class="entry align-left" headers="app_process_every_tag__table_for_each_tag__entry__2">The maximum number of tags for which to run the
+                subprocess at a time. To run the subprocess on all of the tags at the same time,
+                specify <code class="ph codeph">-1</code>. To run the subprocess on only a few of the tags at a
+                time, as in blue/green deployments or rolling deployments, specify an integer. <p class="p">The server attempts to resolve the value to an integer. If the value does
+      not resolve to an integer, then the <code class="ph codeph">-1</code> value is used by default. You can use
+      a property in this field, as long as the property resolves to an integer.</p></td>
+            </tr>
+          </tbody></table>
+    </section>
+<section class="section"><h2 id="app_process_every_tag__title__3" class="title sectiontitle">Iteration properties</h2>
+
+<p class="p">The For Each Tag step has properties, called iteration properties, that can be used to reference
+        steps within the iteration context. By using these properties, for example, you can identify
+        the current agent within the context. To reference iteration properties, use the following
+        format: <code class="ph codeph">${p:iteration/&lt;name&gt;}</code>. For example, the current tag name is in
+        the property <code class="ph codeph">${p:iteration/tag.name</code>.</p>
+<div class="p">
+<br><img class="image" src="../images/app_process_every_tag_b.gif" alt="Iteration properties for the For Each Tag step"><br>
+</div>
+      <div class="p">When you run the application process, the log shows each iteration of the container as a
+        separate entry. For example, the following log shows a For Each Tag step that ran over two
+          tags:<br><img class="image" src="../images/app_process_every_tag_c.gif" alt="The log for an application process request that includes a For Each Tag step, showing two entries for the two resource tags that the step iterated over."><br></div>
+      <div class="p">To view the iteration properties for the step, follow these steps:<ol class="ol">
+          <li class="li">Open the log for the application process request by clicking <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"> application_name</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">History </span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"> View Request</span></span>.</li>
+          <li class="li">Expand the container step and, next to one of the iterations, click
+              <span class="ph uicontrol">Iteration Properties</span><img class="image" src="../images/viewproperties.gif" alt="">.</li>
+        </ol></div>
+<div class="note note note_note"><span class="note__title">Note:</span> If the process fails in a <span class="keyword cmdname">For Each Tag</span> step for any agent or agent pool, no
+new agents will have the process run for them and the step will fail. </div>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_processSteps.html" title="Application processes, component processes, and generic processes are created with the process editor.">Process steps: Reference</a></div></div><div class="linklist relinfo relconcepts"><strong>Related concepts</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="../../tutorial/topics/blueGreen_abstract.html#blueGreen_abstract" title="In this tutorial, you setup a deployment with two identical production environments, referred to arbitrarily as Blue and Green. One environment is always live, and the other environment is inactive and available to host an upgraded version.">Blue-green deployments</a></li></ul></div></nav>
+</article></main></body></html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="After you configure the integration with VMware vRealize Automation Enterprise, you can create software components for IBM DevOps Deploy (Deploy) agents."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="VRA_service_entitle"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating agent components in VMware vRealize Automation</title></head><body id="VRA_service_entitle"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating agent components in VMware vRealize Automation</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-c35d254e-fbb3-422f-8d1e-fdfd4f2f785b">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">After you configure the integration with VMware vRealize Automation Enterprise, you can
+create software components for <span class="ph">IBM DevOps Deploy (Deploy)</span> agents.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskVRA_service_entitle__context__1">About this task</h2></div>You can import VMware vRealize Automation Enterprise catalog items into empty blueprints in
+the blueprint designer. To add <span class="ph">Deploy</span> components to images in these catalog items without creating a new blueprint in vRealize
+automation, the image must contain a vRealize Automation software component for an <span class="ph">Deploy</span> agent. </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskVRA_service_entitle__steps__1">Procedure</h2></div><div class="li stepsection">To create vRealize Automation software components for the agent, complete the following
+steps:</div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Extract the installation files for the agent components.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">From the command line, change to the
+<span class="ph filepath"><var class="keyword varname">installation_directory</var>/ibm-ucd-patterns-install/agent-package-install/</span>
+folder, and run the installation program:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li"><p class="p">On a Linux™ computer, run the following
+command:</p><pre class="pre codeblock"><code>./create-ucd-linux-agent-swcomp-for-vra.sh 
+-s &lt;<var class="keyword varname">VRA_SERVER_URL</var>&gt; 
+-u &lt;<var class="keyword varname">VRA_USERNAME</var>&gt; 
+-p &lt;<var class="keyword varname">VRA_PASSWORD</var>&gt; 
+-t &lt;<var class="keyword varname">VRA_TENANT</var>&gt;</code></pre>This
+command is split onto separate lines for clarity, but it must be entered on a single line.<ul class="ul" id="VRA_service_entitle__vra_props">
+<li class="li"><var class="keyword varname">VRA_SERVER_URL</var> is the URL of the vRealize Automation server</li>
+<li class="li"><var class="keyword varname">VRA_USERNAME</var> is a vRealize Automation user that is assigned a role with
+permission to create a software component, such as the Infrastructure Architect or Software
+Architect role.</li>
+<li class="li">
+<var class="keyword varname">VRA_PASSWORD</var> is the password for that user.</li>
+<li class="li"><var class="keyword varname">VRA_TENANT</var> is the tenant that can access the component.</li>
+</ul><div class="note note note_note" id="VRA_service_entitle__vra_cloud"><span class="note__title">Note:</span> The <var class="keyword varname">VRA_SERVER_URL</var> and <var class="keyword varname">VRA_TENANT</var>
+values must match the values that were used to configure the vRealize Automation cloud project in
+the blueprint designer.</div></li>
+<li class="li"><p class="p">On a Windows™ computer, run the following
+command:</p><pre class="pre codeblock"><code>./create-ucd-windows-agent-swcomp-for-vra.ps1 
+-s &lt;<var class="keyword varname">VRA_SERVER_URL</var>&gt; 
+-u &lt;<var class="keyword varname">VRA_USERNAME</var>&gt; 
+-p &lt;<var class="keyword varname">VRA_PASSWORD</var>&gt; 
+-t &lt;<var class="keyword varname">VRA_TENANT</var>&gt;</code></pre>This
+command is split onto separate lines for clarity, but it must be entered on a single line.<ul class="ul">
+<li class="li"><var class="keyword varname">VRA_SERVER_URL</var> is the URL of the vRealize Automation server</li>
+<li class="li"><var class="keyword varname">VRA_USERNAME</var> is a vRealize Automation user that is assigned a role with
+permission to create a software component, such as the Infrastructure Architect or Software
+Architect role.</li>
+<li class="li">
+<var class="keyword varname">VRA_PASSWORD</var> is the password for that user.</li>
+<li class="li"><var class="keyword varname">VRA_TENANT</var> is the tenant that can access the component.</li>
+</ul><div class="note note note_note"><span class="note__title">Note:</span> The <var class="keyword varname">VRA_SERVER_URL</var> and <var class="keyword varname">VRA_TENANT</var>
+values must match the values that were used to configure the vRealize Automation cloud project in
+the blueprint designer.</div></li>
+</ul>
+</div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskVRA_service_entitle__postreq__1">What to do next</h2></div>Now you can create vRealize Automation blueprints that contain software components for the
+agents. Then, users can import catalog items that are based on the blueprint into the blueprint
+designer and add <span class="ph">Deploy</span> components to images that contain an agent. They can provision these blueprints from the
+blueprint designer without modifying or creating assets in vRealize Automation.</section>
+</div>
+</article></main></body></html>

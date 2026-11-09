@@ -1,0 +1,165 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="If you exported an application, you can import the application on a different server. When you import an application, you can create a new application or upgrade an existing application."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_create.html"><meta name="DC.relation" scheme="URI" content="../../install/topics/ssl_mutual_authServers.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_import"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Importing applications</title></head><body id="app_import"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Importing applications</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-1b25860b-3a30-4f4d-850a-80de820efd5c">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">If you exported an application, you can import the application on a different server.
+        When you import an application, you can create a new application or upgrade an existing
+        application.</p>
+        <section class="section prereq" id="app_import__prereq_uyr_f1n_cfc"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_import__prereq_uyr_f1n_cfc">Before you begin</h2></div>Ensure that you have exported an application from the source
+            server and copied the JSON or YAML file to the destination server. See <a class="xref" href="app_export.html" title="Exporting applications creates a JSON file (file extension json) that contains the properties, components (and their associated properties and processes), and processes of the applications.">Exporting applications</a>.<p class="p">Additionally, you must know that:</p><ul class="ul" id="app_import__ul_kvb_d2n_cfc">
+                <li class="li">To share applications that have secured properties among <span class="ph">Deploy</span>
+                    servers, you exchange keys from each server's encryption keystore. See <a class="xref" href="../../install/topics/ssl_mutual_authServers.html#ssl_mutual_authServers" title="To share applications that have secured properties among IBM DevOps Deploy (Deploy) servers, exchange keys from each server's encryption keystore.">Sharing secured properties among servers</a>.</li>
+                <li class="li">The version of the destination server must be the same as of the source
+                    server.</li>
+            </ul><p class="p">When you export components, applications, processes, or templates, and then
+import them on a different computer, the same versions of the same plug-ins must be installed on
+both computers.</p></section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_import__context__1">About this task</h2></div>To move applications between servers, you export the applications and import them to a
+            different server. When you import an application, components and other items that are
+            associated with the application are also imported, including their properties and
+            processes (if they are available to the importing server). <div class="note note note_note" id="app_import__note_lp2_21n_cfc"><span class="note__title">Note:</span> Notification schemes are not imported.</div><div class="p">For information about templates
+                that are associated with the imported components, see <a class="xref" href="comp_import.html" title="Importing and exporting can be especially useful if you have multiple IBM DevOps Deploy (Deploy) servers, for example, and must quickly move or update components.">Importing components</a>.<div class="note note note_note" id="app_import__note_sjj_5dn_cfc"><span class="note__title">Notes:</span> 
+                    <ul class="ul" id="app_import__ul_tjj_5dn_cfc">
+                        <li class="li">If imported components have the <span class="keyword parmname">Import Versions
+                                Automatically</span> parameter set to true, <span class="ph">Deploy</span> automatically imports component versions if the artifacts are
+                            accessible to the importing server.</li>
+                        <li class="li">You might receive an error message that indicates the Java™ heap space is out of memory
+                            when you attempt to import an application. To resolve the issue,
+                            increase the Java heap size. Open
+                            the <span class="ph filepath">server_directory/bin/set_env</span> file, and set the
+                                Java heap size to a higher
+                            value, such as 2 GB.</li>
+                    </ul>
+                </div></div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_import__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Open the <span class="keyword wintitle">Import Applications</span> dialog
+box by clicking <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Import Applications</span></span>.</span></li><li class="li step stepexpand">
+                <span class="ph cmd">To upgrade an existing application, enable the <span class="ph uicontrol">Upgrade
+                        Application</span> option. To create a new application, leave
+                        <span class="ph uicontrol">Upgrade Application</span> cleared. </span>
+                <div class="itemgroup info">If the name of the application in the JSON file (not the name of the file
+                    itself) matches an existing application name, then the application parameters
+                    are updated. If items such as processes or properties exist, new versions are
+                    created. New items, such as processes, environments, components, or properties,
+                    are also added. If the name of the application is not found, the import action
+                    has no effect.<div class="note note note_note" id="app_import__note_plp_d4m_cfc"><span class="note__title">Note:</span>  The application name is the first
+                        parameter in the defined file. This example shows the first parameter in the
+                        respective file:
+                        <pre class="pre codeblock language-json" id="app_import__codeblock_qlp_d4m_cfc"><code>"name": "helloWorldApplication",</code></pre></div></div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">To import the application with snapshots, enable the <span class="ph uicontrol">Import with
+                        Snapshots</span> option.</span>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">To import the full base resource trees mapped to the application environments,
+                    enable the <span class="ph uicontrol">Import Full Base Resource Trees</span> option.</span>
+                <div class="itemgroup info">
+                    <div class="p">When selected, the resource mapping of the imported application environment
+                        matches with existing resources on the source server.<div class="note note note_note" id="app_import__note_nwc_sbt_2fc"><span class="note__title">Note:</span> The resources must exist on the source server for
+                            the application environment to map to.</div></div>
+                </div>
+            </li><li class="li step stepexpand">
+<span class="ph cmd">Configure how to import the items that are associated with the application.</span>
+<div class="itemgroup info">When you import an application, all application templates, components, generic processes, and
+resource templates that are associated with the application are also imported. For each item type,
+you must select the option from the list that determines how each item type is imported or upgraded.
+If your application does not contain items of a type, accept the default value.</div>
+<div class="itemgroup info">
+<dl class="dl">
+
+<dt class="dt dlterm"><span class="ph uicontrol">Application Template Upgrade Type</span></dt>
+<dd class="dd">If the application was created from an application template, you must specify how to import the
+application template.</dd>
+
+
+<dt class="dt dlterm"><span class="ph uicontrol">Component Upgrade Type</span></dt>
+<dd class="dd">If the application contains components, you must specify how to import them.<div class="note note note_note"><span class="note__title">Note:</span> The components
+must be on the importing server.</div></dd>
+
+
+<dt class="dt dlterm"><span class="ph uicontrol">Process Upgrade Type</span></dt>
+<dd class="dd">If the application processes contain generic processes, you must specify how to import them. If
+you are also upgrading components, then the generic processes that are called in the component
+processes are also affected. The import process has different results if the generic processes exist
+or not.<div class="note note note_note"><span class="note__title">Note:</span> The server tracks generic processes by name. If a generic process on the server is
+assigned the same name as a generic process that is imported, then the generic process exists on the
+server.</div></dd>
+
+
+<dt class="dt dlterm"><span class="ph uicontrol">Resource Template Upgrade Type</span></dt>
+<dd class="dd">The application template might also contain resource templates. Specify how to import resource
+templates that have the same names as existing resource templates.</dd>
+
+</dl>
+</div>
+<div class="itemgroup info">The following table lists the options available for the above upgrade types:<table class="table frame-all" id="app_import__table_drr_swd_bv"><caption><span class="table--title-label">Table 1. </span><span class="title">Upgrade options that are available for each item type</span></caption><colgroup><col style="width:35.97122302158273%"><col style="width:64.02877697841726%"></colgroup><thead class="thead">
+                                <tr class="row">
+                                    <th class="entry colsep-1 rowsep-1" id="app_import__table_drr_swd_bv__entry__1">Option</th>
+                                    <th class="entry colsep-1 rowsep-1" id="app_import__table_drr_swd_bv__entry__2">Description</th>
+                                </tr>
+                            </thead><tbody class="tbody">
+                                <tr class="row">
+                                    <td class="entry align-left colsep-1 rowsep-1" headers="app_import__table_drr_swd_bv__entry__1"><span class="ph uicontrol">Use Existing
+                                                <var class="keyword varname">Item Type</var></span></td>
+                                    <td class="entry align-left colsep-1 rowsep-1" headers="app_import__table_drr_swd_bv__entry__2">To use the same item that is
+                                        used by the imported application, select this option. The
+                                        new application contains references to the item. If you are
+                                        upgrading, the application uses the imported item.</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="entry align-left colsep-1 rowsep-1" headers="app_import__table_drr_swd_bv__entry__1"><span class="ph uicontrol">Create
+                                                <var class="keyword varname">Item Type</var></span></td>
+                                    <td class="entry align-left colsep-1 rowsep-1" headers="app_import__table_drr_swd_bv__entry__2">To create an item that is
+                                        based on the item that the imported application uses, select
+                                        this option. A new item is created that is based on the item
+                                        of the imported application. If you are upgrading, the
+                                        application uses the newly created item, and it no longer
+                                        uses the item that it previously used.</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="entry align-left colsep-1 rowsep-1" headers="app_import__table_drr_swd_bv__entry__1"><span class="ph uicontrol">Fail If
+                                                <var class="keyword varname">Item Type</var>
+                                        Exists</span></td>
+                                    <td class="entry align-left colsep-1 rowsep-1" headers="app_import__table_drr_swd_bv__entry__2">When you want to create a
+                                        fresh installation, select this option. If you are creating
+                                        an application, <span class="ph">Deploy</span> creates both a new application and item unless the item
+                                        exists, in which case the application is not imported. If
+                                        you are upgrading, the upgrade fails if the item exists on
+                                        the importing server.</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="entry align-left colsep-1 rowsep-1" headers="app_import__table_drr_swd_bv__entry__1"><span class="ph uicontrol">Fail If
+                                                <var class="keyword varname">Item Type</var> Does Not
+                                            Exist</span></td>
+                                    <td class="entry align-left colsep-1 rowsep-1" headers="app_import__table_drr_swd_bv__entry__2">To ensure that an item is on
+                                        the importing server, select this option. If you are
+                                        creating an application, <span class="ph">Deploy</span> creates both a new application and item unless the item
+                                        does not exist, in which case the application is not
+                                        imported. If you are upgrading, the upgrade fails if the
+                                        imported item does not exist on the importing
+                                        server.</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="entry align-left colsep-1 rowsep-1" headers="app_import__table_drr_swd_bv__entry__1"><span class="ph uicontrol">Upgrade
+                                                <var class="keyword varname">Item Type</var> If
+                                        Exists</span></td>
+                                    <td class="entry align-left colsep-1 rowsep-1" headers="app_import__table_drr_swd_bv__entry__2">To upgrade the existing item,
+                                        select this option. This option creates an application and
+                                        upgrades the existing item with data from the imported
+                                        application. If you are upgrading and an existing item
+                                        matches an imported one, the item is upgraded. If the
+                                        imported item matches the existing one, the imported item is
+                                        used.</td>
+                                </tr>
+                            </tbody></table></div>
+</li><li class="li step stepexpand">
+                <span class="ph cmd">Click <span class="ph uicontrol">Choose File</span>, and then select the name of the JSON
+                    or YAML file that contains the application definition.</span>
+                <div class="itemgroup info">
+                    <div class="note note note_note" id="app_import__note_ibr_kpm_cfc"><span class="note__title">Note:</span> You must create the JSON or YAML
+                        file that contains the application definition on a server that uses the same
+                        version of <span class="ph">Deploy</span>
+                        as the destination server.</div>
+                </div>
+            </li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Submit</span>.</span></li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../install/topics/ssl_mutual_authServers.html">Sharing secured properties among servers</a></strong><br>To share applications that have secured properties among <span class="ph">IBM DevOps Deploy (Deploy)</span> servers, exchange     keys from each server's encryption keystore. </li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_create.html" title="You can create an application from scratch or import an existing one.">Creating applications</a></div></div></nav></article></main></body></html>

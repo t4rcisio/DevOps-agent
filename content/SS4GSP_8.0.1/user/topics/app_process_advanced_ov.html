@@ -1,0 +1,78 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="The For Each Agent and For Each Tag steps provide ways to deploy to large environments in stages, allowing you to run flexible blue-green or rolling deployments, with or without updating canary nodes first."><meta name="DC.subject" content="blue-green deployments, rolling deployments, canary deployments"><meta name="keywords" content="blue-green deployments, rolling deployments, canary deployments"><meta name="DC.relation" scheme="URI" content="../../user/topics/app_process.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_process_advanced_ov"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Modeling blue-green, rolling, and canary deployments</title></head><body id="app_process_advanced_ov"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Modeling blue-green, rolling, and canary deployments</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-bff5878d-1bec-473d-9bd9-8117cd2f6dad">Edit online</a></span></div>
+  
+  
+  <div class="body conbody"><p class="shortdesc">The For Each Agent and For Each Tag steps provide ways to deploy to large environments
+in stages, allowing you to run flexible blue-green or rolling deployments, with or without updating
+canary nodes first.</p>
+    <p class="p">Two application process steps, the <a class="xref" href="app_process_every_agent.html" title="This step creates a loop that iterates over the agents in the environment.">For Each Agent</a> step and the
+        <a class="xref" href="app_process_every_tag.html" title="This step iterates over resource tags in application processes.">For Each Tag</a> step, provide flexible ways to deploy to
+      multi-node environments in stages. You can use these steps to select subsets of agents and
+      deploy to those subsets in specific orders. The following scenarios are just a few examples of
+      how you can use these steps to control how deployments happen in multi-node environments.</p>
+    <section class="section"><h2 id="app_process_advanced_ov__title__2" class="title sectiontitle">Blue-green deployments</h2>
+      
+      <p class="p">For a video demo of blue-green deployments, see <a class="xref" href="https://youtu.be/fYiJIv_myIk?feature=shared" target="_blank">Blue-green deployments with <span class="ph">Deploy</span></a>. For an
+        article that covers a blue-green deployment scenario in detail, see <a class="xref" href="https://community.ibm.com/community/user/wasdevops/blogs/osman-burucu/2022/07/13/kubernetes-blue-green-deployments-made-easy-with-u" target="_blank">Setting Up Blue-Green Deployments in <span class="ph">Deploy</span></a>.</p>
+      <p class="p">Blue-green deployments use two identical environments. While clients are using one active
+environment, you can update the other environment without interrupting the active environment. Then,
+when the other environment is ready, you set a load balancer to send client traffic to the updated
+environment. Updating environments in this way allows for zero-downtime deployments and keeps a
+second working environment ready at all times in case anything goes wrong with the active
+environment.</p>
+      <div class="p">To set up a blue-green deployment, first set up matching environments on the server. These
+environments can point to the same physical environments as long as they have different agent
+resources. These different agent resources allow you to distinguish the two environments, as shown
+in the following figure.<br><img class="image" src="../images/app_process_advanced_a.gif" alt="The resource tree showing two matching collections of agent resources"><br></div>
+      <div class="p">Then, apply resource tags to select subsets of the agent resources. For example, large
+        deployments often update a few test nodes first, called <dfn class="term">canary nodes</dfn>. You can
+        apply a resource tag to your canary nodes to run deployments on those agent resources first.
+        For example, the following figure shows the same resource tree with the addition of "canary"
+        tags on the canary node and "main" tags on the other nodes:<br><img class="image" src="../images/app_process_advanced_b.gif" alt="The resource tree showing resource tags on the agent resources"><br></div>
+      <div class="p">Then, in your application processes, run deployments based on the tags or agents. For
+        example, to run a deployment on the canary agent resources first, and all of the other agent
+        resources second, use a For Each Tag loop. In the loop, use the canary tag first and then a
+        tag that represents the other resources. The following figure shows the For Each Tag step in
+        use, and the next figure shows the properties for that step:<br><img class="image" src="../images/app_process_advanced_c.gif" alt="The For Each Tag step in use in an application process"><br><br><img class="image" src="../images/app_process_advanced_d.gif" alt="The properties of the For Each Tag step"><br></div>
+      <div class="p">When you request the process, you can set the tags to use for that request, as shown in the
+        following figure:<br><img class="image" src="../images/app_process_advanced_e.gif" alt="Setting the tags to iterate over when you request the process"><br></div>
+      <p class="p">There are many other ways to organize this type of deployment. For example, instead of
+        using separate environments, you could use a single environment and tag the nodes Blue and
+        Green with resource tags. How you organize your environments and apply resource tags to them
+        depends on the order in which you want to update your nodes.</p>
+    </section>
+    <section class="section"><h2 id="app_process_advanced_ov__title__3" class="title sectiontitle">Rolling deployments</h2>
+      
+      <div class="p"><dfn class="term">Rolling deployments</dfn> update large environments a few nodes at a time. The setup
+for rolling deployments can be similar to blue-green deployments, but this time with a single
+logical environment. The environment can have many nodes, as shown in the following figure:<br><img class="image" src="../images/app_process_advanced_f.gif" alt="An environment with six nodes"><br></div>
+      <div class="p">To deploy to these nodes one at a time, use the For Each Agent step. For example, the
+        following application process runs deployments on these nodes within the For Each Agent
+        step. It pauses for a manual task after each deployment to ensure that the deployment ran
+        correctly on that node. You could use any manual or automatic test in place of that manual
+        task. In the properties for the loop, the <span class="ph uicontrol">Max Concurrent Agents</span>
+        property is set to 1 to run the deployment to a single agent at a time.<br><img class="image" src="../images/app_process_advanced_g.gif" alt="An application process that loops; in the loop is an installation step and a manual task step"><br></div>
+    </section>
+<section class="section"><h2 id="app_process_advanced_ov__title__4" class="title sectiontitle">Canary deployments</h2>
+
+<p class="p"><dfn class="term">Canary deployments</dfn> are deployments that start by updating a single node or a subset
+        of nodes. That way, you can test the update on a small subset of your system before you
+        update every node. Canary deployments can be part of many other deployment scenarios. For
+        example, the scenario in <a class="xref" href="https://community.ibm.com/community/user/wasdevops/blogs/laurel-dickson-bull1/2020/11/30/advanced-urbancode-deploy-topic-blue-green-contain" target="_blank">Setting Up Blue-Green Deployments in <span class="ph">Deploy</span></a> includes
+        deployment to a canary node first. </p>
+<p class="p">All you need to do to use a canary node in your deployment is to pick one or a few nodes and make
+sure that you deploy to those nodes first. Then, you must run automated or manual tests to make sure
+that the canary node or nodes are working well with the new version.</p>
+<div class="p">A straightforward way to deploy to canary nodes first is to apply a resource tag to them and to
+deploy to that resource tag first. For example, the scenario in the article <a class="xref" href="https://developer.ibm.com/urbancode/docs/deploying-applications-canary-nodes/" target="_blank">Deploying applications with canary nodes</a> applies the resource tag
+<code class="ph codeph">canary</code> to one node and the resource tag <code class="ph codeph">mainSystem</code> to the other
+nodes. The article shows several ways to use those tags, but a simple way is to use a For Each Tag
+loop. This loop contains a simple sub-process that deploys the components and runs automated
+tests:<br><img class="image" src="../images/app_process_advanced_h.gif" alt="A simple process with a For Each Tag loop that deploys a component, test, it and optionally rolls it back"><br>In the properties of the loop, you select the tags and then set the order for those tags. In
+this case, the <code class="ph codeph">canary</code> tag runs first and the <code class="ph codeph">mainSystem</code> tag runs
+second:<br><img class="image" src="../images/app_process_advanced_i.gif" alt="The properties of the For Each Tag loop, showing that the canary tag runs first"><br></div>
+</section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_process.html" title="You can use application processes to deploy or to roll back components.">Application processes</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can convert an IBM DevOps Deploy (Deploy) server into the first node of a high-availability cluster."><meta name="DC.relation" scheme="URI" content="../../user/topics/server_install_clustered.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ha_convert_server"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Converting a stand-alone server to high availability</title></head><body id="ha_convert_server"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Converting a stand-alone server to high availability</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-04604f12-1729-4cc3-a89a-85eb58069e9a">Edit online</a></span></div>
+  
+  <div class="body taskbody"><p class="shortdesc">You can convert an <span class="ph">IBM DevOps Deploy (Deploy)</span> server into the first
+    node of a high-availability cluster.</p>
+    <section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_convert_server__prereq__1">Before you begin</h2></div>
+<ul class="ul">
+<li class="li" data-hd-otherprops="ibm">Each server in the cluster must run the same version of <span class="ph">Deploy</span>.</li>
+  
+
+</ul>
+</section>
+    <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_convert_server__context__1">About this task</h2></div>
+      <p class="p" id="ha_convert_server__context">To convert a stand-alone server to the first node in a clustered
+configuration, you first move CodeStation to shared network storage, and then modify the server
+settings for multi-server operation.</p>
+    </section>
+    <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_convert_server__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Move CodeStation to a shared storage location with a fast network connection. </span>
+<div class="itemgroup info">Because each cluster server must access the same configuration files, each server must have
+access to this network storage. See <a class="xref" href="arch_relocate_codestation.html" title="You can move the CodeStation artifacts to a different location on the server.">Relocating CodeStation</a>.</div>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">Install a load balancer to send requests to the servers. </span>
+        <div class="itemgroup info">The load balancer must be able to forward requests to the HTTP and HTTPS ports for the
+servers. For more information, see the documentation for your load balancer.<div class="note important note_important"><span class="note__title">Important:</span> You must configure the load balancer for session persistence, also known as session affinity.
+</div></div>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">Stop of the server.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add the following line of code to the
+<span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/server/installed.properties</span> file:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>com.urbancode.ds.UDeployServer.multiserver=true</code></pre>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Start the server.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">On the new cluster server, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System Settings</span></span>, and set the <span class="ph uicontrol">External Agent URL</span> and the <span class="ph uicontrol">External
+User URL</span> to the URL for the load balancer.</span>
+</li><li class="li step stepexpand" data-hd-otherprops="ibm"><strong>Optional: </strong>
+<span class="ph cmd">Configure the license server for high availability.</span>
+<div class="itemgroup info">For information, see the <a class="xref" href="https://www.ibm.com/docs/en/common-licensing/9.0.0" target="_blank"><span class="keyword">Common Licensing</span>
+            documentation</a>. Also, see <a class="xref" href="https://www.ibm.com/support/pages/high-availability-options-rational-license-key-server" target="_blank">High availability options for the license
+          server</a>.</div>
+</li></ol></section>
+    <section class="section result" id="ha_convert_server__results"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_convert_server__results">Results</h2></div>After you configure the server and the load balancer, you can add nodes to
+the cluster.</section>
+    <section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_convert_server__postreq__1">What to do next</h2></div>
+      <ul class="ul">
+        <li class="li">Add new servers to the cluster. See <a class="xref" href="ha_add_server.html" title="You can add new servers to a cluster at installation time, or you can move existing servers to be part of a cluster.">Adding servers to clusters</a>.</li>
+      </ul>
+    </section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/server_install_clustered.html" title="To configure a high-availability cluster, you store shared files on network storage. Then, you configure multiple servers, set each server to access the same files and database, and configure a load balancer to distribute the traffic between the servers.">Setting up high-availability clusters</a></div></div></nav></article></main></body></html>

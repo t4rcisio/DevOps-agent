@@ -1,0 +1,82 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Sets the current logging configuration. The output of the getLoggingConfig command is acceptable input. To support this, several elements of the input template are optional and ignored, but must be valid if supplied. Regardless, the input is still subject to the constraints reported by these ignored elements. For example, objects for which 'deletable' is false must be present in the input as their absense is interpreted as a request for deletion."><meta name="DC.subject" content="REST API, systemConfiguration resource, /loggingConfig PUT, PUT methods, /systemConfiguration/loggingConfig"><meta name="keywords" content="REST API, systemConfiguration resource, /loggingConfig PUT, PUT methods, /systemConfiguration/loggingConfig"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_systemconfiguration.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_systemconfiguration_loggingconfig_put"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Get logging configuration</title></head><body id="rest_cli_systemconfiguration_loggingconfig_put"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Get logging configuration</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-4362ead1-6de0-4545-b5eb-0e562df7a558">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Sets the current logging configuration. The output of the getLoggingConfig command is acceptable input. To support this, several elements of the input template are optional and ignored, but must be valid if supplied. Regardless, the input is still subject to the constraints reported by these ignored elements. For example, objects for which 'deletable' is false must be present in the input as their absense is interpreted as a request for deletion.</p>
+<section class="section"><h2 id="rest_cli_systemconfiguration_loggingconfig_put__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>PUT https://{hostname}:{port}
+    /cli/systemConfiguration/loggingConfig
+Content-Type: application/json
+</code></pre><table class="table" id="rest_cli_systemconfiguration_loggingconfig_put__header_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_systemconfiguration_loggingconfig_put__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_systemconfiguration_loggingconfig_put__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_systemconfiguration_loggingconfig_put__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_systemconfiguration_loggingconfig_put__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_systemconfiguration_loggingconfig_put__header_params__entry__1"><span class="keyword parmname">Content-Type</span></td>
+<td class="entry" headers="rest_cli_systemconfiguration_loggingconfig_put__header_params__entry__2"><code class="ph codeph">application/json</code></td>
+<td class="entry" headers="rest_cli_systemconfiguration_loggingconfig_put__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_systemconfiguration_loggingconfig_put__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+<div class="p" id="rest_cli_systemconfiguration_loggingconfig_put__template">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "createdDate": "Timestamp when the object was created; 
+  ignored and optional",
+  "logs": {
+    "createdDate": "Timestamp when the object was created; 
+  ignored and optional",
+    "deletable": "Reports if log can be deleted; ignored 
+  and optional",
+    "enabled": "Reports if log is enabled; the main log 
+  cannot be disabled",
+    "enabledMutable": "Reports if 'enabled' can be 
+  changed; ignored and optional",
+    "fileCount": "Number of rotated logs; must be at least 
+  1",
+    "fileMegabytes": "Maximum log file size; ignored and 
+  optional if rotation is not SIZE",
+    "loggers": [{
+      "createdDate": "Timestamp when the object was 
+  created; ignored and optional",
+      "deletable": "Reports if the logger can be deleted; 
+  ignored and optional",
+      "level": "The logging level; one of 
+  OFF|FATAL|ERROR|WARN|INFO|DEBUG|TRACE|ALL",
+      "logMutable": "Reports if the log assoctation can be 
+  changed; ignored and optional",
+      "modifiedDate": "Timestamp when the object last 
+  modified; ignored and optional",
+      "name": "Name of the logger; must be unique across 
+  all logs; '*' is the name of the root logger which must 
+  only be in the main log; up to 255 printable ASCII 
+  characters (no whitespace or control codes)",
+      "root": "Reports if this logger is the root logger; 
+  ignored and optional"
+    }],
+    "main": "Reports if this log is the main log; ignored 
+  and optional",
+    "modifiedDate": "Timestamp when the object last 
+  modified; ignored and optional",
+    "name": "Name of the log; must be unique; up to 64 
+  characters from [-_0-9a-z]",
+    "rotation": "Rotation strategy: one of 
+  SIZE|HOURLY|DAILY|WEEKLY|MONTHLY",
+    "rotationMutable": "Reports if 'rotation' can be 
+  changed; ignored and optional"
+  },
+  "modifiedDate": "Timestamp when the object last 
+  modified; ignored and optional"
+}
+</code></pre></div></section>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_setloggingconfig.html" title="Get logging configuration">setLoggingConfig</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_systemconfiguration.html">systemConfiguration resource</a></div></div></nav></article></main></body></html>

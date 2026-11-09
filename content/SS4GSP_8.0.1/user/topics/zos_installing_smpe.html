@@ -1,0 +1,42 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="IBM System Modification Program/Extended (SMP/E) is a tool for installing and maintaining software on z/OS systems. SMP/E controls software changes at the element level. Job Control Language (JCL) is submitted by using 3270 emulation."><meta name="DC.relation" scheme="URI" content="../../install/topics/zos_installing_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="zos_installing_smpe"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Installing the z/OS agent and deployment tools by using SMP/E</title></head><body id="zos_installing_smpe"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Installing the <span class="keyword">z/OS</span> agent
+and deployment tools by using SMP/E</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6dea993b-574e-4da9-b9bf-c3faf1d3ae91">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">IBM® System Modification Program/Extended (SMP/E) is a tool for installing and maintaining software on <span class="keyword">z/OS®</span> systems.
+SMP/E controls software changes at the element level. Job Control Language (JCL) is submitted by
+using 3270 emulation.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_installing_smpe__context__1">About this task</h2></div>The <span class="ph">IBM DevOps Deploy (Deploy)</span> agent
+            for <span class="keyword">z/OS</span>
+            is provided in the <span class="ph">Deploy</span> Agent
+                <span class="keyword">z/OS</span>
+            <var class="keyword varname">@version@</var> Multilingual software image in the <span class="ph">Deploy</span> eAssembly.
+            The image contains program directories and binary files. The program directories contain
+            instructions for installing the <span class="keyword">z/OS</span> agent by
+            using SMP/E.<div class="note note note_note"><span class="note__title">Note:</span> The SMP/E installation media is supplied for each release. Fix packs
+                are available only for <span class="ph filepath">.zip</span> file installation.
+            </div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_installing_smpe__steps__1">Procedure</h2></div><div class="li step p">
+<span class="ph cmd">Follow the instructions in the <span class="keyword">z/OS</span> program
+directory. </span>
+<div class="itemgroup info"> The program directory lists specific directory path names. If you extract files to a
+different location, update the path names to match the location.</div>
+</div></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_installing_smpe__result__1">Results</h2></div>
+<p class="p">The SMP/E package installs several Multiple Virtual Storage data sets, including the
+<var class="keyword varname">high_level_qualifier</var>.SBUZSAMP and
+<var class="keyword varname">high_level_qualifier</var>.SBUZAUTH data sets. You select the high-level qualifier
+during the SMP/E installation. The <var class="keyword varname">high_level_qualifier</var>.SBUZAUTH data set must be
+authorized by the Authorized Program Facility. Other configuration steps include editing and
+submitting JCL that is found in the <var class="keyword varname">high_level_qualifier</var>.SBUZSAMP data set. </p>
+<p class="p">The SMP/E package also installs one <span class="keyword">z/OS</span>
+UNIX™ System Services file directory:
+/<var class="keyword varname">@pathPrefix@</var>/usr/lpp/IBM/ucd/<var class="keyword varname">@version@</var>, where <var class="keyword varname">@pathPrefix@</var> is the path prefix
+that you specified during the SMP/E installation.</p>
+<p class="p">The package installs the following Function Modification Identifier (FMID):
+<code class="ph codeph">HRUC<var class="keyword varname">@version@</var></code>.</p>
+</section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_installing_smpe__postreq__1">What to do next</h2></div>Install and configure an instance of the agent. See <a class="xref" href="../../install/topics/agentInstall.html#agentinstall" title="Installing an agent from the command line involves running a batch file or shell script and specifying information about how the agent connects to the server or agent relay.">Installing agents from the command line</a>.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/zos_installing_ov.html" title="Before you deploy to the IBM z/OS platform, you must install the z/OS agent and configure the z/OS server for communication with IBM DevOps Deploy (Deploy). If the build process runs on a different logical partition (LPAR), then you must additionally install the agent on the build LPAR. You can install the z/OS agent and deployment tools by using the IBM System Modification Program Extended (SMP/E) or by extracting archive files to the z/OS UNIX file system.">Installing the z/OS agent</a></div></div></nav></article></main></body></html>

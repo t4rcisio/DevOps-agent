@@ -1,0 +1,41 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can create z/OS component version by running the buztool.sh command from job control language (JCL) or from the z/OS UNIX System Services command line. You can also create z/OS component version by using the z/OS File Source Config plug-in."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_create.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/zos_runtools_jcl.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/zos_runtools_uss.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/zos_runtools_v2.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/zos_merge_comp.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="zos_runtools"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating z/OS component versions</title></head><body id="zos_runtools"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating <span class="keyword">z/OS</span> component
+versions</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-daa80f37-d5e7-4198-a4fa-3010afe18040">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can create z/OS component version by running the <span class="keyword cmdname">buztool.sh</span>
+command from job control language (JCL) or from the <span class="keyword">z/OS®</span>
+UNIX™ System Services command line. You can also create z/OS
+component version by using the <span class="keyword">z/OS</span> File Source Config plug-in.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_runtools__context__1">About this task</h2></div>
+<p class="p">In an automated system, typically, you write a script that runs the <span class="keyword cmdname">buztool.sh</span>
+command after a build is created by your build system. The <span class="keyword cmdname">buztool.sh</span> command
+then creates a component version which can be deployed using a deploy process.</p>
+   <p class="p"><span class="ph">IBM DevOps Deploy (Deploy)</span> server
+    requires the time zone of the z/OS system to display the artifact modified date accurately.
+    Identify the time zone of the z/OS system and set the TZ environment variable. To know more
+    about the TZ environment variable, refer to the <a class="xref" href="https://www.ibm.com/docs/en/zos/2.4.0?topic=shell-setting-your-local-time-zone" target="_blank"><span class="keyword">z/OS</span>
+    documentation</a>.</p>
+   <p class="p">While packaging load modules, System Status Index (SSI) value is converted to epoch time and
+    displayed as Last Modified Date in the component version page. For example, if a load module SSI
+    value is 087ab85c. Converting to decimal format gives the Epoch time as 142260316 which is
+    displayed as July 5, 1974 12:45:16 PM GMT in the component version page. For non-load modules,
+    the <span class="keyword cmdname">buztool.sh</span> command tries to read <span class="keyword parmname">ZLM4DATE</span>,
+     <span class="keyword parmname">ZLMTIME</span> and <span class="keyword parmname">ZLMSEC</span> statistical values from ISPF.</p>
+   <p class="p">When you create a z/OS component version with an external repository, you will store artifacts
+    in the external repository and store only the metadata of artifacts in Codestation. Hence, when
+    you download the version by using the <span class="ph uicontrol">Download All</span> action on the web
+    application, only the metadata XML file, which is stored in Codestation, is displayed in the
+     <span class="ph filepath">packageManifest.xml</span> file.</p>
+</section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_runtools__postreq__1">What to do next</h2></div>You can work with the component that contains <span class="keyword">z/OS</span> files as you would
+   work with any other component in <span class="ph">Deploy</span>. Use the <span class="keyword">z/OS</span> Utility plug-in to
+   create processes that deploy components that contain <span class="keyword">z/OS</span> files. <p class="p" data-hd-otherprops="ibm">See the <span class="ph">Deploy</span> website for
+    information about the <span class="keyword">z/OS</span> Utility plug-in:
+     <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/#zos-utility" target="_blank">Plugins</a>.</p><div class="note note note_note"><span class="note__title">Note:</span> IMS.TFORMAT members (member name containing non-readable characters)
+    are not supported. PDS members name can have ONLY [0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$]
+    characters.</div></section>
+</div>
+
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/zos_runtools_jcl.html">Creating z/OS component versions from JCL</a></strong><br>To create <span class="keyword">IBM® z/OS</span> component versions from job control language (JCL), create and submit JCL to run the <span class="keyword cmdname">buztool.sh</span> command. </li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/zos_runtools_uss.html">Creating z/OS component versions from z/OS UNIX System Services</a></strong><br>To create <span class="keyword">IBM® z/OS</span> component versions from  <span class="keyword">z/OS</span> UNIX System Services, submit the <span class="keyword cmdname">buztool.sh</span> command from a <span class="keyword">z/OS</span> UNIX shell.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/zos_runtools_v2.html">Creating z/OS component version using the v2 package format</a></strong><br>You can create <span class="keyword">IBM® z/OS</span> component versions from   a new package version called version 2 or v2. You can create v2 component versions using the    <span class="keyword cmdname">buztool.sh</span> command. </li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/zos_merge_comp.html">Merging z/OS component versions</a></strong><br>Two or more z/OS component versions can be merged from a snapshot into one component version to simplify the deployment to the next environment. Merging component versions in this way avoids deploying intermediate programs into production. </li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_create.html" title="A component consists of artifacts of a single source type and one or more processes. Component creation is the same for all source types, however; the content can be different.">Creating components</a></div></div></nav></article></main></body></html>

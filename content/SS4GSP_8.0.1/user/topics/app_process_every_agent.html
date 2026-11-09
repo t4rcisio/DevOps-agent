@@ -1,0 +1,68 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="This step creates a loop that iterates over the agents in the environment."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_processSteps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_process_every_agent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>For Each Agent</title></head><body id="app_process_every_agent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">For Each Agent</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f6d23c56-3bd1-4c57-ba9f-146e604c1a25">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">This step creates a loop that iterates over the agents in the environment.</p>
+<section class="section">
+<div class="note tip note_tip"><span class="note__title">Tip:</span> 
+<p class="p"><span class="ph">Applications, components, and generic processes share some process
+steps. This step applies only to application processes, including application processes that are
+associated with application templates.</span></p>
+</div> <p class="p">This step provides vertical iterations, or iteration
+containers, for application processes. If, for example, you have numerous
+application servers, you can use this step to employ all agents in
+the environment to simultaneously deploy components to the servers.
+In this case, using this step means that overall deployment is not
+impacted even if one application server is slow.</p><p class="p">This step runs the process that is defined within the container for each agent in the application
+        environment. The workflow in the container has its own context, and its own start and finish
+        steps, as shown in the following figure. You can use any application process step in the
+        subprocess. An iteration container can connect to any step, even other iteration containers,
+        but you cannot include other iteration containers within an iteration container.</p><br><img class="image" src="../images/for_each_agent.jpg" alt="A process that includes a For Each Agent step"><br></section>
+    <section class="section">
+      <table class="table" id="app_process_every_agent__table_for_each_agent"><caption><span class="table--title-label">Table 1. </span><span class="title">For Each Agent properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+            <tr class="row">
+              <th class="entry align-left" id="app_process_every_agent__table_for_each_agent__entry__1">Field</th>
+              <th class="entry align-left" id="app_process_every_agent__table_for_each_agent__entry__2">Description</th>
+            </tr>
+          </thead><tbody class="tbody">
+            <tr class="row">
+              <td class="entry align-left" headers="app_process_every_agent__table_for_each_agent__entry__1"><span class="ph uicontrol">Name</span></td>
+              <td class="entry align-left" headers="app_process_every_agent__table_for_each_agent__entry__2"><span class="ph" id="app_process_every_agent__name">A name for the iteration
+                  container.</span></td>
+            </tr>
+            <tr class="row">
+              <td class="entry align-left" headers="app_process_every_agent__table_for_each_agent__entry__1"><span class="ph uicontrol">Limit to Resource
+                Tags</span></td>
+              <td class="entry align-left" headers="app_process_every_agent__table_for_each_agent__entry__2">A list of resource tags that limit the container.
+                The subprocess runs only on the agent resources that have one or more of the
+                specified resource tags.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry align-left" headers="app_process_every_agent__table_for_each_agent__entry__1"><span class="ph uicontrol">Maximum number of concurrent
+                  processes</span></td>
+              <td class="entry align-left" headers="app_process_every_agent__table_for_each_agent__entry__2">The maximum number of agents that run the
+                subprocess at a time. To run the subprocess on every agent at once, specify
+                  <code class="ph codeph">-1</code>. To limit the number of agents to deploy to at once, as in
+                blue/green deployments or rolling deployments, specify an integer. <p class="p">The server attempts to resolve the value to an integer. If the value does
+      not resolve to an integer, then the <code class="ph codeph">-1</code> value is used by default. You can use
+      a property in this field, as long as the property resolves to an integer.</p></td>
+            </tr>
+          </tbody></table>
+    </section>
+<section class="section"><h2 id="app_process_every_agent__title__3" class="title sectiontitle">Iteration properties</h2>
+
+<p class="p">The For Each Agent step has properties, called iteration properties, that can be used to
+        reference steps within the iteration context. By using these properties, for example, you
+        can identify the current agent within the context. To reference iteration properties, use
+        the following format: <code class="ph codeph">${p:iteration/&lt;name&gt;}</code>.</p>
+      <p class="p"><img class="image" id="app_process_every_agent__image_rd3_dny_szb" src="../images/app_process_all_agents_it_prop.gif"></p>
+      <div class="p" id="app_process_every_agent__view_iteration_properties">To view the iteration properties for the step, follow these steps:<ol class="ol">
+          <li class="li">Open the log for the application process request by clicking <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"> application_name</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">History </span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"> View Request</span></span>.</li>
+          <li class="li">Expand the container step and, next to one of the iterations, click
+              <span class="ph uicontrol">Iteration Properties</span><img class="image" src="../images/viewproperties.gif" alt="">.</li>
+        </ol></div>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_processSteps.html" title="Application processes, component processes, and generic processes are created with the process editor.">Process steps: Reference</a></div></div></nav></article></main></body></html>

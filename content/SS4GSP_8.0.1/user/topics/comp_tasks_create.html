@@ -1,0 +1,65 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="A component manual task interrupts a component process until manual intervention is done. To create a component manual task, add a manual step to a component process, and select a notification template."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_tasks_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating component manual tasks</title></head><body id="comp_tasks_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating component manual tasks</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ba66511e-0232-4978-92ef-5927b4f1106b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">A component manual task interrupts a component process
+until manual intervention is done. To create a component manual task,
+add a manual step to a component process, and select a notification
+template.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_tasks_create__context__1">About this task</h2></div> <p class="p">A process that is interrupted by a manual task remains
+suspended until the targeted user or users respond. During new process
+testing, use manual tasks to test the results of steps. After testing,
+use manual tasks for tasks that are too complicated to automate. Remove
+manual tasks after testing or when processes are automated. </p> <p class="p">Similar to approvals, triggered tasks notify targeted users. Affected users can accept or reject
+the task by using the <span class="keyword wintitle">Work Items</span> pane (see <a class="xref" href="app_approvals_workitems.html" title="If a deployment requires approval, create an approval process that generates an approval request. Approvers respond to the requests on the Work Items tab where they approve or deny requests. You can also allow approvers to respond to requests through email.">Responding to approval requests</a>). Unlike approvals, component manual tasks are incorporated
+within a component process. Do not use a component manual task in place of an approval process. To
+obtain approval for an entire component, create an approval process instead of a component manual
+task (see <a class="xref" href="app_approvalCreate.html" title="You can add approval requirements to deployments. The approval process identifies the deployment and the role of the approver. You respond to approval requests on the Work Items page, or, depending on the configuration, through email.">Creating an approval process</a>).</p> </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_tasks_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Open a component process in the process editor.</span></li><li class="li step stepexpand"><span class="ph cmd">From the <span class="ph uicontrol">Utility Steps</span> folder, add
+a <span class="ph uicontrol">Manual Task</span> step to the process.</span></li><li class="li step stepexpand"><span class="ph cmd">In the <span class="keyword wintitle">Edit Properties</span> window, specify
+the following properties for the step:</span><div class="itemgroup info"> <dl class="dl">
+<dt class="dt dlterm"><span class="ph uicontrol">Name</span></dt>
+<dd class="dd">Specify a name for the step.</dd>
+
+<dt class="dt dlterm"><span class="ph uicontrol">Notification Template</span></dt>
+<dd class="dd">Specify a notification template. These templates map to the notification scheme that the
+application uses. (See <a class="xref" href="notify_create.html" title="Notifications are defined in a notification scheme. The notification scheme is assigned to an application and the notifications are sent during the deployment of that application.">Creating Notifications in a Notification Scheme</a>.) If a scheme is not
+specified, the default scheme is used.</dd>
+
+<dt class="dt dlterm" id="comp_tasks_create__properties"><span class="keyword parmname">Properties</span></dt>
+<dd class="dd">Optionally, add one or more properties to the task. You can use
+these properties later in the process just like output properties
+from other steps.</dd>
+
+<dt class="dt dlterm"><span class="ph uicontrol">Who can approve this task</span></dt>
+<dd class="dd"> <dl class="dl">
+
+<dt class="dt dlterm"><span class="ph uicontrol">Any User</span></dt>
+<dd class="dd">Any user can approve the task.</dd>
+
+
+<dt class="dt dlterm"><span class="ph uicontrol">Role Member By Environment</span></dt>
+<dd class="dd">Specify an environment role that can approve the task.</dd>
+
+
+<dt class="dt dlterm"><span class="ph uicontrol">Role Member By Application</span></dt>
+<dd class="dd">Specify an application role that can approve the task.</dd>
+
+</dl>
+</dd>
+
+</dl>
+</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span> to save the properties
+for the step.</span></li><li class="li step stepexpand"><span class="ph cmd">Include the manual task in the process as with any other
+step.</span></li><li class="li step stepexpand"><span class="ph cmd">Save the process.</span></li></ol></section>
+<section class="section result" id="comp_tasks_create__result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_tasks_create__result">Results</h2></div>When you run the process, it pauses at this step, sends a notification, and
+   waits for approval before the process continues. To approve the task and resume the process,
+   click the <span class="ph uicontrol">Respond</span> link for the step in the process log, click
+    <span class="ph uicontrol">Approve</span>, and then click <span class="ph uicontrol">Submit</span>. You can also
+   resume the process from the <span class="keyword wintitle">Work Items</span> tab.<div class="note note note_note"><span class="note__title">Note:</span> You can view the name of
+    the approver of a manual task under <span class="ph uicontrol">ManualTask/ApproverName</span> on the
+    properties page.</div></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_ch.html" title="Components represent deployable items along with user-defined processes that operate on them, usually by deploying them.">Components</a></div></div></nav></article></main></body></html>

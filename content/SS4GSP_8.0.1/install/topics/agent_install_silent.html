@@ -1,0 +1,83 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="In silent mode, you specify the installation properties in a text file and then run the installation without command-line prompts."><meta name="DC.relation" scheme="URI" content="../../install/topics/agent_install_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_install_silent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Installing agents in silent mode</title></head><body id="agent_install_silent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Installing agents in silent mode</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3d6cee57-bc3a-4336-8b46-74b980f4ea6a">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">In silent mode, you specify the installation properties
+in a text file and then run the installation without command-line
+prompts.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_install_silent__prereq__1">Before you begin</h2></div>
+      <ul class="ul">
+        <li class="li">For production environments, create a user account that is dedicated
+to running the agent on the computer where the agent is installed. </li>
+        <li class="li" data-hd-otherprops="ibm">
+<p class="p"><span class="ph" id="agent_install_silent__d77e61">Ensure that each computer where you are installing an
+agent has a supported version of the Java™ Runtime Environment
+(JRE) or Java developer kit. For more information, see <a class="xref" href="https://www.ibm.com/software/reports/compatibility/clarity/index.html" target="_blank">SPCR for Deploy</a>.</span></p>
+</li>
+
+        <li class="li">
+          <p class="p">If the target computer has an IBM® JRE or Java developer kit, update to a supported version of the IBM JRE or Java developer kit.</p>
+        </li>
+        <li class="li">Set the <span class="keyword parmname">JAVA_HOME</span> system variable to the location of the JRE
+or JDK that you are using.</li>
+        <li class="li" data-hd-otherprops="ibm">Make sure that your networks and firewalls allow communication on the
+required ports. See <a class="xref" href="agent_firewalls.html" title="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication.">Firewall and communication configuration</a>.</li>
+        
+        <li class="li" data-hd-otherprops="ibm">Ensure that there is no limit on the maximum memory size and virtual memory size.
+For example, on most Linux™ systems, you can run the
+<code class="ph codeph">ulimit -m</code> and <code class="ph codeph">ulimit -v</code> commands and ensure that both return the
+value <code class="ph codeph">unlimited</code>. To find out how to remove the limit on the maximum memory size and
+virtual memory size, see the documentation for the operating system.</li>
+        
+      </ul>
+    </section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_install_silent__context__1">About this task</h2></div>You specify the installation properties in a properties file. The
+        <span class="ph filepath">example.agent.install.properties</span> file is provided as an example of a
+      properties file. The <span class="ph filepath">example.agent.install.properties</span> file is in the
+        <span class="ph filepath">devops-deploy-agent.zip</span> archive.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_install_silent__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">Copy the following file from the <span class="ph">Deploy</span> server to the
+          target system:
+            <span class="ph filepath"><var class="keyword varname">installation_folder</var>/opt/tomcat/webapps/ROOT/tools/devops-deploy-agent.zip</span>.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Extract the <span class="ph filepath">devops-deploy-agent-<var class="keyword varname">version</var>.zip</span>
+          archive file.</span>
+        <div class="itemgroup info">
+          <div class="note note note_note" data-hd-otherprops="ibm"><span class="note__title">Note:</span> If you are installing the agent on <span class="keyword">IBM z/OS®</span> by extracting
+            files to the UNIX file system, you must convert the character encoding for several
+            text-type files in the installation package to IBM-1047 encoding. If you are installing
+            the agent by using SMP/E, you do not have to convert the character encoding. Move the
+            installation files to the <span class="keyword">z/OS</span> computer,
+            and then extract the files. If the unzip program is not installed on the z/OS computer,
+            use the <span class="keyword cmdname">jar</span> command to extract the files. For instance, type the
+            following text on the command
+              line:<pre class="pre codeblock"><code>JAVA_HOME/bin/jar xvf <span class="ph filepath">devops-deploy-agent-<var class="keyword varname">version</var>.zip</span></code></pre><p class="p">Run
+              the <span class="keyword cmdname">convertFilesForZos.sh</span> script to convert the character encoding
+              of the relevant files to IBM-1047 encoding. After you convert the files, continue with
+              installation.</p><p class="p">If you used the <span class="keyword cmdname">jar</span> command to extract files,
+              add execute permission to <span class="keyword cmdname">convertFilesForZos.sh</span> script
+            first.</p></div>
+        </div>
+      </li><li class="li step stepexpand"><span class="ph cmd">Open the <span class="ph filepath">example.agent.install.properties</span> file
+for editing, or copy the <span class="ph filepath">example.agent.install.properties</span> file
+to a new properties file.</span></li><li class="li step stepexpand">
+        <span class="ph cmd">Customize the installation by editing the <a class="xref" href="agent_properties.html" title="The agent properties in the installed.properties file control details about the agent, including how it connects to the server.">agent
+            installation properties</a> file.</span>
+        <div class="itemgroup info">If you do not specify a property, the default value is used. Some properties in the
+          example file are commented out by default. </div>
+      </li><li class="li step stepexpand" id="agent_install_silent__run_with_properties">
+        <span class="ph cmd">Run the installation file with the <span class="keyword cmdname">install-agent-from-file.bat</span>
+          command on Windows™ or the
+            <span class="keyword cmdname">./install-agent-from-file.sh</span> command on Linux. Provide the properties file as a command-line
+          argument.</span>
+        <div class="itemgroup stepxmp">On Windows, if the properties file is
+          named <span class="ph filepath">install.properties</span>, type the following
+          command:<pre class="pre codeblock"><code>install-agent-from-file install.properties</code></pre></div>
+      </li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_install_silent__result__1">Results</h2></div>The installation program installs the agent.</section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_install_silent__postreq__1">What to do next</h2></div>Start the agent. See <a class="xref" href="run_agent.html" title="To start an agent, run the shell script or batch file.">Starting agents</a>.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/agent_install_ov.html" title="You can install agents from the server or from the command line on the agent system. To configure a failover server for an agent, you must install the agent from the command line.">Installing agents</a></div></div></nav></article></main></body></html>

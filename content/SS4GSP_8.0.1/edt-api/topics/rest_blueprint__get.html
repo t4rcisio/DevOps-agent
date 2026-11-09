@@ -1,0 +1,54 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="reference"><meta name="description" content="This command lists all blueprints that you have access to."><meta name="DC.subject" content="REST API, rest/blueprint resource, /rest/blueprint/ GET, GET methods, /rest/blueprint/"><meta name="keywords" content="REST API, rest/blueprint resource, /rest/blueprint/ GET, GET methods, /rest/blueprint/"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_blueprint__get"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>List blueprints</title></head><body id="rest_blueprint__get"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">List blueprints</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-267f16d0-19d8-4463-86ea-81401d63044d">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">This command lists all blueprints that you have access to.</p>
+<section class="section"><h2 id="rest_blueprint__get__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>GET http://{hostname}:{port}
+  /landscaper/rest/blueprint/
+Accept: application/json
+</code></pre><table class="table" id="rest_blueprint__get__header_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_blueprint__get__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_blueprint__get__header_params__entry__2">Type</th>
+<th class="entry" id="rest_blueprint__get__header_params__entry__3">Required</th>
+<th class="entry" id="rest_blueprint__get__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_blueprint__get__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_blueprint__get__header_params__entry__2"><code class="ph codeph">application/json</code></td>
+<td class="entry" headers="rest_blueprint__get__header_params__entry__3">true</td>
+<td class="entry" headers="rest_blueprint__get__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+</section>
+<div class="example" data-hd-audience="rest"><h2 id="rest_blueprint__get__title__4" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>curl <span class="ph">-u jsmith:passwd 
+  </span><span class="ph">http://myserver.example.com:8080/landscaper</span>/rest/blueprint/</code></pre></div><div class="example" data-hd-audience="all"><h2 id="rest_blueprint__get__title__5" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>[
+    {
+        "category": "blueprint",
+        "createdBy": "jsmith",
+        "dateCreated": 1405958418154,
+        "icon": "images/editor/Blueprint_Palette.gif",
+        "id": "Blueprint1",
+        "internalId": "7eb267e6-1efe-4b7a-a47e-6532f52d50f2",
+        "name": "Blueprint1",
+        "url": "http://ucdp.example.com:8080/landscaper/view/projects?open=Blueprint1",
+        "version": "1.0"
+    },
+    {
+        "category": "blueprint",
+        "createdBy": "jsmith",
+        "dateCreated": 1405967697007,
+        "icon": "images/editor/Blueprint_Palette.gif",
+        "id": "Blueprint2",
+        "internalId": "b1071f0b-7e7f-472a-a828-524ad78df1d6",
+        "name": "Blueprint2",
+        "url": "http://ucdp.example.com:8080/landscaper/view/projects?open=Blueprint2",
+        "version": "1.0"
+    }
+]</code></pre></div>
+</div>
+</article></main></body></html>

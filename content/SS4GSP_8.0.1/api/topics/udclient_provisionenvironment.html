@@ -1,0 +1,140 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Provision a cloud environment"><meta name="DC.subject" content="udclient commands, provisionEnvironment, udclient command, command-line commands"><meta name="keywords" content="udclient commands, provisionEnvironment, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_provisionenvironment"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>provisionEnvironment</title></head><body id="udclient_provisionenvironment"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">provisionEnvironment</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3e7977b6-0686-4898-b06a-0d768d6c324d">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Provision a cloud environment</p>
+<section class="section">
+This command provisions an instance of an application blueprint and creates an application environment based on that blueprint.
+</section>
+<section class="section"><h2 id="udclient_provisionenvironment__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  provisionEnvironment [JSON file]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_provisionenvironment__title__3" class="title sectiontitle">Parameters</h2>
+None.</section>
+<section class="section"><h2 id="udclient_provisionenvironment__title__4" class="title sectiontitle">Template</h2>
+<div class="p">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "application": "Application name or ID (required if you 
+  are specifying the blueprint by name",
+  "baseResource": "Path to the resource node to create 
+  this environment in",
+  "blueprint": "Blueprint name or ID",
+  "description": "Description (optional)",
+  "name": "Environment name",
+  "nodeProperties": {"Path to the resource node, such as 
+  /path/to/resource/node": {"Name of node property": "Value 
+  or node property"}}
+}
+</code></pre></div></section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_provisionenvironment__title__5" class="title sectiontitle">Examples</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  provisionEnvironment newEnvironment.json</code></pre><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  provisionEnvironment -file newEnvironment.json</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_provisionenvironment__title__6" class="title sectiontitle">Example JSON requests</h2><p class="p">How
+you structure the JSON request depends on whether you assign the virtual
+nodes to a cloud group or an environment profile. For more information
+on cloud groups and environment profiles, see the documentation for
+your cloud system.</p><div class="p">The following example creates an environment
+that is named <code class="ph codeph">CloudEnv1</code> from a blueprint that is
+named <code class="ph codeph">My application</code>. In this case, the <code class="ph codeph">cloud_group</code> property
+is at the root of the JSON string, which specifies that the nodes
+will receive IP addresses from the same cloud group. <pre class="pre codeblock language-json"><code>{
+  "name": "CloudEnv1",
+  "application": "My application",
+  "baseResource": "/environments",
+  "blueprint": "Blueprint 1",
+  "description": "New cloud environment from blueprint 1",
+  "lockSnapshots": "false",
+  "requireApprovals": "false",
+  "cloud_group": "2",
+  "nodeProperties": {
+    "/UCD Agent/os_part": {
+      "multiplicity": "1",
+      "numvcpus": "1",
+      "memsize": "1024",
+      "password": "password",
+      "password_0": "password"
+    }
+  }
+}</code></pre></div><div class="p">You can also specify IP addresses for the nodes
+individually. In this case, you specify an environment profile to
+use for the request and then a cloud group and IP group for each node.
+The following example has two nodes, and each uses a different cloud
+group and IP group.<pre class="pre codeblock language-json"><code>{
+  "name": "CloudEnv2",
+  "application": "My application",
+  "baseResource": "/environments",
+  "blueprint": "Blueprint 1",
+  "description": "New cloud environment from blueprint 1",
+  "lockSnapshots": "false",
+  "requireApprovals": "false",
+  "environment_profile": "1",
+  "nodeProperties": {
+    "/UCD Agent/os_part": {
+      "cloud_group": "1",
+      "ip_group": "1",
+      "multiplicity": "1",
+      "numvcpus": "1",
+      "memsize": "1024",
+      "password": "password",
+      "password_0": "password"
+    },
+    "/UCD Agent/os_part0": {
+      "cloud_group": "2",
+      "ip_group": "2",
+      "multiplicity": "1",
+      "numvcpus": "1",
+      "memsize": "1024",
+      "password": "password",
+      "password_0": "password"
+    }
+  }
+}</code></pre></div><div class="note note note_note"><span class="note__title">Note:</span> You must specify cloud groups, IP groups, and
+environment profiles by ID, not by name. In most cases, to get the
+ID, open the cloud system console, open the group or profile, and
+find the ID in the URL in your web browser. In other cases, the ID
+is shown on the cloud system console.</div><div class="p">To specify parameters
+on script packages on the nodes, add the information to the <code class="ph codeph">nodeProperties</code> array.
+The following example assumes a script package named <code class="ph codeph">iwd_registration</code> with
+a parameter named <code class="ph codeph">cloud_hostname</code>:<pre class="pre codeblock language-json"><code>{
+  "name": "CloudEnv3",
+  "application": "My application",
+  "baseResource": "/environments",
+  "blueprint": "Blueprint 1",
+  "description": "New cloud environment from blueprint 1",
+  "lockSnapshots": "false",
+  "requireApprovals": "false",
+  "cloud_group": "2",
+  "nodeProperties": {
+    "/UCD Agent/os_part": {
+      "multiplicity": "1",
+      "numvcpus": "1",
+      "memsize": "1024",
+      "password": "password",
+      "password_0": "password",
+      "iwd_registration/cloud_hostname": "cloudserver.example.org"
+    }
+  }
+}</code></pre></div></div><div class="example" data-hd-audience="all"><h2 id="udclient_provisionenvironment__title__7" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "id": "d84f5683-b05f-4e8b-afdf-f28a38b0fece",
+  "securityResourceId": "2eb5db02-b07e-4010-a0cf-3b84509d0ca4",
+  "name": "CloudEnv1",
+  "description": "New cloud environment",
+  "color": "#ffffff",
+  "requireApprovals": false,
+  "lockSnapshots": false,
+  "calendarId": "7aac87db-3984-4cde-98be-a935fd38bdb0",
+  "active": true,
+  "cleanupDaysToKeep": 0,
+  "cleanupCountToKeep": 0,
+  "conditions": [
+  ]
+}</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_environment_provisionenvironment_put.html" title="This command provisions an instance of an application blueprint and creates an application environment based on that blueprint.">Provision a cloud environment</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

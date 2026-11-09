@@ -1,0 +1,55 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Will return both the status of the request (which indicates if it is still running) and the request result (which indicates the result of the process if it completed)."><meta name="DC.subject" content="REST API, applicationProcessRequest resource, /requestStatus GET, GET methods, /applicationProcessRequest/requestStatus"><meta name="keywords" content="REST API, applicationProcessRequest resource, /requestStatus GET, GET methods, /applicationProcessRequest/requestStatus"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_applicationprocessrequest.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_applicationprocessrequest_requeststatus_get"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Request the status of an application process request</title></head><body id="rest_cli_applicationprocessrequest_requeststatus_get"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Request the status of an application process request</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-1db2f247-3a19-4b97-9077-3b8d1476b4b7">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Will return both the status of the request (which indicates if it is still running) and the request result (which indicates the result of the process if it completed).</p>
+<section class="section"><h2 id="rest_cli_applicationprocessrequest_requeststatus_get__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>GET https://{hostname}:{port}
+    /cli/applicationProcessRequest/requestStatus?{parameters}
+Accept: {contentType}
+</code></pre><table class="table" id="rest_cli_applicationprocessrequest_requeststatus_get__request_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Request parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_applicationprocessrequest_requeststatus_get__request_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_requeststatus_get__request_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_requeststatus_get__request_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_requeststatus_get__request_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_applicationprocessrequest_requeststatus_get__request_params__entry__1"><span class="keyword parmname">request</span></td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_requeststatus_get__request_params__entry__2">string</td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_requeststatus_get__request_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_requeststatus_get__request_params__entry__4">ID of the application process request</td>
+</tr>
+</tbody></table>
+<table class="table" id="rest_cli_applicationprocessrequest_requeststatus_get__header_params"><caption><span class="table--title-label">Table 2. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_applicationprocessrequest_requeststatus_get__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_requeststatus_get__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_requeststatus_get__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_requeststatus_get__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_applicationprocessrequest_requeststatus_get__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_requeststatus_get__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_requeststatus_get__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_requeststatus_get__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+</section>
+<div class="example" data-hd-audience="all"><h2 id="rest_cli_applicationprocessrequest_requeststatus_get__title__5" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "status": "CLOSED",
+  "result": "SUCCEEDED"
+}</code></pre><div class="p">This command returns the following statuses:<ul class="ul"><li class="li"><code class="ph codeph">CANCELING</code></li><li class="li"><code class="ph codeph">CLOSED</code></li><li class="li"><code class="ph codeph">COMPENSATING</code></li><li class="li"><code class="ph codeph">EXECUTING</code></li><li class="li"><code class="ph codeph">FAULTED</code></li><li class="li"><code class="ph codeph">FAULTING</code></li><li class="li"><code class="ph codeph">INITIALIZED</code></li><li class="li"><code class="ph codeph">PENDING</code></li><li class="li"><code class="ph codeph">UNINITIALIZED</code></li></ul></div><div class="p">This command returns the following results:<ul class="ul"><li class="li"><code class="ph codeph">APPROVAL REJECTED</code></li><li class="li"><code class="ph codeph">AWAITING APPROVAL</code></li><li class="li"><code class="ph codeph">CANCELED</code></li><li class="li"><code class="ph codeph">COMPENSATED</code></li><li class="li"><code class="ph codeph">FAILED TO START</code></li><li class="li"><code class="ph codeph">FAULTED</code></li><li class="li"><code class="ph codeph">NONE</code></li><li class="li"><code class="ph codeph">SCHEDULED FOR FUTURE</code></li><li class="li"><code class="ph codeph">SUCCEEDED</code></li><li class="li"><code class="ph codeph">UNINITIALIZED</code></li></ul></div></div>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_getapplicationprocessrequeststatus.html" title="Request the status of an application process request">getApplicationProcessRequestStatus</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_applicationprocessrequest.html" title="Resources for requesting application processes.">applicationProcessRequest resource</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="The step's command element specifies the scripting tool that runs the step and identifies the file that contains the actual script."><meta name="DC.relation" scheme="URI" content="../../reference/topics/reference_plugins_example.html"><meta name="DC.relation" scheme="URI" content="../../reference/topics/ref_example_groovy.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="stepCommands.d12e207"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Step commands</title></head><body id="stepCommands.d12e207"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Step commands</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-8e7e4cec-f512-48b1-904d-21136d10d45a">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">The step's <code class="ph codeph">command</code> element specifies the
+scripting tool that runs the step and identifies the file that contains
+the actual script.</p>
+<p class="p">The agent that runs the step downloads the plug-in and expects
+to find the script among the downloaded files.  The agent must also
+have access to the scripting tool. Any other arguments that are required
+by the script or tool can also be specified with the <code class="ph codeph">arg file</code> attribute.
+The <code class="ph codeph">arg file</code> attributes should be defined in the
+order compatible with the scripting tool.</p>
+<p class="p">The Create File command script is written in Groovy. Groovy is
+scripting language similar to Java™.
+The following illustration shows a command that runs an external Groovy
+file that is named <span class="ph filepath">create_file.groovy</span>.</p>
+<br><img class="image" src="../images/samp_plug3.png" alt="An illustration of how you can write an external script and use it as part of a step"><br>
+<p class="p">This command instructs the Groovy interpreter to run <span class="ph filepath">create_file.groovy</span> (more
+about Groovy and the particulars of this file in the following section).</p>
+<p class="p">This line (which is part of every command):</p>
+<pre class="pre codeblock"><code>&lt;arg file="${PLUGIN_INPUT_PROPS}"/&gt;</code></pre>
+<p class="p">sends a file that contains the properties that are required by
+the step to the agent. The properties in the file are those properties
+that are furnished at runtime and others that are defined earlier
+that are required by the step. See <a class="xref" href="reference_plugins_example.html" title="A plug-in consists of one or more steps. A step represents a unit of functionality that can be user-configured and combined with other steps into a process. Creating a plug-in consists in defining its individual steps and then grouping them together for presentation in IBM DevOps Deploy (Deploy).">Example plug-in</a>. The <code class="ph codeph">${PLUGIN_INPUT_PROPS}</code> variable
+resolves to the location of this properties file.</p>
+<p class="p">And this line (which is also part of every command):</p>
+<pre class="pre codeblock"><code>&lt;arg file="${PLUGIN_OUTPUT_PROPS}"/&gt;</code></pre>
+<p class="p">refers to the file returned by the agent after finishing the step.
+ The properties in this file are available to later steps in the process.
+ The <code class="ph codeph">${PLUGIN_OUTPUT_PROPS}</code> variable resolves to
+the location of this properties file.</p>
+</div>
+
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../reference/topics/ref_example_groovy.html">create_file.groovy</a></strong><br>The <span class="ph filepath">create_file.groovy</span> file contains the Groovy script that runs the step's command.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/reference_plugins_example.html" title="A plug-in consists of one or more steps. A step represents a unit of functionality that can be user-configured and combined with other steps into a process. Creating a plug-in consists in defining its individual steps and then grouping them together for presentation in IBM DevOps Deploy (Deploy).">Example plug-in</a></div></div></nav></article></main></body></html>

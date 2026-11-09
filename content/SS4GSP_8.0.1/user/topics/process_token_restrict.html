@@ -1,0 +1,29 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Use token restrictions to manage process step authentication."><meta name="DC.subject" content="authentication token restrictions, token restrictions, process token restriction"><meta name="keywords" content="authentication token restrictions, token restrictions, process token restriction"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_workflow.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="process_token_restrict"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Manage process step authentication</title></head><body id="process_token_restrict"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Manage process step authentication</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-1c107a1a-b4e4-4253-be48-479c12e9f31c">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">Use token restrictions to manage process step authentication.</p>
+<p class="p">The <span class="ph">IBM DevOps Deploy (Deploy)</span> server generates an
+    authentication token whenever it runs a plug-in process step. The token authenticates the user
+    that is running the step and has the same permissions as that user. You can limit the actions
+    available to tokens by applying token restrictions to them. A token restriction is a set of one
+    or more REST API commands. When a token-restricted plug-in step runs, it uses the commands that
+    are defined by the token restriction regardless of the user's permissions. </p>
+<p class="p">You apply token restrictions to plug-in steps in processes. You can apply
+a different token restriction to every plug-in step in a process. If you do not apply a restriction
+to a step, the default token restriction is used. The default token enables all the supported
+methods for all REST resources. You can modify the default token restriction but you cannot delete
+it.</p>
+<p class="p">You can apply token restrictions to component, application, and generic processes. To apply a
+token restriction to a process step, on the step configuration window, select the restriction from
+the <span class="ph uicontrol">Auth Token Restriction</span> list.</p>
+<div class="p">
+<br><img class="image" src="../images/process-token-restrict.gif" alt="Applying a token restriction"><br>
+</div>
+    <p class="p">You can edit the selected token restriction and also create a new token restriction from the
+plug-in step configuration window. For more information, see, <a class="xref" href="../../admin/topics/security_token_restrict.html" title="Limit authentication token actions by applying token restrictions to process plug-in steps.">Restricting authentication tokens</a></p>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a></div></div></nav></article></main></body></html>

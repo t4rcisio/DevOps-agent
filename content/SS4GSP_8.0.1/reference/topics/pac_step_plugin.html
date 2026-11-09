@@ -1,0 +1,71 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The plugin step allows you to execute a plug-in command. Note that this step is not valid for an application process."><meta name="DC.subject" content="PAC, generic process step, plugin"><meta name="keywords" content="PAC, generic process step, plugin"><meta name="DC.relation" scheme="URI" content="../../reference/topics/pac_generic_process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="pac_step_plugin"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>plugin</title></head><body id="pac_step_plugin"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">plugin</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-93b9dbe2-43de-46c1-9764-48b938c14da4">Edit online</a></span></div>
+
+
+
+<div class="body refbody"><p class="shortdesc">The <code class="ph codeph">plugin</code> step allows you to execute a plug-in command. Note that this
+step is not valid for an application process.</p>
+<section class="section"><h2 id="pac_step_plugin__title__2" class="title sectiontitle">Format</h2>
+
+<pre class="pre codeblock"><code>plugin step "foo" is
+    -- define name of plugin; required
+    plugin "Shell"
+
+    -- define name of plugin command; required
+    command "Shell"
+
+    -- absolute path of the working directory for the step; optional
+    -- if undefined, the default working directory for the process is used
+    working-directory "/working/directory"
+
+    -- javascript precondition script that must evaluate to true for the step to execute; optional
+    precondition-script
+       """
+       true
+       """
+
+    -- define properties that configure the step; optional
+    -- may be repeated
+    property "prop1" = "value1"
+    property "prop2" = "value2"
+on success
+    start "bar"
+end</code></pre>
+</section>
+<section class="section"><h2 id="pac_step_plugin__title__3" class="title sectiontitle">Properties</h2>
+
+<p class="p" data-hd-otherprops="ibm">Refer to the plug-in documentation in the <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/" target="_blank">Deploy plug-ins</a> for detailed information about the
+                specific values required to configure the plug-in. </p>
+
+</section>
+<div class="example"><h2 id="pac_step_plugin__title__4" class="title sectiontitle">Example</h2>
+
+<pre class="pre codeblock"><code>
+start is
+    start A
+    start B
+end
+
+plugin step A is
+    plugin plugin-value
+    command command-value
+    property prop1 = prop1-value
+    property prop2 = prop2-value
+    property prop3 = prop3-value
+on success
+    finish
+end
+
+plugin step B is
+    plugin plugin-value
+    command command-value
+    working-directory "/working/directory"
+    precondition-script "true"
+on success
+    finish
+end</code></pre>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/pac_generic_process_steps.html" title="Lists the various generic steps that can be used in a process.">Generic process steps</a></div></div></nav></article></main></body></html>

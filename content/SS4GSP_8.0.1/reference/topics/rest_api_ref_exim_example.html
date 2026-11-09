@@ -1,0 +1,284 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The following example task describes how to export and import elements with YAML configuration."><meta name="DC.subject" content="REST commands, exporting component, exporting applications, yaml"><meta name="keywords" content="REST commands, exporting component, exporting applications, yaml"><meta name="DC.relation" scheme="URI" content="../../user/topics/c_node_tutorialsHowTo.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_api_ref_example"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>How-to: Export and import elements with YAML configuration</title></head><body id="rest_api_ref_example"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">How-to: Export and import elements with YAML configuration</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-515e522d-3fd9-48f0-8e22-e4067825dd65">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">The following example task describes how to export and import elements with YAML
+    configuration.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrest_api_ref_example__prereq__1">Before you begin</h2></div> This example follows the steps in the <a class="xref" href="../../tutorial/topics/quickstart_abstract.html" title="In this tutorial, you create a simple application with IBM DevOps Deploy (Deploy). You use standard plug-ins to create a component and define an application that deploys the component to an environment.">Create a simple helloWorld deployment</a> tutorial. Review the
+      tutorial before you attempt to follow this example. Configure your system as described in
+        <a class="xref" href="../../tutorial/topics/quickstart_configure.html" title="To deploy the tutorial component, or any component, you must have an agent. An agent is a lightweight process that runs on a target computer and does the actual work of deploying components.">Configure the helloWorld tutorial system</a>. </section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrest_api_ref_example__context__1">About this task</h2></div>In this example, you export components in YAML format, configure, and import them to other
+        <span class="ph">IBM DevOps Deploy (Deploy)</span>systems.
+      However, you can export other elements such as applications, application templates,
+      components, component templates, processes, and so on. <p class="p">Exporting or importing of elements
+        in YAML format is the same as in JSON format. The difference is that you need to specify
+        appropriate headers in the REST calls. For APIs that take input, like import or save
+        actions, you must add the following header: <code class="ph codeph">Accept: application/yaml</code>. For
+        APIs that produce output, like export and get actions, you must add the following header:
+          <code class="ph codeph">Content-Type: application/yaml</code>. </p><div class="note note note_note" id="rest_api_ref_example__note_l4v_hrv_4zb"><span class="note__title">Note:</span> 
+        <ul class="ul" id="rest_api_ref_example__ul_ywf_4hz_qzb">
+          <li class="li">If you don't use the headers, the elements are exported or imported in JSON format by
+            default.</li>
+          <li class="li">Exporting and importing snapshots with YAML is not supported.</li>
+        </ul>
+      </div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrest_api_ref_example__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">Export the helloWorld component you created in <a class="xref" href="../../tutorial/topics/quickstart_createComponent.html" title="Components contain artifacts and processes. Artifacts include runnable files, images, databases, configuration instructions, and anything else that is associated with a software project. Processes define the activities that components can perform.">Lesson 1 Create the helloWorld component</a> by using the REST
+          command. See <a class="xref" href="../../api/topics/rest_cli_component_export_get.html">Export a component to a json file.</a> for
+          command reference.</span>
+        <div class="itemgroup info">While entering the REST command, ensure that you use the following header with your
+          request:<pre class="pre codeblock" id="rest_api_ref_example__codeblock_rzz_z2v_4zb"><code>Content-Type: application/yaml</code></pre></div>
+        <div class="itemgroup stepresult">The command returns a result similar to the following YAML
+          definition:<pre class="pre codeblock language-yml" id="rest_api_ref_example__codeblock_wrt_syy_nzb"><code>---
+name: "helloWorld"
+description: ""
+created: 1700804083300
+componentType: "STANDARD"
+ignoreQualifiers: 0
+importAutomatically: false
+useVfs: true
+active: true
+deleted: false
+defaultVersionType: "FULL"
+cleanupDaysToKeep: 0
+cleanupCountToKeep: 0
+sourceConfigPluginName: "File System (Versioned)"
+envPropDefs: []
+resPropDefs: []
+versionPropDefs: []
+propSheetGroup:
+    propSheets:
+        - name: "template"
+          properties: []
+        - name: "custom"
+          properties:
+              - name: "helloHome"
+                value: "C:\\Users\\Administrator\\Downloads\\helloWorld"
+                description: ""
+                secure: false
+        - name: "FileSystemVersionedComponentProperties"
+          properties:
+              - name: "saveFileExecuteBits"
+                value: "false"
+                description: ""
+                secure: false
+              - name: "extensions"
+                description: ""
+                secure: false
+              - name: "includes"
+                description: ""
+                secure: false
+              - name: "excludes"
+                description: ""
+                secure: false
+              - name: "basePath"
+                value: "C:\\Users\\Administrator\\Downloads\\helloWorld"
+                description: ""
+                secure: false
+processes:
+    - name: "helloProcess"
+      description: ""
+      defaultWorkingDir: "${p:resource/work.dir}/${p:component.name}"
+      takesVersion: true
+      inventoryActionType: "ADD"
+      status: "Active"
+      configActionType: "ADD"
+      active: true
+      path: "components/18bffd2b-e64b-6d96-3016-4d13b84617e1/processes/18bffd9b-473b-6bc9-4e90-ad03192b1cf4"
+      deleted: false
+      propDefs: []
+      rootActivity:
+          edges:
+              - to: "Download Artifacts"
+                from: "Clean work space"
+                type: "SUCCESS"
+                value: ""
+              - to: "Clean work space"
+                type: "ALWAYS"
+                value: ""
+              - to: "Deploy artifacts"
+                from: "Compress artifacts"
+                type: "SUCCESS"
+                value: ""
+              - to: "069538fb309ede5cd10eaf7c7c81e3"
+                from: "Deploy artifacts"
+                type: "SUCCESS"
+                value: ""
+              - to: "Compress artifacts"
+                from: "Download Artifacts"
+                type: "SUCCESS"
+                value: ""
+          offsets:
+              - name: "Download Artifacts"
+                x: -145
+                "y": 310
+                h: 110
+                w: 440
+              - name: "069538fb309ede5cd10eaf7c7c81e3"
+                x: -5
+                "y": 790
+                h: 100
+                w: 160
+              - name: "Deploy artifacts"
+                x: -120
+                "y": 630
+                h: 110
+                w: 390
+              - name: "Clean work space"
+                x: -205
+                "y": 150
+                h: 110
+                w: 560
+              - name: "Compress artifacts"
+                x: -120
+                "y": 470
+                h: 110
+                w: 390
+          layoutMode: "auto"
+          type: "graph"
+          name: "83dd413d-d8d6-4c45-8458-bc7f2e976a5e"
+          children:
+              - type: "finish"
+                name: "069538fb309ede5cd10eaf7c7c81e3"
+                children: []
+              - allowFailure: false
+                useImpersonation: false
+                showHidden: false
+                impersonationUseSudo: false
+                pluginVersion: 96
+                commandName: "Delete Files and Directories"
+                pluginName: "File Utils"
+                pluginId: "com.urbancode.air.plugin.FileUtils"
+                authTokenRestriction: "20000001-0001-0001-0001-000000000000"
+                properties:
+                    baseDir: "."
+                    includes: "*"
+                    excludes: ""
+                    followSymlinks: "false"
+                    caseSensitive: "true"
+                cachedAuthTokenRestriction:
+                    name: "System Default"
+                    description:
+                        "Used by default for any plugin steps without a specified token\
+                        \ restriction"
+                    restrictions:
+                        - verb: "ALL"
+                          url: "/*"
+                type: "plugin"
+                name: "Clean work space"
+                children: []
+              - allowFailure: false
+                useImpersonation: false
+                showHidden: false
+                impersonationUseSudo: false
+                pluginVersion: 46
+                commandName: "Download Artifacts"
+                pluginName: "UrbanCode Deploy Versioned File Storage"
+                pluginId: "com.urbancode.plugin.VFS"
+                authTokenRestriction: "20000001-0001-0001-0001-000000000000"
+                properties:
+                    directoryOffset: "."
+                    artifactSetBaseDir: ""
+                    fileIncludePatterns: "**/*"
+                    fileExcludePatterns: ""
+                    syncMode: "true"
+                    handleIncrementalVersions: "false"
+                    fullVerification: "true"
+                    setFileExecuteBits: "false"
+                    verifyFileIntegrity: "false"
+                    charset: ""
+                    versionId: "${p:version.id}"
+                    versionType: "${p:version.type}"
+                    serverUrl: "${p:server.url}"
+                    compId: "${p:component.id}"
+                    resId: "${p:resource.id}"
+                    envId: "${p:environment.id}"
+                    maxMemory: "1G"
+                    label: ""
+                cachedAuthTokenRestriction:
+                    name: "System Default"
+                    description:
+                        "Used by default for any plugin steps without a specified token\
+                        \ restriction"
+                    restrictions:
+                        - verb: "ALL"
+                          url: "/*"
+                type: "plugin"
+                name: "Download Artifacts"
+                children: []
+              - allowFailure: false
+                useImpersonation: false
+                showHidden: false
+                impersonationUseSudo: false
+                pluginVersion: 96
+                commandName: "Create .zip File"
+                pluginName: "File Utils"
+                pluginId: "com.urbancode.air.plugin.FileUtils"
+                authTokenRestriction: "20000001-0001-0001-0001-000000000000"
+                properties:
+                    zipName: "helloWorld.zip"
+                    baseDir: "."
+                    includes: "*"
+                    excludes: ""
+                    update: "false"
+                    followSymlinks: "false"
+                    caseSensitive: "true"
+                    customEncoding: ""
+                cachedAuthTokenRestriction:
+                    name: "System Default"
+                    description:
+                        "Used by default for any plugin steps without a specified token\
+                        \ restriction"
+                    restrictions:
+                        - verb: "ALL"
+                          url: "/*"
+                type: "plugin"
+                name: "Compress artifacts"
+                children: []
+              - allowFailure: false
+                useImpersonation: false
+                showHidden: false
+                impersonationUseSudo: false
+                pluginVersion: 96
+                commandName: "Move Directory"
+                pluginName: "File Utils"
+                pluginId: "com.urbancode.air.plugin.FileUtils"
+                authTokenRestriction: "20000001-0001-0001-0001-000000000000"
+                properties:
+                    sourceDir: "."
+                    destDir: "${p:helloHome}/target"
+                    includes: "*.zip"
+                    excludes: ""
+                    mapperRules: ""
+                cachedAuthTokenRestriction:
+                    name: "System Default"
+                    description:
+                        "Used by default for any plugin steps without a specified token\
+                        \ restriction"
+                    restrictions:
+                        - verb: "ALL"
+                          url: "/*"
+                type: "plugin"
+                name: "Deploy artifacts"
+                children: []
+configTemplates: []
+genericProcesses: []
+teamMappings: []
+tags: []                </code></pre></div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Copy the content into a text editor and save it.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Edit the YAML configuration to include the changes you require.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Import the component in YAML format by using REST command to the destination <span class="ph">Deploy</span> server.</span>
+        <div class="itemgroup info">See <a class="xref" href="../../api/topics/rest_cli_component_import_put.html">Import component from json file.</a> for command
+          reference. You must use the following header with the REST
+          call.<pre class="pre codeblock" id="rest_api_ref_example__codeblock_nhl_y1v_4zb"><code>Accept: application/yaml</code></pre></div>
+      </li></ol></section>
+    <section class="section result" id="rest_api_ref_example__result_mzb_bhz_nzb"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrest_api_ref_example__result_mzb_bhz_nzb">Results</h2></div>The file is imported and the record is displayed in the
+      Components list.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/c_node_tutorialsHowTo.html" title="Instructions for specific features.">How-tos</a></div></div></nav></article></main></body></html>

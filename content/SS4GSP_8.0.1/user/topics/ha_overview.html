@@ -1,0 +1,43 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="To configure clustered high availability for IBM DevOps Deploy (Deploy), you must use a load balancer. You can configure a cold standby server by using a load balancer or configuring the servers' DNS."><meta name="DC.relation" scheme="URI" content="../../user/topics/ha_config_ov.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/ha_servers.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/ha_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ha_overview"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>High availability overview</title></head><body id="ha_overview"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">High availability overview</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6f553942-7993-462f-ba4e-27cb46276099">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">To configure clustered high availability for <span class="ph">IBM DevOps Deploy (Deploy)</span>, you must use a load
+  balancer. You can configure a cold standby server by using a load balancer or configuring the
+  servers' DNS.</p>
+<section class="section">The architecture of all high-availability scenarios can resemble the following figure:
+        <br><img class="image" src="../../admin/images/uDHADes.png" alt="A diagram of a high-availability system, which shows two servers that share a database"><br><p class="p">The load balancer communicates with all <span class="ph">Deploy</span> servers. All
+        servers access the same database, shared file system, and agents. </p><p class="p">Two common
+        high-availability scenarios are clustered and cold-standby (disaster recovery), and you can
+        apply both scenarios to configurations that use the <span class="ph">Deploy</span> server.
+      </p></section>
+<section class="section"><h2 id="ha_overview__title__2" class="title sectiontitle">Cold Standby</h2>
+
+<p class="p">The cold standby option is simple to implement and reduces downtime. In this setup, the load
+balancer manages two servers, or two servers are connected through DNS settings. Both the primary
+and secondary servers are connected to a database and a remote file system. The secondary server is
+not running. If the active node fails, you must start the secondary server so network traffic can be
+routed to it. This event is called <dfn class="term">failover</dfn>. <span class="ph" id="ha_overview__failover">During failover, the
+secondary server reestablishes connections with all agents, runs recovery, and proceeds with any
+queued processes. <span class="ph">Deploy</span> has no
+automatic process for failover, but it can be managed by using your load balancer or DNS.</span></p>
+<div class="p">You can convert a cold-standby system to a clustered system by putting shared files on network
+storage and connecting the servers with cluster connections. See <a class="xref" href="server_install_clustered.html" title="To configure a high-availability cluster, you store shared files on network storage. Then, you configure multiple servers, set each server to access the same files and database, and configure a load balancer to distribute the traffic between the servers.">Setting up high-availability clusters</a>.<div class="note note note_note"><span class="note__title">Note:</span> The cold standby server or servers must
+not be running until they are started by the failover process. Even if no traffic is routed to the
+cold standby server, it runs internal processes that can corrupt the database. For this reason,
+servers must be either part of the cluster or shut down.</div></div>
+</section>
+<section class="section"><h2 id="ha_overview__title__3" class="title sectiontitle">Clustered</h2>
+
+<p class="p">The high availability (HA) feature increases server reliability by distributing processing across
+a cluster of servers. Each server is an independent node that cooperates in common processing. The
+goal is to create a fault-tolerant system that requires little or no manual intervention. All
+servers are running, and the load balancer routes processes to all servers, based on their
+availability.</p>
+<p class="p">All servers recognize each other, and all services are active on each server. </p>
+<p class="p">For installation instructions, see <a class="xref" href="server_install_clustered.html" title="To configure a high-availability cluster, you store shared files on network storage. Then, you configure multiple servers, set each server to access the same files and database, and configure a load balancer to distribute the traffic between the servers.">Setting up high-availability clusters</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/ha_servers.html">High-availability server processes</a></strong><br>While high-availability servers complete the same processes as standalone servers, they     run slightly differently and access files in run slightly different locations than individual     servers do.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/ha_agents.html">High-availability agent communication</a></strong><br>Agents communicate with the server over HTTP or HTTPS. These modes of communication are handled differently in a high availability scenario.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/ha_config_ov.html" title="You can configure clustered IBM DevOps Deploy (Deploy) servers, and agents for high availability. You can also configure agents and agent relays for failover.">High availability and failover</a></div></div></nav></article></main></body></html>

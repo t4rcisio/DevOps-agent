@@ -1,0 +1,55 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You manage pipelines by defining, editing, deleting, and tracking the execution history of pipelines."><meta name="DC.relation" scheme="URI" content="../../user/topics/application_pipelines.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="managing_pipelines"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Managing pipelines</title></head><body id="managing_pipelines"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Managing pipelines</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-42299c88-e478-4f08-b92f-ee6048c58fc3">Edit online</a></span></div>
+    
+    <div class="body taskbody"><p class="shortdesc">You manage pipelines by defining, editing, deleting, and tracking the execution
+        history of pipelines.</p>
+        <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmanaging_pipelines__context__1">About this task</h2></div>
+            <p class="p">The structure of a pipeline is defined using JSON format. You can use the following
+                example JSON format to define a pipeline per your requirement:</p>
+            <div class="p">
+                <pre class="pre codeblock" id="managing_pipelines__codeblock_aqx_4yk_lvb"><code>{
+    "name": "<kbd class="ph userinput">pipeline-name</kbd>",
+    "stages": [
+        {
+            "name": "<kbd class="ph userinput">stage-name</kbd>",
+            "blocks": [
+                {
+                    "environment": "<kbd class="ph userinput">environment-name</kbd>",
+                    "processes": [
+                        "<kbd class="ph userinput">application-process-name-1</kbd>",
+                        "<kbd class="ph userinput">application-process-name-2</kbd>"
+                    ]
+                }
+            ]
+        }
+    ]
+}</code></pre>
+            </div>
+            <div class="p">Here, <kbd class="ph userinput">pipeline-name</kbd> and <kbd class="ph userinput">stage-name</kbd> are
+                custom names. The <kbd class="ph userinput">stage-name</kbd> can be named to signify the
+                environments you want to deploy. The environment name and application process names
+                must match with the ones existing in the application.<div class="note note note_note" id="managing_pipelines__note_abm_ztl_2fc"><span class="note__title">Note:</span> You
+                    cannot set properties in the application pipelines. The properties must be
+                    preconfigured on the process, environment, and so on.</div></div>
+            <p class="p">Manage pipelines from the Applications page as follows:</p>
+        </section>
+        <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmanaging_pipelines__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+                <span class="ph cmd">Go to <span class="ph menucascade"><span class="ph uicontrol"><var class="keyword varname">application_name</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Pipelines</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Pipeline</span></span>.</span>
+                <div class="itemgroup info">The <span class="keyword wintitle">New Pipeline</span> window is displayed.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Enter a name for the new pipeline and save it.</span>
+                <div class="itemgroup info">The <span class="keyword wintitle">Code View</span> tab of the new pipeline is
+                    displayed.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Define the structure of the pipeline using the JSON format as described above
+                    and save it.</span>
+                <div class="itemgroup info">The new pipeline is listed in the <span class="keyword wintitle">Pipelines</span> tab. You can
+                    manage pipelines by running, editing, or deleting a pipeline. Each pipeline
+                    includes its execution history. You can view or cancel a pipeline execution.
+                    Note that you can cancel pipelines with Started, Not Started, and Running status
+                    only. To run a pipeline, see <a class="xref" href="executing_pipelines.html" title="After you define a pipeline, you can execute it using the Web UI.">Executing pipelines</a>. </div>
+            </li></ol></section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/application_pipelines.html" title="Allows you to run application processes in multiple environments and promote versions through a set of stages.">Application pipelines</a></div></div></nav></article></main></body></html>

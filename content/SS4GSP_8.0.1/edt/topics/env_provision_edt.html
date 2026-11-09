@@ -1,0 +1,123 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="If you connect to the target cloud through OpenStack Heat, you can provision an environment directly from the blueprint designer."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="env_provision_edt"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Provisioning environments from the blueprint designer (through OpenStack Heat)</title></head><body id="env_provision_edt"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Provisioning environments from the blueprint designer (through OpenStack Heat)</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-614492ad-b698-4232-a66e-b7019956761c">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">If you connect to the target cloud through OpenStack Heat, you can provision an
+environment directly from the blueprint designer.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskenv_provision_edt__prereq__1">Before you begin</h2></div><p class="p">This method works only for blueprints that were created with the blueprint designer, not
+                with blueprints that you create on the <span class="ph">IBM DevOps Deploy (Deploy)</span> server. </p><ul class="ul">
+                <li class="li">Connect to a cloud system.</li>
+                <li class="li" id="env_provision_edt__create_blueprint">Create a blueprint and configuration file, and ensure that
+                    these files are appropriate for the target cloud system. Depending on your cloud
+                    system, see<ul class="ul" id="env_provision_edt__modeling_clouds">
+                        <li class="li"><a class="xref" href="blueprint_edit_softlayer.html#blueprint_edit_softlayer" title="To model a SoftLayer environment, log in with a SoftLayer cloud project and specify the information that is specific to SoftLayer in a blueprint.">Modeling environments for SoftLayer</a></li>
+                        <li class="li"><a class="xref" href="blueprint_edit_ec2.html" title="To model an Amazon Web Services (AWS) environment, log in with an AWS cloud project and specify the AWS-specific information in a blueprint.">Modeling environments for Amazon Web Services</a></li>
+                        <li class="li"><a class="xref" href="blueprint_edit_vc.html" title="To model a VMware vCenter environment, log in with a VCenter cloud project and specify the VCenter-specific information in a blueprint.">Modeling environments for VMware vCenter</a></li>
+                        <li class="li"><a class="xref" href="blueprint_edit_vra.html" title="To model a VMware vRealize Automation Enterprise (vRA) environment, log in with a vRealize Automation cloud project and specify the vRealize Automation-specific information in a blueprint.">Modeling environments for VMware vRealize Automation</a></li>
+                        <li class="li"><a class="xref" href="blueprint_edit_os.html" title="To model an OpenStack environment, log in with an OpenStack cloud project and use resources from your cloud system in a blueprint.">Modeling environments for OpenStack and OpenStack-based clouds</a></li>
+                        <li class="li"><a class="xref" href="blueprint_edit_azure.html" title="To model a Microsoft Azure environment, log in with an Azure cloud project and specify the Azure-specific information in a blueprint.">Modeling environments for Microsoft Azure</a>.</li>
+                        <li class="li"><a class="xref" href="blueprint_edit_google_cloud.html" title="To model a Google Cloud Platform environment, log in with a Google Cloud cloud project and specify the Google Cloud-specific information in a blueprint.">Modeling environments for Google Cloud Platform</a></li>
+                    </ul></li>
+                <li class="li">Confirm that you have access to the <span class="ph"><code class="ph codeph">ucd-agent-linux-ppc64</code>, <code class="ph codeph">ucd-agent-linux-x86_64</code>,
+<code class="ph codeph">ucd-agent-win-x86_64</code>, <code class="ph codeph">ucd-agent-linux-s390x</code>,
+<code class="ph codeph">ucd-agent-aix-powerpc64</code>, and <code class="ph codeph">ucd-agent-linux-ppc64le</code></span>
+                    agent components. See <a class="xref" href="../../admin/topics/security_teams_mapping.html#security_teams_mapping" title="In addition to assigning a team to an object (such as a component or application), when you create the object, you can use the Teams page on the server to map teams to objects.">Mapping teams to objects</a>.</li>
+            </ul><span class="ph">By default, when you provision an environment from a blueprint, the
+environment is created by using the cloud account information of its cloud project. However, when
+you create a blueprint for most kinds of clouds, you can specify different user
+credentials.</span> See
+                <a class="xref" href="blueprint_credentials.html" title="By default, when you provision an environment from a blueprint, the environment is created by using the cloud account information of its cloud project. However, when you create a blueprint for most kinds of clouds, you can specify different user credentials.">Providing cloud credentials in a blueprint</a>.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskenv_provision_edt__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Make sure that you are connected to the cloud project and region with which you want to
+provision the environment.</span>
+<div class="itemgroup info">Select the cloud project and region from the menu in the upper-right corner of the screen in
+the blueprint design server, as shown in the following figures. The region is either a geographical
+cloud location or a physical data center.<br><img class="image" src="../images/env_provision_edt_a.gif" alt="Selecting the cloud project and region to use"><br></div>
+<div class="itemgroup stepresult">The cloud project and region are shown at the top of the screen, as shown in the
+following figure:<br><img class="image" src="../images/env_provision_edt_b.gif" alt="The current cloud project and region, which is shown at the top of the screen"><br></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Open the blueprint, and then click <span class="ph uicontrol">Provision</span>.</span>
+<div class="itemgroup stepresult">The <span class="keyword wintitle">Provision Blueprint to new Environment</span> window
+opens.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Cloud Project</span> field, select the cloud project.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Cloud Region</span> field, select the cloud region.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Orchestration Provider</span> field, select the orchestration
+provider.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Environment Name</span> field, specify the name of the
+environment.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In most cases, select a configuration file from the <span class="ph uicontrol">Configuration</span>
+list.</span>
+<div class="itemgroup info"><span class="ph">Configuration files are not necessary if you are deploying to OpenStack and OpenStack-based clouds.
+If you are deploying to any other supported cloud, you must use a configuration file.</span> You can also create a
+configuration file by opening the <span class="ph uicontrol">Configuration</span> list and clicking
+<span class="ph uicontrol">Create Configuration</span>. <div class="note note note_note"><span class="note__title">Note:</span> If you do not select a configuration file, the
+blueprint is provisioned on the OpenStack server that is associated with your user
+account.</div></div>
+<div class="itemgroup stepresult">Click <span class="ph uicontrol">Set The Parameter Values For This Environment</span> to show the
+parameters in the blueprint and the values in the configuration file. The window includes sections
+for parameter groups that are in the blueprint. To view parameter values, click the appropriate
+section name to open the section. The window also validates the blueprint and the configuration
+file. If the configuration file includes parameters that are not in the blueprint, then only the
+parameters that are in the blueprint are used.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Customize the parameter values in the window. </span>
+<div class="itemgroup info">The <span class="keyword wintitle">Provision Blueprint to new Environment</span> window includes sections for
+parameter groups that are in the blueprint, such as <span class="ph uicontrol">Image Parameters</span>,
+<span class="ph uicontrol">Network Parameters</span>, and <span class="ph uicontrol">Agent Parameters</span>. To view and
+change parameter values, click the appropriate section name to open the section.</div>
+<div class="itemgroup stepxmp">For example, for some clouds, click <span class="ph uicontrol">Image Parameters</span> and then
+specify the zone for the environment in the <span class="ph uicontrol">Availability Zone</span> field. To
+supply a value for a secure component resource property or secure component environment property,
+locate the property in the <span class="ph uicontrol">Agent Parameters</span> section and specify the value in
+the <span class="ph uicontrol"><var class="keyword varname">Property name</var> Secure Property</span> field.<p class="p" id="env_provision_edt__flavors">For some clouds, click <span class="ph uicontrol">Image Parameters</span> and then specify the flavor for the
+environment images in the <span class="ph uicontrol">Flavor</span> field. If the list of flavors does not
+contain the flavors that you expect, make sure that you registered the flavors with the cloud
+discovery service. See <a class="xref" href="cloud_connect_softlayer_flavors.html" title="Flavors represent the capacity of images, including memory, storage space, and processor capacity. You must configure a set of flavors for the SoftLayer cloud.">Configuring SoftLayer image flavors</a> or <a class="xref" href="cloud_connect_vmware_flavors.html" title="Flavors represent the capacity of images, including memory, storage space, and processor capacity. You must configure a set of flavors for VMware vCenter.">Configuring VMware vCenter image flavors</a>.</p><p class="p" id="env_provision_edt__ssh_key">In most cases, you select an SSH key
+by name in the <span class="ph uicontrol">Key Name</span> field under <span class="ph uicontrol">Image Parameters</span>.
+However, for VMware clouds, paste the contents of the SSH public key in this
+field.</p></div>
+<div class="itemgroup info">See the following information for Microsoft Azure:<ul class="ul">
+<li class="li">In the <span class="ph uicontrol">Admin User</span> and <span class="ph uicontrol">Admin Pass</span> fields, specify
+the name and password of the administrative user on the new virtual machines. The administrative
+user cannot be named <code class="ph codeph">root</code> on a Linux™
+system. Azure requires a complex password for the
+administrator account.</li>
+<li class="li">In the <span class="ph uicontrol">Availability Zone</span> field, accept the default value. Selecting a
+different availability zone is not supported.</li>
+<li class="li">In the <span class="ph uicontrol">Resource Group</span> field, select the resource group for the new
+environment.</li>
+<li class="li">In the <span class="ph uicontrol">Storage Account</span> field, select the storage account for the new
+environment.</li>
+</ul></div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If you change the parameters, you can save the changes to the configuration file by selecting
+the <span class="ph uicontrol">Save changes to configuration file</span> check box.</span>
+<div class="itemgroup info">This check box is displayed only if you change parameters and are using a configuration
+file.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Provision the environment.</span>
+<ul class="ul choices">
+<li class="li choice">To validate all parameter values before you provision the environment, click
+<span class="ph uicontrol">Provision</span>.</li>
+<li class="li choice">To provision the environment without validating parameters, click <span class="ph uicontrol">Quick
+Provision</span>
+<img class="image" src="../images/quick_provision_icon.gif" alt="">.</li>
+</ul>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskenv_provision_edt__result__1">Results</h2></div>The new environment is displayed on the <span class="ph uicontrol">Environments</span> page of the
+blueprint designer and in the list of application environments on the <span class="ph">Deploy</span> server.<p class="p"></p><p class="p">You can see the status of a specific environment by selecting it from the
+<span class="ph uicontrol">Show all environments</span> list at the top of the page. When you provision a
+standalone Heat engine, the environment name is a combination of the orchestration provider name and
+the word "HEAT," such as <code class="ph codeph">Amazon (HEAT)</code>. When you provision an OpenStack engine, the
+environment name is a combination of the OpenStack cloud project name, the region, and the word
+"OPENSTACK," such as <code class="ph codeph">OpenStack - RegionOne (OPENSTACK)</code>. </p></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskenv_provision_edt__postreq__1">What to do next</h2></div>To modify the images or the <span class="ph">Deploy</span> components in a provisioned environment, update the blueprint and then click
+<span class="ph uicontrol">Apply</span>.</section>
+</div>
+</article></main></body></html>

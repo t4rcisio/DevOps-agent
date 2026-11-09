@@ -1,0 +1,67 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="The create_file.groovy file contains the Groovy script that runs the step's command."><meta name="DC.relation" scheme="URI" content="../../reference/topics/ref_example_step_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="createfilegroovy.d12e290"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>create_file.groovy</title></head><body id="createfilegroovy.d12e290"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1"><span class="ph filepath">create_file.groovy</span></h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b4d3e827-d068-4490-82a2-a13da35ded9a">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">The <span class="ph filepath">create_file.groovy</span> file contains
+the Groovy script that runs the step's command.</p>
+<p class="p">Groovy is a dynamic scripting language (similar to Python, Ruby,
+and Perl) for the Java™ platform.
+Most Java code is also syntactically
+valid Groovy, which makes Groovy popular with Java programmers. Groovy provides native support
+for regular expressions.</p>
+<p class="p">The first lines of the script create a properties object, <code class="ph codeph">props</code>.
+Then it  attempts to load the properties from the file that is sent
+from the server (specified by the <code class="ph codeph">${PLUGIN_OUTPUT_PROPS}</code> variable).
+ If it can load the file, it populates <code class="ph codeph">props</code>; otherwise,
+it throws an exception.</p>
+<pre class="pre codeblock"><code>final def workDir = new File('.').canonicalFile
+final def props = new Properties();
+final def inputPropsFile = new File(args[0]);
+try {
+inputPropsStream = new FileInputStream(inputPropsFile);
+props.load(inputPropsStream);
+}
+catch (IOException e) {
+throw new RuntimeException(e);
+}
+</code></pre>
+<p class="p">To run the command (create a file), the script uses the properties
+that are defined by the step itself. The script retrieves the three
+properties from <code class="ph codeph">props</code> and creates corresponding local
+variables.</p>
+<p class="p">Next, the script creates a file with a name specified by <code class="ph codeph">fileName</code>,
+and tests the <code class="ph codeph">overwrite</code> Boolean variable. If a file
+with the same name exists and <code class="ph codeph">overwrite</code> is false,
+the script ends (fails) with an exit code of 1. Exit codes can be
+examined during post-processing.</p>
+<p class="p">Otherwise, the file is written with the content of <code class="ph codeph">contents</code>.
+A message is written to the output log, and the exit code is set to
+0 (success).</p>
+<pre class="pre codeblock"><code>final def fileName = props['file']
+final def overwrite = props['overwrite']?.toBoolean()
+final def contents = props['contents']?:''
+
+try {
+def file = new File(fileName).canonicalFile
+if (file.exists() &amp;&amp; !overwrite) {
+println "File $file already exists!"
+System.exit 1
+}
+else {
+file.write(contents)
+println "Successfully ${overwrite?'replaced':'created'} file 
+$file with contents:"
+println contents
+}
+}
+catch (Exception e) {
+println "Error creating file $file: ${e.message}"
+System.exit(1)
+}
+
+System.exit(0)
+</code></pre>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/ref_example_step_commands.html" title="The step's command element specifies the scripting tool that runs the step and identifies the file that contains the actual script.">Step commands</a></div></div></nav></article></main></body></html>

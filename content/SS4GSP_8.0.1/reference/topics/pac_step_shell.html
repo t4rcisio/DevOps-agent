@@ -1,0 +1,73 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The shell step is a shortcut for the plugin step that specifies the Shell plug-in and the Shell command. Note that this step is not valid in an application process."><meta name="DC.subject" content="PAC, generic process step, shell"><meta name="keywords" content="PAC, generic process step, shell"><meta name="DC.relation" scheme="URI" content="../../reference/topics/pac_generic_process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="pac_step_shell"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>shell</title></head><body id="pac_step_shell"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">shell</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-0918826b-56cc-437e-8cc8-22b3b897963e">Edit online</a></span></div>
+
+
+
+<div class="body refbody"><p class="shortdesc">The <code class="ph codeph">shell</code> step is a shortcut for the <code class="ph codeph">plugin</code> step that
+specifies the Shell plug-in and the Shell command. Note that this step is not valid in an
+application process.</p>
+<section class="section"><h2 id="pac_step_shell__title__2" class="title sectiontitle">Format</h2>
+
+<pre class="pre codeblock"><code>shell step "foo" is
+    -- a string in the body defines the script; required
+    """
+    msg="hello world A"
+    echo $msg
+    """
+
+    -- run the script without waiting for it to complete; optional
+    -- "output.log" is the path of a file that captures the output
+    run-as-daemon "output.log"
+
+    -- absolute path of the working directory for the step; optional
+    -- if undefined, the default working directory for the process is used
+    working-directory "/working/directory"
+
+    -- javascript precondition script that must evaluate to true for the step to execute; optional
+    precondition-script
+       """
+       true
+       """
+on success
+    start "bar"
+end</code></pre>
+</section>
+<section class="section"><h2 id="pac_step_shell__title__3" class="title sectiontitle">Properties</h2>
+
+<p class="p">Refer to the <a class="xref" data-hd-otherprops="ibm" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/Shell/" target="_blank">Shell plug-in
+                    documentation</a> for
+                detailed information about the specific properties and values required to configure
+                them. </p>
+</section>
+<div class="example"><h2 id="pac_step_shell__title__4" class="title sectiontitle">Example</h2>
+<pre class="pre codeblock"><code>start is
+    start A
+    start B
+    start C
+    finish
+end
+
+shell step A is
+    "echo A"
+on success
+    finish
+end
+
+shell step B is
+    "echo B"
+    run-as-daemon "daemon.log"
+on success
+    finish
+end
+
+shell step C is
+    "echo B"
+    working-directory "/working/directory"
+    precondition-script "true"
+on success
+    finish
+end</code></pre></div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/pac_generic_process_steps.html" title="Lists the various generic steps that can be used in a process.">Generic process steps</a></div></div></nav></article></main></body></html>

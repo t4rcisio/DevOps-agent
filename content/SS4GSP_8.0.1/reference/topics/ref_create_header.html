@@ -1,0 +1,81 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="The mandatory header element identifies the plug-in and contains three mandatory child elements and one optional child element:"><meta name="DC.relation" scheme="URI" content="../../reference/topics/ref_create_pluginxml.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="theHeaderElement.d12e120"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>The header element</title></head><body id="theHeaderElement.d12e120"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">The <code class="ph codeph">header</code> element</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6809a40a-eda4-449d-9f3b-45b698ab6466">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">The mandatory <code class="ph codeph">header</code> element identifies
+the plug-in and contains three mandatory child elements and one optional
+child element: </p>
+<table class="table frame-all"><caption><span class="table--title-label">Table 1. </span><span class="title">Contents of the <code class="ph codeph">header</code> element</span></caption><colgroup><col style="width:33.33333333333333%"><col style="width:66.66666666666666%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="theHeaderElement.d12e120__entry__1"> <code class="ph codeph">&lt;header&gt;</code> Child Elements</th>
+<th class="entry" id="theHeaderElement.d12e120__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="theHeaderElement.d12e120__entry__1"><code class="ph codeph">&lt;identifier&gt;</code> </td>
+<td class="entry" headers="theHeaderElement.d12e120__entry__2">This element's three attributes identify the plug-in: <ul class="ul">
+                <li class="li">
+                  <p class="p"><code class="ph codeph">version</code></p>
+                  <p class="p">API version (the version number for upgrading plug-ins is defined in the
+                      <span class="ph filepath">info.xml</span> file).</p>
+                </li>
+                <li class="li">
+                  <p class="p"><code class="ph codeph">id</code></p>
+                  <p class="p">Identifies the plug-in.</p>
+                </li>
+                <li class="li">
+                  <p class="p"><code class="ph codeph">name</code></p>
+                  <p class="p">The plug-in name is shown on the <span class="keyword wintitle">Automation Plugins</span> pane,
+                    and on informational pages for the
+                    plug-in.</p>
+                </li>
+              </ul>All values must be enclosed within single quotation marks. </td>
+</tr>
+<tr class="row">
+<td class="entry" headers="theHeaderElement.d12e120__entry__1"><code class="ph codeph">&lt;description&gt;</code> </td>
+<td class="entry" headers="theHeaderElement.d12e120__entry__2">Describes the plug-in; is shown on the <span class="keyword wintitle">Automation
+Plugins</span> pane, and on informational pages for the plug-in.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="theHeaderElement.d12e120__entry__1"><code class="ph codeph">&lt;tag&gt;</code> </td>
+<td class="entry" headers="theHeaderElement.d12e120__entry__2">Defines where the plug-in is listed within the process editor's
+hierarchy of available plug-ins. The location is defined by a string
+that is separated by slashes. For example, the Tomcat definition is
+the following string: <code class="ph codeph">Application Server/Java/Tomcat</code>.
+The Tomcat steps are listed beneath the Tomcat item, which in turn
+is nested within the other two. <div class="note note note_note"><span class="note__title">Note:</span> Do not include underscores in
+this element.</div></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="theHeaderElement.d12e120__entry__1"><code class="ph codeph">&lt;server:required-server-version&gt;</code></td>
+<td class="entry" headers="theHeaderElement.d12e120__entry__2">This optional element defines the minimum version of <span class="ph">IBM DevOps Deploy (Deploy)</span> required
+              for use with the plug-in. The version is defined by 4 digits. For example, a plug-in
+              that requires <span class="ph">Deploy</span> Version
+              7.1.0 or later would include the following element in the header:
+              <pre class="pre codeblock"><code>&lt;server:required-server-version&gt;7.1.0.0&lt;/server:required-server-version&gt;</code></pre></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="theHeaderElement.d12e120__entry__1"><code class="ph codeph">&lt;server:dependencies&gt;</code></td>
+<td class="entry" headers="theHeaderElement.d12e120__entry__2">This optional element specifies other plug-ins
+that must be loaded before this plug-in. The <code class="ph codeph">&lt;server:dependencies&gt;</code> element
+contains a <code class="ph codeph">&lt;server:dependency&gt;</code> element that specifies
+the identifier and minimum version for each dependency. For example,
+a plug-in that requires version 76 or later of the <span class="keyword">WebSphere® Application Server</span> - Deploy
+plug-in would include the following elements in the header:<pre class="pre codeblock"><code>&lt;server:dependencies&gt;
+  &lt;server:dependency plugin-id="com.urbancode.air.plugin.WebSphere" min-version="76"/&gt;
+&lt;/server:dependencies&gt;</code></pre></td>
+</tr>
+</tbody></table>
+<p class="p">The following text is a sample header definition:</p>
+<pre class="pre codeblock"><code>&lt;header&gt;
+  &lt;identifier version="3" id="com.&amp;company;.air.plugin.Tomcat" name="Tomcat"/&gt;
+  &lt;description&gt;
+  The Tomcat plugin is used during deployments to run Tomcat run-book 
+  automations and deploy or undeploy Tomcat applications.
+  &lt;/description&gt;
+  &lt;tag&gt;Application Server/Java/Tomcat&lt;/tag&gt;
+&lt;/header&gt;</code></pre>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/ref_create_pluginxml.html" title="An automation plug-in is defined with the plugin.xml file.">The plugin.xml file for automation plug-ins</a></div></div></nav></article></main></body></html>

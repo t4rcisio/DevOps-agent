@@ -1,0 +1,82 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To use an SQL Server database with the IBM DevOps Deploy (Deploy) server, install the SQL server database, install the IBM DevOps Deploy (Deploy)server, and then provide the driver file for the server installation process."><meta name="DC.relation" scheme="URI" content="../../install/topics/DBinstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="dbinstall_sqlserver"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring a Microsoft SQL Server database</title></head><body id="dbinstall_sqlserver"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring a Microsoft SQL Server
+    database</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-1adfb303-a8d5-48b1-bbee-7d84935bfcb0">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">To use an SQL Server database with the <span class="ph">IBM DevOps Deploy (Deploy)</span> server, install the
+    SQL server database, install the <span class="ph">IBM DevOps Deploy (Deploy)</span>server, and then
+    provide the driver file for the server installation process.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdbinstall_sqlserver__prereq__1">Before you begin</h2></div>
+<div class="p">Before you install the SQL Server database, keep in mind the following points:<ul class="ul">
+          <li class="li">You must specify case-sensitive collation for the database. </li>
+          <li class="li">If you are evaluating <span class="ph">Deploy</span>, you can
+            install the database on the same system as the <span class="ph">Deploy</span> server.</li>
+          <li class="li">When you install <span class="ph">Deploy</span>, you need the
+            SQL Server connection information, and a user account with table-creation privileges.
+              <div class="note note note_note"><span class="note__title">Note:</span> The user account cannot have the sysadmin
+              role.</div><div class="p">For example, the commands to create a database, create an SQL server user, and configure the
+              database, might look like the following
+                example:<pre class="pre codeblock"><code>CREATE DATABASE <var class="keyword varname">db_name</var>;
+USE <var class="keyword varname">db_name</var>;
+CREATE LOGIN <var class="keyword varname">db_name</var> WITH PASSWORD = 'password';
+CREATE USER <var class="keyword varname">db_user</var> FOR LOGIN <var class="keyword varname">db_user</var> WITH DEFAULT_SCHEMA = <var class="keyword varname">schema_name</var>;
+CREATE SCHEMA <var class="keyword varname">schema_name</var> AUTHORIZATION <var class="keyword varname">db_user</var>;
+GRANT ALL TO <var class="keyword varname">db_user</var>;</code></pre><div class="note note note_note"><span class="note__title">Note:</span> It is recommended that you change the database to a case-sensitive
+        collation.</div></div></li>
+          <li class="li">Before starting the <span class="ph">Deploy</span> server, the
+            Microsoft SQL Server must have the READ_COMMITTED_SNAPSHOT setting ON. To enable
+            snapshot, execute the statement below while there are no clients connected to the named
+            database:<pre class="pre codeblock" id="dbinstall_sqlserver__codeblock_zfg_53w_wtb"><code>ALTER DATABASE <var class="keyword varname">db_name</var> SET READ_COMMITTED_SNAPSHOT ON</code></pre></li>
+          <li class="li">The SQL Server compatibility should be set to 110.</li>
+          <li class="li">Enable the Always ON availability group feature to use high-availability for recovery
+            or failover. Refer to the SQL Docs for a detailed procedure.</li>
+        </ul></div>
+</section>
+    <section class="section context" id="dbinstall_sqlserver__context_bqm_jps_zxb"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdbinstall_sqlserver__context_bqm_jps_zxb">About this task</h2></div>
+      <p class="p" data-hd-otherprops="ibm">Configure a Microsoft SQL Server database: </p>
+    </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdbinstall_sqlserver__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Obtain the SQL Server JDBC driver files from the Microsoft™ site.</span>
+<div class="itemgroup info">
+<p class="p" id="dbinstall_sqlserver__jdbcdriver">When multiple drivers are available, you might need to consult with the database
+provider to determine which driver to use. The JDBC driver version that you must use might depend on
+the version of the database and the version of Java™ used by
+the <span class="ph">Deploy</span> server.</p>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Put the JDBC JAR file to
+<span class="ph filepath"><var class="keyword varname">installer_directory</var>\lib\ext</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Begin server installation. See <a class="xref" href="serverInstall.html" title="The server provides services such as the user interface used to configure application deployments, the security service, and the artifact repository, among others. Installing the server involves specifying configuration information for the server, such as the ports that the server uses.">Installing the DevOps Deploy server</a>. When you are prompted for the
+database type, enter <kbd class="ph userinput">sqlserver</kbd>. </span>
+</li><li class="li step stepexpand"><span class="ph cmd">Provide the JDBC driver class <span class="ph">Deploy</span> uses
+to connect to the database.</span><div class="itemgroup stepxmp">The default value is <code class="ph codeph">com.microsoft.sqlserver.jdbc.SQLServerDriver</code>.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Next, provide the JDBC connection string.</span><div class="itemgroup info">The
+format depends on the JDBC driver. Typically, it is similar to the
+following code: <pre class="pre codeblock"><code>jdbc:sqlserver://<var class="keyword varname">DB_URL</var>:<var class="keyword varname">DB_PORT</var>;databaseName=<var class="keyword varname">DB_NAME</var></code></pre></div>
+<div class="itemgroup stepxmp"><span class="ph">For example, the connection string to database that is on the same
+            computer as the <span class="ph">Deploy</span> server and
+            that uses the default port resembles the following code:
+          </span><pre class="pre codeblock"><code>jdbc:sqlserver://localhost:1433;databaseName=deploydb</code></pre></div>
+<div class="itemgroup stepxmp">If your database server uses integrated security, include the
+            <span class="keyword parmname">integratedSecurity</span> parameter, as in the following
+          example:<pre class="pre codeblock"><code>jdbc:sqlserver://<var class="keyword varname">database_server</var>:1433;databaseName=deploydb;integratedSecurity=true;</code></pre></div>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> Before using the <code class="ph codeph">integratedSecurity=true</code> option, place the
+<code class="ph codeph">sqljdbc_auth.dll</code> file in the <code class="ph codeph">\bin</code> directory of your JRE.  The file
+can be found in the <code class="ph codeph">\auth\x86</code> or <code class="ph codeph">\auth\x64</code> directory of the SQL
+Server installation files.</div>
+</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Finish by entering the database user name and password.</span>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">Before you start the server, log into the database and run the following command:</span>
+        <div class="itemgroup info"><pre class="pre codeblock"><code>ALTER DATABASE <var class="keyword varname">database_name</var> SET READ_COMMITTED_SNAPSHOT ON</code></pre>Use
+          the name of the database for <code class="ph codeph"><var class="keyword varname">database_name</var></code>.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Start the server.</span>
+      </li></ol></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/DBinstall.html" title="IBM DevOps Deploy (Deploy) requires a database. You can use the following database types for an evaluation or production server.">Installing the server database</a></div></div></nav></article></main></body></html>

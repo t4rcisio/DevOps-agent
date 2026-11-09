@@ -1,0 +1,146 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="abstract" content="Before you can use images on an OpenStack or OpenStack-based cloud with the blueprint designer, you must configure cloud-init on those images."><meta name="description" content="Before you can use images on an OpenStack or OpenStack-based cloud with the blueprint designer, you must configure cloud-init on those images."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="cloud_connect_openstack_images"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring OpenStack images</title></head><body id="cloud_connect_openstack_images"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring OpenStack images</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-8e020650-4233-4435-b4b3-3cf17231307e">Edit online</a></span></div>
+
+
+<div class="body taskbody"><div class="abstract"><span class="shortdesc">Before you can use images on an OpenStack or OpenStack-based cloud with the
+blueprint designer, you must configure cloud-init on those images.</span>Cloud-init is a set of
+scripts and utilities that cloud systems use to initialize and configure instances.</div>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_connect_openstack_images__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" id="cloud_connect_openstack_images__cloud-init">
+
+<span class="ph cmd">On the image, install a package for cloud initialization.</span>
+<ul class="ul choices">
+<li class="li choice">If you use a Linux™ image, install the cloud-init
+package, version 0.7.5 or version 0.7.6. This package is available from the Red Hat Network (RHN)
+common channel. On Linux images, you can often install
+cloud-init with the package manager. For example, if you are using a Red Hat Enterprise Linux (RHEL) version 7 image, you can enable the common
+repository and install cloud-init with the following
+command:<pre class="pre codeblock"><code>yum install --enablerepo rhel-7-server-rh-common-rpms cloud-init</code></pre>You
+might need to adapt this command for your distribution of Linux. For example, for RHEL version 6, substitute the repository
+<code class="ph codeph">rhel-6-server-rh-common-rpms</code> in this command. If you have a problem enabling the
+common repository, you might need to subscribe to the common channel with a command that is similar
+to the following
+example:<pre class="pre codeblock"><code>subscription-manager repos --enable=rhel-7-server-rh-common-rpms</code></pre>Then,
+try running the <span class="keyword cmdname">install</span> command again.
+<p class="p">The
+following instructions assume that cloud-init was installed by the <span class="keyword cmdname">yum</span> package
+manager. You might need to adapt these instructions to work with other package managers or other
+distributions of Linux.</p></li>
+<li class="li choice">If you use a Windows™ image, install the
+cloudbase-init package. Download it from <a class="xref" href="https://www.cloudbase.it/downloads/CloudbaseInitSetup_Beta.msi" target="_blank">https://www.cloudbase.it/downloads/CloudbaseInitSetup_Beta.msi</a> and install it by following the procedure at <a class="xref" href="http://www.cloudbase.it/cloud-init-for-windows-instances/" target="_blank">http://www.cloudbase.it/cloud-init-for-windows-instances/</a>. Accept the default values, and
+ensure that the user name is <kbd class="ph userinput">Administrator</kbd>.</li>
+</ul>
+</li><li class="li step stepexpand" id="cloud_connect_openstack_images__disable_root"><strong>Optional: </strong>
+<span class="ph cmd">On a Linux image, enable password access through SSH for
+the root user:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Open the file <span class="ph filepath">/etc/cloud/cloud.cfg</span> in a text editor.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Remove any lines of code that begin with <code class="ph codeph">disable_root</code>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Add the following line of code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>disable_root: 0</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Save your changes to the file.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Open ports that are required to communicate with your <span class="ph">Deploy</span> server.</span>
+<div class="itemgroup info">By default, open ports 8080 and 8843 to communicate with the server and port 7918 to allow the
+agent that the blueprint designer installs to communicate with the server. See <a class="xref" href="../../install/topics/agent_firewalls.html#agent_firewalls" title="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication.">Firewall and communication configuration</a>.</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Configure the image to resize the file system in response to disk size changes. See <a class="xref" href="http://docs.openstack.org/image-guide/openstack-images.html#disk-partitions-and-resize-root-partition-on-boot-cloud-init" target="_blank">OpenStack Linux image
+requirements</a>.</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+
+<span class="ph cmd">If you want to run Chef roles on the image, run the automated script to install the heat-config
+toolchain on the image.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> Chef roles are supported only on RHEL version 6 and version 7 images.</div>
+</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Download and extract the file <span class="ph filepath">os-chef-config-hook.tgz</span>.</span>
+<div class="itemgroup info">This file is provided in the Heat engine installation media and is in the following location:
+<span class="ph filepath">/<var class="keyword varname">installation_files_location</var>/ibm-ucd-patterns-install/engine-install/resources</span>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Copy the file <span class="ph filepath">install.sh</span> to a temporary folder, such as
+<span class="ph filepath">/tmp/install_chain</span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">On the command line, move to the temporary folder.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Run the following command:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>./install.sh &gt; install.log 2&gt;&amp;1</code></pre>This command might take
+several minutes to complete.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Verify that the command ran successfully by looking at the end of the file
+<span class="ph filepath">install.log</span>.</span>
+<div class="itemgroup info">If the command ran successfully, the end of this file shows the output of the
+<span class="keyword cmdname">os-collect-config</span> command, as in the following
+example:<pre class="pre codeblock"><code>+ cat /etc/os-collect-config.conf
+[DEFAULT]
+command = os-refresh-config
++ os-collect-config --one-time --debug
+2015-08-14 13:51:30.764 27527 WARNING os_collect_config.ec2 [-] ('Connection aborted.', error(101, 'Network is unreachable'))
+2015-08-14 13:51:30.765 27527 WARNING os-collect-config [-] Source [ec2] Unavailable.
+2015-08-14 13:51:30.765 27527 WARNING os_collect_config.cfn [-] No Access Key ID configured.
+2015-08-14 13:51:30.766 27527 DEBUG os-collect-config [-] Source [cfn] Not configured. collect_all /usr/lib/python2.6/site-packages/os_collect_config/collect.py:153
+2015-08-14 13:51:30.766 27527 WARNING os_collect_config.heat [-] No auth_url configured.
+2015-08-14 13:51:30.766 27527 DEBUG os-collect-config [-] Source [heat] Not configured. collect_all /usr/lib/python2.6/site-packages/os_collect_config/collect.py:153
+2015-08-14 13:51:30.767 27527 WARNING os_collect_config.request [-] No metadata_url configured.
+2015-08-14 13:51:30.767 27527 WARNING os-collect-config [-] Source [request] Unavailable.
+2015-08-14 13:51:30.767 27527 WARNING os_collect_config.local [-] /var/lib/os-collect-config/local-data not found. Skipping
+2015-08-14 13:51:30.767 27527 WARNING os_collect_config.local [-] No local metadata found (['/var/lib/os-collect-config/local-data'])
+2015-08-14 13:51:30.768 27527 DEBUG os-collect-config [-] No changes detected. __main__ /usr/lib/python2.6/site-packages/os_collect_config/collect.py:274</code></pre></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Set the communications interval for the image to communicate with the Heat engine.</span>
+<div class="itemgroup info">The <span class="keyword parmname">polling_interval</span> parameter is the frequency in seconds with which the
+image communicates with the Heat engine. By default, the <span class="keyword parmname">polling_interval</span> is 30
+seconds, but the default value can cause excessive engine load. To modify this value, open the
+<span class="ph filepath">/etc/os-collect-config.conf</span> configuration file and add the following
+text:<pre class="pre codeblock"><code>polling_interval = 90</code></pre> In this case, the
+<span class="keyword parmname">polling_interval</span> value is <code class="ph codeph">90</code> seconds.<p class="p">Ensure that the
+<span class="keyword parmname">polling_interval</span> value is short enough that the virtual machine can collect any
+changes from the Heat engine before the stack timeout elapses. The default timeout value is 60
+minutes, but you can set the timeout value for each cloud. See <a class="xref" href="../../admin/topics/security_projects.html#security_projects" title="A cloud project for the blueprint designer represents a tenant or project on a cloud system. You can give users access to cloud systems through cloud projects.">Creating cloud projects for the blueprint designer</a>.</p></div>
+</li>
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Verify that the Chef client is running.</span>
+<div class="itemgroup info">On the command line, run the following command: <pre class="pre codeblock"><code>chef-client -v</code></pre></div>
+<div class="itemgroup stepresult">The version number is displayed. If the Chef client is not running, manually install it.
+See <a class="xref" href="https://downloads.chef.io/chef-client/" target="_blank">Chef
+Downloads: Chef Client</a>.</div>
+</li>
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Verify that the knife command-line tool is running.</span>
+<div class="itemgroup info">On the command line, run the following command: <pre class="pre codeblock"><code>knife -v</code></pre>
+</div>
+<div class="itemgroup stepresult">The version number is displayed. If the knife command-line tool is not running, manually
+configure the Chef development kit. See <a class="xref" href="https://docs.chef.io/install_dk.html" target="_blank">Install the Chef DK</a>. </div>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Shut down the image with the following command:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>shutdown -h now</code></pre>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Upload the image to your cloud.</span>
+<div class="itemgroup info">For more information, see the documentation for your cloud system.</div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_connect_openstack_images__postreq__1">What to do next</h2></div>You can use the image in blueprints that you create on the blueprint designer. See <a class="xref" href="blueprint_edit_os.html" title="To model an OpenStack environment, log in with an OpenStack cloud project and use resources from your cloud system in a blueprint.">Modeling environments for OpenStack and OpenStack-based clouds</a>.</section>
+</div>
+</article></main></body></html>

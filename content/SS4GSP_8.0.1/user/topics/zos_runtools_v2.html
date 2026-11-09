@@ -1,0 +1,193 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="You can create IBM z/OS component versions from a new package version called version 2 or v2. You can create v2 component versions using the buztool.sh command."><meta name="DC.relation" scheme="URI" content="../../user/topics/zos_runtools.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="zos_runtools_v2"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating z/OS component version using the v2 package format</title></head><body id="zos_runtools_v2"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating  <span class="keyword">z/OS</span> component version using the v2 package format</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-0fa02d57-2d9b-4a3a-95ef-b9798e2b6ab6">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">You can create <span class="keyword">IBM® z/OS®</span> component versions from
+  a new package version called version 2 or v2. You can create v2 component versions using the
+   <span class="keyword cmdname">buztool.sh</span> command. </p>
+
+<p class="p">Currently, the artifacts are compressed at the partitioned data set (PDS) level and stored as
+   binary files in Codestation, Nexus, or Artifactory. This condition makes <span class="ph">IBM DevOps Deploy (Deploy)</span>
+   <span class="keyword">z/OS</span> versions
+   unique because distributed systems packages are stored at the artifact level and not at the
+   folder level.</p>
+<p class="p">The <code class="ph codeph">cp</code> command is enhanced in USS to provide a way to copy artifacts to and from
+MVS without losing meta relations like ALIAS. The <span class="ph">Deploy</span> v2 package format utilizes the enhanced <code class="ph codeph">cp</code> command to package versions as-is and
+store them in Codestation, Nexus, or Artifactory.</p>
+<p class="p">You can benefit from several advantages by using the v2 package format:</p>
+<ul class="ul">
+<li class="li">Component version artifacts are downloaded from Codestation, Nexus, or Artifactory and viewed in
+an editor that supports viewing files in mainframe encoding. Artifacts are downloaded in native
+encoding that <span class="keyword">IBM z/OS</span> uses rather than in ASCII. </li>
+<li class="li">During deployments, the token replacements are done in USS because these files are extracted in
+USS. This way, you deploy the token replaced artifacts directly into the target environment. </li>
+<li class="li">Merging component versions using the v2 package format has improved performances than merging in
+previous format </li>
+</ul>
+<div class="note note note_note"><span class="note__title">Note:</span> 
+<ul class="ul">
+<li class="li">The current packaging format is still supported. The v2 package format is optional. </li>
+<li class="li">For better results, move components one at a time to the new package format. After <span class="ph">Deploy</span> component starts
+     using v2 package format, stay in that format for best results. </li>
+<li class="li">No change is required to the component process design to deploy component versions with the new
+package format. </li>
+<li class="li">No change is required to the rollback process. </li>
+<li class="li">Starting from version 7.1.0, you can merge component versions within the same package version.
+     Note that merging is not supported between the v1 and v2 formats.</li>
+            <li class="li">Datasets with spanned records are not supported.</li>
+</ul>
+</div>
+
+
+<p class="p">You can create component versions from the v2 package by using either of these methods:</p>
+<ul class="ul">
+<li class="li">In the <code class="ph codeph">buztool</code> command, use the <code class="ph codeph">createzosversion2</code> option
+instead of <code class="ph codeph">createzosversion</code>. </li>
+<li class="li">Use the <code class="ph codeph">-zpv v2</code> buztool parameter.</li>
+</ul>
+<div class="p">For example, use either of the following commands to create a new component version in the
+   CICSModules component:<pre class="pre codeblock"><code>buztool.sh createzosversion2 -c CICSModules -v fixbug100 -s /u/deployuser/build/shiplist.xml</code></pre><pre class="pre codeblock"><code>buztool.sh createzosversion -zpv v2 -c CICSModules -v fixbug100 -s /u/deployuser/build/shiplist.xml</code></pre><div class="note note note_note"><span class="note__title">Note:</span> 
+    <ul class="ul">
+     <li class="li">Enclose arguments, that have space, in double quotation marks.</li>
+     <li class="li">You can use additional parameters, if needed. The parameters are described in <a class="xref" href="zos_runtools_uss.html#zos_runtools_uss" title="To create IBM z/OS component versions from z/OS UNIX System Services, submit the buztool.sh command from a z/OS UNIX shell.">Creating z/OS component versions from z/OS UNIX System Services</a></li>
+    </ul>
+   </div></div>
+<section class="section" id="zos_runtools_v2__section_orc_ldk_1mb"><h2 id="zos_runtools_v2__section_orc_ldk_1mb__title__1" class="title sectiontitle">The buztool properties file</h2>
+
+<p class="p">Copying files from MVS to USS and back requires that you know the content type of the artifact.
+     <span class="ph">Deploy</span> must determine whether the artifact is an executable file (like a loadlib file) or a binary
+    file (like a DBRM file), or a text file (like a COBOL program). To do this, a property file must
+    be passed as input to the <code class="ph codeph">buztool</code> command with the <code class="ph codeph">-prop &lt;property-file&gt;</code> parameter. This file contains the <code class="ph codeph">deployType</code> to
+     <code class="ph codeph">copyType</code> mapping. Any number of unique deploy types can be mapped to any of
+    the copy types: load, binary, or text. Deploy types must be prefixed with the
+     <code class="ph codeph">deploytype</code> parameter. Uncomment the parameters you want to use. </p>
+   <p class="p">By default, container level deployType attributes in shiplist XML are mapped to below copy
+    types :</p>
+   <pre class="pre codeblock" id="zos_runtools_v2__codeblock_x2j_ypn_ysb"><code>LOAD -&gt; Executable
+OBJ (or) DBRM -&gt; Binary
+TEXT -&gt; Text</code></pre>
+   <div class="p"><div class="note note note_note" id="zos_runtools_v2__note_usr_mvr_stb"><span class="note__title">Note:</span> The values of <span class="keyword parmname">EXTREPO.PASSWORD</span>,
+      <span class="keyword parmname">EXTREPO.APIKEY</span>, and <span class="keyword parmname">SERVER.TOKEN</span> are encrypted in
+     the buztool.sh script. Change the properties file permission to write during the first run of
+     buztool.sh script. You can set the file permission back to read-only later on for security
+     reasons.</div>Below is an example of the buztool properties file:</div>
+<div class="p">
+<pre class="pre codeblock"><code># This property file contains samples for following
+#
+#   1) Defining Deploy Type and Copy Type mappings
+#    (which will be later used to create version in new package format)
+#
+#   2) Setting Runtime Delta Deployment Flag
+#
+#   3) Defining External Repository details
+#
+#   4) Declaring alternate Deploy Server details for creating version
+#
+# * All the lines in the properties file starting with "#" are comments
+#   and can be kept as is for reference.
+#
+#   Please find detailed explaination for each section below
+#
+#
+# Section - 1 :
+# ~~~~~~~~~~~
+#
+# Defining Deploy Type and Copy Type mappings to create version in
+# new package format.
+#
+# * Deploytypes are mandatory for every Dataset Container in shiplist
+#   to create version in new package format.
+# * Deploytypes must be prefixed with "deploytype."
+#
+# Example:
+# -------
+#
+# If deployType is "CICSDBRM", a BINARY dataset then add entry as below
+# deploytype.CICSDBRM=BINARY
+#
+# If deployType is "CICSLOAD", a EXECUTABLE then add entry as below
+# deploytype.CICSLOAD=EXEC
+#
+# If deployType is "CICSLIB", a TEXT dataset then add entry as below
+# deploytype.CICSLIB=TEXT
+#
+# * Property file will have below entries.
+#
+# deploytype.CICSDBRM=BINARY
+# deploytype.CICSLOAD=EXEC
+# deploytype.CICSLIB=TEXT
+#
+#  Add deploytypes to the list as needed.
+#
+# NOTE:
+# ----
+# * DeployType is unique in the property file
+#   i.e., each deployType must be assigned to only one copyType.
+#
+deploytype.JCL=TEXT
+# Above entry is used to define deploytype with JCL to copyType as TEXT
+# to create a version in new package format from below script
+# /var/devops-deploy/agents/deployuser/v7102/installTest/zossamples/test-create-version-new-format.sh
+#
+#
+# Section - 2 :
+# ~~~~~~~~~~~
+#
+# Setting Runtime Delta Deployment Flag.
+#
+# Example:
+#
+# Defining property as below skips the Runtime Delta Deployment
+# calculations Logic.
+# RUNTIME.DELTADEPLOY=FALSE
+#
+# NOTE:
+# ----
+# * Default it is considered as TRUE for version creation.
+#
+# Section - 3 :
+# ~~~~~~~~~~~
+# Defining details to store version artifacts to an external repository.
+#
+# Example:
+#
+# # Common external repository inputs
+# EXTREPO.REPOSITORY_TYPE={Artifactory/Nexus}
+# EXTREPO.USERNAME=
+# EXTREPO.PASSWORD=
+# EXTREPO.URL=
+# EXTREPO.REPOSITORY=
+#
+# # Additional inputs, if external respository type is "Artifactory"
+# EXTREPO.APIKEY=
+# EXTREPO.httpProxyPort=
+# EXTREPO.httpProxyHost=
+#
+# # Additional inputs, if external respository type is "Nexus"
+# EXTREPO.RAWDIRECTORY=
+#
+#
+# Section - 4 :
+# ~~~~~~~~~~~
+#
+# Declaring alternate Deploy Server details to create version
+#
+# Example:
+#
+# Buztool requires below two properties to create a version on a
+# alternate Deploy Server
+#
+# SERVER.URL=
+# SERVER.TOKEN=
+#
+# NOTE:
+# ----
+# * On default, buztool creates version on a Deploy Server defined during
+#   installation
+#</code></pre>
+</div>
+</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/zos_runtools.html" title="You can create z/OS component version by running the buztool.sh command from job control language (JCL) or from the z/OS UNIX System Services command line. You can also create z/OS component version by using the z/OS File Source Config plug-in.">Creating z/OS component versions</a></div></div></nav></article></main></body></html>

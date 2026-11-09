@@ -1,0 +1,487 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more."><meta name="DC.relation" scheme="URI" content="../../user/topics/settings_ch.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="settings_system"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>System settings</title></head><body id="settings_system"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">System settings</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-aa1f9fab-cfe6-4cde-b1f5-cf3ae088b7a2">Edit online</a></span></div>
+
+<div class="body refbody"><p class="shortdesc">System settings allows you to manage global settings for components, clean up, password
+    requirement, security, mail-server, and much more.</p>
+    <div class="example">The following tables list the settings for several system-wide settings for the server. </div>
+<table class="table"><caption><span class="table--title-label">Table 1. </span><span class="title">General settings</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="settings_system__entry__1">Field</th>
+<th class="entry" id="settings_system__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__1"><span class="ph uicontrol">External Agent URL*</span></td>
+<td class="entry align-left" headers="settings_system__entry__2">This is the URL that the <span class="ph">IBM DevOps Deploy (Deploy)</span> server provides to agents as their point of contact. When an agent wants to contact
+              the server, it retrieves this URL and opens a connection on it. This URL must point to
+              the HTTP or HTTPS port of the server.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__1"><span class="ph uicontrol">External User URL*</span></td>
+<td class="entry align-left" headers="settings_system__entry__2">The URL that users enter to connect to the <span class="ph">Deploy</span> server. The
+              URL is also used when creating a notification template.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__1"><span class="ph uicontrol">Message of the Day</span></td>
+<td class="entry align-left" headers="settings_system__entry__2">This message will be displayed on user login or user navigation
+within web UI. </td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__1"><span class="ph uicontrol">Enable Maintenance Mode</span></td>
+<td class="entry align-left" headers="settings_system__entry__2">Maintenance mode stops activity on the server so you can run
+important tasks that require the server to be idle. </td>
+</tr>
+         
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__1"><span class="ph uicontrol">Validate Agent IP</span></td>
+<td class="entry align-left" headers="settings_system__entry__2">Requires that the agent IP and host name are validated against
+              values that are used the first time that the agent is connected to the <span class="ph">Deploy</span>
+              server.</td>
+</tr>
+          <tr class="row">
+            <td class="entry align-left" headers="settings_system__entry__1"><span class="ph uicontrol">Skip Property Updates for Existing
+                Agents</span></td>
+            <td class="entry align-left" headers="settings_system__entry__2">When this toggle button is set to On, when new agents
+              come online, the server does not update their properties. This improves performance,
+              but in this case, agent properties can become out of date.</td>
+          </tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__1"><span class="ph uicontrol">Enable UI Debugging</span></td>
+<td class="entry align-left" headers="settings_system__entry__2">Facilitates debugging with the user interface. If this setting is
+							enabled, the performance of the user interface might be affected.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__1"><span class="ph uicontrol">Create Default Children for
+Plugins</span></td>
+<td class="entry align-left" headers="settings_system__entry__2">When this option is enabled, empty groups are created when
+plugins use the auto discovery feature.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__1"><span class="ph uicontrol">Require a Comment For
+Process Design Changes</span></td>
+<td class="entry align-left" headers="settings_system__entry__2">Requires that the user provides a comment when the user changes
+							processes.</td>
+</tr>
+
+<tr class="row">
+<td class="entry" headers="settings_system__entry__1"><span class="ph uicontrol">Default Locale</span></td>
+<td class="entry" headers="settings_system__entry__2">The default language for the user interface.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="settings_system__entry__1"><span class="ph uicontrol">Default Snapshot Lock Type</span></td>
+<td class="entry" headers="settings_system__entry__2">Determines the default lock type when users
+create snapshots. Lock types are the following values: <span class="ph uicontrol">Only
+Component Versions</span>, <span class="ph uicontrol">Only Configuration</span>,
+or <span class="ph uicontrol">Component Versions and Configuration</span>. The
+initial value is <span class="ph uicontrol">Component Versions and Configuration</span>.
+Changes are effective after the server is restarted. </td>
+</tr>
+</tbody></table>
+<table class="table" id="settings_system__table_zjt_jhh_zdb"><caption><span class="table--title-label">Table 2. </span><span class="title">Component settings</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="settings_system__table_zjt_jhh_zdb__entry__1">Field</th>
+<th class="entry" id="settings_system__table_zjt_jhh_zdb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__1"><span class="ph uicontrol">Components copy to CodeStation by
+default</span></td>
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__2">If this toggle is set to On, newly created components copy
+artifacts to CodeStation by default. You can still change this setting on individual
+components.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__1"><span class="ph uicontrol">Enforce Deployed Version Integrity</span></td>
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__2">When this toggle button is set to On, deployed component version
+artifacts cannot be changed.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__1"><span class="ph uicontrol">Automatic Version Import Check Period
+(seconds)*</span></td>
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__2">The number of seconds between the times that <span class="ph">Deploy</span> polls
+              components for new versions. If this value is changed, the server must be restarted
+              before the change becomes effective. Set this value no lower than 15 seconds.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__1"><span class="ph uicontrol">Use Agent Tag For Integration</span></td>
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__2">Enables any agent that is identified by a specific tag to import
+component versions. If this setting is selected, the <span class="ph uicontrol">Agent Tag for version
+imports</span> field is shown. Otherwise, the <span class="ph uicontrol">Agent for Version Imports</span>
+field is displayed. For information about tagging objects, see <a class="xref" href="../../user/topics/addingtags_tsk.html#addingtags_tsk" title="Add tags to objects to simplify object management, to improve object sorting, and to facilitate task execution by tag.">Adding tags to objects</a></td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__1"><span class="ph uicontrol">Agent for Version Imports</span></td>
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__2">The agent that is used to import component versions. The agent
+must have access to component artifacts. The agent becomes the default agent for new components.
+This value can be overridden when a component is created. This field is displayed if the
+<span class="ph uicontrol">Use Agent Tag for Integration</span> toggle button is set to Off. To import
+artifacts from the server location, install an agent in the same location and specify that
+agent.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__1"><span class="ph uicontrol">Version Import Records to Retain</span></td>
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__2">The number of version import records to retain during cleanup.
+Default is 100.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__1"><span class="ph uicontrol">Agent Tag for version imports</span></td>
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__2">Any agent with the specified tag can import component versions.
+All tagged agents must have access to the artifacts. Tagged agents become the default values for new
+components. This value can be overridden when a component is created. This field is displayed if the
+<span class="ph uicontrol">Use Agent Tag for Integration</span> toggle button is set to On. </td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__1"><span class="ph uicontrol">Enable Safe Edit of Component
+Processes</span></td>
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__2">Enables you to test component processes before making them
+available in normal environments. Make updates to your component process, test those updates safely,
+and then promote to a new version when you are ready, when toggle is set to On.  </td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__1"><span class="ph uicontrol">Require Approval to Promote Component
+Process</span></td>
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__2">When this option is enabled, any draft component process must be
+approved by an authorized user before it can be promoted and used in deployments.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__1"><span class="ph uicontrol">Allow Process Locking</span></td>
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__2">When this option is enabled, users with 'Manage Process Lock'
+permission will be able to lock component processes for editing. Users can also force unlock a
+process locked by another user.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__1"><span class="ph uicontrol">Require Process Locking</span></td>
+<td class="entry align-left" headers="settings_system__table_zjt_jhh_zdb__entry__2">When this option is enabled, users will not be able to edit
+component processes without locking the process first.</td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 3. </span><span class="title">Artifact cleanup settings</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="settings_system__entry__49">Field</th>
+<th class="entry" id="settings_system__entry__50">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__49"><span class="ph uicontrol">Daily Cleanup Start Time*</span></td>
+<td class="entry align-left" headers="settings_system__entry__50">The time when versions are cleaned.
+The value must be an integer from 0 (midnight) to 23 (11 pm). To preview
+the component versions that are scheduled for cleaning, click <span class="ph uicontrol">Preview
+Version Cleanup</span>. See <a class="xref" href="../../user/topics/settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a>.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__49"><span class="ph uicontrol">Default Application Snapshot Retention
+(days)*</span></td>
+<td class="entry align-left" headers="settings_system__entry__50">The number of days application snapshots are kept, by default. A
+value of <code class="ph codeph">-1</code> means that they are kept indefinitely. Component and environment
+settings can override this setting.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__49"><span class="ph uicontrol">Default Version Retention for Component
+(days)*</span></td>
+<td class="entry align-left" headers="settings_system__entry__50">The number of component versions to keep, by default. A value of
+<code class="ph codeph">-1</code> specifies that all are kept. Component  settings can override this
+setting.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__49"><span class="ph uicontrol">Default Number of Versions to Retain for
+Component*</span></td>
+<td class="entry align-left" headers="settings_system__entry__50">The number of versions to retain for each component. </td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__49"><span class="ph uicontrol">Default Version Retention for Environment
+(days)*</span></td>
+<td class="entry align-left" headers="settings_system__entry__50">The number of environment versions to keep, by default. A value
+of <code class="ph codeph">-1</code> specifies that all are kept. Environment settings can override this
+setting.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__49"><span class="ph uicontrol">Default Number of Versions to Retain for
+Environment*</span></td>
+<td class="entry align-left" headers="settings_system__entry__50">The number of versions to retain for each environment. </td>
+</tr>
+<tr class="row valign-top">
+<td class="entry align-left" headers="settings_system__entry__49"><span class="ph uicontrol">Archive Path</span></td>
+<td class="entry align-left" headers="settings_system__entry__50">The path where the compressed file
+that contains the archived component versions is written. If this
+field is blank, the compressed file is not written, and no archive
+is kept.</td>
+</tr>
+          <tr class="row">
+            <td class="entry align-left" headers="settings_system__entry__49"><span class="ph uicontrol">Preview Version
+              Cleanup</span></td>
+            <td class="entry align-left" headers="settings_system__entry__50">To see the versions that are archived using the
+              current settings, click <span class="ph uicontrol">Preview Version Cleanup</span>. See <a class="xref" href="../../user/topics/settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a>.</td>
+          </tr>
+</tbody></table>
+    
+<table class="table" id="settings_system__table_hml_4ph_zdb"><caption><span class="table--title-label">Table 4. </span><span class="title">Process history cleanup settings</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="settings_system__table_hml_4ph_zdb__entry__1">Field</th>
+<th class="entry" id="settings_system__table_hml_4ph_zdb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__1"><span class="ph uicontrol">Daily Cleanup Start Time</span></td>
+<td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__2">The hour that the daily cleanup process starts.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__1"><span class="ph uicontrol">Daily Cleanup Duration (hours)</span></td>
+<td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__2">The number of hours that the cleanup process runs daily.</td>
+</tr>
+          <tr class="row">
+            <td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__1"><span class="ph uicontrol">Enable Deployment History
+                Cleanup</span></td>
+            <td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__2">When this toggle button is set to On, deployment
+              history files are reduced. See <a class="xref" href="../../user/topics/depl_history_cleanup.html" title="You can clean up deployment history files to reduce database and file system storage that IBM DevOps Deploy (Deploy) uses.">Cleaning up deployment history files</a>.</td>
+          </tr>
+<tr class="row valign-top">
+<td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__1"><span class="ph uicontrol">Days to Retain Deployment History</span></td>
+<td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__2">The number of days to retain deployment history. This setting can
+be overridden with the related environment setting.</td>
+</tr>
+          <tr class="row">
+            <td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__1"><span class="ph uicontrol">Enable Generic Process History
+                Cleanup</span></td>
+            <td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__2">When this toggle button is set to On, generic process
+              history files are set to delete as per the <span class="ph uicontrol">Days to Retain Generic Process
+                History</span> setting. </td>
+          </tr>
+          <tr class="row">
+            <td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__1"><span class="ph uicontrol">Days to Retain Generic Process
+                History</span></td>
+            <td class="entry align-left" headers="settings_system__table_hml_4ph_zdb__entry__2">The number of days to retain generic process history.
+              This setting can be overridden with the related environment setting.</td>
+          </tr>
+</tbody></table>
+    
+<table class="table frame-all"><caption><span class="table--title-label">Table 5. </span><span class="title">Audit Log settings</span></caption><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry colsep-1 rowsep-1" id="settings_system__entry__81">Field</th>
+<th class="entry colsep-1 rowsep-1" id="settings_system__entry__82">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="settings_system__entry__81"><span class="ph uicontrol">Enable Audit Log Entries for Read Events</span></td>
+<td class="entry colsep-1 rowsep-1" headers="settings_system__entry__82">When this option is disabled, no READ events are recorded in the audit log.</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="settings_system__entry__81"><span class="ph uicontrol">Enable Audit Log Cleanup</span></td>
+<td class="entry colsep-1 rowsep-1" headers="settings_system__entry__82">When this option is enabled, audit log entries older than the number of days specified in the
+<span class="ph uicontrol">Days to Retain Audit Log Entries</span> field are removed beginning at the time
+specified by the <span class="ph uicontrol">Daily Cleanup Start Time</span> field. By default, this option is
+disabled. See <a class="xref" href="../../user/topics/troubleshoot_logDownload.html" title="You can create rotating audit log file at a regular interval, such as every day.">Creating a rotating audit log file</a>.
+Deleting audit logs from <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Audit Log</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Cleanup Log</span></span> creates a log entry of event type <span class="keyword cmdname">Audit Log Cleanup</span> that are
+non-deletable.</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="settings_system__entry__81"><span class="ph uicontrol">Daily Cleanup Start Time</span></td>
+<td class="entry colsep-1 rowsep-1" headers="settings_system__entry__82">If <span class="ph uicontrol">Enable Audit Log Cleanup</span> is enabled, the time the audit log cleanup
+starts. The default value is 12:00 AM.</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="settings_system__entry__81"><span class="ph uicontrol">Days to Retain Audit Log Entries</span></td>
+<td class="entry colsep-1 rowsep-1" headers="settings_system__entry__82">If <span class="ph uicontrol">Enable Audit Log Cleanup</span> is enabled, the number of days that audit
+log records are retained. The default value is 30.</td>
+</tr>
+</tbody></table>
+<table class="table" id="settings_system__table_pass_req"><caption><span class="table--title-label">Table 6. </span><span class="title">Password requirement settings</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="settings_system__table_pass_req__entry__1">Field</th>
+<th class="entry" id="settings_system__table_pass_req__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__1"><span class="ph uicontrol">Minimum Password Length*</span></td>
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__2">Determines the minimum length for passwords.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__1"><span class="ph uicontrol">Require Uppercase Characters in
+Passwords</span></td>
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__2">If enabled, passwords must contain at least one uppercase
+character.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__1"><span class="ph uicontrol">Require Lowercase Characters in
+Passwords</span></td>
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__2">If enabled, passwords must contain at least one lowercase
+character.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__1"><span class="ph uicontrol">Require Special Characters in
+Passwords</span></td>
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__2">If enabled, passwords must contain at least one special
+character.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__1"><span class="ph uicontrol">Require Number Characters in
+Passwords</span></td>
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__2">If enabled, passwords must contain at least one numeric
+character.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__1"><span class="ph uicontrol">Require Password to be Unique From User
+Information</span></td>
+<td class="entry align-left" headers="settings_system__table_pass_req__entry__2">If enabled, passwords must not match username, actual name, or
+configured email.</td>
+</tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 7. </span><span class="title">Security settings</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="settings_system__entry__105">Field</th>
+<th class="entry" id="settings_system__entry__106">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__105"><span class="ph uicontrol">Discovery Auth Token Expiration
+Delay(seconds)</span></td>
+<td class="entry align-left" headers="settings_system__entry__106">Delay in seconds for auth tokens that are created for Auto
+Discovery Steps to expire. Must be 300 seconds or more.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__105"><span class="ph uicontrol">Configure Auth Token Expiration
+Delay(seconds)</span></td>
+<td class="entry align-left" headers="settings_system__entry__106">Delay in seconds for auth tokens that are created for Auto
+Configure Steps to expire. Must be 300 seconds or more. </td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__105"><span class="ph uicontrol">Version Import Auth Token Expiration
+Delay(seconds)</span></td>
+<td class="entry align-left" headers="settings_system__entry__106">Delay in seconds for auth tokens that are created for Version
+Import Steps to expire. Must be 300 seconds or more.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__105"><span class="ph uicontrol">Plugin Step Auth Token Expiration
+Delay(seconds)</span></td>
+<td class="entry align-left" headers="settings_system__entry__106">Delay in seconds for auth tokens that are created for Plug-in
+Steps to expire. Must be 300 seconds or more.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__105"><span class="ph uicontrol">Use Default Auth Token Restriction if not
+specified</span></td>
+<td class="entry align-left" headers="settings_system__entry__106">Enable the default authentication token restriction for processes
+              that are created in <span class="ph">Deploy</span>. For these
+              versions, the default token is applied to the most current process version but not
+              other versions. By default, the option is turned off. For more information, see <a class="xref" href="security_token_restrict.html" title="Limit authentication token actions by applying token restrictions to process plug-in steps.">Restricting authentication tokens</a>.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__105"><span class="ph uicontrol">"Keep me logged in" duration
+(hours)</span></td>
+<td class="entry align-left" headers="settings_system__entry__106">The number of hours a user remains logged in after checking 'Keep
+me logged in'.</td>
+</tr>
+          <tr class="row">
+            <td class="entry align-left" headers="settings_system__entry__105"><span class="ph uicontrol">Trusted proxy list</span></td>
+            <td class="entry align-left" headers="settings_system__entry__106">A regular expression pattern to match IP of the
+              trusted proxies. This value affects all servers; restart the servers for the changes
+              to reflect. If left blank, the proxy headers are not trusted from incoming
+              connections, which further may affect auth-token IP restriction validation and IP
+              logging.</td>
+          </tr>
+</tbody></table>
+<table class="table"><caption><span class="table--title-label">Table 8. </span><span class="title">Mail server settings</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="settings_system__entry__121">Field</th>
+<th class="entry" id="settings_system__entry__122">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__121"><span class="ph uicontrol">Mail Server Host</span></td>
+<td class="entry align-left" headers="settings_system__entry__122">The host name of the mail server that is used for notifications.
+                <span class="ph">Deploy</span>
+              can send notifications to users based on user-configured trigger events (to set up
+              notifications, see <a class="xref" href="../../user/topics/notify_create.html" title="Notifications are defined in a notification scheme. The notification scheme is assigned to an application and the notifications are sent during the deployment of that application.">Creating Notifications in a Notification Scheme</a>). <span class="ph">Deploy</span> requires an
+              external SMTP mail server to send messages. To disable notifications, leave the field
+              blank. </td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__121"><span class="ph uicontrol">Mail Server Port</span></td>
+<td class="entry align-left" headers="settings_system__entry__122">The SMTP port that is used by the
+notifications mail server.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__121"><span class="ph uicontrol">Secure Mail Server Connection</span></td>
+<td class="entry align-left" headers="settings_system__entry__122">Specifies whether the SMTP connection is secure. The default
+value is <span class="ph uicontrol">Off</span>.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__121"><span class="ph uicontrol">Mail Server Sender Address</span></td>
+<td class="entry align-left" headers="settings_system__entry__122">The sender address for email notifications.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__121"><span class="ph uicontrol">Mail Server Username</span></td>
+<td class="entry align-left" headers="settings_system__entry__122">The user name for sending email
+notifications. Some email servers and firewalls treat emails with
+different sender and user names suspiciously. Therefore, consider
+specifying the same name for both fields. </td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__entry__121"><span class="ph uicontrol">Mail Server Password</span></td>
+<td class="entry align-left" headers="settings_system__entry__122">The user password for sending email
+notifications.</td>
+</tr>
+</tbody></table>
+<table class="table" id="settings_system__table_v1z_zgr_1mb"><caption><span class="table--title-label">Table 9. </span><span class="title">External Approval settings</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left" id="settings_system__table_v1z_zgr_1mb__entry__1">Field</th>
+<th class="entry align-left" id="settings_system__table_v1z_zgr_1mb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_v1z_zgr_1mb__entry__1"><span class="ph uicontrol">Use Agent Pool For External
+Approvals</span></td>
+<td class="entry" headers="settings_system__table_v1z_zgr_1mb__entry__2">Turn the toggle on to use an agent pool for external approval processes.</td>
+</tr>
+<tr class="row" data-hd-otherprops="ibm">
+<td class="entry align-left" headers="settings_system__table_v1z_zgr_1mb__entry__1"><span class="ph uicontrol">Agent for External Approvals </span></td>
+<td class="entry" headers="settings_system__table_v1z_zgr_1mb__entry__2">Choose an agent pool to be used for external approval processes.  For more information, see
+<a class="xref" href="../../user/topics/app_externalApprovalCreate.html" title="If you have a process step that requires validation on an external application before deployment, you can create an approval process and assign it to environments. With this approval process, the deployment runs automatically and only when it is approved.">Managing external approval processes</a>.</td>
+</tr>
+</tbody></table>
+<table class="table" id="settings_system__table_c1y_cpr_4nb"><caption><span class="table--title-label">Table 10. </span><span class="title">Legacy Configuration Options</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left" id="settings_system__table_c1y_cpr_4nb__entry__1">Field</th>
+<th class="entry align-left" id="settings_system__table_c1y_cpr_4nb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_c1y_cpr_4nb__entry__1"><span class="ph uicontrol">Enable "Prompt On Use"</span></td>
+<td class="entry" headers="settings_system__table_c1y_cpr_4nb__entry__2">If checked, the option to set "Prompt On Use" for properties in workflow steps will be
+displayed.</td>
+</tr>
+<tr class="row" data-hd-otherprops="ibm">
+<td class="entry align-left" headers="settings_system__table_c1y_cpr_4nb__entry__1"><span class="ph uicontrol">Enable "Allow Failure"</span></td>
+<td class="entry" headers="settings_system__table_c1y_cpr_4nb__entry__2">If checked, the option to set "Allow Failure" on steps in a workflow will be
+displayed.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_c1y_cpr_4nb__entry__1"><span class="ph uicontrol">Fail Processes With Unresolved
+Properties</span></td>
+<td class="entry" headers="settings_system__table_c1y_cpr_4nb__entry__2">If enabled, any running process which comes across a property it cannot resolve will
+automatically fail.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_c1y_cpr_4nb__entry__1"><span class="ph uicontrol">Component Environment Properties Override Environment
+Properties</span></td>
+<td class="entry" headers="settings_system__table_c1y_cpr_4nb__entry__2">If enabled, component environment properties will override environment properties when using
+${p:propName} notation as opposed to ${p:environment/propName}.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="settings_system__table_c1y_cpr_4nb__entry__1"><span class="ph uicontrol">Enable Deleting Resources From Environment Resource
+Tree</span></td>
+<td class="entry" headers="settings_system__table_c1y_cpr_4nb__entry__2">If enabled, allows you to delete resources that are mapped with environment while deleting
+              that environment. Note that the resources are deleted globally and affects the other
+              environments that uses the same resource tree. </td>
+</tr>
+          <tr class="row">
+            <td class="entry align-left" headers="settings_system__table_c1y_cpr_4nb__entry__1"><span class="ph uicontrol">Load Compliancies On Application
+                Page</span></td>
+            <td class="entry" headers="settings_system__table_c1y_cpr_4nb__entry__2">If enabled, environment compliancies are loaded in batch from the
+                <span class="ph uicontrol">Application</span> page, rather than loading on demand.</td>
+          </tr>
+</tbody></table>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/settings_ch.html" title="After you install IBM DevOps Deploy (Deploy), you can modify the server configuration and configure more options.">Server settings and configuration</a></div></div><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a></div></div></nav></article></main></body></html>

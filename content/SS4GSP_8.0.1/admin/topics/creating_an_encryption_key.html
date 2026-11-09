@@ -1,0 +1,42 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Use the keycreate tool to create a key for secure property encryption without removing previous keys or changing the primary encryption key."><meta name="DC.relation" scheme="URI" content="../../admin/topics/managing_encryption_keys.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="creating_an_encryption_key"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating an encryption key</title></head><body id="creating_an_encryption_key"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Creating an encryption key</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-efa22b6f-a833-4fb7-92c0-9e42d73081e3">Edit online</a></span></div>
+    
+    <div class="body taskbody"><p class="shortdesc">Use the <strong class="ph b"><code class="ph codeph">keycreate</code></strong> tool to create a key for secure property
+        encryption without removing previous keys or changing the primary encryption key. </p>
+        <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcreating_an_encryption_key__context__1">About this task</h2></div>
+            <p class="p">If you complete the processs, the tool provides instructions to make the new key
+                primary. A new non-primary key cannot be used for property encryption. It must be
+                made primary first.</p>
+            <p class="p">To create an encryption key:</p>
+        </section>
+        <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcreating_an_encryption_key__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+                <span class="ph cmd">Run the <code class="ph codeph">keycreate</code> command to create an encryption key. </span>
+                <div class="itemgroup info">It also prints the alias of the new key. You can run the keycreate tool while
+                    the server is online. In an HA cluster, it must be run on only one cluster
+                    member because all clusters share the same keystore. The usage is keycreate and
+                    requires no arguments. </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Configure the server to use the new key as its primary key.</span>
+                <div class="itemgroup info">
+                    <p class="p">Edit the <code class="ph codeph">installed.properties</code> file and set the
+                                <strong class="ph b"><code class="ph codeph">encryption.keystore.alias</code></strong> property to the
+                        alias that the <code class="ph codeph">keycreate</code> command prints. In an HA cluster,
+                        each member has its own <code class="ph codeph">installed.properties</code> file, so you
+                        must edit each cluster individually.</p>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Restart the server.</span>
+                <div class="itemgroup info">
+                    <p class="p">The server loads keys and the primary key setting only at startup. In an HA
+                        cluster, you must restart each member.</p>
+                </div>
+            </li></ol></section>
+        <section class="section result" id="creating_an_encryption_key__result_znk_xrx_x5b"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcreating_an_encryption_key__result_znk_xrx_x5b">Results</h2></div>
+            <p class="p">When this process is complete, the server (or all servers in an HA cluster) uses the
+                new primary key to encrypt new data exclusively. Previous keys can be used only to
+                decrypt previous data.</p>
+        </section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/managing_encryption_keys.html" title="Using the encryption key tools, you can manage your encryption keys.">Encryption key tools</a></div></div></nav></article></main></body></html>

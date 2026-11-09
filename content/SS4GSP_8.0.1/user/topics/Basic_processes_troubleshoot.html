@@ -1,0 +1,213 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="You can answer a number of questions to help isolate the issue behind problems and process failures."><meta name="DC.relation" scheme="URI" content="../../user/topics/trouble_serveragents_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="reference_id_proc_probs"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Troubleshooting processes</title></head><body id="reference_id_proc_probs"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Troubleshooting processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-468c14d5-4ad7-4587-8a4e-bc695a5f2570">Edit online</a></span></div>
+
+
+
+
+
+
+<div class="body refbody"><p class="shortdesc">You can answer a number of questions to help isolate the issue behind problems and
+process failures.</p>
+<section class="section">
+<div class="p">Take these initial approaches to avoid problems with your processes and check these areas before
+you take more complicated troubleshooting steps:<ul class="ul">
+<li class="li">If a process is failing, look for information about the failure in the process request. To open
+a process request, click the application, and go to the <span class="ph uicontrol">History</span> tab. Find the
+process in the table, and click <span class="ph uicontrol">View Request</span>. Within the request, expand the
+steps until you find the step that failed. Failed steps have an error log <img class="image" src="../images/steperrorlog.gif" alt=""> that provides more information about the failure. All steps have an output log <img class="image" src="../images/steplog.gif" alt=""> that includes information about the step progress and any logging messages that the step
+created. For information about viewing logs, see <a class="xref" href="log_audit.html#log_audit" title="You can view audit logs, diagnostic logs, and server output logs from the Settings &gt; System page.">Viewing logs</a>.</li>
+<li class="li">Step through each process element. Verify that you <a class="xref" href="ud_properties_using.html#reference_shs_glx_xl" title="IBM DevOps Deploy (Deploy) provides several ways to refer to properties.">refer to properties</a> by using the correct
+syntax.</li>
+<li class="li">Verify that the steps are wired together, meaning that each step is connected to another step
+within a process. Then, verify that the correct step result is selected. That is, on the arrow that
+connects one step with the next, select the correct condition for proceeding: <span class="ph uicontrol">Run On
+Success</span>, <span class="ph uicontrol">Run On Failure</span>, or <span class="ph uicontrol">Run on
+Both</span>.</li>
+<li class="li">Verify that the process is wired in to the <span class="ph uicontrol">Finish</span> step.</li>
+<li class="li">Consider running each process step's equivalent function in a command-line environment to verify
+that each step works as planned. For example, if the step runs a shell script, try running the shell
+script on the command line to see whether the same problem happens. If the step starts an
+application server, make sure that you can start the application server on the command line by using
+the same commands. </li>
+<li class="li">Verify that you are using the correct component processes type. For information about component
+process types, see <a class="xref" href="comp_process_types.html#comp_process_types" title="Different types of component processes deploy, configure, or uninstall component versions.">Component process types</a>.</li>
+<li class="li">Trace all the way through your process step-by-step. Steps are essentially commands to be run.
+See this IBM support article: <a class="xref" href="http://www-01.ibm.com/support/docview.wss?uid=swg21653769" target="_blank">MustGather: How to trace the execution of a process</a>.</li>
+<li class="li">Verify that no typographical errors are included in the process steps. Review each property and
+script carefully.</li>
+<li class="li">If properties are a factor in the problem, you can view the properties for an application
+process by opening the process request and clicking the <span class="ph uicontrol">Properties</span> tab. You
+can also view the properties that each component process step used by clicking
+<span class="ph uicontrol">Input/Output Properties</span>
+<img class="image" src="../images/viewproperties.gif" alt="">. For more information about properties, see <a class="xref" href="ud_properties_overview.html#ud_properties" title="Properties are variables that store information about many different elements, including components, environments, processes, and applications. You can also set global properties for the system.">Properties</a> and associated topics.</li>
+<li class="li">Check the log for messages that pertain to memory size. You can generate a report of
+requirements for your operating systems and product version: <a class="xref" href="http://www-969.ibm.com/software/reports/compatibility/clarity/hardwareReqsForProduct.html" target="_blank">Hardware requirements for a specific product</a>.</li>
+<li class="li" data-hd-otherprops="ibm">If you are running a UNIX™ based operating
+system, are your file handles configured correctly according to the <a class="xref" href="../../install/topics/sysRequire.html#sysrequire__file_handles">documentation</a>?</li>
+<li class="li">If you are using <span class="keyword cmdname">sudo</span> commands, permissions can be a problem. Verify that the
+            command is configured correctly. Also, verify that the user is configured in
+              <span class="keyword cmdname">sudo</span> and does not need to specify a password. Make sure that the
+            directory can be accessed by the operating system user that is running the <span class="ph">Deploy</span> agent, the impersonated user, and the tool that you are calling. For information
+            about <span class="keyword cmdname">sudo</span> commands, see <a class="xref" href="arch_appx_sudo_using.html#arch_appx_sudo_using" title="The su command (as used by IBM DevOps Deploy (Deploy)) enables a user to start a shell as another user (process steps can be considered individual shells).">Impersonation on Linux™ systems</a>.</li>
+<li class="li">Review the step output for steps that cause problems. On a command line, run a problem line or
+step as the same user that <span class="ph">Deploy</span> uses to
+run the step or line. Be sure to pass the user and the group.</li>
+</ul></div>
+</section>
+<section class="section"><h2 id="reference_id_proc_probs__title__2" class="title sectiontitle">Other troubleshooting tips</h2>
+
+<ul class="ul">
+<li class="li">If your process branches, look closely at the way the process branches to ensure that the
+process is running in the way that you expect. See <a class="xref" href="comp_process_join.html" title="You can branch processes so that multiple steps run at the same time. You can also merge processes to return to running a single step at a time.">Branching and joining steps</a>.</li>
+</ul>
+</section>
+<section class="section"><h2 id="reference_id_proc_probs__title__3" class="title sectiontitle">What issues are you observing or experiencing?</h2>
+
+<div class="p">
+<ul class="ul">
+<li class="li"><a class="xref" href="#reference_id_proc_probs__procss_no_start">A process doesn't
+start</a>.</li>
+<li class="li"><a class="xref" href="#reference_id_proc_probs__fail-no_log">A process fails, but no errors
+are logged</a>.</li>
+<li class="li"><a class="xref" href="#reference_id_proc_probs__fail_after_upgrade">Process failures occur
+after an upgrade</a>.</li>
+<li class="li"><a class="xref" href="#reference_id_proc_probs__run_no_stop">A process runs, but it does not
+stop</a>.</li>
+<li class="li"><a class="xref" href="#reference_id_proc_probs__proc_fail_intermitt">Processes fail
+intermittently</a>.</li>
+<li class="li"><a class="xref" href="#reference_id_proc_probs__proc_hang">Processes stop before
+completion</a>.</li>
+<li class="li"><a class="xref" href="#reference_id_proc_probs__branch_probs">Processes with branches do not
+run correctly</a>.</li>
+<li class="li"><a class="xref" href="#reference_id_proc_probs__impersonation_probs">Processes using
+impersonation do not run correctly</a>.</li>
+</ul>
+</div>
+<div class="p" id="reference_id_proc_probs__procss_no_start"><strong class="ph b">A process doesn't start</strong><ul class="ul">
+<li class="li">Can you run the process while you use the built-in ID? Running the process that way checks for a
+permission issue on the resource.</li>
+<li class="li">Is the agent running? For information about agents, see <a class="xref" href="resources_agents.html#resources_agents" title="An agent is a lightweight process that runs on a deployment-target host and communicates with the IBM DevOps Deploy (Deploy) server.">Agents</a>.</li>
+<li class="li">Can any processes run on the agent? If required, create a simple “echo Hello World” shell step,
+and see whether you can run it on the agent. Running this shell step confirms that communication
+between the server and resource are established.<ul class="ul">
+<li class="li">If the simple shell step works, what's different between the working step and the failing
+step?</li>
+</ul></li>
+<li class="li">Are the components mapped? See <a class="xref" href="app_environment_mapping.html#app_environment_mapping" title="You can specify where components are deployed by adding a resource or resource group to the environment. Then, map the components to those resources.">Mapping resources and components to environments</a>.</li>
+<li class="li">Are any errors logged in the step output? See <a class="xref" href="log_audit.html#log_audit" title="You can view audit logs, diagnostic logs, and server output logs from the Settings &gt; System page.">Viewing logs</a>.</li>
+<li class="li">Check the server log file for errors, permissions issues, or configuration issues. See <a class="xref" href="log_audit.html#log_audit" title="You can view audit logs, diagnostic logs, and server output logs from the Settings &gt; System page.">Viewing logs</a>.</li>
+</ul></div>
+<div class="p" id="reference_id_proc_probs__fail-no_log"><strong class="ph b">A process fails, but no errors are logged</strong><ul class="ul">
+<li class="li">Confirm that the version of <span class="ph">Deploy</span> and the
+agents and agent relays are the same. </li>
+<li class="li">Check the agent log file for errors that point to a configuration issue. For example, a port
+might be blocked or a URL is incorrect. Check the server log file for errors. For example, a port
+might be blocked or URL is incorrect. See <a class="xref" href="log_audit.html#log_audit" title="You can view audit logs, diagnostic logs, and server output logs from the Settings &gt; System page.">Viewing logs</a>. See also <a class="xref" href="../../install/topics/agent_firewalls.html#agent_firewalls" title="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication.">Firewall and communication configuration</a>.</li>
+<li class="li">If you are using high-availability, check to see whether  there was a failover.</li>
+<li class="li">If this result happens for only this process, what might be different between this process and
+the other processes that succeed at running the step?</li>
+<li class="li">Can the process succeed when the built-in admin ID runs it. When you run the process this way,
+incorrect permission configuration does not impact process execution.</li>
+<li class="li">Does this problem happen with any other steps? If not, how is this step different?</li>
+<li class="li">If you run a process with just this step, does it fail in the same way?</li>
+</ul></div>
+<div class="p" id="reference_id_proc_probs__fail_after_upgrade"><strong class="ph b">Process failures occur after an upgrade</strong><ul class="ul">
+<li class="li">Does the new version support the installed Java™ Runtime
+Environment or Java Development kit?<div class="note important note_important" data-hd-otherprops="ibm"><span class="note__title">Important:</span> 
+            <p class="p" id="reference_id_proc_probs__d160e65">For best results, download and use the latest available version of the IBM®
+              Java Runtime Environment (JRE) for the <span class="ph">Deploy</span> server and
+              agent relays. An IBM JRE is available as a
+              separate download. See the <a class="xref" href="https://www.ibm.com/developerworks/java/jdk/" target="_blank">IBM developer
+                kits</a> page to get the latest version. Install the IBM JRE according to the documentation on the page. Be sure to set
+              the <span class="keyword parmname">JAVA_HOME</span> system variable to the location of the IBM JRE. If you are updating or changing the JRE
+              to the latest version, see <a class="xref" href="../../install/topics/../../user/topics/jre_change.html#jre_change" title="You can change the JRE of active servers by editing their configuration files.">Changing or updating the JRE of servers</a>, <a class="xref" href="../../install/topics/../../user/topics/jre_change_agent.html" title="If you upgrade the JRE and change the JRE location on agents, you must also update the JRE location in the agent Java configuration file.">Updating the JRE location for agents</a>, and <a class="xref" href="../../install/topics/../../user/topics/update_JRE_agent_relays.html#update_JRE_agent_relays" title="If you upgrade the JRE and change the JRE location, you must also update the agent relays. If you do not change the location of the JRE, you do not have to update these files.">Updating the JRE location for agent relays</a> for instructions. For
+              documentation on the IBM JRE, see <a class="xref" href="https://www.ibm.com/support/knowledgecenter/SSYKE2/welcome_javasdk_family.html" target="_blank">IBM SDK, Java Technology Edition</a>.</p>
+          </div></li>
+<li class="li">Were there any errors in the upgrade process?</li>
+<li class="li">Check the agent log file for errors that point to a configuration issue. For example, a port
+might be blocked or a URL is incorrect. Check the server log file for errors. For example, a port
+might be blocked or URL is incorrect. See <a class="xref" href="log_audit.html#log_audit" title="You can view audit logs, diagnostic logs, and server output logs from the Settings &gt; System page.">Viewing logs</a>.</li>
+<li class="li">If you use an agent relay, confirm that the agent relay was upgraded to the same version as the server.<ul class="ul">
+<li class="li">Check the <span class="ph uicontrol">Agent Relays</span> tab to verify that the agent relay version is
+supported. To open the <span class="ph uicontrol">Agent Relays</span> tab, click the main
+<span class="ph uicontrol">Resources</span> tab, and then click the <span class="ph uicontrol">Agent Relays</span> tab.
+See the minimum recommended and minimum required versions for the listed agent relays in the
+upper-right corner of the tab. You might have to upgrade an agent relay or agent relays. For
+information about upgrading an agent relay, see <a class="xref" href="../../install/topics/upgrade_agent_relay.html#agent_relay_upgrade" title="When you upgrade the server, be sure to always upgrade agents and agent relays.">Upgrading agent relays from the command line</a>.</li>
+</ul></li>
+<li class="li">Check the <span class="ph uicontrol">Agents</span> tab to verify that the server supports the agent
+version. To open the <span class="ph uicontrol">Agents</span> tab, click the main
+<span class="ph uicontrol">Resources</span> tab, and then click the <span class="ph uicontrol">Agents</span> tab. See the
+minimum recommended and minimum required versions for the listed agents in the upper-right corner of
+the tab. You might have to upgrade an agent or agents. For information about upgrading an agent, see
+<a class="xref" href="../../install/topics/upgradeAgents.html#upgradeagents" title="In most cases, you upgrade agents from the server interface, but you can also upgrade the agents from the command line. Always upgrade agents and agent relays in addition to upgrading the server.">Upgrading agents</a>.</li>
+<li class="li">Did you create this process in the upgraded version? If the process was created in a previous
+version, did it work correctly in the previous version? If so, were any changes made to the process
+after the upgrade?</li>
+</ul></div>
+<div class="p" id="reference_id_proc_probs__run_no_stop"><strong class="ph b">A process runs, but it does not stop</strong><ul class="ul">
+<li class="li">Has this process ever run to completion previously? See this IBM support article: <a class="xref" href="http://www-01.ibm.com/support/docview.wss?uid=swg21653769" target="_blank">MustGather: How to trace the execution of a process</a>.</li>
+<li class="li">Is the process wired to the <span class="ph uicontrol">Finish</span> step?</li>
+<li class="li">If the step that fails is a shell step, is the standard output is redirected for child processes
+to https://developer.ibm.com/urbancode/plugindoc/ibmucd/shell/5-562693/usage/?</li>
+</ul></div>
+<div class="p" id="reference_id_proc_probs__proc_fail_intermitt"><strong class="ph b">Processes fail intermittently</strong><ul class="ul">
+<li class="li">Does the server log contain exceptions that this issue generated?</li>
+<li class="li">On which step does the process fail? Does the step output contain errors?</li>
+<li class="li">At which times does the process fail? Check for network outages, maintenance intervals during
+that time. </li>
+<li class="li">Is the Download Artifacts step failing with the error <code class="ph codeph">java.io.FileNotFoundException: Artifact set not found</code>? Ensure that CodeStation has enough time to store the artifacts
+before they are requested, particularly in high-availability clusters, in which the servers share
+the artifacts. The solution for this issue is typically to add a Wait step with a few seconds wait
+time before the Download Artifacts step.</li>
+</ul></div>
+<div class="p" id="reference_id_proc_probs__proc_hang"><strong class="ph b">Processes stop before completion</strong><ul class="ul">
+<li class="li">Check the agent and server log files for errors.</li>
+<li class="li">Check the process system output. </li>
+<li class="li">Consider running each process step's equivalent function in a command-line environment to verify
+that each step works as planned.</li>
+<li class="li">Can the built-in admin ID run processes with success?</li>
+<li class="li">If the steps that fail are shell steps, redirect the standard output of child processes to
+https://developer.ibm.com/urbancode/plugindoc/ibmucd/shell/5-562693/usage/.</li>
+<li class="li">Do you have sufficient memory on the <span class="ph">Deploy</span>
+server?<div class="note tip note_tip"><span class="note__title">Tip:</span> The workflow execution engine that runs the process runs on the <span class="ph">Deploy</span>
+server.</div></li>
+<li class="li">On which screen or activity do you see no progress?</li>
+<li class="li">How long did the process stop? How long do you expect this activity to take?</li>
+<li class="li">Are there any agents for which this behavior does <em class="ph i">not</em> happen? If so, what differences
+exist between the processes that work and the processes that do not.</li>
+<li class="li">Did this behavior always happen? If not, what changed immediately before this problem
+surfaced?</li>
+</ul></div>
+<div class="p" id="reference_id_proc_probs__branch_probs"><strong class="ph b">Processes with branches do not run correctly</strong><ul class="ul">
+<li class="li">Look closely at the way the process branches to ensure that the process is running in the way as
+expected. See <a class="xref" href="comp_process_join.html" title="You can branch processes so that multiple steps run at the same time. You can also merge processes to return to running a single step at a time.">Branching and joining steps</a>. See this IBM support article: <a class="xref" href="http://www-01.ibm.com/support/docview.wss?uid=swg21653769" target="_blank">MustGather: How to trace the execution of a process</a>.</li>
+</ul></div>
+<div class="p" id="reference_id_proc_probs__impersonation_probs"><strong class="ph b">Processes using impersonation do not run correctly</strong><ul class="ul">
+<li class="li"> Reproduce the problem with a simple shell step, use the <code class="ph codeph">#!</code> syntax at the top
+to specify the shell to use. For example: <pre class="pre codeblock"><code>#!/bin/sh</code></pre> In the example,
+<code class="ph codeph">/bin/sh</code> resolves to different shells depending on the operating system. For
+example, it resolves to <code class="ph codeph">/bin/ksh</code> on AIX and Solaris operating systems and to
+<code class="ph codeph">/bin/bash</code> on a RedHat Enterprise Linux operating system.</li>
+<li class="li">Put the shell script of the step into a separate file and execute it from the <span class="ph">Deploy</span> interface
+or from a command line.</li>
+<li class="li">Enable logging on the agent to verify that the command ran. To enable logging, add the following
+            logger to the logging and set the logging level as DEBUG. Start the agent again for the
+            change to take
+            affect.<pre class="pre codeblock"><code> com.urbancode.shell.impersonation.unix.UnixImpersonateCommand</code></pre></li>
+<li class="li">Add to the separate script file a call to <span class="ph filepath">printenv</span> and execute the script
+from a <span class="ph">Deploy</span> step or
+from a command line. Compare the two processes for differences.</li>
+<li class="li">Execute the separate script using the commands configured in the
+<span class="ph uicontrol">sudoFormat</span> and <span class="ph uicontrol">suFormat </span> agent properties described in
+the <a class="xref" href="arch_appx_sudo_using.html" title="The su command (as used by IBM DevOps Deploy (Deploy)) enables a user to start a shell as another user (process steps can be considered individual shells).">Impersonation on Linux and UNIX systems</a> topic. </li>
+<li class="li">In the agent <span class="ph filepath">installed.properties</span> file, add the following property to
+verify that the command executes successfully after the
+impersonation.<pre class="pre codeblock"><code> com.urbancode.shell.impersonation.unix.scriptPostExecuteAction=echo</code></pre></li>
+<li class="li">Update your Java fixpack level or Java version to a higher level.</li>
+</ul></div>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/trouble_serveragents_ov.html" title="Troubleshooting information that is specific to the server and agents is provided here.">Troubleshooting the DevOps Deploy server and agents</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="The properties that are available to you depends on the context. For example, in a component process, you can access the component properties of the current component. In an application process, you can access the application properties and environment properties, but not any component properties. The following table shows the processes in which each type of property is available."><meta name="DC.relation" scheme="URI" content="../../user/topics/ud_properties_overview.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ud_properties"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Property availability</title></head><body id="ud_properties"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Property availability</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f0d130f3-5900-4e58-bfbd-cae6171d0fe8">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">The properties that are available to you depends on the context. For example, in a
+component process, you can access the component properties of the current component. In an
+application process, you can access the application properties and environment properties, but not
+any component properties. The following table shows the processes in which each type of property is
+available.</p>
+<p class="p"><span class="ph" id="ud_properties__seeing_properties">To see the properties that are available to a process, run the
+process. When the process is finished, go to the <span class="ph uicontrol">Properties</span> tab of the
+process request. This tab lists all the properties that are available to the process.</span> The
+following table lists types of properties that are available to processes and which processes have
+access to each type of property.<div class="draft-comment" translate="no" style="background-color: #99FF99; border: 1pt black solid;"><strong>Draft comment: </strong><br>Why is this important to users? How will they plan or
+accomplish their goals with this knowledge?</div></p>
+<table class="table frame-all"><caption><span class="desc tabledesc"></span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+     <tr class="row valign-bottom">
+      <th class="entry" id="ud_properties__entry__1">Property type</th>
+      <th class="entry" id="ud_properties__entry__2">Processes that can access the property</th>
+      <th class="entry" id="ud_properties__entry__3">Sample syntax</th>
+     </tr>
+    </thead><tbody class="tbody">
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Generic process properties</td>
+      <td class="entry" headers="ud_properties__entry__2">Generic processes</td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:ProcessProp1}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Application process properties</td>
+      <td class="entry" headers="ud_properties__entry__2">Application processes and component processes</td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:ProcessProp1}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Component process properties </td>
+      <td class="entry" headers="ud_properties__entry__2">Component processes </td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:ProcessProp1}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Component version properties </td>
+      <td class="entry" headers="ud_properties__entry__2">Component processes types that include versions, such as Deployment and
+       Operational (with version) </td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:version/VersionProp1}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Resource properties</td>
+      <td class="entry" headers="ud_properties__entry__2">Component processes and generic processes </td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:resource/ResourceProp1}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Environment properties</td>
+      <td class="entry" headers="ud_properties__entry__2">Component processes and application processes </td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:environment/EnvProp1}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Application properties</td>
+      <td class="entry" headers="ud_properties__entry__2">Application processes and component processes </td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:application/AppProp1}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Component properties</td>
+      <td class="entry" headers="ud_properties__entry__2">Component processes</td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:component/CompProp1}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">System properties</td>
+      <td class="entry" headers="ud_properties__entry__2">All processes </td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:system/SystemProp1}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Request properties</td>
+      <td class="entry" headers="ud_properties__entry__2">All processes</td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:request.user.id}</code>,
+        <code class="ph codeph">${p:request.user.displayName}</code>,
+       <code class="ph codeph">${p:request.user.name}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Iteration properties</td>
+      <td class="entry" headers="ud_properties__entry__2">Processes in the For Each Agent step context</td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:iteration/agent.name}</code>,
+        <code class="ph codeph">${p:iteration/agent/AGENT_HOME}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Agent properties</td>
+      <td class="entry" headers="ud_properties__entry__2">Generic processes and component processes</td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:agent/PropName}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">External approval properties</td>
+      <td class="entry" headers="ud_properties__entry__2">Application processes</td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:ext/PropName}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1 ud_properties__entry__2 ud_properties__entry__3" colspan="3"><strong class="ph b">Property Definition</strong></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Environment Property Definitions</td>
+      <td class="entry" headers="ud_properties__entry__2">Component processes</td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:environment/<var class="keyword varname">propertyName</var>}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Resource Property Definitions</td>
+      <td class="entry" headers="ud_properties__entry__2">Component processes</td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:resource/<var class="keyword varname">propertyName</var>}</code></td>
+     </tr>
+     <tr class="row">
+      <td class="entry" headers="ud_properties__entry__1">Version Property Definitions</td>
+      <td class="entry" headers="ud_properties__entry__2">Component processes</td>
+      <td class="entry" headers="ud_properties__entry__3"><code class="ph codeph">${p:version/<var class="keyword varname">propertyName</var>}</code></td>
+     </tr>
+    </tbody></table>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/ud_properties_overview.html" title="Properties are variables that store information about many different elements, including components, environments, processes, and applications. You can also set global properties for the system.">Properties</a></div></div></nav></article></main></body></html>

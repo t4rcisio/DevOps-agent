@@ -1,0 +1,57 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="A manual application task interrupts an application process until manual intervention is done. To create a manual task, add a manual step to an application process and select a notification template."><meta name="DC.relation" scheme="URI" content="../../user/topics/part_using.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_tasks_creating"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Manual application tasks</title></head><body id="app_tasks_creating"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Manual application tasks</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-32e6fa4b-31c0-4981-9474-2be6541a8207">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">A manual application task interrupts an application process
+until manual intervention is done. To create a manual task, add a
+manual step to an application process and select a notification template.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_tasks_creating__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Open an application process in the process editor.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">From the <span class="ph uicontrol">Utility Steps</span> folder, add
+a <span class="ph uicontrol">Manual Application Task</span> step to the process.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">In the <span class="keyword wintitle">Edit Properties</span> window, specify
+the following properties for the step:</span><div class="itemgroup info"><dl class="dl">
+<dt class="dt dlterm"><span class="keyword parmname">Name</span></dt>
+<dd class="dd">Specify a name for the step.</dd>
+
+<dt class="dt dlterm"><span class="ph uicontrol">Notification Template</span></dt>
+<dd class="dd">Specify the notification template to use. These templates refer to the notification scheme that
+is used by the application (see <a class="xref" href="notify_create.html" title="Notifications are defined in a notification scheme. The notification scheme is assigned to an application and the notifications are sent during the deployment of that application.">Creating Notifications in a Notification Scheme</a>). If you select
+<span class="ph uicontrol">None</span>, notifications are not created when the step runs.</dd>
+
+
+<dt class="dt dlterm">Only Allow Deploying User To Complete</dt>
+<dd class="dd">Restrict approval to the user who started the deployment.</dd>
+
+<dt class="dt dlterm"><span class="keyword parmname">Properties</span></dt>
+<dd class="dd">Optionally, add one or more properties to the task. You can use
+these properties later in the process just like output properties
+from other steps.</dd>
+
+<dt class="dt dlterm"><span class="ph uicontrol">Who can approve this task</span></dt>
+<dd class="dd"><dl class="dl">
+
+<dt class="dt dlterm"><span class="ph uicontrol">Any User</span></dt>
+<dd class="dd">Any user can approve the task.</dd>
+
+
+<dt class="dt dlterm"><span class="ph uicontrol">Role Member By Environment</span></dt>
+<dd class="dd">Specify an environment role that can approve the task.</dd>
+
+
+<dt class="dt dlterm"><span class="ph uicontrol">Role Member By Application</span></dt>
+<dd class="dd">Specify an application role that can approve the task.</dd>
+
+</dl></dd>
+</dl></div></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span> to save the properties
+for the step.</span></li><li class="li step stepexpand"><span class="ph cmd">Include the manual task in the process as with any other
+step.</span></li><li class="li step stepexpand"><span class="ph cmd">Save the process.</span></li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_tasks_creating__result__1">Results</h2></div>When you run the process, it pauses at this step, sends a notification, and
+   waits for approval before the process continues. To approve the task and resume the process,
+   click the <span class="ph uicontrol">Respond</span> link for the step in the process log, click
+    <span class="ph uicontrol">Approve</span>, and then click <span class="ph uicontrol">Submit</span>. You can also
+   resume the process from the <span class="keyword wintitle">Work Items</span> tab.<div class="note note note_note"><span class="note__title">Note:</span> You can view the name of
+    the approver of a manual task under <span class="ph uicontrol">ManualTask/ApproverName</span> on the
+    properties page.</div></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/part_using.html" title="Modeling software deployment in IBM DevOps Deploy (Deploy) includes configuring components and component processes and adding those components to applications. Then, you use processes to deploy the components to environments.">Modeling Software Deployment</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="Use the info.xml file is required for each plug-in. It describes the plug-in and provides release notes to users for each version."><meta name="DC.relation" scheme="URI" content="../../reference/topics/reference_plugins_create.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="theInfoxmlFile.d12e887"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>The info.xml file</title></head><body id="theInfoxmlFile.d12e887"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">The <span class="ph filepath">info.xml</span> file</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-0e233aaf-bb98-44b0-88e8-c925a0d9bec4">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">Use the <span class="ph filepath">info.xml</span> file is required
+for each plug-in. It describes the plug-in and provides release notes
+to users for each version.</p>
+
+<div class="p">The following code is an example of a simple <span class="ph filepath">info.xml</span>
+      file.<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;pluginInfo&gt;
+  &lt;author name="Deploy User"&gt;
+    &lt;organization&gt;IBM&lt;/organization&gt;
+    &lt;email&gt;ucplugin@us.ibm.com&lt;/email&gt;
+    &lt;website&gt;https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/&lt;/website&gt;
+    &lt;bio/&gt;
+  &lt;/author&gt;
+
+  &lt;integration type="Deploy"/&gt;
+   
+  &lt;source url="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/"/&gt;
+  
+  &lt;licenses&gt;
+    &lt;license type="IBM"/&gt;
+  &lt;/licenses&gt;
+
+  &lt;tool-description&gt;Sample plug-in for DevOps Deploy&lt;/tool-description&gt;
+  
+  &lt;related-info&gt;
+    &lt;link description="Documentation for DevOps Deploy" 
+  title="Knowledge Center" type="WEBSITE" 
+  url="https://www.ibm.com/docs/en/urbancode-deploy"/&gt;
+  &lt;/related-info&gt;
+    
+  &lt;release-version&gt;12345&lt;/release-version&gt;
+    
+  &lt;release-notes&gt;
+      &lt;release-note plugin-version="2"&gt;
+Fixed some bugs with the plug-in.
+      &lt;/release-note&gt;
+      &lt;release-note plugin-version="1"&gt;
+Fixed some bugs with the plug-in.
+      &lt;/release-note&gt;
+  &lt;/release-notes&gt;
+&lt;/pluginInfo&gt;</code></pre></div>
+<div class="p">This file contains the following sections:<dl class="dl">
+<dt class="dt dlterm"><code class="ph codeph">&lt;author&gt;</code> (required)</dt>
+<dd class="dd">This section provides information about the author of the plug-in.</dd>
+
+<dt class="dt dlterm"><code class="ph codeph">&lt;integration&gt;</code> (required)</dt>
+<dd class="dd">This tag specifies the general type of plug-in. For source configuration
+plug-ins, specify <code class="ph codeph">Source</code>. For plug-ins that retrieve
+artifacts from a repository during a deployment, specify <code class="ph codeph">Artifact</code>.
+For plug-ins that deploy code to a middleware server, specify <code class="ph codeph">Deploy</code>.
+For other automation tasks, specify <code class="ph codeph">Automation</code>.</dd>
+
+<dt class="dt dlterm"><code class="ph codeph">&lt;source&gt;</code></dt>
+<dd class="dd">This tag specifies the location of the source code for the plug-in,
+if that source code is available.</dd>
+
+<dt class="dt dlterm"><code class="ph codeph">&lt;licenses&gt;</code></dt>
+<dd class="dd">This tag provides a description of the license for the plug-in.</dd>
+
+<dt class="dt dlterm"><code class="ph codeph">&lt;tool-description&gt;</code></dt>
+<dd class="dd">This tag provides information about the software or system that
+the plug-in integrates with.</dd>
+
+<dt class="dt dlterm"><code class="ph codeph">&lt;related-info&gt;</code></dt>
+<dd class="dd">This tag provides related links.</dd>
+
+<dt class="dt dlterm"><code class="ph codeph">&lt;meta-html&gt;</code></dt>
+<dd class="dd">This tag provides information about the description of the plug-in
+on web pages.</dd>
+
+<dt class="dt dlterm"><code class="ph codeph">&lt;release-version&gt;</code></dt>
+<dd class="dd">The build version of the plug-in, which is not necessarily the
+same as the version in the <span class="ph filepath">plugin.xml</span> file.</dd>
+
+<dt class="dt dlterm"><code class="ph codeph">&lt;release-notes&gt;</code> (required)</dt>
+<dd class="dd">This section includes release notes for the current and previous
+versions of the plug-in. These versions must match the version in
+the <span class="ph filepath">plugin.xml</span> file.</dd>
+</dl></div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/reference_plugins_create.html" title="You can create your own plug-ins for use with IBM DevOps Deploy (Deploy). A plug-in consists of XML files and supporting script files that the plug-in requires.">Creating plug-ins</a></div></div></nav></article></main></body></html>

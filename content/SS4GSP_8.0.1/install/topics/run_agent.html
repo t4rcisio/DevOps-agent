@@ -1,0 +1,71 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To start an agent, run the shell script or batch file."><meta name="DC.relation" scheme="URI" content="../../install/topics/runProduct.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="run_agent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Starting agents</title></head><body id="run_agent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Starting agents</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-554f3d7e-356e-4e42-9e5c-0859271add68">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To start an agent, run the shell script or batch file.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrun_agent__prereq__1">Before you begin</h2></div>Make sure that the server is running. Also, if the agent runs
+through an agent relay, make sure that the relay is started.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrun_agent__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step"><span class="ph cmd">Go to the <span class="ph filepath"><var class="keyword varname">agent_installation</var>\bin</span> directory.</span>
+</li><li class="li step"><span class="ph cmd">Run the appropriate script:</span>
+<ul class="ul choices">
+          <li class="li choice">To start a compact agent from console, run this
+            command:<pre class="pre codeblock" id="run_agent__codeblock_udz_f21_kyb"><code>./agent.exe run</code></pre></li>
+          <li class="li choice">To start a compact agent in background, run this
+              command:<pre class="pre codeblock" id="run_agent__codeblock_zhd_5d1_kyb"><code>./agent.exe start <var class="keyword varname">pidfile</var></code></pre><p class="p">The
+              optional <kbd class="ph userinput"><var class="keyword varname">pidfile</var></kbd> argument is used for agents
+              on UNIX™, typically when it runs from an init
+              script.</p></li>
+<li class="li choice">On Windows™, run this
+command:<pre class="pre codeblock"><code>agent.cmd start</code></pre></li>
+<li class="li choice">On Linux™ or UNIX, run this command:<pre class="pre codeblock"><code>./agent start</code></pre></li>
+<li class="li choice">On <span class="keyword">z/OS®</span>, to
+            run the agent as a started task, customize the sample
+              <code class="ph codeph"><var class="keyword varname">hlq</var>.SBUZSAMP(BUZAGNT)</code> started task member, and
+            then copy the task member to the <code class="ph codeph">SYS1.PROCLIB</code> library. Provide the
+            installation directory of the agent. The default installation directory of the agent is
+              <span class="ph filepath">/opt/devops-deploy/agent/bin</span>. The following lines show sample
+            code:<pre class="pre codeblock"><code>//* 
+//* <span class="ph">DevOps Deploy</span> Agent - Start 
+//*
+//BUZAGNT  PROC AGENT='/opt/devops-deploy/agent/bin'
+//*
+//BUZAGNT  EXEC PGM=BPXBATCH,REGION=0M,TIME=NOLIMIT,
+//            PARM='PGM &amp;AGENT./agent run'
+//STDOUT   DD SYSOUT=*
+//STDERR   DD SYSOUT=*
+//*
+//        PEND
+//*</code></pre>Associate the agent user ID to the started task by setting up the STARTED
+            class profile. Enter these commands.<pre class="pre codeblock"><code>SETROPTS GENERIC(STARTED)
+
+RDEFINE STARTED BUZAGENT.*
+  STDATA(USER(BUZUSR1) GROUP(BUZGRP1) TRUSTED(NO)
+  DATA('DEVOPS DEPLOY AGENT')
+
+SETROPTS CLASSACT(STARTED) RACLIST(STARTED)
+ or, if the STARTED class is already in use:
+SETROPTS RACLIST(STARTED) REFRESH</code></pre>You can also use the started procedures
+            table (ICHRIN03) to associate the names of started procedures with specific RACF user
+            IDs and group names. See z/OS Security Server RACF System Programmer's Guide for
+            information on how to code the started procedures replaceable module, and for a complete
+            description of the started procedures table (ICHRIN03).<div class="p">To start the agent task, use
+              the START command.<pre class="pre codeblock"><code>S BUZAGNT</code></pre></div><div class="p">To stop the agent task, use
+              the CANCEL command. The STOP command is not supported by the <span class="ph">Deploy</span> z/OS
+              agent.<pre class="pre codeblock"><code>C BUZAGNT</code></pre></div></li>
+<li class="li choice">On <span class="keyword">IBM® i</span>, you must start the agent through the IBM Portable
+Application Solutions Environment for i (PASE for i) shell.</li>
+</ul>
+</li><li class="li step"><span class="ph cmd">After the agent starts, go to the <span class="ph">Deploy</span> web
+application, and under <span class="keyword wintitle">Resources</span>, open the <span class="keyword wintitle">Agents</span> page.</span>
+</li><li class="li step">
+<span class="ph cmd">Associate the agent user ID to the started task by setting up the STARTED class profile. To set
+up the STARTED class, enter these commands:</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrun_agent__result__1">Results</h2></div>
+<p class="p">When the installation is complete, the agent is listed with a status of
+<code class="ph codeph">Online</code>.</p>
+</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/runProduct.html" title="Both UNIX and Windows installations require the IBM DevOps Deploy (Deploy) server and at least one agent. If you are using a database other than Derby, make sure that the appropriate driver is installed and configured.">Starting DevOps Deploy</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can deploy one or more components in an application process by calling component processes."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_process.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_process_deploy_comp"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Deploying components in an application process</title></head><body id="app_process_deploy_comp"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Deploying components in an application process</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-7f03c934-b290-4b20-9d6a-be139f5bc567">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can deploy one or more components in an application
+process by calling component processes.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_deploy_comp__prereq__1">Before you begin</h2></div><ul class="ul">
+<li class="li">Create an application and add one or more components to the application.</li>
+<li class="li">Create an application process.</li>
+<li class="li">Create a component process of the Deployment type for each component. <div class="note important note_important"><span class="note__title">Important:</span> If
+<span class="ph uicontrol">Deployment</span> is not selected for <span class="ph uicontrol">Type</span>, the deployment
+process will not succeed.</div></li>
+</ul></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_deploy_comp__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">In an application process, add the Install Component step to the process, and click the edit
+icon <img class="image" src="../images/edit_proc_step.gif" alt="edit icon">. The <span class="keyword wintitle">Edit Properties</span> window opens.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">In the properties for this step, specify the component
+to deploy and the component process to run.</span><div class="itemgroup info">For more information
+about this step, see <a class="xref" href="app_processsteps_install.html" title="This step installs the selected component with one of the processes that are defined for the component.">Install Component</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">When you drag more steps to the process diagram, position the step so that the link between
+steps is highlighted, and then drop the step. The step is automatically linked to the earlier and
+subsequent steps.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Verify that all processes are connected in the correct order and that the flow is connected to
+the Start and Finish nodes; then, save the process.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Run the process on an environment.</span><div class="itemgroup info">See <a class="xref" href="app_process_run.html" title="To run an application process, specify the environment to use and the process to run. In many cases, you also specify the component versions to deploy.">Running application processes</a>.</div></li></ol></section>
+<section class="example"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_deploy_comp__example__1">Example</h2></div>The following example application process deploys two components. The <code class="ph codeph">Install Component A</code> and <code class="ph codeph">Install Component B</code> steps call the deployment processes
+for each component.<br><img class="image" src="../images/app_process_deploy_a.gif" alt="An example application process that uses the Install Component step twice to deploy two components"><br></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_process.html" title="You can use application processes to deploy or to roll back components.">Application processes</a></div></div></nav></article></main></body></html>

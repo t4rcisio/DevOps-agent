@@ -1,0 +1,61 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="An agent is a lightweight process that runs on a deployment-target host and communicates with the IBM DevOps Deploy (Deploy) server."><meta name="DC.relation" scheme="URI" content="../../user/topics/resources_ch.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/compact_agents.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/compact_agent_changes_summary.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/agent_runner_command_lines.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/agent_metadata.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="resources_agents"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Agents</title></head><body id="resources_agents"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Agents</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-bf6e2450-63e3-4234-8162-dbf0c53e1544">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">An agent is a lightweight process that runs on a deployment-target host and communicates
+    with the <span class="ph">IBM DevOps Deploy (Deploy)</span>
+    server.</p>
+<p class="p"><a class="xref" href="web_agents.html#web_agents" title="Web agents use WebSocket and HTTPS connections for communication. Web agents do not use JMS.">Agents are installed as Web
+          agents</a>. Web agents use WebSocket connections and HTTPS for agent-server
+        communication. </p>
+<p class="p">Agents do the actual work of deploying components and so relieve the server from the task, making
+large deployments that involve thousands of targets possible. Usually, an agent runs on the same
+host on which the resources it handles are located. A single agent can handle all the resources on
+its host. If a host has several resources, an agent process is started separately for each one.
+Depending on the number of hosts in an environment, a deployment might require many agents. For
+example, a test environment might contain a single web server, a single middleware server, and a
+single database server all running on the same host. A deployment to this environment might have one
+agent and three separate resources.</p>
+    <p class="p">Agents have one or more matching <dfn class="term">agent resources</dfn>, which represent the agents in
+      the resource tree.</p>
+<p class="p">Agents are installed with the batch files that are provided with the installation files, see
+<a class="xref" href="../../install/topics/agentInstall.html" title="Installing an agent from the command line involves running a batch file or shell script and specifying information about how the agent connects to the server or agent relay.">Installing agents from the command line</a>. You can
+install agents on UNIX™ systems with the web application.
+Agents are run with the batch files that are included with the installation package.</p>
+<p class="p">Agents are unobtrusive and secure. Agent communications use SSL encryption and mutual key-based
+authentication for server-agent communication and employ HTTP, and HTTPS protocols to communicate
+with the server. See <a class="xref" href="arch_agents.html#arch_agents" title="Agents use SSL-secured WebSocket, and HTTPS protocols to communicate with the server.">Agent security and communication</a>.</p>
+<p class="p">Agent configuration consists of assigning an agent to at least one environment; agents can be
+assigned to multiple environments. If an agent is assigned to several environments, it can do work
+on behalf of all of them.</p>
+<section class="section"><h2 id="resources_agents__title__2" class="title sectiontitle">Agent prototypes</h2><span class="ph" id="resources_agents__prototype_description">An <dfn class="term">agent
+prototype</dfn> is a resource that represents one or more agents that are not yet installed or
+connected to an environment.</span> You can use agent prototypes in resource templates to represent
+resources that are not yet available. When you import a resource template from the cloud, an agent
+prototype is created for each node in the cloud pattern.<p class="p">If you create a resource template instead
+of importing a resource template from the cloud, you can specify an <span class="ph uicontrol">Agent Name
+Pattern</span> for any agent prototype that you add to the resource template. The agent name
+pattern can include the properties <code class="ph codeph">${p:application.name}</code> and
+<code class="ph codeph">${p:environment.name}</code>, but no other properties or wildcards.</p></section>
+<section class="section"><h2 id="agentID" class="title sectiontitle">Agent IDs</h2><span class="ph">Each agent has a Universally Unique Identifier
+                (UUID) that is created the first time you run an agent and it connects to the <span class="ph">Deploy</span> server.
+                You can obtain an agent UUID from the <span class="ph uicontrol">Agents</span> page by
+                selecting an agent. The UUID is managed on the server. There is a one-to-one
+                relationship between an agent name and its UUID. You can use either agent name or
+                its UUID to delete an agent.</span>
+            <p class="p">In addition to an agent's UUID, an agent has an endpoint ID that is generated as part
+                of an agent installation process. An agent's endpoint ID is found in the
+                    <span class="ph filepath">conf/agent/installed.properties</span> file of your agent
+                installation directory with the property name <span class="keyword parmname">locked/agent.id</span>.
+                This endpoint ID is broadcast to the server when the agent connects, and the server
+                uses it to uniquely identify any given agent. When an agent is restarted and
+                reconnects to the <span class="ph">Deploy</span> server,
+                the <span class="ph">Deploy</span>
+                server identifies the connecting agent by its endpoint ID and matches it with the
+                agent UUID. </p><p class="p">In REST API calls, APIs that require the agent's UUID or agent
+                name, accepts the agent's endpoint ID as well.</p></section>
+</div>
+
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/compact_agents.html">Compact agents</a></strong><br>Starting with <span class="ph" data-hd-otherprops="ibm">V7.2.3</span>, the agents are installed as compact agents.  </li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/compact_agent_changes_summary.html">Compact agent changes: Summary</a></strong><br></li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/agent_runner_command_lines.html">Agent executable command-line commands</a></strong><br></li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/agent_metadata.html">Agent metadata</a></strong><br>The <span class="ph uicontrol">Agent Metadata</span> tab provides additional information about         the agent.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/resources_ch.html" title="A resource is a logical deployment target that typically resolves to an agent and a user-defined construct that is based on the architectural model of IBM DevOps Deploy (Deploy).">Resources</a></div></div></nav></article></main></body></html>

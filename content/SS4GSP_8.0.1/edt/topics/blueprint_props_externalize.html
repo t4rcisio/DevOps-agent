@@ -1,0 +1,63 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="Rather than hardcoding values in a blueprint, you can externalize properties to parameters. Then, you can specify values in a configuration file or specify values when you provision an environment."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueprint_props_externalize"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Externalizing properties in blueprints</title></head><body id="blueprint_props_externalize"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Externalizing properties in blueprints</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-81db637b-1dda-4c74-bc51-e2dc29157c79">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">Rather than hardcoding values in a blueprint, you can externalize properties to
+parameters. Then, you can specify values in a configuration file or specify values when you
+provision an environment.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_props_externalize__context__1">About this task</h2></div>
+<p class="p">To provide property values in blueprints, you can put the values in parameters and then
+externalize the parameters to a configuration file. Externalizing properties in this way is an
+important part of creating blueprints that can be provisioned on different cloud systems. You can
+keep the basic information in the blueprint and create configuration files for the specific details
+for different clouds or different situations.</p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_props_externalize__steps__1">Procedure</h2></div><div class="li stepsection">To externalize a property:</div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">In the blueprint designer, on the <span class="ph uicontrol">Diagram</span> tab, click a resource to
+select it.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">At the left of the editor, in the <span class="ph uicontrol">Properties</span> list, next to the property,
+click <span class="ph uicontrol">Set Property</span>
+<img class="image" src="../images/icons/setproperty.gif" alt="">.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd"> From the <span class="keyword wintitle">Set Property</span> window, select an existing parameter or type the
+name of a new parameter, as shown in the following figure. </span>
+<div class="itemgroup stepxmp">In this example, the <code class="ph codeph">flavor</code> property is externalized to a new parameter
+that is named <code class="ph codeph">MyImageFlavor</code>.<br><img class="image" src="../images/blueprint_props_externalize_a.gif" alt="The Set Property window, showing a list of properties and a field in which you can type the name for a new property"><br></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Set Property</span> window, if you selected an existing parameter, click
+<span class="ph uicontrol">Set</span>. If you typed the name of a new parameter, click <span class="ph uicontrol">Create
+Parameter</span>.</span>
+<div class="itemgroup stepresult">The blueprint designer shows the parameter in place of the value. Similarly, the
+resulting code for the property uses the <span class="keyword cmdname">get_param</span> function to retrieve the
+parameter value, as in the following example
+code:<pre class="pre codeblock"><code>  MyServer:
+    type: OS::Nova::Server
+    properties:
+      name: MyServer
+      image: "MyImage" 
+      flavor: { get_param: MyImageFlavor }
+      key_name: { get_param: key_name }
+      availability_zone: { get_param: availability_zone }</code></pre>The
+new parameter appears at the top of the blueprint, in the <code class="ph codeph">parameters</code>
+section:<pre class="pre codeblock"><code>MyImageFlavor:
+  type: string
+  description: Generated</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create a configuration file or open an existing configuration file.</span>
+<div class="itemgroup info">For more information about configuration files, see <a class="xref" href="blueprint_configs.html" title="Configuration files are lists of properties and values. You can use configuration files to provision the same blueprint on multiple cloud systems.">Editing configuration files</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the configuration file, click <span class="ph uicontrol">Add</span>
+<img class="image" src="../images/icons/add.gif" alt="">.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Choose Blueprint</span> window, select the blueprint, and then click
+<span class="ph uicontrol">OK</span>.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_props_externalize__result__1">Results</h2></div>The configuration file contains externalized property and parameter values for the
+blueprint.<div class="p">When you provision an environment from this blueprint, the blueprint designer prompts
+you for a value for the parameters, as shown in the following figure. You can also specify a
+configuration file to use the values that are in that file.<br><img class="image" src="../images/blueprint_props_externalize_b2.gif" alt="The Provision Blueprint to new Environment window, showing the property from the blueprint"><br></div></section>
+</div>
+</article></main></body></html>

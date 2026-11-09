@@ -1,0 +1,31 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can store post-processing scripts on the server so you can reuse them in component processes and in generic processes."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_ch.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_postProcess.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="settings_postscripts"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Storing reusable post-processing scripts</title></head><body id="settings_postscripts"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Storing reusable post-processing scripts</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-8dfa7c15-44e5-4e5a-9bcb-68982edc01a8">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can store post-processing scripts on the server so
+you can reuse them in component processes and in generic processes.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksettings_postscripts__context__1">About this task</h2></div>When a step finishes, the agent runs the post-processing script for that step. When the
+   agent runs the script, it first loads the server log file. It finds the exit code property of the
+   target step with regular expressions that are defined in the script. It then applies any actions
+   that are defined in the script before it runs the next step.<p class="p">The <span class="ph">IBM DevOps Deploy (Deploy)</span> server log file is
+    normally found in the following location:
+      <span class="ph filepath"><var class="keyword varname">server_installation_directory</var>/var/log/deployserver.out</span>.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksettings_postscripts__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Post Processing Scripts</span></span> and then click <span class="ph uicontrol">Create Script</span>. </span>
+<div class="itemgroup stepresult">The <span class="keyword wintitle">Edit Script</span> window opens, as shown in the following
+      figure.<br><img class="image" src="../images/edit_post_processing_scripts.png" height="340" width="406" alt="The Edit Script window, showing fields for the name and description of the script and for the content of the script"><br></div>
+</li><li class="li step stepexpand"><span class="ph cmd">Specify a name for the process step.</span></li><li class="li step stepexpand">
+<span class="ph cmd">Give a description for the process step.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify the teams that can access and edit the script.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Enter or paste the script into the <span class="ph uicontrol">Script Body</span> field. </span>
+<div class="itemgroup info">See the roll-over help next to the field for information about
+the properties and variables that are available for user-defined scripts.<div class="p">Post-processing scripts must set the <span class="keyword parmname">Status</span> property
+to specify the status of the script. The script can specify any value
+for the <span class="keyword parmname">Status</span> property. For example, to specify
+that the script was a success, run the following command in the post-processing
+script:<pre class="pre codeblock"><code>properties.put("Status","Success");</code></pre></div></div>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a></div></div><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_postProcess.html" title="Post-processing scripts run after a step finishes. Typically, post-processing scripts ensure that expected results occurred.">Post-processing scripts</a></div></div></nav></article></main></body></html>

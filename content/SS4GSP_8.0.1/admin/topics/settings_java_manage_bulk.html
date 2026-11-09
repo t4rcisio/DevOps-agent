@@ -1,0 +1,82 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can manage the Java distribution on your numerous agents by using Bulk Actions."><meta name="DC.subject" content="bulk actions, java packages, preferred"><meta name="keywords" content="bulk actions, java packages, preferred"><meta name="DC.relation" scheme="URI" content="../../user/topics/configure_agents.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_javapackage_addjavapackage_post.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_javapackage_setpreferredjavapackage_post.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_agentclibulkinstallagentjava_post.html"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_agentclibulksetagentjavahome_post.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="settings_locks_managing_bulk"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Managing Java packages on agents in bulk</title></head><body id="settings_locks_managing_bulk"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Managing Java packages on agents in bulk</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2c976d9e-6996-41db-a540-daded158fb84">Edit online</a></span></div>
+  
+
+  
+<div class="body taskbody"><p class="shortdesc">You can manage the Java distribution on your numerous agents by using <span class="ph uicontrol">Bulk
+      Actions</span>. </p>
+    <section class="section prereq" id="settings_locks_managing_bulk__prereq_nmq_mqq_2yb"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksettings_locks_managing_bulk__prereq_nmq_mqq_2yb">Before you begin</h2></div>
+      <div class="note important note_important" id="settings_locks_managing_bulk__d550e20"><span class="note__title">Important:</span> 
+        <ul class="ul" id="settings_locks_managing_bulk__d550e22">
+          <li class="li">The agents support Java 11 and later versions.</li>
+          <li class="li">The procedure in this section is applicable only for the operating systems that have
+            compact agents. Agents on operating systems like z/OS and AIX cannot be updated with
+            this procedure.</li>
+        </ul>
+      </div>
+    </section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksettings_locks_managing_bulk__context__1">About this task</h2></div>
+      <p class="p">When you have multiple agents running in your production environment, it can become
+        difficult to apply Java patches regularly. Using <span class="ph uicontrol">Bulk Actions</span>, you
+        can manage Java packages on your agents with just a few clicks. </p>
+      <p class="p">To manage Java package on several agents in bulk:</p>
+    </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksettings_locks_managing_bulk__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">Upload the required Java package.</span>
+        <ol type="a" class="ol substeps" id="settings_locks_managing_bulk__d550e53">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Manage Java Packages</span></span>.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Upload a Java package by clicking <span class="ph uicontrol">Add Package</span>.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Provide a name for the Java package to upload.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Click <span class="ph uicontrol">Choose File</span>, select the Java package to upload and
+              click <span class="ph uicontrol">Submit</span>.</span>
+            <div class="itemgroup info">
+              <div class="note note note_note" id="settings_locks_managing_bulk__d550e101"><span class="note__title">Note:</span> The <span class="ph filepath">.zip</span>, <span class="ph filepath">.tar</span>,
+                  <span class="ph filepath">.tar.gz</span>, <span class="ph filepath">.tgz</span>,
+                  <span class="ph filepath">.tar.bz2</span>, and <span class="ph filepath">.tbz2</span> file extensions are
+                compatible.</div>
+            </div>
+            <div class="itemgroup info">The Java package is uploaded into the system.</div>
+          </li>
+        </ol>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Set the Java package as preferred for the OS and CPU type from the menu option.</span>
+        <div class="itemgroup info">Typically, you must set at least one Java package as preferred for each OS and CPU
+          type.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Go to the <span class="keyword wintitle">Agents</span> page and select the agents for which you want to
+          update the Java.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Install the preferred Java package by clicking <span class="ph menucascade"><span class="ph uicontrol">Bulk Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Install Preferred Java Package</span></span> and confirming the action.</span>
+        <div class="itemgroup info">A message window opens, indicating that the Java installation has started. The
+          installation might take some time. You can close the message window while the installation
+          runs in the background.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Verify that the Java is installed for the agents by checking the
+            <span class="ph uicontrol">Version</span> column.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Set the JAVA_HOME on the agents by clicking <span class="ph menucascade"><span class="ph uicontrol">Bulk Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Set Java Home to Preferred Java Package</span></span> and confirming the action.</span>
+        <div class="itemgroup info">A message window opens, indicating that the Java update request was sent. This step
+          might take some time. You can close the message window while the JAVA_HOME is updated in
+          the background.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Verify that the Java home is updated for the agents.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Restart the agents by clicking <span class="ph menucascade"><span class="ph uicontrol">Bulk Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Restart</span></span>.</span>
+        <div class="itemgroup info">Agents restart and run with the new Java version. You can refresh the
+            <span class="keyword wintitle">Agents</span> page to check if the agents are online.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Remove unused Java package versions by clicking <span class="ph menucascade"><span class="ph uicontrol">Bulk Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Remove Unused Java Packages</span></span>.</span>
+        <div class="itemgroup info">A message displays indicating the number of removed Java packages.</div>
+      </li></ol></section>
+</div>
+  <nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/configure_agents.html" title="After you install an agent for IBM DevOps Deploy (Deploy), you can modify its configuration or create an agent relay to facilitate communication to remote relays.">Agents and agent relay configuration</a></div></div><div class="linklist relinfo relref"><strong>Related reference</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="../../api/topics/rest_cli_javapackage_addjavapackage_post.html">Upload a Java package.</a></li><li class="linklist"><a class="link" href="../../api/topics/rest_cli_javapackage_setpreferredjavapackage_post.html">Sets a package as preferred for its OS and CPU, unsetting the previously preferred package if there was one.</a></li><li class="linklist"><a class="link" href="../../api/topics/rest_cli_agentclibulkinstallagentjava_post.html" title="This command request a set of agents install Java, but does not wait for or report the results. The returned maintenance tasks can be used to query the result. Individual sub-requests may succeed or fail independently. A single request may contain up to 250 sub-requests.">Install Java packages as a new managed Java installations in bulk</a></li><li class="linklist"><a class="link" href="../../api/topics/rest_cli_agentclibulksetagentjavahome_post.html" title="This command requests a set of agents set JAVA_HOME, but does not wait for or report the results. Each new JAVA_HOME will not take effect until the respective agent is restarted. The returned maintenance tasks can be used to query the results.Individual sub-requests may succeed or fail independently. A single request may contain up to 250 sub-requests.">Set the configured JAVA_HOME of agents in bulk</a></li></ul></div></nav>
+</article></main></body></html>

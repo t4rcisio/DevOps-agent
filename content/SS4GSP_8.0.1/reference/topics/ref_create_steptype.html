@@ -1,0 +1,23 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="You define plug-in steps with the step-type element; each step-type element represents a single step in the IBM DevOps Deploy (Deploy) process editor."><meta name="DC.relation" scheme="URI" content="../../reference/topics/reference_plugins_create.html"><meta name="DC.relation" scheme="URI" content="../../reference/topics/ref_create_properties.html"><meta name="DC.relation" scheme="URI" content="../../reference/topics/ref_create_icons.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="pluginStepstheSteptypeElement.d12e245"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Plug-in steps: The step-type element</title></head><body id="pluginStepstheSteptypeElement.d12e245"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Plug-in steps: The <code class="ph codeph">step-type</code> element</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-09842615-52eb-4eaf-8e7e-b19dbb2b6876">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">You define plug-in steps with the <code class="ph codeph">step-type</code> element; each
+   <code class="ph codeph">step-type</code> element represents a single step in the <span class="ph">IBM DevOps Deploy (Deploy)</span> process
+  editor.</p>
+<div class="p">A <code class="ph codeph">step-type</code> element has a name attribute and up to four child elements: <ul class="ul">
+<li class="li"><code class="ph codeph">description</code></li>
+<li class="li"><code class="ph codeph">properties</code></li>
+<li class="li"><code class="ph codeph">command</code></li>
+<li class="li"><code class="ph codeph">post-processing</code></li>
+</ul></div>
+<p class="p">The mandatory name attribute identifies the step. The description and name are shown in the web
+application and on informational pages for the plug-in. The contents of the description determine
+which icon is displayed with the step.</p>
+<pre class="pre codeblock"><code>&lt;step-type name="Start"&gt;
+&lt;description&gt;Start Apache HTTP server&lt;/description&gt;
+</code></pre>
+<div class="note note note_note"><span class="note__title">Note:</span> A step name cannot contain the forward slash (/) character.</div>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../reference/topics/ref_create_properties.html">Step properties: the properties element</a></strong><br>The <code class="ph codeph">properties</code> element is a container for properties, which are defined with the <code class="ph codeph">property</code> tag.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../reference/topics/ref_create_icons.html">Plug-in step icons</a></strong><br>A keyword in the description determines which icon is displayed in the plug-in step.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/reference_plugins_create.html" title="You can create your own plug-ins for use with IBM DevOps Deploy (Deploy). A plug-in consists of XML files and supporting script files that the plug-in requires.">Creating plug-ins</a></div></div></nav></article></main></body></html>

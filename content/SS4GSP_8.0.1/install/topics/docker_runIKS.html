@@ -1,0 +1,54 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can to access and start the IBM DevOps Deploy (Deploy) server in the Kubernetes cluster."><meta name="DC.subject" content="Accessing server, Kubernetes cluster, server URL"><meta name="keywords" content="Accessing server, Kubernetes cluster, server URL"><meta name="DC.relation" scheme="URI" content="../../install/topics/docker_install_iks.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="docker_run"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Accessing the server in a Kubernetes cluster</title></head><body id="docker_run"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Accessing the server in a Kubernetes cluster</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f8db9e03-8a86-48d1-b402-9bbc2d9e579e">Edit online</a></span></div>
+
+
+  
+<div class="body taskbody"><p class="shortdesc">You can to access and start the <span class="ph">IBM DevOps Deploy (Deploy)</span> server in the
+    Kubernetes cluster.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdocker_run__prereq__1">Before you begin</h2></div>
+<p class="p">Ensure that the server is correctly installed in your Kubernetes environment. See <a class="xref" href="https://github.com/IBM/cloud-pak/blob/master/repo/case/ibm-ucd-prod/README.md#prerequisites" target="_blank">Installing the server in Openshift/Kubernetes
+          cluster</a>.</p>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskdocker_run__context__1">About this task</h2></div>
+      <div class="p">The output of the <span class="keyword cmdname">helm status &lt;releaseName&gt;</span> command provides commands
+        that contain the URL of your server. <ol class="ol" id="docker_run__ol_crs_slz_vxb">
+          <li class="li">
+            <p class="p">Run the commands to obtain the server's URL:</p>
+            <div class="p">
+              <pre class="pre codeblock" id="docker_run__codeblock_zsr_kth_wxb"><code>$ helm status ucdtest</code></pre>
+            </div>
+            <p class="p">Where, <var class="keyword varname">ucdtest</var> is the <var class="keyword varname">&lt;releaseName&gt;</var>.</p>
+            <p class="p">The following output message is displayed and shows the application availability at
+              the <span class="keyword cmdname">echo</span> command.</p>
+            <div class="p">
+              <pre class="pre msgblock" id="docker_run__msgblock_tbr_vlz_vxb">NAME: ucdtest
+LAST DEPLOYED: Wed May 17 19:29:55 2023
+NAMESPACE: namespacename
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+The application is now starting and will be available at:
+  echo https://$(oc get routes/ucdtest-opr-ibm-ucd-prod -o=custom-columns=HOST:.spec.host --no-headers)
+</pre>
+            </div>
+          </li>
+          <li class="li">
+            <p class="p">Run the <span class="keyword cmdname">echo</span> command displayed in the output message to identify
+              the URL to use to access the <span class="ph">Deploy</span> server:</p>
+            <div class="p">
+              <pre class="pre codeblock" id="docker_run__codeblock_sdm_ntg_wxb"><code>$ echo https://$(oc get routes/ucdtest-opr-ibm-ucd-prod -o=custom- columns=HOST:.spec.host --no-headers)</code></pre>
+            </div>
+            <p class="p">The output of the command displays the server URL:</p>
+            <div class="p">
+              <pre class="pre msgblock" id="docker_run__msgblock_kzt_ztg_wxb">https://ucdtest-ibm-ucd-prod-namespacename.ucd-ocp12-e3a3d814b8ff2369cc3d5b63c99b22ba-0000.us-east.containers.appdomain.cloud $</pre>
+            </div>
+          </li>
+        </ol></div>
+      <p class="p">You can access the <span class="ph">Deploy</span> by using the URL
+        output of the <span class="keyword cmdname">echo</span> command.</p>
+    </section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/docker_install_iks.html" title="You can install a containerized version of the IBM DevOps Deploy (Deploy) server in an OpenShift/Kubernetes cluster. The Deploy server is installed using a Helm chart or a Helm based operator.">Installing the server in an OpenShift/Kubernetes cluster</a></div></div></nav></article></main></body></html>

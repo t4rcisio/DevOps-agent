@@ -1,0 +1,62 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="When you upgrade the server, be sure to always upgrade agents and agent relays."><meta name="DC.relation" scheme="URI" content="../../install/topics/upgradeAgentRelays.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_relay_upgrade_remotely"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Upgrading agent relays remotely</title></head><body id="agent_relay_upgrade_remotely"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Upgrading agent relays remotely</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-9fe14d36-bd21-4072-b993-a91b42faf287">Edit online</a></span></div>
+  
+  <div class="body taskbody"><p class="shortdesc">When you upgrade the server, be sure to always upgrade agents and agent
+    relays.</p>
+    <section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_relay_upgrade_remotely__prereq__1">Before you begin</h2></div>Upgrade the server. <span class="ph" data-hd-otherprops="ibm">See <a class="xref" href="upgrade_server.html" title="To upgrade the server, stop the server, and run the new installation program.">Upgrading the server in interactive mode</a> for more
+        information.</span></section>
+    <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_relay_upgrade_remotely__context__1">About this task</h2></div>You can upgrade the agent relays remotely.<div class="note important note_important"><span class="note__title">Important:</span> After you upgrade, note these changes to agent relays:<ul class="ul">
+          <li class="li">Users might notice that some agent relays are no longer listed in the user interface
+            even though they were able to view relays before the upgrade. The new version includes
+            updated security controls. The agent relays are still available to the users. However,
+            System Team administrators can assign agent relays to teams and set the <span class="ph uicontrol">View
+              Agent Relays</span> permission for roles so that appropriate users can see the
+            agent relays in the user interface.</li>
+          <li class="li">Users can install and use agent relays. However, the relays are not listed in the user
+            interface for the user until a System Team administrator assigns the agent relay to
+            teams and sets the <span class="ph uicontrol">View Agent Relays</span> permission.</li>
+        </ul></div><div class="note note note_note"><span class="note__title">Note:</span> 
+        <ul class="ul" id="agent_relay_upgrade_remotely__ul_zsg_k5y_jxb">
+          <li class="li">
+            <p class="p">The custom JAVA_OPTS properties needs to be updated in the
+              AGENT_RELAY_INSTALL_DIR\bin\worker-args.conf file. Starting with version 7.0.5.1,
+              worker-args.conf file holds the JAVA_OPTS properties for WORKER thread.</p>
+          </li>
+          <li class="li">
+            <p class="p">During the upgrade, <span class="ph filepath">log4j.properties</span> or
+                <span class="ph filepath">log4j2.properties</span> file overrides the existing configuration to
+              default value.</p>
+            <p class="p">Example: </p>
+            <div class="p">
+              <ul class="ul" id="agent_relay_upgrade_remotely__ul_zb4_x5y_jxb">
+                <li class="li">
+                  <p class="p">On <span class="ph filepath">log4j2.xml</span> file,</p>
+                  <p class="p"><code class="ph codeph">&lt;DefaultRolloverStrategy max="<strong class="ph b">2</strong>" fileIndex="min"/&gt;</code></p>
+                  <p class="p">(where, 2 is the default value)</p>
+                </li>
+                <li class="li">
+                  <p class="p">On <span class="ph filepath">log4j.properties</span> file,</p>
+                  <p class="p"><code class="ph codeph">log4j.appender.file.MaxBackupIndex=<strong class="ph b">2</strong></code></p>
+                  <p class="p">(where, 2 is the default value)</p>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div></section>
+    <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_relay_upgrade_remotely__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Go to <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agent Relays</span></span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Upgrade</span></span> in the same row as the agent relay.</span>
+<div class="itemgroup stepresult">A confirmation message is displayed.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">OK</span> to confirm.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_relay_upgrade_remotely__result__1">Results</h2></div>The agent relay restarts and is upgraded.</section>
+<section class="section postreq" id="agent_relay_upgrade_remotely__postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_relay_upgrade_remotely__postreq">What to do next</h2></div>Check the
+<span class="ph filepath"><var class="keyword varname">AGENT_RELAY_HOME</var>\conf\installed.version</span> file to verify that
+the agent relay shows the new version.</section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/upgradeAgentRelays.html" title="In most cases, you upgrade agents relays from the command line, but starting from 7.0.4.2 version, you can upgrade the server from the interface. Always upgrade agents and agent relays in addition to upgrading the server.">Upgrading agent relays</a></div></div></nav></article></main></body></html>

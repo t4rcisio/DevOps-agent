@@ -1,0 +1,135 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To import artifacts that are not stored in versioned folders, store the artifacts in a folder and create a component with the File System source configuration type."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_create_filesystem.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_create_filesystem_basic"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating components from a nonversioned file system</title></head><body id="comp_create_filesystem_basic"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating components from a nonversioned file system</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-7dce8088-81da-40ed-9ad3-e481bdbec86e">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To import artifacts that are not stored in versioned folders, store the artifacts in a
+folder and create a component with the <span class="ph uicontrol">File System</span> source configuration
+type.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_filesystem_basic__context__1">About this task</h2></div>When you use this type of component, you must manually create
+versions. To create versions of components automatically, see <a class="xref" href="comp_create_filesystem_versioned.html" title="To import artifacts with versions, create a directory with subdirectories that represent the versions of the artifacts. Then, create the component with the File System (Versioned) source configuration type.">Creating components from a versioned file system</a>.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_filesystem_basic__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">In <span class="ph">Deploy</span>,
+          click <span class="ph uicontrol">Components</span>, and then click <span class="ph uicontrol">Create
+            Component</span>.</span>
+        <div class="itemgroup info">The <span class="keyword wintitle">Create Component</span> window displays.</div>
+      </li><li class="li step stepexpand"><span class="ph cmd">To use a template for the new component,
+    select a template from the <span class="ph uicontrol">Template</span> list.</span>
+    <div class="itemgroup info">In this case, the component inherits source configuration, properties,
+      and processes from the template. For information about templates,
+      see <a class="xref" href="comp_template.html" title="With a component template, you can save and reuse component processes and properties and create components from them; template-based components inherit the template's properties and process.">Component templates</a>.</div></li><li class="li step stepexpand">
+        <span class="ph cmd">Specify a name and description for the component.</span>
+      </li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Teams</span> fields,
+specify the access information for the new component.</span></li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Source Configuration Type</span> list, select <span class="ph uicontrol">File
+System</span>.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Specify the following parameters for the component:</span>
+<div class="itemgroup info"><dl class="dl parml">
+<dt class="dt pt dlterm"><span class="ph uicontrol">Base Path</span></dt>
+<dd class="dd pd">Specify the path to the directory that contains the artifacts.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Always Use Name Pattern</span></dt>
+<dd class="dd pd">If you select this check box, new versions are automatically named
+according to the pattern in the <span class="ph uicontrol">Version Name Pattern</span> field.
+If you clear this check box, you must specify a name each time you
+create a version.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Version Name Pattern</span></dt>
+<dd class="dd pd">Specify a pattern for each version name. You can use the <var class="keyword varname">${version}</var> variable
+to include an automatically incremented version number. For example, by using the
+<code class="ph codeph">mycomp_${version}</code> pattern, the server produces versions such as
+<code class="ph codeph">mycomp_1</code> and <code class="ph codeph">mycomp_2</code>. <p class="p">This parameter is meaningful only if you
+select the <span class="ph uicontrol">Always Use Name Pattern</span> check box.</p></dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Next Version Number</span></dt>
+<dd class="dd pd">Specify the version number for the next version.<p class="p">This parameter
+is meaningful only if you select the <span class="ph uicontrol">Always Use Name Pattern</span> check
+box.</p></dd>
+
+
+<dt class="dt pt dlterm" id="comp_create_filesystem_basic__textExt"><span class="ph uicontrol">Extensions of files to Convert</span></dt>
+<dd class="dd pd">If text-type files must be converted into another character set, type the list of file
+extensions to be converted. Matching file types are converted into the default or system character
+set of the system where the agent is located. Separate list items with commas, for
+example:<pre class="pre codeblock"><code>txt,log,ini,sh</code></pre></dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Import Versions Automatically</span></dt>
+<dd class="dd pd">This parameter has no effect on this source configuration type.
+You must import new versions manually.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Copy to CodeStation</span></dt>
+<dd class="dd pd">This option, which is selected by default, creates tamper-protected copies of the artifacts and
+stores them in the embedded artifact management system, CodeStation. If the check box is cleared,
+only metadata about the artifacts is imported. In most cases, keep this check box selected. The
+default for this setting is in the system setting <span class="ph uicontrol">Components copy to CodeStation by
+default</span>. For more information, see <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>.</dd>
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Default Version Type</span></dt>
+<dd class="dd pd">Specify how to import versions into CodeStation:<dl class="dl">
+<dt class="dt dlterm"><span class="ph uicontrol">Full</span></dt>
+<dd class="dd">Each version is comprehensive and contains all artifacts.</dd>
+
+<dt class="dt dlterm"><span class="ph uicontrol">Incremental</span></dt>
+<dd class="dd">Each version contains a subset of artifacts.</dd>
+</dl></dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Use the system's default version import agent/tag</span></dt>
+<dd class="dd pd">If this parameter is selected, the agent or tag that you specified on the <span class="keyword wintitle">System
+Settings</span> page is used to import component artifacts. Agents must have access to the
+system where the artifacts are located. For more information, see <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Import new component versions using a single agent</span></dt>
+<dd class="dd pd">If this parameter is selected, use the <span class="ph uicontrol">Agent for Version
+Imports </span>                 field to identify the agent that
+is used to import artifacts into the component. The              
+  agent must have access to the system where the artifacts are located.
+To import                 artifacts from where the server is located,
+install an agent in the same location                 and specify
+that agent.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Import new component versions using any agent with
+the specified tag</span></dt>
+<dd class="dd pd">If this parameter is selected, use the <span class="ph uicontrol">Agent Tag for
+Version Imports </span>                 field to identify the
+tag that is used to select agents to import artifacts into the   
+             component. All tagged agents must have access to the
+system where the artifacts are                 located.</dd>
+
+
+<dt class="dt pt dlterm"><span class="ph uicontrol">Inherit Cleanup Settings</span></dt>
+<dd class="dd pd">To apply the component version cleanup settings that are specified on the <span class="keyword wintitle">System
+                  Settings</span> page, select the <span class="ph uicontrol">Inherit Cleanup
+                  Settings</span> check box. If this check box is cleared, you must specify how
+                long to keep component versions. <span class="ph" id="comp_create_filesystem_basic__d398e246">For more information
+                  about cleaning up component versions, see <a class="xref" href="settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a>.</span></dd>
+</dl></div></li><li class="li step stepexpand">
+    <span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+    <div class="itemgroup stepresult">The new component is included in the list of components.</div>
+   </li><li class="li step stepexpand">
+    <span class="ph cmd">Import the first version of the component:</span>
+    <ol type="a" class="ol substeps">
+     <li class="li substep">
+      <span class="ph cmd">Go to the <span class="ph uicontrol">Versions</span> tab.</span>
+     </li>
+     <li class="li substep">
+      <span class="ph cmd">Click <span class="ph uicontrol">Import New Versions</span>.</span>
+     </li>
+     <li class="li substep">
+      <span class="ph cmd">Specify a name for the new version and then click <span class="ph uicontrol">Save</span>.</span>
+     </li>
+    </ol>
+    <div class="itemgroup stepresult">The new version is included in the list of versions. You can confirm that the
+     artifacts are included in the version by clicking the version and looking at the list of
+     artifacts.</div>
+   </li><li class="li step stepexpand"><span class="ph cmd">To import future versions of the component, click <span class="ph uicontrol">Import
+New Versions</span> again and specify a name for the new version.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_filesystem_basic__result__1">Results</h2></div><span class="ph">The new component is listed on the
+<span class="keyword wintitle">Components</span> page. The <span class="keyword wintitle">Versions</span> tab shows the available
+versions of the component.</span></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_create_filesystem_basic__postreq__1">What to do next</h2></div>Create processes for the component. See <a class="xref" href="comp_process_configure.html" title="A component process is a series of user-defined steps that operate on a component's artifacts. You create a component process in two steps: first, you configure basic information, such as name; second, you use the process editor to assemble the process.">Creating component processes</a>.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_create_filesystem.html" title="You can create components by importing artifacts from the file system on the IBM DevOps Deploy (Deploy) server. You can import a single version or automatically import versions as they are added to the file system.">Creating components from the file system</a></div></div></nav></article></main></body></html>

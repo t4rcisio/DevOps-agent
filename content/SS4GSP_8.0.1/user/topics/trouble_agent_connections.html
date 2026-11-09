@@ -1,0 +1,128 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="You can answer a number of questions to help isolate the issue behind problems with agents."><meta name="DC.relation" scheme="URI" content="../../user/topics/trouble_serveragents_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="trouble_agent_connections"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Troubleshooting agent connections</title></head><body id="trouble_agent_connections"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Troubleshooting agent connections</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ecdc4416-f48b-4bbe-abb4-fe15a42abaf6">Edit online</a></span></div>
+  
+  <div class="body conbody"><p class="shortdesc">You can answer a number of questions to help isolate the issue behind problems  with
+agents.</p>
+<p class="p">By default, the logs for the agent are in the folder
+<span class="ph filepath"><var class="keyword varname">agent_install</var>/var/log</span>.</p>
+<p class="p">Starting with V7.0.3, you can download and display agent logs from the user interface. This
+      feature is only available for web agents V7.0.3 and later. The <span class="ph uicontrol">Request Agent
+        Logs</span> option is displayed on the selected agent page. After clicking
+        <span class="ph uicontrol">Request Agent Logs</span>, the <var class="keyword varname">agent.out</var> (default file
+      name) appears under the <span class="ph uicontrol">Available Logs</span> section on the same page. </p>
+<div class="p">If you are having trouble with an agent, see the following troubleshooting information for the
+state of the agent:<ul class="ul">
+<li class="li"><a class="xref" href="#trouble_agent_connections__agent_no_show">A new agent isn't displayed
+in the user interface, or the agent is reported as <samp class="ph systemoutput sysout">offline</samp></a>.</li>
+<li class="li"><a class="xref" href="#trouble_agent_connections__agent_connecting">The agent is reported as
+<samp class="ph systemoutput sysout">connecting</samp></a>.</li>
+<li class="li"><a class="xref" href="#trouble_agent_connections__agent_online">The agent is reported as
+<samp class="ph systemoutput sysout">online</samp></a>.</li>
+<li class="li"><a class="xref" href="#trouble_agent_connections__clock_skew">The agent fails to connect to
+the server and returns errors</a>.</li>
+</ul></div>
+<div class="p" id="trouble_agent_connections__agent_no_show"><strong class="ph b">If the agent isn't displayed in the user interface, or if the agent is
+reported as <samp class="ph systemoutput sysout">offline</samp>, complete these actions:</strong><ul class="ul">
+<li class="li">Verify that the agent started successfully:<ul class="ul">
+<li class="li">Look for error messages in the log. If the agent started successfully, the
+<span class="ph filepath">agent.out</span> file has a message that says something like this:
+<pre class="pre codeblock"><code>2017-07-18 08:37:47,575 INFO  AgentWorkerThread com.urbancode.air.agent.AgentWorker - Agent started</code></pre></li>
+<li class="li">Check the prerequisites for the agent. See <a class="xref" href="../../install/topics/agent_install_ov.html" title="You can install agents from the server or from the command line on the agent system. To configure a failover server for an agent, you must install the agent from the command line.">Installing agents</a>.</li>
+<li class="li">If the agent prompt returns right away or the window flashes and closes after you try to start
+it, check the Java version and Java home. This situation typically happens when Java cannot be
+found.</li>
+<li class="li">Verify that the system that hosts the agent has enough free disk space, and that the file system
+and permissions are properly configured.</li>
+<li class="li">If the agent is configured as a service on Linux, start the agent from the command line. If you
+cannot start the agent from the command line, the problem is likely related to the way that the
+service was configured. See <a class="xref" href="../../install/topics/agent_install_service.html#agent_install_service" title="You can set up agents to run as system services.">Running agents as services on Linux</a>.</li>
+<li class="li">Verify that the agent installation properties are correct. See <a class="xref" href="../../install/topics/agent_properties.html" title="The agent properties in the installed.properties file control details about the agent, including how it connects to the server.">Agent installation properties</a>.</li>
+<li class="li">If the agent is configured as a service on Windows, complete these actions:<ol class="ol">
+<li class="li">Remove the service and add it again. See <a class="xref" href="agent_service_windows.html#agent_service_windows" title="If you installed an agent as a Windows service, you can remove and reinstall the service.">Removing and reinstalling agents as Windows services</a>.</li>
+<li class="li">Remove the service and try to start the agent from the command line. If it starts, check
+permissions for the user who is running the service. See step 3 of <a class="xref" href="../../install/topics/agentInstall.html#agentinstall__rmv_svc_1">Installing
+agents from the command line</a>.</li>
+</ol></li>
+</ul></li>
+<li class="li">If  the agent started successfully but the server shows the agent as offline or does not show
+the agent at all, check these things:<ul class="ul">
+<li class="li">If the agent connects through an agent relay, verify that the relay is running.</li>
+<li class="li">Verify that the system that hosts the server has enough free disk space, and that the file
+system and permissions are properly configured.</li>
+<li class="li">Search the user interface for the agent endpoint ID from the
+<span class="ph filepath">installed.properties</span> file. If an agent with the same name is already in the
+system, <span class="ph">Deploy</span> adds the agent to the user interface as <samp class="ph systemoutput sysout">agent-&lt;agent id&gt;</samp>. It is
+possible that the agent is there, but not by a name that you might be looking for. This can happen
+if you clone a virtual machine or create a cloud environment without changing the agent name.</li>
+<li class="li">If the agent is using failover, make sure that failover is configured correctly.</li>
+<li class="li">Check for licensing issues.</li>
+<li class="li">Check the network connection between the agent and the server or between the agent and agent
+relay: <ul class="ul">
+<li class="li">Verify that the Web relays are connected to Web agents. </li>
+<li class="li">Verify that a firewall is not preventing the agent from connecting to the server or agent relay.
+Agents always initiate connections to servers and agent relays, not the other way around.</li>
+<li class="li">Check to see that the agent system can ping the <span class="ph">Deploy</span> server or agent relay.</li>
+<li class="li">If agents are not connecting correctly on high-availability environments, make sure that the
+servers have cluster connections to each other.</li>
+<li class="li">Firewalls might prevent the agent from communicating with the server, particularly if the agent
+is on a public cloud and trying to connect to an <span class="ph">Deploy</span> server that is within a firewall. In this case, use an agent relay.</li>
+<li class="li">If the agent is on a cloud environment and the target cloud environment can connect to the
+<span class="ph">Deploy</span> server, log in to the cloud image and check the <code class="ph codeph">cloud-init</code> log files in this
+folder:<span class="ph filepath">/var/lib/cloud/instance/</span>.</li>
+<li class="li">If an agent on a cloud environment times out with a message like <code class="ph codeph">Agent did not come online after 6.0 minutes! Process not executed.</code>, check to see that the agent package was
+downloaded correctly. If it did, try lengthening the timeout by increasing the value of the
+<span class="keyword parmname">agent_timeout</span> parameter in the blueprint or configuration file.</li>
+<li class="li">Check for DNS issues that might prevent the agent from resolving the host name of the server or
+agent relay.</li>
+</ul></li>
+<li class="li">Can the built-in admin ID see the agent online? If so, permissions might be incorrectly
+configured on the agent. Remember that the built-in admin ID bypasses the team's checking.</li>
+</ul></li>
+</ul></div>
+<p class="p">If you do not know the location of the agent that cannot connect to the server, go to the agent
+properties, which include the last known host name and IP address of the agent.</p>
+<div class="p" id="trouble_agent_connections__agent_connecting"><strong class="ph b">If the agent is reported as <samp class="ph systemoutput sysout">connecting</samp>,
+complete these actions:</strong><ol class="ol">
+<li class="li">When this situation occurs, the problem is an HTTP communication issue. To resolve this issue:<ol class="ol" type="a">
+<li class="li">Check the external agent URL in settings. In the product, click <span class="ph uicontrol">Settings</span>,
+and then click <span class="ph uicontrol">System Settings</span>. Make sure that the host name or IP address
+matches or resolves to the entry in the agents <span class="ph filepath">installed.property</span> file.</li>
+<li class="li">Use Telnet to connect to the HTTP port on the Server.
+</li>
+</ol></li>
+</ol></div>
+<p class="p" id="trouble_agent_connections__agent_online"><strong class="ph b">If the agent is reported as <samp class="ph systemoutput sysout">online</samp> but you
+continue to have problems, complete these actions:</strong></p>
+<div class="p">
+<ol class="ol">
+<li class="li">Verify that the agent and agent relay are running the recommended and minimum versions as
+indicated in the user interface.</li>
+<li class="li">Check the server, agent relay, and agent logs for errors. Look for matching time stamps among
+the logs.</li>
+<li class="li">Enable more detailed logging by adding the following logger, and set the looging level as
+          TRACE:<pre class="pre codeblock"><code>com.urbancode.air</code></pre> Check the output for errors.</li>
+</ol>
+</div>
+<p class="p" id="trouble_agent_connections__clock_skew"><strong class="ph b">If the agent fails to connect to the server to an agent, check if the
+<span class="ph filepath">agent.log</span> shows:</strong></p>
+<ul class="ul">
+<li class="li"><strong class="ph b">A clock skew exception</strong> - Set the system time on the server and the computers that agents
+are running on to times that are the same or within a few minutes of each other. The server and
+agent clock times must be close together if using end-to-end encryption. They do not need to be in
+the same time zone, but must agree about the global time within approximately 5 minutes.</li>
+<li class="li"><strong class="ph b">The SSL handshake error</strong> - When a Web agent fails to connect to the server and returns an
+error <code class="ph codeph">com.urbancode.ds.subsys.deploy.agent.comm.netty.server.ServerPublicKeyPinHandler - SSL handshake failed</code>. Configure the load balancer to use the SSL connection instead of the load
+balancer. In this configuration, you use TCP mode over HTTP mode in both, the front-end and back-end
+configurations. For instance, if the LB is HAProxy, it should treat the connection as a stream of
+information to proxy to a server, rather than use its functions available for HTTP requests. The
+following example is a front-end configuration on HAProxy:
+<pre class="pre codeblock"><code>frontend localhost
+    bind *:80bind *:443
+    option tcplog
+    mode tcp
+    default_backend nodes</code></pre></li>
+</ul>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/trouble_serveragents_ov.html" title="Troubleshooting information that is specific to the server and agents is provided here.">Troubleshooting the DevOps Deploy server and agents</a></div></div></nav></article></main></body></html>

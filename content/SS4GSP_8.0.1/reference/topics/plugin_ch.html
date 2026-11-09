@@ -1,0 +1,233 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="The Deploy plug-ins provide tools for creating component processes and integrations. IBM provides plug-ins for several common deployment processes, and others are available to integrate with a wide variety of tools, such as middleware tools, databases, and servers."><meta name="DC.relation" scheme="URI" content="../../user/topics/c_node_extending.html"><meta name="DC.relation" scheme="URI" content="../../reference/topics/reference_plugins_create.html"><meta name="DC.relation" scheme="URI" content="../../reference/topics/reference_plugins_example.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="plugins.d12e2"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Plug-ins</title></head><body id="plugins.d12e2"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Plug-ins</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b8c58455-c739-4793-9d63-0a2ddc584aa6">Edit online</a></span></div>
+
+
+<div class="body"><p class="shortdesc"><span class="ph" data-hd-otherprops="ibm" id="plugins.d12e2__def">The Deploy plug-ins provide tools for creating component
+   processes and integrations.</span>
+  <span class="ph" data-hd-otherprops="ibm">IBM provides plug-ins for several common deployment processes, and others are
+   available to integrate with a wide variety of tools, such as middleware tools, databases, and
+   servers.</span></p>
+<p class="p">Plug-ins provide processing and integration functions. There are
+two types of plug-ins: </p>
+<ul class="ul">
+<li class="li"><dfn class="term">Source-type</dfn> plug-ins integrate with external systems
+to import artifacts and create component versions. </li>
+<li class="li"><dfn class="term">Automation-type</dfn> plug-ins provide process steps that
+manipulate components, typically by deploying them.</li>
+</ul>
+<p class="p">Both types of plug-ins consist of distinct processes called <dfn class="term">steps</dfn>. Each step
+consists of a number of properties, a command that runs the step, and post-processing instructions.
+(Post-processing typically ensures that expected results occur.) Step properties can serve various
+purposes, from providing input to the command to supplying some, or all, the actual command itself.
+Automation-type plug-in properties can be set at design time in the process editor, or at run time
+in the user interface. Source-type plug-in properties are typically defined when a component is
+created.</p>
+<section class="section" id="plugins.d12e2__auto_plug-in"><h2 id="plugins.d12e2__auto_plug-in__title__1" class="title sectiontitle">Automation-type plug-ins</h2>  <p class="p">You
+use automation plug-ins to deploy components or otherwise manage them.
+Each step is a self-contained unit with inputs, outputs, and properties.
+By combining automation plug-in steps in the process editor, you can
+create fully automated deployment processes. When you create a process,
+you drag steps onto the design area and define the properties as you
+go. Property values can be specified when you define the process or
+at run time. The process flow is defined by drawing connections between
+steps. The following illustration, shows a series of automation-type
+plug-in steps and the connections between them. </p> <div class="p"> <br><img class="image" src="../images/plugin_ch.gif" alt="A simple component process that uses the WebSphere Application Server plug-in to deploy an application"><br> </div> <p class="p">For information about
+creating component processes, see <a class="xref" href="../../user/topics/comp_process.html" title="A component process is a series of user-defined steps that operate on a component's artifacts.">Component processes</a>.</p> </section>
+<p class="p">At deployment time, component processes are run by agents that
+are installed in the target    environment. For a process to run,
+the agent must have access to all resources, tools, and files    that
+are required by the plug-in steps in the process. When you install
+an agent, ensure that    these conditions are met:</p>
+<ul class="ul">
+<li class="li">The agent that runs the process has the necessary user permissions to run commands and can
+access required resources. Assigning these permissions typically entails granting permissions if an
+external tool is installed as a different user; installing the agent as a service; or impersonating
+the appropriate user. See <a class="xref" href="../../user/topics/arch_appx_sudo.html" title="IBM DevOps Deploy (Deploy) can use user impersonation when an agent must run a command for which it might not otherwise have permission, or when a specific user must be employed for a process.">User impersonation for process steps</a>.</li>
+<li class="li">External tools that plug-in steps require are installed in the
+target environment.</li>
+<li class="li">The required minimum version of an external tool is installed.</li>
+</ul>
+<p class="p">For information about installing agents, see <a class="xref" href="../../install/topics/agentInstall.html" title="Installing an agent from the command line involves running a batch file or shell script and specifying information about how the agent connects to the server or agent relay.">Installing agents from the command line</a>.</p>
+<section class="section" id="plugins.d12e2__source_plug-in"><h2 id="plugins.d12e2__source_plug-in__title__1" class="title sectiontitle">Source-type plug-ins</h2>   <p class="p">You
+use source plug-ins to import artifacts and create component versions.
+A source plug-in     defines the type of artifacts that can be imported
+and identifies where the artifacts are     located. Source-type plug-ins
+are configured when components are created, you do not use the   
+ process editor to configure source-type plug-ins. Unlike automation
+plug-ins, source plug-ins     always have a single step, the Import
+Version step.</p> <p class="p">Artifacts are imported into component versions
+by agents that are running in the environment     where the artifacts
+are located. For a component version to be created, the agent must
+have the     required permissions and access to all required resources
+and files. For information about     installing agents that run source
+plug-ins, see <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a>.</p> </section>
+<section class="section"><h2 id="plugins.d12e2__title__4" class="title sectiontitle">Viewing and obtaining plug-ins</h2>
+
+<p class="p" data-hd-otherprops="ibm">Plug-ins that are shipped with the product are called core plug-ins and plug-ins
+                that can be downloaded and installed from the <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/" target="_blank">Deploy plug-ins</a> are called external plug-ins.</p>
+
+<p class="p">View core plug-ins from the user interface as follows:</p>
+<ul class="ul">
+<li class="li">To view source config plug-ins, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Source Configuration Plugins</span></span>. The following source configuration plug-ins are available:<div class="p">
+<table class="table frame-all" id="plugins.d12e2__table_ubw_s15_nnb"><caption></caption><colgroup><col style="width:27.027027027027025%"><col style="width:72.97297297297297%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="plugins.d12e2__table_ubw_s15_nnb__entry__1">Plug-in</th>
+<th class="entry" id="plugins.d12e2__table_ubw_s15_nnb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__1">ClearCase</td>
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__2">Automates importing version artifacts from ClearCase (Base and UCM).</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__1">File System</td>
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__2">Automates uploading artifacts from a normal file system.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__1">File System (Versioned)</td>
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__2">Automates uploading artifacts from a versioned file system.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__1">Git</td>
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__2">Automates importing artifacts from Git.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__1">Maven</td>
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__2">Automates downloading artifacts from Maven projects.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__1">Subversion</td>
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__2">Automates importing artifacts from a Subversion repository</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__1">TFS</td>
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__2">Automates importing version artifacts from a TFS server.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__1">TFS_SCM</td>
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__2">Automates importing version artifacts from a TFS server.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__1">uBuild</td>
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__2">Automates uploading artifacts from a UrbanCode Build server.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__1">zOS File</td>
+<td class="entry" headers="plugins.d12e2__table_ubw_s15_nnb__entry__2">Automates uploading data sets, UNIX files and generic artifacts from a z/OS system.</td>
+</tr>
+</tbody></table>
+</div>For information on how to use the source config plug-ins that are provided with <span class="ph">Deploy</span>, see <a class="xref" href="../../user/topics/comp_create.html" title="A component consists of artifacts of a single source type and one or more processes. Component creation is the same for all source types, however; the content can be different.">Creating components</a>. </li>
+<li class="li">To view automation plug-ins, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Plugins</span></span>. The following automation plug-ins are available:<div class="p">
+<table class="table frame-all" id="plugins.d12e2__table_ij3_xc5_nnb"><caption></caption><colgroup><col style="width:28.011204481792717%"><col style="width:71.98879551820728%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="plugins.d12e2__table_ij3_xc5_nnb__entry__1">Plug-in</th>
+<th class="entry" id="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">File Utils</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Includes steps, such as deleting or creating directories and replacing tokens in a file, that
+perform folder-level and file-level tasks as part of a deployment process.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">General Utilities</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Provides utilities for basic tasks that don't fit in a specific plug-in.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">Groovy</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Provides steps for executing user defined Groovy scripts.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">Shell</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Allows users to run custom shell scripts during the deployment process.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">System Information</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Includes a variety of checks to perform against the operating system. These steps can be used
+to verify that a deployment can succeed or has succeeded.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">UrbanCode <span class="ph">Deploy</span>
+                                            Applications</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Creates and manages <span class="ph">Deploy</span> applications.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">UrbanCode <span class="ph">Deploy</span>
+                                            Component</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Creates and manages <span class="ph">Deploy</span> components.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">UrbanCode <span class="ph">Deploy</span>
+                                            Configuration Management</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Downloads and uploads configuration templates from/to <span class="ph">Deploy</span>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">UrbanCode <span class="ph">Deploy</span>
+                                            Environments</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Creates and manages <span class="ph">Deploy</span> environments.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">UrbanCode <span class="ph">Deploy</span>
+                                            Processes</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Supports interaction with processes and process requests.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">UrbanCode <span class="ph">Deploy</span>
+                                            Resources</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Manages <span class="ph">Deploy</span> resources.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1"><span class="ph" data-hd-otherprops="ibm">UrbanCode <span class="ph">Deploy</span></span> Versioned
+                                            File Storage</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Allows <span class="ph">Deploy</span> to upload artifacts to CodeStation.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">UrbanCode <span class="ph">Deploy</span>
+                                            Versions</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Allows editing Component Versions in <span class="ph">Deploy</span>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__1">zOS Utility</td>
+<td class="entry" headers="plugins.d12e2__table_ij3_xc5_nnb__entry__2">Includes steps related to deployment activities for z/OS.</td>
+</tr>
+</tbody></table>
+</div></li>
+</ul>
+<p class="p" data-hd-otherprops="ibm">Plug-ins can be developed and updated more frequently than IBM provided release
+    cycles.</p>
+
+<p class="p" data-hd-otherprops="ibm">Browse, download, and get documentation for external plug-ins from the <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/" target="_blank">Deploy plug-in</a>. The site contains many more plug-ins than are packaged with the
+     <span class="ph">Deploy</span> product.</p>
+
+<p class="p">The site includes plug-ins that are developed by these sources:</p>
+<dl class="dl">
+
+<dt class="dt dlterm" data-hd-otherprops="ibm">IBM® Corporation</dt>
+<dd class="dd" data-hd-otherprops="ibm">Your <span class="ph">DevOps Deploy</span> license entitles you to download and install the
+                        plug-ins that are developed by IBM
+                        Corporation. <p class="p">Support is provided through the developerWorks® community and through
+                                IBM technical support.</p>
+                    </dd>
+
+
+
+<dt class="dt dlterm">Partners</dt>
+<dd class="dd">Plug-ins that are provided by partners can be purchased from the partner website. <p class="p">Support for
+each partner plug-in is provided exclusively by the partner who provided the plug-in.</p></dd>
+
+
+<dt class="dt dlterm" data-hd-otherprops="ibm">Community</dt>
+<dd class="dd" data-hd-otherprops="ibm">Plug-ins are provided by members of the Deploy community on the <a class="xref" href="https://community.ibm.com/community/user/wasdevops/home" target="_blank">IBM
+       Development Community website</a>. Search for <kbd class="ph userinput">deploy</kbd> or
+       <kbd class="ph userinput">ucplugin</kbd> to find plug-ins. You can contribute to code in the community
+      or use code posted there to incorporate into your own. <p class="p">Support is provided exclusively
+       through the community. </p></dd>
+
+</dl>
+<p class="p">For information about installing plug-ins, see <a class="xref" href="../../admin/topics/settings_plugins.html" title="Plug-ins can be installed at any time. You do not need to restart the server after you install a plug-in.">Installing plug-ins</a>.</p>
+</section>
+</div>
+
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../reference/topics/reference_plugins_create.html">Creating plug-ins</a></strong><br>You can create your own plug-ins for use with <span class="ph">IBM DevOps Deploy (Deploy)</span>. A plug-in         consists of XML files and supporting script files that the plug-in requires.</li><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../reference/topics/reference_plugins_example.html">Example plug-in</a></strong><br>A plug-in consists of one or more steps. A step represents a unit of functionality that   can be user-configured and combined with other steps into a process. Creating a plug-in consists   in defining its individual steps and then grouping them together for presentation in <span class="ph">IBM DevOps Deploy (Deploy)</span>.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/c_node_extending.html" title="Learn how to extend the function of IBM DevOps Deploy (Deploy).">Extending Product Function</a></div></div></nav></article></main></body></html>

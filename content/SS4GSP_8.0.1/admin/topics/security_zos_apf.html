@@ -1,0 +1,40 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="To deploy applications to an IBM z/OS environment, you must identify specific directories and data sets to the authorized program facility (APF)."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_zos.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_zos_apf"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>IBM z/OS authorized program facility</title></head><body id="security_zos_apf"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">
+<span class="keyword">IBM z/OS</span> authorized program facility</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-81f977a0-1a03-416d-a5fa-a927a6bcf66f">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">To deploy applications to an <span class="keyword">IBM® z/OS®</span> environment, you must identify specific directories and data sets to the authorized program
+facility (APF).</p>
+<div class="note note note_note"><span class="note__title">Note:</span> 
+            <ul class="ul" id="security_zos_apf__ul_wlq_ynl_qxb">
+                <li class="li">Access to the UNIX™ directories and files
+                    is required prior to authorization. Refer to <a class="xref" href="security_zos_files.html" title="To deploy applications to an IBM z/OS environment, the user accounts on the agent computer must have adequate access permissions. You must also identify specific directories and data sets to the authorized program facility.">IBM z/OS directories and data
+                    sets</a>.</li>
+                <li class="li">The filesystem mount on which the agent is installed must have the
+                        <span class="keyword parmname">Ignore SETUID</span> value set to 0 for the APF authorization
+                    to take effect.</li>
+            </ul>
+        </div>
+<div class="p">
+<table class="table" id="security_zos_apf__table_a2v_m4l_bfb"><caption><span class="table--title-label">Table 1. </span><span class="title">APF-authorized directories and data sets</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="security_zos_apf__table_a2v_m4l_bfb__entry__1">Directories and data sets</th>
+<th class="entry" id="security_zos_apf__table_a2v_m4l_bfb__entry__2">Required access permissions</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_zos_apf__table_a2v_m4l_bfb__entry__1">The HLQ.SBUZAUTH data set</td>
+<td class="entry" headers="security_zos_apf__table_a2v_m4l_bfb__entry__2">The load module BUZJMON must be APF-authorized.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_zos_apf__table_a2v_m4l_bfb__entry__1"><span class="ph filepath"><var class="keyword varname">agent</var>/auth/checkaccess</span></td>
+<td class="entry" headers="security_zos_apf__table_a2v_m4l_bfb__entry__2">The extended attributes must be set so that the <span class="keyword cmdname">checkaccess</span>
+utility is APF-authorized. To set the extended attributes, type <kbd class="ph userinput">extattr +a</kbd> at
+a command prompt.<p class="p">You must have read access to the BPX.FILEATTR.APF resource in the FACILITY class
+profile to run this command.</p></td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_zos.html" title="Specific security definitions are used to secure IBM DevOps Deploy (Deploy) functions for the IBM z/OS environment. To deploy applications to an IBM z/OS environment, the user accounts on the agent computer must have adequate access permissions. You must also identify specific directories and data sets to the authorized program facility.">Security requirements on IBM z/OS computers</a></div></div></nav></article></main></body></html>

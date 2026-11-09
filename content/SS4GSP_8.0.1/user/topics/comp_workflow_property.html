@@ -1,0 +1,36 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="A process property provides a way to add user-supplied information to a process. A running process can prompt users for information and then incorporate it into the process. For example, if the process entails authenticating with another server, you can require that a user enter an ID and a password for the process to continue. Properties are defined in the Edit Property dialog box."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_workflow.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_workflow_property"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Adding process properties</title></head><body id="comp_workflow_property"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Adding process properties</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-70a43ae4-9eb4-49bf-835b-d271f3b9ffab">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">A <dfn class="term">process property</dfn> provides a way to add user-supplied information to a
+process. A running process can prompt users for information and then incorporate it into the
+process. For example, if the process entails authenticating with another server, you can require
+that a user enter an ID and a password for the process to continue. Properties are defined in the
+<span class="keyword wintitle">Edit Property</span> dialog box.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_workflow_property__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Open the process.</span></li><li class="li step stepexpand">
+<span class="ph cmd">On the <span class="ph uicontrol">Configuration</span> tab, click <span class="ph uicontrol">Component Process
+Properties</span>, <span class="ph uicontrol">Application Process Properties</span>, or <span class="ph uicontrol">Process
+Properties</span>, depending on the type of process.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Edit Properties</span> dialog box, enter a name in the
+<span class="ph uicontrol">Name</span> field. </span>
+</li><li class="li step stepexpand"><span class="ph cmd">Optionally, enter a description in the <span class="ph uicontrol">Description</span> field.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Enter a label in the <span class="ph uicontrol">Label</span> field. </span>
+<div class="itemgroup info">The label is associated with the property in the user interface.<div class="note note note_note"><span class="note__title">Note:</span> If two properties have
+the same label, they will not be grouped if the property names are not also the same.</div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In <span class="ph uicontrol">Pattern</span>, enter a regular expression to require that user input values
+for this property match a specific pattern. Leave this field blank to accept any values.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">If the property is required, check the <span class="ph uicontrol">Required</span> check
+box. </span><div class="itemgroup info">The default value is that the property is not required.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Specify the type of expected value with the <span class="ph uicontrol">Type</span> list.</span>
+<div class="itemgroup info">Supported types are: <code class="ph codeph">text</code>, <code class="ph codeph">text area</code>, <code class="ph codeph">check box</code>, <code class="ph codeph">select</code>, <code class="ph codeph">multi select</code>,
+and <code class="ph codeph">secure</code>. Default type is <code class="ph codeph">text</code>.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Default Value</span> field, enter
+a default value (if any).</span></li><li class="li step stepexpand"><span class="ph cmd">To save your work, click <span class="ph uicontrol">Save</span>. To
+discard changes, click <span class="ph uicontrol">Cancel</span>.</span></li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_workflow_property__postreq__1">What to do next</h2></div>To use a property in a process, reference it when you configure
+(see <a class="xref" href="comp_process.html" title="A component process is a series of user-defined steps that operate on a component's artifacts.">Component processes</a>) a step that uses it.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a></div></div></nav></article></main></body></html>

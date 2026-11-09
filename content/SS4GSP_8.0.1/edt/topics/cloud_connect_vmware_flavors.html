@@ -1,0 +1,114 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="Flavors represent the capacity of images, including memory, storage space, and processor capacity. You must configure a set of flavors for VMware vCenter."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="cloud_connect_vmware_flavors"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring VMware vCenter image flavors</title></head><body id="cloud_connect_vmware_flavors"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring VMware vCenter image flavors</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-38d74d70-fe9d-4c05-812b-75231d61cbf9">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Flavors represent the capacity of images, including memory, storage space, and processor
+capacity. You must configure a set of flavors for VMware vCenter.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_connect_vmware_flavors__prereq__1">Before you begin</h2></div>Configure the cloud discovery service. See <a class="xref" href="../../user/topics/cds_configure.html" title="The cloud discovery service provides information about available images, regions, and flavors to the blueprint design server. This service runs with a default set of options, but you can customize these options so your images, regions and flavors are shown in the blueprint designer.">Setting up images, regions, and flavors for the cloud discovery service and engine</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_connect_vmware_flavors__context__1">About this task</h2></div>After you configure flavors, you can select a flavor at provisioning time to
+specify the size of the environment.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_connect_vmware_flavors__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the cloud discovery service configuration file.</span>
+<div class="itemgroup info">If you do not have a cloud discovery service configuration file, see <a class="xref" href="../../user/topics/cds_configure.html" title="The cloud discovery service provides information about available images, regions, and flavors to the blueprint design server. This service runs with a default set of options, but you can customize these options so your images, regions and flavors are shown in the blueprint designer.">Setting up images, regions, and flavors for the cloud discovery service and engine</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the section of this file that is labeled <code class="ph codeph">vcenter</code>, add flavors.</span>
+<div class="itemgroup info">Each flavor has the following parameters:<dl class="dl">
+
+<dt class="dt dlterm"><span class="keyword parmname">flavor</span></dt>
+<dd class="dd">The name of the flavor. This name appears in the list of flavors when you provision the
+environment.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">memory</span></dt>
+<dd class="dd">The amount of memory in megabytes.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">disk</span></dt>
+<dd class="dd">The size of the storage in gigabytes.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">vcpu</span></dt>
+<dd class="dd">The number of virtual CPUs.</dd>
+
+</dl></div>
+<div class="itemgroup stepxmp">For example, the following code creates five
+flavors:<pre class="pre codeblock"><code>"vcenter": {
+    "flavors": [
+        {
+            "flavor": "m1.tiny",
+            "memory": 512,
+            "disk": 20,
+            "vcpu": 1
+        },
+        {
+            "flavor": "m1.small",
+            "memory": 2048,
+            "disk": 20,
+            "vcpu": 2
+        },
+        {
+            "flavor": "m1.medium",
+            "memory": 4096,
+            "disk": 40,
+            "vcpu": 2
+        },
+        {
+            "flavor": "m1.large",
+            "memory": 8192,
+            "disk": 80,
+            "vcpu": 4
+        },
+        {
+            "flavor": "m1.xlarge",
+            "memory": 16384,
+            "disk": 100,
+            "vcpu": 8
+        }
+    ]
+}</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the file and restart the cloud discovery service.</span>
+<div class="itemgroup info">To restart the cloud discovery service, see <a class="xref" href="start_patterns.html" title="To start the blueprint designer and its associated services, you must start the cloud discovery service, the blueprint design server, and the engine Heat services.">Starting the blueprint designer, cloud discovery service, and engine</a> and <a class="xref" href="stop_patterns.html" title="To stop the blueprint designer and its associated services, you must stop the cloud discovery service, the blueprint design server, and the engine Heat services.">Stopping the blueprint designer, cloud discovery service, and engine</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">On the system that hosts the engine, open the
+<span class="ph filepath">/usr/lib/heat/ibm-cloud-ext/resources/ibm-cloud-discovery.conf</span> file.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In this file, add the same flavors to the <code class="ph codeph">[vmware]</code> section.</span>
+<div class="itemgroup stepxmp">For example, the following code contains five flavors that match the flavors in the
+previous
+example:<pre class="pre codeblock" id="cloud_connect_vmware_flavors__vcenter_heat_example"><code>[vcenter]
+flavors: [
+    {
+        "flavor": "m1.tiny",
+        "memory": 512,
+        "disk": 20,
+        "vcpu": 1
+    }, {
+        "flavor": "m1.small",
+        "memory": 2048,
+        "disk": 20,
+        "vcpu": 2
+    }, {
+        "flavor": "m1.medium",
+        "memory": 4096,
+        "disk": 40,
+        "vcpu": 2
+    }, {
+        "flavor": "m1.large",
+        "memory": 8192,
+        "disk": 80,
+        "vcpu": 4
+    }, {
+        "flavor": "m1.xlarge",
+        "memory": 16384,
+        "disk": 100,
+        "vcpu": 8
+    }]</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the file and restart the engine.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_connect_vmware_flavors__result__1">Results</h2></div>Now when you provision environments, the flavors are listed in the
+<span class="ph uicontrol">Flavor</span> list under <span class="ph uicontrol">Image Parameters</span>.</section>
+</div>
+</article></main></body></html>

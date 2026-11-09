@@ -1,0 +1,396 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The server properties in the installed.properties file control details about the server, such as what ports it uses."><meta name="DC.relation" scheme="URI" content="../../install/topics/serverInstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="server_properties"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Server installation properties</title></head><body id="server_properties"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+ <h1 class="title topictitle1" id="ariaid-title1">Server installation properties</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-be394149-b8d5-4ecb-9772-2735be0529e1">Edit online</a></span></div>
+ 
+ 
+ <div class="body refbody"><p class="shortdesc">The server properties in the <span class="ph filepath">installed.properties</span> file control
+  details about the server, such as what ports it uses.</p>
+  <section class="section">Some of these properties are listed in the table below. Some properties can be changed
+      after the server is installed and others cannot. <span class="ph" data-hd-otherprops="ibm">After the server starts for the first time, the server adds other properties to
+the <span class="ph filepath">installed.properties</span> file. Some of these additional properties can be
+changed and others cannot.</span><p class="p">By default, this file is in the folder
+          <span class="ph filepath">/opt/devops-deploy/server/conf/server</span>.</p><p class="p">For example, the server
+        adds the property <span class="keyword parmname">server.host</span>, which specifies the IP addresses on
+        which the server listens for connections. In most cases, the server sets this property to
+        the value <code class="ph codeph">0.0.0.0</code>, which means that the server listens for connections on
+        all IP addresses that it has available. You can specify a specific IP address in this
+        property to limit the IP addresses that the server listens on.</p></section>
+  <table class="table" id="server_properties__install_properties"><caption><span class="table--title-label">Table 1. </span><span class="title">Server installation properties</span></caption><colgroup><col style="width:33.85579937304075%"><col style="width:31.34796238244514%"><col style="width:34.79623824451411%"></colgroup><thead class="thead">
+          <tr class="row valign-bottom">
+            <th class="entry" id="server_properties__install_properties__entry__1">Property</th>
+            <th class="entry" id="server_properties__install_properties__entry__2">Default value</th>
+            <th class="entry" id="server_properties__install_properties__entry__3">Description</th>
+          </tr>
+        </thead><tbody class="tbody">
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">agentcomm.keystore</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><span class="ph filepath">../conf/server/s2s-client-identity.keystore</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">Used with Web agents. See, <a class="xref" href="../../user/topics/web_agents.html" title="Web agents use WebSocket and HTTPS connections for communication. Web agents do not use JMS.">Web agent configuration</a></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">agentcomm.proxy.uri</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The WebSocket connection that is used to communicate with an agent
+              relay. May have the format <code class="ph codeph">http://host-or-ip:port</code>.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">agentcomm.uri</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><span class="ph filepath">wss://host-or-ip:7919</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">WebSocket connection that is used to communicate with Web agents.
+              The WebSocket secure URL must have the format <code class="ph codeph">wss://host-or-ip:port</code>.
+              Each server must have a unique URL, and every server in a HA cluster must be able to
+              connect to this URL. Web agents use this URL to communicate with the sever.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">component.name</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><kbd class="ph userinput">DevOps Deploy</kbd></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">
+              <p class="p">The name of the <strong class="ph b">Deploy</strong> component during installation. The default property
+                is required for the installer during <strong class="ph b">Deploy</strong> installation. The property is
+                essential for determining default values.</p>
+              <div class="note note note_note" id="server_properties__note_vwn_pvr_lbc"><span class="note__title">Note:</span> You must use the default value during installation.
+                Changing the default values results in the failure of the installation.</div>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">component.directory</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><span class="ph filepath">devops-deploy/server</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">
+              <p class="p">The directory where the <strong class="ph b">Deploy</strong> component is installed. The default property
+                is required for the installer during  <strong class="ph b">Deploy</strong> installation. The property is
+                essential for determining the default values.</p>
+              <div class="note note note_note" id="server_properties__note_x2v_rps_lbc"><span class="note__title">Note:</span> You must use the default value during installation.
+                Changing the default values results in the failure of the installation.</div>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1">
+              <p class="p"><span class="keyword parmname">com.urbancode.ds.subsys.audit.A
+                uditFactory.daysToKeepRestLog</span></p>
+            </td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">30</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The number of days you want to keep the REST call log records. To
+              keep the last 10 days of data, set the value to 10.<div class="note note note_note" id="server_properties__note_vjr_b2v_dyb"><span class="note__title">Note:</span> Restart
+                your server instance for the change to take effect.</div></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1">
+              <p class="p"><span class="keyword parmname">com.urbancode.ds.web.rest.integ
+                ration.vsys.VsysHelper.timeout</span></p>
+            </td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">120</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The time, in seconds, that server waits while it provisions an
+                <span class="keyword">IBM® PureApplication® System</span>
+              environment. For complicated patterns, you might have to increase this value. Specify
+              a value greater than the longest provision session requires. For example, if no
+              provision is expected to take longer than 10 minutes, specify <code class="ph codeph">900</code>, or
+              15 minutes.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1">
+              <p class="p"><span class="keyword parmname">com.urbancode.ds.workflow.cop
+                yChildPropertiesToParentContext</span></p>
+            </td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">true</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">Set this property to false if you are not using children process
+              properties. This can provide a performance boost.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">com.urbancode.resource.sync.interval</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">5</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">Synchronizes the resource template changes at a regular interval
+              of time. Enter the time interval (in minutes) at which the resource sync service runs
+              on the system. Default is <code class="ph codeph">5</code>. Setting the time interval to 15 minutes
+              may help in improving the performance of the system. <span class="ph" data-hd-otherprops="ibm">The <a class="xref" href="https://www.ibm.com/support/pages/mustgather-how-investigate-behavior-resource-synchronization" target="_blank">technote</a> gives you additional information
+                about this property.</span> Note that changes in a resource template structure are
+              automatically picked up by the resource sync service but any change in the role
+              properties of a resource template will not be synchronized.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">database.derby.port</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">11377</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The port for the Derby database. This property is used only for
+              Derby databases.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">database.type</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><span class="ph filepath">derby</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The type of database. <span class="ph" data-hd-otherprops="ibm">Valid values are <code class="ph codeph">derby</code>,
+                    <code class="ph codeph">mysql</code>, <code class="ph codeph">oracle</code>, <code class="ph codeph">sqlserver</code>, and
+                    <code class="ph codeph">db2</code>.</span>
+              <strong class="ph b">Warning: </strong>Derby is for evaluation purposes only; do not use Derby for a
+              production server. In addition, if you install the server as a node in a
+              high-availability cluster, you cannot use Derby.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">encryption.keystore</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><span class="ph filepath">../conf/encryption.keystore</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The path to the encryption keystore. <span class="ph" id="server_properties__optional_for_existing">This parameter is optional if you have an existing
+                installation that you are upgrading.</span></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">encryption.keystore.alias</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><code class="ph codeph">desedekey<var class="keyword varname">uniqueID</var></code></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The encryption keystore alias. <span class="ph">This parameter is optional if you have an existing
+                installation that you are upgrading.</span></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">hibernate.connection.driver_class</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">The default value depends on the type of database</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The class name of the database driver, such as
+                <code class="ph codeph">com.ibm.db2.jcc.DB2Driver</code> for DB2® or <code class="ph codeph">org.apache.derby.jdbc.ClientDriver</code> for Derby.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">hibernate.connection.password</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><code class="ph codeph">password</code></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The password for the database connection. This password is
+              encrypted during the installation process.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">hibernate.connection.url</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><code class="ph codeph">jdbc:derby://host-or-ip:11377/data</code></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The connection URL for the database. For more information on
+              building a database connection string, refer to documentation from your database
+                provider.<div class="note important note_important" id="server_properties__note_iyb_rd5_33c"><span class="note__title">Important:</span> Do not include database
+                credentials (such as <code class="ph codeph">user</code> or <code class="ph codeph">password</code>) in the JDBC
+                connection URL. Instead, define them separately in
+                  <code class="ph codeph">secured-installed.properties</code> using the
+                  <code class="ph codeph">hibernate.connection.password</code> properties. Passwords stored in the
+                  <code class="ph codeph">secured-installed.properties</code> file are automatically encrypted and
+                handled securely by the server.</div></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">hibernate.connection.username</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><code class="ph codeph">devops-deploy</code></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The user name for the database connection. Unless
+                <span class="keyword parmname">skip.db.install</span> is set to <code class="ph codeph">Y</code>, this user must
+              have permission to create tables in the database.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">hibernate.default_schema</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The name of the database schema. This property is required only
+              for Oracle databases on Windows™.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.ha</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><code class="ph codeph">N</code></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">Specify <code class="ph codeph">Y</code> if the new server is part of a
+              high-availability cluster. If you specify <code class="ph codeph">Y</code>, Derby is not an option
+              for the server. In this case, you must specify database information in properties such
+              as <span class="keyword parmname">database.type</span> and
+                <span class="keyword parmname">hibernate.connection.url</span>.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.java.home</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">The value of the <span class="keyword parmname">JAVA_HOME</span> system
+              variable</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The location of the installation of Java™ to use. This value must match the value of the
+                <span class="keyword parmname">JAVA_HOME</span> system variable. It must also match the location of
+              the JRE or JDK that you use to run the installation file.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.server.dir</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><span class="ph filepath" data-hd-otherprops="ibm">/opt/devops-deploy/server</span>
+                (Linux™) or <span class="ph filepath">C:\Program
+                Files\devops-deploy\server</span> (Windows)</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The installation directory for the server.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.server.web.always.secure</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><code class="ph codeph">Y</code></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">Specify <code class="ph codeph">Y</code> to always use secure connections to the
+              server. Specify <code class="ph codeph">N</code> to allow non-secure connections.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.server.web.host</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">The host name of the server</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3"><span class="ph" data-hd-otherprops="ibm">If you are installing a stand-alone server, specify the host name of the
+computer that hosts the server. If you are installing a stand-alone server in a production
+environment, consider specifying a host name that is not tied to the physical computer. By
+specifying such a host name, you can expand the server to a high-availability system later. If you
+are installing a server in a high-availability cluster, specify the host name of the load balancer
+for the cluster.</span></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.server.web.https.port</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">8443</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3"><span class="ph" data-hd-otherprops="ibm">Specify the HTTPS port for the server. The default value is
+                    <code class="ph codeph">8443</code>. <span class="ph" id="server_properties__d76e428">If you are installing <span class="ph">Deploy</span>,
+                      <span class="keyword">IBM DevOps
+                                        Velocity</span>, and
+                      <span class="keyword">IBM DevOps
+                                        Release</span>, be
+                    sure to use a different port for each product. If you are installing multiple
+                    instances of <span class="ph">Deploy</span> on
+                    the same computer, be sure to use a different port for each instance.
+                </span></span></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.server.web.ip</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">0.0.0.0</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The IP address that the server listens on. Specify
+                <code class="ph codeph">0.0.0.0</code> to listen on all addresses that are available to the
+              system.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.server.web.port</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">8080</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3"><span class="ph" data-hd-otherprops="ibm">Specify the HTTP port for the server. The default value is
+<code class="ph codeph">8080</code>.<span class="ph">If you are installing <span class="ph">Deploy</span>,
+                      <span class="keyword">IBM DevOps
+                                        Velocity</span>, and
+                      <span class="keyword">IBM DevOps
+                                        Release</span>, be
+                    sure to use a different port for each product. If you are installing multiple
+                    instances of <span class="ph">Deploy</span> on
+                    the same computer, be sure to use a different port for each instance.
+                </span></span></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.service</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3"> To install <span class="ph">Deploy</span> as Windows
+              service, enter <kbd class="ph userinput">install.service=Y</kbd>.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.service.name</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">To install <span class="ph">Deploy</span> as Windows
+              service, enter
+              <kbd class="ph userinput">install.service.name=devops-deploy-server</kbd>.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.service.login</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">To install <span class="ph">Deploy</span> as Windows
+              service, enter
+                <kbd class="ph userinput">install.service.login=.\\<var class="keyword varname">localsystem</var></kbd>.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.service.password</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">Enter the password for the administrative user.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">install.service.autostart</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">Enter <kbd class="ph userinput">install.service.autostart=N</kbd>. </td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">java.home</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">Defaults to value of JAVA_HOME environment variable</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">If Java is installed in a location other than the default
+              location, then you must update the <code class="ph codeph">java.home</code> property
+              accordingly.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">license.server.url</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">Specify the connection information for the license server. <span class="ph" data-hd-otherprops="ibm">You can specify the port and host name or IP address for the license server,
+                      such as <code class="ph codeph">27000@RCLServer.example.com</code>. To avoid problems when a
+                      license server is not available, you can specify multiple license servers. In
+                      this case, separate each address with colons on Linux and UNIX™
+                      or semicolons on Windows, as in the
+                      following example: <code class="ph codeph">27000@RCLServer.example.com; 27000@backupRCLServer.example.com</code>. For more complicated license
+                      server scenarios, see this <a class="xref" href="https://www.ibm.com/docs/en/common-licensing/9.0.0" target="_blank">document</a>. <span class="ph" data-hd-otherprops="ibm">For information about setting up a IBM Common
+                License server and applying licenses, see <a class="xref" href="https://www.ibm.com/docs/en/common-licensing/9.0.0?topic=overview-getting-started-common-licensing" target="_blank">Getting started with IBM Common Licensing</a>.
+            </span></span><span class="ph">This parameter is optional if you have an existing
+                installation that you are upgrading.</span></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">require.token.basic</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">False</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">When set to true then tools, such as udclient, will only be able
+              to interact with the server using authtoken authentication ( <code class="ph codeph">--authtoken 3fb19dc4-f879-4684-906b-123456789abc</code> ) and prevented from using the basic
+              --username --password flags.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1">
+              <p class="p"><span class="keyword parmname">server.agentCommunicationAlwaysEnc rypted</span></p>
+            </td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><code class="ph codeph">false</code></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">Set this property to true to accept connections only from agents
+              that use secure connections.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">server.appdata.dir</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><span class="ph">The
+                  default application data folder is
+                    <span class="ph filepath">/opt/devops-deploy/server/appdata</span> on Linux and <span class="ph filepath">C:\Program
+                    Files\devops-deploy\server\appdata</span> on Windows.</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The path to the application data directory. The directory must be
+              accessible to the server, and you must have the appropriate permissions. If you are
+              installing a node in a high-availability cluster, this directory must be on the
+              cluster network storage.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">server.initial.password</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3"><span class="ph" data-hd-otherprops="ibm">Specify the starting password for the administrator account on the
+server. The administrator user name is <code class="ph codeph">admin</code>.</span><div class="note note note_note" data-hd-otherprops="ibm" id="server_properties__note_mrt_1z3_3bc"><span class="note__title">Note:</span> When you perform a
+                silent installation, this property is a required entry in the
+                  <span class="ph filepath">install.properties</span> file.</div></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">server.keystore</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The path to the server keystore.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">server.keystore.password</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><code class="ph codeph">changeit</code></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The password for the server keystore. This password is encrypted
+              during the installation process. Additionally, this password is initially assigned to
+              the <code class="ph codeph">encryption.keystore.password</code> property.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">server.key.alias</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">NA</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The name of the shared web agent communication server keypair and
+              certificate located in the server keystore.<div class="p">On upgrade, after automatic rotation of
+                keys, the <span class="keyword parmname">server.key.alias</span> property is added to the
+                  <span class="ph filepath">installed.properties</span> file as
+                below:<pre class="pre codeblock" id="server_properties__codeblock_gm4_nf2_s1c"><code>server.key.alias=&lt;newKeyAlias&gt;</code></pre></div><p class="p">The
+                key aliases are stored in the server keystore defined by the
+                  <span class="keyword parmname">server.keystore</span> property, which defaults to
+                  <span class="ph filepath">$APPDATA/conf/server.keystore</span>. </p></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">server.userIdAuthScheme</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><code class="ph codeph">false</code></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3"> Set to <code class="ph codeph">true</code> to enable the authentication method
+              needed to have a Distributed Frontend Server. Must be set on the backend servers to
+              allow the frontend servers to communicate with them.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">skip.db.install</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">N</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">If the value is <code class="ph codeph">Y</code> or <code class="ph codeph">yes</code>,
+                then:<ul class="ul" id="server_properties__ul_zvk_wz3_3bc">
+                <li class="li">The installation process does not create the database schema. For example, you
+                  skip creating the schema if you have a pre-populated database, such as if you are
+                  adding a server to a cluster. In this case, you must still provide the database
+                  connection information in the other properties such as
+                    <span class="keyword parmname">hibernate.connection.url</span>.</li>
+                <li class="li">The database is not updated during the installation. Therefore, the password
+                  that you specified in the <span class="keyword parmname">server.initial.password</span> property is
+                  not applied.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">tomcat.key.alias</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2">server</td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">The keystore alias name. </td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="server_properties__install_properties__entry__1"><span class="keyword parmname">nonInteractive</span></td>
+            <td class="entry" headers="server_properties__install_properties__entry__2"><code class="ph codeph">false</code></td>
+            <td class="entry" headers="server_properties__install_properties__entry__3">Set to <code class="ph codeph">true</code> to install or upgrade the server in
+              silent mode.</td>
+          </tr>
+        </tbody></table>
+ </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/serverInstall.html" title="The server provides services such as the user interface used to configure application deployments, the security service, and the artifact repository, among others. Installing the server involves specifying configuration information for the server, such as the ports that the server uses.">Installing the DevOps Deploy server</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Create a component"><meta name="DC.subject" content="udclient commands, createComponent, udclient command, command-line commands"><meta name="keywords" content="udclient commands, createComponent, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_createcomponent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>createComponent</title></head><body id="udclient_createcomponent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">createComponent</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3c35b2a5-cd20-48a6-8b8f-12ae41b6c336">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Create a component</p>
+<section class="section"><h2 id="udclient_createcomponent__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  createComponent [JSON file]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_createcomponent__title__3" class="title sectiontitle">Parameters</h2>
+None.</section>
+<section class="section"><h2 id="udclient_createcomponent__title__4" class="title sectiontitle">Template</h2>
+<div class="p">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "cleanupCountToKeep": "Number of most recent versions to 
+  keep; omit this parameter to inherit the system settings 
+  (Optional)",
+  "cleanupDaysToKeep": "Number of days to keep versions; 
+  omit this parameter to inherit the system settings 
+  (Optional)",
+  "defaultVersionType": "The default type to create 
+  versions with; valid values are FULL and INCREMENTAL",
+  "description": "Description",
+  "importAutomatically": "Specify true to import new 
+  versions automatically",
+  "inheritSystemCleanup": "Inherit the system cleanup 
+  settings. If set to true, this overrides the other cleanup 
+  attributes. (Optional, Boolean)",
+  "integrationAgent": "ID of the Agent to use for 
+  importing new component versions (Optional)",
+  "integrationTag": "Tag name of the Agent to use for 
+  importing new component versions (Optional)",
+  "name": "Component name or ID",
+  "properties": {"Source configuration plugin property 
+  name": "Property value"},
+  "sourceConfigPlugin": "The name of the source 
+  configuration plug-in to use (Optional)",
+  "teamMappings": [{
+    "resourceRoleId": "Id of Resource Type to apply to 
+  this team mapping (optional, can specify either this or 
+  resourceRoleLabel",
+    "resourceRoleLabel": "Name of Resource Type to apply 
+  to this team mapping (optional, can specify either this or 
+  resourceRoleId",
+    "teamId": "ID of a team, either this field or 
+  teamLabel are needed to specify a team",
+    "teamLabel": "Name of the team to map the environment 
+  to, either this field or teamId are needed to specify a 
+  team"
+  }],
+  "templateId": "ID of the template to use (Optional)",
+  "templateName": "Name of a template to use; this 
+  parameter is ignored if  templateId is specified 
+  (Optional)",
+  "templateVersion": "Version number of the specified 
+  template (Optional)",
+  "useVfs": "Boolean"
+}
+</code></pre></div></section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_createcomponent__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  createComponent newComponent.json
+</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_createcomponent__title__6" class="title sectiontitle">Example JSON requests</h2><pre class="pre codeblock language-json"><code>{
+  "name": "My new component",
+  "description": "New component for command example",
+  "importAutomatically": false,
+  "useVfs": true,
+  "sourceConfigPlugin": "File System (Versioned)",
+  "defaultVersionType": "FULL",
+  "properties": {
+    "FileSystemVersionedComponentProperties\/basePath": 
+    "/opt/newcomponent"
+  }
+}</code></pre><p class="p">The <span class="keyword parmname">properties</span> attribute in the JSON template refers to properties for the
+source configuration plug-in, not custom properties. For example, the following code creates a
+component from a Maven repository. It includes properties that are prefixed with
+<code class="ph codeph">MavenComponentProperties</code> to refer to the properties for that plug-in.</p><pre class="pre codeblock language-json"><code>{
+  "name": "Component from Maven",
+  "description": "New component for command example for Maven",
+  "importAutomatically": false,
+  "useVfs": false,
+  "sourceConfigPlugin": "Maven",
+  "defaultVersionType": "FULL",
+  "properties": {
+    "MavenComponentProperties\/artifactId":"MyArtifact",
+    "MavenComponentProperties\/groupId":"MyGroup",
+    "MavenComponentProperties\/extension":"ext",
+    "MavenComponentProperties\/repoUrl":"http:\/\/myserver.com"
+  }
+}</code></pre><p class="p">To see the properties for a source configuration plug-in, create a component in the web interface
+and use the source configuration plug-in. Then, then export its information with the <a class="xref" href="udclient_getcomponent.html" title="Get information about a component">getComponent</a> command. The JSON that this command returns includes the
+properties for the source configuration plug-in. You can also look in the
+<span class="ph filepath">plugin.xml</span> file in the plug-in.</p><div class="p">To create a component from a template, specify either the <span class="keyword parmname">templateId</span>
+attribute or the <span class="keyword parmname">templateName</span> attribute. Then, specify the
+<span class="keyword parmname">templateVersion</span> attribute; to use the most recent version of the template,
+specify an empty string. If the template contains property definitions, you can specify values for
+those properties with the attribute
+<code class="ph codeph"><span class="keyword parmname">template/</span><var class="keyword varname">propertyName</var></code>, where
+<code class="ph codeph"><var class="keyword varname">propertyName</var></code> is the name of the property. For example, the
+following JSON code creates a component from the most recent version of the
+<span class="keyword parmname">Template1</span> template. This code specifies the value <code class="ph codeph">MyValue</code> for
+the parameter
+<span class="keyword parmname">template/MyProperty</span>.<pre class="pre codeblock language-json"><code>{
+  "name":"NewComponent1", 
+  "description":"",
+  <strong class="ph b">"templateName":"Template1", 
+  "templateVersion":"",
+  "template/MyProperty":"MyValue",</strong> 
+  "componentType":"STANDARD", 
+  "sourceConfigPlugin":"",
+  "importAutomatically":"false", 
+  "useVfs":"true",
+  "defaultVersionType":"FULL", 
+  "importAgentType":"inherit",
+  "inheritSystemCleanup":"true",
+  "runVersionCreationProcess":"false",
+  "properties":{},
+  "teamMappings":[]
+}</code></pre></div></div><div class="example" data-hd-audience="all"><h2 id="udclient_createcomponent__title__7" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "id": "e84c7947-fad1-4399-8eb8-0d0d354b9e2b",
+  "name": "My new component",
+  "description": "New component for command example",
+  "created": 1391456765556,
+  "importAutomatically": false,
+  "useVfs": true,
+  "active": true,
+  "deleted": false,
+  "defaultVersionType": "FULL",
+  "cleanupDaysToKeep": 0,
+  "cleanupCountToKeep": 0,
+  "tags": [
+  ],
+  "user": "admin"
+}</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_component_create_put.html">Create a component</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

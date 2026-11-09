@@ -1,0 +1,87 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To migrate security settings from uDeploy 4.8.5 or IBM uDeploy 5.0 to IBM DevOps Deploy (Deploy), complete these steps."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ssl_mutual_authServers"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Migrating security settings</title></head><body id="ssl_mutual_authServers"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Migrating security settings</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-770e1bda-3309-4ea8-8ac9-0a5f03c1a1dd">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To migrate security settings from uDeploy® 4.8.5 or IBM® uDeploy 5.0
+to <span class="ph">IBM DevOps Deploy (Deploy)</span>,
+complete these steps.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskssl_mutual_authServers__prereq__1">Before you begin</h2></div>Read the <a class="xref" href="../../admin/topics/security_ch.html" title="IBM DevOps Deploy (Deploy) uses a flexible team-based and role-based security model that maps to your organizational structure.">Managing Security</a> topic, which helps you determine the number of teams you need.<div class="note note note_note"><span class="note__title">Note:</span> If you are upgrading from a
+version before 4.8.5 and you want to upgrade your security settings, you must first upgrade to 4.8.5
+or 5.0 before you start this task. If you are upgrading the server but not your security settings,
+you must be at version 4.8.3 or higher.</div></section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskssl_mutual_authServers__context__1">About this task</h2></div>The security model in <span class="ph">Deploy</span> represents
+significant changes from previous versions. By completing the migration
+task, you can secure existing user-created objects instead of individually
+securing each object after the upgrade.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskssl_mutual_authServers__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">From within uDeploy 4.8.5
+or IBM uDeploy 5.0, open the <span class="keyword wintitle">Migration</span> page
+by navigating to the migration URL: <span class="ph filepath">deploy_server_location/#migration/teams</span>. </span>
+<div class="itemgroup stepxmp">For example:<pre class="pre codeblock"><code>https://company.com:8443/#migration/teams</code></pre></div>
+</li><li class="li step stepexpand"><span class="ph cmd">Open the <span class="ph uicontrol">User Roles</span> pane to create
+roles and assign permissions to them. For information about roles,
+see <a class="xref" href="../../admin/topics/security_roles.html" title="A role is a list of permissions that users have on the IBM DevOps Deploy (Deploy) server. These permissions include the ability to create, edit, and delete objects, such as applications, environments, and components. The permission also includes the parts of the server interface that users can access.">Roles and permissions</a>.</span><div class="itemgroup info">Create at least one administrator-type
+role with all permission, or at a minimum all web UI permissions,
+and the <span class="ph uicontrol">Add Team Members</span> and <span class="ph uicontrol">Manage
+Security</span> permissions from the System security type.<p class="p">For
+information about security types, see <a class="xref" href="../../admin/topics/security_types.html" title="Security types define categories of objects on the server. You can put all objects into a single category, or you can put them in separate categories and give roles different access rights to different categories.">Security types</a>.</p><div class="note note note_note"><span class="note__title">Note:</span> The Execute permission is now only
+used by the Environment security type, and you no longer must grant
+that permission to other types. To change or modify an item, a user
+must have the corresponding Edit permission. You can lock items by
+withholding the Edit permission from a role.</div> </div></li><li class="li step stepexpand"><span class="ph cmd">Open the <span class="ph uicontrol">Teams</span> pane to create teams
+and add users and groups to them. All previously created users and
+groups are available for assignment. For information about creating
+teams and assigning users, see <a class="xref" href="../../admin/topics/security_teams.html" title="Users and groups on the server are assigned roles when they are added to teams.">Security teams</a>.</span><div class="itemgroup info"> <div class="note note note_note"><span class="note__title">Note:</span> Users must be assigned to
+a role when added to a team, so roles must be defined before users
+and groups can be added to teams.</div> </div></li><li class="li step stepexpand"><span class="ph cmd">Open the <span class="ph uicontrol">Object-Team Mapping</span> pane.
+This pane maps objects to the teams that manage security for those
+objects. This pane shows only the objects that can have their own
+security settings.</span><div class="itemgroup info">The secure-able object types can be
+seen in the following screen capture. <br><img class="image" src="../images/security_migrate.png" alt="Specifying the teams that manage security for objects"><br> To map objects,
+do these steps:</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Select the object type from the object-type list. </span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Select all the objects to assign to the same team from
+the object list.</span><div class="itemgroup info">The <span class="ph uicontrol">tph1</span> agent
+is selected in the accompanying figure. You can select multiple items
+by holding down the Shift key when you select an item. Use the filter
+boxes to limit long lists.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Add Selected to Team</span>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">From the Add a Team dialog box, select the team to assign
+the selected objects to, and select the security type. </span></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span></li>
+</ol>
+<div class="itemgroup info"> <div class="note note note_note"><span class="note__title">Note:</span> The <span class="ph uicontrol">Licenses</span> type is not used
+and can be ignored. </div> </div></li><li class="li step stepexpand"><span class="ph cmd">By default, manual tasks are configured so that any user
+can use them. To limit a task to a specific role, open the <span class="ph uicontrol">Task
+Security</span> pane, and associate the task with the role.</span>
+<div class="itemgroup info">Any application, component, or approval-type task that is used
+in a process is available to use. To associate tasks with roles, do
+these steps:</div><div class="itemgroup info"> </div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Select the task type from the task-type list. </span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Open the Configuration dialog box by clicking <span class="ph uicontrol">Configuration</span> for
+the task to use.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">Select a value from the <span class="ph uicontrol">Who can approve this
+task</span> list.</span><div class="itemgroup info">Roles can be restricted by environment
+or application.<br><img class="image" src="../images/security_migrate2.png" alt="Associating a task with a role"><br></div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Select the role and security type for the task.</span>
+<div class="itemgroup info">If you specify the <kbd class="ph userinput">admin</kbd> role, for example,
+to use the object, a user must be assigned the <kbd class="ph userinput">admin</kbd> role.
+Multiple roles can be selected.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Save you work.</span></li>
+</ol>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskssl_mutual_authServers__result__1">Results</h2></div>After you set up security, you are ready to upgrade to <span class="ph">Deploy</span>.
+For information about upgrading, see <a class="xref" href="upgradeInstall.html#upgradeinstall" title="You can upgrade the IBM DevOps Deploy (Deploy) server to incorporate to a later version.">Upgrading the server</a>. After the upgrade,
+in addition to the teams that you configured, a System team is created
+that is granted permissions for all objects that can be secured. Anyone
+added to a role on the System team is granted all permissions for
+its objects.</section>
+</div>
+
+</article></main></body></html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To create a resource template, specify the contents and organization of the template, including resources, groups, and agent prototypes."><meta name="DC.relation" scheme="URI" content="../../user/topics/resources_templates.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="resources_templates_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating resource templates</title></head><body id="resources_templates_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating resource templates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b067280a-374c-425b-8b77-86313e2342f1">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To create a resource template, specify the contents and
+organization of the template, including resources, groups, and agent
+prototypes.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_templates_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Resource Templates</span></span> and then click <span class="ph uicontrol">Create Resource Template</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify a name for the template.</span>
+<div class="itemgroup info">
+<div class="note restriction note_restriction"><span class="note__title">Restriction:</span> If you use this resource template with a blueprint that you provision to a
+cloud that uses virtual system patterns, the name cannot contain asterisk (*), backslash (\), or
+forward slash (/) characters. </div>
+</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">In the <span class="ph uicontrol">Teams</span> fields, specify the access information for the new resource
+template.</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Check the box next to <span class="ph uicontrol">Copy Teams to Root Resource</span> to make the root
+resource available to the same teams as the resource template. </span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> This checkbox only affects creating resources from a resource template, not resources that are
+created by an environment template.</div>
+</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Under <span class="ph uicontrol">Root Resource Teams</span> click the plus sign to add the teams that
+should be able to use the root resource of the resource template. </span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup stepresult">The resource hierarchy for the new template opens in the editor. The hierarchy contains
+a top-level group.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add resources to the template hierarchy by selecting the top-level group or another resource or
+group in the template, clicking <span class="ph uicontrol">Actions</span>, and clicking a task, such as
+<span class="ph uicontrol">Add Group</span>.</span>
+<div class="itemgroup info">The template can contain any number of resources.</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Add agent prototypes to the resource template.</span>
+<div class="itemgroup info"><span class="ph">An <dfn class="term">agent
+prototype</dfn> is a resource that represents one or more agents that are not yet installed or
+connected to an environment.</span></div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Next to a folder in the resource template, click <span class="ph menucascade"><span class="ph uicontrol">Actions (...)</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Agent Prototype</span></span>.</span>
+<div class="itemgroup info">You can add only one agent prototype to each folder. </div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Resource</span> window, specify a description for the agent
+prototype.</span>
+</li>
+<li class="li substep substepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Specify a name pattern for the agents that the agent prototype represents.</span>
+<div class="itemgroup info">You might use an agent name pattern if you have a system for provisioning agents that is not
+cloud-based. When you create an environment from an application blueprint that is based on this
+resource template, you map agents that match the name pattern to the corresponding agent prototypes
+in the blueprint. For any agent prototypes that do not match existing agents, an entry is created in
+the environment for an agent with the expected name. <div class="note note note_note"><span class="note__title">Note:</span> When you specify an agent name pattern,
+you can not use wildcards or regular expressions. You can use the following special properties as
+variables that represent the application name and the environment name:
+<code class="ph codeph"><var class="keyword varname">${p:application.name}</var></code> and
+<code class="ph codeph"><var class="keyword varname">${p:environment.name}</var></code>.</div></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Add components to the agent prototypes.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Next to an agent prototype in the resource template, click <span class="ph menucascade"><span class="ph uicontrol">Actions </span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Component</span></span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Component</span> list, select a component that runs on the agent
+prototype.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Enter a description.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Define default user impersonation credentials.</span>
+<div class="itemgroup info"> For information about setting impersonation credentials, see <a class="xref" href="resources_impersonation.html#resources_impersonation" title="You can define default user impersonation credentials for a resource.">Defining default user impersonation credentials</a>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+<div class="itemgroup info">Components can be added to agents, agent pools, and agent prototypes. <div class="note note note_note"><span class="note__title">Note:</span> 
+<ul class="ul">
+<li class="li">If you create an environment with an environment template and then add component mappings to the
+resource template, the new component mappings are added to the environment. However, if you remove
+component mappings from the resource template, the component mappings are not removed from the
+environment.</li>
+<li class="li">Changes in a resource template structure are automatically picked up by the resource sync
+service but any change in the role properties of a resource template will not be synchronized. </li>
+</ul>
+</div>
+</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Add component tags to the agent prototypes.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> If you use this resource template in an application template and assign component tags to the
+application template, add those component tags to agent prototypes.</div>
+</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Next to an agent prototype in the resource template, click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Component Tag</span></span>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Component Tag</span> list, select a tag for the component that runs on
+the agent prototype.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Enter a description.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Define default user impersonation credentials.</span>
+<div class="itemgroup info"> For information about setting impersonation credentials, see <a class="xref" href="resources_impersonation.html#resources_impersonation" title="You can define default user impersonation credentials for a resource.">Defining default user impersonation credentials</a>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+</li>
+
+
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd"> Add agent pool into resource template.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep">
+<span class="ph cmd">Click the <code class="ph codeph">...</code> icon next to the base resource of the resource template which
+appears on hover. </span>
+</li>
+<li class="li substep">
+<span class="ph cmd"> Select <span class="ph uicontrol">Add agent pool</span> option in the drop-down. Dialog will appear that
+lets you choose agent pool. </span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">submit</span> and agent pool will be a child of the base resource.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Select the <code class="ph codeph">...</code> icon next to the new agent pool resource to <span class="ph uicontrol">Add
+Component</span> and <span class="ph uicontrol">Add Component Tag</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd"> Add agent into resource template.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep">
+<span class="ph cmd">Click the <code class="ph codeph">...</code> icon next to the base resource of the resource template which
+appears on hover. </span>
+</li>
+<li class="li substep">
+<span class="ph cmd"> Select <span class="ph uicontrol">Add agent </span> option in the drop-down. Dialog will appear that lets
+you choose agent. </span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span> and agent will be a child of the base resource.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Select the <code class="ph codeph">...</code> icon next to the new agent resource to <span class="ph uicontrol">Add
+Component</span> and <span class="ph uicontrol">Add Component Tag</span>.</span>
+</li>
+</ol>
+</li></ol></section>
+<section class="example"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_templates_create__example__1">Example</h2></div>For example, the following resource template contains a single agent prototype.<br><img class="image" src="../images/resources_templates_a.gif" alt="A simple resource template with an agent prototype that hosts a component"><br><div class="p">
+<div class="note note note_note"><span class="note__title">Note:</span> Resource templates cannot be deleted if in use by an environment template, or if it's a parent
+of another resource template. When you delete a resource template all resources in that template
+will also be deleted.</div>
+</div></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/resources_templates.html" title="A resource template is a model for a group of resources. The template contains a hierarchy of resources, groups, and agent prototypes that is a starting point for creating new resources.">Resource templates</a></div></div></nav></article></main></body></html>

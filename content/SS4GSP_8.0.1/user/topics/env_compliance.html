@@ -1,0 +1,52 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="The inventory for an environment lists the component versions that are intended to be deployed to that environment. Compliance shows whether the environment contains those component versions."><meta name="DC.relation" scheme="URI" content="../../user/topics/inventory_ch.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/inventory_manage_app.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="env_compliance"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Environment inventory and compliance</title></head><body id="env_compliance"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Environment inventory and compliance</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-bb1fe561-2214-4c71-aaea-7d71c15cb210">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">The <dfn class="term">inventory</dfn> for an environment lists the component versions that are
+intended to be deployed to that environment. <dfn class="term">Compliance</dfn> shows whether the environment
+contains those component versions.</p>
+<p class="p">The inventory and compliance for an environment are updated each time that you run an application
+process or deploy a snapshot to the environment. For example, assume that you run an application
+process that deploys two component versions to an environment. Regardless of whether the application
+process completes successfully, the environment inventory shows that the two component versions are
+deployed. The compliance shows how many of the components are installed successfully. In this way,
+the inventory shows the intended state of a resource or environment, while the compliance shows how
+closely the resource or environment matches the intended state. By reviewing the difference between
+the environment inventory and compliance, you can determine whether another deployment is necessary
+to bring an environment into compliance.</p>
+  <div class="p">The environment compliance status appears green for compliant environment and red for
+   non-compliant environment. Inventory count is displayed along with the compliance status in the
+   format <code class="ph codeph">number of actual inventory/number of desired inventory</code>. Here are a few
+   examples of environment inventory and compliance statuses and what they mean:<table class="table frame-all" id="env_compliance__table_hlw_sjs_xbc"><caption></caption><colgroup><col style="width:22.522522522522525%"><col style="width:77.47747747747749%"></colgroup><thead class="thead">
+      <tr class="row">
+       <th class="entry" id="env_compliance__table_hlw_sjs_xbc__entry__1">Status</th>
+       <th class="entry" id="env_compliance__table_hlw_sjs_xbc__entry__2">Description</th>
+      </tr>
+     </thead><tbody class="tbody">
+      <tr class="row">
+       <td class="entry" headers="env_compliance__table_hlw_sjs_xbc__entry__1">Compliant: 5/5</td>
+       <td class="entry" headers="env_compliance__table_hlw_sjs_xbc__entry__2">The desired inventory is the same as the actual inventory.</td>
+      </tr>
+      <tr class="row">
+       <td class="entry" headers="env_compliance__table_hlw_sjs_xbc__entry__1">Noncompliant: 2/5 (3 missing)</td>
+       <td class="entry" headers="env_compliance__table_hlw_sjs_xbc__entry__2">The desired inventory has more component versions than the actual inventory.</td>
+      </tr>
+      <tr class="row">
+       <td class="entry" headers="env_compliance__table_hlw_sjs_xbc__entry__1">Noncompliant: 5/5</td>
+       <td class="entry" headers="env_compliance__table_hlw_sjs_xbc__entry__2">The desired inventory has the same amount of component versions as the actual
+        inventory, but some versions in the list don't match.</td>
+      </tr>
+      <tr class="row">
+       <td class="entry" headers="env_compliance__table_hlw_sjs_xbc__entry__1">Noncompliant: 7/5</td>
+       <td class="entry" headers="env_compliance__table_hlw_sjs_xbc__entry__2">The desired inventory has less component versions than the actual inventory.</td>
+      </tr>
+     </tbody></table></div>
+<p class="p">The environment inventory and compliance track components but not snapshots or applications. For
+example, if you successfully deploy a snapshot with two component versions, the inventory is two
+components and the compliance is two components. If you successfully deploy a different snapshot
+with versions of two different components, the inventory is four components and the compliance is
+four components. In this way, the server counts component versions for inventory and compliance, not
+the versions in a snapshot or applications.</p>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/inventory_manage_app.html">Managing environment inventory and compliance</a></strong><br>You can allow the server to manage the environment inventory and compliance automatically, or you can manage the environment inventory and compliance with steps in an application process.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/inventory_ch.html" title="You use different inventories to track installed components and properties in IBM DevOps Deploy (Deploy) elements.">Inventories</a></div></div></nav></article></main></body></html>

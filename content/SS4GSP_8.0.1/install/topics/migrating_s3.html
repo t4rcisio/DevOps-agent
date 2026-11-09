@@ -1,0 +1,121 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Migrate your Codestation artifacts from filesystem to S3 using the S3 migrator tool."><meta name="DC.relation" scheme="URI" content="../../user/topics/managing_data.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="migrate_s3"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Migrating Codestation from filesystem repositories to S3 repositories</title></head><body id="migrate_s3"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Migrating Codestation from filesystem repositories to S3 repositories</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-4bdd8366-4961-4931-8681-298db54658ff">Edit online</a></span></div>
+
+
+
+<div class="body taskbody"><p class="shortdesc">Migrate your Codestation artifacts from filesystem to S3 using the S3 migrator tool. </p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_s3__context__1">About this task</h2></div>You can migrate Codestation from filesystem into S3 repositories.<table class="table frame-all" id="migrate_s3__table_lkq_4j3_nkb"><caption><span class="table--title-label">Table 1. </span><span class="title"> Command line argument descriptions</span></caption><colgroup><col style="width:26.80965147453083%"><col style="width:73.19034852546918%"></colgroup><thead class="thead">
+            <tr class="row">
+              <th class="entry colsep-1 rowsep-1" id="migrate_s3__table_lkq_4j3_nkb__entry__1">Parameters</th>
+              <th class="entry colsep-1 rowsep-1" id="migrate_s3__table_lkq_4j3_nkb__entry__2">Description</th>
+            </tr>
+          </thead><tbody class="tbody">
+            <tr class="row">
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__1"><span class="keyword parmname">bucketName</span></td>
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__2">The name of the bucket in S3.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__1"><span class="keyword parmname">s3url</span></td>
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__2">The URL of the S3 provider. <p class="p">Not required if using Amazon Web Services
+                  (AWS).</p></td>
+            </tr>
+            <tr class="row">
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__1"><span class="keyword parmname">s3region</span></td>
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__2">The region of the S3 provider.<p class="p">You must specify either
+                    <span class="keyword parmname">s3url</span> or <span class="keyword parmname">s3region</span>, but not
+                both.</p></td>
+            </tr>
+            <tr class="row">
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__1"><span class="keyword parmname">s3user</span></td>
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__2">The S3 username. <p class="p">Optional, depending on the S3 provider and system
+                  configuration. AWS uses APIKEY.</p></td>
+            </tr>
+            <tr class="row">
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__1"><span class="keyword parmname">password</span></td>
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__2">The S3 password. <p class="p">Optional. The value depends on the S3 provider and system
+                  configuration. AWS uses secret key.</p></td>
+            </tr>
+            <tr class="row">
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__1"><span class="keyword parmname">signer</span>
+              </td>
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__2">Optional. Consult S3 provider documentation for value. Not necessary for
+                AWS.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__1"><span class="keyword parmname">enablePathStyleAccess</span></td>
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__2">Optional. Consult S3 provider for documentation if this is necessary. Not
+                necessary for AWS.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__1"><span class="keyword parmname">repositoryLocation</span></td>
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__2">The location of Codestation repository. <p class="p">The default location in server is
+                    <span class="ph filepath">appdata/var/repository</span>.</p></td>
+            </tr>
+            <tr class="row">
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__1"><span class="keyword parmname">verify</span>
+              </td>
+              <td class="entry colsep-1 rowsep-1" headers="migrate_s3__table_lkq_4j3_nkb__entry__2">Use this parameter to specify whether or not to enable verify mode. <p class="p">If you
+                  specify <code class="ph codeph">true</code>, files are not uploaded to S3. Instead, the tool
+                  verifies that all expected files currently in Codestation on the filesystem are in
+                  S3.</p></td>
+            </tr>
+          </tbody></table><p class="p">Migrate Codestation from filesystem repositories to S3 repositories as
+      follows:</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_s3__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">Download <span class="ph uicontrol">S3 Migrator Jar</span> file from the
+            <span class="ph uicontrol">Tools</span> page on machine that can access both current Codestation
+          and S3 URLs.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Run the S3 Migrator tool. </span>
+        <div class="itemgroup info">
+          <pre class="pre codeblock" id="migrate_s3__codeblock_rc2_jfg_4yb"><code>java -jar s3migrator.jar -repo <var class="keyword varname">repositoryLocation</var> -bucket <var class="keyword varname">bucketName</var> [-url <var class="keyword varname">s3url</var>] [-user <var class="keyword varname">s3user</var>] [-password <var class="keyword varname">password</var>] [-s3signerOverride <var class="keyword varname">signer</var>] [-enablePathStyleAccess <var class="keyword varname">true|false(default false)</var>] [-verify <var class="keyword varname">true|false(default false)</var>]</code></pre>
+          <div class="p"><strong class="ph b">Example usage:</strong>
+            <pre class="pre codeblock" id="migrate_s3__codeblock_e4g_hfg_4yb"><code>java -jar s3migrator.jar -repo /opt/devops-deploy/server/appdata/var/repository -bucket deployCodestation</code></pre></div>
+          <div class="note note note_note"><span class="note__title">Note:</span>  The migrate tool will upload the files which are in Codestation into S3. This can
+            be ran on a server other than the <span class="ph">IBM DevOps Deploy (Deploy)</span> server. It
+            can also be ran while the <span class="ph">Deploy</span> server is up
+            and handling requests. You can run the tool multiple times. Depending on the size of the
+            Codestation repo, the process may take awhile. The tool will only upload files not
+            currently in S3. This will allow the tool to be ran over and over until the time to run
+            it takes is short enough that the server can be shutdown for the last upload to ensure
+            all artifacts are uploaded successfully.</div>
+        </div>
+      </li><li class="li step stepexpand">
+<span class="ph cmd">Configure server to use S3 by setting the below properties based on the values you specified
+when you set up your S3 bucket. </span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code><span class="ph">  #installed.properties   
+  #required 
+codestation.provider=s3   
+codestation.s3.bucket=<var class="keyword varname">yourS3bucketname</var>   
+codestation.s3.region=<var class="keyword varname">S3regionName</var> or codestation.s3.url=<var class="keyword varname">S3customUrl</var> 
+
+  #optional / setup dependent   
+codestation.s3.user=<var class="keyword varname">api_key</var>  
+codestation.s3.signerOverride=<var class="keyword varname">signer</var>   
+codestation.s3.enablePathStyleAccess=<var class="keyword varname">trueORfalse</var>   
+
+  #secured-installed.properties   
+codestation.s3.password=<var class="keyword varname">api_secret</var></span></code></pre>
+</div>
+        <div class="itemgroup info">
+          <div class="note note note_note" id="migrate_s3__note_bsf_pzm_4yb"><span class="note__title">Note:</span> Replace all user-provided values like
+              <var class="keyword varname">yourS3bucketname</var> with values as per your S3 configuration. </div>
+        </div>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">Restart the server. </span>
+      </li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If you need to roll back S3 migration to Codestation, run the migrator tool with updated
+properties.</span>
+<div class="itemgroup info">To recover artifacts from S3 repository, follow the external links below or contact support
+for assistance.<ul class="ul">
+<li class="li"><a class="xref" href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html" target="_blank">https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html</a></li>
+<li class="li"><a class="xref" href="https://aws.amazon.com/backup-restore/" target="_blank">https://aws.amazon.com/backup-restore/</a></li>
+<li class="li"><a class="xref" href="https://docs.aws.amazon.com/AmazonS3/latest/user-guide/undelete-objects.html" target="_blank">https://docs.aws.amazon.com/AmazonS3/latest/user-guide/undelete-objects.html</a></li>
+<li class="li"><a class="xref" href="https://stackoverflow.com/questions/2426493/disaster-recovery-for-files-on-amazon-s3" target="_blank">https://stackoverflow.com/questions/2426493/disaster-recovery-for-files-on-amazon-s3</a></li>
+</ul></div>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/managing_data.html">Managing data</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Properties are available in various contexts. Not all properties are available for all contexts. To plan and set properties, you must know where to access properties and how that setting behaves in context."><meta name="DC.relation" scheme="URI" content="../../user/topics/ud_properties_overview.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ud_properties_context"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Property contexts</title></head><body id="ud_properties_context"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Property contexts</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-85e803fc-fa5d-4586-96fa-14862fd546de">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">Properties are available in various contexts. Not all properties
+are available for all contexts. To plan and set properties, you must
+know where to access properties and how that setting behaves in context.</p>
+<div class="p">The following table shows the contexts in which properties are available and how you can use the
+properties. <div class="note tip note_tip"><span class="note__title">Tip:</span> The context that you set a property in can have narrow or widespread
+influence. For example, if you set a system property, that property persists in all areas. The key
+to setting properties effectively is to find a balance to setting narrowly as possible without
+setting them so narrow that you create extra work for yourself. </div></div>
+<table class="table" id="ud_properties_context__precedence1"><caption></caption><colgroup><col></colgroup><tbody class="tbody">
+<tr class="row">
+<td class="entry"><strong class="ph b">Example: Overriding server locations</strong> Consider this example: Initially you have one
+Tomcat server. To store the location of that server, you create an application property with the
+name <code class="ph codeph">Tomcat.server.url</code> and the location of that server. Your environments refer to
+that property to know where the Tomcat server is. Then, suppose that you add a second Tomcat server.
+This Tomcat server is intended for use only by specific environments. So on those specific
+environments, you create an environment property with the same name
+<code class="ph codeph">Tomcat.server.url</code> and the location of the second server. Now the environment has
+two properties with the same name: one system property and one environment property. The order of
+precedence determines which property value is used. Environment properties come before system
+properties in the order of precedence. Therefore, the environment uses the value of the environment
+property instead of the system property. In this way, you can use system properties to set defaults
+and then you can override those properties in specific contexts.</td>
+</tr>
+</tbody></table>
+<section class="section">
+<p class="p">The following table shows the order of precedence of properties.</p>
+<table class="table" id="ud_properties_context__table_k14_cln_hw"><caption><span class="desc tabledesc"></span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="ud_properties_context__table_k14_cln_hw__entry__1">Context</th>
+<th class="entry" id="ud_properties_context__table_k14_cln_hw__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__1">Process</td>
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__2">Available on the <span class="ph uicontrol">Configuration</span> tab of the process,
+whether it is a generic process, application process, or component process. Reference syntax:
+<samp class="ph systemoutput sysout">${p:propertyName}</samp>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__1">Component version</td>
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__2">Available on the component <span class="ph uicontrol">Configuration</span> tab. Click <span class="ph menucascade"><span class="ph uicontrol">Component</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected component</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Version Property Definitions</span></span>. Then, specify values on individual component versions. Referenced:
+<samp class="ph systemoutput sysout">${p:version/propertyName}</samp>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__1">Resource</td>
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__2">Available on the resource <span class="ph uicontrol">Configuration</span> tab. Click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected resource</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Resource Properties</span></span>. Referenced: <samp class="ph systemoutput sysout">${p:resource/propertyName}</samp>. You can also
+use the following syntax to get a comma-separated list of all properties:
+<code class="ph codeph">${p:resource/allProperties}</code>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__1">Agent</td>
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__2">Available on the agent <span class="ph uicontrol">Configuration</span> tab. Click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agents</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected agent</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agent properties</span></span>. Referenced: <code class="ph codeph">${p:agent/propertyName}</code>. In a For Each Agent context,
+you can use the following syntax to get a comma-separated list of all properties:
+<code class="ph codeph">${p:iteration/allProperties}</code>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__1">Environment</td>
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__2">Environment properties are available on the
+<span class="ph uicontrol">Configuration</span> tab for environments. Also, components can have component
+environment properties; these properties transfer to the environment when the component is deployed.
+An environment property overrides the value that is set on a component environment property that has
+the same name. Reference syntax: <code class="ph codeph">${p:environment/propertyName}</code>. You can also use
+the following syntax to get a comma-separated list of all properties:
+<code class="ph codeph">${p:environment/allProperties}</code>. Both the component and environment properties use
+the same syntax. For example, assume that you are deploying a web application to three environments.
+Each environment might have the application server in a different location. You can specify this
+location in an environment property on each environment.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__1">Component</td>
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__2">Available on the component <span class="ph uicontrol">Configuration</span> tab. Click <span class="ph menucascade"><span class="ph uicontrol">Component</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected component</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Component Properties</span></span>. Referenced: <code class="ph codeph">${p:component/propertyName}</code>. You can also use the
+following syntax to get a comma-separated list of all properties:
+<code class="ph codeph">${p:component/allProperties}</code>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__1">Application</td>
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__2">Available on the application <span class="ph uicontrol">Properties</span> tab. Click <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected application</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Application Properties</span></span>. Reference syntax: <code class="ph codeph">${p:application/propertyName}</code>.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__1">System</td>
+<td class="entry" headers="ud_properties_context__table_k14_cln_hw__entry__2">System (global) properties are available on the
+         <span class="ph uicontrol">Settings</span> tab. Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Properties</span></span>. Reference syntax: <code class="ph codeph">${p:system/propertyName}</code>. The system
+        property is broadest. If you plan to deploy an application, use application properties
+        because it's more specific. If you have an <code class="ph codeph">xyz</code> system property and an
+         <code class="ph codeph">xyz</code> application property, and you want to use the value of the system
+        property, you must provide the entire context. Otherwise, the value resolves to the
+        application property. You can also use the following syntax to get a comma-separated list of
+        all properties: <code class="ph codeph">${p:system/allProperties}</code>.<div class="note note note_note" id="ud_properties_context__note_mgm_b5q_kbc"><span class="note__title">Note:</span> The
+         system properties are only available during the process executions. Do not use them in
+         your System Setting configurations.</div></td>
+</tr>
+</tbody></table>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/ud_properties_overview.html" title="Properties are variables that store information about many different elements, including components, environments, processes, and applications. You can also set global properties for the system.">Properties</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="Source-type plug-ins are defined the same way that automation-type plug-ins are defined except for some modifications to the plugin.xml file."><meta name="DC.relation" scheme="URI" content="../../reference/topics/reference_plugins_create.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="plugin_createsource"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating source plug-ins</title></head><body id="plugin_createsource"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating source plug-ins</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-7da78b4a-a2b2-415b-95b8-cd05859ba44a">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">Source-type plug-ins are defined the same way that automation-type
+plug-ins are defined except for some modifications to the <span class="ph filepath">plugin.xml</span> file.</p>
+<p class="p">Like automation plug-ins, source plug-ins are defined with two
+files, an <span class="ph filepath">info.xml</span> file and a <span class="ph filepath">plugin.xml</span> file.
+The structure of the first file is identical for both plug-in types.
+The structure of the <span class="ph filepath">plugin.xml</span> file varies depending
+on the type of plug-in. For information about the <span class="ph filepath">plugin.xml</span> file
+for automation plug-ins, see <a class="xref" href="ref_create_pluginxml.html#thePluginxmlFile.d12e80" title="An automation plug-in is defined with the plugin.xml file.">The plugin.xml file for automation plug-ins</a>.</p>
+<p class="p">The following code fragment is an example of a source plug-in file.
+The <code class="ph codeph">&lt;server:plugin-type&gt;Source&lt;/server:plugin-type&gt;</code> tag
+identifies the type of plug-in. For source plug-ins, the type must
+be <code class="ph codeph">Source</code>:</p>
+<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!-- the xmlns:server argument is necessary to parse the tags with the server prefix --&gt;
+&lt;plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" 
+    xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;header&gt;
+    &lt;identifier id="com.urbancode.air.plugin.source.Name" name="Plugin Name" version="1"/&gt;
+    &lt;description&gt;Short description&lt;/description&gt;
+    &lt;tag&gt;SCM/Name&lt;/tag&gt;
+    
+   <strong class="ph b"> &lt;server:plugin-type&gt;Source&lt;/server:plugin-type&gt;</strong>
+  &lt;/header&gt;
+
+   </code></pre>
+<p class="p">A source plug-in has one step, which must be named <code class="ph codeph">Import
+Version</code>:</p>
+<pre class="pre codeblock"><code>
+
+    <strong class="ph b"> &lt;step-type name="Import Version"&gt;</strong>
+      &lt;description&gt;Creates a new component version and imports artifacts&lt;/description&gt;
+      &lt;properties&gt;
+      &lt;/properties&gt;
+      &lt;post-processing&gt;&lt;![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]&gt;&lt;/post-processing&gt;
+     
+      &lt;command program="${JAVA_HOME}/bin/java"&gt;
+        &lt;arg value="${JAVA_OPTS}"/&gt;
+        &lt;arg value="-jar"/&gt;
+        &lt;arg file="FileSystemSourceConfig.jar"/&gt;
+        &lt;arg value="ImportVersion"/&gt;
+        &lt;arg file="${PLUGIN_INPUT_PROPS}"/&gt;
+        &lt;arg file="${PLUGIN_OUTPUT_PROPS}"/&gt;
+      &lt;/command&gt;
+      
+    &lt;/step-type&gt;
+    
+   </code></pre>
+<p class="p">As shown in the following code fragment, source plug-ins have two
+property groups. <code class="ph codeph">Component</code> type properties are configured
+with the <span class="keyword wintitle">Create Component</span> window. <code class="ph codeph">Import</code> type
+properties are configured with the <span class="keyword wintitle">Import Component</span> window.</p>
+<pre class="pre codeblock"><code>
+
+       
+    &lt;!-- ==================================== --&gt;
+    &lt;!--   Properties                         --&gt;
+    &lt;!-- ==================================== --&gt;
+   
+   <strong class="ph b"> &lt;server:property-group type="Component" name="FileSystemComponentProperties"&gt;</strong>
+      &lt;server:property name="property-name" required="true"&gt;
+        &lt;server:property-ui type="textBox"
+                            label="property-label"
+                            description="property-description" /&gt;
+      &lt;/server:property&gt;
+    &lt;/server:property-group&gt;
+    
+       &lt;!-- If left empty or omitted then no dialog will appear --&gt;
+  <strong class="ph b">  &lt;server:property-group type="Import" name="FileSystemImportProperties"&gt;</strong>
+      &lt;server:property name="property-name" required="true"&gt;
+        &lt;server:property-ui type="textBox"
+                            label="property-label"
+                            description="property-description" /&gt;
+      &lt;/server:property&gt;
+    &lt;/server:property-group&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/reference_plugins_create.html" title="You can create your own plug-ins for use with IBM DevOps Deploy (Deploy). A plug-in consists of XML files and supporting script files that the plug-in requires.">Creating plug-ins</a></div></div></nav></article></main></body></html>

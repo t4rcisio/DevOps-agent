@@ -1,0 +1,52 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Get all children or descendants of a resource template"><meta name="DC.subject" content="udclient commands, getResourceTemplateChildren, udclient command, command-line commands"><meta name="keywords" content="udclient commands, getResourceTemplateChildren, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_getresourcetemplatechildren"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>getResourceTemplateChildren</title></head><body id="udclient_getresourcetemplatechildren"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">getResourceTemplateChildren</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-24298781-0218-4be3-8234-3c270a28ce9a">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Get all children or descendants of a resource template</p>
+<section class="section">
+Results include the base resource and resources inherited from ancestors of this template.
+</section>
+<section class="section"><h2 id="udclient_getresourcetemplatechildren__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  getResourceTemplateChildren [parameters]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_getresourcetemplatechildren__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_getresourcetemplatechildren__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_getresourcetemplatechildren__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_getresourcetemplatechildren__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_getresourcetemplatechildren__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_getresourcetemplatechildren__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__1"><span class="keyword parmname">template</span></td>
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__4">Name or ID of the resource template. If this is a blueprint identified by name rather than ID, a parent application must also be specified using the -application flag.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__1"><span class="keyword parmname">application</span></td>
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__4">Name or ID of the parent application. Required if the template represents an application blueprint identified by name.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__1"><span class="keyword parmname">recursive</span></td>
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__2">boolean</td>
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_getresourcetemplatechildren__composite_params__entry__4">Get all descendants of the template (not just immediate children). Default is false.</td>
+</tr>
+</tbody></table>
+
+</section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_getresourcetemplatechildren__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  getResourceTemplateChildren
+  -template MyResourceTemplate</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_resourcetemplate_getchildren_get.html" title="Results include the base resource and resources inherited from ancestors of this template.">Get all children or descendants of a resource template</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

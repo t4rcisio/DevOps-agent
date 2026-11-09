@@ -1,0 +1,120 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="The su command (as used by IBM DevOps Deploy (Deploy)) enables a user to start a shell as another user (process steps can be considered individual shells)."><meta name="DC.relation" scheme="URI" content="../../user/topics/arch_appx_sudo.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="arch_appx_sudo_using"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Impersonation on Linux and UNIX systems</title></head><body id="arch_appx_sudo_using"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Impersonation on Linux and UNIX systems</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-df32371f-e658-437c-8712-e06b0742e2c8">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">The <span class="keyword cmdname">su</span> command (as used by <span class="ph">IBM DevOps Deploy (Deploy)</span>) enables a user
+        to start a shell as another user (process steps can be considered individual
+        shells).</p>
+<p class="p">When you configure a process step (see <a class="xref" href="comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a>),
+you can tell <span class="ph">Deploy</span> to
+use impersonation for the step. By default, <code class="ph codeph">su</code> is
+used but you can use <span class="keyword cmdname">sudo</span> instead. To configure
+impersonation, you supply the user name that is required by the target
+host. When the impersonation-configured process step runs, the <span class="keyword cmdname">su</span> or <span class="keyword cmdname">sudo</span> command
+runs the step as the impersonated user. Each step that needs user
+impersonation must be configured independently.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> The user account must have root privileges in order to issue the <span class="keyword cmdname">su</span> or
+<span class="keyword cmdname">sudo</span> command when installing.</div>
+<p class="p">Before <code class="ph codeph">sudo</code> can be used, impersonation privileges
+must be defined in the <span class="ph filepath">/etc/sudoers</span> file. When
+you configure <span class="ph filepath">sudoers</span>, ensure that the impersonating
+user does not need to supply a password. Typically, you would configure
+the <span class="ph filepath">/etc/sudoers</span> file like the following example:</p>
+<pre class="pre codeblock"><code>Defaults:X !requiretty </code></pre>
+<pre class="pre codeblock"><code>X ALL=(Y) NOPASSWD: ALL </code></pre>
+<p class="p">where X and Y are user names. Configured this way, user X can run
+any command as user Y without supplying a password.</p>
+<p class="p">Also, Y can be a comma separated list, as shown here:</p>
+<pre class="pre codeblock"><code>X ALL=(Y1, Y2, Y3) NOPASSWD: ALL</code></pre>
+    <div class="p">
+      <div class="note note note_note"><span class="note__title">Note:</span> The impersonated user must have read and execute access to the agent working
+        directory.</div>
+    </div>
+<p class="p">As an alternative to configuring <span class="ph filepath">sudoers</span>,
+in some cases you can configure the PAM via the module <code class="ph codeph">pam_wheel.so</code> to
+allow certain users to log in without specifying a password. In this
+case, add users to a specific <code class="ph codeph">wheel</code> group and edit
+the PAM configuration allow users in this group to run commands as
+though they were the root user.</p>
+<p class="p"><span class="keyword cmdname">su</span> and <span class="keyword cmdname">sudo</span> maintain a record
+in the system logs of all of their activity. <span class="keyword cmdname">su</span> can
+be used without configuring the <span class="ph filepath">sudoers</span> file.
+For information about <span class="keyword cmdname">su/sudo</span>, see the UNIX™ or Linux™ documentation.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> For UNIX or Linux agents, the password option is ignored.</div>
+<div class="p">To customize the <span class="keyword cmdname">su</span> and <span class="keyword cmdname">sudo</span> commands, you can set the
+following properties on the agent, in the <span class="ph filepath">installed.properties</span>
+file:<table class="table"><caption><span class="table--title-label">Table 1. </span><span class="title">Agent properties for the <span class="keyword cmdname">su</span> and <span class="keyword cmdname">sudo</span>
+commands</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="arch_appx_sudo_using__entry__1">Property</th>
+<th class="entry" id="arch_appx_sudo_using__entry__2">Default value</th>
+<th class="entry" id="arch_appx_sudo_using__entry__3">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="arch_appx_sudo_using__entry__1"><span class="keyword parmname">com.urbancode.shell.impersonation.unix.sudoFormat</span></td>
+<td class="entry" headers="arch_appx_sudo_using__entry__2"><code class="ph codeph">%s -n -u %u %c</code></td>
+<td class="entry" headers="arch_appx_sudo_using__entry__3">Syntax of the <span class="keyword cmdname">sudo</span> command</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="arch_appx_sudo_using__entry__1"><span class="keyword parmname">com.urbancode.shell.impersonation.unix.sudoGroupFormat</span></td>
+<td class="entry" headers="arch_appx_sudo_using__entry__2"><code class="ph codeph">%s -n -u %u -g %g %c</code></td>
+<td class="entry" headers="arch_appx_sudo_using__entry__3">Syntax of the <span class="keyword cmdname">sudo</span> command when a group is
+specified</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="arch_appx_sudo_using__entry__1"><span class="keyword parmname">com.urbancode.shell.impersonation.unix.suFormat</span></td>
+<td class="entry" headers="arch_appx_sudo_using__entry__2"><code class="ph codeph">%s - %u -c %c</code></td>
+<td class="entry" headers="arch_appx_sudo_using__entry__3">Syntax of the <span class="keyword cmdname">su</span> command</td>
+</tr>
+</tbody></table><div class="note tip note_tip"><span class="note__title">Tip:</span> To set these properties on new agents, create a generic process
+that updates the <span class="ph filepath">installed.properties</span> file and run the process on new
+agents.<ol class="ol" id="arch_appx_sudo_using__ol_ojq_yhn_5bb">
+<li class="li">Create a generic process that appends the property to the file located at
+                                <span class="ph filepath"><var class="keyword varname">&lt;DEPLOY_AGENT_HOME&gt;</var>/conf/agent/installed.properties</span>
+                        (for example, use a Shell step to append the property to the file). Make
+                        sure you have the right file, the default working directory for a generic
+                        process is <span class="ph filepath">\var\work.</span>
+                    </li>
+<li class="li">Once you've added the property, go to the <span class="ph uicontrol">Resources -&gt; Agents</span> tab, select
+the agents, and go to <span class="ph uicontrol">Actions -&gt; Restart</span> . This will restart the agent
+process and pick up the new property. It is recommended restarting no more than ~100 agents at a
+time to make sure they're all able to reconnect to the server quickly. <p class="p">If the agents are
+installed as services and you don't mind restarting the whole machine, you could alternatively use
+the Linux or Windows System tools plug-ins to restart the whole machine as part of the generic
+process, removing the need to restart all the agents from the UI.</p><p class="p">If the agents are started by
+a root user having system group, then the user running WAS plug-in should also be part of the system
+group or else the plug-in step fails with permission issue.</p></li>
+<li class="li">If later you need to run the generic process in bulk, you can create an application just for
+that purpose and add all the agents to an environment. You can then use the <span class="ph uicontrol">For every
+agent</span> step to run a generic process on all the agents at once. It is recommended you
+should only do this process on a few agents so that you can test that everything is configured
+properly before moving to configuring the agents in bulk.</li>
+</ol></div></div>
+<div class="p">You can use the following variables in these properties:<table class="table"><caption><span class="table--title-label">Table 2. </span><span class="title">Variables for the <span class="keyword cmdname">su</span> and <span class="keyword cmdname">sudo</span> commands</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="arch_appx_sudo_using__entry__13">Variable</th>
+<th class="entry" id="arch_appx_sudo_using__entry__14">Value</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="arch_appx_sudo_using__entry__13"><code class="ph codeph"><var class="keyword varname">%s</var></code></td>
+<td class="entry" headers="arch_appx_sudo_using__entry__14">The location of the <span class="keyword cmdname">su</span> or <span class="keyword cmdname">sudo</span> executable</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="arch_appx_sudo_using__entry__13"><code class="ph codeph"><var class="keyword varname">%u</var></code></td>
+<td class="entry" headers="arch_appx_sudo_using__entry__14">The user</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="arch_appx_sudo_using__entry__13"><code class="ph codeph"><var class="keyword varname">%g</var></code></td>
+<td class="entry" headers="arch_appx_sudo_using__entry__14">The group</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="arch_appx_sudo_using__entry__13"><code class="ph codeph"><var class="keyword varname">%c</var></code></td>
+<td class="entry" headers="arch_appx_sudo_using__entry__14">The command to run</td>
+</tr>
+</tbody></table></div>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/arch_appx_sudo.html" title="IBM DevOps Deploy (Deploy) can use user impersonation when an agent must run a command for which it might not otherwise have permission, or when a specific user must be employed for a process.">User impersonation for process steps</a></div></div></nav></article></main></body></html>

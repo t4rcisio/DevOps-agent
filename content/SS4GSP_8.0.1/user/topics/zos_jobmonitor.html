@@ -1,0 +1,62 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The Job Monitor binary is installed with the IBM z/OS deployment tools in the hlq.SBUZAUTH data set. You need the assistance of a security administrator and a TCP/IP administrator to complete this customization task."><meta name="DC.relation" scheme="URI" content="../../user/topics/deploying_zos.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="zos_jobmonitor_custom"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Job Monitor customization</title></head><body id="zos_jobmonitor_custom"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Job Monitor customization</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-561288fe-0c29-444f-a7b7-b920be711374">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">The Job Monitor binary is installed with the <span class="keyword">IBM® z/OS®</span>
+deployment tools in the hlq.SBUZAUTH data set. You need the assistance of a security administrator
+and a TCP/IP administrator to complete this customization task.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_jobmonitor_custom__prereq__1">Before you begin</h2></div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_jobmonitor_custom__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create a JCL file in a partitioned data set and base the file on the sample in the
+<span class="ph filepath"><var class="keyword varname">high_level_qualifier</var>.SBUZSAMP(BUZRJCL)</span> file.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Use the <span class="keyword cmdname">buztool createzosversion</span> command to create the component
+version.</span>
+<div class="itemgroup info">
+<table class="table" id="zos_jobmonitor_custom__request_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Arguments for the <span class="keyword cmdname">buztool createzosversion</span> command</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="zos_jobmonitor_custom__request_params__entry__1">Parameter</th>
+<th class="entry" id="zos_jobmonitor_custom__request_params__entry__2">Required</th>
+<th class="entry" id="zos_jobmonitor_custom__request_params__entry__3">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__1"><span class="keyword parmname">-c</span></td>
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__2">true</td>
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__3">The name of the component in <span class="ph">IBM DevOps Deploy (Deploy)</span>. The
+                    component name can contain only letters, numbers, and spaces.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__1"><span class="keyword parmname">-v</span></td>
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__2">false</td>
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__3">The name of the version to create. If a version is not specified, a version
+                    name is generated from the current time stamp. The version name can contain only
+                    letters, numbers, and spaces. <div class="note note note_note"><span class="note__title">Note:</span> The version name must not end in a
+                      space.</div></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__1"><span class="keyword parmname">-s</span></td>
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__2">true</td>
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__3">The location of the ship list file.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__1"><span class="keyword parmname">-verb</span></td>
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__2">false</td>
+<td class="entry" headers="zos_jobmonitor_custom__request_params__entry__3">To display a trace log, set this parameter to
+<kbd class="ph userinput">true</kbd>.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="itemgroup stepxmp">For example, the following command creates a new version in the CICSModules
+component:<pre class="pre codeblock"><code>buztool "createzosversion" "-c" "CICSModules" "-v" "fixbug100" "-s" "/u/ucduser/build/shiplist.xml"</code></pre>As
+shown, you must enclose all arguments in double quotation marks.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Modify the sample file to reflect your system configuration.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Submit the JCL.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_jobmonitor_custom__result__1">Results</h2></div>The content that the ship list file specifies is available in a component in <span class="ph">Deploy</span>.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/deploying_zos.html" title="Use the toolkit to deploy to the IBM z/OS platform.">Deploying components to the z/OS platform</a></div></div></nav></article></main></body></html>

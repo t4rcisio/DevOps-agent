@@ -1,0 +1,74 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To provision dynamic environments from a cloud system, you must create a virtual system pattern that specifies the contents of the environment."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="resources_template_pattern"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating virtual system patterns for resource templates</title></head><body id="resources_template_pattern"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating virtual system patterns for resource templates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-61f9931d-dd45-4e03-af95-7a72233e15a7">Edit online</a></span></div>
+ 
+
+<div class="body taskbody"><p class="shortdesc">To provision dynamic environments from a cloud system,
+you must create a virtual system pattern that specifies the contents
+of the environment.</p>
+<section class="section prereq" id="resources_template_pattern__prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_template_pattern__prereq">Before you begin</h2></div><ul class="ul">
+<li class="li">Make sure that you have a user account on the cloud and that you have the permission to create
+virtual system patterns.<div class="p">For this type of cloud integration, the following cloud
+				systems are supported:<ul class="ul" id="resources_template_pattern__d462e38">
+					<li class="li"><span class="keyword">IBM® Cloud Orchestrator</span> version 2.4 or later</li>
+					<li class="li">IBM SmartCloud® Orchestrator
+						versions 2.2 and 2.3</li>
+					<li class="li"><span class="keyword">IBM PureApplication® System</span> version 1.0 or later</li>
+					<li class="li"><span class="keyword">IBM Workload Deployer</span>
+						version 3.1.0.6 or later</li>
+				</ul>Within these cloud systems, you can provision the virtual resources in
+				environment profiles or in cloud groups. You can also assign the virtual resources
+				to IP groups, but only when you assign the resources to an environment profile
+				first. For more information, see <a class="xref" href="app_environment_create.html" title="Before you can run a deployment, you must define at least one application environment that associates components with an agent on the target host.">Creating environments</a>. You can
+				also use virtual images with no more than one virtual network card. <span class="ph">IBM DevOps Deploy (Deploy)</span> does
+				not support selecting different flavors of virtual resources or virtual nodes that
+				have a multiplicity greater than 1.</div><p class="p" data-hd-otherprops="ibm">To connect to OpenStack and
+				OpenStack-based clouds, SoftLayer®,
+				Amazon Elastic Compute Cloud, VMware vCenter, or Microsoft™ Azure, see <a class="xref" href="../../edt/topics/security_cloud_connection.html" title="To create a connection to a cloud to use with the blueprint designer, you use OpenStack Heat. You specify the location of the identity server and the engine to use. The steps are different for each type of cloud.">Connecting to clouds through the blueprint designer</a>.</p></li>
+<li class="li">Configure the cloud system as described in <a class="xref" href="../../install/topics/cloud_configure.html" title="To create dynamic environments on a cloud system that uses virtual system patterns, you must install a script package on your cloud system.">Configuring virtual system pattern-based clouds</a>.</li>
+</ul></section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_template_pattern__context__1">About this task</h2></div>The virtual system pattern specifies one or more virtual images. The pattern also lists the
+   script packages to apply to the virtual images. These scripts perform tasks such as opening the
+   firewall and installing the <span class="ph">IBM DevOps Deploy (Deploy)</span> agent.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_template_pattern__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">On the web console for the cloud host, create a new virtual
+system pattern.</span><div class="itemgroup info">This process differs depending on the type
+of cloud. For instructions, read the documentation for your cloud
+system. </div><div class="itemgroup stepxmp">For example, for <span class="keyword">IBM Workload Deployer</span>,
+click <span class="ph menucascade"><span class="ph uicontrol">Patterns</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Virtual
+Systems</span></span> and then click the <span class="ph uicontrol">New</span> <img class="image" src="../images/new_script_package.gif" alt=""> button.<br><img class="image" src="../images/resources_template_pattern_a.gif" alt="Creating a new virtual system pattern"><br></div>
+</li><li class="li step stepexpand"><span class="ph cmd">Give the pattern a name and click <span class="ph uicontrol">OK</span>. </span>
+</li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Edit</span><img class="image" src="../images/edit.gif" alt="">.</span></li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Parts</span> list, find one or more
+base virtual images for the application. </span><div class="itemgroup info"><div class="note note note_note"><span class="note__title">Note:</span> These virtual
+images must have the following characteristics:<ul class="ul">
+<li class="li">An installation of Java™</li>
+<li class="li">The <span class="keyword cmdname">unzip</span> program</li>
+<li class="li">The <span class="keyword parmname">JAVA_HOME</span> system variable set</li>
+</ul>If the image does not have one or more of these prerequisites,
+you can add them later with script packages or select an appropriate
+image.</div><div class="note restriction note_restriction"><span class="note__title">Restriction:</span> For versions of <span class="ph">Deploy</span> prior
+to version 6.0.1.4, the image must not have more than one network
+card. For version 6.0.1.4 and later, the image can have more than
+one network card.</div></div></li><li class="li step stepexpand"><span class="ph cmd">Drag one or more copies of the base images to the editor. </span>
+<div class="itemgroup stepresult">For example, the following figure shows a pattern that
+contains two images. <span class="ph" id="resources_template_pattern__dragging_image"><br><img class="image" src="../images/resources_template_pattern_b.gif" alt="Adding the image to the topology"><br></span></div>
+</li><li class="li step stepexpand"><span class="ph cmd">Add script packages to the nodes based on the requirements
+of your cloud system.</span><div class="itemgroup stepresult">For example, you might need
+to open the firewall on the images. You might also need to run script
+packages for security compliance or registration. To add a script
+package, find it in the <span class="keyword wintitle">Pattern Editor</span>, under <span class="ph uicontrol">Scripts</span> and
+then drag the script package to one node at a time.</div></li><li class="li step stepexpand"><span class="ph cmd">Add the <span class="ph">Install <span class="ph">Deploy</span>
+				Agent</span> script
+package to each node.</span><div class="itemgroup info">You do not need to specify the parameters
+on this script package; these parameters are filled in when you provision
+an environment using this pattern.</div></li><li class="li step stepexpand"><strong>Optional: </strong><span class="ph cmd">Customize the pattern.</span><div class="itemgroup stepxmp">For
+example, you can specify the passwords for the images by clicking
+the <span class="ph uicontrol">Properties</span> <img class="image" src="../images/image_properties.gif" alt=""> icon at
+the top of each image. Depending on the images you are using, you
+might be able to specify the memory or processing power of the images,
+or other details about the images.</div></li><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Done editing</span> to save the pattern.</span>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_template_pattern__postreq__1">What to do next</h2></div>Now you can import this pattern to a resource template. See <a class="xref" href="resources_template_import_cloud.html" title="If you have a virtual system pattern on a cloud system, you can import that pattern as a resource template. This resource template is a pattern from which you can provision cloud resources.">Importing resource templates from clouds</a></section>
+</div>
+
+</article></main></body></html>

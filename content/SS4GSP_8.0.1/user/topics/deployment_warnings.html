@@ -1,0 +1,147 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Warning statuses provide a way to easily identify deployments that require closer inspection that had been marked during the process execution."><meta name="DC.relation" scheme="URI" content="../../user/topics/process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="deployment_warnings"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Adding deployment warnings</title></head><body id="deployment_warnings"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Adding deployment warnings</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-e88bd1d9-1204-4b64-9d1a-aeb413958927">Edit online</a></span></div>
+
+
+
+
+<div class="body conbody"><p class="shortdesc">Warning statuses provide a way to easily identify deployments that require closer
+inspection that had been marked during the process execution.</p>
+
+<p class="p"><strong class="ph b">Adding warnings</strong></p>
+<p class="p">The warning message will be determined by the process author at design time. </p>
+
+<div class="p">Warnings can be set on an execution by either of the following:<ol class="ol">
+<li class="li">Through the <code class="ph codeph">Add Warning</code> plug-in step. <p class="p">This step requires a warning message
+                        as its only field. The warning message has a minimum length of 1 and maximum
+                        length of 2000. Empty string messages will be discarded.</p><img class="image" src="../images/add_warnings.PNG" height="325" width="385" alt="Add warning in process designer."></li>
+
+<li class="li">In the post processing script. </li>
+</ol></div>
+<div class="p">The default post-processing script is an example of how this is
+
+done:<pre class="pre codeblock"><code>// post-processing script
+var exit = properties.get('exitCode');
+
+
+/* Set a warning
+scanner.register('^Warning: ', function(lineNumber, line) {
+    properties.put('ucdWarning', line);
+});
+
+scanner.scan();
+*/
+
+
+if (exit == 0) {
+    properties.put('Status', 'Success');
+}
+else {
+    properties.put('Status', 'Failure');
+}</code></pre></div>
+<p class="p"><strong class="ph b">View process requests with warnings</strong></p>
+<p class="p">Scan the request history to locate executions that have warnings set and easily trace the
+warnings back to their originating plug-in step. The <span class="ph uicontrol">history</span> and
+<span class="ph uicontrol">execution log</span> pages will display the status of the execution alongside a
+warning indicator with count of warnings. This indicator will only display if there are any warnings
+from child activities that have not been ignored. Users can click warning count to view the list of
+warning messages from the plug-in steps of the executed process activity.</p>
+<p class="p">The <span class="ph uicontrol">history</span> page will display a <code class="ph codeph">Status</code> column that shows
+the execution status (Success or Failure) and also the count of warnings that had been set for that
+process. No count will be given if no warnings were set.</p>
+<div class="p">The <span class="ph uicontrol">execution log </span> page displays each step and child execution. When the
+steps have completed the Status column will display the count of warnings in the same manner as the
+<span class="ph uicontrol">Request History</span> page. In addition to displaying how many warning messages
+were set on a step/execution, you can bring up the warning messages for that step and any child
+steps underneath it. Below is an example of what messages would be available at each step in the
+<span class="ph uicontrol">execution log</span> page. The <code class="ph codeph">shell with warning</code> steps set a
+warning message.<figure class="fig fignone" id="deployment_warnings__executionlog"><figcaption><span class="fig--title-label">Figure 1. </span>Execution log showing warnings</figcaption>
+
+<img class="image" src="../images/executionlog.JPG" alt="Execution log with warnings">
+</figure></div>
+<table class="table" id="deployment_warnings__steps_warnings"><caption></caption><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="deployment_warnings__steps_warnings__entry__1">Steps</th>
+<th class="entry" id="deployment_warnings__steps_warnings__entry__2">Warning Messages</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__1">(application process (execution))</td>
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__2">"warningA, warningB"</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__1">1. Install Component "myComponent"</td>
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__2">"warningA, warningB"</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__1">__ i. myComponent</td>
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__2">"warningA, warningB"</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__1">____ A. myComponentProcess</td>
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__2">"warningA"</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__1">______ a. Shell with warning</td>
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__2">"warningA"</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__1">______ b. Shell</td>
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__2">""</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__1">____ B. myOtherComponentProcess</td>
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__2">"warningB"</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__1">______ a. Shell with warning</td>
+<td class="entry" headers="deployment_warnings__steps_warnings__entry__2">"warningB"</td>
+</tr>
+</tbody></table>
+<p class="p"><strong class="ph b">Success/Failure notifications include warnings</strong></p>
+<p class="p">In addition to displaying the result status, the default deployment or process notification
+templates include the total count of warnings that have not been ignored. You have access to the
+warning messages if you choose to modify the default notification templates. Server upgrades will
+not modify existing notification schemes.</p>
+<p class="p"><strong class="ph b">Behavior</strong></p>
+<p class="p">Warnings set on plug-in steps are passed up to parent process. For example, if you have a
+component process which uses the plug-in step <code class="ph codeph">Add Warning</code> and this component
+process is used in an application process, the warning would be available in the application process
+<span class="ph uicontrol">execution log</span> and <span class="ph uicontrol">history</span>.</p>
+<p class="p">Warning messages are stored in the workflow trace. Each activity trace may contain a field
+<code class="ph codeph">warningMessage</code>containing the warning message if one is set. Workflow metadata will
+contain a count of warnings generated for each execution context to allow accessing the warning
+count without loading the workflow trace.</p>
+<p class="p">Activities can optionally ignore warnings from its child activities. An activity that can spawn
+child activities can be configured to ignore the warnings from its child activities. The UI has an
+option to ignore warnings from child activities. If the activity is configured to ignore warnings
+then any warnings set from child activities should not be included in the spawning-activity's
+execution log and process request history.</p>
+<p class="p">For example, a component process <code class="ph codeph">deployWithWarning</code> will always set a warning
+message. There is an application process <code class="ph codeph">appProcess</code> that runs an <code class="ph codeph">Install Component</code> step that runs <code class="ph codeph">deployWithWarning</code> but ignores warnings. After
+execution completion, the execution log and deployment history will show <code class="ph codeph">appProcess</code>
+and the <code class="ph codeph">Install Component</code> step was successful with no warnings. However if the
+execution log is expanded, <code class="ph codeph">deployWithWarning</code> will show successful with 1
+warning.</p>
+<div class="p">Specific activities that have the option to ignore child warnings are:<ul class="ul">
+<li class="li">Run Generic Process</li>
+<li class="li">Run Generic Process for Each Affected Resource</li>
+<li class="li">Run Component Process</li>
+<li class="li">Run Application Process</li>
+<li class="li">Run Operational Process for Multiple Components</li>
+<li class="li">For Each Agent</li>
+<li class="li">For Each Tag</li>
+<li class="li">Run Process for Each Version</li>
+<li class="li">Install Multiple Components</li>
+<li class="li">Install Component</li>
+</ul></div>
+<p class="p"><strong class="ph b">Existing History and Execution Log</strong></p>
+<div class="p">
+<div class="div">
+<p class="p">The existing process request history and execution logs are not affected as they will not have
+the new plug in step <code class="ph codeph">Add Warning</code> and post-processing script actions.</p>
+</div>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/process_steps.html" title="When you design processes, you use different kinds of process steps and joining techniques. You can assign properties to process steps and use them to control step execution.">Process step types and logic</a></div></div></nav></article></main></body></html>

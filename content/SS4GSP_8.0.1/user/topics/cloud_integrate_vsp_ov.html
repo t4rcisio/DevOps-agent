@@ -1,0 +1,66 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The IBM DevOps Deploy (Deploy) server can use virtual system patterns from cloud systems such as IBM Cloud Orchestrator to create dynamic environments."><meta name="DC.relation" scheme="URI" content="../../user/topics/integrat_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="cloud_integrate_vsp_ov"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Connecting to clouds through DevOps Deploy</title></head><body id="cloud_integrate_vsp_ov"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Connecting to clouds through <span class="ph">DevOps Deploy</span></h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5222b121-38f3-4fc7-9848-e9d8df2603af">Edit online</a></span></div>
+    
+
+<div class="body taskbody"><p class="shortdesc">The <span class="ph">IBM DevOps Deploy (Deploy)</span>
+        server can use virtual system patterns from cloud systems such as <span class="keyword">IBM® Cloud Orchestrator</span> to create
+        dynamic environments.</p>
+<section class="section prereq" data-hd-otherprops="ibm"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_integrate_vsp_ov__prereq__1">Before you begin</h2></div>
+<p class="p">You must have a user account on a cloud system. This account must have
+                permission to create script packages, to read information about virtual system
+                patterns, IP groups, cloud groups, and environment profiles, and to create and
+                delete virtual environments. See the documentation for your cloud system for more
+                information about setting up permissions. For example, for <span class="keyword">IBM PureApplication® System</span>, refer
+                to the <a class="xref" href="https://www.ibm.com/docs/en/psww2500/2.3.3?topic=security-roles" target="_blank">Understanding security roles for PureApplication®
+                    System</a>.</p>
+<div class="p">For this type of cloud integration, the following cloud
+				systems are supported:<ul class="ul" id="cloud_integrate_vsp_ov__d346e38">
+					<li class="li"><span class="keyword">IBM Cloud Orchestrator</span> version 2.4 or later</li>
+					<li class="li">IBM SmartCloud® Orchestrator
+						versions 2.2 and 2.3</li>
+					<li class="li"><span class="keyword">IBM PureApplication System</span> version 1.0 or later</li>
+					<li class="li"><span class="keyword">IBM Workload Deployer</span>
+						version 3.1.0.6 or later</li>
+				</ul>Within these cloud systems, you can provision the virtual resources in
+				environment profiles or in cloud groups. You can also assign the virtual resources
+				to IP groups, but only when you assign the resources to an environment profile
+				first. For more information, see <a class="xref" href="app_environment_create.html" title="Before you can run a deployment, you must define at least one application environment that associates components with an agent on the target host.">Creating environments</a>. You can
+				also use virtual images with no more than one virtual network card. <span class="ph">IBM DevOps Deploy (Deploy)</span> does
+				not support selecting different flavors of virtual resources or virtual nodes that
+				have a multiplicity greater than 1.</div>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_integrate_vsp_ov__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Configure the cloud system to install agents automatically. </span>
+<div class="itemgroup info">See <a class="xref" href="../../install/topics/cloud_configure.html" title="To create dynamic environments on a cloud system that uses virtual system patterns, you must install a script package on your cloud system.">Configuring virtual system pattern-based clouds</a>.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Create a connection to a cloud system. </span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Cloud Connections</span></span> and then click <span class="ph uicontrol">New
+Connection</span>.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Name</span> field, specify a
+name for the connection.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Management Console</span> field,
+specify the host name of the cloud system.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Username</span> field, specify
+the user name of an account that has permission to request cloud resources.</span>
+<div class="itemgroup info">The server stores this user name and password and uses it to
+request cloud resources when you use this cloud connection.</div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Password</span> field, specify
+the password for the user account.</span></li>
+<li class="li substep substepexpand"><strong>Optional: </strong><span class="ph cmd">In the <span class="ph uicontrol">Description</span> field,
+specify a description for the connection.</span></li>
+<li class="li substep substepexpand"><strong>Optional: </strong><span class="ph cmd">In the <span class="ph uicontrol">Teams</span> field,
+specify the teams that have access to this connection.</span></li>
+<li class="li substep substepexpand"><strong>Optional: </strong><span class="ph cmd">Set the timeout for cloud requests
+by opening the file <span class="ph filepath">installed.properties</span> on the
+server and specifying the <span class="keyword parmname">cloud.requestTimeout</span> property.</span>
+<div class="itemgroup info">This property specifies the timeout in seconds. The default
+value is 7200 seconds, or two hours.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span></li>
+</ol>
+<div class="itemgroup stepresult">The new cloud connection is included in the <span class="ph uicontrol">Cloud
+Connections</span> pane.</div></li></ol></section>
+    <section class="section postreq" data-hd-otherprops="ibm"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_integrate_vsp_ov__postreq__1">What to do next</h2></div>Model environments for this cloud. See <a class="xref" href="../../edt/topics/blueprint_edit_clouds_vsp.html" title="To model environments for clouds that use virtual system patterns (VSPs), on the server, import a virtual system pattern as a resource template and then create a blueprint that is based on the resource template.">Modeling environments for clouds that use virtual system patterns</a>.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/integrat_ov.html" title="IBM DevOps Deploy (Deploy) supports integrations with other IBM products, products from others, and certain cloud systems.">Overview of integrations</a></div></div></nav></article></main></body></html>

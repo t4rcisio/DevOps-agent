@@ -1,0 +1,194 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To configure a cluster of servers, set up a shared database and file system for the servers to use."><meta name="DC.relation" scheme="URI" content="../../user/topics/server_install_clustered.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ha_config_server"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Setting up clusters of servers</title></head><body id="ha_config_server"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Setting up clusters of servers</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-85ed731b-b933-4072-88bd-e5e6d0e22d8a">Edit online</a></span></div>
+  
+  <div class="body taskbody"><p class="shortdesc">To configure a cluster of servers, set up a shared database and file system for the
+    servers to use.</p>
+    <section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_config_server__prereq__1">Before you begin</h2></div>
+      <ul class="ul">
+        <li class="li" data-hd-otherprops="ibm">Each server in the cluster must run the same version of <span class="ph">Deploy</span>.</li>
+        <li class="li" data-hd-otherprops="ibm">
+<div class="note note note_note"><span class="note__title">Note:</span>  If you are using the <span class="ph uicontrol">Server-Agent</span>, <span class="ph uicontrol">Authorized</span>
+license mode, you will need a <span class="ph">Deploy</span> server license for each Cluster member. See, <a class="xref" href="../../install/topics/license_scenarios.html#license_scenarios" title="After the evaluation period, you must acquire a license before you can use all product features. Several different license scenarios are available. Depending on the scenario, you might need to apply licenses to IBM DevOps Deploy (Deploy) servers, agents, or both.">License scenarios</a>.</div>
+</li>
+      </ul>
+    </section>
+    <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_config_server__context__1">About this task</h2></div>
+      <div class="p" id="ha_config_server__context">To set up servers in a clustered configuration, you install servers on
+separate systems and connect the servers to the same database and network storage. Several log and
+configuration files are stored in the shared network storage, but each server also independently
+maintains some configuration information, such as database and connection information. The database
+stores other configuration information and runtime data, as well as other information. Because the
+servers share the database, all servers run on the same interval.<div class="note note note_note"><span class="note__title">Note:</span> To create a second server in
+an high-availability setup use the <span class="ph">Deploy</span> installer. An install which copies server install files to create a second server is not
+supported. </div></div>
+<p class="p">Then, you configure a load balancer to distribute the traffic between the servers. Instead of
+accessing the servers directly, users access the load balancer URL. To the users, that URL appears
+to host a single instance of the server with high capacity; users are unaware of the multiple
+servers.</p>
+      <div class="note note note_note"><span class="note__title">Note:</span> Servers, agents, and agent relays communicate in several ways: via HTTP/HTTPS on the
+default ports 8080 and 8443, and via WebSocket connects on the default port 7919. To set up the
+cluster, you must configure the load balancer to distribute the HTTP/HTTPS traffic. In general, load
+balancers work well with HTTP/HTTPS traffic because this traffic is stateless and works on a request
+and response cycle. </div>
+    </section>
+    <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_config_server__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">Set up a shared database for the servers to use. </span>
+        <div class="itemgroup info">See <a class="xref" href="../../install/topics/DBinstall.html" title="IBM DevOps Deploy (Deploy) requires a database. You can use the following database types for an evaluation or production server.">Installing the server database</a>.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Set up network storage for the server configuration files. </span>
+        <div class="itemgroup info">Because each cluster server must access the same configuration files, each server must
+          have access to this network storage.</div>
+      </li><li class="li step stepexpand" id="ha_config_server__set_up_backups">
+        <span class="ph cmd">Configure online and offline backups for the servers. </span>
+        <div class="itemgroup info">See <a class="xref" href="../../install/topics/server_backup.html#server_backup" title="To back up the server, make a backup copy of the database and application data directory. Both frequent online backups and occasional offline backups are required.">Backing up the server</a>.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Install a load balancer to send requests to the servers. </span>
+        <div class="itemgroup info">The load balancer must be able to forward requests to the HTTP and HTTPS ports for the
+servers. For more information, see the documentation for your load balancer.<div class="note important note_important"><span class="note__title">Important:</span> You must configure the load balancer for session persistence, also known as session affinity.
+</div></div>
+      </li><li class="li step stepexpand" id="ha_config_server__populate_network_storage">
+        <span class="ph cmd">If you have one or more servers already installed, populate the network storage with
+          configuration files for the servers:</span>
+        <ol type="a" class="ol substeps">
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Stop one of the existing servers.</span>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">On the server, mount the network storage.</span>
+          </li>
+          <li class="li substep substepexpand" id="ha_config_server__copy_files">
+            <span class="ph cmd">From the server installation directory, move the following files and folders to the
+              network storage and update the existing server to access those files and
+              folders.</span>
+            <div class="itemgroup info">Which folders you move depends on how the files are structured on the server and
+              which version the server is running on:<p class="p" data-hd-otherprops="ibm"><strong class="ph b">If the server is running
+                  on version 6.1.1.5 or later and was not migrated from a version prior to
+                  6.1.1.5</strong>, the server has an application data folder. <span class="ph" id="ha_config_server__default_application_data">The default application data folder is
+                    <span class="ph filepath">/opt/devops-deploy/server/appdata</span> on Linux™ and <span class="ph filepath">C:\Program
+                    Files\devops-deploy\server\appdata</span> on Windows™. On high-availability systems, the application data
+                  folder is always on a shared network drive that each server can access.</span> You
+                can also tell whether the server has an application data folder by checking to see
+                if the server <span class="ph filepath">installed.properties</span> file has a value other than
+                two periods (<code class="ph codeph">..</code>) specified as the value of the
+                  <span class="keyword parmname">server.appdata.dir</span>
+                property.</p><div class="p">In this
+                case, follow these steps:<ol class="ol" type="i">
+                  <li class="li">Move the application data folder to the network storage.</li>
+                  <li class="li" id="ha_config_server__update_appdata_folder">On the server, open the
+                      <span class="ph filepath">devops-deploy/conf/server/installed.properties</span> file and
+                    update the following properties to reflect the new location of the application
+                    data (appdata) folder:<ul class="ul" id="ha_config_server__ul_dk3_zk1_zjc">
+                      <li class="li"><span class="keyword parmname">server.appdata.dir</span> — The path to the appdata
+                        folder.</li>
+                      <li class="li"><span class="keyword parmname">encryption.keystore</span> — The path to the encryption
+                        keystore file. </li>
+                      <li class="li"><span class="keyword parmname">server.keystore</span> — The path to the server keystore
+                        file. </li>
+                      <li class="li"><span class="keyword parmname">derby.system.home</span> (only if you use the Derby
+                        database) — The path to the Derby database home.</li>
+                    </ul>For example, specify the properties as
+                      follows:<pre class="pre codeblock" id="ha_config_server__codeblock_bcx_vl1_zjc"><code>server.appdata.dir=../appdata
+encryption.keystore=../appdata/conf/encryption.keystore
+server.keystore=../appdata/conf/server.keystore
+derby.system.home=../appdata/var/db</code></pre><div class="note note note_note" id="ha_config_server__note_hcb_mn1_zjc"><span class="note__title">Note:</span> 
+                      <ul class="ul" id="ha_config_server__ul_gkc_rn1_zjc">
+                        <li class="li">By default, the <code class="ph codeph">installed.properties</code> file uses relative
+                          paths (for example, ../appdata). If you relocate the application data
+                          folder to a non-standard location such as a network-attached storage (NAS)
+                          mount, use absolute paths instead of relative paths to ensure that the <span class="ph">Deploy</span>
+                          server can reliably resolve the file locations.</li>
+                        <li class="li">The operating system user account that runs the <span class="ph">Deploy</span>
+                          server process must have full read and write access to the new
+                            <code class="ph codeph">appdata</code> directory and all of its contents, including
+                          the <code class="ph codeph">conf</code> and <code class="ph codeph">var</code> subdirectories. On
+                          Linux, you can verify permissions by running: <code class="ph codeph">ls -la
+                            /data/devops-deploy/appdata</code>. You must ensure that the ownership
+                          and permissions match the user that runs the <span class="ph">Deploy</span>
+                          server service.</li>
+                      </ul>
+                    </div></li>
+                </ol></div><div class="p"><strong class="ph b">If the server was upgraded from a version prior to 6.1.1.5 to version
+                  6.1.1.5 or later</strong>, the server does not have an application data folder. In this
+                case, you must move the folders into an application data folder on the network
+                storage by running these steps:<ol class="ol" type="i">
+                  <li class="li">On the network storage, create a folder to be the application data folder,
+                    such as <span class="ph filepath">/media/share/appdata</span>.</li>
+                  <li class="li">Copy the following folders to the application data folder:<ul class="ul" id="ha_config_server__pre_appdata_shared_folders">
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/var/plugins</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/var/repository</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/var/sa</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/logs</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/server/notification-templates</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/encryption.keystore</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/server.keystore</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/collectors</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/patches</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/server/log4j.properties</span></li>
+                    </ul><span class="ph" id="ha_config_server__install_folder">For
+                        <span class="ph filepath"><var class="keyword varname">install_folder</var></span>, use the installation
+                      directory for the server.</span>
+                    <span class="ph" data-hd-otherprops="ibm">The default server installation directory is
+                            <span class="ph filepath">/opt/devops-deploy/server</span> on Linux and <span class="ph filepath">C:\Program
+                            Files\devops-deploy\server</span> on Windows.</span><div class="note note note_note" data-hd-otherprops="ibm"><span class="note__title">Note:</span> For versions prior to 6.2.0.2, the
+                        <span class="ph filepath">notification-templates</span> folder is in the location
+                          <span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/server/notification-templates</span>
+                      and not in the application data folder. In this case, if you are using
+                      notification templates, you must share this folder in addition to the
+                      application data folder.</div></li>
+                  <li class="li">Copy (not move) the <span class="ph filepath">&lt;server
+                      install&gt;/conf/installed.version</span> file to the newly created
+                      <span class="ph filepath">&lt;appdata&gt;/conf</span> directory.</li>
+                  <li class="li">Verify that the application data folder has the correct folder layout. For
+                    example, if you use the <span class="ph filepath">/media/share/appdata</span> folder for the
+                    application data folder, make sure that you have the following folders and files:<ul class="ul">
+                      <li class="li"><span class="ph filepath">/media/share/appdata/var/plugins</span></li>
+                      <li class="li"><span class="ph filepath">/media/share/appdata/var/repository</span></li>
+                      <li class="li"><span class="ph filepath">/media/share/appdata/var/sa</span></li>
+                      <li class="li"><span class="ph filepath">/media/share/appdata/logs</span></li>
+                      <li class="li"><span class="ph filepath">/media/share/appdata/conf/server/notification-templates</span></li>
+                      <li class="li"><span class="ph filepath">/media/share/appdata/conf/encryption.keystore</span></li>
+                      <li class="li"><span class="ph filepath">/media/share/appdata/conf/server.keystore</span></li>
+                      <li class="li"><span class="ph filepath">/media/share/appdata/conf/collectors</span></li>
+                      <li class="li"><span class="ph filepath">/media/share/appdata/patches</span></li>
+                      <li class="li"><span class="ph filepath">/media/share/appdata/conf/server/log4j.properties</span></li>
+                    </ul>Some of these files and folders might not exist yet.</li>
+                  <li class="li">On the server, in the <span class="ph filepath">installed.properties</span> file, set the
+                      <span class="keyword parmname">server.appdata.dir</span> property to the new location of the
+                    application data folder.</li>
+                </ol></div></div>
+          </li>
+          <li class="li substep substepexpand">
+            <span class="ph cmd">Delete the original copies of the files and folders that you moved to network
+              storage. (In other words, delete the files on the local server and keep the files on
+              the network storage.)</span>
+          </li>
+        </ol>
+      </li><li class="li step stepexpand" id="ha_config_server__same_certificate">
+        <span class="ph cmd">If you terminate SSL at the server level, set the servers to use the same security
+          certificate.</span>
+        <div class="itemgroup info" id="ha_config_server__import_certificate">For example, you can copy the certificate in the
+            <span class="ph filepath">/opt/tomcat/conf/tomcat.keystore</span> file to the other servers. Edit
+          the <var class="keyword varname">tomcat.key.alias </var>property in
+            <span class="ph filepath">installed.properties</span> file to specify the alias in the keystore that
+          contains the certificate to use as
+          follows:<pre class="pre codeblock" id="ha_config_server__codeblock_ugd_3pp_35b"><code>tomcat.key.alias=<var class="keyword varname">alias_of_your_certificate_in_tomcat_keystore</var></code></pre></div>
+      </li><li class="li step stepexpand"><strong>Optional: </strong>
+        <span class="ph cmd">Configure the license server for high availability.</span>
+        <div class="itemgroup info">For information, see the <a class="xref" href="https://www.ibm.com/docs/en/common-licensing" target="_blank"><span class="keyword">Common Licensing</span>
+            documentation</a>. Also, see <a class="xref" href="https://www.ibm.com/support/pages/high-availability-options-rational-license-key-server" target="_blank">High availability options for Rational License Key
+            Server</a>.</div>
+      </li></ol></section>
+    <section class="section result" id="ha_config_server__results"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_config_server__results">Results</h2></div>After you configure the load balancer to distribute connections to the
+systems, users can connect to a single URL and use the entire cluster. The servers also ensure that
+the correct number of licenses are used, even if a user accesses multiple servers.<p class="p">Several server
+processes behave differently than with individual servers. See <a class="xref" href="../../admin/topics/ha_servers.html#ha_servers" title="While high-availability servers complete the same processes as standalone servers, they run slightly differently and access files in run slightly different locations than individual servers do.">High-availability server processes</a>.</p></section>
+    <section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskha_config_server__postreq__1">What to do next</h2></div>
+      <ul class="ul">
+        <li class="li">Add servers to the cluster. See <a class="xref" href="ha_add_server.html" title="You can add new servers to a cluster at installation time, or you can move existing servers to be part of a cluster.">Adding servers to clusters</a>.</li>
+<li class="li">Set up cold standby servers to use for disaster recovery. See <a class="xref" href="../../install/topics/server_install_cold.html#server_install_cold" title="You can add cold standby servers to serve as a backup server or for disaster recovery. You must start the secondary server or servers when the active server fails, and network traffic is routed to the secondary servers.">Adding cold standby servers</a>.</li>
+      </ul>
+    </section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/server_install_clustered.html" title="To configure a high-availability cluster, you store shared files on network storage. Then, you configure multiple servers, set each server to access the same files and database, and configure a load balancer to distribute the traffic between the servers.">Setting up high-availability clusters</a></div></div></nav></article></main></body></html>

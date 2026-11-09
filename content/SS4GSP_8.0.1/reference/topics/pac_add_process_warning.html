@@ -1,0 +1,40 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The add-process-warning step adds a warning message to the executing process"><meta name="DC.subject" content="PAC, Core process steps, add-process-warning"><meta name="keywords" content="PAC, Core process steps, add-process-warning"><meta name="DC.relation" scheme="URI" content="../../reference/topics/pac_generic_process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="reference_e1z_5xd_lnb"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>add-process-warning</title></head><body id="reference_e1z_5xd_lnb"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">add-process-warning</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dd557c6d-2c5e-47b0-8ab7-5146cdf80f55">Edit online</a></span></div>
+
+
+
+<div class="body refbody"><p class="shortdesc">The <code class="ph codeph">add-process-warning</code> step adds a warning message to the executing
+process</p>
+<section class="section"><h2 id="reference_e1z_5xd_lnb__title__2" class="title sectiontitle">Format</h2>
+
+<pre class="pre codeblock"><code>add-process-warning step "foo" is
+    -- a string in the body defines the warning; required
+    "Warning: process partially successful"
+on success
+    finish
+end</code></pre>
+</section>
+<div class="example" data-hd-audience="rest"><h2 id="reference_e1z_5xd_lnb__title__3" class="title sectiontitle">Example</h2>
+
+<pre class="pre codeblock"><code>start is
+
+    start A
+
+end
+
+
+
+add-process-warning step A is
+
+    "warning"
+
+on success
+
+    finish
+
+end</code></pre>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/pac_generic_process_steps.html" title="Lists the various generic steps that can be used in a process.">Generic process steps</a></div></div></nav></article></main></body></html>

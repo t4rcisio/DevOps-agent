@@ -1,0 +1,1409 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Example templates are provided that helps you to create message layout to use with Slack integration."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/howto-integrate-slack.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="howto_slack_templates"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Slack message layout templates</title></head><body id="howto_slack_templates"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Slack message layout templates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Example templates are provided that helps you to create message layout to use with Slack
+integration.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskhowto_slack_templates__context__1">About this task</h2></div>The message layout is available for the following events:<ul class="ul">
+<li class="li"><a class="xref" href="#task_ktc_tk1_2rb">Application Deployment Failure JSON body</a></li>
+<li class="li"><a class="xref" href="#task_nlf_wk1_2rb">Application Deployment Success JSON body</a></li>
+<li class="li"><a class="xref" href="#task_bzj_cl1_2rb">Approval Completed JSON body</a></li>
+<li class="li"><a class="xref" href="#task_kt3_fl1_2rb">Approval Created JSON body</a></li>
+<li class="li"><a class="xref" href="#task_ft2_3l1_2rb">Approval Failed JSON body</a></li>
+<li class="li"><a class="xref" href="#task_tj5_kl1_2rb">External Approval Completed JSON body</a></li>
+<li class="li"><a class="xref" href="#task_oqw_nl1_2rb">External Approval Failed JSON body</a></li>
+<li class="li"><a class="xref" href="#task_ctr_ql1_2rb">Generic Process Failure JSON body</a></li>
+<li class="li"><a class="xref" href="#task_q4b_5l1_2rb">Generic Process Request Started JSON body</a></li>
+<li class="li"><a class="xref" href="#task_lzj_wl1_2rb">Generic Process Success JSON body</a></li>
+<li class="li"><a class="xref" href="#task_xkx_yl1_2rb">Process Not Started JSON body</a></li>
+<li class="li"><a class="xref" href="#task_r4m_bm1_2rb">Process Request Started JSON body</a></li>
+<li class="li"><a class="xref" href="#task_blp_2m1_2rb">Task Created JSON body</a></li>
+</ul><div class="note note note_note"><span class="note__title">Note:</span> You can customize these available message layout as per your team requirement. Refer to
+<a class="xref" href="https://api.slack.com/messaging/composing" target="_blank">Slack
+documentation</a> for more information. </div></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../tutorial/topics/howto-integrate-slack.html" title="Integrate Slack with IBM DevOps Deploy (Deploy) to post notifications automatically to your Slack app whenever a specific deployment event happens.">How-to: Integrate Slack</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_ktc_tk1_2rb">
+<h2 class="title topictitle2" id="ariaid-title2">Application Deployment Failure JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+#macro (addLimitReached)
+        ## show limit message &amp; link
+    ,{
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": "&lt;$fn.escapeJson($externalUrl)#applicationProcessRequest/$request.getId().toString()|View Process Request For More&gt;"
+        }
+    }
+        #set ($blockCount = $blockCount + 1)
+#end
+#macro (showFailure $analysis $indent)
+    #if ($blockCount == 50)
+        #addLimitReached()
+    #elseif ($blockCount &gt; 50)
+        ##ignore no room left
+    #else
+        ## add section and recurse down
+    ,{
+        "type": "section",
+        "text": {
+            "type": "plain_text",
+            "text": "$indent$fn.escapeJson($analysis.getTrace().getName())"
+        }
+    }
+        #set ($blockCount = $blockCount + 1)
+        #set ($analysisChildren = $analysis.getChildren())
+        #if ($analysisChildren &amp;&amp; $analysisChildren.size() &gt; 0)
+            #set ($newindent = $indent+"--")
+            #foreach ($child in $analysisChildren)
+                #showFailure($child, $newindent)
+            #end
+        #end
+    #end
+#end
+
+#macro (showVersion $version)
+    #if ($blockCount == 50)
+        #addLimitReached()
+    #elseif ($blockCount &gt; 50)
+        ##ignore no room left
+    #else
+        ## add section
+    ,{
+        "type": "section",
+        "fields": [{
+             "type": "mrkdwn",
+             "text": "*Component*: $fn.escapeJson($version.getComponent().getName())"
+         },{
+             "type": "mrkdwn",
+             "text": "*Version*: $fn.escapeJson($version.getName())"
+         #if ($version.getDescription() and !$version.getDescription().trim().isEmpty())
+         },{
+             "type": "plain_text",
+             "text": "$fn.escapeJson($version.getDescription())"
+         #end
+         }]
+    }
+        #set ($blockCount = $blockCount + 1)
+    #end
+#end
+
+{
+    "blocks": [
+        ## block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "A process on $fn.escapeJson($application.getName()) failed"
+            }
+        },
+        ## block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Application*: $fn.escapeJson($application.getName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Environment*: $fn.escapeJson($environment.getName())"
+                },
+                #if ($snapshot)
+                {
+                    "type": "mrkdwn",
+                    "text": "*Snapshot*: $fn.escapeJson($snapshot.getName())"
+                },
+                #end
+                {
+                    "type": "mrkdwn",
+                    "text": "*Process*: $fn.escapeJson($applicationProcess.getName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($user.getDisplayName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Requested On*: $fn.formatDate($request.getSubmittedDate())"
+                }
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Duration in Milliseconds*: $request.getDurationInMillis()"
+                }
+                #if ($request.getDescription())
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Description*: $fn.escapeJson($request.getDescription())"
+                }
+                #end
+                #set ($warningCount = $workflowTrace.getWarningCount())
+                #if ($warningCount &gt; 0)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Warning Count*: $warningCount"
+                }
+                #end
+            ]
+        },
+        ## block 3
+        {
+            "type":"section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)#applicationProcessRequest/$request.getId().toString()|View Process Request&gt;"
+            }
+        },
+        ## block 4
+        {
+            "type":"divider"
+        },
+        ## block 5
+        #set ($warnMessList = $workflowTrace.getChildWarningMessages())
+        #if ($warnMessList &amp;&amp; $warnMessList.size() &gt; 0)
+        {
+            "type": "section",
+            "fields": [{
+                "type": "mrkdwn",
+                "text": "*Warnings*"
+            #foreach ($mess in $warnMessList)
+                #if($velocityCount == 9)
+                    ## add link
+            },{
+                "type": "mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)#applicationProcessRequest/$request.getId().toString()|See process request for more&gt;"
+                #elseif ($velocityCount &gt; 9)
+                    ## ignore
+                #else
+            },{
+                "type": "plain_text",
+                "text": "$fn.escapeJson($mess)"
+                #end
+            #end
+            }]
+        },
+        #end
+        ## block 6
+        {
+            "type":"divider"
+        }
+        ## Show as many of the failure analysis and versions as we can.
+        ## If we run out of blocks(slack limits to 50), make the last block
+        ## a link to the process request
+        ## for brevity we don't show summary of other steps as we do in emails
+        ##block 7 - 50
+        #set ($blockCount = 7)
+        #set ($rootAnalyses = $failureAnalysis.getRootAnalyses())
+        #if ($rootAnalyses &amp;&amp; $rootAnalyses.size() &gt; 0)
+            ## block 7
+            ,{
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*Failures*"
+                }
+            }
+            #set ($blockCount = $blockCount + 1)
+            #foreach ($failure in $rootAnalyses)
+                #showFailure ($failure "")
+            #end
+        #end
+        ##Show as many versions as we have space for
+        #if ($versions &amp;&amp; $versions.size() &gt; 0)
+            #if ($blockCount == 50)
+                #addLimitReached()
+            #elseif ($blockCount &gt; 50)
+                ## do nothing
+            #else
+                ,{
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "*Versions*"
+                    }
+                }
+                #set ($blockCount = $blockCount + 1)
+                #foreach($version in $versions)
+                    #showVersion ($version)
+                #end
+            #end
+        #end
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" id="task_nlf_wk1_2rb">
+<h2 class="title topictitle2" id="ariaid-title3">Application Deployment Success JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+#macro (addLimitReached)
+        ## show limit message &amp; link
+    ,{
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": "&lt;$fn.escapeJson($externalUrl)#applicationProcessRequest/$request.getId().toString()|View Process Request For More&gt;"
+        }
+    }
+        #set ($blockCount = $blockCount + 1)
+#end
+
+#macro (showVersion $version)
+    #if ($blockCount == 50)
+        #addLimitReached()
+    #elseif ($blockCount &gt; 50)
+        ##ignore no room left
+    #else
+        ## add section
+    ,{
+        "type": "section",
+        "fields": [{
+             "type": "mrkdwn",
+             "text": "*Component*: $fn.escapeJson($version.getComponent().getName())"
+         },{
+             "type": "mrkdwn",
+             "text": "*Version*: $version.getName()"
+         #if ($version.getDescription() and !$version.getDescription().trim().isEmpty())
+         },{
+             "type": "plain_text",
+             "text": "$fn.escapeJson($version.getDescription())"
+         #end
+         }]
+    }
+        #set ($blockCount = $blockCount + 1)
+    #end
+#end
+
+{
+    "blocks": [
+        ## block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "A process on $fn.escapeJson($application.getName()) completed successfully"
+            }
+        },
+        ## block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Application*: $fn.escapeJson($application.getName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Environment*: $fn.escapeJson($environment.getName())"
+                },
+                #if ($snapshot)
+                {
+                    "type": "mrkdwn",
+                    "text": "*Snapshot*: $fn.escapeJson($snapshot.getName())"
+                },
+                #end
+                {
+                    "type": "mrkdwn",
+                    "text": "*Process*: $fn.escapeJson($applicationProcess.getName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($user.getDisplayName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Requested On*: $fn.formatDate($request.getSubmittedDate())"
+                }
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Duration in Milliseconds*: $request.getDurationInMillis()"
+                }
+                #if ($request.getDescription())
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Description*: $fn.escapeJson($request.getDescription())"
+                }
+                #end
+                #set ($warningCount = $workflowTrace.getWarningCount())
+                #if ($warningCount &gt; 0)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Warning Count*: $warningCount"
+                }
+                #end
+            ]
+        },
+        ## block 3
+        {
+            "type":"section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)#applicationProcessRequest/$request.getId().toString()|View Process Request&gt;"
+            }
+        },
+        ## block 4
+        {
+            "type":"divider"
+        },
+        ## block 5
+        #set ($warnMessList = $workflowTrace.getChildWarningMessages())
+        #if ($warnMessList &amp;&amp; $warnMessList.size() &gt; 0)
+        {
+            "type": "section",
+            "fields": [{
+                "type": "mrkdwn",
+                "text": "*Warnings*"
+            #foreach ($mess in $warnMessList)
+                #if($velocityCount == 9)
+                    ## add link
+            },{
+                "type": "mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)#applicationProcessRequest/$request.getId().toString()|See process request for more&gt;"
+                #elseif ($velocityCount &gt; 9)
+                    ## ignore
+                #else
+            },{
+                "type": "plain_text",
+                "text": "$fn.escapeJson($mess)"
+                #end
+            #end
+            }]
+        },
+        #end
+        ## block 6
+        {
+            "type":"divider"
+        }
+        ##block 7 - 50
+        #set ($blockCount = 7)
+        ## show as many versions as possible
+        ## in the email template we show step summaries as well.
+        ## this is omitted here due to slack limits on sections and
+        ## my personal believe version list is more valuable than a bunch
+        ## of successful steps
+        ##Show as many versions as we have space for
+        #if ($versions &amp;&amp; $versions.size() &gt; 0)
+            #if ($blockCount == 50)
+                #addLimitReached()
+            #elseif ($blockCount &gt; 50)
+                ## do nothing
+            #else
+                ,{
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "*Versions*"
+                    }
+                }
+                #set ($blockCount = $blockCount + 1)
+                #foreach($version in $versions)
+                    #showVersion ($version)
+                #end
+            #end
+        #end
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title4" id="task_bzj_cl1_2rb">
+<h2 class="title topictitle2" id="ariaid-title4">Approval Completed JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+{
+    "blocks": [
+        ## Block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "Approval Completed"
+            }
+        },
+        ## Block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Application*: $fn.escapeJson($application.getName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Environment*: $fn.escapeJson($environment.getName())"
+                },
+                #if ($snapshot)
+                {
+                    "type": "mrkdwn",
+                    "text": "*Snapshot*: $fn.escapeJson($snapshot.getName())"
+                },
+                #end
+                {
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($requester.getDisplayName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Scheduled for*: $scheduledDate"
+                }
+                #if ($appRequest.getDescription())
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Request Description*: $fn.escapeJson($appRequest.getDescription())"
+                }
+                #end
+            ]
+        },
+        ## Block 3
+        {
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request&gt;"
+            }
+        },
+        ## Block 4
+        {
+            "type": "divider"
+        }
+        ## Block 5
+        #if ($tasks &amp;&amp; $tasks.size() &gt; 0)
+        ,{
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*Tasks*"
+            }
+        }
+        #end
+        #set ($blockCount = 6)
+       
+        #foreach ($task in $tasks)
+            #if ($blockCount == 50)
+        ,{
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request for more information.&gt;"
+            }
+        }
+            #set ($blockCount = $blockCount + 1)
+            #elseif ($blockCount &gt; 50)
+                ## no more room
+            #else
+        ,{
+            "type": "context",
+            "elements": [{
+                "type": "mrkdwn",
+                "text": "*Name*: $fn.escapeJson($task.getName())"
+            },{
+                "type": "mrkdwn",
+                "text": "*Type*: $fn.escapeJson($task.getTaskType())"
+            },{
+                "type": "mrkdwn",
+                "text": "*Status*: $fn.escapeJson($task.getStatus().name())"
+            },{
+                "type": "mrkdwn",
+                "text": "*User*: $fn.escapeJson($task.getUser().getDisplayName())"
+            },{
+                "type": "mrkdwn",
+                "text": "*Comment*: $fn.escapeJson($task.getComment())"
+            },{
+                "type": "mrkdwn",
+                "text": "*Date*: $fn.formatUnixTime($task.getDateEnded())"
+            }]
+        }
+            #set ($blockCount = $blockCount + 1)
+            #end
+        #end
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title5" id="task_kt3_fl1_2rb">
+<h2 class="title topictitle2" id="ariaid-title5">Approval Created JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+{
+    "blocks": [
+        ## Block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "Approval Pending"
+            }
+        },
+        ## Block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Application*: $fn.escapeJson($application.getName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Environment*: $fn.escapeJson($environment.getName())"
+                },
+                #if ($snapshot)
+                {
+                    "type": "mrkdwn",
+                    "text": "*Snapshot*: $fn.escapeJson($snapshot.getName())"
+                },
+                #end
+                #if ($component)
+                {
+                    "type": "mrkdwn",
+                    "text": "*Component*: $fn.escapeJson($component.getName())"
+                },
+                #end
+                {
+                    "type": "mrkdwn",
+                    "text": "*Process*: $fn.escapeJson($processName)"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($user.getDisplayName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Scheduled for*: $scheduledDate"
+                }
+                #if ($appRequest.getDescription())
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Request Description*: $fn.escapeJson($appRequest.getDescription())"
+                }
+                #end
+            ]
+        },
+        ## Block 3
+        {
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request&gt;"
+            }
+        },
+        ## Block 4
+        #if ($respondUrl)
+        {
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($respondUrl)|Respond&gt;"
+            }
+        },
+        #end
+        ## Block 5
+        {
+            "type": "divider"
+        }
+        ## Block 6
+        #if ($roles)
+        ,{
+            "type": "section",
+            "fields": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Roles*:"
+                }
+                ## This breaks at &gt; 9 roles. Check for version handling to modify to handle more
+                #foreach ( $role in $roles )
+                ,{
+                     "type": "mrkdwn",
+                     "text": "$fn.escapeJson($role.getName())"
+                }
+                #end
+            ]
+        },{
+            "type": "divider"
+        }
+        #end
+        ## Block 7-50
+        #if ($versionMap)
+            #set ( $compSet = $versionMap.getComponents())
+            #foreach ( $comp in $compSet)
+                ## velocityCount is the default iterator velocity uses
+                #if ($velocityCount == 42)
+                    ## add placeholder
+        ,{
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|Refer to request for more components.&gt;"
+            }
+        }
+                #elseif ($velocityCount &gt; 42)
+                     ## do nothing
+                     ## anymore and slack will reject the message
+                ## velocityCount starts at 1
+                #elseif ($velocityCount == 1)
+                    ## add label and thing
+        ,{
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*Versions by Component*:"
+            }
+        }
+        ,{
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*$fn.escapeJson($comp)*: $fn.escapeJson($versionMap.getVersionsForComp($comp))"
+            }
+        }
+                #else
+                     ## addthing
+        ,{
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*$fn.escapeJson($comp)*: $fn.escapeJson($versionMap.getVersionsForComp($comp))"
+            }
+        }
+                #end
+            #end
+        #end
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title6" id="task_ft2_3l1_2rb">
+<h2 class="title topictitle2" id="ariaid-title6">Approval Failed JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+{
+    "blocks": [
+        ## Block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "Approval Failed"
+            }
+        },
+        ## Block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Application*: $fn.escapeJson($application.getName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Environment*: $fn.escapeJson($environment.getName())"
+                },
+                #if ($snapshot)
+                {
+                    "type": "mrkdwn",
+                    "text": "*Snapshot*: $fn.escapeJson($snapshot.getName())"
+                },
+                #end
+                {
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($requester.getDisplayName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Scheduled for*: $scheduledDate"
+                }
+                #if ($appRequest.getDescription())
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Request Description*: $fn.escapeJson($appRequest.getDescription())"
+                }
+                #end
+            ]
+        },
+        ## Block 3
+        {
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request&gt;"
+            }
+        },
+        ## Block 4
+        {
+            "type": "divider"
+        }
+        ## Block 5
+        #if ($tasks &amp;&amp; $tasks.size() &gt; 0)
+        ,{
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*Tasks*"
+            }
+        }
+        #end
+        #set ($blockCount = 6)
+       
+        #foreach ($task in $tasks)
+            #if ($blockCount == 50)
+        ,{
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request for more information.&gt;"
+            }
+        }
+            #set ($blockCount = $blockCount + 1)
+            #elseif ($blockCount &gt; 50)
+                ## no more room
+            #else
+        ,{
+            "type": "context",
+            "elements": [{
+                "type": "mrkdwn",
+                "text": "*Name*: $fn.escapeJson($task.getName())"
+            },{
+                "type": "mrkdwn",
+                "text": "*Type*: $fn.escapeJson($task.getTaskType())"
+            },{
+                "type": "mrkdwn",
+                "text": "*Status*: $$fn.escapeJson(task.getStatus().name())"
+            },{
+                "type": "mrkdwn",
+                "text": "*User*: $fn.escapeJson($task.getUser().getDisplayName())"
+            },{
+                "type": "mrkdwn",
+                "text": "*Comment*: $fn.escapeJson($task.getComment())"
+            },{
+                "type": "mrkdwn",
+                "text": "*Date*: $fn.formatUnixTime($task.getDateEnded())"
+            }]
+        }
+            #set ($blockCount = $blockCount + 1)
+            #end
+        #end
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title7" id="task_tj5_kl1_2rb">
+<h2 class="title topictitle2" id="ariaid-title7">External Approval Completed JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+{
+    "blocks": [
+        ## Block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "An external approval process was successful"
+            }
+        },
+        ## Block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Application*: $fn.escapeJson($application.getName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Environment*: $fn.escapeJson($environment.getName())"
+                },
+                #if ($snapshot)
+                {
+                    "type": "mrkdwn",
+                    "text": "*Snapshot*: $fn.escapeJson($snapshot.getName())"
+                },
+                #end
+                {
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($requester.getDisplayName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Scheduled for*: $scheduledDate"
+                }
+                #if ($request.getDescription())
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Request Description*: $fn.escapeJson($request.getDescription())"
+                }
+                #end
+            ]
+        },
+        ## Block 3
+        {
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request&gt;"
+            }
+        }
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title8" id="task_oqw_nl1_2rb">
+<h2 class="title topictitle2" id="ariaid-title8">External Approval Failed JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+{
+    "blocks": [
+        ## Block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "An application process was rejected during its external approval process"
+            }
+        },
+        ## Block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Application*: $fn.escapeJson($application.getName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Environment*: $fn.escapeJson($environment.getName())"
+                },
+                #if ($snapshot)
+                {
+                    "type": "mrkdwn",
+                    "text": "*Snapshot*: $fn.escapeJson($snapshot.getName())"
+                },
+                #end
+                {
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($requester.getDisplayName())"
+                },
+                {
+                    "type": "mrkdwn",
+                    "text": "*Scheduled for*: $scheduledDate"
+                }
+                #if ($request.getDescription())
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Request Description*: $fn.escapeJson($request.getDescription())"
+                }
+                #end
+            ]
+        },
+        ## Block 3
+        {
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request&gt;"
+            }
+        }
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title9" id="task_ctr_ql1_2rb">
+<h2 class="title topictitle2" id="ariaid-title9">Generic Process Failure JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+{
+    "blocks": [
+        ## Block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "A process failed"
+            }
+        },
+        ## Block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Process*: $fn.escapeJson($process.getName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($user.getDisplayName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Request on*: $scheduledDate"
+                }
+                #if ($resourceName)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Resource*: $fn.escapeJson($resourceName)"
+                }
+                #end
+            ]
+        },
+        ## Block 3
+        {
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request&gt;"
+            }
+        }
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title10" id="task_q4b_5l1_2rb">
+<h2 class="title topictitle2" id="ariaid-title10">Generic Process Request Started JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+{
+    "blocks": [
+        ## Block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "A process started"
+            }
+        },
+        ## Block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Process*: $fn.escapeJson($process.getName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($user.getDisplayName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Request on*: $scheduledDate"
+                }
+                #if ($resourceName)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Resource*: $fn.escapeJson($resourceName)"
+                }
+                #end
+            ]
+        },
+        ## Block 3
+        {
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request&gt;"
+            }
+        }
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title11" id="task_lzj_wl1_2rb">
+<h2 class="title topictitle2" id="ariaid-title11">Generic Process Success JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+{
+    "blocks": [
+        ## Block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "A process succeeded"
+            }
+        },
+        ## Block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Process*: $fn.escapeJson($process.getName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($user.getDisplayName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Request on*: $scheduledDate"
+                }
+                #if ($resourceName)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Resource*: $fn.escapeJson($resourceName)"
+                }
+                #end
+            ]
+        },
+        ## Block 3
+        {
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request&gt;"
+            }
+        }
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title12" id="task_xkx_yl1_2rb">
+<h2 class="title topictitle2" id="ariaid-title12">Process Not Started JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+{
+    "blocks": [
+        ## Block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "A process failed to start (server in maintenance mode)"
+            }
+        },
+        ## Block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Process*: $fn.escapeJson($process.getName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($user.getDisplayName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Request on*: $scheduledDate"
+                }
+                #if ($resourceName)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Resource*: $fn.escapeJson($resourceName)"
+                }
+                #end
+            ]
+        },
+        ## Block 3
+        {
+            "type": "section",
+            "text": {
+                "type": "plain_text",
+                "text": "The process failed to start because the server is in maintenance mode. You can request the process again when maintenance is complete."
+            }
+        },
+        ## Block 4
+        {
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request&gt;"
+            }
+        }
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title13" id="task_r4m_bm1_2rb">
+<h2 class="title topictitle2" id="ariaid-title13">Process Request Started JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+#macro (addLimitReached)
+        ## show limit message &amp; link
+    ,{
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": "&lt;$fn.escapeJson($externalUrl)#applicationProcessRequest/$request.getId().toString()|View Process Request For More&gt;"
+        }
+    }
+        #set ($blockCount = $blockCount + 1)
+#end
+
+#macro (showVersion $version)
+    #if ($blockCount == 50)
+        #addLimitReached()
+    #elseif ($blockCount &gt; 50)
+        ##ignore no room left
+    #else
+        ## add section
+    ,{
+        "type": "section",
+        "fields": [{
+             "type": "mrkdwn",
+             "text": "*Component*: $fn.escapeJson($version.getComponent().getName())"
+         },{
+             "type": "mrkdwn",
+             "text": "*Version*: $fn.escapeJson($version.getName())"
+         #if ($version.getDescription() and !$version.getDescription().trim().isEmpty())
+         },{
+             "type": "plain_text",
+             "text": "$fn.escapeJson($version.getDescription())"
+         #end
+         }]
+    }
+        #set ($blockCount = $blockCount + 1)
+    #end
+#end
+#macro (showChanges $compName)
+    #if ($blockCount == 50)
+        #addLimitReached()
+        #set ($blockCount = $blockCount + 1)
+    #elseif ($blockCount &gt; 50)
+        ## do nothing
+    #else
+        ,{
+            "type":"section",
+            "fields": [
+                {
+                    "type":"mrkdwn",
+                    "text": "*$fn.escapeJson($compName)*:"
+                }
+                #set ($changes = $changesByComponent.get($compName))
+                #foreach ($change in $changes)
+                    #if ($velocityCount &lt; 9)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "$fn.escapeJson($fn.getChangeTypeDisplayName($change)) $fn.escapeJson($fn.getChangeVersionDisplayName($change)) to &lt;$fn.escapeJson($externalUrl)#resource/$change.getResource().getId().toString()|$fn.escapeJson($change.getResource().getName())&gt;"
+                }
+                    #elseif ($velocityCount == 9)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "&lt;$fn.escapeJson($externalUrl)#applicationProcessRequest/$request.getId().toString()|View Process Request For More&gt;"
+                }
+                    #end
+                #end
+            ]
+        }
+        #set ($blockCount = $blockCount + 1)
+    #end
+#end
+
+{
+    "blocks": [
+        ## Block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "An application process started."
+            }
+        },
+        ## Block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Application*: $fn.escapeJson($application.getName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Process*: $fn.escapeJson($applicationProcess.getName())"
+                },{
+                #if ($snapshot)
+                    "type": "mrkdwn",
+                    "text": "*Snapshot*: $fn.escapeJson($snapshot.getName())"
+                },{
+                #end
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($user.getDisplayName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Request on*: $fn.formatDate($request.getSubmittedDate())"
+                }
+                #if ($request.getDescription())
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Description*: $fn.escapeJson($request.getDescription())"
+                }
+                #end
+            ]
+        },
+        ## Block 3
+        {
+            "type": "section",
+            "text": {
+                "type":"mrkdwn",
+                "text": "&lt;$fn.escapeJson($externalUrl)#applicationProcessRequest/$request.getId().toString()|View Process Request For More&gt;"
+            }
+        }
+        #set ($blockCount = 4)
+        ##Show as many versions as we have space for
+        #if ($versions &amp;&amp; $versions.size() &gt; 0)
+            #if ($blockCount == 50)
+                #addLimitReached()
+            #elseif ($blockCount &gt; 50)
+                ## do nothing
+            #else
+                ,{
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "*Versions*"
+                    }
+                }
+                #set ($blockCount = $blockCount + 1)
+                #foreach($version in $versions)
+                    #showVersion ($version)
+                #end
+            #end
+        #end
+        ## show as many Components as possible
+        #if ($uniqueComponentNames &amp;&amp; $uniqueComponentNames.size() &gt; 0)
+            #if ($blockCount == 50)
+                #addLimitReached()
+            #elseif ($blockCount &gt; 50)
+                ## do nothing
+            #else
+                ,{
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "*Pending Changes*"
+                    }
+                }
+                #set ($blockCount = $blockCount + 1)
+                #foreach($compName in $uniqueComponentNames)
+                    #showChanges ($compName)
+                #end
+            #end
+        #end
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title14" id="task_blp_2m1_2rb">
+<h2 class="title topictitle2" id="ariaid-title14">Task Created JSON body</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a1584716-3deb-4e2b-bd89-c40fef33a9ab">Edit online</a></span></div>
+<div class="abstract">
+<pre class="pre codeblock"><code>## BEGIN SECTION Body
+## PROPERTY Content-Type: application/json
+{
+    "blocks": [
+        ## Block 1
+        {
+            "type": "header",
+            "text": {
+                "type": "plain_text",
+                "text": "A task is eligible to be completed. Please review the request and approve or reject this task."
+            }
+        },
+        ## Block 2
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Process*: $fn.escapeJson($process.getName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Requested by*: $fn.escapeJson($user.getDisplayName())"
+                },{
+                    "type": "mrkdwn",
+                    "text": "*Request on*: $scheduledDate"
+                }
+                #if ($application)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Application*: $fn.escapeJson($application.getName())"
+                }
+                #end
+                #if ($enviornment)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Environment*: $fn.escapeJson($environment.getName())"
+                }
+                #end
+                #if ($snapshot)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Snapshot*: $fn.escapeJson($snapshot.getName())"
+                }
+                #end
+                #if ($component)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Component*: $fn.escapeJson($component.getName())"
+                }
+                #end
+                #if ($resourceName)
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Resource*: $fn.escapeJson($resourceName)"
+                }
+                #end
+                #if ($appRequest &amp;&amp; $appRequest.getDescription())
+                ,{
+                    "type": "mrkdwn",
+                    "text": "*Request Description*: $fn.escapeJson($appRequest.getDescription())"
+                }
+                #end
+            ]
+        },
+        ## Block 3
+        {
+            "type": "section",
+            "fields": [
+                {
+                    "type":"mrkdwn",
+                    "text": "&lt;$fn.escapeJson($externalUrl)/#$requestType/$processId|View Request&gt;"
+                }
+                #if ($respondUrl)
+                ,{
+                    "type":"mrkdwn",
+                    "text": "&lt;$fn.escapeJson($respondUrl)|Respond&gt;"
+                }
+                #end
+            ]
+        }
+        #if ($roles)
+        ,{
+            "type": "section",
+            "fields": [
+                {
+                    "type": "mrkdwn",
+                    "text": "*Roles*:"
+                }
+                ## This breaks at &gt; 9 roles. Check for other templates handling to modify to handle more
+                #for each ( $role in $roles )
+                ,{
+                     "type": "mrkdwn",
+                     "text": "$fn.escapeJson($role.getName())"
+                }
+                #end
+            ]
+        }
+        #end
+    ]
+}
+## END SECTION Body</code></pre>
+</div>
+</article>
+
+
+</article></main></body></html>

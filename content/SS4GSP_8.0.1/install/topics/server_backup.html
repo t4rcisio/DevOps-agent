@@ -1,0 +1,70 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To back up the server, make a backup copy of the database and application data directory. Both frequent online backups and occasional offline backups are required."><meta name="DC.relation" scheme="URI" content="../../install/topics/backup_recover.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="server_backup"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Backing up the server</title></head><body id="server_backup"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Backing up the server</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-e6fa68ff-6df2-41ec-8345-b5062f5156ec">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To back up the server, make a backup copy of the database and application data directory.
+    Both frequent online backups and occasional offline backups are required.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_backup__context__1">About this task</h2></div>Note the following points before performing the online or offline backup procedure.<div class="note important note_important"><span class="note__title">Important:</span> 
+<p class="p">Make sure that you take backups of the filesystem and the database at the same time, or as close
+as possible. The bigger the gap between backups, the bigger the data skew is likely to be. Using a
+backup of the server directory and the database taken from different times may cause the following
+problems when you restore the backups: </p>
+<ul class="ul">
+<li class="li">If you back up the file system before the database, then the database may know of the versions
+or step logs that were created after the file system was backed up. This may lead to problems
+attempting to deploy those versions or to view those step logs.</li>
+<li class="li">If you back up the database before the file system, then the file system may contain versions
+and step logs that the database is not aware of. Due to this, you may not get the correct available
+file system size.</li>
+</ul>
+</div></section>
+</div>
+  <nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/backup_recover.html" title="You can back up and recover the contents of your IBM DevOps Deploy (Deploy) installation.">Backup and recover</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" id="server_backup_offline">
+    <h2 class="title topictitle2" id="ariaid-title2">Offline backups</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-e6fa68ff-6df2-41ec-8345-b5062f5156ec">Edit online</a></span></div>
+    
+    <div class="body taskbody"><p class="shortdesc">Offline backups happen when the server is stopped, for example during a monthly
+      maintenance window when you install operating system updates and other updates on the server
+      and agent systems.</p>
+      <section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskserver_backup_offline__context__1">About this task</h3></div>Offline backups must include both the database and the server file system, including
+the application data directory. Follow these steps to take an offline backup of the
+server:</section>
+      <section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskserver_backup_offline__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+          <span class="ph cmd">Stop the server.</span>
+          <div class="itemgroup info">See <a class="xref" href="run_server.html" title="To run the server, run the batch file or shell script for the server.">Starting and stopping the server</a>.</div>
+        </li><li class="li step stepexpand" id="server_backup_offline__backup_database">
+          <span class="ph cmd">Create a full backup of the database. </span>
+          <div class="itemgroup info">For instructions on backing up the database, see the documentation for your
+            database.</div>
+        </li><li class="li step stepexpand">
+          <span class="ph cmd">Back up the application data folder to a secure backup location. </span>
+          <div class="itemgroup info"><span class="ph" data-hd-otherprops="ibm">The default application data folder is
+                <span class="ph filepath">/opt/devops-deploy/server/appdata</span> on Linux™ and <span class="ph filepath">C:\Program
+                Files\devops-deploy\server\appdata</span> on Windows™. On high-availability systems, the application data folder is always
+              on a shared network drive that each server can access.</span></div>
+        </li><li class="li step stepexpand">
+          <span class="ph cmd">Back up the <span class="ph filepath">conf</span> folder.</span>
+          <div class="itemgroup info"><span class="ph" data-hd-otherprops="ibm">The default location of this folder is
+                <span class="ph filepath">/opt/devops-deploy/server/conf</span> on Linux and
+                <span class="ph filepath">C:\Program Files\devops-deploy\server\conf</span> on Windows.</span> On
+            high-availability systems, back up this folder for each server.</div>
+        </li><li class="li step stepexpand">
+          <span class="ph cmd">Start the server.</span>
+        </li></ol></section>
+    </div>
+  </article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" id="server_backup_online">
+<h2 class="title topictitle2" id="ariaid-title3">Online backups</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-e6fa68ff-6df2-41ec-8345-b5062f5156ec">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Online backups happen frequently, and without stopping the server. For online backups,
+you need to back up only the database.</p>
+<section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskserver_backup_online__context__1">About this task</h3></div>Online backups, typically include only the database and not the server file system and
+application data directory. Use the backup options for your database system.<div class="note note note_note"><span class="note__title">Note:</span> To make the online
+backups easier to restore, configure your database to create full regular restore points and to
+enable transaction logging. For example, the database might make full backups once a month and log
+transactions all the time. That way, you can restore the database at any time.</div></section>
+<section class="section postreq" id="server_backup_online__postreq"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskserver_backup_online__postreq">What to do next</h3></div>To restore <span class="ph">IBM DevOps Deploy (Deploy)</span> from a backup,
+        see <a class="xref" href="../../user/topics/arch_data_recovery.html" title="To restore a backup of the server, stop the server and replace the existing files and databases with the backup files and databases.">Restoring a backup</a>.</section>
+</div>
+</article>
+</article></main></body></html>

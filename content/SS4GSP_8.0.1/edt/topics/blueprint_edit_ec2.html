@@ -1,0 +1,134 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To model an Amazon Web Services (AWS) environment, log in with an AWS cloud project and specify the AWS-specific information in a blueprint."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueprint_edit_ec2"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Modeling environments for Amazon Web Services</title></head><body id="blueprint_edit_ec2"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Modeling environments for Amazon Web Services</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-038a43eb-a2ba-4cc6-94cd-00ef63d34bf4">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To model an Amazon Web Services (AWS) environment, log in with an AWS cloud project and
+specify the AWS-specific information in a blueprint.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit_ec2__prereq__1">Before you begin</h2></div>
+<ul class="ul">
+<li class="li">Login to the Blueprint Designer.</li>
+<li class="li">For Heat blueprints only:<ul class="ul" id="blueprint_edit_ec2__d119e27">
+<li class="li">Connect the blueprint design server to a cloud system. See <a class="xref" href="security_cloud_connection.html" title="To create a connection to a cloud to use with the blueprint designer, you use OpenStack Heat. You specify the location of the identity server and the engine to use. The steps are different for each type of cloud.">Connecting to clouds through the blueprint designer</a></li>
+<li class="li">Make sure that your user account is authenticated to a cloud system. See <a class="xref" href="../../admin/topics/security_auth_bds.html" title="You can provide users of the blueprint designer the permissions to access clouds in two ways. You can provide functional IDs through cloud projects, or you can use accounts on an OpenStack cloud that already have permissions.">Setting up access to clouds in the blueprint designer</a>.</li>
+<li class="li" id="blueprint_edit_ec2__d119e38"><span class="ph" id="blueprint_edit_ec2__d119e39">Connect the blueprint design server to the server. See
+<a class="xref" href="../../user/topics/p_integrate.html" title="In most cases, you connect the blueprint design server to the server at installation time, but you can also connect them later.">Connecting the blueprint design server to the server</a>.</span></li>
+<li class="li">At the top of the page, select the cloud project and region to use.</li>
+</ul></li>
+</ul>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit_ec2__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create the blueprint.</span>
+<div class="itemgroup info">See <a class="xref" href="blueprint_edit.html#blueprint_edit" title="You can create projects, blueprints, configuration files, folders, and many other type of the files in the blueprint designer.">Creating files</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add resources from the palette to the blueprint, such as virtual images.</span>
+<div class="itemgroup info">The palette shows resources from the currently connected cloud, which is shown in the
+upper-right corner of the page. For more information on working with the blueprint designer, see
+<a class="xref" href="blueprint_diagram.html" title="You can edit Terraform blueprints in a graphical editor.">Editing Terraform blueprint diagram</a> and <a class="xref" href="blueprint_source.html" title="You can edit the Heat Orchestration Template (HOT) source code of blueprints directly.">Editing blueprint source code</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Customize the blueprint source code for your configuration of AWS. </span>
+<div class="itemgroup stepxmp">For example, you might have to change the mount points of volumes from defaults like
+<code class="ph codeph">/dev/vdc</code> to specific locations like <code class="ph codeph">/dev/xvdc</code>, as in the following
+example:<pre class="pre codeblock"><code>linux_image_1_volume_1_attachment:
+  type: OS::Cinder::VolumeAttachment
+  properties:
+    volume_id: vol-4d4aaa04
+    instance_uuid: { get_resource: linux_image_1_volume_1_attachment }
+    mountpoint: /dev/xvdc</code></pre></div>
+<div class="itemgroup stepresult">In another example, to ensure that nodes and volumes are created in the same zone, you
+might need to update the <code class="ph codeph">availability_zone</code> property to resources in the blueprint,
+as in the following
+example:<pre class="pre codeblock"><code>parameters:
+  availability_zone:
+    type: string
+    <strong class="ph b">default: us-east-1d</strong>
+    description: Name of availability zone in which to create the instance
+
+resources:
+linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    flavor: { get_param: flavor }
+    image: "LinuxImageA"
+    key_name: { get_param: key_name }
+    name: "images/linux_image_A"
+    <strong class="ph b">availability_zone: { get_param: availability_zone }</strong>
+  metadata:
+    ec2_properties:
+      access_id: ABC12345
+      secret_key: 67890DEF
+linux_image_A_volumeA_attachment:
+  type: OS::Cinder::VolumeAttachment
+  properties:
+    volume_id: volumeA
+    instance_uuid: { get_resource: linux_image_A }
+    mountpoint: /dev/xvdc
+  metadata:
+    ec2_properties:
+      access_id: ABC12345
+      secret_key: 67890DEF
+
+volumeA:
+  type: OS::Cinder::Volume
+  properties:
+    name: volumeA
+    <strong class="ph b">availability_zone: { get_param: availability_zone }</strong>
+    size: 1
+  metadata:
+    ec2_properties:
+      access_id: ABC12345
+      secret_key: 67890DEF</code></pre>For
+more information, see the Amazon Web Services documentation.</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">In the blueprint source code, specify any additional core or extended properties for the
+resources in the blueprint.</span>
+<div class="itemgroup stepxmp">Specify core properties in the <code class="ph codeph">properties</code> section of the resource code, as
+in the following example:
+<pre class="pre codeblock"><code>
+linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    flavor: { get_param: flavor }
+    image: "LinuxImageA"
+    key_name: { get_param: key_name }
+    name: "images/linux_image_A"
+    availability_zone: { get_param: availability_zone }</code></pre></div>
+<div class="itemgroup stepxmp">Specify extended properties in the <code class="ph codeph">metadata/ec2_properties</code> section of the
+resource code, as in the following example. This example applies two tags to a virtual
+image.<pre class="pre codeblock"><code>
+linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    flavor: { get_param: flavor }
+    image: "LinuxImageA"
+    key_name: { get_param: key_name }
+    name: "images/linux_image_A"
+    availability_zone: { get_param: availability_zone }
+  metadata:
+    ec2_properties:
+      cluster: blue
+      database_type: mysql</code></pre></div>
+<div class="itemgroup info">For information about the properties that are available for resource types, see <a class="xref" href="../../edt-heat-reference/topics/ref_heat_types_ov.html" title="The engine includes custom Heat resource types that represent resources on cloud systems and artifacts from the IBM DevOps Deploy (Deploy) server.">Heat resource types</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create a configuration file and externalize properties to the file.</span>
+<div class="itemgroup info">See <a class="xref" href="blueprint_configs.html" title="Configuration files are lists of properties and values. You can use configuration files to provision the same blueprint on multiple cloud systems.">Editing configuration files</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the configuration file, ensure that the core OpenStack types are mapped to Amazon Elastic
+Compute Cloud (EC2) types.</span>
+<div class="itemgroup info">The configuration file must have mapping similar to the following
+code:<pre class="pre codeblock"><code>resource_registry:
+  OS::Nova::Server : IBM::EC2::Server
+  OS::Cinder::Volume : IBM::EC2::Volume
+  OS::Cinder::VolumeAttachment : IBM::EC2::VolumeAttachment
+  OS::Neutron::Port : IBM::EC2::Port
+  OS::Neutron::Net : IBM::EC2::VPC
+  OS::Neutron::Subnet : IBM::EC2::Subnet
+  OS::Neutron::Router : IBM::EC2::RouteTable
+  OS::Neutron::RouterGateway : IBM::EC2::InternetGateway
+  OS::Neutron::RouterInterface : IBM::EC2::RouteTableAssociation</code></pre></div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit_ec2__postreq__1">What to do next</h2></div>
+<p class="p">Add the components of your application to the blueprint. See <a class="xref" href="blueprint_deploy_env.html" title="Add components to a blueprint so that when you provision environments from the blueprint, the engine automatically installs the components.">Deploying components with blueprints</a>.</p>
+</section>
+</div>
+</article></main></body></html>

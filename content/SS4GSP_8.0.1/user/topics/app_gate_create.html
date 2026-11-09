@@ -1,0 +1,51 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Create gates that specify the conditions that must be met before a component version or snapshot is deployed to the environment. The conditions are defined on the component version statuses and snapshot statuses."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_gate.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_gate_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating environment gates</title></head><body id="app_gate_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating environment gates</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-687071db-d815-4e3b-bdb5-5405843ffce3">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Create gates that specify the conditions that must be met before a component version or
+snapshot is deployed to the environment. The conditions are defined on the component version
+statuses and snapshot statuses.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_gate_create__prereq__1">Before you begin</h2></div>Create one or more component version and/or snapshot statuses. To create statuses, see <a class="xref" href="../../admin/topics/settings_status_create.html" title="Define component version, snapshot, and inventory statuses on the Statuses tab.">Creating statuses</a>.
+   Note that component versions cannot be deployed to the environments unless they have the
+   specified statuses.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_gate_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Display the <span class="keyword wintitle">Environment Gates</span> pane for the target application or
+application template (<span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected application</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Environment Gates</span></span> or <span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected application template</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Environment Gates</span></span>). </span>
+<div class="itemgroup info">This pane lists the environments and the gates for each environment.<div class="note note note_note"><span class="note__title">Note:</span> You cannot modify
+environment gates if the environment was created by using an application template.</div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Next to an environment, click <span class="ph uicontrol">Add gate condition</span>. </span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select a component version and/or snapshot status by clicking the drop-down arrow from their
+respective fields.</span>
+<div class="itemgroup info"><img class="image" src="../images/Env_gates1.PNG" alt="Selecting environment gates"></div>
+<div class="itemgroup info">
+<p class="p">You can add more than one status to a gate condition that must be satisfied for the deployment.
+For example, if you define a gate with the statuses <code class="ph codeph">Passed unit tests</code> and
+<code class="ph codeph">Latest</code>, only component versions with both of these statuses can be deployed into
+the environment.</p>
+<p class="p">Adding another gate condition, applies the <code class="ph codeph">-or-</code> operation to the gate. An
+environment with two or more gate conditions means that the component version can be deployed if it
+meets any of the conditions. For example, if you define a gate with the statuses <code class="ph codeph">Passed unit tests</code> and <code class="ph codeph">Latest</code>, a component version passes the gate if it has either
+status (or both). A single environment can have any number of gate conditions.</p>
+<p class="p">Once you add a status, you can click the green check mark that turns it into a circle-backslash
+symbol. It gives the status a <code class="ph codeph">Not</code> operation. A status with circle-backslash symbol
+indicates that it will exclude the status from deployment. For example. if you define a gate with
+the condition <code class="ph codeph">(circle-backslash symbol) Failed tests</code>, the component versions with
+this status will not be deployed into the environment. </p>
+</div>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> When deploying component versions without choosing a snapshot, the snapshot gates are
+ignored.</div>
+</div>
+<div class="itemgroup info"><p class="p">The following example screen capture shows how you can set the gate conditions for an
+environment.</p><img class="image" src="../images/EnviroGates.PNG" alt="Environment gate showing &#34;and&#34;, &#34;or&#34;, and &#34;not&#34;."></div>
+</li><li class="li step stepexpand"><span class="ph cmd">Repeat these steps for other environments.</span><div class="itemgroup info">Each
+environment can have different gates.</div></li><li class="li step stepexpand">
+<span class="ph cmd"><span class="ph uicontrol">Save</span> your changes.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_gate_create__result__1">Results</h2></div>The environment deployments are executed when all of the specified gate conditions are
+met.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_gate.html" title="An environment gate is a requirement that must be met before component versions can be deployed to an environment. For example, a component version might need to pass certain tests or receive an approval.">Environment gates</a></div></div></nav></article></main></body></html>

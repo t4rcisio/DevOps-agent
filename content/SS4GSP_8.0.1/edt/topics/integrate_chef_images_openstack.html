@@ -1,0 +1,128 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To create images for OpenStack-based clouds that can use Chef, set up a development environment that includes the prerequisites, and then use the disk-image-create command."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="integrate_chef_images_openstack"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Using a dedicated environment to create Chef-compatible images on OpenStack-based clouds</title></head><body id="integrate_chef_images_openstack"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Using a dedicated environment to create Chef-compatible images on OpenStack-based
+clouds</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-59459d05-2b11-43e3-a020-f2dc9656be28">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To create images for OpenStack-based clouds that can use Chef, set up a development
+environment that includes the prerequisites, and then use the <span class="keyword cmdname">disk-image-create</span>
+command.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_chef_images_openstack__context__1">About this task</h2></div>To create images that are compatible with Chef and the blueprint designer, you can either
+update individual images or configure an environment to create images in bulk. To update individual
+images, see <a class="xref" href="cloud_connect_openstack_images.html" title="Before you can use images on an OpenStack or OpenStack-based cloud with the blueprint designer, you must configure cloud-init on those images.">Configuring OpenStack images</a>. <div class="p">To create images in bulk, you
+must set up an environment to use in creating those images. This environment must include certain
+prerequisites, which are listed in the steps that follow. This environment does not have to be on
+the cloud system, and it does not have to be the same operating system as the images that you want
+to create for use on the cloud. The following procedure assumes a Red Hat Enterprise Linux™ (RHEL) version 7 operating system.<div class="note note note_note"><span class="note__title">Note:</span> Chef roles are supported only
+on RHEL version 6 and version 7 images.</div></div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_chef_images_openstack__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On RHEL version 7, install these packages:</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li"><code class="ph codeph">git</code></li>
+<li class="li"><code class="ph codeph">qemu-system-x86 qemu-img</code></li>
+<li class="li"><code class="ph codeph">kpartx</code></li>
+</ul>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Using the <code class="ph codeph">git</code> program, clone the following repositories as shown:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>git clone https://github.com/openstack/diskimage-builder.git
+git clone https://github.com/openstack/tripleo-image-elements.git
+git clone https://github.com/openstack/heat-templates.git
+git clone https://git.openstack.org/openstack/dib-utils.git</code></pre>Place
+all the cloned repositories into the same folder, such as
+<span class="ph filepath">/opt/image-builder</span>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add the Chef hook element to your environment by extracting the
+<span class="ph filepath">os-chef-config-hook.tgz</span> file into the same folder that you placed the Git
+repositories. </span>
+<div class="itemgroup info"><span class="ph" id="integrate_chef_images_openstack__chef_hook_provided">This file is provided in the engine installation media and is in
+the <span class="ph filepath">/ibm-ucd-patterns-install/engine-install/resources</span>
+folder.</span><pre class="pre codeblock"><code>tar -xf os-chef-config-hook.tgz</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify these environment variables:</span>
+<div class="itemgroup info">
+<dl class="dl">
+
+<dt class="dt dlterm"><span class="keyword parmname">ELEMENTS_PATH</span></dt>
+<dd class="dd">Specify the location of the Chef hook element that you extracted and the repositories that you
+cloned. Separate the locations of different paths with colons. For example, if you extracted the
+Chef hook element and cloned the repositories into the <span class="ph filepath">/opt/image-builder</span>
+folder, the code might look like the following example:
+<p class="p"><code class="ph codeph">/opt/image-builder/tripleo-image-elements/elements:/opt/image-builder/heat-templates/hot/software-config/elements:/opt/image-builder/os-chef-config-hook/heat-templates/hot/software-config/elements:/opt/image-builder/ibm-customizations/elements</code></p></dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">BASE_IMAGE_FILE</span></dt>
+<dd class="dd">Specify the name of the file for the image.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">DIB_CLOUD_IMAGES</span></dt>
+<dd class="dd">Specify the location of the image file that is listed in the
+<span class="keyword parmname">BASE_IMAGE_FILE</span> variable.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">PATH</span></dt>
+<dd class="dd">Add the location of the disk image creation tool, such as
+<code class="ph codeph">/usr/local/source/dib-utils/bin:$PATH</code>.</dd>
+
+
+<dt class="dt dlterm"><span class="keyword parmname">QEMU_IMG_OPTIONS</span></dt>
+<dd class="dd">Specify the version of the <code class="ph codeph">qemu-img</code> program to use, such as
+<code class="ph codeph">compat=0.10</code>.</dd>
+
+</dl>
+</div>
+<div class="itemgroup stepxmp">For example, you might set these variables with the following
+code:<pre class="pre codeblock"><code>export ELEMENTS_PATH=/opt/image-builder/tripleo-image-elements/elements:/opt/image-builder/heat-templates/hot/software-config/elements:/opt/image-builder/os-chef-config-hook/heat-templates/hot/software-config/elements:/opt/image-builder/ibm-customizations/elements
+export DIB_CLOUD_IMAGES=file:///usr/local/source/image
+export BASE_IMAGE_FILE=rhel-guest-image-7.0-20140930.0.x86_64.qcow2
+export PATH="/usr/local/source/dib-utils/bin:$PATH"
+export QEMU_IMG_OPTIONS="compat=0.10"</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Using the <span class="keyword cmdname">disk-image-create</span> image creation tool, create the Chef-compatible
+image:</span>
+<div class="itemgroup stepxmp"><pre class="pre codeblock"><code>./diskimage-builder/bin/disk-image-create vm <var class="keyword varname">image-type</var> disable-selinux ntp 
+  heat-config os-collect-config os-refresh-config os-apply-config 
+  heat-config-chef heat-config-script 
+  --image-size <var class="keyword varname">image-size</var> 
+  -o <var class="keyword varname">image-name</var></code></pre><div class="note note note_note"><span class="note__title">Note:</span> This
+command must be entered on a single line. The preceding command is split into multiple lines for
+clarity.</div><dl class="dl">
+
+<dt class="dt dlterm"><code class="ph codeph"><var class="keyword varname">image-type</var></code></dt>
+<dd class="dd">Specify the type of image, such as <code class="ph codeph">rhel</code> for a Red Hat Enterprise Linux image. You can create an image type that is different from
+the operating system on which you create the image. </dd>
+
+
+<dt class="dt dlterm"><code class="ph codeph"><var class="keyword varname">image-size</var></code></dt>
+<dd class="dd">The size of the image in gigabytes.</dd>
+
+
+<dt class="dt dlterm"><code class="ph codeph"><var class="keyword varname">image-name</var></code></dt>
+<dd class="dd">The name of the output image.</dd>
+
+</dl>For more information about this command and the image creation process, see <a class="xref" href="http://docs.openstack.org/developer/diskimage-builder/" target="_blank">http://docs.openstack.org/developer/diskimage-builder/</a>.<div class="p">For example, the
+following command creates a 20 GB image that is named
+<span class="ph filepath">chefhook-rhel-7.0.qcow2</span>:<pre class="pre codeblock"><code>./diskimage-builder/bin/disk-image-create vm rhel 
+  disable-selinux ntp heat-config os-collect-config 
+  os-refresh-config os-apply-config heat-config-chef 
+  heat-config-script --image-size 20 
+  -o chefhook-rhel-7.0.qcow2</code></pre></div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Set the communications interval for the image to communicate with the Heat engine.</span>
+<div class="itemgroup info">The <span class="keyword parmname">polling_interval</span> parameter is the frequency in seconds with which the
+image communicates with the Heat engine. By default, the <span class="keyword parmname">polling_interval</span> is 30
+seconds, but the default value can cause excessive engine load. To modify this value in the image,
+open the <span class="ph filepath">/etc/os-collect-config.conf</span> configuration file in the image and add
+the following text:<pre class="pre codeblock"><code>polling_interval = 90</code></pre> In this case, the
+<span class="keyword parmname">polling_interval</span> value is <code class="ph codeph">90</code> seconds.<p class="p">Ensure that the
+<span class="keyword parmname">polling_interval</span> value is short enough that the virtual machine can collect any
+changes from the Heat engine before the stack timeout elapses. The default timeout value is 60
+minutes, but you can set the timeout value for each cloud. See <a class="xref" href="../../admin/topics/security_projects.html#security_projects" title="A cloud project for the blueprint designer represents a tenant or project on a cloud system. You can give users access to cloud systems through cloud projects.">Creating cloud projects for the blueprint designer</a>.</p></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Upload the image to your cloud system.</span>
+</li></ol></section>
+<section class="section postreq" id="integrate_chef_images_openstack__postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskintegrate_chef_images_openstack__postreq">What to do next</h2></div>When you edit blueprints in the blueprint designer, you can apply Chef roles
+to virtual images. See <a class="xref" href="blueprint_chef.html" title="Chef roles describe automation tasks to be run on a target system. You can apply roles to images in a blueprint.">Applying Chef roles to environments</a>.</section>
+</div>
+</article></main></body></html>

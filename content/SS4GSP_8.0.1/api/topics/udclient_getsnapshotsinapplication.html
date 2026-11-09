@@ -1,0 +1,68 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Get information about snapshots in an application"><meta name="DC.subject" content="udclient commands, getSnapshotsInApplication, udclient command, command-line commands"><meta name="keywords" content="udclient commands, getSnapshotsInApplication, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_getsnapshotsinapplication"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>getSnapshotsInApplication</title></head><body id="udclient_getsnapshotsinapplication"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">getSnapshotsInApplication</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-807c931f-f05c-442e-bdf9-92c592feb29f">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Get information about snapshots in an application</p>
+<section class="section">
+Snapshots are listed from most recent to least recent.
+</section>
+<section class="section"><h2 id="udclient_getsnapshotsinapplication__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  getSnapshotsInApplication [parameters]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_getsnapshotsinapplication__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_getsnapshotsinapplication__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_getsnapshotsinapplication__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_getsnapshotsinapplication__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_getsnapshotsinapplication__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_getsnapshotsinapplication__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_getsnapshotsinapplication__composite_params__entry__1"><span class="keyword parmname">application</span></td>
+<td class="entry" headers="udclient_getsnapshotsinapplication__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getsnapshotsinapplication__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_getsnapshotsinapplication__composite_params__entry__4">Name or ID of the application</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_getsnapshotsinapplication__composite_params__entry__1"><span class="keyword parmname">maxResults</span></td>
+<td class="entry" headers="udclient_getsnapshotsinapplication__composite_params__entry__2">int</td>
+<td class="entry" headers="udclient_getsnapshotsinapplication__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_getsnapshotsinapplication__composite_params__entry__4">Cap the number of results. Any value less than 1 returns all results.</td>
+</tr>
+</tbody></table>
+
+</section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_getsnapshotsinapplication__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  getSnapshotsInApplication 
+  -application MyApplication
+</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_getsnapshotsinapplication__title__6" class="title sectiontitle">Example JSON request</h2><pre class="pre codeblock"><code>[
+  {
+    "id": "305749d0-9838-4fce-a8bd-7d25b4ffd5f7",
+    "name": "Snapshot1",
+    "created": 1441386527766,
+    "active": true,
+    "versionsLocked": false,
+    "configLocked": false,
+    "applicationId": "2d741420-fd31-443d-95eb-472d334f8ec9",
+    "user": "jsmith"
+  },
+  {
+    "id": "5ab250dd-37f8-4a6e-9ec1-8cf0b547eb25",
+    "name": "Snapshot2",
+    "created": 1441386081196,
+    "active": true,
+    "versionsLocked": false,
+    "configLocked": false,
+    "applicationId": "2d741420-fd31-443d-95eb-472d334f8ec9",
+    "user": "jsmith"
+  }
+]</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_application_snapshotsinapplication_get.html" title="Snapshots are listed from most recent to least recent.">Get information about snapshots in an application</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

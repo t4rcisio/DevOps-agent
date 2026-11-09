@@ -1,0 +1,39 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Component processes are typically run from within application processes. However, you can also run component processes directly to test the processes or to correct an error in an urgent situation."><meta name="DC.relation" scheme="URI" content="../../user/topics/intro_component_processes.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_process_run"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Running component processes</title></head><body id="comp_process_run"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Running component processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-09ac5f9f-bd19-4b84-9438-c5f8008ae147">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Component processes are typically run from within application processes. However, you can
+also run component processes directly to test the processes or to correct an error in an urgent
+situation.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_process_run__context__1">About this task</h2></div><p class="p">To run a component process in an application process, add the appropriate step to the application
+process and specify the component process. For example, to run a deployment component process, use
+the Install Component step. The step that you use depends on the type of component process. For more
+information, see <a class="xref" href="comp_process_types.html" title="Different types of component processes deploy, configure, or uninstall component versions.">Component process types</a>.</p><p class="p">You can run certain
+types of component process from generic processes. See <a class="xref" href="genProcess_ch.html" title="Generic processes are not specific to a particular component and can be used in any number of applications. They are like general purpose processes. You can use generic processes to download and install packages on the system or perform other configuration management related tasks such as configuring SSH or completing FTP tasks. With a generic process, for example, you can update Linux agents that were recently installed by using SSH to run as a service on a Linux computer. Linux agents cannot be updated in this way during a remote installation.">Generic processes</a>.</p><div class="p">You can also run component processes directly as follows:<ol class="ol">
+     <li class="li">Click an application, and go to the <span class="ph uicontrol">Components</span> tab.</li>
+     <li class="li">Next to the component, click <span class="ph uicontrol">Run Process</span>.</li>
+     <li class="li">In the <span class="ph uicontrol">Environment</span> and <span class="ph uicontrol">Resource</span> lists, select
+      where to run the process.</li>
+     <li class="li">In the <span class="ph uicontrol">Process</span> list, select the component process.</li>
+     <li class="li">If the component process requires a component version, in the
+       <span class="ph uicontrol">Version</span> list, select the component version.</li>
+     <li class="li">If the component process requires other properties, specify values for those
+      properties.</li>
+     <li class="li">Click <span class="ph uicontrol">Submit</span>. </li>
+    </ol></div></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_process_run__result__1">Results</h2></div>The component process is listed in the <span class="ph menucascade"><span class="ph uicontrol">Components</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected component</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Component Request History</span></span>.</section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_process_run__postreq__1">What to do next</h2></div>
+<div class="p">You can search a component process by filtering any of the columns from the <span class="ph uicontrol">Component
+Request History</span>:<ul class="ul">
+<li class="li">Resource</li>
+<li class="li">Version</li>
+<li class="li">Application</li>
+<li class="li">Environment</li>
+<li class="li">Scheduled For</li>
+<li class="li">By</li>
+<li class="li">Status</li>
+</ul></div>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/intro_component_processes.html" title="A component process is a series of user-defined steps that operate on a component's artifacts. Each component has at least one process that is defined for it and can have several.">Component processes</a></div></div></nav></article></main></body></html>

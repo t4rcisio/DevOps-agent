@@ -1,0 +1,118 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="A version may be set to 'latest' to deploy the latest version of that component."><meta name="DC.subject" content="REST API, applicationProcessRequest resource, /request POST, POST methods, /applicationProcessRequest/request"><meta name="keywords" content="REST API, applicationProcessRequest resource, /request POST, POST methods, /applicationProcessRequest/request"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_applicationprocessrequest.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_applicationprocessrequest_request_post"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Run an application process</title></head><body id="rest_cli_applicationprocessrequest_request_post"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Run an application process</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-16122345-1884-4e6d-b819-aa733b104411">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">A version may be set to 'latest' to deploy the latest version of that component.</p>
+<section class="section"><h2 id="rest_cli_applicationprocessrequest_request_post__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>POST https://{hostname}:{port}
+    /cli/applicationProcessRequest/request
+Accept: {contentType}</code></pre><table class="table" id="rest_cli_applicationprocessrequest_request_post__header_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_applicationprocessrequest_request_post__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_request_post__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_request_post__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_request_post__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_post__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_post__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_post__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_post__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+<div class="p" id="rest_cli_applicationprocessrequest_request_post__template">This command takes a JSON request string or file. Use the following template for the request: <pre class="pre codeblock language-json"><code>{
+   "application": "Application name or ID",
+   "applicationProcess": "Application process name or ID",
+   "date": "Date and time to schedule the process for. (Optional) Supports unix timecodes or the format yyyy-mm-dd HH:mm",
+   "description": "Description for the request (Optional)",
+   "environment": "Environment name or ID",
+   "onlyChanged": "Specify false to force deployment of versions that are already in the inventory (Optional)",
+   "post-deploy-message": "The body of the PUT message. You can use the variable ${p:finalStatus}, which holds the state of the process. 
+                            The possible states are: Success, Failure, Approval Rejected, Awaiting Approval, Running, Scheduled, 
+                            Cancelled, and Unknown. You can use the variable ${p:warningCount}, which holds the number of warnings that occurred on the process. (Optional)",
+   "post-deploy-put-url": "The URL that the post-deploy-message is PUT to. (Optional)",
+   "properties": {
+      "Property name": "Property value (Optional, if a default value is defined for the required property)",
+      "applicationProcess step name/Property name": "Property value (Optional, if a default value is defined for the required property)"
+   },
+   "recurrencePattern": "To make a scheduled process recur, specify 'D' (daily), 'W' (weekly), or 'M' (monthly). (Optional)",
+   "snapshot": "Snapshot name or ID (Optional)",
+   "versions": [
+      {
+         "component": "Component name or ID for the version, if you are using version name instead of ID.",
+         "version": "Version name or ID (Repeat as necessary. Not used with snapshots)"
+      }
+   ]
+}</code></pre></div>
+      <div class="note note note_note" id="rest_cli_applicationprocessrequest_request_post__note_py5_fvr_bgc"><span class="note__title">Note:</span> In the <code class="ph codeph">properties</code> section of the JSON string, the
+          <strong class="ph b">'applicationProcess step name'</strong> refers to the name of the corresponding step in the
+        application process used for the component. This property is used for defining component
+        process properties.</div></section>
+
+<div class="example" data-hd-audience="all"><h2 id="rest_cli_applicationprocessrequest_request_post__title__4" class="title sectiontitle">Example JSON request</h2><pre class="pre codeblock language-json"><code>{
+  "application": "JPetStore",
+  "description": "Requesting deployment",
+  "applicationProcess": "Deploy JPetStore",
+  "environment": "Tutorial environment 1",
+  "onlyChanged": false,
+  "properties": {
+    "Prop1": "value1",
+    "applicationProcess step name/Prop2": "value2"
+  },
+  "versions": [
+    {
+      "version": "1.0",
+      "component": "JPetStore-APP"
+    },
+    {
+      "version": "1.0",
+      "component": "JPetStore-WEB"
+    },
+    {
+      "version": "1.0",
+      "component": "JPetStore-DB"
+    }
+  ]
+}</code></pre></div><div class="example" data-hd-audience="all"><h2 id="rest_cli_applicationprocessrequest_request_post__title__5" class="title sectiontitle">Example JSON request</h2>You can also use the keywords
+        <code class="ph codeph">latest</code>, <code class="ph codeph">latestVersion</code>, and <code class="ph codeph">newest</code> in
+      place of component version names. In this case, the process uses the most recently created
+      component version. The following example shows how you can use these keywords in the JSON
+      request.<pre class="pre codeblock language-json"><code>{
+  "application": "JPetStore",
+  "description": "Deploying newest versions",
+  "applicationProcess": "Deploy JPetStore",
+  "environment": "Tutorial environment 1",
+  "onlyChanged": false,
+  "properties": {
+    "Prop1": "value1",
+    "applicationProcess step name/Prop2": "value2"
+  },
+  "versions": [
+    {
+      "version": "newest",
+      "component": "JPetStore-APP"
+    },
+    {
+      "version": "latest",
+      "component": "JPetStore-WEB"
+    },
+    {
+      "version": "latestVersion",
+      "component": "JPetStore-DB"
+    }
+  ]
+}</code></pre></div><div class="example" data-hd-audience="all"><h2 id="rest_cli_applicationprocessrequest_request_post__title__6" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "requestId": "f7e7b00d-8ea6-4a95-ad74-0ff853125232"
+}</code></pre></div>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_requestapplicationprocess.html" title="Run an application process">requestApplicationProcess</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_applicationprocessrequest.html" title="Resources for requesting application processes.">applicationProcessRequest resource</a></div></div></nav></article></main></body></html>

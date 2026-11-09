@@ -1,0 +1,104 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="reference"><meta name="abstract" content="This resource type represents configuration properties that are used when you deploy a component, including the name of the component process that deploys the component."><meta name="description" content="This resource type represents configuration properties that are used when you deploy a component, including the name of the component process that deploys the component."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="res_ibm_urbancode_softwareconfig_ucd"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>IBM::UrbanCode::SoftwareConfig::UCD</title></head><body id="res_ibm_urbancode_softwareconfig_ucd"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">IBM::UrbanCode::SoftwareConfig::UCD</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-0cdd9b6b-16bb-4008-896f-10dd5f6a8cd9">Edit online</a></span></div>
+
+<div class="body refbody"><div class="abstract"><span class="shortdesc">This resource type represents configuration
+properties that are used when you deploy a component, including the
+name of the component process that deploys the component. </span>In
+most cases, this resource type is associated with a <a class="xref" href="res_ibm_urbancode_softwaredeploy_ucd.html" title="This resource type represents a deployment instance of a component.">IBM::UrbanCode::SoftwareDeploy::UCD</a> resource.</div>
+<section class="section">
+<p class="p">The blueprint uses the core properties and extended properties, if any, from
+this resource type. Review and configure the applicable heat resources that apply to your
+configuration information.</p>
+<p class="p">In the blueprint designer, you can configure the properties that the
+following table includes. Properties are listed as either <q class="q">core</q> or <q class="q">extended.</q> Each type
+of property is located in separate sections of the heat resource that you can view in the blueprint
+designer. You set the core properties in the properties section and set the extended properties in
+the metadata section of the blueprint.</p>
+</section>
+<table class="table"><caption><span class="table--title-label">Table 1. </span><span class="title">Properties</span></caption><colgroup><col><col><col><col style="width:100%"><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="res_ibm_urbancode_softwareconfig_ucd__entry__1">Name</th>
+<th class="entry" id="res_ibm_urbancode_softwareconfig_ucd__entry__2">Type</th>
+<th class="entry" id="res_ibm_urbancode_softwareconfig_ucd__entry__3">Required</th>
+<th class="entry" id="res_ibm_urbancode_softwareconfig_ucd__entry__4">Core or extended</th>
+<th class="entry" id="res_ibm_urbancode_softwareconfig_ucd__entry__5">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__1"><span class="keyword parmname">application</span></td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__2">String</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__3">True</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__4">Core</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__5"><span class="ph">The name of the application in <span class="ph">IBM DevOps Deploy (Deploy)</span></span></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__1"><span class="keyword parmname">component_process</span></td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__2">String</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__3">True</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__4">Core</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__5">The component process that deploys the component</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__1"><span class="keyword parmname">component_process_timeout</span></td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__2">String</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__3">False</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__4">Core</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__5">The component process execution timeout value</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__1"><span class="keyword parmname">environment_name</span></td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__2">String</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__3">False</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__4">Core</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__5">The name of the environment to be created in <span class="ph">IBM DevOps Deploy (Deploy)</span></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__1"><span class="keyword parmname">inputs</span></td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__2">Map</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__3">False</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__4">Core</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__5">The environment properties on an <span class="ph">IBM DevOps Deploy (Deploy)</span>
+component</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__1"><span class="keyword parmname">name</span></td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__2">String</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__3">False</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__4">Core</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__5">The name of the component to deploy</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__1"><span class="keyword parmname">tag</span></td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__2">String</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__3">False</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__4">Core</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__5">The component tag of the components to deploy</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__1"><span class="keyword parmname">ucd_password</span></td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__2">String</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__3">True</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__4">Core</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__5">The password for the user name</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__1"><span class="keyword parmname">ucd_server_url</span></td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__2">String</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__3">True</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__4">Core</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__5"><span class="ph">The URL of the <span class="ph">IBM DevOps Deploy (Deploy)</span>
+server</span></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__1"><span class="keyword parmname">ucd_username</span></td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__2">String</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__3">True</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__4">Core</td>
+<td class="entry" headers="res_ibm_urbancode_softwareconfig_ucd__entry__5"><span class="ph">The user name with which to connect to <span class="ph">IBM DevOps Deploy (Deploy)</span></span></td>
+</tr>
+</tbody></table>
+<section class="section">This resource type has no attributes.</section>
+</div>
+</article></main></body></html>

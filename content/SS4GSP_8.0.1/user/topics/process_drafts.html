@@ -1,0 +1,64 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Safe editing enables you to test component processes before making them available in normal environments. Make updates to your component process, test those updates safely, and then promote to a new version when you are ready."><meta name="DC.subject" content="process draft, safe editing"><meta name="keywords" content="process draft, safe editing"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_workflow.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="process_drafts"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Working on processes in safe edit mode</title></head><body id="process_drafts"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Working on processes in safe edit mode</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b12d268c-3d6c-47be-ac3b-876dd75c020f">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">Safe editing enables you to test component processes before making them available in
+normal environments. Make updates to your component process, test those updates safely, and then
+promote to a new version when you are ready. </p>
+<section class="section prereq" id="process_drafts__prereq_eg2_11n_b2b"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskprocess_drafts__prereq_eg2_11n_b2b">Before you begin</h2></div>Enable Safe Edit mode by completing the following steps: <ol class="ol" id="process_drafts__ol_phr_4md_d2b">
+    <li class="li">Click <span class="ph menucascade"><span class="ph uicontrol">Settings &gt; System Settings</span></span>. Select <span class="ph uicontrol">Enable Safe Edit of Component Processes</span>,
+     optionally select<span class="ph uicontrol"> Require Approval to Promote Component Process</span> and then
+     click <span class="ph uicontrol">Save</span> at the bottom of the System Settings page.</li>
+    <li class="li">If <span class="ph uicontrol">Require Approval to Promote Component Process</span> is enabled, after a
+     draft is promoted you see <span class="keyword wintitle">Promotion Pending</span> where the
+      <span class="keyword wintitle">Promote</span> push button was. The <span class="ph uicontrol">Promotion Pending</span>
+     button is inactive while an approval is pending. Approval requests go to anyone with manage
+     processes permission on component. Under <span class="ph uicontrol">Work Items</span>, there is a new
+     Component Process promotion table with <span class="ph uicontrol">Approve</span> and <span class="ph uicontrol">Reject
+     </span> actions. These actions link to latest promoted version and draft processes for
+     which promotion was requested.</li>
+    <li class="li">Two new parameters are displayed under the <span class="ph uicontrol">Component Settings</span>. <ol class="ol" type="a">
+      <li class="li"><span class="ph uicontrol">Allow Process Locking</span>. When this option is enabled you will be able
+       to lock component processes for editing. </li>
+      <li class="li"><span class="ph uicontrol">Require Process Locking</span>. When this option is enabled you will not
+       be able to edit component processes without locking the process first. </li>
+     </ol></li>
+   </ol></section>
+<section class="section context" id="process_drafts__context_jkd_3kb_c2b"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskprocess_drafts__context_jkd_3kb_c2b">About this task</h2></div>You can edit component processes and component template processes
+without affecting deployments to protected environments. </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskprocess_drafts__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Under <span class="ph uicontrol">Environments</span>, when you are editing the <span class="ph uicontrol">Enable Drafts
+Processes</span> option, a new setting becomes available. After you select <span class="ph uicontrol">Enable
+Draft Procees</span>, a new field, <span class="ph uicontrol">Component using Process Drafts</span>, is
+displayed. Choose components for draft processes to run on.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">On the <span class="keyword wintitle">Components</span> tab, click the component name. </span></li><li class="li step stepexpand">
+<span class="ph cmd">To <span class="ph uicontrol">Edit</span> draft process, on the <span class="keyword wintitle">Processes</span> tab, hover
+the cursor over the process to edit, and click the <img class="image" id="process_drafts__image_ptz_jcc_c2b" src="../images/pencil_icon.jpg" alt="pencilicon,"> the pencil icon.</span></li><li class="li step stepexpand"><span class="ph cmd">Design your draft process, and then click <span class="ph uicontrol"> Save</span>.</span></li><li class="li step stepexpand"><span class="ph cmd">Test the process in the environment you set up in step one.</span></li><li class="li step stepexpand"><span class="ph cmd">When process works as expected, go back to the process designer, and click
+<span class="ph uicontrol">Promote</span>.</span>
+<div class="itemgroup info"> This action makes the process available for use or creates a promotion approval.
+</div></li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Click <span class="ph uicontrol">Lock</span> to lock draft. </span>
+<div class="itemgroup stepresult">The name of the person who locked the draft is displayed under <span class="ph uicontrol">Locked
+By</span> on the <span class="keyword wintitle">Processes</span> page. Only the person who holds the lock can
+edit the process. Under <span class="ph uicontrol">Actions</span> a <span class="ph uicontrol">Force Unlock</span> option
+is available. </div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Click <span class="ph uicontrol">Copy Latest Promoted Version To Draft</span> to create a copy of that
+version at the head of the draft stream.  Click <span class="ph uicontrol">Copy as Latest Draft </span>  on a
+promoted process to create a copy of that version at the head of the draft stream.</span>
+</li></ol></section>
+<section class="section result" id="process_drafts__result_gzf_bjb_c2b"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskprocess_drafts__result_gzf_bjb_c2b">Results</h2></div>
+<p class="p">Environments that are set to allow draft processes can use draft process for deployments. Other
+environments must use the promoted processes. </p>
+<div class="note note note_note"><span class="note__title">Note:</span> Snapshots can only lock to versions of component processes. They cannot lock to drafts. If a
+snapshot is deployed to an environment that allows drafts then one of these conditions apply: <ul class="ul" id="process_drafts__ul_czs_ddc_c2b">
+<li class="li">If the snapshot is using the latest version of a process, the draft will be used. </li>
+<li class="li">If the snapshot is using a specific version of a process, then that specific version will be
+used.</li>
+</ul></div>
+</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a></div></div></nav></article></main></body></html>

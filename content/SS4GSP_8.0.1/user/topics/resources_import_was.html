@@ -1,0 +1,91 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Use the WebSphere Application Server - Deploy plug-in to import information about an IBM WebSphere Application Server system into a collection of resources. Typically, importing information by using the plug-in takes less time than manually creating resources to match the IBM WebSphere Application Server."><meta name="DC.relation" scheme="URI" content="../../user/topics/resources_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="resources_import_was"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Importing resources from WebSphere Application Server</title></head><body id="resources_import_was"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Importing resources from <span class="keyword">WebSphere Application Server</span></h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-04f2143d-b39c-408c-9596-0b1a0918a9fb">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Use the <span class="keyword">WebSphere® Application Server</span> - Deploy
+plug-in to import information about an <span class="keyword">IBM® WebSphere Application Server</span> system
+into a collection of resources. Typically, importing information by using the plug-in takes less
+time than manually creating resources to match the <span class="keyword">IBM WebSphere Application Server</span>.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_import_was__prereq__1">Before you begin</h2></div><ul class="ul">
+<li class="li" data-hd-otherprops="ibm">Install the <span class="keyword">WebSphere Application Server</span> -
+                    Deploy plug-in. To download plug-ins, see the <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/" target="_blank">Deploy plug-ins</a>. Use the most recent version of the plug-in.</li>
+
+<li class="li">Create a top-level resource group to contain agents. See <a class="xref" href="resources_createGroup.html" title="Resource groups organize resources into logical groupings.">Creating groups</a>.</li>
+<li class="li">Install an agent on the <span class="keyword">WebSphere Application Server</span> system and
+add the agent as an agent resource under the top-level resource group.</li>
+</ul></section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_import_was__context__1">About this task</h2></div>
+<p class="p" data-hd-otherprops="ibm">Plug-ins can be developed and updated more frequently than <span class="ph">IBM DevOps Deploy (Deploy)</span>
+                provides release cycles. For the latest version of the <span class="keyword">WebSphere Application Server</span> -
+                    <span class="ph">Deploy</span> plug-in and the latest documentation, see the <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/" target="_blank">Deploy plug-ins</a>.</p>
+
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_import_was__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" id="resources_import_was__resources_tab">
+<span class="ph cmd">On the <span class="ph">Deploy</span> server,
+click <span class="ph uicontrol">Resources</span> to view the <span class="keyword wintitle">Resource Tree</span> page.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If the <span class="ph filepath">wsadmin</span> file is in a different location than one of the default
+locations, specify the file location as the value of the <span class="keyword parmname">wsadmin.path</span> property
+on the agent resource.</span>
+<div class="itemgroup info">
+<p class="p" id="resources_import_was__wsadmin_default">The default location of the <span class="ph filepath">wsadmin</span> file on Linux™ is
+<span class="ph filepath">/opt/IBM/WebSphere/AppServer/bin/wsadmin.sh</span>. The default locations on Microsoft™ Windows™ are
+<span class="ph filepath">C:\IBM\WebSphere\AppServer\bin\wsadmin.bat</span> and <span class="ph filepath">C:\Program
+Files\IBM\WebSphere\AppServer\bin\wsadmin.bat</span>.</p>
+</div>
+</li><li class="li step stepexpand" id="resources_import_was__add_agent">
+<span class="ph cmd">Click the <span class="ph uicontrol">Actions</span> push button that is associated with the top-level
+group, and then click <span class="ph uicontrol">Add Agent</span>.</span>
+</li><li class="li step stepexpand" id="resources_import_was__select_agent">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Resource</span> window, select the agent and then click
+<span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup stepresult">The new agent resource is displayed in the resource tree. Eventually, another resource
+is displayed under the agent resource. This resource is named <code class="ph codeph">WebSphereCell</code> and
+represents the <span class="keyword">WebSphere Application Server</span> cell. You
+might need to click <span class="ph uicontrol">Refresh</span> to see the cell resource, and it can take several
+minutes for the cell resource to be displayed.</div>
+</li><li class="li step stepexpand" id="resources_import_was__open_cell">
+<span class="ph cmd">Click the <span class="keyword">WebSphere Application Server</span> cell
+resource and then click <span class="ph menucascade"><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Basic Settings</span></span>.</span>
+<div class="itemgroup info">The cell resource has the <code class="ph codeph">WebSphereCell</code> role, which includes several
+properties that are related to the cell.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd" id="resources_import_was__props_cmd">In the section that is labeled <span class="ph uicontrol">Role Properties</span> for the
+<code class="ph codeph">WebSphereCell</code> role, specify the connection information for the cell, including the
+locations of the profile and <span class="ph filepath">wsadmin</span> file and the user name and password for
+the <span class="keyword">WebSphere Application Server</span> system, as in the following figure:</span>
+<div class="itemgroup info" id="resources_import_was__props_info">
+<br><img class="image" src="../images/resources_import_was_a.gif" height="768" width="444" alt="Specifying the information for the cell resource"><br>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+</li><li class="li step stepexpand" id="resources_import_was__auto_config">
+<span class="ph cmd">On the <span class="keyword wintitle">Resources</span> page, click the <span class="ph uicontrol">Actions</span> push
+button that is associated with the cell resource, and then click <span class="ph uicontrol">Configure using
+WebSphere Topology Discovery</span>.</span>
+<div class="itemgroup stepresult">The discovery step runs. This step might take several minutes. A log is displayed to
+show progress.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">When the discovery process completes, close the log window, and then refresh the resource
+tree.</span>
+<div class="itemgroup stepresult">
+<div class="p" data-hd-otherprops="ibm">
+<div class="note note note_note"><span class="note__title">Note:</span> If you have multiple profiles defined for your WebSphere installation, you may discover all
+                            the profiles by using the <span class="ph filepath">websphere.profilePath</span>
+                            property. See, <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/Websphere/" target="_blank">https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/Websphere/</a></div>
+</div>
+
+</div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_import_was__result__1">Results</h2></div>Resources that represent the <span class="keyword">WebSphere Application Server</span> components
+are displayed in the resource tree. These new resources are displayed under the agent resource that
+you used to import the <span class="keyword">WebSphere Application Server</span>
+components. Each node, cluster, and server has a matching resource. The following figure shows
+resources that represent a <span class="keyword">WebSphere Application Server</span> system
+with three nodes:<br><img class="image" src="../images/resources_import_was_c.gif" alt="Resources that represent the components of a WebSphere Application Server system, under the agent in the resource tree"><br></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_import_was__postreq__1">What to do next</h2></div>Add these resources to an environment by opening the <span class="keyword wintitle">Resources</span> page
+for the environment and then clicking <span class="ph uicontrol">Add Base Resources</span>.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/resources_ch.html" title="A resource is a logical deployment target that typically resolves to an agent and a user-defined construct that is based on the architectural model of IBM DevOps Deploy (Deploy).">Resources</a></div></div></nav></article></main></body></html>

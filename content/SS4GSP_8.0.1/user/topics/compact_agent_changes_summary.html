@@ -1,0 +1,107 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="DC.relation" scheme="URI" content="../../user/topics/resources_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="compact_agent_changes_summary"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Compact agent changes: Summary</title></head><body id="compact_agent_changes_summary"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Compact agent changes: Summary</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-54be067e-96b5-4dc9-a2d7-4a18a10bbe54">Edit online</a></span></div>
+    
+    <div class="body">
+        <p class="p">A new installation or upgrade establishes the following changes: </p>
+        <p class="p">• Running a compact agent doesn't show any monitor process.</p>
+        <p class="p">• Restarting or upgrading changes the worker process identifier (PID).</p>
+        <p class="p">• The <span class="ph filepath">/monitor</span> directory is removed.</p>
+        <p class="p">• The <var class="keyword varname">JAVA_HOME</var> variable is set to the content of the
+                    <span class="ph filepath"><var class="keyword varname">&lt;DEPLOY_AGENT_HOME&gt;</var>/conf/agent/javahome.conf</span>
+            file. The <strong class="ph b">set_env</strong> setting is ignored.</p>
+        <p class="p">• File changes in the agent installation directory are as follows:</p>
+        <table class="table" id="compact_agent_changes_summary__table_pm5_ypt_v5b"><caption></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+                    <tr class="row">
+                        <th class="entry" id="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__1"><strong class="ph b">File or folder</strong></th>
+                        <th class="entry" id="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__2"><strong class="ph b">Previous location</strong></th>
+                        <th class="entry" id="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__3"><strong class="ph b">New location</strong></th>
+                        <th class="entry" id="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__4"><strong class="ph b">Description</strong></th>
+                    </tr>
+                </thead><tbody class="tbody">
+                    <tr class="row">
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__1">shutdown.sh</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__2">/bin/shutdown </td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__3">/var/shutdown</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__4"> </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__1">restart.sh</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__2">/bin/restart</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__3">/var/restart</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__4"> </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__1">classpath.conf</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__2">/bin/classpath.conf</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__3">/conf/agent/classpath.conf</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__4">Content is unmodified.</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__1">worker-args.conf</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__2">/bin/worker-args.conf </td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__3">/conf/agent/javaopts.conf</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__4">The javaopts.conf file contains a list of options for the Java
+                            executable file that runs the agent. </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__1">upgrade.out</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__2">/bin/upgrade.out</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__3">/var/log/upgrade.log</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__4"> </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__1">agent-upgrade </td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__2">/agent-upgrade (or /bin/agent-upgrade </td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__3">/var/upgrade/unpack</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__4"> </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__1">air-agentupgrade.jar</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__2">/bin/air-agentupgrade.jar</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__3">/var/upgrade/air-agentupgrade.jar</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__4"> </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__1">launcher.jar</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__2">/monitor/launcher.jar</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__3">/lib/launcher.jar</td>
+                        <td class="entry" headers="compact_agent_changes_summary__table_pm5_ypt_v5b__entry__4"> </td>
+                    </tr>
+                </tbody></table>
+        <p class="p">The
+                <span class="ph filepath"><var class="keyword varname">&lt;DEPLOY_AGENT_HOME&gt;</var>/conf/agent/javahome.conf</span>
+            file contains a single line that is the path to the Java installation that runs the
+            agent.</p>
+        <p class="p">The following list identifies Windows-specific changes after a new installation or
+            upgrade:</p>
+        <p class="p">• The <span class="ph filepath">/bin/agent.cmd</span> and
+                <span class="ph filepath">/native/&lt;cpu&gt;/winservice.exe</span> files replace the
+                <span class="ph filepath">/bin/agent.exe</span> file.</p>
+        <p class="p">• The process removes the <span class="ph filepath">/bin/run_agent.cmd</span>,
+                <span class="ph filepath">/bin/start_agent.cmd</span>, <span class="ph filepath">/bin/stop_agent.cmd</span>
+            files.</p>
+        <p class="p">• If you run the agent as a service, restarting it restarts the entire service.
+            Therefore, changes to the system environment are reflected in the agent's
+            environment.</p>
+        <p class="p">• The agent service configuration is no longer stored in the registry. Environment
+            variables are defined in the <span class="ph filepath">/bin/set_env.cmd</span> file and reflected in
+            the agent's environment. This means that the service mode and <span class="ph filepath">agent
+                run</span> or <span class="ph filepath">agent start</span> are more consistent.</p>
+        <p class="p">• The process does not migrate the custom environment variables that are defined in
+            previous service registry entries.</p>
+        <p class="p">• Some side-effects of scripting in the <span class="ph filepath">set_env.cmd</span> file might no
+            longer apply. Changes to the environment are explicitly detected and saved. Other script
+            continues to run and side-effects affects the entire system. For example, modifications
+            to the file system still apply to the agent.</p>
+        <p class="p">• The following files are replaced by the <span class="ph filepath">/var/log/stdout</span> log
+            file:</p>
+        <pre class="pre codeblock" id="compact_agent_changes_summary__codeblock_hgd_b11_w5b"><code>/var/log/stdout_XXXXXXXX.log
+/var/log/stderr_XXXXXXXX.log
+/var/log/service_XXXXXXXX.log</code></pre>
+        <p class="p"> Note that the previous files are not removed but new files are not created.</p>
+        <p class="p">• The service name cannot be customized. The service name is generated from a hash of the
+            agent installation path and is unique to each installation on a computer.</p>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/resources_agents.html" title="An agent is a lightweight process that runs on a deployment-target host and communicates with the IBM DevOps Deploy (Deploy) server.">Agents</a></div></div></nav></article></main></body></html>

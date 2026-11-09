@@ -1,0 +1,70 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can add approval requirements to deployments. The approval process identifies the deployment and the role of the approver. You respond to approval requests on the Work Items page, or, depending on the configuration, through email."><meta name="DC.subject" content="approvals, approval process, email approval, respondUrl"><meta name="keywords" content="approvals, approval process, email approval, respondUrl"><meta name="DC.relation" scheme="URI" content="../../user/topics/app_approval.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_approvalCreate"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating an approval process</title></head><body id="app_approvalCreate"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating an approval process</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-994ecc78-c1e7-46f3-abb4-652bc1ec0937">Edit online</a></span></div>
+
+
+
+<div class="body taskbody"><p class="shortdesc">You can add approval requirements to deployments. The approval process identifies the
+deployment and the role of the approver. You respond to approval requests on the <span class="ph uicontrol">Work
+Items</span> page, or, depending on the configuration, through email.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_approvalCreate__prereq__1">Before you begin</h2></div>Before an approval process can be configured, these prerequisites must be met.<ul class="ul">
+                <li class="li">An <span class="ph uicontrol">ApprovalCompleted</span> notification template exists for use
+                    in the approval process.</li>
+            </ul><ul class="ul">
+                <li class="li"><span class="ph uicontrol">Require Approvals</span> is enabled for an environment. In the
+                    application environment, select <span class="ph uicontrol">Configuration</span> at the task
+                    bar and ensure that the <span class="ph uicontrol">Require Approvals</span> check box is
+                    enabled in the <span class="keyword wintitle">Basic Settings</span> window. <span class="ph uicontrol">Approval
+                        Process</span> will be enabled in the environments task bar.</li>
+                <li class="li">The email approval feature is available in notification templates created in
+                    V7.1.1 and later. Because templates are not overwritten when you upgrade, you
+                    must manually add the email approval feature to your template if you upgrade
+                    from a version prior to 7.1.1. To add the feature to your template, paste the
+                    following script into your email templates:<pre class="pre codeblock"><code>  #if ($respondUrl)
+        &lt;tr&gt;
+            &lt;td&gt;&lt;a href="$respondUrl"&gt;Respond&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    #end</code></pre><div class="note note note_note"><span class="note__title">Note:</span> You can add the script to all email templates but
+                        currently the <code class="ph codeph">respondUrl</code> property is only available for
+                        TaskCreated and ApprovalCreated notifications.</div></li>
+            </ul><div class="note tip note_tip" id="app_approvalCreate__noselfapproval"><span class="note__title">Tip:</span> You can also select the <span class="ph uicontrol">No
+                    Self-Approvals</span> check box that follows the <span class="ph uicontrol">Require
+                    Approvals</span> check box. When this check box is selected, the user who
+                sets up of the approval process cannot subsequently approve the
+            process.</div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_approvalCreate__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">To create an approval process, display the <span class="keyword wintitle">Approval Process Design</span> pane (<span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">application name</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Environments</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Environment: <var class="keyword varname">environment name</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Approval Process</span></span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Configure the steps that need approval from the process editor. The steps are based on job type
+and the role of the approver. You have the option of selecting three job types: the application,
+component, or environment. For help on the process editor, see <a class="xref" href="comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a>.</span>
+<div class="itemgroup info">
+<p class="p">When the process runs, the approver is notified with an e-mail that an approval is required. An
+example of a default <span class="ph uicontrol">ApprovalCreated</span> notification template is shown below. </p>
+<p class="p"><img class="image" src="../images/NotifyTemp_approvalpending.jpg" width="532" alt="Example ApprovalCreated Notification Template"></p>
+</div>
+<div class="itemgroup info">The e-mail notification includes the <span class="ph uicontrol">Respond</span> option that directs the
+approver to the E-mail summary page. An example of the E-mail summary page is shown below:<p class="p"><img class="image" src="../images/task_approval_summary.png" alt="e-mail summary"></p> This allows the approver to
+take appropriate action without logging into the <span class="ph">Deploy</span>.<div class="note note note_note"><span class="note__title">Note:</span> The Approve and Reject links expire in 5 days from the date of approval is
+requested.</div></div>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> If a scheduled deployment that requires approval reaches its start time and the approval is
+not given, the process does not run and acts as a rejected request. To resubmit a request, you must
+request a new process. If a process with an approval does not have a scheduled deployment time, the
+process remains idle until a response is made.</div>
+</div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_approvalCreate__postreq__1">What to do next</h2></div>
+<ul class="ul">
+<li class="li">View the status of the request by displaying the <span class="keyword wintitle">Deployment Detail</span> pane on
+the <span class="keyword wintitle">Reports</span> tab. If a request is approved, it is displayed as a success.
+However, if the request was rejected, it shows as failed. If a request is failed, display the
+<span class="keyword wintitle">Application Process Request</span> by clicking <span class="ph uicontrol">view
+request</span>.</li>
+<li class="li">If a comment is made regarding the process, you can view it by clicking the log push button in
+the actions column on the <span class="keyword wintitle">Application Process Request</span>.</li>
+</ul>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_approval.html" title="You can add approval requirements to deployments. Deployments with approvals cannot be completed until all approvers respond. Approvers can respond to requests on the Work Items tab, or by email.">Approval Process</a></div></div></nav></article></main></body></html>

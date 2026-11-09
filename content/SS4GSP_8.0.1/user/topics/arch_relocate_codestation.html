@@ -1,0 +1,94 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can move the CodeStation artifacts to a different location on the server."><meta name="DC.relation" scheme="URI" content="../../user/topics/managing_data.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="arch_relocate_codestation"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Relocating CodeStation</title></head><body id="arch_relocate_codestation"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Relocating CodeStation</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6b5a218e-3222-4de5-ac87-d0a6401fd068">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can move the CodeStation artifacts to a different location
+on the server.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskarch_relocate_codestation__context__1">About this task</h2></div><p class="p">By default, the server's log files and CodeStation artifacts are stored in the application data
+directory. You specified this directory when you installed the server. In the case of
+high-availability clusters, this directory is in a shared location where each server in the cluster
+can access it.</p>
+      <p class="p">Ideally, this data is stored on robust network storage that is regularly synchronized with
+        an off-site disaster recovery facility. In addition, the <span class="ph">IBM DevOps Deploy (Deploy)</span> server requires a
+        fast network connection to this storage.</p><div class="note tip note_tip"><span class="note__title">Tip:</span> The following formula shows a good rule-of-thumb for determining CodeStation
+        storage requirements: <code class="ph codeph">average artifact size * number of versions that are imported per day * average number of days before cleanup</code></div></section>
+    <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskarch_relocate_codestation__steps__1">Procedure</h2></div><div class="li stepsection">Follow these steps to move the location of the CodeStation
+        artifacts:</div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Stop the server.</span>
+<div class="itemgroup info">See <a class="xref" href="../../install/topics/run_server.html#run_server" title="To run the server, run the batch file or shell script for the server.">Starting and stopping the server</a>.</div>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">Move the CodeStation data to a new location.</span>
+        <div class="itemgroup info">Which folders you move depend on whether the server uses an application data folder or not:<ul class="ul">
+            <li class="li">Check the <span class="ph filepath">installed.properties</span> file on the server. If the
+                <span class="keyword parmname">server.appdata.dir</span> property in this file has a value of two
+              periods, (<code class="ph codeph">..</code>) the server does not use an application data folder. If
+              the property has a value other than two periods, the server uses an application data
+              folder. </li>
+          </ul><p class="p">When you know whether the server has an application data folder or not, you can
+            move the correct files to a new location.</p></div>
+        <ul class="ul choices">
+          <li class="li choice">If the server uses an application data folder, complete these steps:<ol class="ol" type="a">
+              <li class="li">Move the application data folder to a new location. <span class="ph" id="arch_relocate_codestation__appdata_default">The
+                  default application data folder is
+                    <span class="ph filepath">/opt/devops-deploy/server/appdata</span> on Linux™ and <span class="ph filepath">C:\Program
+                    Files\devops-deploy\server\appdata</span> on Windows™.</span></li>
+              
+              <li class="li">On the server, open the
+                      <span class="ph filepath">devops-deploy/conf/server/installed.properties</span> file and
+                    update the following properties to reflect the new location of the application
+                    data (appdata) folder:<ul class="ul" id="arch_relocate_codestation__d625e168">
+                      <li class="li"><span class="keyword parmname">server.appdata.dir</span> — The path to the appdata
+                        folder.</li>
+                      <li class="li"><span class="keyword parmname">encryption.keystore</span> — The path to the encryption
+                        keystore file. </li>
+                      <li class="li"><span class="keyword parmname">server.keystore</span> — The path to the server keystore
+                        file. </li>
+                      <li class="li"><span class="keyword parmname">derby.system.home</span> (only if you use the Derby
+                        database) — The path to the Derby database home.</li>
+                    </ul>For example, specify the properties as
+                      follows:<pre class="pre codeblock" id="arch_relocate_codestation__d625e191"><code>server.appdata.dir=../appdata
+encryption.keystore=../appdata/conf/encryption.keystore
+server.keystore=../appdata/conf/server.keystore
+derby.system.home=../appdata/var/db</code></pre><div class="note note note_note" id="arch_relocate_codestation__d625e193"><span class="note__title">Note:</span> 
+                      <ul class="ul" id="arch_relocate_codestation__d625e195">
+                        <li class="li">By default, the <code class="ph codeph">installed.properties</code> file uses relative
+                          paths (for example, ../appdata). If you relocate the application data
+                          folder to a non-standard location such as a network-attached storage (NAS)
+                          mount, use absolute paths instead of relative paths to ensure that the <span class="ph">Deploy</span>
+                          server can reliably resolve the file locations.</li>
+                        <li class="li">The operating system user account that runs the <span class="ph">Deploy</span>
+                          server process must have full read and write access to the new
+                            <code class="ph codeph">appdata</code> directory and all of its contents, including
+                          the <code class="ph codeph">conf</code> and <code class="ph codeph">var</code> subdirectories. On
+                          Linux, you can verify permissions by running: <code class="ph codeph">ls -la
+                            /data/devops-deploy/appdata</code>. You must ensure that the ownership
+                          and permissions match the user that runs the <span class="ph">Deploy</span>
+                          server service.</li>
+                      </ul>
+                    </div></li>
+            </ol>If the new application data folder is on a remote system, you might have to set the
+              <span class="keyword parmname">server.appdata.dir</span> property to a remotely mounted folder or other
+            network storage.</li>
+          <li class="li choice">If the server does not use an application data folder, complete these steps:<ol class="ol" type="a">
+              <li class="li">Move the following individual folders to new locations:<ul class="ul">
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/var/plugins</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/var/repository</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/var/sa</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/logs</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/server/notification-templates</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/encryption.keystore</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/server.keystore</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/collectors</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/patches</span></li>
+                      <li class="li"><span class="ph filepath"><var class="keyword varname">install_folder</var>/conf/server/log4j.properties</span></li>
+                    </ul></li>
+              <li class="li">Create links from the previous folder locations to the new folder locations so                 that the server can continue to access the folders. For example, on Linux systems,                 you can use symbolic links, also known as <dfn class="term">symlinks</dfn>.</li>
+            </ol></li>
+        </ul>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Start the server.</span>
+      </li></ol></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/managing_data.html">Managing data</a></div></div></nav></article></main></body></html>

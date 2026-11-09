@@ -1,0 +1,52 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="If you upgrade your blueprint design server, you might need to modify references to the Chef validator key before you provision environments from existing blueprints."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="chef_validator"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Modifying blueprints to access the Chef validator key</title></head><body id="chef_validator"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Modifying blueprints to access the Chef validator key</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a8d31d45-0e7f-485a-bbb3-9b705edbf04e">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">If you upgrade your blueprint design server, you might need to modify references to the
+    Chef validator key before you provision environments from existing blueprints. </p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskchef_validator__context__1">About this task</h2></div>The method of providing the Chef validator key has changed. Instead of obtaining the key
+      value from an external location during provisioning, the blueprint design server itself
+      provides the key value to the Chef server.<p class="p">If you used Chef, you might need to modify your
+        existing blueprints before you provision an environment from it. For example, if you are
+        using a different Chef server or stopped hosting the key value in an external location, you
+        must make the following changes before you provision.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskchef_validator__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Add a <span class="keyword parmname">chef_validator_key</span> parameter.</span>
+<div class="itemgroup info">The parameter resembles the following
+code:<pre class="pre codeblock"><code>chef_validator_key:
+  type: string
+  description: 'The Chef validator private key'
+  hidden: true</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword parmname">OS::Heat::SoftwareDeployment</span> resource for each Chef role, replace
+the <span class="keyword parmname">CHEF_VALID_PEM_URL</span> input value property with the
+<span class="keyword parmname">CHEF_VALIDATOR_KEY</span> input value property.</span>
+<div class="itemgroup info">The input property must reference the <span class="keyword parmname">chef_validator_key</span> parameter and
+resembles the following
+code:<pre class="pre codeblock"><code>Chef_role:
+  type: OS::Heat::SoftwareDeployment
+  properties:
+    config: { get_resource: Chef_role_sw_config }
+    server: { get_resource: image }
+    input_values:
+      <strong class="ph b">CHEF_VALIDATOR_KEY: { get_param: chef_validator_key }</strong></code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword parmname">OS::Heat::SoftwareConfig</span> resource for the Chef roles, replace the
+<span class="keyword parmname">CHEF_VALID_PEM_URL</span> input property with the
+<span class="keyword parmname">CHEF_VALIDATOR_KEY</span> input property.</span>
+<div class="itemgroup info">The input property must reference the <span class="keyword parmname">chef_validator_key</span> parameter and
+resembles the following
+code:<pre class="pre codeblock"><code>Chef_role_sw_config:
+  type: OS::Heat::SoftwareConfig
+  properties:
+    group: chef
+    inputs:
+      - name: <strong class="ph b">CHEF_VALIDATOR_KEY</strong>
+        type: String</code></pre></div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskchef_validator__postreq__1">What to do next</h2></div>Provision an environment from the blueprint. See <a class="xref" href="env_provision_edt.html#env_provision_edt" title="If you connect to the target cloud through OpenStack Heat, you can provision an environment directly from the blueprint designer.">Provisioning environments from the blueprint designer (through OpenStack Heat)</a>.<div class="note note note_note"><span class="note__title">Note:</span> Before you provision an environment, you
+must also upgrade the Chef hook on the images on your cloud. See <a class="xref" href="cloud_update_chef_images.html#cloud_update_chef_images" title="If your image uses Chef recipes, after you upgrade to IBM DevOps Deploy (Deploy) version 6.2.1 or later, you must manually update the Chef hook on the images in your cloud.">Updating Chef-compatible images</a>.</div></section>
+</div>
+</article></main></body></html>

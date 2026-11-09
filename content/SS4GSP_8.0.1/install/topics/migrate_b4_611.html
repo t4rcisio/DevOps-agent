@@ -1,0 +1,36 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Upgrade the server, agents, and agent relays before upgrading the IBM z/OS deployment tools."><meta name="DC.relation" scheme="URI" content="../../install/topics/upgrade_zOS_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="migrate_b4_611"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Migrating data from versions before 6.1.1</title></head><body id="migrate_b4_611"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Migrating data from versions before 6.1.1</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2028526a-e313-439e-b803-60c66526d907">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">Upgrade the server, agents, and agent relays before upgrading the <span class="keyword">IBM® z/OS®</span> deployment tools.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_b4_611__context__1">About this task</h2></div>If you have version data and deployment results that were created by a version of the
+<span class="keyword">z/OS</span> agent and deployment tools before version 6.1.1, complete these migration steps.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_b4_611__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Determine the repository directory and deployment base directory in the current installation of
+the product. The repository directory is the value of the <span class="keyword parmname">ucd.repository</span>
+property in the profile data set. The location of the profile data set is recorded in the
+<span class="ph filepath">ISPF.conf</span> file. The deployment base directory is typically set in the
+<span class="keyword parmname">deploy.base.path</span>  environment property.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Install a new agent or upgrade the current agent. Then, copy files to the new repository and
+deployment directories.</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">
+<div class="p">For version 6.2.4, the repository directory and the deploy directory are  as follows: <ul class="ul">
+<li class="li"><span class="ph filepath"><var class="keyword varname">agent install dir</var>/var/repository</span></li>
+<li class="li"><span class="ph filepath"><var class="keyword varname">agent install dir</var>/var/deploy</span></li>
+</ul></div>
+</li>
+<li class="li">For versions from 6.1.1 to 6.2.3, you can find the the repository directory and the deployment
+directory locations in the profile data set.</li>
+</ul>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Verify the migration by deploying a current version of a component, and then by rolling back
+version.</span>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/upgrade_zOS_agents.html" title="You can upgrade IBM z/OS agents. However, you must upgrade the server before you upgrade the agents.">Upgrading IBM z/OS agents</a></div></div></nav></article></main></body></html>

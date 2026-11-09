@@ -1,0 +1,129 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Create a new environment"><meta name="DC.subject" content="udclient commands, createEnvironment, udclient command, command-line commands"><meta name="keywords" content="udclient commands, createEnvironment, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_createenvironment"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>createEnvironment</title></head><body id="udclient_createenvironment"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">createEnvironment</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-bfa8605a-09ca-4e67-96d0-ddf9be598d12">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Create a new environment</p>
+<section class="section"><h2 id="udclient_createenvironment__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  createEnvironment [parameters] [JSON file]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_createenvironment__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_createenvironment__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_createenvironment__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_createenvironment__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_createenvironment__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_createenvironment__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__1"><span class="keyword parmname">application</span></td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__4">Application to add the environment to</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__1"><span class="keyword parmname">name</span></td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__4">Name of the new environment</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__1"><span class="keyword parmname">description</span></td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__4">Description of the new environment</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__1"><span class="keyword parmname">color</span></td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__4">Color of the new environment, in hex format. For a REST call, URL encode the #
+                symbol; for example, %23ff0000 for pure red. For a udclient command, put the color
+                in hex format in single quotes for Linux hosts (example '#ff0000') and double quotes
+                for Windows hosts (example "#ff0000").</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__1"><span class="keyword parmname">requireApprovals</span></td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__2">boolean</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__4">Whether the environment requires approvals</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__1"><span class="keyword parmname">noSelfApprovals</span></td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__2">boolean</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_createenvironment__composite_params__entry__4">Whether the environment allows self approvals</td>
+</tr>
+</tbody></table>
+
+</section>
+<section class="section"><h2 id="udclient_createenvironment__title__5" class="title sectiontitle">Template</h2>
+<div class="p">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "applicationId": "Application ID associated with the 
+  Environment template.",
+  "cleanupCountToKeep": "Number of most recently deployed 
+  versions to keep (optional)",
+  "cleanupDaysToKeep": "Number of days to keep versions 
+  deployed to this environment (optional)",
+  "color": "HTML color code for the environment (optional)",
+  "description": "Description (optional)",
+  "exemptProcessesArray": "An array of process Ids. These 
+  processes will be exempt from approvals for this 
+  environment (optional).",
+  "externalApprovalAgent": "Name or id of agent to run 
+  external approval processes on (optional).",
+  "externalApprovalAgentPool": "Name or id of agent pool 
+  to run external approval processes on (optional).",
+  "externalApprovalProcess": "Name or id of external 
+  approval process(optional).",
+  "historyCleanupDaysToKeep": "Number of days to keep 
+  application process history for this environment 
+  (optional)",
+  "inheritSystemCleanup": "Inherit the system cleanup 
+  settings. If set to true, this overrides the other cleanup 
+  attributes. (optional, boolean)",
+  "lockSnapshots": "Whether snapshots will be locked when 
+  deployed to this environment (optional)",
+  "name": "Environment name",
+  "noSelfApprovals": "When this option is selected, users 
+  that submit deployment requests cannot approve their own 
+  requests (optional)",
+  "requireApprovals": "Whether approvals will be required 
+  (optional)",
+  "requireSnapshot": "If enabled, all deployments must use 
+  a snapshot instead of loose versions (optional)",
+  "snapshotDaysToKeep": "Number of days to keep snapshots 
+  deployed to this environment (optional)",
+  "teamMappings": [{
+    "resourceRoleId": "Id of Resource Type to apply to 
+  this team mapping (optional, can specify either this or 
+  resourceRoleLabel",
+    "resourceRoleLabel": "Name of Resource Type to apply 
+  to this team mapping (optional, can specify either this or 
+  resourceRoleId",
+    "teamId": "ID of a team, either this field or 
+  teamLabel are needed to specify a team",
+    "teamLabel": "Name of the team to map the environment 
+  to, either this field or teamId are needed to specify a 
+  team"
+  }],
+  "useSystemDefaultDays": "Whether or not to use the 
+  system default number of days to keep application process 
+  history for this environment (optional)"
+}
+</code></pre></div></section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_createenvironment__title__6" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  createEnvironment 
+  -application JPetStore 
+  -name NewEnvironment
+  -color '#ff0000'</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_environment_createenvironment_put.html">Create a new environment</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

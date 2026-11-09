@@ -1,0 +1,50 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Post-processing scripts run after a step finishes. Typically, post-processing scripts ensure that expected results occurred."><meta name="DC.relation" scheme="URI" content="../../user/topics/process_steps.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/settings_postScripts.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_postprocess_examples.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_postprocess"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Post-processing scripts</title></head><body id="comp_postprocess"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Post-processing scripts</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-51d22c00-bf17-4575-9656-d619da347367">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">Post-processing scripts run after a step finishes. Typically,
+post-processing scripts ensure that expected results occurred.</p>
+<div class="note note note_note"><span class="note__title">Notes:</span> 
+<ul class="ul">
+<li class="li">Use JavaScript™ 1.7 to write post-processing
+scripts.</li>
+<li class="li">In the script, do not use the <code class="ph codeph">${p:<var class="keyword varname">component.myProperty</var>}</code>
+notation. For example, to set a property named <code class="ph codeph">myProp</code> whose value is included in
+the output log, enter this
+script:<pre class="pre codeblock"><code>var exit = properties.get('exitCode');
+
+scanner.register("regex", function(lineNumber, line) {
+     var thing = 'do stuff';
+});
+scanner.scan();
+
+if (exit == 0) {
+    properties.put('Status', 'Success');
+}
+else {
+     properties.put('Status', 'Failure');
+}</code></pre></li>
+<li class="li">The syntax for post-processing scripts is similar to the syntax for preconditions. See <a class="xref" href="comp_process_step_precondition.html" title="Most steps in a process can have a precondition. If the Precondition field is available, the process supports a precondition. This precondition determines whether the step runs. Like post-processing scripts, preconditions use JavaScript 1.7.">Process step preconditions</a>.</li>
+</ul>
+</div>
+<p class="p">Steps in component processes and generic processes can have post-processing
+scripts, but steps in application processes cannot.</p>
+<div class="p">Post-processing scripts come from the following sources:<ul class="ul">
+<li class="li">Steps can have default post-processing scripts. These scripts
+are included with the plug-in. See <a class="xref" href="../../reference/topics/reference_plugins_create.html" title="You can create your own plug-ins for use with IBM DevOps Deploy (Deploy). A plug-in consists of XML files and supporting script files that the plug-in requires.">Creating plug-ins</a>.</li>
+<li class="li">You can override the default post-processing script for a step
+or provide a post-processing script for a step that does not have
+one. See <a class="xref" href="comp_workflow_edit.html" title="In the process editor you organize the steps in a process, specify their properties, and connect them to each other.">Editing processes</a>.</li>
+<li class="li">You can store post-processing scripts on the server for reuse.
+See <a class="xref" href="../../admin/topics/settings_postScripts.html" title="You can store post-processing scripts on the server so you can reuse them in component processes and in generic processes.">Storing reusable post-processing scripts</a>.</li>
+</ul></div>
+<div class="p">Post-processing scripts must set the <span class="keyword parmname">Status</span> property
+to specify the status of the script. The script can specify any value
+for the <span class="keyword parmname">Status</span> property. For example, to specify
+that the script was a success, run the following command in the post-processing
+script:<pre class="pre codeblock"><code>properties.put("Status","Success");</code></pre></div>
+<p class="p">See <a class="xref" href="../../reference/topics/ref_create_postprocessing.html" title="When a plug-in step's <command&gt; element finishes processing, the step's mandatory <post-processing&gt; element runs.">The post-processing element</a> for examples and more information.</p>
+</div>
+
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../admin/topics/settings_postScripts.html">Storing reusable post-processing scripts</a></strong><br>You can store post-processing scripts on the server so you can reuse them in component processes and in generic processes.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_postprocess_examples.html">Examples of post-processing scripts</a></strong><br>Post-processing scripts are written in JavaScript.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/process_steps.html" title="When you design processes, you use different kinds of process steps and joining techniques. You can assign properties to process steps and use them to control step execution.">Process step types and logic</a></div></div></nav></article></main></body></html>

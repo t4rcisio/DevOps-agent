@@ -1,0 +1,36 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="After you install the server, you can modify the context root, if your server configuration requires it."><meta name="DC.relation" scheme="URI" content="../../user/topics/settings_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="server_contextroot"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Modifying the context root of the server</title></head><body id="server_contextroot"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Modifying the context root of the server</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-1c9a5892-01a2-4f9d-9637-143884b247be">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">After you install the server, you can modify the context
+root, if your server configuration requires it.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_contextroot__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Stop the server.</span></li><li class="li step stepexpand"><span class="ph cmd">From the server installation directory, rename the directory <span class="ph filepath"><var class="keyword varname">server_install</var>/opt/tomcat/webapps/ROOT</span> to
+a new name, such as <span class="ph filepath"><var class="keyword varname">server_install</var>/opt/tomcat/webapps/deploy</span></span>
+<div class="itemgroup info">Use the server installation directory for <code class="ph codeph"><var class="keyword varname">server_install</var></code>.
+            <span class="ph" data-hd-otherprops="ibm">The default server installation directory is
+                            <span class="ph filepath">/opt/devops-deploy/server</span> on Linux™ and <span class="ph filepath">C:\Program
+                            Files\devops-deploy\server</span> on Windows™.</span></div>
+</li><li class="li step stepexpand"><span class="ph cmd">Make a backup copy of the file <span class="ph filepath">opt/tomcat/conf/server.xml</span>.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">Open the file <span class="ph filepath">opt/tomcat/conf/server.xml</span> in
+a text editor</span></li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph filepath">server.xml</span> file, find the following
+line of code:</span><div class="itemgroup info"><pre class="pre codeblock"><code>&lt;Context path=""
+  docBase="ROOT"
+  debug="0"
+  reloadable="false"
+  useHttpOnly="true"
+  sessionCookieName="JSESSIONID_8080"&gt;</code></pre></div></li><li class="li step stepexpand"><span class="ph cmd">In this code, change both the <span class="keyword parmname">docBase</span> attribute
+and the <span class="keyword parmname">path</span> attribute to the name of the new
+folder.</span><div class="itemgroup stepxmp">For example, if you renamed the <span class="ph filepath">ROOT</span> folder
+to <span class="ph filepath">deploy</span>, the code looks like the following
+example:<pre class="pre codeblock"><code>&lt;Context path="deploy"
+  docBase="deploy"
+  debug="0"
+  reloadable="false"
+  useHttpOnly="true"
+  sessionCookieName="JSESSIONID_8080"&gt;</code></pre></div></li><li class="li step stepexpand"><span class="ph cmd">Save the file.</span></li><li class="li step stepexpand"><span class="ph cmd">Restart the server.</span></li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_contextroot__result__1">Results</h2></div>Now you can access the server at the following URL:<pre class="pre codeblock"><code>https://<var class="keyword varname">hostname</var>:<var class="keyword varname">port</var>/<var class="keyword varname">foldername</var></code></pre>Use
+the new name of the folder as <code class="ph codeph"><var class="keyword varname">foldername</var></code>.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/settings_ch.html" title="After you install IBM DevOps Deploy (Deploy), you can modify the server configuration and configure more options.">Server settings and configuration</a></div></div></nav></article></main></body></html>

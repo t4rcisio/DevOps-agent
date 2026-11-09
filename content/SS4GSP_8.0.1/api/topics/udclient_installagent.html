@@ -1,0 +1,56 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Install an agent"><meta name="DC.subject" content="udclient commands, installAgent, udclient command, command-line commands"><meta name="keywords" content="udclient commands, installAgent, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_installagent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>installAgent</title></head><body id="udclient_installagent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">installAgent</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f81bf4bf-8f78-4b2f-9cbe-e01132bfa1bb">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Install an agent</p>
+<section class="section">
+This command installs an agent over SSH.
+</section>
+<section class="section"><h2 id="udclient_installagent__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  installAgent [JSON file]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_installagent__title__3" class="title sectiontitle">Parameters</h2>
+None.</section>
+<section class="section"><h2 id="udclient_installagent__title__4" class="title sectiontitle">Template</h2>
+<div class="p">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "host": "Host name or IP address of the system to 
+  install the agent on",
+  "installDir": "Installation directory for the agent",
+  "javaHomePath": "Path to Java on the agent system",
+  "name": "Name of the agent resource",
+  "port": "SSH port of the agent system; the default port 
+  is 22",
+  "sshPassword": "SSH password for the agent system; leave 
+  blank to use public key authentication instead",
+  "sshUsername": "SSH user name to use to connect to the 
+  agent system",
+  "tempDirPath": "Path to directory to install from on the 
+  agent system",
+  "webProxyUri": "Web socket URI for the relay server (e.
+  g. https://relay:20080).",
+  "webUri": "Web socket URI for the Deploy server (e.g. 
+  wss://server:7919)."
+}
+</code></pre></div></section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_installagent__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  installAgent
+  -name NewAgent
+  -host agenthost.example.com
+  -port 22
+  -sshUsername root
+  -sshPassword 12345
+  -installDir /opt/install-dir/agent
+  -javaHomePath /usr/lib/java
+  -tempDirPath /tmp
+  -serverHost host.example.com
+  -serverPort 7918</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_sshinstallagent_installnewagent_post.html" title="This command installs an agent over SSH.">Install an agent</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

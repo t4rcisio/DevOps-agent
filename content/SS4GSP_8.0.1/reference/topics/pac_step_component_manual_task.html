@@ -1,0 +1,561 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The component-manual-task step pauses the process until a manual approval is completed. This step is only valid in a component process."><meta name="DC.subject" content="PAC, Core process steps, component-manual-task"><meta name="keywords" content="PAC, Core process steps, component-manual-task"><meta name="DC.relation" scheme="URI" content="../../reference/topics/pac_component_process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="pac_component_manual_task"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>component-manual-task</title></head><body id="pac_component_manual_task"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">component-manual-task</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-eb95415c-70df-4db7-a8f5-5a49b9ad24f2">Edit online</a></span></div>
+
+
+
+<div class="body refbody"><p class="shortdesc">The <code class="ph codeph">component-manual-task</code> step pauses the process until a manual
+approval is completed. This step is only valid in a component process.</p>
+<section class="section"><h2 id="pac_component_manual_task__title__2" class="title sectiontitle">Format</h2>
+
+<pre class="pre codeblock"><code>component-manual-task step "foo" is
+    -- users that can approve the task; required
+    -- approval restriction to the deploying user
+    restrict-approval-to deploying-user
+
+    -- name of notification template; optional
+    notification-template "TaskCompleted"
+
+    -- property-definition establishes a property definition; optional, repeatable
+
+    -- a text property definition with all options
+    property-definition p1-text is text with
+        -- label for the property definition; optional
+        -- common to all property defintion types
+        label "p1-label"
+
+        -- description for the property definition; optional
+        -- common to all property defintion types
+        description "p1-description"
+
+        -- regex pattern for the property definition's property values; optional
+        -- an empty pattern is equivalent to ".*"
+        -- common to all property defintion types
+        pattern "p1-pattern-.*"
+
+        -- a value is required for property defined by this property definition; optional
+        -- common to all property defintion types
+        required true
+
+        -- default value for text properties created by this property definition; optional
+        default "p1-pattern-default"
+    end
+
+    -- a text property definition with no options
+    property-definition p2-text-simple is text
+
+    -- a text area property definition with all options
+    property-definition p3-textarea is text-area with
+        -- common options; optional
+        label "p3-label"
+        description "p3-description"
+        pattern ".*"
+        required true
+
+        -- default value for text area properties created by this property definition; optional
+        default
+            """
+            p3-default-line1
+            p3-default-line2
+            p3-default-line3
+            """
+    end
+
+    -- a text area property definition with no options
+    property-definition p4-textarea-simple is text-area
+
+    -- a text area property definition with all options
+    property-definition p5-secure is secure with
+        -- common options; optional
+        label "p5-label"
+        description "p5-description"
+
+        -- default value for secure properties created by this property definition; optional
+        -- currently, default values for secure properties do not function properly and their use is not recommended
+        default "p5-pattern-default"
+    end
+
+    -- a secure property definition with no options
+    property-definition p6-secure-simple is secure
+
+    -- a checkbox property definition with all options
+    property-definition p7-checkbox is checkbox with
+        -- common options; optional
+        label "p7-label"
+        description "p7-description"
+        pattern "true|false"
+        required true
+
+        -- default value for checkbox properties created by this property definition; optional
+        -- permitted values are 'true' or 'false'
+        default true
+    end
+
+    -- a checkbox property definition with no options
+    property-definition p8-checkbox-simple is checkbox
+
+    -- a date-time property definition with all options
+    property-definition p9-datetime is date-time with
+        -- common options; optional
+        label "p9-label"
+        description "p9-description"
+        pattern ""
+        required true
+
+        -- default value for date-time properties created by this property definition; optional
+        -- time is specified as milliseconds from 1970-01-01 00:00:00 UTC.
+        default millis 1594814965125
+    end
+
+    -- a date-time property with an xml schema format default value
+    property-definition p10-datetime-xml is date-time with
+        -- default value for date-time properties created by this property definition; optional
+        -- time is format is specified at https://www.w3.org/TR/xmlschema-2/#dateTime
+        default xml "2000-01-20T12:00:00+12:00"
+    end
+
+    -- a date-time property definition with no options
+    property-definition p11-datetime-simple is date-time
+
+    -- a select property definition with all options
+    -- at least one value must be supplied
+    -- at most one value may be selected as the default value
+    property-definition p12-select is select of
+        -- a possible value in for the property; optional, repeatable
+        value "p12-value1"
+
+        -- a value with an optional label
+        value "p12-value2" as "Value 2"
+
+        -- a value with a label and optionally selected as the default value
+        value "p12-value3" as "Value 3" selected
+    with
+        -- common otptions; optional
+        label "p12-label"
+        description "p12-description"
+        pattern "p12-value.*"
+        required true
+    end
+
+    -- a select property definition with an unlabeled value selected as the default and no common options
+    property-definition p13-select-default-unlabeled is select of
+        value "p13-value1" selected
+        value "p13-value2"
+        value "p13-value3"
+    end
+
+    -- a select property definition with no options
+    property-definition p14-select-simple is select of
+        value p14-value1
+        value p14-value2
+        value p14-value3
+    end
+
+    -- a multi-select property definition with all options
+    -- a date-time property definition with all options
+    -- one or more values may be selected as the default value
+    property-definition p15-multiselect is multi-select of
+        -- a possible value in for the property; optional, repeatable
+        value "p15-value1"
+
+        -- a value with a label and optionally selected as one of the default values
+        value "p15-value2" as "Value 2" selected
+
+        -- a value with a label and optionally selected as a second default value
+        value "p15-value3" as "Value 3" selected
+    with
+        -- common options; optional
+        label "p15-label"
+        description "p15-description"
+        pattern "p15-value.*"
+        required true
+    end
+
+    -- a select property definition with an unlabeled values selected as the defaults and no common options
+    property-definition p16-multiselect-default-unlabeled is multi-select of
+        value "p16-value1" selected
+        value "p16-value2" selected
+        value "p16-value3"
+    end
+
+    -- a select property definition with a single unlabeled value selected as the default and no common options
+    property-definition p17-multiselect-one-default is multi-select of
+        value "p17-value1" selected
+        value "p17-value2"
+        value "p17-value3"
+    end
+
+    -- a multi-select property definition with no options
+    property-definition p18-multiselect-simple is multi-select of
+        value "p18-value1"
+        value "p18-value2"
+        value "p18-value3"
+    end
+on success
+    finish
+end
+
+component-manual-task step "bar" is
+    -- approval restricted to certain application roles
+    -- if present, at least one role must be supplied
+    restrict-approval-to application-roles of
+        -- role name on the standard resource type; optional, repeatable
+        -- before 7.1.1.0, the role must be specified with a database ID
+        role "role1"
+
+        -- role on a custom resource type; optional, repeatable
+        -- before 7.1.1.0, the resource type must be specified with a database ID
+        role "role2" for "resourcetype1"
+    end
+end
+
+component-manual-task step "baz" is
+    -- approval restricted to certain environment roles
+    -- if present, at least one role must be supplied
+    restrict-approval-to environment-roles of
+        role "role3"
+        role "role4" for "resourcetype2"
+    end
+end
+
+component-manual-task step "quux" is
+    -- approval restricted to certain component roles
+    -- if present, at least one role must be supplied
+    restrict-approval-to component-roles of
+        role "role5"
+        role "role6" for "resourcetype3"
+    end
+end
+
+component-manual-task step "quuux" is
+    -- approval restricted to any user
+    restrict-approval-to any-user
+end</code></pre>
+</section>
+<div class="example" data-hd-audience="rest"><h2 id="pac_component_manual_task__title__3" class="title sectiontitle">Example</h2>
+
+<pre class="pre codeblock"><code>start is
+
+    start A
+
+    start B
+
+    start C
+
+    start D
+
+    start E
+
+end
+
+
+
+component-manual-task step A is
+
+    restrict-approval-to application-roles of
+
+        role "role1"
+
+        role "role2" for "resourcetype1"
+
+    end
+
+
+
+    notification-template template1
+
+
+
+    property-definition p1-text is text with
+
+        label "p1-label"
+
+        description "p1-description"
+
+        pattern "p1-pattern-.*"
+
+        required true
+
+        default "p1-pattern-default"
+
+    end
+
+
+
+    property-definition p2-text-simple is text
+
+
+
+    property-definition p3-textarea is text-area with
+
+        label "p3-label"
+
+        description "p3-description"
+
+        -- see p19-textarea-pattern for pattern
+
+        required true
+
+        default "p3-default-line1\np3-default-line2\np3-default-line3"
+
+    end
+
+
+
+    property-definition p4-textarea-simple is text-area
+
+
+
+    property-definition p5-secure is secure with
+
+        label "p5-label"
+
+        description "p5-description"
+
+        required true
+
+        default "p5-default"
+
+    end
+
+
+
+    property-definition p6-secure-simple is secure
+
+
+
+    property-definition p7-checkbox is checkbox with
+
+        label "p7-label"
+
+        description "p7-description"
+
+        pattern "true|false"
+
+        required true
+
+        default true
+
+    end
+
+
+
+    property-definition p8-checkbox-simple is checkbox
+
+
+
+    property-definition p9-datetime is date-time with
+
+        label "p9-label"
+
+        description "p9-description"
+
+        pattern ""
+
+        required true
+
+        default millis 1594814965125
+
+    end
+
+
+
+    property-definition p10-datetime-xml is date-time with
+
+        default xml "2000-01-20T12:00:00+12:00"
+
+    end
+
+
+
+    property-definition p11-datetime-simple is date-time
+
+
+
+    property-definition p12-select is select of
+
+        value p12-value1
+
+        value p12-value2 as p12-value2-label selected
+
+        value p12-value3 as p12-value3-label
+
+    with
+
+        label "p12-label"
+
+        description "p12-description"
+
+        pattern "p12-value.*"
+
+        required true
+
+    end
+
+
+
+    property-definition p13-select-default-unlabeled is select of
+
+        value p13-value1 selected
+
+        value p13-value2 as p13-value2-label
+
+        value p13-value3 as p13-value3-label
+
+    end
+
+
+
+    property-definition p14-select-simple is select of
+
+        value p14-value1
+
+        value p14-value2
+
+        value p14-value3
+
+    end
+
+
+
+    property-definition p15-multiselect is multi-select of
+
+        value p15-value1 selected
+
+        value p15-value2 as p15-value2-label selected
+
+        value p15-value3 as p15-value3-label
+
+    with
+
+        label "p15-label"
+
+        description "p15-description"
+
+        pattern "p15-value.*"
+
+        required true
+
+    end
+
+
+
+    property-definition p16-multiselect-default-unlabeled is multi-select of
+
+        value p16-value1 selected
+
+        value p16-value2 selected
+
+        value p16-value3
+
+    end
+
+
+
+    property-definition p17-multiselect-one-default is multi-select of
+
+        value p17-value1 selected
+
+        value p17-value2
+
+        value p17-value3
+
+    end
+
+
+
+    property-definition p18-multiselect-simple is multi-select of
+
+        value p18-value1
+
+        value p18-value2
+
+        value p18-value3
+
+    end
+
+
+
+    -- pattern is skipped in p13-textarea above because it
+
+    -- does not work with values containing line terminators,
+
+    -- consistent com.urbancode.air.property.prop_def.PropDef
+
+    property-definition p19-textarea-pattern is text-area with
+
+        pattern "p19-textarea-pattern-pattern-.*"
+
+        default "p19-textarea-pattern-pattern-default"
+
+    end
+
+on success
+
+    finish
+
+end
+
+
+
+component-manual-task step B is
+
+    restrict-approval-to environment-roles of
+
+        role "role3"
+
+        role "role4" for "resourcetype2"
+
+    end
+
+on success
+
+    finish
+
+end
+
+
+
+component-manual-task step C is
+
+    restrict-approval-to deploying-user
+
+on success
+
+    finish
+
+end
+
+
+
+component-manual-task step D is
+
+    restrict-approval-to any-user
+
+on success
+
+    finish
+
+end
+
+
+
+component-manual-task step E is
+
+    restrict-approval-to component-roles of
+
+        role "role5"
+
+        role "role6" for "resourcetype3"
+
+    end
+
+on success
+
+    finish
+
+end</code></pre>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/pac_component_process_steps.html" title="Lists the various core component steps that can be used in a process.">Core component process steps</a></div></div></nav></article></main></body></html>

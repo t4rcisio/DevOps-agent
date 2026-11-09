@@ -1,0 +1,102 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication."><meta name="DC.relation" scheme="URI" content="../../install/topics/install_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_firewalls"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Firewall and communication configuration</title></head><body id="agent_firewalls"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Firewall and communication configuration</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-bc467fe9-7d32-4af4-826d-63b0b9e4a2e0">Edit online</a></span></div>
+  
+  
+  <div class="body conbody"><p class="shortdesc">This topic describes the communication between the <span class="ph">IBM DevOps Deploy (Deploy)</span> components, the
+    firewall, and the ports involved in the communication. </p>
+    <section class="section" id="agent_firewalls__section_cqm_nfj_n1c"><h2 id="agent_firewalls__section_cqm_nfj_n1c__title__1" class="title sectiontitle">Communication between the servers, agents, and
+        relays</h2><p class="p">The agent runs the deployment target host and connects with the <span class="ph">Deploy</span> server. Agents
+        connect to server for low-latency, high-bandwidth, or real-time applications. Instead of
+        each agent connecting directly to the server, agents connect to agent relays, which then
+        connect to the server. The communication between the relays and the server is always
+        unidirectional. The server does not initiate the connection with agents or agents
+        relays.</p><p class="p">The following diagram shows the main default ports that are involved in
+        communication between the server, agents, and agent relays.</p><img class="image" id="agent_firewalls__image_sqp_dmk_n1c" src="../images/Communication_Flow_Server.png" alt="A diagram of the ports that agents, agent relays, and servers use to communicate; these are the same posts in the lists above"><p class="p">For more information on communication between the server, agents, and agent relays,
+        see <a class="xref" href="../../user/topics/arch_agents.html" title="Agents use SSL-secured WebSocket, and HTTPS protocols to communicate with the server.">Agent security and communication</a>, <a class="xref" href="../../user/topics/arch_agents.html" title="Agents use SSL-secured WebSocket, and HTTPS protocols to communicate with the server.">Agents</a>, and <a class="xref" href="../../user/topics/arch_agent_relays.html" title="Agent relays coordinate communication between agents and the IBM DevOps Deploy (Deploy) server. Agent relays improve the performance of communication between the server and agents. Relays also allow agents to communicate through firewalls.">Agent relays</a>.</p></section>
+    <section class="section" id="agent_firewalls__section_w25_nfj_n1c"><h2 id="agent_firewalls__section_w25_nfj_n1c__title__1" class="title sectiontitle">Communication between the server clusters, agents, and relays</h2>
+      
+      <p class="p">The <strong class="ph b">Deploy</strong> servers, within a server cluster, connect with each other. The
+          <strong class="ph b">Deploy</strong> agents connect with the server cluster. The remote agents connect with the
+        server clusters by using the agent relays, communication between the relays and the server
+        cluster is always unidirectional.</p>
+      <p class="p">The following diagram shows the main default ports that are involved in communication
+        between agents, agent relays and the server cluster.</p>
+      <p class="p"><img class="image" id="agent_firewalls__image_hjc_hwk_n1c" src="../images/Communication_flow_servercluster.jpg" alt="A diagram of the ports that agents, agent relays, and server clusters use to communicate; these are the same posts in the lists above"></p>
+      <p class="p">For more information on communication between the server, agents, and agent relays, see
+          <a class="xref" href="../../user/topics/arch_agents.html" title="Agents use SSL-secured WebSocket, and HTTPS protocols to communicate with the server.">Agent security and communication</a>, <a class="xref" href="../../user/topics/arch_agents.html" title="Agents use SSL-secured WebSocket, and HTTPS protocols to communicate with the server.">Agents</a>, and <a class="xref" href="../../user/topics/arch_agent_relays.html" title="Agent relays coordinate communication between agents and the IBM DevOps Deploy (Deploy) server. Agent relays improve the performance of communication between the server and agents. Relays also allow agents to communicate through firewalls.">Agent relays</a>.</p>
+    </section>
+    <section class="section" id="agent_firewalls__section_ftb_swk_n1c"><h2 id="agent_firewalls__section_ftb_swk_n1c__title__1" class="title sectiontitle">Communication ports topology</h2>
+      
+      <p class="p">The following diagram shows the default port numbers that <strong class="ph b">Deploy</strong> uses for
+        communication. You can change most of these ports, depending on your choices during
+        installation. The following diagram is only a summary of the default port numbers.</p>
+      <p class="p"><img class="image" id="agent_firewalls__image_fx4_kk1_w1c" src="../images/urbancode_deployports2.png" alt="A topology that shows the ports that each part of Deploy uses for communication"></p>
+      <p class="p">As shown in the diagram, agents can connect to servers directly or through agent relays.
+        You must ensure that the agent communication can get to the server through any firewalls or
+        other limitations.</p>
+    </section>
+    <section class="section" id="agent_firewalls__section_rrv_522_v1c"><h2 id="agent_firewalls__section_rrv_522_v1c__title__1" class="title sectiontitle">Communication ports for the server</h2>
+      
+      <div class="p">You must ensure that the server must have network access to the following ports:<ul class="ul" id="agent_firewalls__ul_axv_mjl_n1c">
+          <li class="li">The server must be able to initiate connections to the license server. The default
+            port for <span class="keyword">Common Licensing</span> is
+            27000. However, in some situations, the server uses different ports to connect to the
+            license server. For more information, or to change the port, see <a class="xref" href="https://www.ibm.com/support/pages/how-serve-license-key-client-machines-through-firewall" target="_blank">https://www.ibm.com/support/pages/how-serve-license-key-client-machines-through-firewall</a>.</li>
+          <li class="li">The server must be able to accept connections from agents and agent relays. By
+            default, agent relays and WebSocket agents connect on port 7919. </li>
+          <li class="li">Users and agents that do not use a relay must be able to initiate connections to the
+            server through HTTPS. The default port is 8443 for HTTPS.</li>
+          <li class="li">Installing agents remotely on Linux™ or UNIX™ systems requires the server to initiate
+            connections to the SSH port of the agent computer. The default port for SSH is 22.</li>
+          <li class="li">Remote discovery of agents requires the server to initiate connections to port 22 for
+              Linux agents and port 135 for Windows™ agents. See <a class="xref" href="../../user/topics/agent_discovery.html" title="You can use IBM DevOps Deploy (Deploy) to discover potential agent locations on UNIX and Windows.">Discovering agents automatically</a>.</li>
+          <li class="li">The server might require access to other ports if you connect to external systems,
+            such as an SMTP server for notifications or to cloud systems that use virtual system
+            patterns.</li>
+        </ul></div>
+    </section>
+    <section class="section" id="agent_firewalls__section_dqk_432_v1c"><h2 id="agent_firewalls__section_dqk_432_v1c__title__1" class="title sectiontitle">Communication ports for agents connecting to the server through agent relay</h2>
+      
+      <div class="p">For agents that connect to the server through agent relay, you must configure your networks
+        and firewalls to allow the following communication. In this case, you install the agent
+        relay on the same network and the same side of the firewall as the agents. <ul class="ul" id="agent_firewalls__ul_dr2_trl_q1c">
+          <li class="li">Agents must be able to open network connections on the agent relay HTTP proxy port.
+            The default agent relay HTTP proxy port is 20080.</li>
+          <li class="li">Agents must be able to open a network connection to the Agent Relay CodeStation proxy
+            port (HTTP_proxy + 1, by default 20081).</li>
+          <li class="li" id="agent_firewalls__step_ports">Agents run steps from automation plug-ins and source configuration
+            plug-ins. Some of these steps require that agents create network connections to an
+            external system.</li>
+          <li class="li">Agent relays must be able to open network connections on the server with an HTTPS
+            port. The default HTTPS port is 8443. You cannot reverse the direction of this
+            connection. Starting with V7.2.2, relays only support proxying HTTPS requests.</li>
+        </ul></div>
+      <div class="p">To configure virtual images in supported clouds for communication with <span class="ph">Deploy</span>, you must have
+        access to the following ports:<ul class="ul" id="agent_firewalls__ul_zwv_mjl_n1c">
+          <li class="li">Virtual images must be able to open network connections on the server's HTTP and HTTPS
+            ports. The default HTTP and HTTPS ports are 8080 and 8443. You cannot reverse the
+            direction of this connection.</li>
+          <li class="li">The agent that is installed on the virtual image must be able to open network
+            connections on the agent relay port. </li>
+          
+          
+        </ul></div>
+      <p class="p">For more information, see <a class="xref" href="../../user/topics/arch_agents.html" title="Agents use SSL-secured WebSocket, and HTTPS protocols to communicate with the server.">Agent security and communication</a>, <a class="xref" href="../../user/topics/arch_agents.html" title="Agents use SSL-secured WebSocket, and HTTPS protocols to communicate with the server.">Agents</a>, and <a class="xref" href="../../user/topics/arch_agent_relays.html" title="Agent relays coordinate communication between agents and the IBM DevOps Deploy (Deploy) server. Agent relays improve the performance of communication between the server and agents. Relays also allow agents to communicate through firewalls.">Agent relays</a>.</p>
+    </section>
+    <section class="section" id="agent_firewalls__section_ykw_z32_v1c"><h2 id="agent_firewalls__section_ykw_z32_v1c__title__1" class="title sectiontitle">Communication ports for agents connecting directly to the server</h2>
+      
+      <div class="p">For agents that connect directly to the server, you must configure your networks and
+        firewalls to allow the following communication:<ul class="ul" id="agent_firewalls__ul_uwk_btl_q1c">
+          <li class="li">WebSocket agents must be able to open network connections on the server. The default
+            server port is 7919.</li>
+          <li class="li">Agents must be able to open network connections on the server with an HTTPS port. The
+            default HTTPS port is 8443.</li>
+          <li class="li"> Agents run steps from automation plug-ins and source configuration plug-ins. Some of
+            these steps require that agents create network connections to an external system.</li>
+        </ul></div>
+      <p class="p">For more information, see <a class="xref" href="../../user/topics/arch_agents.html" title="Agents use SSL-secured WebSocket, and HTTPS protocols to communicate with the server.">Agent security and communication</a>, <a class="xref" href="../../user/topics/arch_agents.html" title="Agents use SSL-secured WebSocket, and HTTPS protocols to communicate with the server.">Agents</a>, and <a class="xref" href="../../user/topics/arch_agent_relays.html" title="Agent relays coordinate communication between agents and the IBM DevOps Deploy (Deploy) server. Agent relays improve the performance of communication between the server and agents. Relays also allow agents to communicate through firewalls.">Agent relays</a>.</p>
+    </section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/install_ch.html" title="An IBM DevOps Deploy (Deploy) installation consists of a Deploy server, a database server, and at least one agent.">Installing DevOps Deploy</a></div></div></nav></article></main></body></html>

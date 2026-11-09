@@ -1,0 +1,166 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="The following example describes how to use the REST commands to provision an environment through the blueprint design server and engine."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_api_ref_provision_example"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>How-to: Provision environments by using REST commands</title></head><body id="rest_api_ref_provision_example"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">How-to: Provision environments by using REST commands</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-96763763-d7a8-472e-a511-d8a6bdf7533a">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">The following example describes how to use the REST commands to provision an environment
+through the blueprint design server and engine.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrest_api_ref_provision_example__prereq__1">Before you begin</h2></div>Create a blueprint and ensure that you can provision an environment from the blueprint by
+using the blueprint designer user interface. <div class="p">To provision environments with REST commands, you
+must have the following information:<dl class="dl">
+
+<dt class="dt dlterm">The ID of the cloud project to use</dt>
+<dd class="dd">You can get this information from this REST command: <a class="xref" href="../../edt-api/topics/security_cloudproject__get.html">List cloud projects</a>.</dd>
+
+
+<dt class="dt dlterm">The name of the blueprint and the location of the blueprint on the blueprint design server</dt>
+<dd class="dd">You can get this information from this REST command: <a class="xref" href="../../edt-api/topics/rest_blueprint__get.html" title="This command lists all blueprints that you have access to.">List blueprints</a>.</dd>
+
+
+<dt class="dt dlterm">The name and location of the configuration file on the blueprint design server (Optional)</dt>
+<dd class="dd">To use a configuration file, you must have the name and complete location of that file. You can
+get this information from this REST command: <a class="xref" href="../../edt-api/topics/rest_bpid_configuration_get.html">List configuration files for a blueprint</a>.</dd>
+
+
+<dt class="dt dlterm">The parameters that are required to provision an environment from the blueprint</dt>
+<dd class="dd">To provision an environment from a blueprint, you must specify the parameters for that
+blueprint. You can see the required parameters for a blueprint by clicking
+<span class="ph uicontrol">Provision</span> and selecting the blueprint. You can also get this information from
+these REST commands: <a class="xref" href="../../edt-api/topics/rest_bpid_parameters_get.html">List the parameters required to provision a blueprint</a> or <a class="xref" href="../../edt-api/topics/rest_bpid_confid_parameters_get.html">List the parameters required to provision a blueprint with a configuration file</a>.<div class="note note note_note"><span class="note__title">Note:</span> For the command
+to be successful, you must provide exactly these parameters. Any missing parameters or additional
+parameters cause the command to fail.</div></dd>
+
+
+<dt class="dt dlterm">A session key for the blueprint design server</dt>
+<dd class="dd">The session key authenticates you to the server. You can get a session key by running a command
+on the server with a user name and password and examining the session key in the return headers. See
+<a class="xref" href="rest_api_ref_authenticating.html" title="The way that you authenticate to run REST commands depends on how the server is set up and the tool that you are using to run the commands.">Authenticating for REST commands</a>.</dd>
+
+</dl></div></section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrest_api_ref_provision_example__context__1">About this task</h2></div>
+<p class="p">To provision an environment from the API, use this REST PUT command: <a class="xref" href="../../edt-api/topics/rest_bpid_deploy_put.html" title="This command provisions a blueprint to the cloud along with the parameters in the submitted JSON string.">Provision a blueprint</a>.</p>
+<div class="p">Use the following URL string for the
+request:<pre class="pre codeblock"><code>http://<var class="keyword varname">hostname</var>:<var class="keyword varname">port</var>/landscaper/rest/blueprint/<var class="keyword varname">{blueprintId}</var>/deploy</code></pre>Use
+the host name and port of the blueprint designer for <code class="ph codeph"><var class="keyword varname">hostname</var></code>
+and <code class="ph codeph"><var class="keyword varname">port</var></code> and the name of the blueprint for
+<code class="ph codeph"><var class="keyword varname">{blueprintId}</var></code>.</div>
+<div class="p">Include the following headers with the PUT request:<table class="table" id="rest_api_ref_provision_example__request_params"><caption></caption><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="rest_api_ref_provision_example__request_params__entry__1">Header</th>
+<th class="entry" id="rest_api_ref_provision_example__request_params__entry__2">Example</th>
+<th class="entry" id="rest_api_ref_provision_example__request_params__entry__3">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__1"><span class="keyword parmname">UCR_SESSION_KEY</span></td>
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__2"><code class="ph codeph">347e9240-dcc9-424e-af31-3614df52b245</code></td>
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__3">The session key that you retrieve from running a simple command with a user name and
+password</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__2"><code class="ph codeph">application/json</code></td>
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__3">Specify <code class="ph codeph">application/json</code> as the type of information that the command
+returns</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__1"><span class="keyword parmname">Content-Type</span></td>
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__2"><code class="ph codeph">application/json</code></td>
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__3">Specify <code class="ph codeph">application/json</code> as the type of information that you are sending to
+the command</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__1"><span class="keyword parmname">Location</span></td>
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__2"><code class="ph codeph">/landscaper/orion/file/jsmith_00000000_0000_0000_0000_000000000002-
+OrionContent/Internal-Team/myBlueprint/myBlueprint.yml</code></td>
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__3">The location of the blueprint on the blueprint design server</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__1"><span class="keyword parmname">X-Region-Name</span></td>
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__2"><code class="ph codeph">MyCloudRegion</code></td>
+<td class="entry" headers="rest_api_ref_provision_example__request_params__entry__3">(Optional) The region for the environment</td>
+</tr>
+</tbody></table></div>
+<div class="p">Pass a JSON document that is similar to the following example as the request body. This example
+        uses an authentication token for the server instead of a user name and password.<pre class="pre codeblock language-json"><code>{
+  "environmentName": "myNewEnvironment1",
+  "configuration": "myConfigFile",
+  "cloudProjectId":"3d16879f-7b43-4909-9862-12767dad7f04",
+  "configurationLocation":"/landscaper/orion/file/jsmith_00000000_2-OrionContent/default/configurations/myConfigFile.yml",
+  "parameters": {
+    "availability_zone" : "nova",
+    "flavor" : "m1.tiny",
+    "key_name" : "myKey",
+    "ucd_password":"cc99a431-d96c-4154-99d6-1a5532275015",
+    "ucd_relay_url":"None",
+    "ucd_server_url":"http://server.example.com:9080",
+    "ucd_user":"PasswordIsAuthToken"
+  },
+  "teamMappings":[],
+  "validate": "true"
+}</code></pre>This JSON document contains the following information:<table class="table" id="rest_api_ref_provision_example__json_keys"><caption></caption><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead class="thead">
+              <tr class="row">
+                <th class="entry" id="rest_api_ref_provision_example__json_keys__entry__1">JSON property</th>
+                <th class="entry" id="rest_api_ref_provision_example__json_keys__entry__2">Example</th>
+                <th class="entry" id="rest_api_ref_provision_example__json_keys__entry__3">Description</th>
+              </tr>
+            </thead><tbody class="tbody">
+              <tr class="row">
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__1"><span class="keyword parmname">cloudProjectId</span></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__2"><code class="ph codeph">3d16879f-7b43-4909-9862-12767dad7f04</code></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__3">The ID of the cloud project; to get this ID, you can use the command <a class="xref" href="../../edt-api/topics/security_cloudproject__get.html">List cloud projects</a></td>
+              </tr>
+              <tr class="row">
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__1"><span class="keyword parmname">configuration</span></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__2"><code class="ph codeph">myConfigFile</code></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__3">(Optional) The name of the configuration file to use</td>
+              </tr>
+              <tr class="row">
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__1"><span class="keyword parmname">configurationLocation</span></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__2"><code class="ph codeph">/landscaper/orion/file/jsmith_00000000_2-OrionContent/default/configurations/myConfigFile.yml</code></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__3">The location of the configuration file on the server</td>
+              </tr>
+              <tr class="row">
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__1"><span class="keyword parmname">environmentName</span></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__2"><kbd class="ph userinput">myNewEnvironment1</kbd></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__3">A name for the new environment</td>
+              </tr>
+              <tr class="row">
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__1"><span class="keyword parmname">parameters</span></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__2"><code class="ph codeph">{ "availability_zone" : "nova", "flavor" : "m1.tiny", "key_name" :
+                    "myKey", "ucd_password":"cc99a431-d96c-4154-99d6-1a5532275015",
+                    "ucd_relay_url":"None", "ucd_server_url":"http://ucd.example.com:9080",
+                    "ucd_user":"PasswordIsAuthToken" }</code></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__3">A JSON array of parameters to pass to the provisioning process, including the
+                  parameters that you would specify if you provisioned the environment from the
+                  designer server user interface. To get a list of the required parameters, use the
+                  command <a class="xref" href="../../edt-api/topics/rest_bpid_parameters_get.html">List the parameters required to provision a blueprint</a> or <a class="xref" href="../../edt-api/topics/rest_bpid_confid_parameters_get.html">List the parameters required to provision a blueprint with a configuration file</a>.</td>
+              </tr>
+              <tr class="row">
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__1"><span class="keyword parmname">teamMappings</span></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__2"></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__3">An array of teams to add the environment to</td>
+              </tr>
+              <tr class="row">
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__1"><span class="keyword parmname">validate</span></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__2"><code class="ph codeph">true</code></td>
+                <td class="entry" headers="rest_api_ref_provision_example__json_keys__entry__3">Whether to validate the request before running it</td>
+              </tr>
+            </tbody></table></div>
+</section>
+<section class="example"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskrest_api_ref_provision_example__example__1">Example</h2></div>If you use the Linux™ program
+<span class="keyword cmdname">curl</span>, the command might look like the following example. This command must be
+written on a single
+line.<pre class="pre codeblock"><code>curl -k -u jsmith:passwd
+  "http://myserver.example.com:8080/landscaper/rest/blueprint/myBlueprint/deploy" 
+  -X PUT 
+  -H "Accept: application/json" 
+  -H "Content-Type: application/json" 
+  -H "UCR_SESSION_KEY: 347e9240-dcc9-424e-af31-3614df52b245" 
+  -H "Location:
+  /landscaper/orion/file/jsmith_00000000_0000_0000_0000_000000000002- OrionContent/Internal-Team/myBlueprint/myBlueprint.yml" 
+  -H "X-Region-Name: MyCloudRegion" 
+  -d @provisionEnvironment.json</code></pre>This
+example command uses a JSON file that is named <span class="ph filepath">newEnvironment.json</span>.</section>
+</div>
+</article></main></body></html>

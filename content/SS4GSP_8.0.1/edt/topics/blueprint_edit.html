@@ -1,0 +1,78 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="You can create projects, blueprints, configuration files, folders, and many other type of the files in the blueprint designer."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueprint_edit"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating files</title></head><body id="blueprint_edit"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating files</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-692a4202-36b3-41de-98af-7afb1ca672dc">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can create projects, blueprints, configuration files, folders, and many other type of
+the files in the blueprint designer.</p>
+<section class="section prereq" id="blueprint_edit__prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit__prereq">Before you begin</h2></div>
+<ul class="ul">
+<li class="li">Login to the Blueprint Designer.</li>
+<li class="li">For Heat blueprints only:<ul class="ul" id="blueprint_edit__ul_sgz_xv2_3jb">
+<li class="li">Connect the blueprint design server to a cloud system. See <a class="xref" href="security_cloud_connection.html" title="To create a connection to a cloud to use with the blueprint designer, you use OpenStack Heat. You specify the location of the identity server and the engine to use. The steps are different for each type of cloud.">Connecting to clouds through the blueprint designer</a></li>
+<li class="li">Make sure that your user account is authenticated to a cloud system. See <a class="xref" href="../../admin/topics/security_auth_bds.html" title="You can provide users of the blueprint designer the permissions to access clouds in two ways. You can provide functional IDs through cloud projects, or you can use accounts on an OpenStack cloud that already have permissions.">Setting up access to clouds in the blueprint designer</a>.</li>
+<li class="li" id="blueprint_edit__ucd_connect"><span class="ph" id="blueprint_edit__ucdp_connect_ph">Connect the blueprint design server to the server. See
+<a class="xref" href="../../user/topics/p_integrate.html" title="In most cases, you connect the blueprint design server to the server at installation time, but you can also connect them later.">Connecting the blueprint design server to the server</a>.</span></li>
+<li class="li">At the top of the page, select the cloud project and region to use.</li>
+</ul></li>
+</ul>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit__context__1">About this task</h2></div></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Blueprints</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">New</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select the file type from the <span class="ph uicontrol">Type</span> list. The following file types are
+available:</span>
+<ul class="ul choices">
+<li class="li choice"> Select <strong class="ph b">Project</strong> to create either a Terraform or Cloud Automation Manager project. A
+project is a collection of files that make up a Terraform blueprint. </li>
+<li class="li choice">Select <span class="ph uicontrol">Blueprint</span> to create a file that defines a cloud environment
+and its components.</li>
+<li class="li choice">Select <span class="ph uicontrol">Configuration</span> to create files to manage variables. See <a class="xref" href="blueprint_configs.html#blueprint_configs" title="Configuration files are lists of properties and values. You can use configuration files to provision the same blueprint on multiple cloud systems.">Editing configuration files</a>.</li>
+<li class="li choice">Select <span class="ph uicontrol">Folder</span> to create an internal folder for an existing
+repository.</li>
+<li class="li choice">Select <span class="ph uicontrol">Other</span> to create different types of files to be used by a
+blueprint. </li>
+</ul>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify the name for the artifact to be created in the <span class="keyword wintitle">Add a New</span> window.
+It could be a project, blueprint, folder etc. </span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> You must use a unique name. If your blueprint name contains the same sequence of alphanumeric
+characters with different capitalization as an existing blueprint, only one blueprint will be
+available to provision from the <span class="ph">Deploy</span> server.</div>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select a repository from the <strong class="ph b">Repository</strong> list. The repository list contains the
+<em class="ph i">default</em> project, team repositories, and locally cloned remote Git repositories. The
+<em class="ph i">default</em> project is not associated with any remote Git repository and files in this project
+can not be shared with other users. Team repositories are shared with all team members, but can be
+provisioned using <em class="ph i">local</em> provisioning only.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select the folder name from the <span class="ph uicontrol">Folder</span> list to set the folder in which
+the artifact is saved.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Clone</span> to copy the contents of an existing
+source.</span>
+<div class="itemgroup info">If you selected an existing file, you can create a copy of that file. You can also import the
+contents of a file from your file system or paste the contents into the new file.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a description of the file.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup stepresult"></div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit__postreq__1">What to do next</h2></div>
+<p class="p">To open a file, go to the <span class="ph uicontrol">Blueprints</span> page, click on the file name from the
+<span class="ph uicontrol">Files</span> list.</p>
+<p class="p">To open a project, go to the <span class="ph uicontrol">Blueprints</span> page, click any file from the
+project folder in the <span class="ph uicontrol">Files</span> list.</p>
+<p class="p">If you created a blueprint, you can work with it in the diagram editor or the source-code editor. </p>
+<div class="p"><div class="note note note_note"><span class="note__title">Note:</span> You can also clone a repository and access it from within the blueprint designer. From the
+<span class="ph uicontrol">Repositories</span> list, click <span class="ph uicontrol">Clone Repository</span>, and then
+specify a URL. </div>--&gt;</div>
+</section>
+</div>
+</article></main></body></html>

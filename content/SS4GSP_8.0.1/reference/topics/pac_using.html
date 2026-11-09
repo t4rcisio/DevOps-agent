@@ -1,0 +1,63 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Use the PAC language to create IBM DevOps Deploy (Deploy) processes."><meta name="DC.subject" content="process as code, PAC, PAC language, using PAC, PAC syntax"><meta name="keywords" content="process as code, PAC, PAC language, using PAC, PAC syntax"><meta name="DC.relation" scheme="URI" content="../../reference/topics/pac_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="pac_using"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Using the PAC commands</title></head><body id="pac_using"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Using the PAC commands</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-695e6e80-0e7c-43bd-8634-8127920d4ace">Edit online</a></span></div>
+
+
+
+<div class="body taskbody"><p class="shortdesc">Use the PAC language to create <span class="ph">IBM DevOps Deploy (Deploy)</span>
+        processes.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskpac_using__prereq__1">Before you begin</h2></div>
+<p class="p">To get started, install the PAC tools. </p>
+<ol class="ol">
+<li class="li">On the dashboard, click <span class="ph menucascade"><span class="ph uicontrol">Help</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Tools</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Process-as-code Compiler</span></span>. </li>
+<li class="li">Extract the downloaded <samp class="ph systemoutput sysout">pacc-version_number</samp> file.</li>
+<li class="li">Optionally, if you want to reference PAC commands from anywhere on your computer, add the folder
+to your <span class="ph filepath">path</span> system variable.</li>
+</ol>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskpac_using__context__1">About this task</h2></div>To use PAC scripts in your applications, upload valid PAC files to the <span class="ph">Deploy</span> server. You initially create processes in the process designer and then download them as PAC
+files. When you finish editing the PAC script, you upload them to the server. The processes that you
+define in PAC files are identical to the processes that you define in the process designer.<p class="p">The
+PAC tools consist of a number of command files. The primary commands are upload and download. The
+primary commands are further organized by type: application, component, and generic. For example,
+the PAC command to upload an application process is: <code class="ph codeph">upload-application-process</code>.
+The PAC command to download a generic process is: <code class="ph codeph">download-generic-process</code>.
+Similarly, you can upload and download a component process using the PAC
+commands.</p><div class="sectiondiv"><strong class="ph b">Upload examples</strong></div><p class="p">The command format for uploading PAC
+files is provided in the following code example:</p><div class="p">
+<pre class="pre codeblock"><code>upload-&lt;process-type&gt;-process &lt;user-name&gt; &lt;server-url&gt; &lt;process-id&gt; &lt;next-version&gt; input.pac</code></pre>
+</div><p class="p">All PAC scripts have the same arguments and differ only by the type of process referenced.
+For example, to upload an application-type file named <span class="ph filepath">my_command.pac</span>, the
+command might look like the following code example:</p><div class="p">
+<pre class="pre codeblock"><code>upload-application-process my_user_name https://my_server:4540 17542df8-a0a3-7b7d-ffa9-88ebe19324a9 2 my_command.pac</code></pre>
+</div><p class="p">This command example uploads a new version of the application process defined in the
+<span class="ph filepath">my_command.pac</span> file. </p><div class="sectiondiv"><strong class="ph b">Download
+examples</strong></div><p class="p">The command format for downloading PAC files is provided in the
+following code example:</p><div class="p">
+<pre class="pre codeblock"><code>download-&lt;process-type&gt;-process &lt;user-name&gt; &lt;server-url&gt; &lt;process-id&gt; &lt;next-version&gt; input.pac</code></pre>
+</div><p class="p">For example, to download an application-type file named <span class="ph filepath">my_command.pac</span>,
+the command might look like the following code example:</p><div class="p">
+<pre class="pre codeblock"><code>download-application-process my_user_name https://my_server:4540 17542df8-a0a3-7b7d-ffa9-88ebe19324a9 3 my_command.pac</code></pre>
+</div><p class="p">This command example downloads the process identified by the version ID to a PAC file named
+<span class="ph filepath">my_command.pac</span>. If the version is not specified, the latest version is
+downloaded.</p><p class="p">To implement PAC processes, complete the following steps:</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskpac_using__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+                <span class="ph cmd">From the dashboard, create a process.</span>
+                <div class="itemgroup info">The process can be of any type, application, component, or generic. You use
+                    the ID assigned by the server to the process in your PAC files to identify the
+                    process. You do not need to define steps with the process designer. </div>
+            </li><li class="li step stepexpand">
+<span class="ph cmd">From the command line, download the PAC file using the
+<code class="ph codeph">download-&lt;process-type&gt;-process</code> PAC command.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In any text editor, edit the PAC file.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Upload the PAC file using the process ID assigned to it by the server.</span>
+<div class="itemgroup info">Along with the process ID you obtained from the server, you must assign a unique process
+version number to the uploaded process.</div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskpac_using__result__1">Results</h2></div>The next time that you open the process designer, the designer displays the new process
+defined in the PAC file.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/pac_ch.html" title="Programmatically manage processes with PAC language.">Process-as-code feature</a></div></div></nav></article></main></body></html>

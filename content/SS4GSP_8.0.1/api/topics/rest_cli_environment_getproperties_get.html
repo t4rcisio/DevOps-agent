@@ -1,0 +1,87 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content=""><meta name="DC.subject" content="REST API, environment resource, /getProperties GET, GET methods, /environment/getProperties"><meta name="keywords" content="REST API, environment resource, /getProperties GET, GET methods, /environment/getProperties"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_environment.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_environment_getproperties_get"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Get environment property values</title></head><body id="rest_cli_environment_getproperties_get"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Get environment property values</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-eec6d0d1-5a1c-40e7-bb98-cb4578831d1a">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc"></p>
+<section class="section"><h2 id="rest_cli_environment_getproperties_get__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>GET https://{hostname}:{port}
+    /cli/environment/getProperties?{parameters}
+Accept: {contentType}
+</code></pre><table class="table" id="rest_cli_environment_getproperties_get__request_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Request parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_environment_getproperties_get__request_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_environment_getproperties_get__request_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_environment_getproperties_get__request_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_environment_getproperties_get__request_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_environment_getproperties_get__request_params__entry__1"><span class="keyword parmname">environment</span></td>
+<td class="entry" headers="rest_cli_environment_getproperties_get__request_params__entry__2">string</td>
+<td class="entry" headers="rest_cli_environment_getproperties_get__request_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_environment_getproperties_get__request_params__entry__4">Name or ID of the environment</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="rest_cli_environment_getproperties_get__request_params__entry__1"><span class="keyword parmname">application</span></td>
+<td class="entry" headers="rest_cli_environment_getproperties_get__request_params__entry__2">string</td>
+<td class="entry" headers="rest_cli_environment_getproperties_get__request_params__entry__3">false</td>
+<td class="entry" headers="rest_cli_environment_getproperties_get__request_params__entry__4">Name or ID of the application; this value is required if you specify the environment name instead of ID</td>
+</tr>
+</tbody></table>
+<table class="table" id="rest_cli_environment_getproperties_get__header_params"><caption><span class="table--title-label">Table 2. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_environment_getproperties_get__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_environment_getproperties_get__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_environment_getproperties_get__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_environment_getproperties_get__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_environment_getproperties_get__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_environment_getproperties_get__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_environment_getproperties_get__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_environment_getproperties_get__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+</section>
+<div class="example" data-hd-audience="all"><h2 id="rest_cli_environment_getproperties_get__title__5" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>[
+  {
+    "id": "9dbcf2f6-a96e-4ee5-ba65-07c5fa8422c9",
+    "name": "db.url",
+    "value": "jdbc:mysql://localhost:3306/jpetstore",
+    "description": "",
+    "secure": false
+  },
+  {
+    "id": "f395d093-95d8-4d1d-8901-fc0329ef6bdb",
+    "name": "tomcat.home",
+    "value": "/opt/apache-tomcat-9.0.100",
+    "description": "",
+    "secure": false
+  },
+  {
+    "id": "404fb6e0-b0a9-433a-9b63-d8614017d459",
+    "name": "tomcat.manager.url",
+    "value": "http://localhost:8080/manager",
+    "description": "",
+    "secure": false
+  },
+  {
+    "id": "167fa275-bb95-460b-97b2-e27e713a1400",
+    "name": "tomcat.start",
+    "value": "/opt/apache-tomcat-9.0.100/bin/startup.sh",
+    "description": "",
+    "secure": false
+  }
+]</code></pre></div>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_getenvironmentproperties.html" title="Get environment property values">getEnvironmentProperties</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_environment.html">environment resource</a></div></div></nav></article></main></body></html>

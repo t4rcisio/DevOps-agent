@@ -1,0 +1,48 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Remove public key pin for a server host from an agent"><meta name="DC.subject" content="udclient commands, removeAgentServerPin, udclient command, command-line commands"><meta name="keywords" content="udclient commands, removeAgentServerPin, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_removeagentserverpin"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>removeAgentServerPin</title></head><body id="udclient_removeagentserverpin"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">removeAgentServerPin</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-941ffe17-1adb-4a86-85fb-48dae966e013">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Remove public key pin for a server host from an agent</p>
+<section class="section">
+This command requests the agent remove a public key pin for a server host, but does not wait for or report the result. The returned maintenance task can be used to query the result.
+</section>
+<section class="section"><h2 id="udclient_removeagentserverpin__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  removeAgentServerPin [parameters]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_removeagentserverpin__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_removeagentserverpin__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_removeagentserverpin__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_removeagentserverpin__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_removeagentserverpin__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_removeagentserverpin__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__1"><span class="keyword parmname">agent</span></td>
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__4">Name or ID of the agent</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__1"><span class="keyword parmname">host</span></td>
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__4">The host name, as it is known by the agent, from which the public key pin is removed</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__1"><span class="keyword parmname">publicKeyFingerprint</span></td>
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_removeagentserverpin__composite_params__entry__4">The fingerprint for the public key pin to remove</td>
+</tr>
+</tbody></table>
+
+</section>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_agentcliremoveserverpin_post.html" title="This command requests the agent remove a public key pin for a server host, but does not wait for or report the result. The returned maintenance task can be used to query the result.">Remove public key pin for a server host from an agent</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

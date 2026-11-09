@@ -1,0 +1,173 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="IBM DevOps Deploy (Deploy) supports multiple SSL protocols and ciphers for communication among servers."><meta name="DC.relation" scheme="URI" content="../../user/topics/SSLinstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ssl_compatibility"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Supported TLS and SSL protocols and ciphers</title></head><body id="ssl_compatibility"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Supported TLS and SSL protocols and ciphers</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-643e710d-1992-456b-a3d4-6c92f683fdff">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc"><span class="ph">IBM DevOps Deploy (Deploy)</span> supports
+        multiple SSL protocols and ciphers for communication among servers.</p>
+<p class="p"><span class="ph">Deploy</span> supports TLS v1.2,
+            TLS v1.3, and SSL protocols. <span class="ph">Deploy</span> supports
+            the SSL v3 protocol only if older agents require it.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> 
+            <ul class="ul" id="ssl_compatibility__ul_hn1_kxp_zsb">
+                <li class="li">Limiting and disabling SSL and TLS protocols and ciphers is done at the JVM
+                    level rather than the application level.</li>
+                <li class="li">Support for TLS v1.0, TLS v1.1, and SSL v2Hello is deprecated.</li>
+            </ul>
+        </div>
+<p class="p"><span class="ph">Deploy</span> uses SSL to
+            communicate between the web UI and server and between the servers that use ActiveMQ. The
+            SSL certificates that control both types of communication use the Java™ KeyStore (JKS) format. These certificates are generated
+            by an RSA key with a 2048-bit length and are signed by a SHA256withRSA algorithm.</p>
+        <p class="p">By default, the web UI connects on port 8443. The server certificate is in the
+                <span class="ph filepath">opt/tomcat/conf/tomcat.keystore</span> file. See <a class="xref" href="../../user/topics/ssl_config.html" title="The steps for configuring secure HTTPS connections with the IBM DevOps Deploy (Deploy) server are similar to the steps for any Java Platform, Enterprise Edition server.">Configuring SSL on Apache Tomcat and LDAP servers</a> for more information.</p>
+<p class="p">The SSL ciphers you can use depend on which ciphers the Java crypto provider of the JRE supports
+            on which you  installed your <span class="ph">Deploy</span> server,
+            relay and agent. For example, refer to <a class="xref" href="https://docs.oracle.com/en/java/javase/11/security/oracle-providers.html#GUID-FE2D2E28-C991-4EF9-9DBE-2A4982726313" target="_blank">a list of providers by Oracle/OpenJDK Java
+            11</a>.</p>
+<p class="p">The following SSL cipher suites are enabled by default:</p>
+        <table class="table" id="ssl_compatibility__table_dlr_5j1_pzb"><caption><span class="table--title-label">Table 1. </span><span class="title">Default cipher suites</span></caption><colgroup><col style="width:339"></colgroup><tbody class="tbody">
+                    <tr class="row">
+                        <td class="entry">AES_256_GCM_SHA384</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">AES_128_GCM_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">AES_128_CCM_8_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">AES_128_CCM_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">CHACHA20_POLY1305_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_ECDSA_WITH_AES_128_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_ECDSA_WITH_AES_128_CBC_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_ECDSA_WITH_AES_128_GCM_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_ECDSA_WITH_AES_256_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_ECDSA_WITH_AES_256_CBC_SHA384</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_ECDSA_WITH_AES_256_GCM_SHA384</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_RSA_WITH_AES_128_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_RSA_WITH_AES_128_CBC_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_RSA_WITH_AES_128_GCM_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_RSA_WITH_AES_256_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_RSA_WITH_AES_256_CBC_SHA384</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDH_RSA_WITH_AES_256_GCM_SHA384</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_ECDSA_WITH_AES_128_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_ECDSA_WITH_AES_128_CBC_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_ECDSA_WITH_AES_128_GCM_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_ECDSA_WITH_AES_256_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_ECDSA_WITH_AES_256_CBC_SHA384</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_ECDSA_WITH_AES_256_GCM_SHA384</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_RSA_WITH_AES_128_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_RSA_WITH_AES_128_CBC_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_RSA_WITH_AES_128_GCM_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_RSA_WITH_AES_256_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_RSA_WITH_AES_256_CBC_SHA384</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_RSA_WITH_AES_256_GCM_SHA384</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">RSA_WITH_AES_128_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">RSA_WITH_AES_128_CBC_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">RSA_WITH_AES_128_GCM_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">RSA_WITH_AES_256_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">RSA_WITH_AES_256_CBC_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">RSA_WITH_AES_256_GCM_SHA384</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">RSA_WITH_CAMELLIA_128_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">RSA_WITH_CAMELLIA_128_CBC_SHA256</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">RSA_WITH_CAMELLIA_256_CBC_SHA</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry">RSA_WITH_CAMELLIA_256_CBC_SHA256</td>
+                    </tr>
+                </tbody></table>
+        <section class="section" id="ssl_compatibility__section_lx1_qk1_pzb"><h2 id="ssl_compatibility__section_lx1_qk1_pzb__title__1" class="title sectiontitle">Overriding suggested cipher suites</h2>
+            
+            <p class="p"><span class="ph">Deploy</span> suggests
+                ciphers based on their availability and what the system identifies as secure. You
+                can use system properties to add specific ciphers or prevent the system to add a
+                cipher automatically to the default cipher list. </p>
+            <div class="p">To add a cipher to the list of default ciphers, add the following property to the
+                system
+                property:<pre class="pre codeblock" id="ssl_compatibility__codeblock_kpr_bn1_pzb"><code>com.urbancode.commons.util.ssl.sslContextEnabledCiphers</code></pre></div>
+        </section>
+        <div class="example" id="ssl_compatibility__example_gcy_vlb_rzb">For example, you can add cipher1 and cipher2 to the
+            default ciphers by adding the following
+            property:<pre class="pre codeblock" id="ssl_compatibility__codeblock_obr_4mb_rzb"><code>com.urbancode.commons.util.ssl.sslContextEnabledCiphers=cipher1,cipher2</code></pre></div>
+        <section class="section" id="ssl_compatibility__section_vby_vlb_rzb">
+            <div class="p">To prevent the system from adding a cipher to the default cipher list, add the
+                following
+                property:<pre class="pre codeblock" id="ssl_compatibility__codeblock_kcz_ln1_pzb"><code>com.urbancode.commons.util.ssl.sslContextIgnoreSuggestedCiphers=true</code></pre></div>
+        </section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/SSLinstall.html" title="With Secure Sockets Layer (SSL) technology, clients and servers can communicate securely by encrypting all communications. Data is encrypted before it is sent and decrypted by the recipient. This communication cannot be deciphered or modified by third-parties. In addition to encryption, SSL can also support authentication.">SSL configuration</a></div></div></nav></article></main></body></html>

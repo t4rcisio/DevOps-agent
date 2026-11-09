@@ -1,0 +1,41 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="If your image uses Chef recipes, after you upgrade to IBM DevOps Deploy (Deploy) version 6.2.1 or later, you must manually update the Chef hook on the images in your cloud."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="cloud_update_chef_images"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Updating Chef-compatible images</title></head><body id="cloud_update_chef_images"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Updating Chef-compatible images</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f3d59747-fb43-46dc-9797-bdc0b417203c">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">If your image uses Chef recipes, after you upgrade to <span class="ph">IBM DevOps Deploy (Deploy)</span> version 6.2.1 or later, you must manually update the Chef hook on the images in your
+cloud.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_update_chef_images__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Extract the <span class="ph filepath">os-chef-config-hook.tgz</span> file.</span>
+<div class="itemgroup info">This file is provided in the heat engine installation media and is in the following location:
+<span class="ph filepath">/<var class="keyword varname">installation_files_location</var>/ibm-ucd-patterns-install/engine-install/resources</span>.
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create a copy of the <code class="ph codeph">hook-chef</code> file, which is in the following directory:
+<span class="ph filepath"><var class="keyword varname">extracted_files</var>/os-chef-config-hook/heat-templates/hot/software-config/elements/heat-config-chef/install.d</span>.
+</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Rename the <code class="ph codeph">hook-chef.py</code> file that you copied as <code class="ph codeph">chef</code>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">On an image that you configured for Chef, in the
+<span class="ph filepath">/var/lib/heat-config/hooks</span> folder, replace the <code class="ph codeph">chef</code> file with
+the copy that you renamed.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Change the permission of the new <code class="ph codeph">chef</code> file to
+<kbd class="ph userinput">0777</kbd>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Shut down the image with the following command:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>shutdown -h now</code></pre>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create an image and upload it to your cloud.</span>
+<div class="itemgroup info">For more information, see <a class="xref" href="integrate_chef_images.html#integrate_chef_images" title="To use images with Chef and the blueprint designer, you must create the images with certain prerequisites.">Creating Chef-compatible images</a>.</div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_update_chef_images__result__1">Results</h2></div>After you update the Chef hook, you can provision environments from blueprints that contain
+Chef recipes. You can also modify blueprints that contain Chef recipes to obtain the Chef validator
+key value without the use of a hosted file that contains the value. See <a class="xref" href="chef_validator.html#chef_validator" title="If you upgrade your blueprint design server, you might need to modify references to the Chef validator key before you provision environments from existing blueprints.">Modifying blueprints to access the Chef validator key</a>. </section>
+</div>
+
+</article></main></body></html>

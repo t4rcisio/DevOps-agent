@@ -1,0 +1,114 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="When you upgrade the server, you can upgrade the SSL encryption."><meta name="DC.relation" scheme="URI" content="../../user/topics/SSLinstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="upgrade_key_strength"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Upgrading encryption key strength</title></head><body id="upgrade_key_strength"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Upgrading encryption key strength</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-290b2653-4ef3-410d-9d49-7ee0c4a433e1">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">When you upgrade the server, you can upgrade the SSL encryption.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupgrade_key_strength__context__1">About this task</h2></div>This upgrade is optional, but it strengthens server security. The
+        <span class="ph filepath">keytool</span> application is included in the Java™ developer kit and is not part of <span class="ph">IBM DevOps Deploy (Deploy)</span>.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskupgrade_key_strength__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Upgrade the HTTPS certificate for the server:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">On the server, open a command-line window to the <span class="ph filepath"><var class="keyword varname">server_install</var>/opt/tomcat/conf</span> folder,
+where <var class="keyword varname">server_install</var> is the server installation
+folder.</span><div class="itemgroup info"><span class="ph" data-hd-otherprops="ibm">The default server installation directory is
+                            <span class="ph filepath">/opt/devops-deploy/server</span> on Linux™ and <span class="ph filepath">C:\Program
+                            Files\devops-deploy\server</span> on Windows™.</span></div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Delete the existing certificate with the following command:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>keytool -delete 
+  -alias tomcat 
+  -keystore tomcat.keystore 
+  -storepass changeit</code></pre><div class="note note note_note" id="upgrade_key_strength__oneline"><span class="note__title">Note:</span> Each command in
+this example must be written on one line. Also, the commands in the
+following examples must be written on one line. The commands are written
+on multiple lines for clarity.</div></div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Create a certificate with the following command:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>keytool -genkey 
+  -alias tomcat 
+  -storepass changeit 
+  -keypass changeit 
+  -keyalg RSA 
+  -sigalg SHA256withRSA 
+  -keysize 2048 
+  -validity 7305 
+  -dname CN=<var class="keyword varname">host_name</var> 
+  -keystore tomcat.keystore</code></pre><span class="ph" id="upgrade_key_strength__hostname">For <code class="ph codeph"><var class="keyword varname">host_name</var></code>,
+use the host name of the server.</span></div></li>
+<li class="li substep substepexpand">
+            <span class="ph cmd">Go to the folder <span class="ph filepath"><var class="keyword varname">app_data</var>/conf</span>.</span>
+          </li>
+<li class="li substep substepexpand"><span class="ph cmd">Delete the existing entry to the keystore with the following
+command:</span><div class="itemgroup info"><pre class="pre codeblock"><code>keytool -delete 
+  -alias server 
+  -keystore server.keystore 
+  -storepass changeit</code></pre></div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Create an entry to the keystore with the following command:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>keytool -genkey 
+  -alias server 
+  -storepass changeit 
+  -keypass changeit 
+  -keyalg RSA 
+  -sigalg SHA256withRSA 
+  -keysize 2048 
+  -validity 7305 
+  -dname CN=<var class="keyword varname">host_name</var> 
+-keystore server.keystore</code></pre><span class="ph">For <code class="ph codeph"><var class="keyword varname">host_name</var></code>,
+use the host name of the server.</span></div></li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">For each of your agent relays, upgrade the encryption with
+the following steps:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">In a command-line window, go to the <span class="ph filepath"><var class="keyword varname">relay_install</var>/conf/jms-relay</span> folder,
+where <var class="keyword varname">relay_install</var> is the relay installation folder.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Delete the existing entry in the keystore for the agent
+relay with the following command:</span><div class="itemgroup info"><pre class="pre codeblock"><code>keytool -delete 
+  -alias agentrelay 
+  -keystore agentrelay.keystore 
+  -storepass changeit</code></pre></div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Add an entry with the new encryption level with the
+following command:</span><div class="itemgroup info"><pre class="pre codeblock"><code>keytool -genkey 
+  -alias agentrelay 
+  -keystore agentrelay.keystore 
+  -storepass changeit 
+  -keypass changeit 
+  -keyalg RSA 
+  -sigalg SHA256withRSA 
+  -keysize 2048 
+  -validity 7305 
+  -dname CN=<var class="keyword varname">host_name</var></code></pre><span class="ph">For <code class="ph codeph"><var class="keyword varname">host_name</var></code>,
+use the host name of the server.</span></div></li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">If you are using mutual encryption between servers and
+agents, upgrade the encryption on each agent:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">In a command-line window, go to the <span class="ph filepath"><var class="keyword varname">agent_install</var>/conf/jms-relay</span> folder,
+where <var class="keyword varname">agent_install</var> is the agent installation folder.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Delete the existing entry in the keystore for the agent
+with the following command:</span><div class="itemgroup info"><pre class="pre codeblock"><code>keytool -delete 
+  -alias <var class="keyword varname">alias</var> 
+  -keystore <var class="keyword varname">keystore_file</var> 
+  -storepass changeit</code></pre>Replace the <var class="keyword varname">alias</var> variable with the alias of the
+              server certificate in the agent keystore. The <var class="keyword varname">keystore_file</var>
+              variable represents the keystore file. The default name of the keystore file is
+                <span class="ph filepath">agent.keystore</span>. To find the alias, run the following command,
+              and look for the alias name in the
+              output:<pre class="pre codeblock"><code>keytool -list -v -keystore <var class="keyword varname">keystore_file</var></code></pre></div>
+</li>
+</ol>
+        <div class="itemgroup info">
+          <div class="note note note_note" id="upgrade_key_strength__note_ypq_knd_51c"><span class="note__title">Note:</span> 
+            <p class="p">Although agents and relays that use the JMS communication protocol cannot establish
+              connections with <span class="ph">IBM DevOps Deploy (Deploy)</span> v7.2.0 and
+              later, the references to JMS persist in some file names, property names, folder names,
+              and directory names. </p>
+            <p class="p"> For example, the following names that are associated with JMS are still used in
+                <strong class="ph b">Deploy</strong> v7.2 and later: agentrelay.jms_proxy.name, agentrelay.jms_proxy.id,
+              jms-relay.log directory, and jms-relay folder.</p>
+          </div>
+        </div>
+</li></ol></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/SSLinstall.html" title="With Secure Sockets Layer (SSL) technology, clients and servers can communicate securely by encrypting all communications. Data is encrypted before it is sent and decrypted by the recipient. This communication cannot be deciphered or modified by third-parties. In addition to encryption, SSL can also support authentication.">SSL configuration</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="reference"><meta name="description" content="Typically, you do not edit the options that are used when IBM DevOps Deploy (Deploy) agents are installed on virtual images. However, you can edit the code that is embedded in an agent resource to change how the agent is installed."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="reference_wmb_vp4_1v"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Options for deploying agents</title></head><body id="reference_wmb_vp4_1v"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Options for deploying agents</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2fc24af7-e7bf-4ee3-905f-0b9ab714d3fd">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Typically, you do not edit the options that are used when <span class="ph">IBM DevOps Deploy (Deploy)</span> agents are
+        installed on virtual images. However, you can edit the code that is embedded in an agent
+        resource to change how the agent is installed.</p>
+<section class="section">
+
+<p class="p">When you create a blueprint, the editor adds a resource that represents the <span class="ph">Deploy</span> agent, and this resource is installed automatically on each virtual image. The resource is named
+either <code class="ph codeph">ucd_agent_install_win</code> or <code class="ph codeph">ucd_agent_install_linux</code>, depending
+on the operating system that is installed on the virtual image. The resource includes a call to a
+script that installs the agent. On Linux™, the
+<span class="ph filepath">install-agent-with-options.sh</span> script is called. On Microsoft™
+Windows™, the
+<span class="ph filepath">install-agent-with-options.ps1</span> script is called. To change how the agent is
+installed, examine the code in the agent resource and adjust the arguments based on the information
+in the following table.</p>
+<table class="simpletable frame-all"><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead><tr class="sthead">
+<th class="stentry" scope="col">Option name</th>
+<th class="stentry" scope="col">Command-line parameter</th>
+<th class="stentry" scope="col">Comments</th>
+</tr></thead><tbody><tr class="strow">
+<td class="stentry">Agent name</td>
+<td class="stentry">-n <var class="keyword varname">agent_name</var></td>
+<td class="stentry">Required. The name of the agent to create.</td>
+</tr><tr class="strow">
+<td class="stentry"><span class="ph">Deploy</span> remote host</td>
+<td class="stentry">-s <var class="keyword varname">remote_host_URL</var></td>
+<td class="stentry">Required. The host name of the <span class="ph">Deploy</span> server or agent relay to connect to.</td>
+</tr><tr class="strow">
+<td class="stentry">Agent communication port</td>
+<td class="stentry">-p <var class="keyword varname">port_number</var></td>
+<td class="stentry">Required. The port number to use for communication with the remote host. By default, the
+port number is 7918 for <span class="ph">Deploy</span> servers and 7916 for agent relays.</td>
+</tr><tr class="strow">
+<td class="stentry">Start option</td>
+<td class="stentry">-x <var class="keyword varname">start_option</var></td>
+<td class="stentry">Optional. After installation, starts the agent with the specified options. Valid options
+are <kbd class="ph userinput">start</kbd> and <kbd class="ph userinput">run</kbd>.</td>
+</tr><tr class="strow">
+<td class="stentry">Use agent relay</td>
+<td class="stentry">-r</td>
+<td class="stentry">Optional. Configures the agent for use with an agent relay.</td>
+</tr><tr class="strow">
+<td class="stentry">Initial team</td>
+<td class="stentry">-t <var class="keyword varname">list_of_teams</var></td>
+<td class="stentry">Optional. A list of team names, separated by commas, to add the agent to when it connects
+to the server. By default, the initial team is <samp class="ph systemoutput sysout">System Team</samp>.</td>
+</tr><tr class="strow">
+<td class="stentry">Proxy host</td>
+<td class="stentry">-k <var class="keyword varname">proxy_host</var></td>
+<td class="stentry">Optional. The host name of a proxy server to use with an agent relay.</td>
+</tr><tr class="strow">
+<td class="stentry">Proxy port</td>
+<td class="stentry">-l <var class="keyword varname">proxy_port</var></td>
+<td class="stentry">Optional. The port of a proxy server to use with an agent relay. By default, the proxy port
+number is <samp class="ph systemoutput sysout">20080</samp>.</td>
+</tr><tr class="strow">
+<td class="stentry">Disable HTTP failover</td>
+<td class="stentry">-d</td>
+<td class="stentry">Optional. Disables HTTP failover handling for agents that connect through an agent
+relay.</td>
+</tr><tr class="strow">
+<td class="stentry">Install service</td>
+<td class="stentry">-v</td>
+<td class="stentry">Optional. This parameter works only on Linux
+computers. Installs the agent as a service.</td>
+</tr><tr class="strow">
+<td class="stentry">UCD install location</td>
+<td class="stentry">-c</td>
+<td class="stentry">Optional. Installs <span class="ph">Deploy</span> agent to a desired location.</td>
+</tr></tbody></table>
+</section>
+</div>
+</article></main></body></html>

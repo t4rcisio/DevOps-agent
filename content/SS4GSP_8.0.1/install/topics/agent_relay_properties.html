@@ -1,0 +1,222 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="You can find the list of IBM DevOps Deploy (Deploy) agent relay properties that are used during the installation process."><meta name="DC.relation" scheme="URI" content="../../install/topics/agentRelayInstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_relay_properties"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Agent relay installation properties</title></head><body id="agent_relay_properties"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Agent relay installation properties</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-494c024c-ee89-4f3f-ae54-d3dcda2c6626">Edit online</a></span></div>
+  
+
+<div class="body refbody"><p class="shortdesc">You can find the list of <span class="ph">IBM DevOps Deploy (Deploy)</span> agent relay
+    properties that are used during the installation process. </p>
+    <section class="section" id="agent_relay_properties__section_i1z_rfr_w1c">
+      <p class="p">These properties are located in the <span class="ph filepath">agentrelay.properties</span> file after
+        the installation is complete. The properties can also be used to modify the setting of an
+        already installed agent relay.</p>
+    </section>
+    
+    
+    <table class="table" id="agent_relay_properties__install_properties"><caption><span class="table--title-label">Table 1. </span><span class="title">Agent relay installation properties</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+          <tr class="row valign-bottom">
+            <th class="entry" id="agent_relay_properties__install_properties__entry__1">Property</th>
+            <th class="entry" id="agent_relay_properties__install_properties__entry__2">Default value</th>
+            <th class="entry" id="agent_relay_properties__install_properties__entry__3">Description</th>
+          </tr>
+        </thead><tbody class="tbody">
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.home</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">/opt/devops-deploy/agentrelay</code> on Linux™ or <code class="ph codeph">C:\\Program Files\\devops-deploy\\agentrelay</code> on Windows™</td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The installation folder for the relay. On Windows, escape each backslash with an additional backslash, as in
+              the following example:<code class="ph codeph">agentrelay.home=C:\\Program Files\\devops-deploy\\agentrelay</code>.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.jms_proxy.name</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">devops-deploy-relay</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The name of the relay. Each relay must have a unique name.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.jms_proxy.id </span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The unique ID that is generated the first time relay connects to a
+                <strong class="ph b">Deploy</strong> server.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.http_proxy.host</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">0.0.0.0</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The IP address or host name on which the relay listens for HTTP
+              requests from agents. In most cases, the agent relay listens on all IP addresses that
+              are available to the computer; in this case, specify <code class="ph codeph">0.0.0.0</code>.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.http_proxy.port</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">20080</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The port on which the agent relay listens for HTTP requests coming
+              from agents. In addition, the relay automatically listens for CodeStation requests on
+              port <code class="ph codeph">HTTP_proxy + 1</code> on the system where the agent relay is located.
+              If you use the default port for HTTP requests, the relay uses 20081 for CodeStation
+              requests and artifact transfers. If the CodeStation request port is blocked, agents
+              cannot download artifacts.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentcomm.server.uri</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">wss://localhost:7919</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The WebSocket connection used by the agent relay to communicate
+              with the <span class="ph">Deploy</span>
+              server. The WebSocket secure URL must have the format:
+                <code class="ph codeph">wss://host-or-ip:port</code>. In an HA environment, multiple server URLs
+              can be specified using the supported failover syntax. For example,
+                <code class="ph codeph">random:(wss://node1.example.com:7919,wss://node2.example.com:7919)</code>.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.user</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">agentrelay</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The user with which to run the agent relay. This property is not
+              used on Windows systems.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.group</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">agentrelay</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The group with which to run the agent relay. This property is not
+              used on Windows systems.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">verify.server.identity</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">false</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">Whether the agent relay attempts to verify the server certificate.
+              If set to <code class="ph codeph">true</code>, you must import the server certificate to the JRE
+              keystore on the agent relay.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.codestation.server_url</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The HTTP/HTTPS base URL of the <span class="ph">Deploy</span> server or
+              Load Balancer used for CodeStation artifact traffic, such as
+                <code class="ph codeph">https://myserver.example.com:8443</code>. In an HA environment, set this
+              value to the Load Balancer or Virtual IP (VIP) URL. This property accepts only a
+              single URL and does not support multiple URLs or failover-list syntax.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.codestation.server_password</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">An authentication token from the server.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.codestation.enable_replication</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">false</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">Specify <code class="ph codeph">true</code> to enable artifact caching on the
+              relay.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.codestation.max_cache_size</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2">None.</td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The size to which to limit the artifact cache, such as
+                <code class="ph codeph">500M</code> for 500 MB or <code class="ph codeph">5G</code> for 5 GB. To not put a limit
+              on the cache, specify <code class="ph codeph">none</code>. By default, each hour, the agent relay
+              checks the size of the artifact cache. If the cache is over the limit, the agent relay
+              removes files based on which files have not been used in the longest time. Therefore,
+              the total disk space used by the cache can exceed the cache limit. You must ensure
+              that the agent relay has enough space to store all of the cached artifacts.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.codestation.geotags</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2">None.</td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">If you choose to cache files on the relay, you can specify one or
+              more component version statuses here, separated by semicolons. The agent relay
+              automatically caches component versions with any of these statuses so that those
+              versions are ready when they are needed for a deployment. A status can contain a space
+              except in the first or last position. A status can contain commas. The special
+                <code class="ph codeph">*</code> status replicates all artifacts, but use this status with
+              caution, because it can make the agent relay store a large amount of data. If no value
+              is specified, no component versions are cached automatically. If you cache files on
+              the relay, do not put the CodeStation cache on an NFS file system.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.install.service</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">false</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">Specify <code class="ph codeph">true</code> to install as a Windows service.<span class="ph" id="agent_relay_properties__windows_only">This
+                property is used only on Windows.</span></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.install.service.name</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">agentrelay</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The name of the service. <span class="ph">This
+                property is used only on Windows.</span></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.install.service.login</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">.\\localsystem</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The user to run the service. <span class="ph">This
+                property is used only on Windows.</span></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.install.service.password</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">nopass</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The password for the user that runs the service. <span class="ph">This
+                property is used only on Windows.</span></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.install.service.autostart</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">false</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">Specify <code class="ph codeph">true</code> to start the service automatically.
+                <span class="ph">This
+                property is used only on Windows.</span></td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.keystore.password</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">changeit</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The keystore password for the
+                <span class="keyword parmname">agentrelay.keystore</span> file.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.cert.alias</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">agentrelay</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The certificate alias for the
+                <span class="keyword parmname">agentrelay.keystore</span> file.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">agentrelay.cert.password</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">changeit</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The password for the <span class="keyword parmname">agentrelay.keystore</span>
+              certificate.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">codestation.keystore</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">conf/codestation.keystore</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The location of the keystore for HTTPS communication.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">codestation.keystore.password</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">changeit</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The keystore password for the
+                <span class="keyword parmname">codestation.keystore</span> file.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">codestation.cert.alias</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">agentrelay</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The certificate alias for the
+                <span class="keyword parmname">codestation.keystore</span> file.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">codestation.cert.password</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2"><code class="ph codeph">changeit</code></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The password for the <span class="keyword parmname">codestation.keystore</span>
+              certificate.</td>
+          </tr>
+          <tr class="row">
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__1"><span class="keyword parmname">cpu_arch</span></td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__2">None</td>
+            <td class="entry" headers="agent_relay_properties__install_properties__entry__3">The system information where agent relay is installed. For
+              example, <code class="ph codeph">x64</code>.</td>
+          </tr>
+        </tbody></table>
+    <section class="section" id="agent_relay_properties__section_isd_cdr_w1c">
+      <div class="note note note_note" id="agent_relay_properties__note_nv5_cdr_w1c"><span class="note__title">Note:</span> 
+        <p class="p">Although agents and relays that use the JMS communication protocol cannot establish
+          connections with <span class="ph">IBM DevOps Deploy (Deploy)</span> v7.2.0 and
+          later, the references to JMS persist in some file names, property names, folder names, and
+          directory names. </p>
+        <p class="p"> For example, the following names that are associated with JMS are still used in
+            <strong class="ph b">Deploy</strong> v7.2.0 and later: <span class="keyword parmname">agentrelay.jms_proxy.name</span>,
+            <span class="keyword parmname">agentrelay.jms_proxy.id</span>, <span class="ph filepath">jms-relay.log</span>
+          directory, and <span class="ph filepath">jms-relay</span> folder.</p>
+      </div>
+    </section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/agentRelayInstall.html" title="An agent relay is a communication proxy for agents that are located behind a firewall or in another network location. You can install agent relays in interactive mode or in silent mode.">Installing agent relays</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="If you upgrade the JRE and change the JRE location on agents, you must also update the JRE location in the agent Java configuration file."><meta name="DC.relation" scheme="URI" content="../../user/topics/configure_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="jre_change_agent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Updating the JRE location for agents</title></head><body id="jre_change_agent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Updating the JRE location for agents</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-c745c52b-6994-46c8-8138-066cfd3b8124">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">If you upgrade the JRE and change the JRE location on agents, you must also update the
+    JRE location in the agent Java configuration file.</p>
+    <section class="section prereq" id="jre_change_agent__prereq_vbg_byp_cfc"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskjre_change_agent__prereq_vbg_byp_cfc">Before you begin</h2></div>
+      <ul class="ul" id="jre_change_agent__ul_dz3_1ml_2fc">
+        <li class="li">Verify the supported Java version for agents. See <a class="xref" href="sysreq_prereqsw.html" title="You can find information about the software, licensing and web browser requirements for running the IBM DevOps Deploy (Deploy).">Prerequisite software</a>.</li>
+        <li class="li">You have installed the new JRE on the target agent and set the JAVA_HOME environment
+          variable of the system.</li>
+      </ul>
+      <div class="note important note_important" id="jre_change_agent__note_ofv_lhw_fyb"><span class="note__title">Important:</span> Do not use the server UI to restart the
+        agent.</div>
+    </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskjre_change_agent__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">On the agent system, stop the agent.</span>
+        <div class="itemgroup info">See <a class="xref" href="agent_runner_command_lines.html">Agent executable command-line commands</a>.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Edit the location of the JRE in the Java home configuration file.</span>
+        <div class="itemgroup info">
+          <ul class="ul" id="jre_change_agent__ul_qzc_vjl_2fc">
+            <li class="li">On Linux™, edit the
+                  <span class="ph filepath"><var class="keyword varname">installation_directory</var>/conf/agent/javahome</span>
+              file.</li>
+            <li class="li">On AIX, edit the following files:<ul class="ul" id="jre_change_agent__ul_wg3_fsf_gfc">
+                <li class="li">In the <code class="ph codeph">installation_directory/bin/configure-agent</code> file, set the
+                  value of the <strong class="ph b">JAVA_HOME</strong> property to the location of the JRE.</li>
+                <li class="li">In the <code class="ph codeph">installation_directory/bin/agent</code> file, set the value of
+                  the <strong class="ph b">JAVA_HOME</strong> property to the location of the JRE.</li>
+              </ul></li>
+            <li class="li">On Windows™, edit the
+                  <span class="ph filepath"><var class="keyword varname">&lt;DEPLOY_AGENT_HOME&gt;</var>\conf\agent\javahome.conf</span>
+                file.<div class="note note note_note" id="jre_change_agent__note_nd2_skl_2fc"><span class="note__title">Note:</span> For example, add the new location of the JRE on Windows
+                as:<pre class="pre codeblock" id="jre_change_agent__codeblock_od2_skl_2fc"><code>C:\Program Files\Java\jdk-17.0.0</code></pre></div></li>
+            <li class="li">If the agent is running as a service on Windows, remove and reinstall the service. See <a class="xref" href="agent_service_windows.html#agent_service_windows" title="If you installed an agent as a Windows service, you can remove and reinstall the service.">Removing and reinstalling agents as Windows services</a>.  <div class="note note note_note" id="jre_change_agent__note_hwj_cll_2fc"><span class="note__title">Note:</span> For the Windows service of agents, you must update the
+                  <span class="keyword parmname">JAVA_HOME</span> property in
+                    <span class="ph filepath"><var class="keyword varname">installation_directory</var>\conf\agent\javahome.conf</span>
+                file with the new location of Java, and then recreate the Windows
+              service.</div></li>
+          </ul>
+        </div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">On the agent system, start the agent.</span>
+        <div class="itemgroup info">See <a class="xref" href="agent_runner_command_lines.html">Agent executable command-line commands</a>.</div>
+      </li></ol></section>
+    <section class="section result" id="jre_change_agent__result_xxf_fll_2fc"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskjre_change_agent__result_xxf_fll_2fc">Results</h2></div>You have updated the JRE of the active agents.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/configure_agents.html" title="After you install an agent for IBM DevOps Deploy (Deploy), you can modify its configuration or create an agent relay to facilitate communication to remote relays.">Agents and agent relay configuration</a></div></div></nav></article></main></body></html>

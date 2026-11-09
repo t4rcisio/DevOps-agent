@@ -1,0 +1,43 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="After you upgrade the Deploy server, you must review all post-upgrade tasks and perform them as required."><meta name="DC.relation" scheme="URI" content="../../install/topics/upgradeInstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="post_upgrade_tasks"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Post-upgrade tasks</title></head><body id="post_upgrade_tasks"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Post-upgrade tasks</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f1fbead2-4d7b-47d6-9e7e-454d7ca674ff">Edit online</a></span></div>
+    
+    <div class="body"><p class="shortdesc">After you upgrade the <span class="ph">Deploy</span> server, you
+        must review all post-upgrade tasks and perform them as required. </p>
+        <div class="p">The following table lists the tasks that you may need to perform after the server
+            upgrade: <table class="simpletable frame-all" id="post_upgrade_tasks__simpletable_dlg_z55_zfc"><colgroup><col style="width:21.50537634408602%"><col style="width:78.49462365591397%"></colgroup><thead><tr class="sthead">
+                    <th class="stentry" scope="col">Task</th>
+                    <th class="stentry" scope="col">Description</th>
+                </tr></thead><tbody><tr class="strow">
+                    <td class="stentry">Database monitoring</td>
+                    <td class="stentry">After the upgrade, DBAs must monitor the database for at least a week
+                        to ensure optimal performance. It is important to perform the necessary
+                        database statistics actions and verify that the database is using the most
+                        efficient execution plans. For larger databases, using outdated execution
+                        plans after an upgrade can lead to significant performance issues.</td>
+                </tr><tr class="strow">
+                    <td class="stentry">Upgrade agents</td>
+                    <td class="stentry">You must upgrade agents that use Java™ plug-ins, including most source configuration plug-ins. See
+                            <a class="xref" href="upgradeAgents.html" title="In most cases, you upgrade agents from the server interface, but you can also upgrade the agents from the command line. Always upgrade agents and agent relays in addition to upgrading the server.">Upgrading agents</a> for information about upgrading the
+                        agents. <p class="p">If you do not upgrade the agents, they will throw an
+                            IllegalCharsetNameException exception that refers to the variable
+                                <span class="keyword parmname">DS_SYSTEM_ENCODING</span>.  See <a class="xref" href="https://www.ibm.com/support/pages/agent-throws-illegalcharsetnameexception" target="_blank">Agent throws
+                                IllegalCharsetNameException</a> for troubleshooting the
+                            error.</p></td>
+                </tr><tr class="strow">
+                    <td class="stentry">Upgrade agent relays</td>
+                    <td class="stentry">Upgrade all agent relays to the current version. Agents that connect
+                        through relays may not connect successfully until both server and relay are
+                        upgraded.</td>
+                </tr><tr class="strow">
+                    <td class="stentry">Upgrade plug-ins</td>
+                    <td class="stentry">You may need to upgrade the plug-ins if they do not work after upgrade.
+                        See <a class="xref" href="../../reference/topics/plugin_ch.html" title="The Deploy plug-ins provide tools for creating component processes and integrations. IBM provides plug-ins for several common deployment processes, and others are available to integrate with a wide variety of tools, such as middleware tools, databases, and servers.">Plug-ins</a> for information
+                        about how to install plug-ins.</td>
+                </tr><tr class="strow">
+                    <td class="stentry">Upgrade encryption key strength</td>
+                    <td class="stentry">See <a class="xref" href="upgrade_key_strength.html" title="When you upgrade the server, you can upgrade the SSL encryption.">Upgrading encryption key strength</a>.</td>
+                </tr></tbody></table></div>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/upgradeInstall.html" title="You can upgrade the IBM DevOps Deploy (Deploy) server to incorporate to a later version.">Upgrading the server</a></div></div></nav></article></main></body></html>

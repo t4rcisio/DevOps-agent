@@ -1,0 +1,61 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="A component process is a series of user-defined steps that operate on a component's artifacts. Each component has at least one process that is defined for it and can have several."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_workflow.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_process_types.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_process_configure.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_process_run.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_tasks_config_create.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="intro_component_processes"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Component processes</title></head><body id="intro_component_processes"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Component processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-6259b5df-4b73-4cce-8482-f56893638663">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">A <dfn class="term">component process</dfn> is a series of user-defined steps that operate on a
+component's artifacts. Each component has at least one process that is defined for it and can have
+several.</p>
+<p class="p"> A component process can be as simple as a single step or contain numerous steps and
+relationships. The <dfn class="term">switch step</dfn>, for instance,  creates conditional processes. For
+example, you might take artifacts from a source like an <span class="keyword">IBM® Anthill Pro</span> project
+and map the artifacts that get deployed to an HTTP server into one component. Then, you might map
+the artifacts that get deployed to a Java™ Platform, Enterprise
+Edition container to another component. You might map the artifacts that get deployed to a database
+to yet another component. Or, to take another example, a single-component deployment might consist
+of two processes: the first moves component files to a target server on Friday night (a lengthy
+operation), while the second deploys the files Saturday morning.</p>
+<br><img class="image" src="../images/intro_component_processes_a.gif" alt="A process that includes a switch step"><br>
+<div class="note important note_important"><span class="note__title">Important:</span>  When you begin to create a component process, you must assign a type by
+            making a selection from <span class="ph uicontrol">Process Type</span> menu. The type that you
+            select can determine whether the application process that you create later functions as
+            intended. For example, if the object of the component process you are creating is to
+            deploy the current component and you select <span class="ph uicontrol">Operational (with
+                version)</span> in <span class="ph uicontrol">Process Type</span>, the process will fail.
+            See <a class="xref" href="comp_process_types.html#comp_process_types" title="Different types of component processes deploy, configure, or uninstall component versions.">Component process types</a>.</div>
+<p class="p">Component processes are created with the <dfn class="term">process editor</dfn>. The process editor is
+            visual drag-and-drop editor where you can drag process steps onto the design space and
+            configure them as you go. As more steps are placed, you visually define their
+            relationships with one another. Process steps are selected from a menu of standard steps
+            that replace typical deployment scripts and manual processes. <span class="ph">IBM DevOps Deploy (Deploy)</span> provides
+            steps for several utility processes, such as inventory management, and workflow control.
+            Other process steps are provided by plug-ins. Plug-ins provide integration with common
+            deployment tools and application servers, such as WebSphere®, Microsoft™ IIS, and many
+            others. Without any additions, <span class="ph">Deploy</span> provides
+            plug-ins for many common processes, such as downloading and uploading artifacts, and
+            retrieving environment information. A component process can have steps from more than
+            one plug-in.</p>
+    <p class="p">Like other processes, component processes begin with the Start step and must end with the
+Finish step.</p>
+<p class="p">A component process is defined for a specific component. A component can have more than one
+process that is defined for it, but each component requires at least one process.</p>
+<p class="p">For example, deploying an EAR file to an <span class="keyword">IBM WebSphere Application Server</span> typically
+consists of the following operations:</p>
+<ol class="ol">
+<li class="li">Transfer the EAR file to the target server.</li>
+<li class="li">Stop the target server instance.</li>
+<li class="li">Run <span class="keyword cmdname">wsAdmin</span> with deployment properties.</li>
+<li class="li">Start the target server instance.</li>
+<li class="li">Verify that the deployment succeeded by accessing a specified URL.</li>
+</ol>
+<p class="p">The <span class="keyword">WebSphere Application Server</span> - Deploy
+plug-in provides a configurable process step for each operation.</p>
+<p class="p">A frequently used component process can be saved as a template
+and applied later to new components.</p>
+<p class="p">Component processes are run by <span class="ph">Deploy</span> agents
+on hosts. One instance of a component process is started for each
+resource that is mapped to a component in the target environment.
+See <a class="xref" href="resources_ch.html" title="A resource is a logical deployment target that typically resolves to an agent and a user-defined construct that is based on the architectural model of IBM DevOps Deploy (Deploy).">Resources</a>.</p>
+</div>
+
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_process_types.html">Component process types</a></strong><br>Different types of component processes deploy, configure, or uninstall component versions.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_process_configure.html">Creating component processes</a></strong><br>A component process is a series of user-defined steps that operate on a component's artifacts. You create a component process in two steps: first, you configure basic information, such as name; second, you use the process editor to assemble the process. </li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_process_run.html">Running component processes</a></strong><br>Component processes are typically run from within application processes. However, you can also run component processes directly to test the processes or to correct an error in an urgent situation.</li><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/comp_tasks_config_create.html">Creating configuration files in component processes</a></strong><br>Configuration templates are templates for files that are created during a component process. Typically, the data is for configurations for web servers, but the files can be used for any application that you deploy.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a></div></div></nav></article></main></body></html>

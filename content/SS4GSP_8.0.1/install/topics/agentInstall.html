@@ -1,0 +1,288 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Installing an agent from the command line involves running a batch file or shell script and specifying information about how the agent connects to the server or agent relay."><meta name="DC.relation" scheme="URI" content="../../install/topics/agent_install_ov.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_zos.html#security_zos"><meta name="DC.relation" scheme="URI" content="../../user/topics/arch_appx_sudo_using.html#arch_appx_sudo_using"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agentinstall"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Installing agents from the command line</title></head><body id="agentinstall"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Installing agents from the command line</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-aa6b2d25-375e-4a0e-89fd-f113b1a0fbb8">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">Installing an agent from the command line involves running a batch file or shell script
+and specifying information about how the agent connects to the server or agent relay.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagentinstall__prereq__1">Before you begin</h2></div>
+<ul class="ul">
+<li class="li">For production environments, create a user account that has the required privileges for the
+installation.<p class="p">If the user account does not have the necessary privileges, the installation
+fails.</p><p class="p">For AIX, HP, Solaris, Windows and Mac OS, the user account must have access to all
+working directories used in the process the agent runs.</p><p class="p">For Linux and Unix OS, the user
+account must have root privileges in order to issue the <span class="keyword cmdname">su</span> or
+<span class="keyword cmdname">sudo</span> command when installing.</p><p class="p" data-hd-otherprops="ibm">For z/OS environments,
+review the security requirements for the IBM z/OS computers.</p></li>
+</ul>
+<ul class="ul">
+<li class="li" data-hd-otherprops="ibm">Make sure that your networks and firewalls allow communication on the
+required ports. See <a class="xref" href="agent_firewalls.html" title="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication.">Firewall and communication configuration</a>.</li>
+    
+<li class="li" data-hd-otherprops="ibm">
+<p class="p"><span class="ph" id="agentinstall__d77e61">Ensure that each computer where you are installing an
+agent has a supported version of the Java™ Runtime Environment
+(JRE) or Java developer kit. For more information, see <a class="xref" href="https://www.ibm.com/software/reports/compatibility/clarity/index.html" target="_blank">SPCR for Deploy</a>.</span></p>
+</li>
+<li class="li" data-hd-otherprops="ibm">
+<p class="p">If the target computer has an IBM® JRE or Java developer kit, update to a supported version of the IBM JRE or Java developer kit.</p>
+</li>
+<li class="li" id="agentinstall__java_home">Set the <span class="keyword parmname">JAVA_HOME</span> system variable to the location of the JRE
+or JDK that you are using.</li>
+<li class="li" data-hd-otherprops="ibm">Ensure that there is no limit on the maximum memory size and virtual memory size.
+For example, on most Linux™ systems, you can run the
+<code class="ph codeph">ulimit -m</code> and <code class="ph codeph">ulimit -v</code> commands and ensure that both return the
+value <code class="ph codeph">unlimited</code>. To find out how to remove the limit on the maximum memory size and
+virtual memory size, see the documentation for the operating system.</li>
+    
+</ul>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagentinstall__context__1">About this task</h2></div>
+<p class="p">Agents can also be installed directly from the <span class="ph">IBM DevOps Deploy (Deploy)</span> web
+                application, see <a class="xref" href="../../user/topics/agent_installremote.html" title="You can install agents by using the IBM DevOps Deploy (Deploy) web application.">Installing agents remotely</a>.</p>
+<p class="p" id="agentinstall__evaluate">For simple evaluations, the administrative user can run the agent on the computer
+where the server is located. Because agent workloads can be resource-intensive, for production
+environments, do not install agents on the computer where the <span class="ph">Deploy</span> server is located. If you plan to run deployments on several target servers, install a separate
+agent on each one. If, for example, your testing environment consists of three servers, install an
+agent on each one. Follow the same procedure for each environment the application uses.</p>
+<p class="p">Each agent requires the appropriate rights to communicate with the <span class="ph">Deploy</span> server.
+                At a minimum, each agent must have these permissions:</p>
+<ul class="ul">
+<li class="li">Open a TCP connection. A Web agent uses one for its WebSocket connection.</li>
+<li class="li">Open a HTTP(S) connection. The agent must be able to connect to the <span class="ph">Deploy</span> user interface to download artifacts from the CodeStation repository.</li>
+<li class="li">Access the file system. Many agents need read/write permissions to items on the file
+system.</li>
+</ul>
+<p class="p">If the agent communicates with <span class="ph">Deploy</span> by using an agent relay, you can install the agent from the command line.</p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagentinstall__steps__1">Procedure</h2></div><div class="li stepsection">To install an agent from the command line:</div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Download and extract the agent installer using any one of the following ways:</span>
+<ul class="ul choices" id="agentinstall__download_locations">
+<li class="li choice">To download the installer, log in to the server and click the <span class="ph uicontrol">Help</span>
+                        icon <img class="image" src="../images/help_button.gif" height="31" width="27" alt=""> at the upper right of any page on the server, and click
+                            <span class="ph uicontrol">Tools</span>. Then, click <span class="ph">DevOps Deploy</span> Agent, and download and extract the file.</li>
+<li class="li choice">To find the installer on the server with the command line, go to the following location, and
+                        copy the file to the target computer:
+                                <span class="ph filepath"><var class="keyword varname">installation_folder</var>/opt/tomcat/webapps/ROOT/tools/devops-deploy-agent.zip</span></li>
+</ul>
+                <div class="itemgroup info">
+                    <div class="note note note_note" id="agentinstall__note_vbt_bcm_jyb"><span class="note__title">Note:</span> If you are installing the agent on <span class="keyword">IBM z/OS®</span>
+                        by extracting files to the UNIX™ file
+                        system, you must convert the character encoding for several text-type files
+                        in the installation package to IBM-1047 encoding. If you are installing the agent by using SMP/E, you
+                        do not have to convert the character encoding. Move the installation files
+                        to the <span class="keyword">z/OS</span> computer, and then extract the files. If the <span class="keyword cmdname">unzip</span>
+                        program is not installed on the <span class="keyword">z/OS</span> computer, use the <span class="keyword cmdname">jar</span> command to extract the files.
+                        For instance, type the following text on the command
+                        line:<pre class="pre codeblock" id="agentinstall__codeblock_ucm_dcm_jyb"><code>JAVA_HOME/bin/jar xvf devops-deploy-agent.zip</code></pre>Run
+                        the <span class="keyword cmdname">convertFilesForZos.sh</span> script to convert the character
+                        encoding of the relevant files to IBM-1047 encoding. After you convert the files, continue with
+                            installation.<p class="p">If you used the <span class="keyword cmdname">jar</span> command to
+                            extract files, add execute permission to
+                                <span class="keyword cmdname">convertFilesForZos.sh</span> script first.</p></div>
+                </div>
+</li><li class="li step stepexpand" id="agentinstall__download_and_open">
+<span class="ph cmd">After you download and expand the installation package, open the installer directory.</span>
+</li><li class="li step stepexpand" id="agentinstall__rmv_svc_1">
+                <span class="ph cmd" id="agentinstall__run_installer">Run the installer. </span>
+                <div class="itemgroup info">Run the <span class="keyword cmdname">install-agent.bat</span> command (Windows™) or <span class="keyword cmdname">install-agent.sh</span>
+                        (UNIX, Linux, Mac OS,
+                    or <span class="keyword">IBM z/OS</span>).<div class="note note note_note" id="agentinstall__note_klt_vzl_jyb"><span class="note__title">Note:</span> If you install the agent as a Windows service, the user account
+                        must have the following privileges:<ul class="ul" id="agentinstall__ul_rth_wzl_jyb">
+                            <li class="li">SE_INCREASE_QUOTA_NAME "Adjust memory quotas for a process"</li>
+                            <li class="li">SE_ASSIGNPRIMARYTOKEN_NAME "Replace a process level token"</li>
+                            <li class="li">SE_INTERACTIVE_LOGON_NAME "Logon locally"</li>
+                        </ul></div></div>
+                <div class="itemgroup info">The <span class="ph">Deploy</span>
+                    agent installer is displayed and prompts you to provide the following
+                    information. You can accept the default values (displayed in brackets) by
+                    pressing Enter. If two options are given, such as <code class="ph codeph">Y/n</code>, the
+                    uppercase option is the default value. Depending on the options that you select,
+                    different prompts display.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">For all agents, provide values for the following prompts:</span>
+                <div class="itemgroup info">
+                    <dl class="dl" id="agentinstall__dl_cbb_l1m_jyb">
+                        
+                            <dt class="dt dlterm">Enter the directory where agent should be installed.</dt>
+                            <dd class="dd">For example, enter <code class="ph codeph">C:\Program Files\devops-deploy\agent</code> (Windows) or
+                                    <code class="ph codeph">/opt/devops-deploy/agent</code> (UNIX). If the directory does not exist,
+                                enter <kbd class="ph userinput">Y</kbd> to instruct the Installer to create
+                                it for you. If you enter an existing directory, the program gives
+                                you the option to upgrade the agent. For information about
+                                upgrading, see <a class="xref" href="upgradeAgents.html" title="In most cases, you upgrade agents from the server interface, but you can also upgrade the agents from the command line. Always upgrade agents and agent relays in addition to upgrading the server.">Upgrading agents</a>.<div class="note note note_note" data-hd-otherprops="ibm" id="agentinstall__note_sc1_n4l_jyb"><span class="note__title">Note:</span> Do not use any shell expansions or abbreviations, such as
+                  the tilde character (<code class="ph codeph">~</code>).</div><p class="p">The agent directory length must not
+                                    exceed 38 characters on <span class="keyword">IBM z/OS</span>.</p></dd>
+                        
+                    </dl>
+                </div>
+                <div class="itemgroup info">
+                    <dl class="dl" id="agentinstall__dl_rc1_n4l_jyb">
+                        
+                            <dt class="dt dlterm"><span class="ph uicontrol">Please enter the home directory of the JRE/JDK used to
+                                    run this agent.</span></dt>
+                            <dd class="dd">If Java is already installed,
+                                    <span class="ph">Deploy</span> suggests the Java location
+                                as the default value. To accept the default value, press Enter.
+                                Otherwise, override the default value, and enter the correct
+                                path.</dd>
+                        
+                        
+                            <dt class="dt dlterm"><span class="ph uicontrol">Will the agent connect to an agent relay instead of
+                                    directly to the server?</span></dt>
+                            <dd class="dd">The default value is <code class="ph codeph">N</code>. To configure a connection
+                                to an agent relay instead of a connection to the server, specify
+                                    <kbd class="ph userinput">Y</kbd>. If you connect directly to a server,
+                                skip to step <a class="xref" href="#agentinstall__server_direct">6</a>. To connect to an agent relay, complete step <a class="xref" href="#agentinstall__agent_relay">5</a>
+                                first.</dd>
+                        
+                    </dl>
+                </div>
+            </li><li class="li step stepexpand" id="agentinstall__agent_relay">
+                <span class="ph cmd">To connect the agent to an agent relay, provide values for the following
+                    prompts:</span>
+                <div class="itemgroup info">
+                    <dl class="dl" id="agentinstall__dl_cr5_cvl_jyb">
+                        
+                            <dt class="dt dlterm"><span class="ph uicontrol">Will the agent connect to an agent relay instead of
+                                    directly to the server.</span></dt>
+                            <dd class="dd">Specify <code class="ph codeph">y</code> to provide relay configuration in further
+                                steps. The default value is <code class="ph codeph">N</code>.<dl class="dl" id="agentinstall__dl_dr5_cvl_jyb">
+                                    
+                                        <dt class="dt dlterm"><span class="ph uicontrol">Enter the address of a relay for the agent to
+                                                use as a proxy.</span></dt>
+                                        <dd class="dd">Specify the address of the agent relay. The format is
+                                                <code class="ph codeph">http://hostname:port</code>. The default
+                                            value is <code class="ph codeph">http://localhost:20080</code>. </dd>
+                                    
+                                    
+                                        <dt class="dt dlterm"><span class="ph uicontrol">Do you want to configure another relay to use
+                                                as a proxy?</span></dt>
+                                        <dd class="dd">The default value is <code class="ph codeph">N</code>. To specify
+                                            another relay server, press <code class="ph codeph">Y</code>. </dd>
+                                    
+                                </dl></dd>
+                        
+                    </dl>
+                </div>
+            </li><li class="li step stepexpand" id="agentinstall__server_direct">
+                <span class="ph cmd">To connect the agent directly to the server, provide values for the following
+                    prompts:</span>
+                <div class="itemgroup info">
+                    <dl class="dl" id="agentinstall__dl_tpz_2q5_hzb">
+                        
+                            <dt class="dt dlterm"><span class="ph uicontrol">Enable the agent to verify the server HTTPs certificate?
+                                    If enabled, you must import the server certificate to the JRE
+                                    keystore on the agent.</span></dt>
+                            <dd class="dd">The default value is <code class="ph codeph">N</code>. If you specify
+                                    <code class="ph codeph">y</code>, import the server certificate to the JRE
+                                keystore after the installation completes.</dd>
+                        
+                    </dl>
+                    <dl class="dl" id="agentinstall__dl_tyh_kq5_hzb">
+                        
+                            <dt class="dt dlterm">Enter the web agent communication URL for your DevOps Deploy server.
+                                It must begin with 'wss://'.</dt>
+                            <dd class="dd">Specify the secure WebSocket connection URI. The format is
+                                    <code class="ph codeph">wss://hostname:port</code>. The default value is
+                                    <code class="ph codeph">wss://localhost:7919</code>. </dd>
+                        
+                    </dl>
+                    <dl class="dl" id="agentinstall__dl_fpz_2q5_hzb">
+                        
+                            <dt class="dt dlterm"><span class="ph uicontrol">Do you want to configure another failover server
+                                    connection?</span></dt>
+                            <dd class="dd">The default value is <code class="ph codeph">N</code>. To specify another failover
+                                server, press <code class="ph codeph">Y</code>.</dd>
+                        
+                        
+                            <dt class="dt dlterm">Enter the name for this agent.</dt>
+                            <dd class="dd">Enter a unique name. The server uses this name to identify this
+                                agent. Names are limited to 256 characters and cannot be
+                                changed.</dd>
+                        
+                        
+                            <dt class="dt dlterm"><span class="ph uicontrol">Enter teams (and types) to add this agent to, separated
+                                    by commas.</span></dt>
+                            <dd class="dd">The default value is <code class="ph codeph">None</code>.<p class="p">Agents can be added to
+                                    teams the first time they connect to the server. The agent is
+                                    assigned to the specific teams the first time that it connects
+                                    to the server. Separate multiple teams by commas. Trailing
+                                    spaces are ignored. Team names that do not exist are also
+                                    ignored. To specify the agent's security type for a team,
+                                    provide the team and security type in the following format:
+                                            <kbd class="ph userinput"><var class="keyword varname">team</var>:<var class="keyword varname">type</var>.</kbd></p></dd>
+                        
+                    </dl>
+                    <dl class="dl" id="agentinstall__dl_jbw_3s5_hzb">
+                        
+                            <dt class="dt dlterm"><span class="ph uicontrol">Do you want to install the Agent as Windows
+                                    service?</span></dt>
+                            <dd class="dd">This parameter applies only to Windows. The default value is <code class="ph codeph">N</code>. When
+                                installed as a service, <span class="ph">Deploy</span> captures the PATH variable values. The default service name is
+                                        <code class="ph codeph"><span class="ph">DevOps Deploy</span> Agent</code>. Any changes to the values after the service
+                                is installed will be used by the agent process when it starts up.
+                                For recent versions of Windows, you must run the command as Administrator.</dd>
+                        
+                    </dl>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">For <span class="keyword">IBM z/OS</span>,
+                    provide values for the following prompts:</span>
+                <div class="itemgroup info">
+                    <dl class="dl" id="agentinstall__dl_jz3_dzl_jyb">
+                        
+                            <dt class="dt dlterm">Enter the high-level qualifier to install product data sets.
+                                [Default: BUZ]</dt>
+                            <dd class="dd">Specify the high-level qualifier to install product data sets. If
+                                the agent is installed by using SMP/E, the high-level qualifier must
+                                be the same qualifier that was used in the SMP/E installation.</dd>
+                        
+                        
+                            <dt class="dt dlterm">Enter the volume serial to install product data sets.</dt>
+                            <dd class="dd">Specify the volume serial number to install product data sets. If
+                                the agent is installed by using SMP/E, the volume serial number must
+                                be the same as that was used in the SMP/E installation.</dd>
+                        
+                        
+                            <dt class="dt dlterm">Enter the URL of the DevOps Deploy server. [Default:
+                                https://hostname:8443/]</dt>
+                            <dd class="dd">
+                                <p class="p">Enter the URL with the protocol and port number. The default
+                                    value is generated using the input hostname and the default port
+                                    8443.</p>
+                            </dd>
+                        
+                        
+                            <dt class="dt dlterm">Enter the authentication token for the <span class="ph">DevOps Deploy</span> server. You can modify the token later in
+                                    <span class="ph filepath">installed.properties</span> file. [Default:
+                                empty]</dt>
+                            <dd class="dd">
+                                <p class="p">Specify an authentication token to be used to import <span class="keyword">z/OS</span> component versions. </p>
+                                <p class="p">To create a token in <span class="ph">Deploy</span>, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Tokens</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Token</span></span>. The token is stored in the
+                                        <span class="ph filepath">installed.properties</span> file and can be
+                                    updated when a new token must be used. The token is encrypted
+                                    after the first time it is used.</p>
+                            </dd>
+                        
+                        
+                        
+                    </dl>
+                </div>
+            </li><li class="li step stepexpand" data-hd-otherprops="ibm">
+<span class="ph cmd">When you install on <span class="keyword">IBM z/OS</span> by using downloaded <span class="ph filepath">.zip</span> file, submit a job to load the agent data
+sets.</span>
+<div class="itemgroup info">
+<p class="p">Locate the job JCL at <span class="ph filepath"><var class="keyword varname">agent install dir</var>/mvs/BUZEXPD</span>. The
+JCL, except the job parameter, has already been customized based on your input. Edit and submit the
+job to load the agent data sets. For example, use the following command in OMVS to edit or submit
+the JCL:</p>
+<pre class="pre codeblock"><code>oedit <var class="keyword varname">agent install dir</var>/mvs/BUZEXPD
+submit <var class="keyword varname">agent install dir</var>/mvs/BUZEXPD</code></pre>
+</div>
+</li></ol></section>
+        <section class="section postreq" id="agentinstall__postreq_jkd_byv_hzb"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagentinstall__postreq_jkd_byv_hzb">What to do next</h2></div><a class="xref" href="run_agent.html" title="To start an agent, run the shell script or batch file.">Start</a> the agent. </section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/agent_install_ov.html" title="You can install agents from the server or from the command line on the agent system. To configure a failover server for an agent, you must install the agent from the command line.">Installing agents</a></div></div><div class="linklist relinfo relconcepts"><strong>Related concepts</strong><br><ul class="linklist"><li class="linklist"><a class="link" data-hd-otherprops="ibm" href="../../admin/topics/security_zos.html#security_zos" title="Specific security definitions are used to secure IBM DevOps Deploy (Deploy) functions for the IBM z/OS environment. To deploy applications to an IBM z/OS environment, the user accounts on the agent computer must have adequate access permissions. You must also identify specific directories and data sets to the authorized program facility.">Security requirements on IBM z/OS computers</a></li><li class="linklist"><a class="link" href="../../user/topics/arch_appx_sudo_using.html#arch_appx_sudo_using" title="The su command (as used by IBM DevOps Deploy (Deploy)) enables a user to start a shell as another user (process steps can be considered individual shells).">Impersonation on Linux and UNIX systems</a></li></ul></div></nav>
+</article></main></body></html>

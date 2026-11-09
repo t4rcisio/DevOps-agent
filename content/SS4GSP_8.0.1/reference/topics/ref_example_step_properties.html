@@ -1,0 +1,46 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="In the context of our discussion, properties are values that are used by the step's command. Step properties are defined with the property element."><meta name="DC.relation" scheme="URI" content="../../reference/topics/reference_plugins_example.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="stepProperties.d12e123"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Step properties</title></head><body id="stepProperties.d12e123"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Step properties</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-79373bbf-1995-4cb2-bb28-d5d33d3b98ab">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">In the context of our discussion, properties are values
+that are used by the step's command. Step properties are defined with
+the <span class="ph filepath">property</span> element.</p>
+<p class="p">As you can see in <a class="xref" href="reference_plugins_example.html" title="A plug-in consists of one or more steps. A step represents a unit of functionality that can be user-configured and combined with other steps into a process. Creating a plug-in consists in defining its individual steps and then grouping them together for presentation in IBM DevOps Deploy (Deploy).">Example plug-in</a>,
+the Create File step has three properties:</p>
+<ul class="ul">
+<li class="li"><code class="ph codeph">file</code> contains the name of the file the command
+creates; it is represented as a text box in the process designer</li>
+<li class="li"><code class="ph codeph">contents</code> contains the content of the file; it
+is represented by a text-area box, which can contain a large amount
+of data</li>
+<li class="li"><code class="ph codeph">overwrite</code> is used to specify whether the file
+can overwrite an existing file; it is represented by a check box in
+the process designer</li>
+</ul>
+<p class="p">These properties are displayed in the dialog box that appears when
+the step is added to a component process. The other properties in
+the dialog are displayed for every step (post-processing is discussed
+below). Property values can be entered into the dialog box by the
+process designer at design-time, or left to be furnished at runtime
+by the user that runs the application.</p>
+<p class="p">You can configure most properties with the <span class="ph filepath">property-ui</span> child
+element (the <code class="ph codeph">selectBox</code> type requires the <code class="ph codeph">value</code> child
+element as well). See <a class="xref" href="reference_plugins_create.html" title="You can create your own plug-ins for use with IBM DevOps Deploy (Deploy). A plug-in consists of XML files and supporting script files that the plug-in requires.">Creating plug-ins</a> for
+information about the options available for presentation in the UI.
+ Default values can be defined when you create the step.</p>
+<p class="p">In addition to a step's own properties, a command has access to
+properties set earlier by other steps within the process, to properties
+set by the application that started the component process, to properties
+on the target environment and resource.</p>
+<p class="p">The following illustration shows the properties that are available
+to an individual step. Step property values become unavailable after
+the component process ends.</p>
+<br><img class="image" src="../images/prop-lifer.png" alt="An illustration that shows the scope of the properties that a step has access to"><br>
+<p class="p">Runtime defined properties are combined with the properties that
+were defined earlier and together sent to the agent. Earlier properties
+(those properties that were defined outside the current process) are
+retrieved from the database. How properties are processed and consumed
+is discussed further in the next section.</p>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/reference_plugins_example.html" title="A plug-in consists of one or more steps. A step represents a unit of functionality that can be user-configured and combined with other steps into a process. Creating a plug-in consists in defining its individual steps and then grouping them together for presentation in IBM DevOps Deploy (Deploy).">Example plug-in</a></div></div></nav></article></main></body></html>

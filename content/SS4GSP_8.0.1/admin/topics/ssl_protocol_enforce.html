@@ -1,0 +1,147 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="For security reasons, ensure that all SSL connections to and from the IBM DevOps Deploy (Deploy) server uses the TLSv1.2 protocol. To configure SSL globally, follow these instructions under jdk.tls.disabledAlgorithms here."><meta name="DC.relation" scheme="URI" content="../../user/topics/SSLinstall.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ssl_protocol_enforce"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Enforcing the use of a security protocol or set of ciphers</title></head><body id="ssl_protocol_enforce"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Enforcing the use of a security protocol or set of ciphers</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-1791f2fa-4407-4d59-b6e2-37080be8d136">Edit online</a></span></div>
+ 
+<div class="body"><p class="shortdesc">For security reasons, ensure that all SSL connections to and from the <span class="ph">IBM DevOps Deploy (Deploy)</span> server uses the
+    TLSv1.2 protocol. To configure SSL globally, follow these instructions under
+    jdk.tls.disabledAlgorithms <a class="xref" href="https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.security.component.80.doc/security-component/jsse2Docs/disabledalgorithms.html" target="_blank">here.</a></p>
+    <section class="section">
+      <p class="p">The <span class="ph">Deploy</span>
+        server uses the following communication protocols that rely on SSL at the transport
+        level:</p>
+    </section>
+    <ul class="ul">
+      <li class="li">HTTPS for displaying the user interface</li>
+      <li class="li">LDAP to connect to LDAP and Active Directory servers</li>
+      <li class="li">JDBC to connect to the database containing the schema of the <span class="ph">Deploy</span> server
+        application</li>
+    </ul>
+    <div class="note note note_note"><span class="note__title">Note:</span> Support for TLSv1.0, TLSv1.1, and SSLv2Hello is deprecated.</div>
+    <p class="p">The following sections explain how to enforce the usage of TLSv1.2.</p>
+    <section class="section"><h2 id="ssl_protocol_enforce__title__2" class="title sectiontitle">Environment</h2>
+      
+      <p class="p">Enforcing TLSv1.2 is possible if the <span class="ph">Deploy</span> server, relay,
+        and agent are running a JVM version that supports this protocol. For more information on
+        such JVM versions, see <a class="xref" href="https://www.java.com/en/jre-jdk-cryptoroadmap.html" target="_blank">Oracle JRE and JDK Cryptographic Roadmap</a>. Before you
+        enforce TLSv1.2 as the only supported protocol in <span class="ph">Deploy</span>, make sure that
+        the external tools like LDAP servers, database servers, and middleware that the plug-ins
+        deploy to, also support TLSv1.2 or else the connections will fail.</p>
+    </section>
+    <section class="section"><h2 id="ssl_protocol_enforce__title__3" class="title sectiontitle"><span class="ph">Deploy</span>
+        server: HTTPS protocol </h2>
+      
+      <div class="p">The HTTPS protocol is configured in the
+          <span class="ph filepath">devops-deploy/server/opt/tomcat/conf/server.xml</span> file. The
+          <span class="ph filepath">server.xml</span> file contains the following relevant
+        entries:<pre class="pre codeblock"><code>    &lt;Connector port="${install.server.web.https.port}"
+               address="${install.server.web.ip}"
+               server="SERVER"
+               maxThreads="150"
+               enableLookups="false"
+               acceptCount="100"
+               debug="0"
+               connectionTimeout="20000"
+               disableUploadTimeout="true"
+               compression="1024"
+               noCompressionUserAgents="gozilla, traviata"
+               compressableMimeType="text/html,text/xml,text/javascript,text/css,text/plain,application/json"
+               algorithm="${install.server.ssl.algorithm}"
+               SSLEnabled="true"
+               scheme="https"
+               secure="true"
+               clientAuth="false"
+               URIEncoding="UTF-8"
+               ciphers="${install.server.ssl.enabledCiphers}"
+               <strong class="ph b">sslEnabledProtocols="${install.server.ssl.enabledProtocols}"</strong>
+               keystoreFile="${tomcat.keystore.file}"
+               keyAlias="${tomcat.key.alias}"
+               keystorePass="${tomcat.keystore.password}" /&gt;
+</code></pre></div>
+      <p class="p">To enforce TLSv1.2, add or modify the
+          <code class="ph codeph">install.server.ssl.enabledProtocols=TLSv1.2</code> property in the
+          <span class="ph filepath">devops-deploy/server/conf/server/installed.properties</span> file. Note that
+        this property might be missing, or it might be present and have a different value, including
+        an empty value. The property is referred to as:
+          <span class="ph filepath">${install.server.ssl.enabledProtocols}</span> in the
+          <span class="ph filepath">server.xml</span> and <span class="ph filepath">installed.properties</span> files. </p>
+    </section>
+    <section class="section"><h2 id="ssl_protocol_enforce__title__4" class="title sectiontitle"><span class="ph">Deploy</span>
+        Server: LDAP integration</h2>
+      
+      <div class="p">The <span class="ph">Deploy</span>
+        server uses the LDAP client that is contained in the JRE that is running on the server. You
+        must specify a URL for the LDAP server, which uses the <code class="ph codeph">ldaps://</code> protocol
+        that uses port 636 but default to connect through SSL or TLS. <div class="note note note_note"><span class="note__title">Note:</span> The
+            <code class="ph codeph">install.server.ssl.enabledProtocols</code> parameter changes the
+          SSLContextParameters which might affect the LDAP connection that is opened. </div></div>
+    </section>
+    <section class="section"><h2 id="ssl_protocol_enforce__title__5" class="title sectiontitle"><span class="ph">Deploy</span>
+        Server: JDBC connection to the database server</h2><p class="p">JDBC is used to connect <span class="ph">Deploy</span> to the backend
+        database.</p><p class="p"><strong class="ph b">DB2</strong></p><p class="p">Refer to the DB2 documentation - <a class="xref" href="https://www.ibm.com/support/knowledgecenter/en/SSEPGG_10.5.0/com.ibm.db2.luw.admin.sec.doc/doc/t0025241.html" target="_blank">Configuring SSL support in a DB2 instance</a> for
+        detailed information. Configure the DB2 instance according to the instructions, and test
+        after you compete the configuration.</p><strong class="ph b">Postgres</strong><p class="p">Connection string:
+          <span class="ph filepath">connectionString=jdbc:postgresql://dbhost/dummy?ssl=true
+          jdbcDriver=org.postgresql.Driver
+          jdbcJar=C:\devops-deploy\agent\postgresql-42.1.4.jar</span>.</p><p class="p">Import the database
+        certificate to the <span class="ph">Deploy</span> Agent Java
+        keystore. The latest available plug-in is version 13, see <a class="xref" data-hd-otherprops="ibm" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/SQL-JDBC/" target="_blank">SQL JDBC plug-in for Deploy</a>. </p><strong class="ph b">Microsoft SQL Server</strong><ol class="ol">
+        <li class="li">Ensure that your Microsoft SQL server supports TLSv1.2 and have the right FixLevel and
+          KB 3052404 installed on it.</li>
+        <li class="li">Enable TLSv1.2.<ol class="ol" type="a">
+            <li class="li">Depending on the Microsoft SQL Server JDBC type 4 driver version, you can pass in
+              the JDBC a connection string that enforces TLSv1.2, that is sslProtocol=TLSv1.2
+              protocol.</li>
+            <li class="li">You can enforce TLSv1.2 at the JRE level that runs the <span class="ph">Deploy</span> server.
+              Enabling TLSv1.2 has the following results:<ul class="ul">
+                <li class="li">Outgoing connections to the LDAP database all are made with TLSv1.2.</li>
+                <li class="li">Incoming connections from <span class="ph">Deploy</span> agents,
+                    <span class="ph">Deploy</span>
+                  agent relays, and WebUI require TLS v1.2.</li>
+              </ul><p class="p">These results can be undesirable if one of the involved components does not
+                support TLSv1.2. You must make sure that the JDBC drivers support TLSv1.2. To ensure
+                this support, change the <span class="ph filepath">jdk.tls.disabledAlgorithms</span> line in the
+                  <span class="ph filepath">jre/lib/security/java.security</span> file to
+                  <span class="ph filepath">jdk.tls.disabledAlgorithms=SSLv3, TLSv1, TLSv1.1</span>. You can
+                also pass the <span class="ph filepath">devops-deploy/server/bin/set_env JAVA_OPTS</span> string
+                through a <span class="keyword cmdname">java.security</span> file.</p><div class="p">
+                <div class="note note note_note"><span class="note__title">Note:</span> You cannot disable the SSLv2Hello, because it is used as the initial handshake
+                  from the <span class="ph">Deploy</span> agents
+                  with the <span class="ph">Deploy</span>
+                  server.</div>
+              </div></li>
+            <li class="li"><p class="p">For the JDBC connection string, refer to the SQL Server 2017 documentation -
+                  <a class="xref" href="https://learn.microsoft.com/en-us/sql/connect/jdbc/understanding-ssl-support?view=sql-server-2017" target="_blank">Understanding SSL Support</a>. The
+                  <span class="ph filepath">encrypt=true</span> property uses TLS/SSL. </p>Do not blanket
+                <span class="ph filepath">trustServerCertificate=false</span>. Every SSL certificate from
+              Microsoft SQL server uses the default JRE's trust store
+                <span class="ph filepath">jre/lib/security/cacerts</span>. Use
+                <span class="ph filepath">hostNameInCertificate=yes</span> to verify that DNS and
+                <span class="ph filepath">SubjectAltName</span> in the SSL certificate are the same. For
+                <span class="ph filepath">trustStore=/my/own/trustStore.jks</span>, do not use the default JRE's
+              trust store <span class="ph filepath">jre/lib/security/cacert</span>, use a separate one. The
+                <span class="ph filepath">trustStorePassword=changeit</span> is the password for the trust
+              store.</li>
+          </ol></li>
+      </ol><strong class="ph b">Oracle </strong><div class="p">To enforce TLSv1.2 for Oracle12c: <ol class="ol">
+          <li class="li">Ensure that you have a JDBC driver version higher than 12.2.0.1.</li>
+          <li class="li">In the file <span class="ph filepath">devops-deploy/server/bin/set_env.sh</span> append the
+            following <span class="keyword cmdname">-D</span> argument
+              <span class="ph filepath">-Doracle.net.ssl_version='1.2'</span> in the value you currently set for
+            JAVA_OPTS variable.</li>
+          <li class="li">Restart the <span class="ph">Deploy</span> server.</li>
+        </ol></div></section>
+    <section class="section"><h2 id="ssl_protocol_enforce__title__6" class="title sectiontitle"><span class="ph">Deploy</span>
+        Agent</h2>
+      
+      <p class="p">To add TLSv1.2 protocol to <span class="ph">Deploy</span> agents using
+        HTTPS communication with the <span class="ph">Deploy</span> server, add
+          <code class="ph codeph">-Djdk.tls.client.protocols=TLSv1.2</code> line to the
+          <span class="ph filepath">devops-deploy/agent/bin/worker-args.conf</span> file. </p>
+      <p class="p">For a step running on <span class="ph">Deploy</span> agent, add
+          <code class="ph codeph">-Djdk.tls.client.protocols=TLSv1.2</code> line to the
+          <span class="ph filepath">devops-deploy/agent/conf/plugin-javaopts.conf</span> file.</p>
+    </section>
+  </div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/SSLinstall.html" title="With Secure Sockets Layer (SSL) technology, clients and servers can communicate securely by encrypting all communications. Data is encrypted before it is sent and decrypted by the recipient. This communication cannot be deciphered or modified by third-parties. In addition to encryption, SSL can also support authentication.">SSL configuration</a></div></div></nav></article></main></body></html>

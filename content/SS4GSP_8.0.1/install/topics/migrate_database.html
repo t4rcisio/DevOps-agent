@@ -1,0 +1,35 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The server installation files include a script that migrates the server database from Derby to another database system. You can not migrate from any database other than Derby."><meta name="DC.relation" scheme="URI" content="../../user/topics/c_node_upgrading.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="migrate_database"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Migrating the server database</title></head><body id="migrate_database"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Migrating the server database</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3eaa1305-07f6-4355-ad5e-2b4558672106">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">The server installation files include a script that migrates the server database from
+    Derby to another database system. You can not migrate from any database other than
+    Derby.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_database__prereq__1">Before you begin</h2></div>Install the database that you want to migrate to and create
+an account for the server to use.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_database__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" data-hd-otherprops="ibm">
+<span class="ph cmd">Download and extract the installation files for <span class="ph">Deploy</span>.</span>
+<div class="itemgroup info">These files are available for download from the <a class="xref" href="https://www.ibm.com/software/passportadvantage/pao_customer.html" target="_blank">IBM®
+            Passport Advantage® website</a>. </div>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">Place the JAR file for the new database in the <span class="ph filepath">lib/ext</span> folder of
+          the installation files.</span>
+      </li><li class="li step stepexpand"><span class="ph cmd">Stop the server.</span></li><li class="li step stepexpand"><span class="ph cmd">Back up the current database.</span></li><li class="li step stepexpand"><span class="ph cmd">From the command line, run the database migration script. </span>
+<ul class="ul choices">
+<li class="li choice">On Windows™, run the <span class="ph filepath">migrate-database.bat</span> file.</li>
+<li class="li choice">On Linux™, run the <span class="ph filepath">migrate-database.sh</span> file.</li>
+</ul>
+<div class="itemgroup info">Depending on your system settings, you might need to run this
+file as an administrator.</div></li><li class="li step stepexpand"><span class="ph cmd">Follow the instructions in the migration script, specifying
+the current location of the server and the connection information
+for the new database.</span></li><li class="li step stepexpand"><span class="ph cmd">When the migration script is finished, restart the server
+and verify that the data has been migrated.</span><div class="itemgroup info"><p class="p">If the migration
+fails due to memory issues, increase the memory that is available
+to the script. To increase the memory, open the migration script and
+find the line of code that says <code class="ph codeph">'ANT_OPTS="-Xmx1024m"</code>.
+The <code class="ph codeph">1024m</code> in this code represents 1024 megabytes
+of memory. Increase this number and run the migration script again.</p></div>
+</li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/c_node_upgrading.html" title="Stay updated with latest features and functionalities by upgrading IBM DevOps Deploy (Deploy) server, agents, and relays. This section also provides instruction on how to migrate your Deploy instance.">Upgrading and Migrating</a></div></div></nav></article></main></body></html>

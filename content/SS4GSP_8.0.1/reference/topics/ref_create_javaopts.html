@@ -1,0 +1,32 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="The plugin-javaopts.conf file can be used to set the JAVA_OPTS environment variable for automation plug-ins that use Groovy."><meta name="DC.relation" scheme="URI" content="../../reference/topics/ref_create_pluginxml.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="ref_create_javaopts"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>The plugin-javaopts.conf file</title></head><body id="ref_create_javaopts"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">The <span class="ph filepath">plugin-javaopts.conf</span> file</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-e5b1c868-a066-4d50-8687-bfe8a1037eac">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">The <span class="ph filepath">plugin-javaopts.conf</span> file can
+be used to set the <var class="keyword varname">JAVA_OPTS</var> environment variable
+for automation plug-ins that use Groovy.</p>
+<p class="p">By default, the <span class="ph filepath">plugin-javaopts.conf</span> file
+is stored on the agent computer in the <span class="ph filepath"><var class="keyword varname">agent_installation_directory</var>/conf/</span> folder.
+You can use the <span class="ph filepath">plugin-javaopts.conf</span> file to
+set the <var class="keyword varname">JAVA_OPTS</var> environment variable for a plug-in
+that is different from the <var class="keyword varname">JAVA_OPTS</var> variable for the agent process itself. The plug-in must use Groovy, and not Java™.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> If there are syntax errors in the <span class="ph filepath">plugin-javaopts.conf</span> file,
+errors and unpredictable behavior can result. Also, any custom modifications
+that you make to the <span class="ph filepath">plugin-javaopts.conf</span> file
+might be overwritten if you upgrade the agent to a newer version.</div>
+        <section class="section" id="ref_create_javaopts__section_btb_1nj_pzb"><h2 id="ref_create_javaopts__section_btb_1nj_pzb__title__1" class="title sectiontitle">JVM options for optimizing performance</h2>
+            
+            <p class="p">When you run a plug-in step, the agent automatically adds the appropriate Java
+                optimization options to the <span class="ph filepath">plugin-javaopts.conf</span> file, if it's
+                not available. For example, if you use the IBM Java Runtime Environment (JRE), the
+                agent adds the <span class="ph filepath">-Xquickstart</span> parameter automatically to the
+                    <span class="ph filepath">plugin-javaopts.conf</span> file. </p>
+            <p class="p">If you use Oracle JDK or Open JDK distributions, the agent adds the
+                    <code class="ph codeph">-XX:TieredStopAtLevel=1</code> parameter to the
+                    <span class="ph filepath">plugin-javaopts.conf</span> file to optimize the plug-in step run
+                time.</p>
+        </section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/ref_create_pluginxml.html" title="An automation plug-in is defined with the plugin.xml file.">The plugin.xml file for automation plug-ins</a></div></div></nav></article></main></body></html>

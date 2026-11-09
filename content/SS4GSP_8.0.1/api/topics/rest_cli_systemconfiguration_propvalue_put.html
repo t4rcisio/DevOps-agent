@@ -1,0 +1,54 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="System properties behave like global variables for the server."><meta name="DC.subject" content="REST API, systemConfiguration resource, /propValue PUT, PUT methods, /systemConfiguration/propValue"><meta name="keywords" content="REST API, systemConfiguration resource, /propValue PUT, PUT methods, /systemConfiguration/propValue"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_systemconfiguration.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_systemconfiguration_propvalue_put"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Set a system property</title></head><body id="rest_cli_systemconfiguration_propvalue_put"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Set a system property</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-87d52579-f01c-4ac6-8e3f-19c8aa37cda4">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">System properties behave like global variables for the server.</p>
+<section class="section"><h2 id="rest_cli_systemconfiguration_propvalue_put__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>PUT https://{hostname}:{port}
+    /cli/systemConfiguration/propValue
+Accept: {contentType}
+</code></pre><table class="table" id="rest_cli_systemconfiguration_propvalue_put__header_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_systemconfiguration_propvalue_put__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_systemconfiguration_propvalue_put__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_systemconfiguration_propvalue_put__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_systemconfiguration_propvalue_put__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_systemconfiguration_propvalue_put__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_systemconfiguration_propvalue_put__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_systemconfiguration_propvalue_put__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_systemconfiguration_propvalue_put__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+<div class="p" id="rest_cli_systemconfiguration_propvalue_put__template">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "description": "The description of the property 
+  (optional)",
+  "isSecure": "Whether the property is secure; the default 
+  is the current state of the property, or false if the 
+  property is not yet specified (optional)",
+  "label": "The label of the property (optional)",
+  "name": "Name of the property",
+  "value": "Value of the property (optional)"
+}
+</code></pre></div></section>
+<div class="example" data-hd-audience="all"><h2 id="rest_cli_systemconfiguration_propvalue_put__title__4" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "id": "f3bec2ee-3f3e-461f-b5b0-e844efafbdbe",
+  "name": "System property 1",
+  "value": "value001",
+  "secure": false
+}</code></pre></div>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_setsystemproperty.html" title="Set a system property">setSystemProperty</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_systemconfiguration.html">systemConfiguration resource</a></div></div></nav></article></main></body></html>

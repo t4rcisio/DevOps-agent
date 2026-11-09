@@ -1,0 +1,45 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="abstract" content="Generic processes are not specific to a particular component and can be used in any number of applications. They are like general purpose processes. You can use generic processes to download and install packages on the system or perform other configuration management related tasks such as configuring SSH or completing FTP tasks. With a generic process, for example, you can update Linux agents that were recently installed by using SSH to run as a service on a Linux computer. Linux agents cannot be updated in this way during a remote installation."><meta name="description" content="Generic processes are not specific to a particular component and can be used in any number of applications. They are like general purpose processes. You can use generic processes to download and install packages on the system or perform other configuration management related tasks such as configuring SSH or completing FTP tasks. With a generic process, for example, you can update Linux agents that were recently installed by using SSH to run as a service on a Linux computer. Linux agents cannot be updated in this way during a remote installation."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_workflow.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/genProcess_import.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="genprocess_ch"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Generic processes</title></head><body id="genprocess_ch"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Generic processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b2c61431-8749-49a0-80e6-9446db51c45f">Edit online</a></span></div>
+
+<div class="body conbody"><div class="abstract">Generic processes are processes that are designed to run outside normal component or
+application processing. <span class="shortdesc">Generic processes are not specific to a particular component and
+can be used in any number of applications. They are like general purpose processes. You can use
+generic processes to download and install packages on the system or perform other configuration
+management related tasks such as configuring SSH or completing FTP tasks. With a generic process,
+for example, you can update Linux agents that were recently installed by using SSH to run as a
+service on a Linux computer. Linux agents cannot be updated in this way during a remote
+installation.</span></div>
+<div class="p">Generic processes can be used anywhere an application or component process might not be needed.
+Generic processes are run by agents on hosts that are managed by the agents. You can use generic
+processes in these instances, for example:<ul class="ul">
+<li class="li">In conjunction with a number of different component processes that do not fit well into a
+component template</li>
+<li class="li">When you want to run processes that directly affect <span class="ph">IBM DevOps Deploy (Deploy)</span> agents that are
+       unrelated to component, such as changing the agent configuration</li>
+</ul></div>
+
+<p class="p">Like component processes, generic processes consist of plug-in steps. Generic processes are
+created in the same way that component processes are created: steps are placed and configured in the
+process design editor. All plug-ins can be used, but some might be of little or no use outside a
+deployment. See <a class="xref" href="comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a>.</p>
+
+<p class="p"><span class="ph">To run a generic process, click <span class="ph uicontrol">Processes</span>, and then
+click the generic process. On the <span class="ph uicontrol">Dashboard</span> tab for the process, specify a
+resource (in most cases, an agent) in the <span class="ph uicontrol">Resource</span> list, and then click
+<span class="ph uicontrol">Submit</span>.</span></p>
+<p class="p">Generic processes can also be run from within component processes.</p>
+<p class="p">Starting in <span class="ph">Deploy</span>  7.0.3 generic processes can run against multiple resources at the same time. These resources can
+be selected at run time or in the process designer as part of the process flow.</p>
+<div class="note tip note_tip"><span class="note__title">Tip:</span> You can set a default
+resource for generic processes:<ol class="ol">
+<li class="li">Click the generic process to open it.</li>
+<li class="li">Open the <span class="ph uicontrol">Configuration</span> tab.</li>
+<li class="li">Click <span class="ph uicontrol">Basic Settings</span>.</li>
+<li class="li">In the <span class="ph uicontrol">Default Resource</span> field, specify the default resource to run the
+process on. In most cases, specify an agent.</li>
+<li class="li">Click <span class="ph uicontrol">Save</span>.</li>
+</ol></div>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/genProcess_import.html">Importing and exporting generic processes</a></strong><br>You can move generic processes between servers by exporting and importing them.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a></div></div></nav></article></main></body></html>

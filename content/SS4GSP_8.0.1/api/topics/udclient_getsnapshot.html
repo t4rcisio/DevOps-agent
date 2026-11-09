@@ -1,0 +1,110 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Get information about a snapshot"><meta name="DC.subject" content="udclient commands, getSnapshot, udclient command, command-line commands"><meta name="keywords" content="udclient commands, getSnapshot, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_getsnapshot"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>getSnapshot</title></head><body id="udclient_getsnapshot"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">getSnapshot</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-e270965d-2b22-4056-83d1-4e6fa4a254e2">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Get information about a snapshot</p>
+<section class="section"><h2 id="udclient_getsnapshot__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  getSnapshot [parameters]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_getsnapshot__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_getsnapshot__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_getsnapshot__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_getsnapshot__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_getsnapshot__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_getsnapshot__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_getsnapshot__composite_params__entry__1"><span class="keyword parmname">snapshot</span></td>
+<td class="entry" headers="udclient_getsnapshot__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getsnapshot__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_getsnapshot__composite_params__entry__4">Name or ID of the snapshot</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_getsnapshot__composite_params__entry__1"><span class="keyword parmname">application</span></td>
+<td class="entry" headers="udclient_getsnapshot__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getsnapshot__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_getsnapshot__composite_params__entry__4">Name of the application; this value is required if you specify the snapshot name instead of ID</td>
+</tr>
+</tbody></table>
+
+</section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_getsnapshot__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  getSnapshot 
+  -application JPetStore 
+  -snapshot mySnapshot</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_getsnapshot__title__6" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "application": {
+    "security": {
+      "read": true,
+      "Create Applications": true,
+      "Delete": true,
+      "Edit Basic Settings": true,
+      "Manage Blueprints": true,
+      "Manage Components": true,
+      "Manage Environments": true,
+      "Manage Processes": true,
+      "Manage Properties": true,
+      "Manage Snapshots": true,
+      "Manage Teams": true,
+      "Run Component Processes": true,
+      "View Applications": true
+    },
+    "componentCount": 16,
+    "extendedSecurity": {
+      "read": true,
+      "Create Applications": true,
+      "Delete": true,
+      "Edit Basic Settings": true,
+      "Manage Blueprints": true,
+      "Manage Components": true,
+      "Manage Environments": true,
+      "Manage Processes": true,
+      "Manage Properties": true,
+      "Manage Snapshots": true,
+      "Manage Teams": true,
+      "Run Component Processes": true,
+      "View Applications": true,
+      "teams": [{
+        "teamId": "86739325-1ebb-4fb9-8a0f-a73c1e4d88c8",
+        "teamLabel": "Landscaper",
+        "resourceTypeId": "20000000000000000000000000000100",
+        "resourceTypeName": "Application"
+      }]
+    },
+    "propSheet": {
+      "id": "ad6279a0-f140-4398-a238-cedb26880e2c",
+      "path": "applications\/413b1470-3dae-446c-95fa-77873a5daaa9\/propSheet",
+      "version": 1,
+      "versionCount": 1,
+      "commit": 10231,
+      "versioned": true
+    },
+    "id": "413b1470-3dae-446c-95fa-77873a5daaa9",
+    "securityResourceId": "ba1e7e3e-8642-45f9-a378-7528a82deb9a",
+    "name": "JPetStore",
+    "description": "",
+    "created": 1389979285087,
+    "enforceCompleteSnapshots": false,
+    "active": true,
+    "tags": [],
+    "user": "Michael (mdelder@us.ibm.com)"
+  },
+  "id": "8724200d-9cd1-4b31-90e2-9ab8b0edb55d",
+  "name": "MySnapshot",
+  "description": "",
+  "created": 1410462609512,
+  "active": true,
+  "versionsLocked": false,
+  "configLocked": false,
+  "applicationId": "413b1470-3dae-446c-95fa-77873a5daaa9",
+  "user": "jsmith"
+}</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_snapshot_getsnapshot_get.html">Get information about a snapshot</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

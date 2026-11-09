@@ -1,0 +1,56 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="On the Cleanup Configuration page, you can edit the cleanup settings of multiple components and environments at once."><meta name="DC.relation" scheme="URI" content="../../user/topics/storage_cleanup.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="bulk_cleanup_config"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring bulk cleanup settings</title></head><body id="bulk_cleanup_config"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring bulk cleanup settings</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-37f5ab37-46b3-423b-90f5-a0238135f8cc">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">On the Cleanup Configuration page, you can edit the cleanup settings of multiple
+components and environments at once. </p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskbulk_cleanup_config__context__1">About this task</h2></div>You can specify or edit the cleanup criteria for a group of component versions and
+environments. </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskbulk_cleanup_config__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the Cleanup Configuration page by clicking <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Cleanup Configuration</span></span>.</span>
+<div class="itemgroup info">The list of all defined components is displayed. To set cleanup configuration for
+environments, select <span class="ph uicontrol">Environments</span> from the menu on the left.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Filter the component list by name and cleanup settings to get the results you require.</span>
+<div class="itemgroup info">You can filter the environment list by environment and application name. To sort the list,
+click on a column header.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">To select all displayed rows, click <span class="ph uicontrol">Select All</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Set Cleanup Configuration</span>.</span>
+<div class="itemgroup info"><p class="p">The following example screen capture shows the fields that are available for components
+cleanup configuration.</p><figure class="fig fignone" id="bulk_cleanup_config__fig_cs4_q1j_z4b">
+<img class="image" src="../images/cleanup_comp_bulk.GIF" height="278" width="282" alt="component cleanup configuration">
+</figure> Use any of the following component cleanup configuration methods:<ul class="ul">
+<li class="li">Select <span class="ph uicontrol">Inherit Cleanup Settings</span> to use the artifacts cleanup settings
+that are defined in System Settings. See <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a> for more
+information.</li>
+<li class="li">Specify <span class="ph uicontrol">Days to Keep Versions</span> and <span class="ph uicontrol">Number of Versions to
+Keep</span> for the selected components. See <a class="xref" href="settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a> for more information about the fields.</li>
+</ul>
+</div>
+<div class="itemgroup info"><p class="p">The following example screen capture shows the fields that are available for environments
+cleanup configuration.</p><figure class="fig fignone" id="bulk_cleanup_config__fig_dhj_1bj_z4b">
+<img class="image" src="../images/cleanup_env_bulk.GIF" height="277" width="280" alt="component cleanup configuration">
+</figure> Use any of the following environment cleanup configuration methods:<ul class="ul">
+<li class="li">Select <span class="ph uicontrol">Use Default Artifact Cleanup Settings</span> to retain the artifact
+cleanup settings that are defined in System Settings. See <a class="xref" href="../../admin/topics/settings_system.html" title="System settings allows you to manage global settings for components, clean up, password requirement, security, mail-server, and much more.">System settings</a> for more
+information.</li>
+<li class="li">Specify <span class="ph uicontrol">Days to Retain Application Snapshots</span>, <span class="ph uicontrol">Days to Retain
+Version</span> and <span class="ph uicontrol">Number of Versions to Retain</span> for the selected
+environments. See <a class="xref" href="settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a> for more information
+about the fields.</li>
+<li class="li">Select <span class="ph uicontrol">Use Deployment History Cleanup Settings</span> to set the deployment
+history cleanup settings. You can choose to use the settings that are defined in System Settings by
+enabling <span class="ph uicontrol">Use Default Deploy History Retention</span> or provide a different value in
+the <span class="ph uicontrol">Days to Retain Deployment History Snapshots</span> field. See <a class="xref" href="settings_system_preview.html" title="You can configure the server to reduce the number of component versions by archiving them. You can specify artifacts cleanup settings from the System Settings, or cleanup settings for individual components, and environments.">Cleaning up component versions</a> for detailed information about these
+fields.</li>
+</ul>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save your changes.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskbulk_cleanup_config__result__1">Results</h2></div>The cleanup configuration for selected components and environment is saved. </section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/storage_cleanup.html" title="If you have storage issues and feel that you need to cleanup some unnecessary stored data, you can use cleanup settings to cleanup your database and file system storage.">Cleaning up targets</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="To deploy applications to an IBM z/OS environment, the user accounts on the agent computer must have adequate access permissions. You must also identify specific directories and data sets to the authorized program facility."><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_zos.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_zos_files"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>IBM z/OS directories and data sets</title></head><body id="security_zos_files"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">
+<span class="keyword">IBM z/OS</span> directories and data sets</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-641c917a-be02-4624-ab34-9aef886e38eb">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">To deploy applications to an <span class="keyword">IBM® z/OS®</span> environment, the user accounts on the agent computer must have adequate access permissions. You
+must also identify specific directories and data sets to the authorized program
+facility.</p>
+<section class="section">
+<p class="p">The agent user account must have access to the following UNIX™ directories and files, and MVS™ data sets.</p>
+<p class="p">The access permissions are set up when you install the agent. If you use a different user account
+                to run the agent, the access permissions must be set correctly for that account.</p>
+            <div class="p">
+                <table class="table" id="security_zos_files__table_dyp_b55_zgb"><caption><span class="table--title-label">Table 1. </span><span class="title">Agent user account permissions</span></caption><colgroup><col><col></colgroup><thead class="thead">
+                            <tr class="row valign-bottom">
+                                <th class="entry" id="security_zos_files__table_dyp_b55_zgb__entry__1">Directories, files, and data sets</th>
+                                <th class="entry" id="security_zos_files__table_dyp_b55_zgb__entry__2">Required access permissions</th>
+                            </tr>
+                        </thead><tbody class="tbody">
+                            <tr class="row">
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__1">The <span class="ph filepath">/tmp</span> directory or the
+                                            <span class="ph filepath"><var class="keyword varname">agent</var>/var/temp</span>
+                                    directory.</td>
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__2">RW</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__1">The <var class="keyword varname">agent/conf</var>
+                                    directory</td>
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__2">RW</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__1">The
+                                            <span class="ph filepath"><var class="keyword varname">&lt;DEPLOY_AGENT_HOME&gt;</var>/var/work</span>
+                                    directory.</td>
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__2">RW</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__1">The <span class="ph filepath">agent/var/repository</span>
+                                    directory. The directory to store artifacts in
+                                    CodeStation.</td>
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__2">R</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__1">The <span class="ph filepath">agent/var/deploy</span>
+                                    directory. The directory where backup data and deployment
+                                    results are stored .</td>
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__2">RW</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__1">The <span class="ph filepath">agent/var/log/ispf</span>
+                                    directory. The directory where ISPF gateway log files are
+                                    stored.</td>
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__2">RW</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__1">The
+                                        <span class="ph filepath">agent/var/log/ispf/WORKAREA</span> directory.
+                                    The directory where ISPF gateway stores work files during
+                                    execution</td>
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__2">RW</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__1">The HLQ.SBUZAUTH, HLQ.SBUZEXEC, HLQ.SBUZMENU,
+                                    and HLQ.SBUZSAMP data sets</td>
+                                <td class="entry" headers="security_zos_files__table_dyp_b55_zgb__entry__2">R</td>
+                            </tr>
+                        </tbody></table>
+            </div>
+<div class="p">The user account that runs buztool.sh must have access to the following UNIX directories and
+files, and MVS data sets.<table class="table" id="security_zos_files__table_ipg_zt5_zgb"><caption><span class="table--title-label">Table 2. </span><span class="title">Deployment tools user account permissions</span></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry" id="security_zos_files__d34451e259">Directories, files, and data sets</th>
+<th class="entry" id="security_zos_files__d34451e261">Required access permissions</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="security_zos_files__d34451e259">The agent/var/repository directory. The directory to store artifacts in CodeStation.</td>
+<td class="entry" headers="security_zos_files__d34451e261">RW</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_zos_files__d34451e259">The agent/var/log/ispf directory. The directory where ISPF gateway log files are
+stored</td>
+<td class="entry" headers="security_zos_files__d34451e261">RW</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_zos_files__d34451e259">The HLQ.SBUZAUTH, HLQ.SBUZEXEC, HLQ.SBUZMENU, and HLQ.SBUZSAMP data sets</td>
+<td class="entry" headers="security_zos_files__d34451e261">R</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="security_zos_files__d34451e259">The agent/conf/agent directory.</td>
+<td class="entry" headers="security_zos_files__d34451e261">RW</td>
+</tr>
+</tbody></table></div>
+    
+            
+</section>
+<section class="section"><h2 id="security_zos_files__title__4" class="title sectiontitle">Changing ownership to Started Task ID</h2>
+    
+    <p class="p">After an agent is installed, the owner of agent directories and files is changed to a
+        Started Task ID. Modify the group of agent directories and files such that all the
+        user IDs of the group are allowed to create z/OS component versions.</p>
+    <p class="p">To change owner and group, <strong class="ph b">chown</strong> and <strong class="ph b">chgrp</strong> can be used respectively on
+        the agent directory and applied recursively.</p>
+</section>    
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_zos.html" title="Specific security definitions are used to secure IBM DevOps Deploy (Deploy) functions for the IBM z/OS environment. To deploy applications to an IBM z/OS environment, the user accounts on the agent computer must have adequate access permissions. You must also identify specific directories and data sets to the authorized program facility.">Security requirements on IBM z/OS computers</a></div></div></nav></article></main></body></html>

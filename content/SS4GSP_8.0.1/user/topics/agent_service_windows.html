@@ -1,0 +1,45 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="If you installed an agent as a Windows service, you can remove and reinstall the service."><meta name="DC.relation" scheme="URI" content="../../user/topics/configure_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_service_windows"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Removing and reinstalling agents as Windows services</title></head><body id="agent_service_windows"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Removing and reinstalling agents as Windows services </h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f8bb5612-75b1-4d39-97b2-08944846dd40">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc">If you installed an agent as a Windows™ service,
+you can remove and reinstall the service.</p>
+        <section class="section" id="agent_service_windows__section_i1n_lpb_3yb"><h2 id="agent_service_windows__section_i1n_lpb_3yb__title__1" class="title sectiontitle">Old or non-compact agents</h2>
+            
+            <p class="p" id="agent_service_windows__prereq">Before you begin, make sure that the agent is installed as a Windows service. See
+                    <a class="xref" href="../../install/topics/agentInstall.html#agentinstall" title="Installing an agent from the command line involves running a batch file or shell script and specifying information about how the agent connects to the server or agent relay.">Installing agents from the command line</a> for detailed
+                instructions.</p>
+        </section>
+<ol class="ol">
+<li class="li">Open a command prompt as an administrator. </li>
+<li class="li">Go to the <span class="ph filepath">C:\<var class="keyword varname">agent_install</var>\bin\service</span> folder, where
+                    <var class="keyword varname">agent_install</var> is the installed agent location. </li>
+<li class="li">Remove the service by running the following command:
+                <pre class="pre codeblock"><code>_agent.cmd remove <var class="keyword varname">service_name</var></code></pre>Use the name
+                of the service for <code class="ph codeph"><var class="keyword varname">service_name</var></code>. The default
+                service name is <code class="ph codeph"><span class="ph">DevOps Deploy</span> Agent</code>.  </li>
+<li class="li">Reinstall the service by running the following command:
+                    <pre class="pre codeblock"><code>_agent.cmd install <var class="keyword varname">service_name</var> </code></pre><div class="note note note_note" id="agent_service_windows__note_nqy_p1c_3yb"><span class="note__title">Note:</span> While re-installing an agent, the latest PATH variable
+                    values are used. </div>
+            </li>
+</ol>
+        <section class="section" id="agent_service_windows__section_vzm_5zb_3yb"><h2 id="agent_service_windows__section_vzm_5zb_3yb__title__1" class="title sectiontitle">Compact agents</h2>
+            
+            <p class="p">Before you begin, make sure that the agent is installed as a Windows service. See
+                    <a class="xref" href="../../install/topics/agentInstall.html#agentinstall" title="Installing an agent from the command line involves running a batch file or shell script and specifying information about how the agent connects to the server or agent relay.">Installing agents from the command line</a> for detailed
+                instructions.</p>
+            <ol class="ol" id="agent_service_windows__ol_ifx_f1c_3yb">
+                <li class="li">Open a command prompt as an administrator. </li>
+                <li class="li">Go to the <span class="ph filepath">C:\<var class="keyword varname">agent_install</var>\bin\</span> folder,
+                    where <var class="keyword varname">agent_install</var> is the installed agent location. </li>
+                <li class="li">Remove the service by running the following command:
+                    <pre class="pre codeblock" id="agent_service_windows__codeblock_lqy_p1c_3yb"><code>agent.exe uninstall-service</code></pre></li>
+                <li class="li">Reinstall the service by running the following command:
+                        <pre class="pre codeblock" id="agent_service_windows__codeblock_mqy_p1c_3yb"><code>agent.exe install-service</code></pre><p class="p">For
+                        additional commands, see <a class="xref" href="agent_runner_command_lines.html">Agent executable command-line commands</a>.</p></li>
+            </ol>
+        </section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/configure_agents.html" title="After you install an agent for IBM DevOps Deploy (Deploy), you can modify its configuration or create an agent relay to facilitate communication to remote relays.">Agents and agent relay configuration</a></div></div></nav></article></main></body></html>

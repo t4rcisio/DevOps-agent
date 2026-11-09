@@ -1,0 +1,127 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="The for-each-resource-tag application process step lets you run processes for resources selected by tag. This step is only valid in an application process."><meta name="DC.subject" content="PAC, application process step, for-each-resource-tag"><meta name="keywords" content="PAC, application process step, for-each-resource-tag"><meta name="DC.relation" scheme="URI" content="../../reference/topics/pac_application_process_steps.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="pac_step_for_each_tag"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>for-each-resource-tag</title></head><body id="pac_step_for_each_tag"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">for-each-resource-tag</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-0cac57dd-213a-450a-ab96-2fe71eb9833c">Edit online</a></span></div>
+
+
+
+<div class="body refbody"><p class="shortdesc">The for-each-resource-tag application process step lets you run processes for resources
+selected by tag. This step is only valid in an application process. </p>
+<section class="section"><h2 id="pac_step_for_each_tag__title__2" class="title sectiontitle">Format</h2>
+
+<p class="p">The for-each-resource-tag step is called For Each Tag in the <span class="ph">IBM DevOps Deploy (Deploy)</span> web
+                application.</p>
+</section>
+<section class="section">
+<pre class="pre codeblock"><code>for-each-resource-tag step "loop1" is
+    -- define target resource tags; required, repeatable
+    -- before 7.1.1.0, the tag must be specified by internal database ID
+    tag "res-tag-a1"
+    tag "res-tag-a2"
+
+    -- maximum number of tags to target concurrently; optional
+    -- default is 1
+    max-concurrent-tags 1
+
+    -- must contain an embedded 'start' block that works like the top-level version
+    start is
+        start "install-c1"
+    end
+
+    -- contains one or more embedded steps of any type except for other for-each steps
+    install-component step "install-c1" is
+        component "c1"
+        process "deploy"
+        without-status "Active"
+        fail-fast true
+        ignore-child-warnings true
+        max-concurent-processes 43
+
+    -- on success/failure/complete reference steps inside the for-each
+    -- 'finish' refers to the implied finish step inside the for-each
+    on success
+        finish
+    end
+
+-- on success/failure/complete outside an embedded step reference steps in the top-level process
+on success
+    start "next-step"
+end</code></pre>
+</section>
+<section class="section"><h2 id="pac_step_for_each_tag__title__3" class="title sectiontitle">Properties</h2>
+
+</section>
+<table class="table" id="pac_step_for_each_tag__table_ir4_c14_knb"><caption><span class="table--title-label">Table 1. </span><span class="title">For Each Tag properties</span></caption><colgroup><col><col></colgroup><thead class="thead">
+            <tr class="row">
+              <th class="entry align-left" id="pac_step_for_each_tag__table_ir4_c14_knb__entry__1">Field</th>
+              <th class="entry align-left" id="pac_step_for_each_tag__table_ir4_c14_knb__entry__2">Description</th>
+            </tr>
+          </thead><tbody class="tbody">
+            <tr class="row">
+              <td class="entry align-left" headers="pac_step_for_each_tag__table_ir4_c14_knb__entry__1"><span class="ph uicontrol">Name</span></td>
+              <td class="entry align-left" headers="pac_step_for_each_tag__table_ir4_c14_knb__entry__2"><span class="ph">A name for the iteration
+                  container.</span></td>
+            </tr>
+            <tr class="row">
+              <td class="entry align-left" headers="pac_step_for_each_tag__table_ir4_c14_knb__entry__1"><span class="ph uicontrol">Tags</span></td>
+              <td class="entry align-left" headers="pac_step_for_each_tag__table_ir4_c14_knb__entry__2">A list of resource tags to use in the container.
+                The subprocess runs once for each resource tag. You can order the resource tags by
+                dragging and dropping them.</td>
+            </tr>
+            <tr class="row">
+              <td class="entry align-left" headers="pac_step_for_each_tag__table_ir4_c14_knb__entry__1"><span class="ph uicontrol">Max Concurrent Tags</span></td>
+              <td class="entry align-left" headers="pac_step_for_each_tag__table_ir4_c14_knb__entry__2">The maximum number of tags for which to run the
+                subprocess at a time. To run the subprocess on all of the tags at the same time,
+                specify <code class="ph codeph">-1</code>. To run the subprocess on only a few of the tags at a
+                time, as in blue/green deployments or rolling deployments, specify an integer. <p class="p">The server attempts to resolve the value to an integer. If the value does
+      not resolve to an integer, then the <code class="ph codeph">-1</code> value is used by default. You can use
+      a property in this field, as long as the property resolves to an integer.</p></td>
+            </tr>
+          </tbody></table>
+<div class="example"><h2 id="pac_step_for_each_tag__title__5" class="title sectiontitle">Example</h2>
+
+<pre class="pre codeblock"><code>start is
+    start A
+    start B
+end
+
+for-each-resource-tag step A is
+    tag "res-tag-a1"
+    tag "res-tag-a2"
+    tag "res-tag-a3"
+
+    max-concurrent-tags 10
+
+    start is
+        start A1
+    end
+
+    shell step A1 is
+        "echo A1"
+    on success
+        finish
+    end
+on complete
+    finish
+end
+
+for-each-resource-tag step B is
+    tag "res-tag-b1"
+
+    max-concurrent-tags unlimited
+
+    start is
+        start B1
+    end
+
+    shell step B1 is
+        "echo B1"
+    on success
+        finish
+    end
+on complete
+    finish
+end</code></pre>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/pac_application_process_steps.html" title="Lists the various application steps that can be used in a process.">Application process steps</a></div></div></nav></article></main></body></html>

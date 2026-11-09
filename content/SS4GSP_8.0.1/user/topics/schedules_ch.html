@@ -1,0 +1,59 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="IBM DevOps Deploy (Deploy) has a built-in deployment scheduling system for setting regular deployments, or even black-out dates, for your Deployments."><meta name="DC.relation" scheme="URI" content="../../user/topics/deployment_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="schedulingDeployments.d12e2"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Scheduling deployments</title></head><body id="schedulingDeployments.d12e2"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Scheduling deployments</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-701da41b-60d1-49d7-8071-3239e4e988fc">Edit online</a></span></div>
+
+<div class="body"><p class="shortdesc"><span class="ph">IBM DevOps Deploy (Deploy)</span> has a
+    built-in deployment scheduling system for setting regular deployments, or even black-out dates,
+    for your Deployments.</p>
+<p class="p">Deployments for an individual application are scheduled on a per-environment
+basis, set when you run a deployment of a snapshot or deployment process.
+Black-out dates are set within the individual environments.</p>
+<p class="p"><span class="ph">Deploy</span> stores
+all times relative to Coordinated Universal Time and displays them
+based on your time zone. A process that you schedule during Daylight
+Saving Time moves back an hour after Daylight Saving Time ends.</p>
+
+<p class="p">To set up a scheduled deployment, click <span class="ph uicontrol">Applications</span>, click your
+application, and next to the environment, click <span class="ph uicontrol">Request Process</span><img class="image" src="../images/request_process_icon.gif" alt="">, and in the <span class="keyword wintitle">Create Deployment</span> window, go to <span class="ph uicontrol">Schedule
+Deployment</span>, and disable the <span class="ph uicontrol">Run Now</span> option.</p>
+<p class="p">When you disable the <span class="ph uicontrol">Run Now</span> option, the <span class="ph uicontrol">Date</span> and
+<span class="ph uicontrol">Time</span> fields appear for you to specify the date and time for the deployment to
+run. The <span class="ph uicontrol">Recurrence Pattern</span> setting deploys the application on a regular
+schedule. For example, if you are practicing continuous delivery, the <code class="ph codeph">Daily</code> option
+deploys the application to the target environment every day.</p>
+<p class="p">After you schedule the deployment, it is added to the calendar. There, if you click the scheduled
+      deployment, you can edit, delete, or investigate the deployment. You can also add scheduled
+      deployments directly from the calendar by opening the calendar and clicking
+        <span class="ph uicontrol">Schedule Process</span>.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> Do not change the starting time of a scheduled deployment. Instead,
+delete the recurring deployment and recreate it.</div>
+
+<p class="p">A <dfn class="term">blackout</dfn> is a set per-environment, per-application.
+After the blackout is set, no deployments or snapshots can be scheduled
+to occur in that environment. Any previously scheduled deployments
+to the environment fail if they fall within the blackout date you
+set. To set up a blackout, go to (<span class="ph menucascade"><span class="ph uicontrol">Application</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Environments</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Calendar</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Blackout</span></span>). If you must set
+blackouts for more than one environment, you must set a separate blackout
+for each environment. <span class="ph">Deploy</span> prompts
+you to give the dates and times for the blackout.</p>
+
+<div class="p">
+<table class="table frame-all" id="schedulingDeployments.d12e2__table_jxr_cf4_dlb"><caption><span class="table--title-label">Table 1. </span><span class="title">Calendar hotkey shortcuts</span></caption><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry colsep-1 rowsep-1" id="schedulingDeployments.d12e2__table_jxr_cf4_dlb__entry__1">Keyboard shortcut</th>
+<th class="entry colsep-1 rowsep-1" id="schedulingDeployments.d12e2__table_jxr_cf4_dlb__entry__2">Function</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="schedulingDeployments.d12e2__table_jxr_cf4_dlb__entry__1">Double Click or Shift + Click</td>
+<td class="entry colsep-1 rowsep-1" headers="schedulingDeployments.d12e2__table_jxr_cf4_dlb__entry__2">Brings up Schedule Deployment for the clicked date cell.</td>
+</tr>
+<tr class="row">
+<td class="entry colsep-1 rowsep-1" headers="schedulingDeployments.d12e2__table_jxr_cf4_dlb__entry__1">Ctrl + Click or Alt + Click inside an environment calendar</td>
+<td class="entry colsep-1 rowsep-1" headers="schedulingDeployments.d12e2__table_jxr_cf4_dlb__entry__2">Enables you to set blackout date by dragging the mouse and releasing.</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/deployment_ov.html" title="Learn how to deploy applications in IBM DevOps Deploy (Deploy).">Deploying</a></div></div></nav></article></main></body></html>

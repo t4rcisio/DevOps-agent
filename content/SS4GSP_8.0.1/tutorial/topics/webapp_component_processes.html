@@ -1,0 +1,644 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Component processes describe automated tasks that run on components. Component processes can deploy, install, uninstall, update, or run other tasks on a component."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/webapp_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="webapp_component_processes"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 2: Creating component processes</title></head><body id="webapp_component_processes"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 2: Creating component processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3379e31c-73d1-44b0-ba2b-fc5bf4621e6b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Component processes describe automated tasks that run on components. Component processes
+can deploy, install, uninstall, update, or run other tasks on a component.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_component_processes__context__1">About this task</h2></div>
+<div class="p" id="webapp_component_processes__process_types">There are three types of processes:<ul class="ul">
+<li class="li">Generic processes run outside the context of components or applications. Generic processes are
+shown on the top-level <span class="ph uicontrol">Processes</span> tab. You can use generic processes in these
+instances, for example:<ul class="ul" id="webapp_component_processes__gen_process_example">
+<li class="li">In conjunction with a number of different component processes that do not fit well into a
+component template</li>
+<li class="li">When you want to run processes that directly affect <span class="ph">IBM DevOps Deploy (Deploy)</span> agents that are unrelated to component, such as changing the
+                                agent configuration</li>
+</ul></li>
+<li class="li">Application processes run within the context of applications. In many cases, application
+processes call component processes. For example, an application process can call the component
+processes that deploy their associated components.</li>
+<li class="li">Component processes run tasks on a single component, such as deploying it, uninstalling it, or
+running configuration tasks on it.</li>
+</ul></div>
+<p class="p" id="webapp_component_processes__process_description">Processes are lists of steps and connections between those steps. Each
+step is an individual command that runs on a target computer. Steps can manipulate files, run system
+commands, download files, and run programs. Plug-ins contribute most of these steps; plug-ins are
+available that work with many different types of software. </p>
+<p class="p">Each component must have at least one component process to deploy or install the component. In
+this lesson, you create a deployment process for each of the three components. Later, you create an
+application process that calls these component processes to deploy each component.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.1 SS4GSP_8.0.1" href="../../tutorial/topics/webapp_abstract.html" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">Deploying a simple web application</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" lang="en-us" id="process-web">
+<h2 class="title topictitle2" id="ariaid-title2">Creating a component process for the web component</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3379e31c-73d1-44b0-ba2b-fc5bf4621e6b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">The component process for the web component downloads the most recent version of the
+component artifacts and puts those artifacts in the correct folder.</p>
+<section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskprocess-web__context__1">About this task</h3></div>Follow these steps to create the component process that deploys the web
+component:</section>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskprocess-web__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">On the <span class="ph uicontrol">Components</span> tab, click the <span class="ph uicontrol">JPetStore-WEB</span>
+component.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Processes</span>, and then click <span class="ph uicontrol">Create
+Process</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Process</span> window, specify the name to be <kbd class="ph userinput">Deploy
+component</kbd>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Process Type</span> list, select <span class="ph uicontrol">Deployment</span>. </span>
+<div class="itemgroup info">This list has other options for processes that uninstall or configure components.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Accept the default values for the other properties, and click
+<span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup stepresult">The process opens in the process editor. This editor shows the steps in the process in a
+graphical form, as a flowchart. The <span class="ph uicontrol">Start</span> and <span class="ph uicontrol">Finish</span>
+boxes represent the beginning and the end of the process. From here, you add steps to the process
+and link them between the <span class="ph uicontrol">Start</span> and <span class="ph uicontrol">Finish</span> steps to
+show the order of the steps.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to clean any files out of the working directory.</span>
+<div class="itemgroup info">The process runs within a working directory. To ensure that you are using the most recent
+version of the files in the web component, run a command to clean the working directory:</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">At the left of the process editor, in the step palette, expand
+<span class="ph uicontrol">Utilities</span>.</span>
+<div class="itemgroup info">The step palette menu shows the available steps. You can explore the palette categories to
+find steps, or you can type in the search box at the top of the window.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Under <span class="ph uicontrol">FileUtils</span>, click and drag the <span class="ph uicontrol">Delete Files and
+Directories</span> step to the process editor.</span>
+<div class="itemgroup stepresult">The step is inserted between the <span class="ph uicontrol">Start</span> and
+<span class="ph uicontrol">Finish</span> steps. The inserted step is automatically connected to these steps
+<span class="keyword wintitle">Edit Properties</span> window opens, showing the properties for the step. Some of
+these properties are unique to the step and others are the same for all steps.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click the <span class="ph uicontrol">Edit</span> icon <img class="image" src="../images/edit_icon.gif">, and the
+<span class="keyword wintitle">Edit Properties</span> window opens. In the <span class="ph uicontrol">Name</span> field, specify
+the name to be <kbd class="ph userinput">Clean working directory</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Base Directory</span> field, specify a single period
+(<code class="ph codeph">.</code>).</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Include</span> field, specify the following code: </span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>**/*</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Accept the defaults for the other properties and then click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">The new step is displayed as a box in the process editor. The process editor looks like
+the following figure:<br><img class="image" src="../images/webapp_component_processes_g.gif" alt="The new process with one step in the flow"><br></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to download the latest version of the component artifacts.</span>
+<div class="itemgroup info">The <span class="ph uicontrol">Download Artifacts</span> step is used in most deployment processes. This
+step downloads the specified version of the component artifacts to the target computer. When you run
+the process, you will specify whether to use the most recent version of the component artifacts or a
+specific version.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep">
+<div class="note tip note_tip"><span class="note__title">Tip:</span> When you drag the first step into a process editor, that step is automatically
+connected to the <span class="ph uicontrol">Start</span> and <span class="ph uicontrol">Finish</span> steps. When you drag
+subsequent steps into the process editor, place the cursor in the target position so that the
+connection arrow is highlighted, and then place the step. The new step is automatically connected.
+You can always change step locations and manually connect steps later.</div>
+<span class="ph cmd">In the step palette, expand <span class="ph uicontrol">Repositories</span>, and under Artifact/<span class="ph">Deploy</span>, drag the <span class="ph uicontrol">Download Artifacts</span> step to the process editor.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Click the <span class="ph uicontrol">Edit</span> icon <img class="image" src="../images/edit_icon.gif">, and in the
+<span class="keyword wintitle">Edit Properties</span> window, accept the default values; then, click
+<span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to remove the old web content from the server:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Expand <span class="ph uicontrol">Utilities</span>, and under FileUtils, drag another <span class="ph uicontrol">Delete
+Files and Directories</span> step to the process editor.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Edit Properties</span> window (click the <span class="ph uicontrol">Edit</span>
+icon), and specify the name as <kbd class="ph userinput">Remove old content</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Base Directory</span> field, specify the following directory:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>webapps/${p:environment/tomcat.contextroot}</code></pre>The variable represents the
+location where Tomcat stores your deployed files. You specify a value for this variable
+later.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Include</span> field, specify the following directory:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>images</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Working Directory</span> field, specify the following variable:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>${p:environment/tomcat.home}</code></pre>This variable represents the main folder of
+the Tomcat web server. You will specify a value for this variable later.</div>
+</li>
+
+<li class="li substep substepexpand">
+<span class="ph cmd">Accept the default values in the other fields, and click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to deploy the new content to the server.</span>
+<div class="itemgroup info">This step copies the component artifacts to the application server.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Expand <span class="ph uicontrol">Utilities</span> and under <span class="ph uicontrol">FileUtils</span>, drag a
+<span class="ph uicontrol">Move Directory</span> step to the process editor.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Edit Properties</span> window, specify the name to be <kbd class="ph userinput">Deploy
+new content</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click the <span class="ph uicontrol">Edit</span> icon, and in the <span class="ph uicontrol">Source Directory</span>
+field, specify a single period (<code class="ph codeph">.</code>).</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Destination Directory</span> field, specify the following
+directory:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>${p:environment/tomcat.home}/webapps/${p:environment/tomcat.contextroot}/</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Include Files</span> field, specify the following code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>images/*</code></pre>
+</div>
+</li>
+
+<li class="li substep substepexpand">
+<span class="ph cmd">Accept the default values in the other fields and click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">Now the process has four steps, as in the following figure:<br><img class="image" src="../images/webapp_component_processes_a.gif" alt="The four steps of the process, which are placed in order between the Start and Finish steps"><br></div>
+</li></ol><div class="li stepsection">Each step has three icons at the upper right corner of the step. The
+<span class="ph uicontrol">Edit</span> icon <img class="image" src="../images/edit_icon.gif" alt=""> opens the <span class="keyword wintitle">Edit Properties</span> window. The X icon <img class="image" src="../images/delete_step.gif" alt=""> deletes the step. The Copy icon <img class="image" src="../images/copy_icon.gif" alt=""> copies the step to the <span class="ph uicontrol">Clipboard</span> folder so you can duplicate
+it.<div class="p">Also, if you move the mouse over a step, an arrow icon is displayed over the center of the
+step. This icon is used to manually create links between steps.<br><img class="image" src="../images/webapp_component_processes_b.gif" alt="Displaying the arrow button at the center of the step"><br></div></div><ol class="ol steps" start="10"><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If your steps are not connected or are not connected in the correct order, you can connect the
+steps manually:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">If the steps are not in the correct order, remove the connection link between steps by clicking
+the <span class="ph uicontrol">X</span> icons<img class="image" src="../images/edit_proc_connex.gif"> on any of the link
+arrows; then, rearrange the steps in the correct order.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Move the mouse over the <span class="ph uicontrol">Start</span> step, and drag the arrow icon to the
+<code class="ph codeph">Clean working directory</code> step.</span>
+<div class="itemgroup stepresult">The arrow between these steps represents the flow of activity from one step to another,
+as in the following figure:<br><img class="image" src="../images/webapp_component_processes_c.gif" alt="The link that connects the Start step to the Clean working directory step"><br></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Similarly, drag an arrow from the <code class="ph codeph">Clean working directory</code> step to the
+<code class="ph codeph">Download Artifacts</code> step.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Drag an arrow from the <code class="ph codeph">Download Artifacts</code> step to the <code class="ph codeph">Remove old
+content</code> step.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Drag an arrow from the <code class="ph codeph">Remove old content</code> step to the <code class="ph codeph">Deploy new
+content</code> step.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Drag an arrow from the <code class="ph codeph">Deploy new content</code> step to the <code class="ph codeph">Finish</code>
+step.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">You can connect steps in a sequence like these steps, or you can run steps in parallel
+with each other by creating more links. However, processes always start with the
+<span class="ph uicontrol">Start</span> step and end with the <span class="ph uicontrol">Finish</span> step. The sequence
+of steps in this process is as follows:<ol class="ol" type="a">
+<li class="li"><code class="ph codeph">Start</code></li>
+<li class="li"><code class="ph codeph">Clean working directory</code></li>
+<li class="li"><code class="ph codeph">Download Artifacts</code></li>
+<li class="li"><code class="ph codeph">Remove old content</code></li>
+<li class="li"><code class="ph codeph">Deploy new content</code></li>
+<li class="li"><code class="ph codeph">Finish</code></li>
+</ol></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the process by clicking <span class="ph uicontrol">Save</span>.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskprocess-web__result__1">Results</h3></div>The complete component process for the web component looks like the following figure:<br><img class="image" src="../images/webapp_component_processes_d.gif" alt="The complete component process, which removes the old version of the artifacts and deploys the new version to the application server"><br></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" lang="en-us" id="process-app">
+<h2 class="title topictitle2" id="ariaid-title3">Creating a component process for the application component</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3379e31c-73d1-44b0-ba2b-fc5bf4621e6b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">The application component consists of a single WAR file. This component process downloads
+the most recent version of the WAR file, updates values in the file, and deploys the file on the
+application server.</p>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskprocess-app__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Components</span> tab, click the <span class="ph uicontrol">JPetStore-APP</span>
+component.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Processes</span>, and then click <span class="ph uicontrol">Create
+Process</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Process</span> window, specify the name as <kbd class="ph userinput">Deploy
+component</kbd>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Process Type</span> list, select <span class="ph uicontrol">Deployment</span>.
+</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Accept the default values for the other properties, and click
+<span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup info"></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the process editor, add a step to clean the working directory.</span>
+<div class="itemgroup info">As you did for the web component, add a <span class="ph uicontrol">Delete Files and Directories</span>
+step named <kbd class="ph userinput">Clean working directory</kbd>, and specify a period in the
+<span class="ph uicontrol">Base Directory</span> field and <code class="ph codeph">**/*</code> in the
+<span class="ph uicontrol">Include</span> field.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to download the artifacts.</span>
+<div class="itemgroup info">As you did for the web component, add a <code class="ph codeph">Download Artifacts</code> step, and accept
+the default properties.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to extract the WAR file.</span>
+<div class="itemgroup info">You must extract the WAR file so you can update a property file with the database connection
+information.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">In the list of available steps, expand <span class="ph uicontrol">Utilities</span>, and under FileUtils,
+drag an <span class="ph uicontrol">Unzip</span> step to the process editor.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Specify the name as <kbd class="ph userinput">Expand WAR</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Extract directory</span> field, specify the following code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>./JPetStore_expanded</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">.zip files</span> field, specify the following file: </span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>JPetStore.war</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Include Files</span> field, specify the following code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>**/*</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to update the property file with the location of the database:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">In the list of available steps, expand <span class="ph uicontrol">Utilities</span>, and from FileUtils add
+an <span class="ph uicontrol">Update Java Properties File</span> step to the process editor.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Specify the name as <kbd class="ph userinput">Update property file</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Directory Offset</span> field, specify the following folder:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>./JPetStore_expanded/WEB-INF/classes/properties</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">File Includes</span> field, specify the following file:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>database.properties</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Add/Update properties</span> field, specify the following code:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>url=${p:environment/db.url}</code></pre>This code updates the
+<span class="keyword parmname">url</span> property in the property file with the location of the database. The
+<code class="ph codeph">${p:environment/db.url}</code> code is a variable that represents the location of the
+database component when the application is deployed.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to update the WAR file with the new property file:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">From the list of available steps, expand the <span class="ph uicontrol">Utilities</span>, and from
+FileUtils, add a <span class="ph uicontrol">Create .zip File</span> step to the process editor.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Specify the name as <kbd class="ph userinput">Update WAR</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+                            <span class="ph cmd">In the <span class="ph uicontrol">.zip File Name</span> field, specify the
+                                following file:</span>
+                            <div class="itemgroup info">
+                                <pre class="pre codeblock" id="process-app__codeblock_x25_zfy_3hc"><code>JPetStore.war</code></pre>
+                            </div>
+                        </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Base Directory</span> field, specify the following folder:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>./JPetStore_expanded</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Include</span> field, specify the following code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>**/*</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Select the <span class="ph uicontrol">Update Existing</span> check box.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to start Tomcat:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">In the list of available steps, expand <span class="ph uicontrol">Application Server</span>, and from
+Java/Tomcat, add a <span class="ph uicontrol">Start Tomcat</span> step to the process editor.</span>
+<div class="itemgroup info">If this step is not in the tree, install the Tomcat plug-in as described in the <a class="xref" href="webapp_intro.html#webapp_intro__prereqs">Prerequisites</a> for this tutorial.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Accept the default name <kbd class="ph userinput">Start Tomcat</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Launcher</span> field, specify the following code:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>${p:environment/tomcat.start}</code></pre>This code is another variable that
+represents the command to start Tomcat.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Startup timeout (in seconds)</span> field, specify
+<kbd class="ph userinput">60</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Port</span> field, specify the port <kbd class="ph userinput">8081</kbd>.</span>
+</li>
+                        <li class="li substep substepexpand">
+                            <span class="ph cmd">In the <span class="ph uicontrol">Catalina Home</span> field, specify the home
+                                directory where the Apache Tomcat is installed. </span>
+                        </li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to remove any previous versions of the application:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">In the list of available steps, expand <span class="ph uicontrol">Application Server</span>, and from
+Java/Tomcat, add an <span class="ph uicontrol">Undeploy Application</span> step to the process editor. </span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Accept the default name <kbd class="ph userinput">Undeploy Application</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Tomcat Manager URL</span> field, specify the following code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>${p:environment/tomcat.manager.url}</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Tomcat Manager User Name</span> field, specify the user name for the
+Tomcat server.</span>
+<div class="itemgroup info" id="process-app__manager_username">You specified this user name and its password in <a class="xref" href="webapp_configure_agent.html" title="To deploy applications with IBM DevOps Deploy (Deploy), you need one or more agents. The server uses the agents to deploy the application components on target systems.">Configuring the agent and target system</a>. If you used the code examples from that topic, the user name
+and password are <kbd class="ph userinput">tomcatmanager</kbd>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Tomcat Manager Password</span> field, specify the password for the
+Tomcat server.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Context Name</span> field, specify the following context name, including
+the preceding forward slash:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>/${p:environment/tomcat.contextroot}</code></pre>Ensure that you include a slash
+(<kbd class="ph userinput">/</kbd>) before the variable.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to deploy the updated WAR file to the application server:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">In the list of available steps, expand <span class="ph uicontrol">Application Server</span>, and from
+Java/Tomcat, add a <span class="ph uicontrol">Deploy Application</span> step to the process editor.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Accept the default name <kbd class="ph userinput">Deploy Application</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Tomcat Manager URL</span> field, specify the following code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>${p:environment/tomcat.manager.url}</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Tomcat Manager User Name</span> field, specify the user name for the
+Tomcat server.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Tomcat Manager Password</span> field, specify the password for the
+Tomcat server.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Context Name</span> field, specify the following context name:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>/${p:environment/tomcat.contextroot}</code></pre>Ensure that you include a slash
+(<kbd class="ph userinput">/</kbd>) before the variable.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">War File Path</span> field, specify the following path:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>./JPetStore.war</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If required, arrange and connect the steps in the following order:</span>
+<div class="itemgroup info">
+<ol class="ol" type="a">
+<li class="li"><code class="ph codeph">Start</code></li>
+<li class="li"><code class="ph codeph">Clean working directory</code></li>
+<li class="li"><code class="ph codeph">Download Artifacts</code></li>
+<li class="li"><code class="ph codeph">Expand WAR</code></li>
+<li class="li"><code class="ph codeph">Update Property File</code></li>
+<li class="li"><code class="ph codeph">Update WAR</code></li>
+<li class="li"><code class="ph codeph">Start Tomcat</code></li>
+<li class="li"><code class="ph codeph">Undeploy Application</code></li>
+<li class="li"><code class="ph codeph">Deploy Application</code></li>
+<li class="li"><code class="ph codeph">Finish</code></li>
+</ol>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Change the conditional flag on the link between the <code class="ph codeph">Undeploy Application</code> and
+<code class="ph codeph">Deploy Application</code> steps to <code class="ph codeph">both</code> by clicking the green check mark
+on the connection until it turns to a gray circle, as shown in the following figure:</span>
+<div class="itemgroup info">
+<br><img class="image" src="../images/webapp_component_processes_h.gif" alt="Clicking the green check mark between the Undeploy Application and Deploy Application steps to turn it to a gray circle"><br>
+<div class="p">Each connection from one step to another has a <dfn class="term">conditional flag</dfn>. The conditional
+flag specifies a condition for the connection. Three conditional flags are available:<ul class="ul">
+<li class="li">By default, the conditional flag on each connection is set to <code class="ph codeph">success</code>, which is
+represented by a green check mark. The process follows these connections when the step
+succeeds.</li>
+<li class="li">The conditional flag <code class="ph codeph">fail</code> is represented by an exclamation point (!) in a red
+field. The process follows these connections when steps fail.</li>
+<li class="li">The conditional flag <code class="ph codeph">both</code> is represented by a gray circle. The process follows
+these connections regardless of whether a step succeeds or fails.</li>
+</ul>The <code class="ph codeph">Undeploy Application</code> step fails if no previous versions of the application
+are installed. In this case, setting the conditional flag on the connection to <code class="ph codeph">both</code>
+specifies that the process keeps running regardless of whether the step fails or succeeds.</div>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the process.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskprocess-app__result__1">Results</h3></div>The complete component process for the application component looks like the following
+figure:<br><img class="image" src="../images/webapp_component_processes_e.gif" alt="The complete component process that deploys the application"><br></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title4" lang="en-us" id="process-db">
+<h2 class="title topictitle2" id="ariaid-title4">Creating a component process for the database component</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3379e31c-73d1-44b0-ba2b-fc5bf4621e6b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">The deployment process for the database component updates the database with sample
+values.</p>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskprocess-db__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Components</span> tab, click the <code class="ph codeph">JPetStore-DB</code>
+component.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">Processes</span>, and then click <span class="ph uicontrol">Create
+Process</span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Process</span> window, specify the name as <kbd class="ph userinput">Deploy
+component</kbd>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Process Type</span> list, select <span class="ph uicontrol">Deployment</span>.
+</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Accept the default values for the other properties, and click
+<span class="ph uicontrol">Save</span>.</span>
+<div class="itemgroup info"></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the process editor, add a step to download the artifacts.</span>
+<div class="itemgroup info">As you did for the web component, add a <code class="ph codeph">Download Artifacts</code> step, and accept
+the default properties.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add a step to update the database:</span>
+<div class="itemgroup info">You must create a database version table on every target database either manually before you
+run the DBUpgrader plug-in steps for the first time or as part of the first change.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">In the list of available steps, expand <span class="ph uicontrol">Database</span>, and under DBUpgrader,
+add an <span class="ph uicontrol">Upgrade DB</span> step to the process editor.</span>
+<div class="itemgroup info">If this step is not in the tree, install the database upgrade plug-in as described in the
+<a class="xref" href="webapp_intro.html#webapp_intro__prereqs">Prerequisites</a> for this tutorial.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Edit Properties</span> window, in the <span class="ph uicontrol">Name</span> field,
+accept the default value of <kbd class="ph userinput">Upgrade DB</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Driver Classname</span> field, specify the following class:</span>
+<div class="itemgroup info">
+    <pre class="pre codeblock"><code>com.mysql.cj.jdbc.Driver</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">DB Driver Jar</span> field, specify the following path:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>lib/mysql-connector-j-9.4.0.jar</code></pre>This file is provided in the source code
+                                for the component.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">URL</span> field, specify the following variable:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>${p:environment/db.url}</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">User</span> field, specify the user ID of the database user.</span>
+<div class="itemgroup info" id="process-db__default_db_user">If you used the examples in <a class="xref" href="webapp_configure_agent.html" title="To deploy applications with IBM DevOps Deploy (Deploy), you need one or more agents. The server uses the agents to deploy the application components on target systems.">Configuring the agent and target system</a>,
+the user ID is <kbd class="ph userinput">jpetstore</kbd>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Password</span> field, specify the password of the database user.</span>
+<div class="itemgroup info" id="process-db__default_db_pass">If you used the examples in <a class="xref" href="webapp_configure_agent.html" title="To deploy applications with IBM DevOps Deploy (Deploy), you need one or more agents. The server uses the agents to deploy the application components on target systems.">Configuring the agent and target system</a>,
+the password is <kbd class="ph userinput">jppwd</kbd>.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">SQL File path</span> field, specify a single period: <code class="ph codeph">.</code>
+.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">SQL File Include</span> field, specify the extension
+<code class="ph codeph">*.xml</code> .</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Current Version SQL</span> field, specify the following SQL code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>SELECT VER FROM DB_VERSION WHERE RELEASE_NAME = ?</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Delete Version SQL</span> field, specify the following SQL code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>DELETE FROM DB_VERSION WHERE RELEASE_NAME = ?</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Update Version SQL</span> field, specify the following SQL code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>INSERT INTO DB_VERSION (RELEASE_NAME,VER) VALUES(?,?)</code></pre>
+</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">If required, arrange and connect the steps in the following order:</span>
+<div class="itemgroup info">
+<ol class="ol" type="a">
+<li class="li"><code class="ph codeph">Start</code></li>
+<li class="li"><code class="ph codeph">Download Artifacts</code></li>
+<li class="li"><code class="ph codeph">Upgrade DB</code></li>
+<li class="li"><code class="ph codeph">Finish</code></li>
+</ol>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Save the process.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskprocess-db__result__1">Results</h3></div>The complete component process for the database component looks like the following
+                    figure:<br><img class="image" src="../images/webapp_component_processes_f.gif" alt="The complete component process that deploys the database"><br><p class="p">In this lesson, you created component processes to deploy the components.
+                    </p><p class="p">You can use component processes to automate many different tasks on
+                    components. However, you generally do not run component processes directly; in
+                    most cases, you add them to application processes. Later in this tutorial, you
+                    will create an application process for these three component processes.</p><p class="p" data-hd-otherprops="ibm">Processes consist of steps, which are provided by plug-ins. To
+                    see a list of plug-ins that are available, and for documentation on those
+                    plug-ins and steps, see: <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/" target="_blank">Deploy Plug-ins</a>.</p></section>
+</div>
+</article>
+</article></main></body></html>

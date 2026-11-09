@@ -1,0 +1,62 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The z/OS search feature is available for any application that contains a z/OS type component. Search is performed for a specific file in the artifacts belonging to the z/OS components deployed to that environment."><meta name="DC.relation" scheme="URI" content="../../user/topics/deploying_zos.html"><meta name="DC.relation" scheme="URI" content="reports_deploy_intro.html#deploymentReports.d12e2/dt_e4x_yfq_wwb"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="zos_search_inventory"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Searching the z/OS environment inventory</title></head><body id="zos_search_inventory"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Searching the z/OS environment inventory</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fa4bec9f-112d-48d1-b3c0-170861ac8c55">Edit online</a></span></div>
+
+
+
+<div class="body taskbody"><p class="shortdesc">The z/OS search feature is available for any application that contains a z/OS type
+component. Search is performed for a specific file in the artifacts belonging to the z/OS components
+deployed to that environment.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_search_inventory__context__1">About this task</h2></div>
+<p class="p">Files in the z/OS environment can be identified with the <span class="ph uicontrol">Search Z
+Artifacts</span> option available in the z/OS application environment. </p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskzos_search_inventory__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Navigate to the environment of interest (<span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">application name</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Environments</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Environment: <var class="keyword varname">environment name</var></span></span>.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">From the Properties ellipsis for the environment, select <span class="ph uicontrol">Search Z
+Artifacts</span>.</span>
+<div class="itemgroup info"><img class="image" src="../images/zOS_search.jpg" alt="Search Z Artifacts selection"></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Enter the name of the file to search in the <span class="keyword wintitle">Search Z Artifacts</span> dialog,
+then click <span class="ph uicontrol">Search.</span> Results are returned in batches. A maximum of 1000 results
+are returned per batch, beginning with the most recent version deployed. If the file is not found in
+the most recent batch, a file not found message is displayed. </span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Select <span class="ph uicontrol">Search Earlier Inventory</span> to return the next 1000 most recent
+instances of the file. Subsequent results can be returned until there are no more versions to
+search.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Note:</span> 
+<p class="p">The batch size of returned results is configurable and can be changed by adding the property
+<span class="keyword cmdname">zos.search.batch.size=&lt;number&gt;</span> to the servers
+<span class="ph filepath">installed.properties</span> file.</p>
+</div>
+<p class="p">The following information is presented for each batch returned in the search results.</p>
+</div>
+<table border="1" frame="hsides" rules="rows" cellpadding="4" cellspacing="0" summary="" class="simpletable choicetable choicetableborder"><colgroup><col style="width:29.154518950437314%"><col style="width:70.8454810495627%"></colgroup><thead><tr class="sthead chhead"><th scope="col" class="stentry choptionhd" style="vertical-align:bottom;text-align:left;">Option</th><th scope="col" class="stentry chdeschd" style="vertical-align:bottom;text-align:left;">Description</th></tr></thead><tbody><tr class="strow chrow">
+<th style="vertical-align:top;" scope="row" class="stentry choption">Name</th>
+<td style="vertical-align:top;" class="stentry chdesc">The name of the file, as imported into CodeStation. The file names are group according to
+the PDS (container) on the mainframe where they are located.</td>
+</tr><tr class="strow chrow">
+<th style="vertical-align:top;" scope="row" class="stentry choption">Deploy Type</th>
+<td style="vertical-align:top;" class="stentry chdesc">The type of resource the file was mapped to when deployed. </td>
+</tr><tr class="strow chrow">
+<th style="vertical-align:top;" scope="row" class="stentry choption">Inputs</th>
+<td style="vertical-align:top;" class="stentry chdesc">The inputs to the artifact (like copybooks) provided in the shiplist file.</td>
+</tr><tr class="strow chrow">
+<th style="vertical-align:top;" scope="row" class="stentry choption">Component</th>
+<td style="vertical-align:top;" class="stentry chdesc">The name of the component that belongs to the file.</td>
+</tr><tr class="strow chrow">
+<th style="vertical-align:top;" scope="row" class="stentry choption">Version</th>
+<td style="vertical-align:top;" class="stentry chdesc">The version the file was deployed in.</td>
+</tr><tr class="strow chrow">
+<th style="vertical-align:top;" scope="row" class="stentry choption">Deployment Time</th>
+<td style="vertical-align:top;" class="stentry chdesc">The calendar date and time the file was deployed as mm/dd/yyy and hh:mm (12-hour clock).
+</td>
+</tr></tbody></table>
+</li></ol></section>
+</div>
+    <nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/deploying_zos.html" title="Use the toolkit to deploy to the IBM z/OS platform.">Deploying components to the z/OS platform</a></div></div><div class="linklist relinfo"><strong>Related information</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="reports_deploy_intro.html#deploymentReports.d12e2__dt_e4x_yfq_wwb"> z/OS search</a></li></ul></div></nav>
+</article></main></body></html>

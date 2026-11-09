@@ -1,0 +1,177 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can migrate your IBM DevOps Deploy (Deploy) server from an on-premises production installation to a containerized instance that runs in a Kubernetes or Openshift cluster."><meta name="DC.subject" content="migrate, Kubernetes, openshift, container, OpenShift, Helm, appdata"><meta name="keywords" content="migrate, Kubernetes, openshift, container, OpenShift, Helm, appdata"><meta name="DC.relation" scheme="URI" content="../../user/topics/c_node_upgrading.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="migrate_onpremtocloud"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Migrating the server to Kubernetes/Openshift</title></head><body id="migrate_onpremtocloud"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Migrating the server to Kubernetes/Openshift </h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-f266da76-baed-4d57-956c-026676c6557e">Edit online</a></span></div>
+    
+
+    
+<div class="body taskbody"><p class="shortdesc">You can migrate your <span class="ph">IBM DevOps Deploy (Deploy)</span> server from an
+        on-premises production installation to a containerized instance that runs in a Kubernetes or
+        Openshift cluster.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_onpremtocloud__prereq__1">Before you begin</h2></div>
+            <p class="p" data-hd-otherprops="ibm"><strong class="ph b">Prerequisites:</strong></p>
+            <ul class="ul" id="migrate_onpremtocloud__ul_mzc_1mc_bxb">
+                <li class="li">Open a pre-emptive guidance case with <span class="ph">Deploy</span>
+                    support. This case serves as a forum for support to help you answer any
+                    questions or concerns that arise from the cloning process.</li>
+                <li class="li">Stop the <span class="ph">Deploy</span>
+                    production server. Plan downtime for a duration of the database and application
+                    data cloning process, and have a running containerized <span class="ph">Deploy</span>
+                    server instance.</li>
+            </ul>
+        </section>
+        <section class="section context" id="migrate_onpremtocloud__context_dsr_lmc_bxb"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_onpremtocloud__context_dsr_lmc_bxb">About this task</h2></div>
+            <p class="p" data-hd-otherprops="ibm"><strong class="ph b">Procedure:</strong></p>
+            <p class="p">You create a new environment by cloning the data from the current production
+                environment and referring to the cloned data in the containerized <span class="ph">Deploy</span> server
+                installation. To migrate your <span class="ph">Deploy</span> server
+                from an on-premises site to a containerized instance follow these steps:</p>
+        </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskmigrate_onpremtocloud__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+                <span class="ph cmd">Clone the <span class="ph">Deploy</span>
+                    database.</span>
+                <div class="itemgroup info">Contact your database administrators (DBAs) to clone the database. The DBA
+                    takes a backup of the current database to a new location that can be accessed
+                    from pods running in the Kubernetes cluster. If more assistance is needed than
+                    your DBA can provide, use the support case for help.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Clone the application data folder.</span>
+                <div class="itemgroup info">Most application data folders have mount points to an external file system.
+                    Copy the contents of your application data folder to a new directory so that
+                    your cloned server does not use the same application data folder as your on-prem
+                    production server. <div class="note note note_note" id="migrate_onpremtocloud__note_yvn_xmc_bxb"><span class="note__title">Note:</span> 
+                        <ul class="ul" id="migrate_onpremtocloud__ul_tnj_ymc_bxb">
+                            <li class="li">If the directory is contained in a network filesystem like NFS, you
+                                should be able to refer to that network path when you create the
+                                Kubernetes persistent volume resource. To create an NFS PV and PVC,
+                                see the following example of a YAML file
+                                format.<pre class="pre codeblock language-yml" id="migrate_onpremtocloud__codeblock_rwf_qtm_cxb"><code>apiVersion: v1
+kind: PersistentVolume
+metadata:
+&nbsp; name: deploy-appdata-vol
+&nbsp; labels:
+&nbsp;&nbsp;&nbsp; volume: deploy-appdata-vol
+spec:
+&nbsp; capacity:
+&nbsp;&nbsp;&nbsp; storage: 20Gi
+&nbsp; accessModes:
+&nbsp;&nbsp;&nbsp; - ReadWriteOnce
+&nbsp; nfs:
+&nbsp;&nbsp;&nbsp; server: 192.168.1.17
+&nbsp;&nbsp;&nbsp; path: /volume1/k8/deploy-appdata
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+&nbsp; name: deploy-appdata-volc
+spec:
+&nbsp; storageClassName: ""
+&nbsp; accessModes:
+&nbsp;&nbsp;&nbsp; - "ReadWriteOnce"
+&nbsp; resources:
+&nbsp;&nbsp;&nbsp; requests:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; storage: 20Gi
+&nbsp; selector:
+&nbsp;&nbsp;&nbsp; matchLabels:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; volume: deploy-appdata-vol </code></pre></li>
+                            <li class="li">If you don't use NFS or another network file system to back up your
+                                persistent volume, copy your application data directory contents
+                                into a persistent volume in your Kubernetes cluster. The associated
+                                persistent volume claim resource name is required when you install
+                                the new <span class="ph">Deploy</span> server instance. </li>
+                        </ul>
+                    </div></div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Configure the cloned appdata.</span>
+                <div class="itemgroup info">
+                    <ul class="ul" id="migrate_onpremtocloud__ul_klr_3nc_bxb">
+                        <li class="li">Ensure that the <span class="keyword parmname">spec.persistentVolumeReclaimPolicy</span>
+                            parameter is set to <span class="keyword cmdname">Retain</span> on the application data
+                            persistent volume. By default, the value is <span class="keyword cmdname">Delete</span>
+                            for dynamically created persistent volumes. Setting the value to
+                                <span class="keyword cmdname">Retain</span> ensures that the persistent volume is not
+                            freed or deleted if its associated persistent volume claim is
+                            deleted.</li>
+                        <li class="li">Enable debug logging by creating the
+                                <code class="ph codeph">appdata/enable-debug</code> file. This file is required
+                            for the init and application containers to debug log messages.</li>
+                    </ul>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">If the production <span class="ph">Deploy</span>
+                    server is configured to use S3 storage, clone the S3 bucket and modify the
+                    following S3 storage properties specified in the
+                        <span class="ph filepath">installed.properties</span> file, or ensure they are correct
+                    for your cloned S3 bucket.</span>
+                <div class="itemgroup info">
+                    <pre class="pre codeblock" id="migrate_onpremtocloud__s3prop"><code>codestation.s3.bucket – the bucket name
+codestation.s3.region – the region
+codestation.s3.user – the API key
+codestation.s3.url – custom URL
+codestation.s3.signerOverride – signature algorithm
+codestation.s3.enablePathStyleAccess – true or false
+codestation.s3.password – API secret</code></pre>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Restart the production <span class="ph">Deploy</span>
+                    server, if required.</span>
+                <div class="itemgroup info">Note that changes you make to the production <span class="ph">Deploy</span>
+                    server instance after this point are not present in the containerized <span class="ph">Deploy</span>
+                    server instance that runs in the Kubernetes cluster.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Modify the cloned database.</span>
+                <div class="itemgroup info">
+                    <ul class="ul" id="migrate_onpremtocloud__ul_dsn_b4c_bxb">
+                        <li class="li">For high-availability (HA) configurations, complete these steps:<ul class="ul" id="migrate_onpremtocloud__ul_esn_b4c_bxb">
+                                <li class="li">Remove the JMS cluster configuration from the database. This
+                                    removal requires deleting all the contents of the
+                                        <code class="ph codeph">ds_network_relay</code> table. If you need
+                                    assistance deleting the contents, contact your DBA.</li>
+                                <li class="li">Remove the Web Cluster configuration from the database, if
+                                    applicable. This removal requires deleting all the contents of
+                                    the <code class="ph codeph">ds_server</code> table. If you need assistance
+                                    deleting the contents, contact your DBA. <div class="note note note_note" data-hd-otherprops="ibm" id="migrate_onpremtocloud__note_btz_d4c_bxb"><span class="note__title">Note:</span> Web cluster
+                                        configuration applies to versions starting with 7.0.0. Older
+                                        versions of <span class="ph">Deploy</span> do not have a <code class="ph codeph">ds_server</code>
+                                    table.</div></li>
+                            </ul></li>
+                        <li class="li">To stop automatic component version imports, run the following SQL
+                            command to update the components in the database:
+                            <pre class="pre codeblock language-sql" id="migrate_onpremtocloud__codeblock_hsn_b4c_bxb"><code>update DS_COMPONENT set IMPORT_AUTOMATICALLY='N' where IMPORT_AUTOMATICALLY='Y'; </code></pre></li>
+                    </ul>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Install the <span class="ph">Deploy</span>
+                    server in the Kubernetes or Openshift cluster by following the instructions in
+                    the Helm chart <a class="xref" data-hd-otherprops="ibm" href="https://github.com/IBM/charts/blob/master/repo/ibm-helm/ibm-ucd-prod.md" target="_blank">bundle README</a>.</span>
+                <div class="itemgroup info">
+                    <div class="note note note_note" id="migrate_onpremtocloud__note_thv_p4c_bxb"><span class="note__title">Note:</span> 
+                        <ul class="ul" id="migrate_onpremtocloud__ul_czd_q4c_bxb">
+                            <li class="li">If you are installing into an OpenShift cluster and using NFS for
+                                persistent storage, make sure that you use Helm chart v7.3.3 or
+                                later because the availability of support for using the
+                                supplementalGroups parameter was added to statefulset
+                                resources.</li>
+                            <li class="li">If you are upgrading to a new version of <span class="ph">Deploy</span>, manually disable any patches in the cloned appdata/patches
+                                directory by adding the <code class="ph codeph">.off</code> suffix to the patch
+                                file names. This is done automatically in containerized <span class="ph">Deploy</span> starting with version 7.2.1.1. For best results, migrate to the
+                                same version of <span class="ph">Deploy</span>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Create new agents for the containerized instance or point your existing agents
+                    to the new containerized server.</span>
+                <div class="itemgroup info">Note that the agent information that exists in the cloned database show the
+                    status as offline because the agents are configured to connect only to the
+                    on-prem production server. You can create new agents for the cloned environment.
+                    These agents can be installed on the original agent machines or VMs, and in the
+                    Kubernetes cluster. The only requirement is having network connectivity with the
+                    worker nodes that run in the Kubernetes cluster.</div>
+                <div class="itemgroup info">If you don't want to containerize the existing agents, point them to the new
+                    containerized server by following the steps in the <a class="xref" data-hd-otherprops="ibm" href="https://www.ibm.com/support/pages/node/6436713" target="_blank">How to point an existing agent to a new
+                            <span class="ph">Deploy</span>
+                        server</a> document.</div>
+            </li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/c_node_upgrading.html" title="Stay updated with latest features and functionalities by upgrading IBM DevOps Deploy (Deploy) server, agents, and relays. This section also provides instruction on how to migrate your Deploy instance.">Upgrading and Migrating</a></div></div></nav></article></main></body></html>

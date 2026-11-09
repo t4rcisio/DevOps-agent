@@ -1,0 +1,53 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Agents use SSL-secured WebSocket, and HTTPS protocols to communicate with the server."><meta name="DC.subject" content="Web agent, agent"><meta name="keywords" content="Web agent, agent"><meta name="DC.relation" scheme="URI" content="../../user/topics/configure_agents.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/web_agents.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="arch_agents"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Agent security and communication</title></head><body id="arch_agents"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Agent security and communication</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-bb4a23bf-6b8f-4ac3-949d-d92d890b0467">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">Agents use SSL-secured WebSocket, and HTTPS protocols to communicate with the
+  server.</p>
+<section class="section"><h2 id="arch_agents__title__2" class="title sectiontitle">Agent overview</h2>
+
+<p class="p">Agents do the actual work of deployment, which removes the task from the server. Agents are an
+        important part of scalability in <span class="ph">IBM DevOps Deploy (Deploy)</span>.</p>
+<p class="p">Although an agent is typically considered as a single process, technically an agent consists of a
+<dfn class="term">worker</dfn> process and a <dfn class="term">monitor</dfn> process. The worker process is a
+multithreaded process that runs the deployment work after it receives commands from the server. Work
+commands come from plug-in steps, which provide integration with many third-party tools. The monitor
+is a service that manages the worker process: starting and stopping, handling restarts, upgrades,
+and security, for example. After an agent is installed, it can be managed from the <span class="ph">Deploy</span> web application.</p>
+</section>
+<section class="section"><h2 id="arch_agents__title__3" class="title sectiontitle">Agent security</h2>
+
+<p class="p">All processes, including packaging, configuration, and deploying, that the <span class="ph">Deploy</span> server requests
+        run on hardware that is assigned to agents. For added security, agents do not listen to
+        ports, but open direct connections to the server instead. After an installed agent starts,
+        the agent opens a WebSocket connection to the <span class="ph">Deploy</span> server based on
+        the installation information. </p>
+<p class="p">Agents on networks other than the one where the server is located might need to open a firewall
+to establish connection. After communication is established, the agent will be visible in the
+<span class="ph">Deploy</span> web application where it can be configured. Active agents, regardless of operating system, can be
+upgraded with the web application.</p>
+</section>
+<section class="section"><h2 id="arch_agents__title__4" class="title sectiontitle">Agent communication</h2>
+
+      <p class="p" id="arch_agents__agent-types"><a class="xref" href="web_agents.html#web_agents" title="Web agents use WebSocket and HTTPS connections for communication. Web agents do not use JMS.">Agents are installed as Web
+          agents</a>. Web agents use WebSocket connections and HTTPS for agent-server
+        communication. </p>
+<p class="p">Web agents uses WebSocket connections for tracking agent status and notifications, and HTTPS for
+        everything else.</p>
+<div class="p" id="arch_agents__agent_port_diagram">The following diagram shows the main default ports that are involved in
+        communication between agents, agent relays, and the server.<br><img class="image" src="../../install/images/web-agent-topology.png" height="459" width="434" alt="A diagram of the ports that agents, agent relays, and servers use to communicate; these are the same posts in the lists above"><br></div>
+<p class="p" data-hd-otherprops="ibm">For more information about firewall configuration and port usage, see <a class="xref" href="system_requirements.html" title="This document includes information about the hardware, containers, prerequisite software, supported operating system, and database requirements with component level detail for the IBM DevOps Deploy (Deploy).">System Requirements</a> and <a class="xref" href="../../install/topics/agent_firewalls.html" title="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication.">Firewall and communication configuration</a>.</p>
+<p class="p">Stateless server-agent communication provides significant benefits to performance, security,
+availability, and disaster recovery. Because each agent request is self-contained, a transaction
+consists of an independent message, which can be synchronized to auxiliary storage as it occurs.
+Either endpoint, server or agent, can be stopped and restarted without repercussion, other than lost
+time. If communications fail midtransaction, no messages are lost. After they are reconnected, the
+server and agent automatically determine which messages got through and what work was completed.
+After an outage, the system synchronizes the endpoints and recovers affected processes. The results
+of work that an agent completes during the outage are communicated to the server.</p>
+</section>
+</div>
+
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../user/topics/web_agents.html">Web agent configuration</a></strong><br>Web agents use WebSocket and HTTPS connections for communication. Web agents do not use   JMS.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/configure_agents.html" title="After you install an agent for IBM DevOps Deploy (Deploy), you can modify its configuration or create an agent relay to facilitate communication to remote relays.">Agents and agent relay configuration</a></div></div></nav></article></main></body></html>

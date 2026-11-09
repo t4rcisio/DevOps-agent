@@ -1,0 +1,71 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Do not use the keywords latest, latestVersion, or newest as the version name."><meta name="DC.subject" content="REST API, version resource, /createManyVersions POST, POST methods, /version/createManyVersions"><meta name="keywords" content="REST API, version resource, /createManyVersions POST, POST methods, /version/createManyVersions"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_version.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_version_createmanyversions_post"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Create multiple component versions</title></head><body id="rest_cli_version_createmanyversions_post"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Create multiple component versions</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5ea23203-6277-4f78-a968-bb6621ddedb3">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Do not use the keywords latest, latestVersion, or newest as the version name.</p>
+<section class="section"><h2 id="rest_cli_version_createmanyversions_post__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>POST https://{hostname}:{port}
+    /cli/version/createManyVersions
+</code></pre><div class="p" id="rest_cli_version_createmanyversions_post__template">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{"wrappedArray": [{
+  "componentId": "Component identifier. If not specified 
+  componentName is required",
+  "componentName": "Component name. If not specified 
+  componentId is required",
+  "links": [{
+    "isPriority": "Optional. If true, prioritize the link 
+  by placing it in the version page header for quicker 
+  access",
+    "link": "Link url",
+    "name": "Link name"
+  }],
+  "status": [{"name": "Status name"}],
+  "version": "Version name to create"
+}]}
+</code></pre></div></section>
+<div class="example" data-hd-audience="rest"><h2 id="rest_cli_version_createmanyversions_post__title__3" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>curl <span class="ph">-k -u jsmith:passwd 
+  </span> 
+  "<span class="ph">https://deployserver.example.com:8443</span>/cli/
+  version/createManyVersions" 
+  -X POST 
+  -d @newVersions.json 
+  -H "Content-Type: application/json"</code></pre></div><div class="example" data-hd-audience="all"><h2 id="rest_cli_version_createmanyversions_post__title__4" class="title sectiontitle">Example JSON request</h2><pre class="pre codeblock"><code>[
+  {
+    "version": "New version 1",
+    "componentName": "MyComponent",
+    "links": [
+      {
+        "name": "New link",
+        "link": "http://www.foo.com"
+      }
+    ],
+    "status": [
+      {
+        "name": "MyStatus"
+      }
+    ]
+  },
+  {
+    "version": "New version 2",
+    "componentName": "MyComponent",
+    "links": [
+      {
+        "name": "New link",
+        "link": "http://www.foo.com"
+      }
+    ],
+    "status": [
+      {
+        "name": "MyStatus"
+      }
+    ]
+  }
+]</code></pre></div>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_createmanyversions.html" title="Create multiple component versions">createManyVersions</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_version.html">version resource</a></div></div></nav></article></main></body></html>

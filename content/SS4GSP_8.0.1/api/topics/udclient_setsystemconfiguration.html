@@ -1,0 +1,172 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Update the system configuration"><meta name="DC.subject" content="udclient commands, setSystemConfiguration, udclient command, command-line commands"><meta name="keywords" content="udclient commands, setSystemConfiguration, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_setsystemconfiguration"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>setSystemConfiguration</title></head><body id="udclient_setsystemconfiguration"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">setSystemConfiguration</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-435697d4-cf81-4c50-af62-a1090b99f959">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Update the system configuration</p>
+<section class="section">
+Use this command to set any of the properties on the System Settings page of the server. The JSON template for this command lists all of the properties that you can change, but you can omit properties that you are not changing.
+</section>
+<section class="section"><h2 id="udclient_setsystemconfiguration__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  setSystemConfiguration [JSON file]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_setsystemconfiguration__title__3" class="title sectiontitle">Parameters</h2>
+None.</section>
+<section class="section"><h2 id="udclient_setsystemconfiguration__title__4" class="title sectiontitle">Template</h2>
+<div class="p">This command takes a JSON request string or file. Use the following template for
+        the request: <pre class="pre codeblock language-json"><code>{
+  "agentAutoLicense": "Specify true to automatically 
+  assign licenses to agents",
+  "artifactAgent": "Specify a default agent for component 
+  version imports.",
+  "auditLogCleanupEnabled": "Whether the audit logs will 
+  be deleted after a given number of days.",
+  "auditLogCleanupHour": "The hour when audit logs are 
+  cleaned; the value must be an integer from 0 (midnight) to 
+  23 (11pm).",
+  "auditLogCleanupMinute": "The minute when audit logs are 
+  cleaned; the value must be an integer from 0 to 59.",
+  "auditLogReadEntriesEnabled": "Controls whether READ 
+  events are captured in the audit log.",
+  "auditLogRetentionLength": "The number of days to retain 
+  audit log entries.",
+  "cleanupArchivePath": "The path for archived component 
+  versions",
+  "cleanupCountToKeep": "The number of component versions 
+  to keep",
+  "cleanupDaysToKeep": "The number of days component 
+  versions are kept",
+  "cleanupHourOfDay": "The time when versions are cleaned; 
+  the value must be an integer from 0 (midnight) to 23 (11 
+  pm)",
+  "defaultLocale": "The default locale to use for the 
+  system (determines language and date formats.)",
+  "deleteEnvResources": "Enable deleting resources 
+  globally from an environment's resource tree or when 
+  deleting an environment.",
+  "deployMailHost": "The host name of the mail server that 
+  is used for notifications",
+  "deployMailPassword": "The user password for sending 
+  email notifications",
+  "deployMailPort": "The SMTP port that is used by the 
+  notifications mail server",
+  "deployMailSecure": "Specifies whether the SMTP 
+  connection is secure",
+  "deployMailSender": "The sender address for email 
+  notifications",
+  "deployMailUsername": "The user name for sending email 
+  notifications",
+  "enableAllowFailure": "Controls whether the 'allow 
+  failure' option can be used on the steps in a workflow.",
+  "enableInactiveLinks": "Specify true to show links to 
+  inactive objects",
+  "enablePromptOnUse": "Controls whether user-entered 
+  values can be specified at process run time",
+  "enableUIDebugging": "Changes how the UI resources are 
+  loaded so it is easier to debug problems in the UI if set. 
+  Enabling reduces UI performance.",
+  "envCompPropsOverrideEnvProps": "Determines whether or 
+  not environment component properties will override 
+  environment properties.",
+  "environmentCountToKeep": "The number of versions to 
+  retain for this environment. Lists the versions in order 
+  of the time of deployment to this environment, and exempts 
+  the first N from artifact cleanup. If an archive path is 
+  set, the versions that are cleaned up will be archived. If 
+  no archive path is set, the versions will be deleted. To 
+  retain all versions of a component, enter -1.",
+  "environmentDaysToKeep": "The number of days since 
+  deployment to retain component versions which have been 
+  deployed to this environment. If an archive path is set, 
+  the versions that are cleaned up will be archived. If no 
+  archive path is set, the versions will be deleted. To 
+  retain component versions indefinitely, enter -1.",
+  "externalApprovalAgent": "Specify a default agent to use 
+  for running External Approval Processes. Superseded by 
+  approvalAgentPool.",
+  "externalApprovalAgentPool": "Specify a default agent 
+  pool to use for running External Approval Processes. 
+  Supersedes approvalAgent.",
+  "externalURL": "The URL that agents use to connect to 
+  the server",
+  "externalUserURL": "The URL that users enter to connect 
+  to the server",
+  "failProcessesWithUnresolvedProperties": "Determines 
+  whether or not a process will fail when it encounters a 
+  property that cannot be resolved.",
+  "historyCleanupDaysToKeep": "The number of days 
+  application process history is to be kept. -1 will disable 
+  application process history cleanup.",
+  "historyCleanupDuration": "The maxiumum number of hours 
+  per day the history cleanup process can take; the value 
+  must be an integer from 1 to 23.",
+  "historyCleanupEnabled": "The system will not delete any 
+  process history unless this is enabled.",
+  "historyCleanupHour": "The time when application process 
+  history is cleaned; the value must be an integer from 0 
+  (midnight) to 23 (11pm).",
+  "historyCleanupMinute": "The minute when process history 
+  is cleaned; the value must be an integer from 0 to 59.",
+  "integrationTag": "Specify an agent tag to use any agent 
+  with the given tag for version imports.",
+  "licenseServerUrl": "The host name and port of the 
+  license server",
+  "maintenanceModeEnabled": "When this option is enabled, 
+  the server will be in maintenance mode.",
+  "messageOfTheDay": "Message you want to display
+  "minimumPasswordLength": "Determines the minimum length 
+  for passwords",
+  "repoAutoIntegrationPeriod": "The number of seconds 
+  between the times that the server polls components for new 
+  versions",
+  "requireCommentForProcessChanges": "When enabled, the 
+  user must provide a comment when saving changes to any 
+  process design.",
+  "requireDigits": "Require new passwords to contain at 
+  least one number character.",
+  "requireDuplicate": "Require new passwords to not match 
+  the username, actual name, or configured email.",
+  "requireLowercase": "Require new passwords to contain at 
+  least one lowercase character.",
+  "requireSpecials": "Require new passwords to contain at 
+  least one special character.",
+  "requireUppercase": "Require new passwords to contain at 
+  least one uppercase character.",
+  "showCompliancyOnLoad": "Load visible environment 
+  compliancies when viewing the application page, rather 
+  than on demand.",
+  "skipCollectPropertiesForExistingAgents": "Controls 
+  whether or not agent properties will be updated when an 
+  existing agent reconnects to the server.",
+  "snapshotDaysToKeep": "The number of days to retain 
+  snapshots. Snapshots are always kept if they are the most 
+  recently deployed snapshot in an environment. Each 
+  environment  can override this setting and retain 
+  snapshots longer. In this case a snapshot will only be 
+  deleted if it is not retained by an environment. If no 
+  environment is retaining the snapshot and the snapshot is 
+  older than the number of days in this setting, the server 
+  deletes the snapshot. To retain all snapshots 
+  indefinitely, enter -1.",
+  "use.default.atr.if.not.specified": "Use the Default 
+  Auth Token Restriction for plugin steps that do not have 
+  an auth token restriction set. If false this will not 
+  restrict auth token usage at all. Any new version will 
+  have an auth token restriction.",
+  "validateAgentIp": "Controls validation of agent IPs and 
+  hostnames. The first time the agent connects, its IP and 
+  hostname will be saved. In subsequent connections, if 
+  either has changed, the agent will be prevented from 
+  coming online."
+}
+</code></pre></div></section>
+<div class="example" data-hd-audience="all"><h2 id="udclient_setsystemconfiguration__title__5" class="title sectiontitle">Example JSON request</h2><pre class="pre codeblock language-json"><code>{
+  "minimumPasswordLength": "9",
+  "requireComplexPasswords": "true"
+}</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_systemconfiguration_put.html" title="Use this command to set any of the properties on the System Settings page of the server. The JSON template for this command lists all of the properties that you can change, but you can omit properties that you are not changing.">Update the system configuration</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

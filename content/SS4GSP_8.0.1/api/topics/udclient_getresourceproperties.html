@@ -1,0 +1,77 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="List resource properties"><meta name="DC.subject" content="udclient commands, getResourceProperties, udclient command, command-line commands"><meta name="keywords" content="udclient commands, getResourceProperties, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_getresourceproperties"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>getResourceProperties</title></head><body id="udclient_getresourceproperties"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">getResourceProperties</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-549e8140-fcc9-4681-ae1c-6e66451625f7">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">List resource properties</p>
+<section class="section"><h2 id="udclient_getresourceproperties__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  getResourceProperties [parameters]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_getresourceproperties__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_getresourceproperties__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_getresourceproperties__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_getresourceproperties__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_getresourceproperties__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_getresourceproperties__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__1"><span class="keyword parmname">resource</span></td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__4">ID or path to the resource, such as /ResourceGroup/Agents/Agent1</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__1"><span class="keyword parmname">template</span></td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__4">Name or ID of the resource template (Optional)</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__1"><span class="keyword parmname">blueprintId</span></td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__4">Name or ID of the blueprint (Optional)</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__1"><span class="keyword parmname">application</span></td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__3">false</td>
+<td class="entry" headers="udclient_getresourceproperties__composite_params__entry__4">Name or ID of the application (Required to look up blueprint by name)</td>
+</tr>
+</tbody></table>
+
+</section>
+<div class="example" data-hd-audience="udclient"><h2 id="udclient_getresourceproperties__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+  getResourceProperties
+  -resource "/My resource"</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_getresourceproperties__title__6" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>[
+  {
+    "id": "bd20924e-8547-4d41-b9b1-36b41278d224",
+    "name": "property1",
+    "value": "1",
+    "description": "A new property",
+    "secure": false
+  },
+  {
+    "id": "18963e9e-2cca-47ac-807a-7fc5e67c49ee",
+    "name": "property2",
+    "value": "",
+    "description": "A property with no value",
+    "secure": false
+  },
+  {
+    "id": "9cc56712-65f8-41fe-8fd6-d07414364c98",
+    "name": "property3",
+    "value": "****",
+    "description": "A secure property",
+    "secure": true
+  }
+]</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_resource_getproperties_get.html">List resource properties</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

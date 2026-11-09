@@ -1,0 +1,131 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To model a Microsoft Azure environment, log in with an Azure cloud project and specify the Azure-specific information in a blueprint."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueprint_edit_azure"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Modeling environments for Microsoft Azure</title></head><body id="blueprint_edit_azure"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Modeling environments for Microsoft Azure</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dc739d07-bacb-4d63-89ac-174a1711d459">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To model a Microsoft™ Azure environment, log in
+with an Azure cloud project and specify the Azure-specific information in a blueprint.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit_azure__prereq__1">Before you begin</h2></div>
+<ul class="ul">
+<li class="li">Upgrade the blueprint design server and engine to version 6.2.1.1 or later.</li>
+<li class="li">On the Azure web portal, create a security group for new environments. <span class="ph" id="blueprint_edit_azure__security_group_ports">The security group determines which ports are open on the images, so you
+must use a security group that has the appropriate ports open for agent communication. See <a class="xref" href="../../install/topics/agent_firewalls.html" title="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication.">Firewall and communication configuration</a>.</span></li>
+<li class="li">On the Azure web portal, set up a standard storage account. You can use only standard storage
+accounts with the blueprint designer.</li>
+<li class="li">On the Azure web portal, set up a virtual network.</li>
+<li class="li">On the Azure web portal, organize your artifacts. Place the storage account, virtual network,
+and any custom images that this blueprint includes in the same resource group.<div class="note note note_note"><span class="note__title">Note:</span> 
+<span class="ph" id="blueprint_edit_azure__same_group">Blueprints must contain custom images, networks, and storage accounts from the
+same resource group. </span></div></li>
+<li class="li">Connect the blueprint design server to Azure. See <a class="xref" href="cloud_connect_azure.html" title="To connect to Microsoft Azure, you must provide Azure account information in a functional ID.">Connecting to Microsoft Azure</a>.</li>
+<li class="li" id="blueprint_edit_azure__ucd_connect"><span class="ph" id="blueprint_edit_azure__ucdp_connect_ph">Connect the blueprint design server to the server. See
+<a class="xref" href="../../user/topics/p_integrate.html" title="In most cases, you connect the blueprint design server to the server at installation time, but you can also connect them later.">Connecting the blueprint design server to the server</a>.</span></li>
+<li class="li">Log in to the blueprint designer.</li>
+<li class="li">At the top of the page, select the cloud project and region to use.</li>
+</ul>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit_azure__context__1">About this task</h2></div>You cannot use SSH keys to secure images on Azure. Only user name and password security is
+supported.<p class="p">Beginning with version 6.2.1.1, you can use Windows and Linux images on
+Azure.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit_azure__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create the blueprint.</span>
+<div class="itemgroup info">See <a class="xref" href="blueprint_edit.html#blueprint_edit" title="You can create projects, blueprints, configuration files, folders, and many other type of the files in the blueprint designer.">Creating files</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add virtual images from the palette to the blueprint.</span>
+<div class="itemgroup info">The images in the palette are a subset of the images in the Azure Virtual Machines Marketplace
+and custom images that you registered with the cloud discovery service. If you add custom images,
+you must select images that are part of a single resource group.<p class="p">Beginning in version 6.2.1.1, you
+can specify a custom name for the virtual machine disk with the <span class="keyword parmname">os_disk_name</span>
+property. If you do not specify this property and a disk already exists with the name of the virtual
+image, or if you specify the name of an existing disk, the engine creates a disk with a different
+name.</p><div class="p">Similarly, beginning in version 6.2.1.1, you can specify whether to keep or delete the
+virtual disk when you delete the environment by setting the <span class="keyword parmname">preserve_os_disk</span>
+property. For example, the following code names the storage disk <code class="ph codeph">TempStorageDisk</code>
+and deletes it when the environment is
+deleted:<pre class="pre codeblock"><code>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:
+    azure_properties:
+      resource_group: { get_param: resource_group }
+      storage_account: { get_param: storage_account }
+      preserve_os_disk: false
+      os_disk_name: "TempStorageDisk"</code></pre></div><p class="p">To
+delete disks from your storage account manually, open the Azure web portal, open your storage
+account, click <span class="ph uicontrol">Blobs</span>, click <span class="ph uicontrol">vhds</span>, click a virtual
+disk, and then click <span class="ph uicontrol">Delete</span>.</p>The palette shows resources from the
+currently connected account, which is shown in the upper-right corner of the page. For more
+information on working with the blueprint designer, see <a class="xref" href="blueprint_diagram.html" title="You can edit Terraform blueprints in a graphical editor.">Editing Terraform blueprint diagram</a> and
+<a class="xref" href="blueprint_source.html" title="You can edit the Heat Orchestration Template (HOT) source code of blueprints directly.">Editing blueprint source code</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add other Azure resources, such as networks, from the palette to the blueprint.</span>
+<div class="itemgroup info">Blueprints can contain only custom images, networks, and storage accounts from the same
+resource group. You can determine which resource group contains these resources through the Azure
+web portal or command-line client.</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Specify how to install the <span class="ph">Deploy</span> agent.</span>
+<div class="itemgroup info">In version 6.2.1, the engine always uses the <code class="ph codeph">cloud-init</code> package. Therefore,
+in version 6.2.1, only images that have the <code class="ph codeph">cloud-init</code> package preinstalled are
+supported. In version 6.2.1.1 and later, you can use the <span class="keyword parmname">use_cloudinit</span> property
+to specify how to install the agent:</div>
+<ul class="ul choices">
+<li class="li choice">In version 6.2.1.1 and later, by default, Azure Marketplace images use the Azure Linux Agent
+or related tools on Windows images to install the <span class="ph">Deploy</span> agent. In this case, after you provision the environment, you can see the script that the server
+used to set up the image and install the <span class="ph">Deploy</span> agent. In the Azure web portal, select the storage account, open the <code class="ph codeph">Blobs</code> list,
+open the <code class="ph codeph">scripts</code> container, and browse to the script, such as
+<code class="ph codeph">myImage.sh</code>. This script is encoded in base 64 to hide passwords and reduce the file
+size.</li>
+<li class="li choice">In version 6.2.1.1 and later, by default, custom images use the <code class="ph codeph">cloud-init</code>
+package to install the <span class="ph">Deploy</span> agent.</li>
+<li class="li choice">To specify whether to use the Azure tools or the <code class="ph codeph">cloud-init</code> package, set
+the <span class="keyword parmname">use_cloudinit</span> property. For example, to use the <code class="ph codeph">cloud-init</code>
+package, set the <span class="keyword parmname">use_cloudinit</span> property to true, as shown in the following
+code:<pre class="pre codeblock"><code>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:
+    azure_properties:
+      resource_group: { get_param: resource_group }
+      storage_account: { get_param: storage_account }
+      use_cloudinit: true</code></pre></li>
+</ul>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Apply a security group to each image.</span>
+<div class="itemgroup info"><span class="ph">The security group determines which ports are open on the images, so you
+must use a security group that has the appropriate ports open for agent communication. See <a class="xref" href="../../install/topics/agent_firewalls.html" title="This topic describes the communication between the IBM DevOps Deploy (Deploy) components, the firewall, and the ports involved in the communication.">Firewall and communication configuration</a>.</span></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If the image requires a floating IP address, at the bottom right of the image, click <img class="image" src="../images/icons/ip_not_set.gif" alt=""> the IP address icon.</span>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Set the default resource group and storage account in the blueprint parameters, as in the
+following example code:</span>
+<div class="itemgroup info">
+<pre class="pre codeblock"><code>resource_group:
+  type: string
+  description: 'The Azure resource group'
+  default: 'MyStorageGroup'
+storage_account:
+  type: string
+  description: 'The Azure storage account'
+  'MyStorageAccount'</code></pre>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create a configuration file and externalize properties to the file.</span>
+<div class="itemgroup info">See <a class="xref" href="blueprint_configs.html" title="Configuration files are lists of properties and values. You can use configuration files to provision the same blueprint on multiple cloud systems.">Editing configuration files</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the configuration file, ensure that the core OpenStack types are mapped to Azure
+types.</span>
+<div class="itemgroup info">The configuration file must have mapping similar to the following
+code:<pre class="pre codeblock"><code>resource_registry:
+  OS::Nova::Server : IBM::Azure::Server
+  OS::Neutron::Port : IBM::Azure::NetworkInterface
+  OS::Neutron::FloatingIP : IBM::Azure::PublicIP</code></pre></div>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_edit_azure__postreq__1">What to do next</h2></div>
+<p class="p">Add the components of your application to the blueprint. See <a class="xref" href="blueprint_deploy_env.html" title="Add components to a blueprint so that when you provision environments from the blueprint, the engine automatically installs the components.">Deploying components with blueprints</a>.</p>
+</section>
+</div>
+</article></main></body></html>

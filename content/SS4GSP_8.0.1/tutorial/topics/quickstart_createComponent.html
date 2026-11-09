@@ -1,0 +1,107 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Components contain artifacts and processes. Artifacts include runnable files, images, databases, configuration instructions, and anything else that is associated with a software project. Processes define the activities that components can perform."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/quickstart_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="quickstart_createComponent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 1 Create the helloWorld component</title></head><body id="quickstart_createComponent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 1 Create the helloWorld component</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a6b1b29f-3f1b-4fd6-bc93-068459751c63">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Components contain <dfn class="term">artifacts</dfn> and <dfn class="term">processes</dfn>.
+Artifacts include runnable files, images, databases, configuration
+instructions, and anything else that is associated with a software
+project. Processes define the activities that components can perform.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_createComponent__prereq__1">Before you begin</h2></div>Before you begin this lesson, make sure that you complete
+the steps that are described in <a class="xref" href="quickstart_configure.html" title="To deploy the tutorial component, or any component, you must have an agent. An agent is a lightweight process that runs on a target computer and does the actual work of deploying components.">Configure the helloWorld tutorial system</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_createComponent__context__1">About this task</h2></div>In many cases, artifacts are added to a component by connecting the <span class="ph">IBM DevOps Deploy (Deploy)</span> server to a
+            computer system that hosts the artifacts. The server can import artifacts from build
+            systems, source-code management systems, and file systems. Imported artifacts are stored
+            in CodeStation, the artifact repository. The artifacts for the helloWorld component come
+            from the file system where the <span class="ph">Deploy</span> agent is
+            located. For more information about creating components, see <a class="xref" href="../../user/topics/comp_create.html" title="A component consists of artifacts of a single source type and one or more processes. Component creation is the same for all source types, however; the content can be different.">Creating components</a>.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_createComponent__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">To create the helloWorld component:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Click the <span class="ph uicontrol">Components</span> tab and then click <span class="ph uicontrol">Create
+Component</span>.</span>
+<div class="itemgroup info">In the window that opens, you define the component and specify the location of the artifacts
+for it.</div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Name</span> field, type <kbd class="ph userinput">helloWorld</kbd>.</span>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="ph uicontrol">Source Configuration Type</span> list, select <span class="ph uicontrol">File System
+(Versioned)</span>.</span>
+<div class="itemgroup info">This parameter defines the type of artifacts the component uses. All artifacts in a component
+share the source type. The File System (Versioned) type looks for the artifacts on the file system.
+<div class="note note note_note"><span class="note__title">Note:</span> The None type can be used for configuration-type or operational-type deployments. For more
+information about deployment types, see <a class="xref" href="../../user/topics/comp_process_configure.html" title="A component process is a series of user-defined steps that operate on a component's artifacts. You create a component process in two steps: first, you configure basic information, such as name; second, you use the process editor to assemble the process.">Creating component processes</a>.</div></div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Base Path</span> field, specify
+the location of the <span class="ph filepath">helloWorld</span> folder that you
+created earlier, such as <span class="ph filepath">/home/user1/artifacts/shared/helloWorld</span>.</span>
+<div class="itemgroup info"> The File System (Versioned) source type considers directories
+in the specified folder as representations of component versions.
+For this reason, make sure that you specify the <span class="ph filepath">helloWorld</span> directory
+and not the <span class="ph filepath">helloWorld/1.0</span> directory.</div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Accept the default values for the other fields on the
+page. </span><div class="itemgroup info">The <span class="ph uicontrol">Preserve Execute Permissions</span> and <span class="ph uicontrol">Import
+Versions Automatically</span> check boxes are cleared and the <span class="ph uicontrol">Copy
+to CodeStation</span> check box is selected. The <span class="ph uicontrol">Default
+Version Type</span> is set to <span class="ph uicontrol">Full</span>.</div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span></li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Create a component property.</span><div class="itemgroup info">A property is user-defined
+parameter that can be set at design time or run time. Properties can
+be defined for components, processes, applications, environments,
+and other product elements. Here you set the property on the component,
+but in situations where multiple components share the property, you
+might set the property value on the environment instead of setting
+it on every component.</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">On the "<span class="keyword wintitle">Component: helloWorld</span>"
+page, click the <span class="ph uicontrol">Configuration</span> tab and then
+click <span class="ph uicontrol">Component Properties</span>.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Add Property</span>.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="keyword wintitle">Edit Property</span> window, name
+the property something like <kbd class="ph userinput">helloHome</kbd>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Value</span> field, type the
+name of the directory that you created to hold the component artifacts,
+for example <span class="ph filepath">c:\helloWorld</span>.</span><div class="itemgroup info">The component
+process uses this property later to identify the target location for
+the component artifacts. </div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span></li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Import the component version:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Click the <span class="ph uicontrol">Versions</span> tab.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Import New Versions</span>.</span>
+<div class="itemgroup stepresult"> The server creates a version of the component that is
+based on the folder in the <span class="ph filepath">helloWorld</span> folder,
+and imports the files in the <span class="ph filepath">helloWorld/1.0</span> directory.
+In this case, the server creates a single version of the component
+that is based on the <span class="ph filepath">helloWorld/1.0</span> folder. If
+other folders were in the <span class="ph filepath">helloWorld</span> directory,
+they too would be imported and versions would be created from them.</div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Verify that the list of versions includes version 1.0
+of the component, as in the following figure:</span><div class="itemgroup stepresult"> <br><img class="image" src="../images/quickstart-comp-ver.gif" alt="The first version of the new component is shown on the Versions tab"><br> </div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click the version name, <span class="ph uicontrol">1.0</span>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Verify that the list of artifacts includes the files
+in the <span class="ph filepath">helloWorld/1.0</span> directory, as in the following
+figure:</span><div class="itemgroup stepresult"> <br><img class="image" src="../images/quickstart-artifacts.gif" alt="The version artifacts are shown"><br> </div></li>
+</ol>
+<div class="itemgroup stepresult">The helloWorld component is ready to use.</div>
+</li></ol></section><section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_createComponent__result__1">Results</h2></div>In this lesson, you created a component that is based on files in the file system, and
+imported the initial version into CodeStation, the artifact repository. On the <span class="keyword wintitle">helloWorld Component</span> page, you
+have the initial version, 1.0, listed. </section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskquickstart_createComponent__postreq__1">What to do next</h2></div><dfn class="term">Component processes</dfn> describe different ways
+to use a component, such as how to deploy it, install it, update it,
+or do other tasks with it. In the next lesson, you create a process
+that defines how to deploy the component. For more information about creating components, see <a class="xref" href="../../user/topics/comp_create.html" title="A component consists of artifacts of a single source type and one or more processes. Component creation is the same for all source types, however; the content can be different.">Creating components</a>.</section>
+</div>
+
+
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_6.2.0 SS4GSP_8.0.1" href="../../tutorial/topics/quickstart_abstract.html" title="In this tutorial, you create a simple application with IBM DevOps Deploy (Deploy). You use standard plug-ins to create a component and define an application that deploys the component to an environment.">Create a simple helloWorld deployment</a></div></div></nav></article></main></body></html>

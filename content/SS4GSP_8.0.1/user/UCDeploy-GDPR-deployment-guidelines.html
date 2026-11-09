@@ -1,0 +1,293 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="topic"><meta name="description" content="This section provides information about using IBM InfoSphere Master Data Management Collaborative Edition to help your organization achieve GDPR readiness."><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="deploy-ibm-devops-deploy-with-patterns-considerations-for-gdpr-readiness"><link rel="stylesheet" type="text/css" href="../commonltr.css"><title>Considerations for GDPR Readiness</title></head><body id="deploy-ibm-devops-deploy-with-patterns-considerations-for-gdpr-readiness"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Considerations for GDPR Readiness</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+    
+    <div class="body"><p class="shortdesc">This section provides information about using IBM InfoSphere Master Data Management
+        Collaborative Edition to help your organization achieve GDPR readiness.</p>
+        <section class="section" id="deploy-ibm-devops-deploy-with-patterns-considerations-for-gdpr-readiness__section_u2s_ysr_qzb">
+            <div class="p">For PID(s): 5725-M54, 5725-R35, IBM DevOps Deploy <div class="note note note_note" id="deploy-ibm-devops-deploy-with-patterns-considerations-for-gdpr-readiness__note_dhb_5sr_qzb"><span class="note__title">Note:</span> 
+                    <p class="p">This document is intended to help you in your preparations for GDPR
+                        readiness. It provides information about features of DevOps Deploy, IBM
+                        DevOps Deploy with Patterns that you can configure, and aspects of the
+                        product's use, that you should consider to help your organization with GDPR
+                        readiness. This information is not an exhaustive list, due to the many ways
+                        that clients can choose and configure features, and the large variety of
+                        ways that the product can be used in itself and with third-party
+                        applications and systems.</p>
+                    <p class="p"><strong class="ph b">Clients are responsible for ensuring their own compliance with various
+                            laws and regulations, including the European Union General Data
+                            Protection Regulation. Clients are solely responsible for obtaining
+                            advice of competent legal counsel as to the identification and
+                            interpretation of any relevant laws and regulations that may affect the
+                            clients' business and any actions the clients may need to take to comply
+                            with such laws and regulations.</strong></p>
+                    <p class="p"><strong class="ph b">The products, services, and other capabilities described herein are not
+                            suitable for all client situations and may have restricted availability.
+                            IBM does not provide legal, accounting, or auditing advice or represent
+                            or warrant that its services or products will ensure that clients are in
+                            compliance with any law or regulation.</strong></p>
+                </div></div>
+        </section>
+    </div>
+    
+        <article class="topic nested1" aria-labelledby="ariaid-title2" id="table-of-contents">
+            <h2 class="title topictitle2" id="ariaid-title2">Table of Contents</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+            <div class="body">
+                <ol class="ol">
+                    <li class="li"><p class="p">GDPR</p></li>
+                    <li class="li"><p class="p">Product Configuration for GDPR</p></li>
+                    <li class="li"><p class="p">Data Life Cycle</p></li>
+                    <li class="li"><p class="p">Data Collection</p></li>
+                    <li class="li"><p class="p">Data Storage</p></li>
+                    <li class="li"><p class="p">Data Access</p></li>
+                    <li class="li"><p class="p">Data Processing</p></li>
+                    <li class="li"><p class="p">Data Deletion</p></li>
+                    <li class="li"><p class="p">Data Monitoring</p></li>
+                    <li class="li"><p class="p">Responding to Data Subject Rights</p></li>
+                </ol>
+            </div>
+        </article>
+        <article class="topic nested1" aria-labelledby="ariaid-title3" id="gdpr">
+            <h2 class="title topictitle2" id="ariaid-title3">GDPR</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+            <div class="body">
+                <p class="p">General Data Protection Regulation (GDPR) has been adopted by the European Union
+                    ("EU") and applies from May 25, 2018.</p>
+            </div>
+            <article class="topic nested2" aria-labelledby="ariaid-title4" id="why-is-gdpr-important">
+                <h3 class="title topictitle3" id="ariaid-title4">Why is GDPR important?</h3><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+                <div class="body">
+                    <p class="p">GDPR establishes a stronger data protection regulatory framework for
+                        processing of personal data of individuals. GDPR brings:</p>
+                    <ul class="ul">
+                        <li class="li"><p class="p">New and enhanced rights for individuals</p></li>
+                        <li class="li"><p class="p">Widened definition of personal data</p></li>
+                        <li class="li"><p class="p">New obligations for processors</p></li>
+                        <li class="li"><p class="p">Potential for significant financial penalties for
+                            non-compliance</p></li>
+                        <li class="li"><p class="p">Compulsory data breach notification</p></li>
+                    </ul>
+                </div>
+            </article>
+            <article class="topic nested2" aria-labelledby="ariaid-title5" id="read-more-about-gdpr">
+                <h3 class="title topictitle3" id="ariaid-title5">Read more about GDPR</h3><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+                <div class="body">
+                    <ul class="ul">
+                        <li class="li"><p class="p"><a class="xref" href="https://gdpr.eu/" target="_blank">EU GDPR Information
+                            Portal</a></p></li>
+                        <li class="li"><p class="p"><a class="xref" href="https://ibm.com/GDPR" target="_blank">ibm.com/GDPR website</a></p></li>
+                    </ul>
+                </div>
+            </article>
+        </article>
+        <article class="topic nested1" aria-labelledby="ariaid-title6" id="product-configuration---considerations-for-gdpr-readiness">
+            <h2 class="title topictitle2" id="ariaid-title6">Product Configuration - Considerations for GDPR Readiness</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+            <div class="body">
+                <p class="p">The following sections provide considerations for configuring DevOps Deploy, IBM
+                    DevOps Deploy with Patterns to help your organization with GDPR readiness.</p>
+            </div>
+        </article>
+        <article class="topic nested1" aria-labelledby="ariaid-title7" id="data-life-cycle">
+            <h2 class="title topictitle2" id="ariaid-title7">Data Life Cycle</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+            <article class="topic nested2" aria-labelledby="ariaid-title8" id="what-is-the-end-to-end-process-through-which-personal-data-go-through-when-using-our-offering">
+                <h3 class="title topictitle3" id="ariaid-title8">What is the end-to-end process through which personal data go through when
+                    using our offering?</h3><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+                <div class="body">
+                    <p class="p">IBM DevOps Deploy uses a client-server model with a network of agents and
+                        relays that communicate with target systems. The server provides the
+                        web-based front-end and core services, such as workflow, agent management,
+                        and security. Services can be consumed by clients and agents or other
+                        services. Deployments are orchestrated by the server and performed by agents
+                        distributed throughout the network. Clients access the server through web
+                        browsers, the REST API, or the command-line client.</p>
+                    <p class="p">Server-agent communication is done with Java Message Service (JMS) and HTTPS
+                        protocols. JMS is used for basic commands and information that is exchanged
+                        between the server and an agent. HTTPS is used for file transfers between
+                        the server and agents, such as uploading or downloading component version
+                        artifacts.</p>
+                    <p class="p">The core installation of Deploy includes a server, agents, and a license
+                        server. Agents, which do the application processing, can be installed on
+                        cloud environments, virtual machines (VMs), containers, or physical systems.
+                        The artifact repository comes with a client application that provides remote
+                        access to the repository. In addition to the client application, the
+                        artifact repository exposes REST-based web services.</p>
+                    <p class="p">There are several third-party products that interact with Deploy via
+                    plug-ins, and might exchange data. Some of these are IBM-owned, and many others
+                    are provided by other technology suppliers. The <a class="xref" href="https://www.ibm.com/software/reports/compatibility/clarity/index.html" target="_blank">Deploy system requirements website</a>
+                    provides links to Software Product Compatibility Reports (SPCR) pages that list
+                    the associated software. For considerations for GDPR readiness of a third-party
+                    product, see that product’s documentation.</p>
+                </div>
+            </article>
+            <article class="topic nested2" aria-labelledby="ariaid-title9" id="what-types-of-data-flow-through-deploy">
+                <h3 class="title topictitle3" id="ariaid-title9">What types of data flow through Deploy?</h3><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+                <div class="body">
+                    <p class="p">As a software deployment an integration engine, Deploy does not require
+                        sensitive personal data to be gathered from the client or the client's
+                        clients.</p>
+                </div>
+                <article class="topic nested3" aria-labelledby="ariaid-title10" id="personal-data-used-for-online-contact-with-ibm">
+                    <h4 class="title topictitle4" id="ariaid-title10">Personal data used for online contact with IBM</h4><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+                    <div class="body">
+                        <p class="p">DevOps Deploy, IBM DevOps Deploy with Patterns clients can submit online
+                            comments/feedback/requests to contact IBM about product topics in a
+                            variety of ways, primarily the comment areas of the following, as
+                            applicable:</p>
+                        <p class="p">Typically, only the client name and email address are used, to enable
+                            personal replies for the subject of the contact, and the use of personal
+                            data conforms to the <a class="xref" href="https://www.ibm.com/privacy/us/en/" target="_blank">IBM Online Privacy
+                            Statement</a>.</p>
+                    </div>
+                </article>
+            </article>
+        </article>
+        <article class="topic nested1" aria-labelledby="ariaid-title11" id="data-collection">
+            <h2 class="title topictitle2" id="ariaid-title11">Data Collection</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+        </article>
+        <article class="topic nested1" aria-labelledby="ariaid-title12" id="data-storage">
+            <h2 class="title topictitle2" id="ariaid-title12">Data Storage</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+            <div class="body">
+                <p class="p">Deployments are orchestrated by the server and performed by agents distributed
+                    throughout the network. The file store, CodeStation, contains log files,
+                    artifacts, and other non-structured data objects. Reporting tools can connect
+                    directly to the relational database.</p>
+                <p class="p">The file store manages artifacts in a secure and and tamper-proof repository that
+                    ensures deployed artifacts are identical to those tested in preproduction
+                    environments.</p>
+                <p class="p">Read more: * <a class="xref" href="https://www.ibm.com/support/knowledgecenter/SS4GSP_8.0.0/install/topics/DBinstall.html" target="_blank">A relational database stores configuration
+                        and run-time data.</a></p>
+            </div>
+            <article class="topic nested2" aria-labelledby="ariaid-title13" id="protection">
+                <h3 class="title topictitle3" id="ariaid-title13">Protection</h3><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+                <div class="body">
+                    <p class="p">Deploy uses several technologies to provide security. Some features cannot be
+                        disabled, such as Transport Layer Security (TLS) for JMS communication.
+                        Other features can be configured to meet client requirements. Some features
+                        are enabled by default, such as end-to-end JMS encryption, while others are
+                        disabled by default, such as mutual authentication.</p>
+                </div>
+            </article>
+        </article>
+        <article class="topic nested1" aria-labelledby="ariaid-title14" id="data-access">
+            <h2 class="title topictitle2" id="ariaid-title14">Data Access</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+            <div class="body">
+                <ul class="ul">
+                    <li class="li"><p class="p">The Deploy team- and role-based security system manages user interactions
+                            and secures product features. Roles control virtually every product
+                            area, including the objects that users can create and who can modify the
+                            security system itself. User-created objects are managed by teams. Team
+                            members can only access objects, such as applications, managed by their
+                            team. Team members interact with team-managed objects according to the
+                            permissions granted to their role.</p></li>
+                </ul>
+                <p class="p">Read more: * <a class="xref" href="https://www.ibm.com/support/knowledgecenter/SS4GSP_8.0.0/admin/topics/security_ch.html" target="_blank">Deploy team-based security model.</a></p>
+            </div>
+            <article class="topic nested2" aria-labelledby="ariaid-title15" id="authentication">
+                <h3 class="title topictitle3" id="ariaid-title15">Authentication:</h3><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+                <div class="body">
+                    <p class="p">Deploy uses mutual authentication for JMS-based server-agent communication.
+                        In this mode, the server provides a digital certificate to each agent and
+                        agent relay, and each agent and agent relay provides one to the server.
+                        Certificate checks are performed by the JVM according to its own algorithm.
+                        Certificates can be issued from a certification authority (CA) if desired,
+                        in which instance certificates do not have to be swapped. The integrity of
+                        the content is established by the mechanisms built into TLS technology.</p>
+                </div>
+            </article>
+            <article class="topic nested2" aria-labelledby="ariaid-title16" id="logging-administration-activity">
+                <h3 class="title topictitle3" id="ariaid-title16">Logging administration activity:</h3><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+                <div class="body">
+                    <p class="p">Administrative activity is kept in the system logs. instances when the admin
+                        user adds a user or changes a users role and permissions are tracked in the
+                        log.</p>
+                </div>
+            </article>
+        </article>
+        <article class="topic nested1" aria-labelledby="ariaid-title17" id="data-processing">
+            <h2 class="title topictitle2" id="ariaid-title17">Data Processing</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+            <div class="body">
+                <p class="p">Users control the way in which Deploy interacts with data passing through it by
+                    their definition of application processes. A process is commonly constructed by
+                    a user acting in the role of “developer” working with the component plug-in
+                    toolkit. A process is composed of discrete building blocks (known as steps) that
+                    are joined together by the developer.</p>
+                <p class="p">Agents play a central role in Deploy processing. An agent is a lightweight
+                    process that runs on a deployment-target host and communicates with the Deploy
+                    server. Agents perform the actual work of software deployment which relieves the
+                    server of the task. All processes requested by the server are executed on
+                    hardware assigned to agents.</p>
+            </div>
+            <article class="topic nested2" aria-labelledby="ariaid-title18" id="who-has-access-to-the-data">
+                <h3 class="title topictitle3" id="ariaid-title18">Who has access to the Data?</h3><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+                <div class="body">
+                    <p class="p">Most customers import users from external LDAP realms. Clients filter LDAP
+                        account data for the information they need, such as user IDs, email
+                        addresses, and passwords. Groups that the imported users belong to are also
+                        imported.</p>
+                    <p class="p">Permissions are assigned to roles and users and groups are placed into roles
+                        when they are placed onto teams. Users without roles have read-only
+                        privileges and cannot access data let alone modify it.</p>
+                </div>
+            </article>
+            <article class="topic nested2" aria-labelledby="ariaid-title19" id="encryption">
+                <h3 class="title topictitle3" id="ariaid-title19">Encryption:</h3><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+                <div class="body">
+                    <p class="p">Communication between server and agents uses a JMS-based (Java Message
+                        Service) protocol and can be secured using SSL and TLS, with optional mutual
+                        key-based authentication for each end-point. This communication protocol is
+                        stateless and resilient to network outages. End-to-end JMS encryption
+                        ensures that agents cannot send messages to one another after they are
+                        connected to the JMS mesh. It also ensures that JMS clients cannot read
+                        messages that are not sent to them. End-to-end encryption ensures that
+                        agents do not accept messages from rogue servers or other malicious
+                        entities.</p>
+                    <p class="p">When mutual authentication mode is active, Deploy uses it for JMS-based
+                        server-agent communication. In this mode, the server provides a digital
+                        certificate to each agent and agent relay, and each agent and agent relay
+                        provides one to the server. Certificate checks are performed by the JVM
+                        according to its own algorithm. Certificates can be issued from a
+                        certification authority (CA) if desired. The integrity of the content is
+                        established by the mechanisms built into TLS technology.</p>
+                    <p class="p">Unless the client uses a certification authority, the server stores the
+                        certificate from each agent in its trust store, and each agent stores the
+                        server’s certificate in its trust store. If the client uses agent relays,
+                        certificates are swapped between agents, agent relays, and the server.
+                        Connections are rejected if the recipient cannot find the sender’s
+                        certificate in its trust store.</p>
+                    <p class="p">Read more: * <a class="xref" href="https://developer.ibm.com/urbancode/docs/overview-ibm-urbancode-deploy-security-features/" target="_blank">Deploy security features white
+                            paper.</a></p>
+                </div>
+            </article>
+        </article>
+        <article class="topic nested1" aria-labelledby="ariaid-title20" id="data-deletion">
+            <h2 class="title topictitle2" id="ariaid-title20">Data Deletion</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+            <div class="body">
+                <p class="p">When client-created objects are deleted, they are removed from the Deploy user
+                    interface. For auditing purposes, deleted objects remain in the database.</p>
+            </div>
+        </article>
+        <article class="topic nested1" aria-labelledby="ariaid-title21" id="data-monitoring">
+            <h2 class="title topictitle2" id="ariaid-title21">Data Monitoring</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+            <div class="body">
+                <p class="p">With an external monitoring tools, clients can use Managed Beans (MBeans) to
+                    review numerous details about Deploy, such as statistics that specify how many
+                    components are available or see how long it takes for an application process to
+                    run to completion. Clients can use these statistics and details to assess the
+                    health of their deployments and deployment processes.</p>
+            </div>
+            <article class="topic nested2" aria-labelledby="ariaid-title22" id="activity-monitoring">
+                <h3 class="title topictitle3" id="ariaid-title22">Activity monitoring</h3><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+                <div class="body">
+                    <p class="p">Audit and diagnostic logs are under user control. Clients control the amount
+                        of user activity maintained and the frequency with which it is stored.</p>
+                </div>
+            </article>
+        </article>
+        <article class="topic nested1" aria-labelledby="ariaid-title23" id="responding-to-data-subject-rights">
+            <h2 class="title topictitle2" id="ariaid-title23">Responding to Data Subject Rights</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-fcc1544d-a885-4a77-aeb3-b14836970cef">Edit online</a></span></div>
+            <div class="body">
+                <p class="p">On premises product managed by the client, please review links provided in
+                    earlier sections for configuration information.</p>
+            </div>
+        </article>
+</article></main></body></html>

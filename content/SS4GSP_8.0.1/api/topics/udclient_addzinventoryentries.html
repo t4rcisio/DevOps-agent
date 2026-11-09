@@ -1,0 +1,37 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Add entries to Z inventory."><meta name="DC.subject" content="udclient commands, addZInventoryEntries, udclient command, command-line commands"><meta name="keywords" content="udclient commands, addZInventoryEntries, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_addzinventoryentries"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>addZInventoryEntries</title></head><body id="udclient_addzinventoryentries"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">addZInventoryEntries</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-23d943e0-ed51-4321-85b1-49ce3a054691">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Add entries to Z inventory.</p>
+<section class="section"><h2 id="udclient_addzinventoryentries__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  addZInventoryEntries [JSON file]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_addzinventoryentries__title__3" class="title sectiontitle">Parameters</h2>
+None.</section>
+<section class="section"><h2 id="udclient_addzinventoryentries__title__4" class="title sectiontitle">Template</h2>
+<div class="p">This command takes a JSON request string or file. Use the following template for the request:
+
+<pre class="pre codeblock language-json"><code>{
+  "application": "Name or Id of the application.",
+  "component": "Name or Id of the component.",
+  "deploy-time": "Time in milliseconds.",
+  "environment": "Name or Id of the environment.",
+  "resources": [{
+    "deploy-type": "Type of deployment for this resource.",
+    "inputs": "Inputs",
+    "name": "Filename of the entry.",
+    "operation-type": "Type of operation for this entry. e.
+  g. 'Deploy' or 'Delete'.",
+    "target": "Target",
+    "target-type": "Type of the target for this resource."
+  }],
+  "version": "Name or Id of the version."
+}
+</code></pre></div></section>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_zinventory_post.html">Add entries to Z inventory.</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To create an authentication realm on the server, specify where to store user information, such as internal storage on the server, a single sign-on service, an LDAP server, or in OpenID Connect."><meta name="DC.subject" content="OpenID Connect, LDAP, Single Sign-on"><meta name="keywords" content="OpenID Connect, LDAP, Single Sign-on"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_auth.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_auth_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating authentication realms</title></head><body id="security_auth_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating authentication realms</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-a8ad511f-fc52-468f-a467-94e9c5cecbfa">Edit online</a></span></div>
+ 
+
+ 
+<div class="body taskbody"><p class="shortdesc">To create an authentication realm on the server, specify where to store
+  user information, such as internal storage on the server, a single sign-on service, an LDAP
+  server, or in OpenID Connect.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_auth_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+    <span class="ph cmd">On the Web UI, click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication (Users) </span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Realm</span></span>. The <span class="keyword wintitle">Create Authentication Realm</span> pane opens.</span>
+   </li><li class="li step stepexpand">
+    <span class="ph cmd">Enter a name, and description.</span>
+   </li><li class="li step stepexpand">
+<span class="ph cmd">Select the authentication realm type from the <span class="ph uicontrol">Type</span> list. </span>
+<div class="itemgroup info">The available types in the list are as follows: <span class="ph uicontrol">LDAP or Active
+      Directory</span>, <span class="ph uicontrol">Single Sign-on</span> (SSO), <span class="ph uicontrol">Internal
+      Storage</span>, and <span class="ph uicontrol">OpenID Connect</span>. </div>
+<div class="itemgroup info">If you select <span class="ph uicontrol">Internal Storage</span>, no additional parameters are required. </div>
+    <div class="itemgroup info">If you select <span class="ph uicontrol">LDAP or Active Directory</span>, specify the following
+      parameters:<table class="table frame-all" id="security_auth_create__table_o1d_5bv_1s"><caption><span class="table--title-label">Table 1. </span><span class="title">LDAP or Active Directory authentication realm properties</span></caption><colgroup><col style="width:33pt"><col style="width:33pt"><col style="width:526.2pt"></colgroup><thead class="thead">
+        <tr class="row">
+         <th class="entry align-left colsep-1 rowsep-1" id="security_auth_create__table_o1d_5bv_1s__entry__1" colspan="2">Field</th>
+         <th class="entry align-left colsep-1 rowsep-1" id="security_auth_create__table_o1d_5bv_1s__entry__2">Description</th>
+        </tr>
+       </thead><tbody class="tbody">
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1" colspan="2">LDAP URL</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">The URL of the LDAP server that begins with <code class="ph codeph">ldap://</code> or
+           <code class="ph codeph">ldaps://</code>. You can provide more than one URL, separated by spaces. If you
+          provide more than one URL, the server tries the URLs one at a time until the server
+          succeeds. </td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1" colspan="2">Authentication Mechanism</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">Indicates the authentication mechanism for use. The default mechanism is Simple.
+          Select <span class="ph uicontrol">DIGEST-MD5</span> to configure the LDAP server to use DIGEST-MD5,
+          and then specify the SASL realm.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1" colspan="2">Search Anonymously</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">When this checkbox is selected, LDAP accepts anonymous queries. If this check box is
+          cleared, specify the LDAP search connection DN and associated password. This check box is
+          selected by default.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-0 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1"></td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1">Search Connection DN</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">Complete the LDAP distinguished name to search. This parameter is required if the
+           <span class="ph uicontrol">Search Anonymously</span> check box is cleared.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-0 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1"></td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1">Search Connection Password</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">The password that is used for LDAP searches. This parameter is used with the value
+          in the <span class="ph uicontrol">Search Connection DN</span> field.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1" colspan="2">Specify how to search LDAP</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">Specifies how LDAP is searched. If users exist in multiple directories, select
+           <span class="ph uicontrol">LDAP users may exist in many directories; search across LDAP using a
+           criterion</span>. Otherwise, select <span class="ph uicontrol">LDAP users exist in a single
+           directory; use a pattern to create the DN for users</span>. Depending on the
+          selection, more fields are displayed.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-0 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1"></td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1">User Search Base</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2"><span class="ph" id="security_auth_create__user_search_base">When you search multiple directories, specify
+           the starting directory that is used for searches, such as
+            <code class="ph codeph">ou=employees,dc=mydomain,dc=com</code>.</span></td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-0 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1"> </td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1">User Search Filter</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2"><span class="ph" id="security_auth_create__user_search_filter">The LDAP filter expression to use when you
+           search for group entries, such as
+            <code class="ph codeph">(&amp;(mail={0})(objectclass=ePerson)(sAMAccountName={0}))</code>. The user
+           name replaces the <var class="keyword varname">{1}</var> variable in the search pattern, and the full
+           user DN replaces the <var class="keyword varname">{0}</var> variable. If the value is not part of the DN
+           pattern, enclose the value in parentheses, for example,
+            <code class="ph codeph">(accountName={0})</code>. For more information, see the help information for
+           your LDAP server and look for information about creating user search
+          filters.</span></td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-0 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1"></td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1">Search User Subtree</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2"><span class="ph" id="security_auth_create__search_user_subtree">When you search multiple directories, select
+           this check box to search directories that are subordinate to the base
+          directory.</span></td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-0 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1"></td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1">User DN Pattern</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">When you search a single directory, the name is substituted in place of 0
+          in the pattern, for example, <code class="ph codeph">cn={0},ou=employees,dc=yourcompany,dc=com</code>.
+         </td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1" colspan="2">Name Attribute</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">Contains the user name in LDAP.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1" colspan="2">Email Attribute</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">Contains the user email address in LDAP.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1" colspan="2">Login Machanism</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">Enables you to use OpenID Connect as an authentication mechanism with two modes; UID
+          and alternate ID. <p class="p">For the properties that are common to both types, refer to the OpenID
+           Connect authentication realm properties in the table that follows. </p></td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1"></td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1">Force Authentication through OpenID Connect</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">Prevents direct username and password authentication with LDAP for this
+          realm.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1"></td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1">UID Claim</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">The OpenID Claim that contains the unique ID to use for LDAP lookup.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1"></td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1">Alternate ID Claim</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">The OpenID Claim that contains the alternate or custom ID to use for LDAP
+          lookup.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1"></td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__1">Alternate ID Search</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_o1d_5bv_1s__entry__2">The LDAP search filter that uses the alternate ID as <code class="ph codeph">{0}</code>.</td>
+        </tr>
+       </tbody></table>If you select <span class="ph uicontrol">Single Sign-on</span>, specify the following
+      parameters:<table class="table frame-all" id="security_auth_create__table_nn4_14n_rwb"><caption><span class="table--title-label">Table 2. </span><span class="title">SSO authentication realm properties</span></caption><colgroup><col style="width:105.6pt"><col style="width:526.2pt"></colgroup><thead class="thead">
+        <tr class="row">
+         <th class="entry align-left colsep-1 rowsep-1" id="security_auth_create__table_nn4_14n_rwb__entry__1">Field</th>
+         <th class="entry align-left colsep-1 rowsep-1" id="security_auth_create__table_nn4_14n_rwb__entry__2">Description</th>
+        </tr>
+       </thead><tbody class="tbody">
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_nn4_14n_rwb__entry__1">User Header Name</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_nn4_14n_rwb__entry__2">The header that contains the list of users.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_nn4_14n_rwb__entry__1">Email Header Name</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_nn4_14n_rwb__entry__2">The header that contains the list of user email addresses.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_nn4_14n_rwb__entry__1">Logout URL</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_nn4_14n_rwb__entry__2">The URL to which users are redirected after they log out of <span class="ph">IBM DevOps Deploy (Deploy)</span>.</td>
+        </tr>
+       </tbody></table></div>
+    <div class="itemgroup info">
+     <p class="p">If you select <span class="ph uicontrol">OpenID Connect</span>, specify the following parameters:</p>
+     <table class="table frame-all" id="security_auth_create__table_jvw_c4n_rwb"><caption><span class="table--title-label">Table 3. </span><span class="title">OpenID Connect authentication realm properties</span></caption><colgroup><col style="width:105.6pt"><col style="width:526.2pt"></colgroup><thead class="thead">
+        <tr class="row">
+         <th class="entry align-left colsep-1 rowsep-1" id="security_auth_create__table_jvw_c4n_rwb__entry__1">Field</th>
+         <th class="entry align-left colsep-1 rowsep-1" id="security_auth_create__table_jvw_c4n_rwb__entry__2">Description</th>
+        </tr>
+       </thead><tbody class="tbody">
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1 security_auth_create__table_jvw_c4n_rwb__entry__2" colspan="2"><strong class="ph b">OpenID Provider and Client Identity</strong></td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1">Client ID</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__2">The client ID that is registered with the OpenID provider. </td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1">Client Secret</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__2">The client secret that the OpenID provider issues upon registration.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1">Issuer</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__2">The issuer identifier for the issuer of the token response. Enter the issuer
+          identifier, and click <span class="ph uicontrol">Discover</span> to fetch the OpenID endpoint
+          configuration automatically. The issuer identifier must not contain a query or
+          fragment.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1 security_auth_create__table_jvw_c4n_rwb__entry__2" colspan="2"><strong class="ph b">OpenID Endpoints</strong></td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1">JWKS URI</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__2">The JSON Web Key Sets (JWKS) URI endpoint.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1">Authorization Endpoint</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__2">The URI for authorization with the OpenID provider.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1">Token Endpoint</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__2">The URI for token requests with the OpenID provider.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1">Userinfo Endpoint</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__2">The URI for user information requests with the OpenID provider.</td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1 security_auth_create__table_jvw_c4n_rwb__entry__2" colspan="2"><strong class="ph b">Custom OpenID Claims</strong></td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1">Name Claim</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__2">The custom claim that you want to use to display as Name in the web UI. Defaults to
+           <code class="ph codeph">name</code>. <p class="p">Note that the Name Claim is not available in LDAP with OpenID
+           Connect type authentication realm.</p></td>
+        </tr>
+        <tr class="row">
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__1">Email Claim</td>
+         <td class="entry align-left colsep-1 rowsep-1" headers="security_auth_create__table_jvw_c4n_rwb__entry__2">The custom claim that contains user e-mail ID and is displayed as Email in the web
+          UI. Defaults to <code class="ph codeph">email</code>.<p class="p">Note that the Email Claim is not available in
+           LDAP with OpenID Connect type authentication realm.</p></td>
+        </tr>
+       </tbody></table>
+     <div class="note note note_note" id="security_auth_create__note_lzp_5qx_5wb"><span class="note__title">Note:</span> 
+      <ul class="ul" id="security_auth_create__ul_d3y_wrk_15b">
+       <li class="li">Make sure that the external agent URL matches with the OpenID provider configuration for
+        the redirect URI.</li>
+       <li class="li">The OpenID provider must be set to use RS256 as its token signature algorithm, so that
+         <span class="ph">Deploy</span>
+        communicates with it correctly.</li>
+      </ul>
+     </div>
+    </div>
+</li><li class="li step stepexpand">
+    <span class="ph cmd">Disable password-based login for the authentication realm by checking the
+      <span class="ph uicontrol">Disable Login</span> option.</span>
+    <div class="itemgroup info">Administrators can still login by using login password via the admin URL, that is
+       <code class="ph codeph">https://<var class="keyword varname">hostname</var>:<var class="keyword varname">port</var>/admin</code>. Note that
+     authentication tokens that are defined in this realm continue to work. Changing this setting
+     does not disrupt active sessions. </div>
+   </li><li class="li step stepexpand">
+    <span class="ph cmd">Enter the number of user login attempts to accept in the <span class="ph uicontrol">Allowed Login
+      Attempts</span> field.</span>
+    <div class="itemgroup info">A blank value means that an unlimited number of attempts is allowed. If a user exceeds the
+     attempt limit, use the <span class="ph uicontrol">Unlock User</span> action on the
+      <span class="keyword wintitle">Authentication</span> page to unlock the user.</div>
+   </li><li class="li step stepexpand">
+<span class="ph cmd">Select the authorization realm from the <span class="ph uicontrol">Authorization Realm</span> list.</span>
+<div class="itemgroup info">The internal security realm is available by default. See <a class="xref" href="security_config.html#security_config" title="Use the Authorization Realms pane to create authorization realms and user groups for the server. Groups can be imported from external systems, such as LDAP.">Authorization realms</a>.<div class="note note note_note"><span class="note__title">Note:</span> If you use an LDAP authentication realm
+      with an LDAP authorization realm, the settings in this authentication realm override the
+      settings in the LDAP authorization realm. If you use an SSO authentication realm with an LDAP
+      authorization realm, you must specify connection settings on the LDAP authorization
+      realm.</div></div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="tasksecurity_auth_create__result__1">Results</h2></div>When new users log on to the server and use their LDAP or SSO credentials, they are listed
+   on the <span class="ph uicontrol">Authentication</span> tab. In most cases, do not manage user passwords or
+   remove users from the list. If an active user is removed from <span class="ph">Deploy</span>, they can still log on
+   to the server while their LDAP credentials are valid.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../admin/topics/security_auth.html" title="Authentication realms manage users and determine user identity within authorization realms for the server.">Authentication realms</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To deploy applications with IBM DevOps Deploy (Deploy), you need one or more agents. The server uses the agents to deploy the application components on target systems."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/webapp_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="webapp_configure_agent"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring the agent and target system</title></head><body id="webapp_configure_agent"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring the agent and target system</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-d0a3142a-8453-48f8-9c39-0816074c0b55">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To deploy applications with <span class="ph">IBM DevOps Deploy (Deploy)</span>, you need one or more
+      <dfn class="term">agents</dfn>. The server uses the agents to deploy the application components on target
+    systems.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_configure_agent__prereq__1">Before you begin</h2></div>Before you begin the tutorial, make sure that you completed the <a class="xref" href="webapp_intro.html#webapp_intro__prereqs">Prerequisites</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_configure_agent__context__1">About this task</h2></div>To work through this tutorial, you need an agent that is running on a target computer
+      system. This target computer can be a cloud resource, a virtual image, or a physical computer.
+      You must have access to this computer and be able to install MySQL/MariaDB, Apache Tomcat, and
+      the <span class="ph">Deploy</span>
+      agent on it. Follow these steps to set up an agent and a target system for your work with the
+      tutorial:</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_configure_agent__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Prepare a computer for use as the target system.</span>
+<div class="itemgroup info" data-hd-otherprops="ibm">This computer must meet the system requirements that are listed in <a class="xref" href="../../install/topics/sysRequire.html#sysrequire" title="The IBM DevOps Deploy (Deploy) server runs on Windows and UNIX systems. Following some guidelines can improve the performance of the server and agents.">System requirements and performance considerations</a>. Most of the examples
+in this tutorial show information for a simple Linux™
+operating system such as Red Hat Enterprise Linux version
+7.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Install an agent on the target system.</span>
+<div class="itemgroup info">See <a class="xref" href="../../install/topics/agent_install_ov.html#agent_install_ov" title="You can install agents from the server or from the command line on the agent system. To configure a failover server for an agent, you must install the agent from the command line.">Installing agents</a>.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">On the <span class="ph">Deploy</span> server,
+verify that the agent is installed by clicking <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agents</span></span>. Your agent must appear
+in the list of agents with a status of <span class="ph uicontrol">Online</span>,
+as shown in the following figure:</span><div class="itemgroup info"><br><img class="image" id="webapp_configure_agent__agent_online" src="../images/webapp_configure_a.gif" alt="The agent in the list of agents; the Status column shows that the agent is online"><br></div></li><li class="li step stepexpand"><span class="ph cmd">Add the agent as a resource:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Go to the <span class="ph uicontrol">Resource Tree</span> tab.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Create Top-Level Group</span>,
+give the new group a name such as <kbd class="ph userinput">JPetStore agents</kbd> and
+click <span class="ph uicontrol">Save</span>.</span><div class="itemgroup info">This group is a container
+for resources, such as agents.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">On the same row as the new resource group, click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Agent</span></span>, as shown in the following figure:</span><div class="itemgroup info"><br><img class="image" src="../images/webapp_configure_c.gif" height="195" width="499" alt="Adding an agent to the resource group"><br></div></li>
+<li class="li substep substepexpand">
+<span class="ph cmd">In the <span class="keyword wintitle">Create Resource</span> window, select the agent in the
+<span class="ph uicontrol">Agent</span> field and click <span class="ph uicontrol">Save</span>.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult">The agent is now listed as a child of the resource group.
+You must add agents to resource groups in this way so that applications
+can access the agents through the resource group.</div></li><li class="li step stepexpand">
+        <span class="ph cmd">Install and start the MySQL/MariaDB server on the target system.</span>
+        <div class="itemgroup info">The application uses a MySQL/MariaDB database. </div>
+        <div class="itemgroup stepxmp">If you are using a Linux operating system,
+          you can use the package manager to install and start MySQL/MariaDB. For example, on Red
+          Hat Enterprise Linux version 7, run the following
+          commands:<pre class="pre codeblock"><code>yum install mariadb mariadb-server</code></pre><pre class="pre codeblock"><code>systemctl enable mariadb</code></pre><pre class="pre codeblock"><code>systemctl start mariadb</code></pre></div>
+        <div class="itemgroup stepxmp">On Windows, you can use a graphical
+          installer or download a binary package for the database server. Then, start the server by
+          going to the <span class="ph filepath">bin</span> folder and running the <span class="keyword cmdname">mysqld</span>
+          command.</div>
+      </li><li class="li step stepexpand"><span class="ph cmd">Create an empty database for the application to use:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+            <span class="ph cmd">Open a command-line window and log in to the database as the root user.</span>
+            <div class="itemgroup stepxmp">For example, run this command from the command
+              line:<pre class="pre codeblock"><code>mysql -u root</code></pre></div>
+            <div class="itemgroup stepresult">The command line now shows a prompt that looks like this
+              prompt:<pre class="pre codeblock"><code>MariaDB&gt;</code></pre></div>
+          </li>
+<li class="li substep substepexpand"><span class="ph cmd">Create the database with the following command:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>create database jpetstore;</code></pre></div>
+<div class="itemgroup stepresult">If the command runs properly, you see the message <code class="ph codeph">Query
+OK, 1 row affected</code>.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Create the database user with the following command:</span>
+<div class="itemgroup info"><pre class="pre codeblock"><code>create user 'jpetstore'@'localhost' identified by 'jppwd';</code></pre></div>
+<div class="itemgroup stepresult">If the command runs properly, you see the message <code class="ph codeph">Query
+OK, 0 rows affected</code>.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Give the user access rights to the database with the
+following command:</span><div class="itemgroup info"><pre class="pre codeblock"><code>grant all privileges on jpetstore.* to 'jpetstore'@'localhost';</code></pre></div>
+<div class="itemgroup stepresult">If the command runs properly, you see the message <code class="ph codeph">Query
+OK, 0 rows affected</code>.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Type <kbd class="ph userinput">quit</kbd> to exit the MySQL command
+line.</span></li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Verify that the user can access the database:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+            <span class="ph cmd">From the command-line window, log in to the database as the new user:</span>
+            <div class="itemgroup info">
+              <pre class="pre codeblock"><code>mysql -u jpetstore -pjppwd</code></pre>
+            </div>
+          </li>
+<li class="li substep substepexpand"><span class="ph cmd">Run the following command to list the databases on the
+system:</span><div class="itemgroup info"><pre class="pre codeblock"><code>show databases;</code></pre></div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Verify that the <code class="ph codeph">jpetstore</code> database
+appears in the list, as shown in the following figure:</span><div class="itemgroup stepresult"><br><img class="image" src="../images/webapp_configure_b.gif" alt="The list of databases on the system, including the jpetstore database"><br></div></li>
+<li class="li substep substepexpand">
+            <span class="ph cmd">Type <kbd class="ph userinput">quit</kbd> to exit the database command line.</span>
+          </li>
+</ol>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Install Apache Tomcat on the target system.</span>
+<div class="itemgroup info">You can use Tomcat version 9.</div>
+<div class="itemgroup stepxmp">A simple way to install Tomcat on a Linux operating
+system is to download and install the binary distribution of Tomcat, as in the following
+steps:</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+            <span class="ph cmd">Download the binary distribution of Tomcat, such as
+                <span class="ph filepath">apache-tomcat-9.0.100.tar.gz</span> .</span>
+          </li>
+
+<li class="li substep substepexpand">
+            <span class="ph cmd">Extract this file to a folder on the target computer, such as
+                <span class="ph filepath">/opt/apache-tomcat-9.0.100</span> .</span>
+            <div class="itemgroup stepxmp">For example, on a Linux operating system
+              you might run the following
+              command:<pre class="pre codeblock"><code>tar -xf apache-tomcat-9.0.100.tar.gz ; mv apache-tomcat-9.0.100/ /opt</code></pre></div>
+          </li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Add an administrative user to the Tomcat server in the <span class="ph filepath">conf/tomcat-users.xml</span> file.</span>
+<div class="itemgroup info">This user account is necessary to deploy applications to Tomcat.</div>
+<div class="itemgroup stepxmp">For example, for Tomcat version 9, open the file <span class="ph filepath">conf/tomcat-users.xml</span>
+          and uncomment the <code class="ph codeph">role</code> and <code class="ph codeph">user</code> tags at the bottom of
+          the file. Then, add the following lines of code to those
+          tags:<pre class="pre codeblock"><code>&lt;role rolename="manager"/&gt;
+&lt;user username="tomcatmanager" password="tomcatmanager" roles="manager"/&gt;</code></pre>The
+          end of the file looks like the following
+          example:<pre class="pre codeblock"><code>&lt;role rolename="tomcat"/&gt;
+  &lt;role rolename="role1"/&gt;
+  &lt;user username="tomcat" password="tomcat" roles="tomcat"/&gt;
+  &lt;user username="both" password="tomcat" roles="tomcat,role1"/&gt;
+  &lt;user username="role1" password="tomcat" roles="role1"/&gt;
+
+  &lt;role rolename="manager"/&gt;
+  &lt;user username="tomcatmanager" password="tomcatmanager" roles="manager"/&gt;
+
+&lt;/tomcat-users&gt;</code></pre></div><div class="itemgroup stepxmp">For Tomcat version 9, open the file <span class="ph filepath">conf/tomcat-users.xml</span> and
+          uncomment the <code class="ph codeph">role</code> and <code class="ph codeph">user</code> tags at the bottom of the
+          file. Remove the text <code class="ph codeph">&lt;must-be-changed&gt;</code> and replace it with passwords
+          for the default user accounts. If you do not remove this text, the configuration file is
+          unreadable and your sample application will not be able to access Tomcat. Then, add the
+          following lines of code to those tags:<pre class="pre codeblock"><code>&lt;role rolename="manager-script"/&gt;
+&lt;role rolename="manager-gui"/&gt;
+&lt;user username="tomcatmanager" password="tomcatmanager" roles="manager-script,manager-gui"/&gt;</code></pre>The
+          end of the file might look like the following
+          example:<pre class="pre codeblock"><code>&lt;role rolename="tomcat"/&gt;
+  &lt;role rolename="role1"/&gt;
+  &lt;user username="tomcat" password="tomcat" roles="tomcat"/&gt;
+  &lt;user username="both" password="tomcat" roles="tomcat,role1"/&gt;
+  &lt;user username="role1" password="tomcat" roles="role1"/&gt;
+
+  &lt;role rolename="manager-script"/&gt;
+  &lt;role rolename="manager-gui"/&gt;
+  &lt;user username="tomcatmanager" password="tomcatmanager" roles="manager-script,manager-gui"/&gt;
+
+&lt;/tomcat-users&gt;</code></pre></div></li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph filepath">conf/server.xml</span> file, modify
+the default HTTP ports to avoid conflicts.</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">Replace all instances of port number <code class="ph codeph">8080</code> with port number
+<code class="ph codeph">8081</code>.</span>
+<div class="itemgroup stepxmp">To update the port numbers from the command line, run this command:
+<pre class="pre codeblock"><code>sed -i 's/8080/8081/g' /opt/<var class="keyword varname">tomcat_directory</var>/conf/server.xml</code></pre></div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Replace all instances of port number <code class="ph codeph">8443</code> with port number
+<code class="ph codeph">8445</code>.</span>
+<div class="itemgroup stepxmp">To update the port numbers from the command line, run this command:
+              <pre class="pre codeblock"><code>sed -i 's/8443/8445/g' /opt/<var class="keyword varname">tomcat_directory</var>/conf/server.xml</code></pre></div>
+</li>
+</ol>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_configure_agent__result__1">Results</h2></div>Now the agent and the target system are configured for your work with the sample
+application. You need the passwords and locations that you specified later.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.1 SS4GSP_8.0.1" href="../../tutorial/topics/webapp_abstract.html" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">Deploying a simple web application</a></div></div></nav></article></main></body></html>

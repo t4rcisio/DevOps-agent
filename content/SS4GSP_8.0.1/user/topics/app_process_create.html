@@ -1,0 +1,63 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can use application processes to deploy or to roll back components."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_process.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_process_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating application processes</title></head><body id="app_process_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating application processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-109f9a27-d81b-42d4-9038-ae4824a3fd6d">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can use application processes to deploy or to roll
+back components.</p>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Display the <span class="keyword wintitle">Create an Application Process</span> dialog box (<span class="ph menucascade"><span class="ph uicontrol">Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">select application</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Processes</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create Process</span></span>), and enter the following information: </span>
+<div class="itemgroup info">
+
+<table class="table"><caption></caption><colgroup><col><col></colgroup><thead class="thead">
+<tr class="row">
+<th class="entry align-left" id="app_process_create__entry__1">Field</th>
+<th class="entry align-left" id="app_process_create__entry__2">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry align-left" headers="app_process_create__entry__1"><span class="ph uicontrol">Name</span> and
+<span class="ph uicontrol">Description</span></td>
+<td class="entry align-left" headers="app_process_create__entry__2">Typically the name and description correspond to the application
+you plan on deploying.<div class="note note note_note"><span class="note__title">Note:</span> You must specify a unique name. Your application process name cannot
+contain the same sequence of alphanumeric characters with different capitalization as an existing
+application process.</div></td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="app_process_create__entry__1"><span class="ph uicontrol">Inventory Management</span></td>
+<td class="entry align-left" headers="app_process_create__entry__2">If you want to handle inventory manually, select
+<code class="ph codeph">Advanced</code>. To have inventory that is handled automatically, leave the default value,
+<code class="ph codeph">Automatic</code>, selected. See <a class="xref" href="inventory_ch.html" title="You use different inventories to track installed components and properties in IBM DevOps Deploy (Deploy) elements.">Inventories</a>.</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="app_process_create__entry__1"><span class="ph uicontrol">Offline Agent Handling</span></td>
+<td class="entry align-left" headers="app_process_create__entry__2"> Specify how the process reacts if expected agents are offline: <ul class="ul">
+<li class="li"><span class="ph uicontrol">Check Before Execution</span>: checks to see whether expected agents are online
+before you start the process. If agents are offline, the process does not run.</li>
+<li class="li"><span class="ph uicontrol">Use All Available</span>; <span class="ph uicontrol">Report Failure</span>: process runs
+while at least one agent is online; reports any failed deployments because of offline agents. Useful
+for rollbacks or configuration deployments.</li>
+<li class="li"><span class="ph uicontrol">Always Report Success</span>: process runs while at least one agent is online;
+reports successful deployments.</li>
+</ul>
+</td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="app_process_create__entry__1"><span class="ph uicontrol">Required Role</span></td>
+<td class="entry align-left" headers="app_process_create__entry__2">Use this list to select the role that a user must have to run the
+process. You will need to be in the required role for the team on the environment you are trying to
+run the process on. For more information, see <a class="xref" href="../../admin/topics/security_roles.html" title="A role is a list of permissions that users have on the IBM DevOps Deploy (Deploy) server. These permissions include the ability to create, edit, and delete objects, such as applications, environments, and components. The permission also includes the parts of the server interface that users can access.">Roles and permissions</a>. The default value
+is <code class="ph codeph">None</code>. </td>
+</tr>
+<tr class="row">
+<td class="entry align-left" headers="app_process_create__entry__1"><span class="ph uicontrol">Disable Deploying Snapshots</span></td>
+<td class="entry align-left" headers="app_process_create__entry__2">Allows you to create an application process that deploys
+component versions only. On enabling the option, you are forced to specify the component versions
+while deploying applications and alerts you that snapshot deployments are disabled.</td>
+</tr>
+</tbody></table>
+</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Save your work.</span></li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_create__postreq__1">What to do next</h2></div>Edit the process in the process editor. See <a class="xref" href="comp_workflow_edit.html" title="In the process editor you organize the steps in a process, specify their properties, and connect them to each other.">Editing processes</a>.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_process.html" title="You can use application processes to deploy or to roll back components.">Application processes</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="With an external monitoring tool, such as IBM Performance Management on Cloud 8.1.3 or New Relic, you can use Managed Beans (MBeans) to review numerous details about IBM DevOps Deploy (Deploy). For example, you can view statistics that specify how many components are available or see how long it takes for an application process to run to completion. You can use these statistics and details to assess the health of your deployments and deployment processes."><meta name="DC.relation" scheme="URI" content="../../user/topics/reports_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_amt_brd_5w"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Monitor operating details with MBeans</title></head><body id="concept_amt_brd_5w"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Monitor operating details with MBeans</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-55e18717-3105-4f60-9850-2890bcc942b9">Edit online</a></span></div>
+
+
+<div class="body conbody"><p class="shortdesc">With an external monitoring tool, such as IBM®
+          Performance Management on Cloud 8.1.3 or New Relic, you can use Managed Beans (MBeans) to
+          review numerous details about <span class="ph">IBM DevOps Deploy (Deploy)</span>. For
+          example, you can view statistics that specify how many components are available or see how
+          long it takes for an application process to run to completion. You can use these
+          statistics and details to assess the health of your deployments and deployment
+          processes.</p>
+<p class="p">You can request and specify metrics by using four MBeans. Two MBeans provide summary information
+for all the targeted elements. For example, the agent summary information MBean provides aggregate
+information about all agents. The other two MBeans provide specific information about elements. The
+individual component information MBean provides details about a particular component, which you
+specify by name. The following list shows the four areas and the structure of the data that each
+MBean provides. Access the data according to the requirements of your monitoring tool. Refer to the
+documentation for the tool as required.</p>
+<div class="p">By default, the metrics monitoring is turned off. To enable the metrics monitoring, you must add
+a property to the <span class="ph filepath">installed.properties</span> file. By default, this file is in the
+<span class="ph filepath">/opt/install-dir/server/conf/server</span> folder. To enable monitoring, add this line to
+the file: <pre class="pre codeblock"><code>jmx.monitoring.enabled=true</code></pre>If your servers are
+working in high availability, you can specify how frequently the servers synchronize data to ensure
+that the servers maintain a consistent list of components and applications. In the
+<span class="ph filepath">installed.properties</span> file, add the following
+line:<pre class="pre codeblock"><code>jmx.monitoring.ha.update.interval.minutes=<var class="keyword varname">measurement_update_time</var></code></pre>where
+<var class="keyword varname">measurement_update_time</var> is a whole number is greater than or equal to 30. You
+cannot get updates more frequently than every 30 minutes. This limit reduces the processing
+requirements on the servers. </div>
+<p class="p">You can monitor four areas of operational details.</p>
+<section class="section"><h2 id="concept_amt_brd_5w__title__2" class="title sectiontitle">Agent summary information</h2>
+
+<p class="p">
+<p class="lines"><span class="keyword parmname">JMX: com.urbancode.ds.agents:type=monitor</span><br> <br> <code class="ph codeph"> AllAgentCount</code> (The total number of agents)<br><code class="ph codeph"> ConnectingAgentCount</code> (The number of agents that are currently attempting to connect to the server)<br><code class="ph codeph"> UpgradeRecommendAgentCount</code> (The number of agents to upgrade to achieve best results)<br><code class="ph codeph"> UpgradeRequiredAgentCount</code> (The number of agents that must be upgraded)<br><code class="ph codeph"> ErrorAgentCount</code> (The number of agents that are in an error state)<br><code class="ph codeph"> OfflineAgentCount</code> (The number of agents that are offline)<br> <code class="ph codeph"> InstallableAgentCount</code> (The number of agents that can be installed)<br><code class="ph codeph"> OnlineAgentCount</code> (The number of agents that are online)<br><code class="ph codeph"> LicensedAgentCount</code> (The number of the agents that have licenses)<br><code class="ph codeph"> UnlicensedAgentCount</code> (The number of unlicensed agents)</p>
+</p>
+</section>
+<section class="section"><h2 id="concept_amt_brd_5w__title__3" class="title sectiontitle">Individual component information </h2>
+
+<p class="lines"><span class="keyword parmname">JMX: com.urbancode.ds.components.individual.monitor:type=</span><br><code class="ph codeph"> <var class="keyword varname">COMPONENT_NAME</var></code><br><code class="ph codeph"> LatestVersionSizeInBytes</code> (The size in bytes of the most recent version of the specified component)<br><code class="ph codeph"> PreviousVersionSizeInBytes</code> (The size in bytes of the previous version of the specified component)<br><code class="ph codeph"> AverageVersionSizeInBytes</code> (The average in bytes size of all the versions of the specified components)<br></p>
+<div class="p">You can specify multiple components individually in three ways:<ul class="ul">
+<li class="li">Name the component specifically, for
+example:<pre class="pre codeblock"><code>com.urbancode.ds.components.individual.monitor:type=
+     <var class="keyword varname">ComponentA</var>
+
+com.urbancode.ds.components.individual.monitor:type=
+     <var class="keyword varname">ComponentB</var>
+</code></pre></li>
+<li class="li">Use wildcards to report components with names that match the sample, for
+example:<pre class="pre codeblock"><code>com.urbancode.ds.components.individual.monitor:type=
+     <var class="keyword varname">Component*</var></code></pre></li>
+<li class="li">Use a wildcard to report all components, for
+example:<pre class="pre codeblock"><code>com.urbancode.ds.components.individual.monitor:type=*</code></pre></li>
+</ul>
+</div>
+</section>
+<section class="section"><h2 id="concept_amt_brd_5w__title__4" class="title sectiontitle">Component summary information</h2>
+
+<p class="p">
+<p class="lines"><span class="keyword parmname">JMX: com.urbancode.ds.components.summary:type=monitor</span><br><code class="ph codeph"> TotalComponentCount</code> (The total number of components)<br><code class="ph codeph"> FailedImportComponentCount</code> (The number of components whose latest version was not imported after an import request)<br><code class="ph codeph"> ImportingComponentCount</code> (The number of components that are currently being imported)<br><code class="ph codeph"> NoVersionComponentCount</code> (The number of components that do not have versions)<br><br><code class="ph codeph"> OKComponentCount</code> (The number of components whose latest versions were not imported successfully)</p>
+</p>
+</section>
+<section class="section"><h2 id="concept_amt_brd_5w__title__5" class="title sectiontitle">Individual application information</h2>
+
+<div class="p">
+<p class="lines"><span class="keyword parmname">JMX:com.urbancode.ds.applications.individual.monitor:type=</span><br><code class="ph codeph"> <var class="keyword varname">APPLICATION_NAME</var></code><br><code class="ph codeph"> LatestDeploymentDurationInMS</code> (The amount of time that the most recently completed deployment process lasted for the specified component)<br><code class="ph codeph"> PreviousDeploymentDurationInMS</code> (The amount of time that the previously completed deployment process lasted for the specified component)<br><code class="ph codeph"> AverageDeploymentDurationInMS</code> (The average amount of time that completed deployment processes lasted for the specified component) </p>
+<ul class="ul">
+<li class="li">Name the component specifically, for
+example:<pre class="pre codeblock"><code>com.urbancode.ds.components.individual.monitor:type=
+     <var class="keyword varname">ApplicationA</var>
+
+com.urbancode.ds.components.individual.monitor:type=
+     <var class="keyword varname">ApplicationB</var>
+</code></pre></li>
+<li class="li">Use wildcards to report components with names that match the sample, for
+example:<pre class="pre codeblock"><code>com.urbancode.ds.components.individual.monitor:type=
+     <var class="keyword varname">Application*</var></code></pre></li>
+<li class="li">Use a wildcard to report all components, for
+example:<pre class="pre codeblock"><code>com.urbancode.ds.components.individual.monitor:type=*</code></pre></li>
+</ul>
+</div>
+</section>
+<section class="section"><h2 id="concept_amt_brd_5w__title__6" class="title sectiontitle">Viewing metrics with JConsole</h2>
+
+<p class="p">JConsole is one external monitoring tool that is immediately available to you. For information
+about JConsole and starting the tool, see <a class="xref" href="http://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html" target="_blank">Using JConsole</a>. After you turn on monitoring as described earlier and start
+JConsole, select a new connection as shown in this illustration: </p>
+<p class="p"><img class="image" src="../images/jconsole_conex.gif" alt="Connection menu for JConsole">.</p>
+<p class="p"> Then, click the <span class="ph uicontrol">Mbeans</span> tab. In the left navigation, select the metrics to
+view.</p>
+<p class="p"><img class="image" src="../images/jconsole_mbean.gif" alt="Available metrics in JConsole"></p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/reports_ch.html" title="Provides several different deployment and security reports.">Reporting</a></div></div></nav></article></main></body></html>

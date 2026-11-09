@@ -1,0 +1,124 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="Chef roles describe automation tasks to be run on a target system. You can apply roles to images in a blueprint."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueprint_chef"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Applying Chef roles to environments</title></head><body id="blueprint_chef"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Applying Chef roles to environments</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3d677d11-caa6-48aa-9ead-d85d11a5089c">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Chef roles describe automation tasks to be run on a target system. You can apply roles to
+images in a blueprint.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_chef__prereq__1">Before you begin</h2></div>
+<div class="note note note_note"><span class="note__title">Note:</span> These instructions are for using Chef when you provision environments on
+cloud systems via OpenStack Heat. To use Chef in component processes, see the <a class="xref" href="https://developer.ibm.com/urbancode/plugin/chef/" target="_blank">Chef
+automation plugin</a>.</div>
+<ul class="ul">
+<li class="li"><span class="ph">Chef roles are supported on only OpenStack, VMware, and SoftLayer® clouds.</span></li>
+<li class="li">Connect to a Chef server. See <a class="xref" href="integrate_chef.html" title="Chef can automate infrastructure tasks, such as installing databases and application servers. By integrating the blueprint designer with Chef, you can apply Chef roles to images in blueprints. When you provision environments, the environments run the Chef automation scripts that are based on those roles.">Integrating with Chef</a>.</li>
+<li class="li">Configure your images to work with Chef. See <a class="xref" href="integrate_chef_images.html" title="To use images with Chef and the blueprint designer, you must create the images with certain prerequisites.">Creating Chef-compatible images</a>.</li>
+<li class="li">Connect the blueprint design server to a cloud system. See <a class="xref" href="security_cloud_connection.html" title="To create a connection to a cloud to use with the blueprint designer, you use OpenStack Heat. You specify the location of the identity server and the engine to use. The steps are different for each type of cloud.">Connecting to clouds through the blueprint designer</a>.</li>
+</ul>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_chef__context__1">About this task</h2></div>When you provision an environment that includes Chef roles, the virtual image contacts the
+Chef server, downloads the associated roles and cookbooks, and runs the specified
+automation.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_chef__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">In a blueprint, add one or more images.</span>
+<div class="itemgroup info">These images must be configured to work with Chef as described in <a class="xref" href="integrate_chef_images.html" title="To use images with Chef and the blueprint designer, you must create the images with certain prerequisites.">Creating Chef-compatible images</a>.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">From the <span class="ph uicontrol">Components</span> palette drawer, drag one or more Chef roles to the
+images.</span>
+<div class="itemgroup stepresult">Two resources are added to the blueprint source code for each Chef role. The
+<code class="ph codeph">OS::Heat::SoftwareDeployment</code> resource type represents the deployment instance of
+the role, and the <code class="ph codeph">OS::Heat::SoftwareConfig</code> resource type represents the
+configuration properties for the role, including its inputs and outputs.<div class="note note note_note"><span class="note__title">Note:</span> When you add a Chef
+role to an image, the <span class="keyword parmname">name</span> property is removed from the image. When you use a
+Chef role on an image, the engine generates a unique name for the image
+automatically.</div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Specify the properties for the <code class="ph codeph">OS::Heat::SoftwareDeployment</code>.</span>
+<div class="itemgroup info">
+<ul class="ul">
+<li class="li">Set the <span class="keyword parmname">ENV_NAME</span> property. This property must have the name of an
+environment on the Chef server. By default, Chef servers have an environment that is named
+<code class="ph codeph">_default</code>. This environment must exist on the Chef server. The blueprint design
+server does not create environments on the Chef server. Do not confuse Chef environments with cloud
+environments. For information about Chef environments, see <a class="xref" href="http://docs.chef.io/environments.html" target="_blank">http://docs.chef.io/environments.html</a>.</li>
+<li class="li">Assign the Chef node name. <p class="p">If you do not specify a value, the fully
+qualified host name of the server that you create is the Chef node name.</p><ul class="ul">
+<li class="li">To manually assign the node name, specify a value in the <span class="keyword parmname">NODE_NAME</span>
+property. Inn in the following code.
+<pre class="pre codeblock"><code>  Chef_tutorial:
+    type: OS::Heat::SoftwareDeployment
+    properties:
+      config: { get_resource: Chef_tutorial_sw_config }
+      server: { get_resource: rhel-7-chef_image }
+      input_values:
+        CHEF_VALIDATOR_KEY: { get_param: chef_validator_key }
+        CHEF_SERVER_URL: { get_param: chef_server_url }
+        ENV_NAME: { get_param: chef_env }
+        VALIDATOR_NAME: { get_param: chef_validator_name }
+        RUN_LIST: "role[tutorial]"
+        <strong class="ph b">NODE_NAME: Tutorial_node</strong>
+        CHEF_METADATA:
+      actions:
+        - CREATE
+        - DELETE
+</code></pre></li>
+<li class="li">To automatically assign the node name based on the stack id, specify a variable in the
+<span class="keyword parmname">NODE_NAME</span> property, as shown in the following
+code.<pre class="pre codeblock"><code>  Chef_tutorial:
+    type: OS::Heat::SoftwareDeployment
+    properties:
+      config: { get_resource: Chef_tutorial_sw_config }
+      server: { get_resource: rhel-7-chef_image }
+      input_values:
+        CHEF_VALIDATOR_KEY: { get_param: chef_validator_key }
+        CHEF_SERVER_URL: { get_param: chef_server_url }
+        ENV_NAME: { get_param: chef_env }
+        VALIDATOR_NAME: { get_param: chef_validator_name }
+        RUN_LIST: "role[write-file]"
+        <strong class="ph b">NODE_NAME: _node_name_string_</strong>
+        CHEF_METADATA:
+      actions:
+        - CREATE
+        - DELETE</code></pre><p class="p">You
+must configure the <code class="ph codeph">OS::Heat::SoftwareConfig</code> resource to obtain the value for the
+variable in the <span class="keyword parmname">NODE_NAME</span> property. In the following code, the value of the
+variable <code class="ph codeph">_node_name_string_</code> is the text <kbd class="ph userinput">test-node-</kbd> and the
+value of the <span class="keyword parmname">OS::stack_id</span>
+parameter.</p><pre class="pre codeblock"><code>  Chef_write-file_sw_config:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      config:
+        str_replace:
+          template: |
+          <strong class="ph b">params:
+            _node_name_string_:
+              str_replace:
+                template: |
+                  "test-node-_res_id_"
+                params:
+                  _res_id_: { get_param: "OS::stack_id" }</strong></code></pre>The
+value of the <code class="ph codeph">_node_name_string_</code> variable resembles the following code:
+<pre class="pre codeblock"><code>test-node-9f6a4b07-254d-406k-9bdb-fd5f8a576918</code></pre></li>
+</ul><div class="note note note_note"><span class="note__title">Note:</span> If you place multiple Chef roles on the same instance, set the
+<span class="keyword parmname">NODE_NAME</span> property for only the first role that you run. To specify the
+deployment order of the roles, see <a class="xref" href="blueprint_deploy_env.html#blueprint_deploy_env__deployment_order">Deploying components with
+blueprints</a>.</div></li>
+<li class="li">Set any metadata for the Chef role in the
+<span class="keyword parmname">CHEF_METADATA</span> section. By providing values in the
+<span class="keyword parmname">CHEF_METADATA</span> property, you can set attributes for the Chef role. For an
+example of using <span class="keyword parmname">CHEF_METADATA</span>, see <a class="xref" href="https://developer.ibm.com/urbancode/docs/using-output-properties-chef-recipe/" target="_blank">Using output properties from a Chef recipe</a>.</li>
+</ul>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If you used Chef in versions of the blueprint designer before 6.2.1, upgraded to version 6.2.1
+or later, and removed the validator key value from a URL that you host, you must modify your
+blueprint.</span>
+<div class="itemgroup info">See <a class="xref" href="chef_validator.html#chef_validator" title="If you upgrade your blueprint design server, you might need to modify references to the Chef validator key before you provision environments from existing blueprints.">Modifying blueprints to access the Chef validator key</a>.</div>
+</li><li class="li step stepexpand"><strong>Optional: </strong>
+<span class="ph cmd">Specify the Chef validator key.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueprint_chef__result__1">Results</h2></div>When you provision environments from this blueprint, the Chef server applies the roles to
+the environments. If any of the Chef roles fails, the provisioning process fails, in the same way as
+a step in a process fails.</section>
+</div>
+</article></main></body></html>

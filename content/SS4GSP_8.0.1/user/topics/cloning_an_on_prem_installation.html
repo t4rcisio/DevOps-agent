@@ -1,0 +1,205 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can install a new IBM DevOps Deploy (Deploy) server and then populate it with data from the production server."><meta name="DC.relation" scheme="URI" content="../../user/topics/cloning_server_test_upgrade.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="cloning_an_on_prem_installation"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Testing upgrades on a cloned on-prem installation</title></head><body id="cloning_an_on_prem_installation"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Testing upgrades on a cloned on-prem installation</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-25e1a606-9f76-425a-bd4e-7472dbc6f7d2">Edit online</a></span></div>
+    
+    <div class="body taskbody"><p class="shortdesc">You can install a new <span class="ph">IBM DevOps Deploy (Deploy)</span> server and then
+        populate it with data from the production server.</p>
+        <section id="cloning_an_on_prem_installation__steps_nlw_prl_j1c"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloning_an_on_prem_installation__steps_nlw_prl_j1c">Procedure</h2></div><ol class="ol steps" id="cloning_an_on_prem_installation__steps_nlw_prl_j1c"><li class="li step stepexpand">
+                <span class="ph cmd">Create a host machine that is similar to your production server
+                    configuration.</span>
+                <div class="itemgroup info">
+                    <div class="note note note_note" id="cloning_an_on_prem_installation__note_mcl_wwm_m1c"><span class="note__title">Note:</span> The cloned server must not be an exact copy of your
+                        production environment, but is similar enough to test an upgrade.</div>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Install the same version of Java that the production host uses.</span>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Stop the production server.</span>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Clone the database:</span>
+                <div class="itemgroup info">Contact your database administrators (DBAs) to clone the database. Your DBA
+                    must backup the existing database and restore it to a new database that can be
+                    accessed from the newly cloned <span class="ph">IBM DevOps Deploy (Deploy)</span>
+                    server. If more assistance is needed than your DBA can provide, use your support
+                    case for assistance.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Clone the application data (appdata) folder:</span>
+                <div class="itemgroup info">The location of your appdata is defined by the
+                        <code class="ph codeph">server.appdata.dir</code> property in the server's
+                        <span class="ph filepath">installed.properties</span> file.  </div>
+                <div class="itemgroup info">Most application data folders are mount points to an external file system. If
+                    your application data folder is external to the <span class="ph">Deploy</span>
+                    server, clone the application data folder. Point your cloned <span class="ph">Deploy</span>
+                    server to the cloned application data folder to avoid using the application data
+                    folder of your production server.</div>
+                <div class="itemgroup info">If your application data folder is large and you do not want to clone it for
+                    your test environment, you can skip cloning the application data folder and
+                    start a new one. If you chose not to clone the application data folder, no
+                    production component versions can be used nor can you view any production step
+                    output (both are stored in the application data folder). New component versions
+                    must be created to deploy. </div>
+                <div class="itemgroup info">If you choose not to clone the application data folder, copy the other
+                    application data folder files, such as:<ul class="ul" id="cloning_an_on_prem_installation__d443e75">
+                        <li class="li">Custom email notification templates, if you want to test them after you
+                            upgrade the clone.</li>
+                        <li class="li">The plug-ins directory. </li>
+                        <li class="li">If you want to verify the clone's health before you perform an upgrade,
+                            copy the patches. During an upgrade, <span class="ph">Deploy</span> turns off any patches by appending ".off" to the patch name.</li>
+                    </ul></div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">If <span class="ph">Deploy</span>
+                    is configured to use S3 storage, which is available starting with v7.0.5, clone
+                    the S3 bucket to use the same component versions artifacts as the production
+                    server. </span>
+                <div class="itemgroup info">
+                    <div class="note note note_note" id="cloning_an_on_prem_installation__d443e100"><span class="note__title">Note:</span> You can skip this step if you prefer to create new
+                        component version artifacts.</div>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Start the production server.</span>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Transfer the <span class="ph">Deploy</span>
+                    installation files to the clone host. </span>
+                <div class="itemgroup info">Place the JDBC driver JAR file that production is using into the clone
+                    system's <span class="ph filepath">lib/ext</span> directory so that the same JDBC driver is
+                    used by the clone.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Run the same <span class="ph">Deploy</span>
+                    version installer as your production server, choosing not to install the
+                    database. </span>
+                <div class="itemgroup info">The installer prompts you to configure <span class="ph">Deploy</span> to
+                    use an application data folder. If you do not use an application data folder,
+                    this configuration is corrected in a later step.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Copy the contents of the <span class="ph filepath">conf/encryption.keystore</span>
+                    directory of the production server to the clone’s
+                        <span class="ph filepath">conf/encryption.keystore</span> location. </span>
+                <div class="itemgroup info">To handle the differences in encryption keys, you can either replace the
+                    clone’s <span class="ph filepath">encryption.keystore</span> folder after installation with
+                    the production one or you can add the production key to the cloned keystore. See
+                        <a class="xref" href="../../install/topics/ssl_mutual_authServers.html" title="To share applications that have secured properties among IBM DevOps Deploy (Deploy) servers, exchange keys from each server's encryption keystore.">Sharing secured properties among servers</a>. </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Modify the cloned database.</span>
+                <ol type="a" class="ol substeps" id="cloning_an_on_prem_installation__d443e128">
+                    <li class="li substep substepexpand">
+                        <span class="ph cmd">For high availability (HA) configurations
+                            only:</span>
+                        <div class="itemgroup info">Remove the web cluster configuration from the database, if applicable,
+                            by deleting all the contents of the <code class="ph codeph">ds_server</code> table. If
+                            you need assistance deleting the contents, contact your DBA. <div class="note note note_note" id="cloning_an_on_prem_installation__d443e140"><span class="note__title">Note:</span> Versions prior to 7.0.0 do not have a
+                                    <code class="ph codeph">ds_server</code> table.</div></div>
+                    </li>
+                    <li class="li substep substepexpand">
+                        <span class="ph cmd">To stop automatic component version imports, run the following SQL to
+                            update the components in the database: </span>
+                    </li>
+                </ol>
+                <div class="itemgroup info">
+                    <pre class="pre codeblock" id="cloning_an_on_prem_installation__d443e156"><code>update DS_COMPONENT set IMPORT_AUTOMATICALLY='N' where IMPORT_AUTOMATICALLY='Y';</code></pre>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Modify the appropriate property values in the clone’s
+                        <span class="ph filepath">installed.properties</span> (and
+                        <span class="ph filepath">secured-installed.properties</span> file in newer versions)
+                    file.</span>
+                <div class="itemgroup info">
+                    <div class="p">The following properties must be modified to the values that are appropriate
+                        for the cloned server:<table class="simpletable frame-all" id="cloning_an_on_prem_installation__d443e176"><colgroup><col style="width:34.01360544217687%"><col style="width:65.98639455782312%"></colgroup><thead><tr class="sthead">
+                                <th class="stentry" scope="col">Property</th>
+                                <th class="stentry" scope="col">Description</th>
+                            </tr></thead><tbody><tr class="strow">
+                                <td class="stentry"><span class="keyword parmname">hibernate.connection.url</span></td>
+                                <td class="stentry">The URL of the cloned database.</td>
+                            </tr><tr class="strow">
+                                <td class="stentry"><span class="keyword parmname">hibernate.connection.username</span></td>
+                                <td class="stentry">The username used to access the cloned database.</td>
+                            </tr><tr class="strow">
+                                <td class="stentry"><span class="keyword parmname">hibernate.connection.password</span></td>
+                                <td class="stentry">The password of the user used to access the cloned
+                                        database.<p class="p">The password is stored in plain text until the
+                                        cloned server is started. After the cloned is
+                                            <em class="ph i">successfully </em>started, the password is encrypted.
+                                        In later versions of <span class="ph">Deploy</span>, this value is stored in the
+                                                <strong class="ph b"><em class="ph i">secured-installed.properties</em></strong>
+                                    file.</p></td>
+                            </tr><tr class="strow">
+                                <td class="stentry"><span class="keyword parmname">server.external.web.url</span></td>
+                                <td class="stentry">The URL of the cloned server.</td>
+                            </tr><tr class="strow">
+                                <td class="stentry"><span class="keyword parmname">install.server.web.host</span></td>
+                                <td class="stentry">The hostname of the cloned server.</td>
+                            </tr><tr class="strow">
+                                <td class="stentry"><span class="keyword parmname">server.appdata.dir</span></td>
+                                <td class="stentry">The location of the cloned application data folder.
+                                </td>
+                            </tr><tr class="strow">
+                                <td class="stentry"><span class="keyword parmname">agentcomm.uri</span></td>
+                                <td class="stentry">Update the hostname with the clone's name.</td>
+                            </tr><tr class="strow">
+                                <td class="stentry"><span class="keyword parmname">encryption.keystore.alias</span></td>
+                                <td class="stentry">Update only if you copied the
+                                        <span class="keyword parmname">encryption.keystore</span> from production to
+                                    the clone. Set it to the same value as the production server's
+                                    value.</td>
+                            </tr></tbody></table></div>
+                </div>
+                <div class="itemgroup info">
+                    <div class="p">If you are using S3 storage, you might have to modify the S3 storage
+                        properties, or ensure they are correct for your cloned S3
+                        bucket:<pre class="pre codeblock" id="cloning_an_on_prem_installation__codeblock_rsy_stg_j1c"><code>codestation.s3.bucket – the bucket name
+codestation.s3.region – the region
+codestation.s3.user – the API key
+codestation.s3.url – custom URL
+codestation.s3.signerOverride – signature algorithm
+codestation.s3.enablePathStyleAccess – true or false
+codestation.s3.password – API secret</code></pre></div>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">If you are not using an application data folder, replace the clone server's
+                        <span class="ph filepath">var</span> directory with the production server's
+                        <span class="ph filepath">var</span> directory.</span>
+                <div class="itemgroup info">This replacement copies over files like the artifact repository and plug-ins.
+                    You can delete the application data folder that was created during the
+                    installation because the server does not use it.</div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Start the clone server. </span>
+                <div class="itemgroup info">
+                    <div class="note note note_note" id="cloning_an_on_prem_installation__d443e300"><span class="note__title">Note:</span> Use the machine IP address to access the <span class="ph">Deploy</span>
+                        UI for the next step.</div>
+                </div>
+            </li><li class="li step stepexpand">
+                <span class="ph cmd">Make additional changes to the clone.</span>
+                <ol type="a" class="ol substeps" id="cloning_an_on_prem_installation__d443e312">
+                    <li class="li substep substepexpand">
+                        <span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System Settings</span></span> from the web UI:</span>
+                        <div class="itemgroup info">
+                            <ul class="ul" id="cloning_an_on_prem_installation__d443e330">
+                                <li class="li">
+                                    <p class="p">Set the <strong class="ph b">External Agent URL </strong>and <strong class="ph b">External User
+                                            URL</strong>.</p>
+                                </li>
+                                <li class="li">
+                                    <p class="p">Remove the <strong class="ph b">Mail Server Settings</strong> information. </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="li substep substepexpand">
+                        <span class="ph cmd">Delete any scheduled jobs from the calendar.</span>
+                    </li>
+                    <li class="li substep substepexpand">
+                        <span class="ph cmd">Create new agents for testing. </span>
+                        <div class="itemgroup info">Although production agent information exists in the cloned database,
+                            the production agents show offline in the clone because the agents are
+                            configured to connect only to the production server. To test deployments
+                            after you upgrade, create new agents for the cloned environment.</div>
+                    </li>
+                    <li class="li substep substepexpand">
+                        <span class="ph cmd">To license the clone, contact your <span class="ph" data-hd-otherprops="ibm">IBM</span> sales representative to obtain a temporary
+                            license.</span>
+                    </li>
+                </ol>
+            </li></ol></section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/cloning_server_test_upgrade.html" title="Before you upgrade your production IBM DevOps Deploy (Deploy) server, for best results, perform a test upgrade, verify the challenges you are facing, and resolve them before performing an actual upgrade.">Testing an upgrade</a></div></div></nav></article></main></body></html>

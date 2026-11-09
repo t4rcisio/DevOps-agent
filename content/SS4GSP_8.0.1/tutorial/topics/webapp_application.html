@@ -1,0 +1,164 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Applications are collections of components. Environments represent systems on which you deploy the application components."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/webapp_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="webapp_application"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 3: Creating an application and an environment</title></head><body id="webapp_application"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 3: Creating an application and an environment</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-61ab33f3-beec-48b0-b3ba-438835c94220">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Applications are collections of components. Environments
+represent systems on which you deploy the application components.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_application__prereq__1">Before you begin</h2></div>Before you start this lesson, ensure that your agent is running. Click <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Agents</span></span> and make sure that your agent is listed as <code class="ph codeph">Online</code>, as in the
+following figure:<br><img class="image" src="../images/webapp_configure_a.gif" alt="The agent in the list of agents; the Status column shows that the agent is online"><br></section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskwebapp_application__context__1">About this task</h2></div>In this lesson, you add the three components to an application
+and then create an environment on which to deploy the application.
+You also add your agent to the environment.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.1 SS4GSP_8.0.1" href="../../tutorial/topics/webapp_abstract.html" title="In this tutorial, you deploy a simple web application with IBM DevOps Deploy (Deploy). You create components, create an application that contains those components, and then deploy the components to an environment.">Deploying a simple web application</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" lang="en-us" id="application-create">
+<h2 class="title topictitle2" id="ariaid-title2">Creating an application</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-61ab33f3-beec-48b0-b3ba-438835c94220">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Creating an application involves selecting the components
+that are in the application.</p>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskapplication-create__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step">
+<span class="ph cmd">Click the <span class="ph uicontrol">Applications</span> tab, and then click <span class="ph uicontrol">Create
+Application</span>.</span>
+</li><li class="li step">
+<span class="ph cmd">Name the new application <code class="ph codeph">JPetStore</code>, and then click
+<span class="ph uicontrol">Save</span>.</span>
+</li><li class="li step"><span class="ph cmd">Add the components to the application:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep">
+<span class="ph cmd">Click the <span class="ph uicontrol">Applications</span> tab, and then click the new application,
+<code class="ph codeph">JPetStore</code>.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Click the <span class="ph uicontrol">Components</span> tab for the application (not the
+<span class="ph uicontrol">Components</span> tab at the top of the page), and then click <span class="ph uicontrol">Add
+Component</span>.</span>
+</li>
+<li class="li substep"><span class="ph cmd">In the <span class="keyword wintitle">Add a Component</span> window,
+in the <span class="ph uicontrol">Select a Component</span> list, select the
+three components: <code class="ph codeph">JPetStore-APP</code>, <code class="ph codeph">JPetStore-WEB</code>,
+and <code class="ph codeph">JPetStore-DB</code>.</span></li>
+<li class="li substep"><span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span></li>
+</ol>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskapplication-create__result__1">Results</h3></div>The application includes the three components, as shown in the following figure. Components
+can be included in any number of applications.<br><img class="image" src="../images/webapp_application_c.gif" alt="The contents of the application on the Components tab, including the three components of the sample application"><br></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" lang="en-us" id="environment-create">
+<h2 class="title topictitle2" id="ariaid-title3">Creating an environment</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-61ab33f3-beec-48b0-b3ba-438835c94220">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Creating an environment involves selecting one or more
+agent resources and specifying which components are deployed to each
+agent resource.</p>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskenvironment-create__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Define an environment for the application:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep"><span class="ph cmd">Go to the <span class="ph uicontrol">Environments</span> tab for
+the application.</span></li>
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">Create Environment</span>.</span>
+</li>
+<li class="li substep"><span class="ph cmd">Specify the name to be <kbd class="ph userinput">Tutorial environment
+1</kbd>.</span></li>
+<li class="li substep"><span class="ph cmd">Accept the defaults in the other fields in this window
+and click <span class="ph uicontrol">Save</span>.</span></li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Specify the properties for the environment.</span><div class="itemgroup info">When
+you created the component processes, you included parameters that
+specify the location of artifacts on the target system, such as the
+location of the application server. Because these properties can vary
+on different target systems, you specify these properties as environment
+properties.</div>
+<ol type="a" class="ol substeps" id="environment-create__env-props">
+<li class="li substep substepexpand"><span class="ph cmd">Open the environment by clicking the environment name.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Open the environment properties by clicking <span class="ph uicontrol">Configuration</span> and
+then clicking <span class="ph uicontrol">Environment Properties</span>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Add the following properties one at a time by clicking <span class="ph uicontrol">Add
+Property</span> and specifying the name and value of the property
+as shown in the following table:</span><div class="itemgroup info"><table class="table" id="environment-create__env_props"><caption><span class="table--title-label">Table 1. </span><span class="title">Properties for the environment</span></caption><colgroup><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="environment-create__env_props__entry__1">Property</th>
+<th class="entry" id="environment-create__env_props__entry__2">Description</th>
+<th class="entry" id="environment-create__env_props__entry__3">Example</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="environment-create__env_props__entry__1"><code class="ph codeph">tomcat.home</code></td>
+<td class="entry" headers="environment-create__env_props__entry__2">The Tomcat home folder on the target computer</td>
+<td class="entry" headers="environment-create__env_props__entry__3"><span class="ph filepath">/opt/apache-tomcat-9.0.100</span> on Linux™ or
+                                                  <span class="ph filepath">C:\apache-tomcat-9.0.100</span> on
+                                                  Windows™</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="environment-create__env_props__entry__1"><code class="ph codeph">tomcat.contextroot</code></td>
+<td class="entry" headers="environment-create__env_props__entry__2">The Tomcat webapp folder on the target computer, which is an identifier in the
+application URL</td>
+<td class="entry" headers="environment-create__env_props__entry__3">For all versions of Tomcat, specify <code class="ph codeph">JPetStoreDev</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="environment-create__env_props__entry__1"><code class="ph codeph">db.url</code></td>
+<td class="entry" headers="environment-create__env_props__entry__2">The URL to the MySQL database, relative to the
+target system</td>
+<td class="entry" headers="environment-create__env_props__entry__3">If you installed MySQL on the same system as the agent and used the
+database name <code class="ph codeph">jpetstore</code>, the URL looks like the following example:
+<code class="ph codeph">jdbc:mysql://host-or-ip:3306/jpetstore</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="environment-create__env_props__entry__1"><code class="ph codeph">tomcat.manager.url</code></td>
+<td class="entry" headers="environment-create__env_props__entry__2">The location of the Tomcat manager application</td>
+<td class="entry" headers="environment-create__env_props__entry__3">For Tomcat version 9, specify
+                                                  <code class="ph codeph">http://host-or-ip:8081/manager/text</code></td>
+</tr>
+<tr class="row">
+<td class="entry" headers="environment-create__env_props__entry__1"><code class="ph codeph">tomcat.start</code></td>
+<td class="entry" headers="environment-create__env_props__entry__2">The location of the startup script for Tomcat</td>
+<td class="entry" headers="environment-create__env_props__entry__3"><span class="ph filepath">/opt/apache-tomcat-9.0.100/bin/startup.sh</span> on Linux or
+                                                  <span class="ph filepath">C:\apache-tomcat-9.0.100\bin\startup.bat</span>
+                                                  on Windows</td>
+</tr>
+</tbody></table></div></li>
+</ol>
+</li><li class="li step stepexpand"><span class="ph cmd">Add the agent to the environment.</span><div class="itemgroup info">When you set
+up the agent, you added the agent as a resource to a resource group.
+Now you can use that resource as part of the environment, as described
+in the following steps:</div>
+<ol type="a" class="ol substeps" id="environment-create__add-agent">
+<li class="li substep substepexpand"><span class="ph cmd">Click the <span class="ph uicontrol">Resources</span> tab for the
+environment.</span><div class="itemgroup info">Make sure that you are on the <span class="ph uicontrol">Resources</span> tab
+for the environment and not the <span class="ph uicontrol">Resources</span> tab
+at the top of the page.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">Add Base Resources</span>.</span>
+<div class="itemgroup stepresult">The <span class="keyword wintitle">Add Resource to Environment window shows
+all of the resources that are available on the server.</span></div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Select the check box next to your agent and then click <span class="ph uicontrol">OK</span>.</span>
+</li>
+</ol>
+<div class="itemgroup stepresult" id="environment-create__add-agent_results">The resource is shown on the <span class="keyword wintitle">Resources</span> tab
+for the environment, as shown in the following figure:<br><img class="image" src="../images/webapp_application_a.gif" alt="The Resources tab for the environment, which shows the resource that is bound to the environment"><br></div></li><li class="li step stepexpand" id="environment-create__map_components"><span class="ph cmd">Map the components to this agent resource.</span>
+<div class="itemgroup info">If you had many agents on a system with multiple nodes, you
+would specify which components run on each agent resource. In this
+case, you have only one agent resource, so all of the components run
+on this agent.</div>
+<ol type="a" class="ol substeps" id="environment-create__add-components-to-agent">
+<li class="li substep substepexpand"><span class="ph cmd">On the same row as the agent resource, click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add Component</span></span>.</span><div class="itemgroup info">The <span class="ph uicontrol">Actions</span> button
+does not appear until you hover the mouse over the resource.</div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Select the application component and then click <span class="ph uicontrol">Save</span>.</span>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Repeat the process to add the other components to the
+resource.</span><div class="itemgroup info"><div class="note note note_note"><span class="note__title">Note:</span> Be sure to add each component to the agent
+resource and not to another component. The components must be at the
+same hierarchy level, and not as child items of each other.</div></div>
+</li>
+</ol>
+<div class="itemgroup stepresult">Now the components are mapped to the target system, as
+shown in the following figure:<br><img class="image" src="../images/webapp_application_b.gif" alt="The Resources tab for the environment, showing the agent with three components that are mapped to it"><br></div></li></ol></section>
+<section class="section result"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskenvironment-create__result__1">Results</h3></div>The new environment appears on the <span class="keyword wintitle">Environments</span> tab.
+Now that the environment is prepared and the agent is running, you
+can run application processes on the environment to deploy the components.</section>
+</div>
+</article>
+
+</article></main></body></html>

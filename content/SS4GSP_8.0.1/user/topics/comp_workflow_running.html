@@ -1,0 +1,43 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="The way you run a process is different for each type of process."><meta name="DC.relation" scheme="URI" content="../../user/topics/comp_workflow.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_workflow_running"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Running processes</title></head><body id="comp_workflow_running"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Running processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5ef7adb9-3fe1-43e8-86fd-58a85e1ace41">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">The way you run a process is different for each type of
+process.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_workflow_running__context__1">About this task</h2></div>To run a process, you must have permissions to access the processes and to run processes on
+the target agent resource.<dl class="dl">
+
+<dt class="dt dlterm">Component processes</dt>
+<dd class="dd">You cannot run a component process directly. Instead, you add one or more component processes to
+an application process and then run the application process.</dd>
+
+
+<dt class="dt dlterm">Application processes</dt>
+<dd class="dd">To run an application process, you must have an application environment. Click
+<span class="ph uicontrol">Applications</span>, click the application, and then next to the environment, click
+<span class="ph uicontrol">Request Process</span>
+<img class="image" src="../images/request_process_icon.gif" alt="">. Then, specify the application process and the versions of the components to use. For more
+information, see <a class="xref" href="app_process_run.html" title="To run an application process, specify the environment to use and the process to run. In many cases, you also specify the component versions to deploy.">Running application processes</a>.</dd>
+
+
+<dt class="dt dlterm">Generic processes</dt>
+<dd class="dd"><span class="ph" id="comp_workflow_running__run_generic">To run a generic process, click <span class="ph uicontrol">Processes</span>, and then
+click the generic process. On the <span class="ph uicontrol">Dashboard</span> tab for the process, specify a
+resource (in most cases, an agent) in the <span class="ph uicontrol">Resource</span> list, and then click
+<span class="ph uicontrol">Submit</span>.</span><div class="note tip note_tip" id="comp_workflow_running__default_resource"><span class="note__title">Tip:</span> You can set a default
+resource for generic processes:<ol class="ol">
+<li class="li">Click the generic process to open it.</li>
+<li class="li">Open the <span class="ph uicontrol">Configuration</span> tab.</li>
+<li class="li">Click <span class="ph uicontrol">Basic Settings</span>.</li>
+<li class="li">In the <span class="ph uicontrol">Default Resource</span> field, specify the default resource to run the
+process on. In most cases, specify an agent.</li>
+<li class="li">Click <span class="ph uicontrol">Save</span>.</li>
+</ol></div></dd>
+
+</dl><p class="p">Each time you request a process, the server keeps
+a log of information about the process and the individual logs from
+each step. To download these logs, open the process request and click <span class="ph uicontrol">Download
+All Logs</span>.</p></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/comp_workflow.html" title="Processes are automated tasks that run on agents.">Processes</a></div></div></nav></article></main></body></html>

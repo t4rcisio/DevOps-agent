@@ -1,0 +1,64 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Prepare the application environments for the blue-green deployment."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/blueGreen_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueGreen_createApp"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Lesson 2: Preparing the application</title></head><body id="blueGreen_createApp"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Lesson 2: Preparing the application </h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b79a7018-3ca4-43e7-bf7e-d950e582fa9b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Prepare the application environments for the blue-green deployment.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_createApp__prereq__1">Before you begin</h2></div>Before you begin the lesson, make sure that you completed the <a class="xref" href="blueGreen_intro.html#blueGreen_intro__prereqs">Prerequisites</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_createApp__context__1">About this task</h2></div>In this lesson, you modify the JPetStore application by adding the resources that you
+created in the previous lesson. To complete the lesson, you define environments and create
+properties that are used by the process that you create in the next lesson.<p class="p">If you use another
+application other than JPetStore, you can still apply the steps described in this lesson.
+</p></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.1.0 SS4GSP_8.0.1" href="../../tutorial/topics/blueGreen_abstract.html" title="In this tutorial, you setup a deployment with two identical production environments, referred to arbitrarily as Blue and Green. One environment is always live, and the other environment is inactive and available to host an upgraded version.">Blue-green deployments</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" lang="en-us" id="environment-create">
+<h2 class="title topictitle2" id="ariaid-title2">Creating the environments</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b79a7018-3ca4-43e7-bf7e-d950e582fa9b">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Prepare the blue-green environments.</p>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskenvironment-create__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">For the JPetStore application, create an application property and name it
+<code class="ph codeph">activeEnvironment</code>, and assign it a value of <code class="ph codeph">Blue
+environment</code>.</span>
+<div class="itemgroup info">The application process checks the value of this property to ensure that the active
+environment is not updated. At the start of the tutorial, the Blue environment is the active
+environment.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create an environment, named Blue environment, to use for the Blue system.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create an environment property for the Blue environment and name it
+<kbd class="ph userinput">LBPort</kbd>. Assign a value of <kbd class="ph userinput">8081</kbd> to the property. </span>
+<div class="itemgroup info">When you create component processes, you often define parameters that specify the location of
+artifacts on the target system, such as the location of the application server. Because these
+properties can vary on different target systems, you specify these properties as environment
+properties. Because you're using ports to distinguish the Blue and Green environments, you add a
+property to each environment named <kbd class="ph userinput">LBPort</kbd>. This property stores the port that
+the application is running on in each environment; in this case, 8081 for Blue and 8082 for Green.
+<div class="note note note_note"><span class="note__title">Note:</span> For the tutorial, you can use any environment property. The tutorial abstractly references
+ports because, as an exercise, you might use a proxy server to simulate a load balancer. Switching
+ports with a proxy server, such as HAProxy, is an easy way to test blue-green deployments without
+using an actual load balancer and separate nodes. </div></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd"><a class="xref" href="webapp_application.html#environment-create__env_props">Add the JPetStore environment
+properties to the environment.</a></span>
+<div class="itemgroup info">The JPetStore application uses several environment property to deploy its web application. If
+you are using your own application, you can skip this step.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add the<kbd class="ph userinput">Blue system</kbd> agent resource to the Blue environment.</span>
+<div class="itemgroup info">Because you put the <kbd class="ph userinput">JPetStore</kbd> component tag on the resource, you don't
+have to map the individual components. The component tag grabs all of the components at once. </div>
+<div class="itemgroup stepresult" id="environment-create__add-agent_results">The resource is shown on the <span class="keyword wintitle">Resources</span> tab
+for the environment, as shown in the following figure:<br><img class="image" src="../images/bluegreen_app_a.png" alt="The Resources tab for the environment, which shows the resource that is bound to the environment"><br></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add the load balancer agent resource to the environment.</span>
+<div class="itemgroup info">Later, you call processes to update the load balancer as part of the regular deployment
+processes. </div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create the Green environment similar to the Blue environment, and assign the Green system agent
+resource to it. Create the<kbd class="ph userinput">LBPort</kbd> environment property for the Green
+environment, and assign the value <code class="ph codeph">8082</code> to it.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskenvironment-create__result__1">Results</h3></div>The new environments appear on the <span class="keyword wintitle">Environments</span> tab.</section>
+</div>
+</article>
+
+</article></main></body></html>

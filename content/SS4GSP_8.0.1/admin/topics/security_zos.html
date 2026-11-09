@@ -1,0 +1,49 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="Specific security definitions are used to secure IBM DevOps Deploy (Deploy) functions for the IBM z/OS environment. To deploy applications to an IBM z/OS environment, the user accounts on the agent computer must have adequate access permissions. You must also identify specific directories and data sets to the authorized program facility."><meta name="DC.relation" scheme="URI" content="../../install/topics/zos_installing_ov.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_zos_agent.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_zos_apf.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_zos_files.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_zos_tokens.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_zos_versions.html"><meta name="DC.relation" scheme="URI" content="../../admin/topics/security_zos_UCDrelated.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="security_zos"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Security requirements on IBM z/OS computers</title></head><body id="security_zos"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Security requirements on <span class="keyword">IBM z/OS</span> computers</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-2e6bf711-ee02-4ecf-8baf-3c92012ac8e8">Edit online</a></span></div>
+
+<div class="body conbody"><p class="shortdesc">Specific security definitions are used to secure <span class="ph">IBM DevOps Deploy (Deploy)</span> functions for
+        the <span class="keyword">IBM® z/OS®</span>
+        environment. To deploy applications to an <span class="keyword">IBM z/OS</span> environment,
+        the user accounts on the agent computer must have adequate access permissions. You must also
+        identify specific directories and data sets to the authorized program facility. </p>
+<div class="p">The topics in this section present the security configurations related to the agent started task,
+data sets, file systems, user IDs, impersonation and security configurations related to the z/OS
+Utility plugin.<div class="note note note_note"><span class="note__title">Note:</span> This document does NOT cover the <span class="ph">Deploy</span> server’s security model and the security configurations related to server agent communication.
+Refer to <a class="xref" href="security_zos_UCDrelated.html" title="Information for the IBM DevOps Deploy (Deploy) server’s security model and the security configurations related to server agent communication for IBM z/OS are referenced in this topic.">Security configuration related to
+z/OS</a>.</div></div>
+<section class="section"><h2 id="security_zos__title__2" class="title sectiontitle">Agent started task and agent user ID</h2>
+
+<div class="p">The <span class="ph">Deploy</span>
+<span class="keyword">IBM z/OS</span> agent is a long running Java process in the <span class="keyword">IBM z/OS</span> UNIX System Services. The <span class="ph">Deploy</span> server distributes work, known as deploy processes, to an agent to execute. For each step in the
+deploy process, the agent starts a separate work process. The work process inherits the agent user
+ID’s security environment, unless the process is configured to use impersonation. <figure class="fig fignone" id="security_zos__fig_emy_ynn_bfb"><figcaption><span class="fig--title-label">Figure 1. </span>z/OS Server Agent Architecture</figcaption>
+
+<img class="image" data-hd-otherprops="ibm" height="144" src="../images/zos_architecture.jpg" width="288" alt="z/OS Server Agent Architecture diagram">
+    
+</figure></div>
+</section>
+<section class="section"><h2 id="security_zos__title__4" class="title sectiontitle">Agent impersonation</h2>
+
+<div class="p">The <span class="keyword cmdname">su</span> command is used to impersonate users. This figure shows a deployment
+scenario with two logical environments, DEV and TEST, in the same logical partition (LPAR). The
+deployment process is configured so that the agent impersonates USERA when deploying to DEV and
+USERB when deploying to TEST.<figure class="fig fignone" id="security_zos__fig_twr_qnn_bfb"><figcaption><span class="fig--title-label">Figure 2. </span>z/OS Impersonation</figcaption>
+
+<img class="image" data-hd-otherprops="ibm" height="288" src="../images/zos_impersonation.jpg" width="384" alt="z/OS Impersonation diagram">
+    
+</figure></div>
+</section>
+<section class="section"><h2 id="security_zos__title__6" class="title sectiontitle">Limitations</h2>
+
+<div class="p">
+<ol class="ol">
+<li class="li"><a class="xref" href="https://www.ibm.com/systems/z/os/zos/tools/java/products/sdk71jcecca.html" target="_blank">HardwareCryptography IBMJCECCA</a> is not supported.</li>
+<li class="li"><a class="xref" href="https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.3.0/com.ibm.zos.v2r3.icha700/digcert.htm" target="_blank">RACFdigital certificates</a> are not supported. <span class="ph">Deploy</span> uses keystore and keytool provided by Java to generate and manage certifications to be used for
+the agent/server communication.</li>
+</ol>
+</div>
+</section>
+</div>
+<nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_zos_agent.html">IBM z/OS agent user accounts</a></strong><br>If you run the agent from a UNIX™ command line, the agent user account is the account that you use to log in to the UNIX shell. If you run the agent as a started task, the agent user account is assigned by the Resource Access Control Facility (RACF®) using the started procedures table (ICHRIN03) or the STARTED class. To learn more about RACF, see the <cite class="cite">z/OS Security Server RACF® System Programmer's Guide, SA23-2287-00</cite>.</li><li class="link ulchildlink" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_zos_apf.html">IBM z/OS authorized program facility</a></strong><br>To deploy applications to an <span class="keyword">IBM z/OS</span> environment, you must identify specific directories and data sets to the authorized program facility (APF).</li><li class="link ulchildlink" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_zos_files.html">IBM z/OS directories and data sets</a></strong><br>To deploy applications to an <span class="keyword">IBM z/OS</span> environment, the user accounts on the agent computer must have adequate access permissions. You must also identify specific directories and data sets to the authorized program facility.</li><li class="link ulchildlink" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_zos_tokens.html">IBM z/OS tokens</a></strong><br>Tokens are used to authenticate with the <span class="ph">IBM DevOps Deploy (Deploy)</span> server when             <span class="keyword">z/OS</span>         component versions are imported.</li><li class="link ulchildlink" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_zos_versions.html">IBM z/OS component versions</a></strong><br>Component versions for <span class="keyword">IBM z/OS</span> are imported         from the build LPAR by using the <span class="keyword cmdname">buztool.sh</span> command. </li><li class="link ulchildlink" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1"><strong><a href="../../admin/topics/security_zos_UCDrelated.html">Security configuration related to z/OS</a></strong><br>Information for the <span class="ph">IBM DevOps Deploy (Deploy)</span> server’s         security model and the security configurations related to server agent communication for             <span class="keyword">IBM z/OS</span> are         referenced in this topic.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-otherprops="ibm" data-hd-product="SS4GSP_8.0.1" href="../../install/topics/zos_installing_ov.html" title="Before you deploy to the IBM z/OS platform, you must install the z/OS agent and configure the z/OS server for communication with IBM DevOps Deploy (Deploy). If the build process runs on a different logical partition (LPAR), then you must additionally install the agent on the build LPAR. You can install the z/OS agent and deployment tools by using the IBM System Modification Program Extended (SMP/E) or by extracting archive files to the z/OS UNIX file system.">Installing the z/OS agent</a></div></div></nav></article></main></body></html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="concept"><meta name="description" content="You can find information about hardware and embedded software requirements for containers to run the IBM DevOps Deploy (Deploy)."><meta name="DC.subject" content="Containers, Container requirements"><meta name="keywords" content="Containers, Container requirements"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="Sys_Req_container"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Containers</title></head><body id="Sys_Req_container"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Containers</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-37515f00-223e-44cc-af49-29cc17e3f07a">Edit online</a></span></div>
+    
+    
+    
+    <div class="body conbody"><p class="shortdesc">You can find information about hardware and embedded software requirements for
+        containers to run the <span class="ph">IBM DevOps Deploy (Deploy)</span>.</p>
+        <div class="p">The hardware requirements for the containers to run the <span class="ph">Deploy</span> server are
+            as follows:<table class="table frame-all" id="Sys_Req_container__table_dj4_yj3_wyb"><caption></caption><colgroup><col style="width:25%"><col style="width:25%"><col style="width:50%"></colgroup><thead class="thead">
+                        <tr class="row rowsep-1 valign-middle">
+                            <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="Sys_Req_container__table_dj4_yj3_wyb__entry__1">Hardware</th>
+                            <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="Sys_Req_container__table_dj4_yj3_wyb__entry__2">Containers</th>
+                            <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="Sys_Req_container__table_dj4_yj3_wyb__entry__3">Requirement</th>
+                        </tr>
+                    </thead><tbody class="tbody">
+                        <tr class="row rowsep-1 valign-middle">
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__1">Disk space</td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__2">
+                                <ul class="ul" id="Sys_Req_container__ul_b1k_qk3_wyb">
+                                    <li class="li">IBM Z</li>
+                                    <li class="li">POWER</li>
+                                    <li class="li">x86</li>
+                                </ul>
+                            </td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__3">Minimum of 2 GB.</td>
+                        </tr>
+                        <tr class="row rowsep-1 valign-middle">
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__1">Memory</td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__2">
+                                <ul class="ul" id="Sys_Req_container__ul_um3_snv_11c">
+                                    <li class="li">IBM Z</li>
+                                    <li class="li">POWER</li>
+                                    <li class="li">x86</li>
+                                </ul>
+                            </td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__3">Java Heap requirements:<p class="p">A
+                                    minimum of 2 GB is required for <strong class="ph b">evaluation</strong> purposes, such
+                                    as a proof of concept (POC) instance or a small demo
+                                    environment.</p><div class="p">Increase the Xmx setting for
+                                        <strong class="ph b">production</strong> purposes as follows:<ul class="ul" id="Sys_Req_container__ul_v3m_mq3_wyb">
+                                        <li class="li">&lt;500 agents: ~4 GB</li>
+                                        <li class="li">500-5000 agents: ~13 GB</li>
+                                        <li class="li">5000-15000 agents: ~24 GB</li>
+                                    </ul></div><p class="p">Native memory:</p><p class="p">4 GB for POC, 4 GB for
+                                    production, for additional memory required beyond the Java
+                                    Heap.</p></td>
+                        </tr>
+                        <tr class="row rowsep-1 valign-middle">
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__1">Network: adapters, drivers,
+                                protocols</td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__2">
+                                <ul class="ul" id="Sys_Req_container__ul_hz3_tnv_11c">
+                                    <li class="li">IBM Z</li>
+                                    <li class="li">POWER</li>
+                                    <li class="li">x86</li>
+                                </ul>
+                            </td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__3">Gigabit (1000) Ethernet
+                                with low-latency to the database.</td>
+                        </tr>
+                        <tr class="row rowsep-1 valign-middle">
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__1">Processor</td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__2">
+                                <ul class="ul" id="Sys_Req_container__ul_zqq_snv_11c">
+                                    <li class="li">IBM Z</li>
+                                    <li class="li">POWER</li>
+                                    <li class="li">x86</li>
+                                </ul>
+                            </td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__3">The server requires
+                                approximately double the CPU capacity of a relay. So, given the
+                                number of agents (800) and a 2-core processor per 500 agents on the
+                                relay, use an 8-core server for the best performance.</td>
+                        </tr>
+                        <tr class="row rowsep-1 valign-middle">
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__1">Product specific</td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__2">
+                                <ul class="ul" id="Sys_Req_container__ul_mzw_snv_11c">
+                                    <li class="li">IBM Z</li>
+                                    <li class="li">POWER</li>
+                                    <li class="li">x86</li>
+                                </ul>
+                            </td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__3">Agent relay minimum system
+                                    requirements.<div class="p">Without artifact caching:<ul class="ul" id="Sys_Req_container__ul_bzl_343_wyb">
+                                        <li class="li">HDD - 2GB</li>
+                                        <li class="li">CPU - 2</li>
+                                        <li class="li">RAM - 2GB</li>
+                                    </ul></div><p class="p">With artifact caching, use the
+                                        formula:<div class="div equation-block" id="Sys_Req_container__equation-block_iyq_vp3_wyb">HDD
+                                        - 2 GB + the cache size *2</div></p></td>
+                        </tr>
+                        <tr class="row rowsep-1 valign-middle">
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__1">Storage hardware</td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__2">
+                                <ul class="ul" id="Sys_Req_container__ul_x4v_vnv_11c">
+                                    <li class="li">IBM Z</li>
+                                    <li class="li">POWER</li>
+                                    <li class="li">x86</li>
+                                </ul>
+                            </td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_dj4_yj3_wyb__entry__3">Individual requirements
+                                depend on usage, retention policies, and application types. In
+                                general, the larger number of artifacts kept in <span class="ph" data-hd-otherprops="ibm">IBM </span>
+                                <span class="ph">Deploy</span>'s artifact repository (CodeStation), the more storage is
+                                    required.<div class="note note note_note" id="Sys_Req_container__note_znl_yl3_wyb"><span class="note__title">Note:</span>  CodeStation is installed
+                                    when the <span class="ph">Deploy</span> server is installed.</div><div class="p">Follow these guidelines to
+                                    determine storage requirements for production environments:<ul class="ul" id="Sys_Req_container__ul_vx2_cm3_wyb">
+                                        <li class="li">200-400 GB of database storage is typically sufficient
+                                            for most environments.</li>
+                                        <li class="li">To calculate CodeStation storage requirements, use the
+                                            following formula:<div class="div equation-block" id="Sys_Req_container__equation-block_kbf_hm3_wyb"><em class="ph i">average artifact
+                                                  size * number of versions imported per day *
+                                                  average number of days before
+                                                cleanup</em></div></li>
+                                        <li class="li">Approximately 1 MB per deployment of database storage,
+                                            which varies based on local requirements.</li>
+                                    </ul></div></td>
+                        </tr>
+                    </tbody></table></div>
+        <div class="p">The embedded software requirements for containers to run the <span class="ph">Deploy</span> components
+            are as follows:<table class="table frame-all" id="Sys_Req_container__table_ecj_l4s_g1c"><caption></caption><colgroup><col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:20%"></colgroup><thead class="thead">
+                        <tr class="row rowsep-1 valign-middle">
+                            <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="Sys_Req_container__table_ecj_l4s_g1c__entry__1">Embedded
+                                software</th>
+                            <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="Sys_Req_container__table_ecj_l4s_g1c__entry__2">Containers </th>
+                            <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="Sys_Req_container__table_ecj_l4s_g1c__entry__3">Components</th>
+                            <th class="entry align-center colsep-1 rowsep-1 valign-middle" id="Sys_Req_container__table_ecj_l4s_g1c__entry__4" colspan="2">Runtime provider</th>
+                        </tr>
+                    </thead><tbody class="tbody">
+                        <tr class="row rowsep-1 valign-middle">
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_ecj_l4s_g1c__entry__1">Red Hat Universal Minimal
+                                Base image (UBI) 9</td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_ecj_l4s_g1c__entry__2">
+                                <ul class="ul" id="Sys_Req_container__ul_mcw_lps_g1c">
+                                    <li class="li">IBM Z</li>
+                                    <li class="li">POWER</li>
+                                    <li class="li">x86</li>
+                                </ul>
+                            </td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_ecj_l4s_g1c__entry__3">
+                                <ul class="ul" id="Sys_Req_container__ul_mxd_kys_g1c">
+                                    <li class="li">Agent</li>
+                                    <li class="li">Relay</li>
+                                    <li class="li">Server</li>
+                                </ul>
+                            </td>
+                            <td class="entry align-left colsep-1 rowsep-1 valign-middle" headers="Sys_Req_container__table_ecj_l4s_g1c__entry__4" colspan="2">
+                                <ul class="ul" id="Sys_Req_container__ul_wfg_lxs_g1c">
+                                    <li class="li">Kubernetes 1.19 and future versions and fix packs.</li>
+                                    <li class="li">OpenShift container platform 4.12 and future fix packs</li>
+                                    <li class="li">OpenShift container platform 4.13 and future fix packs</li>
+                                    <li class="li">OpenShift container platform 4.14 and future fix packs</li>
+                                    <li class="li">OpenShift container platform 4.15 and future fix packs</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody></table></div>
+        <p class="p"><span class="ph" data-hd-otherprops="ibm">For more details on system requirements, see <a class="xref" href="https://www.ibm.com/software/reports/compatibility/clarity/index.html" target="_blank">Software product compatibility
+                report</a>.</span></p>
+    </div>
+</article></main></body></html>

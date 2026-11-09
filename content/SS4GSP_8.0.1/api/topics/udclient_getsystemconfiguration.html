@@ -1,0 +1,89 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="List system configuration properties"><meta name="DC.subject" content="udclient commands, getSystemConfiguration, udclient command, command-line commands"><meta name="keywords" content="udclient commands, getSystemConfiguration, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_getsystemconfiguration"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>getSystemConfiguration</title></head><body id="udclient_getsystemconfiguration"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">getSystemConfiguration</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-3013b891-9627-4058-a675-b621ceaf142f">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">List system configuration properties</p>
+<section class="section">
+These properties are available on the System Settings page of the server.
+</section>
+<section class="section"><h2 id="udclient_getsystemconfiguration__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  getSystemConfiguration</code></pre>
+</section>
+<section class="section"><h2 id="udclient_getsystemconfiguration__title__3" class="title sectiontitle">Parameters</h2>
+None.</section>
+<div class="example" data-hd-audience="all"><h2 id="udclient_getsystemconfiguration__title__4" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+    "vendorName": "",
+    "externalURL": "https://example.hostname.com:8443",
+    "externalUserURL": "https://example.hostname.com:8443",
+    "repoAutoIntegrationPeriod": 300,
+    "deployMailHost": "smtp.example.com",
+    "deployMailPassword": "****",
+    "deployMailPort": 25,
+    "deployMailSecure": false,
+    "deployMailSender": "sender@example.com",
+    "deployMailUsername": "username",
+    "snapshotDaysToKeep": -1,
+    "cleanupHourOfDay": 0,
+    "cleanupDaysToKeep": -1,
+    "cleanupCountToKeep": -1,
+    "environmentDaysToKeep": -1,
+    "environmentCountToKeep": -1,
+    "cleanupArchivePath": "",
+    "historyCleanupHour": 0,
+    "historyCleanupMinute": 0,
+    "historyCleanupDaysToKeep": 730,
+    "historyCleanupDuration": 23,
+    "historyCleanupEnabled": false,
+    "auditLogReadEntriesEnabled": false,
+    "auditLogCleanupEnabled": false,
+    "auditLogCleanupHour": 0,
+    "auditLogCleanupMinute": 0,
+    "auditLogRetentionLength": 30,
+    "enableInactiveLinks": false,
+    "enablePromptOnUse": true,
+    "enableAllowFailure": false,
+    "validateAgentIp": false,
+    "skipCollectPropertiesForExistingAgents": false,
+    "minimumPasswordLength": 1,
+    "requireUppercase": false,
+    "requireLowercase": false,
+    "requireSpecials": false,
+    "requireDigits": false,
+    "requireDuplicate": false,
+    "enableUIDebugging": true,
+    "messageOfTheDay": "",
+    "isCreateDefaultChildren": false,
+    "requireCommentForProcessChanges": false,
+    "requireProcessPromotionApproval": false,
+    "failProcessesWithUnresolvedProperties": false,
+    "enforceDeployedVersionIntegrity": false,
+    "copyToCodestation": true,
+    "discoveryExpiry": 300,
+    "configureExpiry": 43200,
+    "importExpiry": 7200,
+    "pluginStepExpiry": 86400,
+    "useDefaultATRIfNotSpecified": false,
+    "safeEditEnabled": false,
+    "allowProcessLocking": false,
+    "requireProcessLocking": false,
+    "maintenanceModeEnabled": false,
+    "keepMeLoggedInHours": 12,
+    "versionImportKeepRecords": 100,
+    "licenseServerUrl": "use the default that the server tooltip recommends",
+    "licenseMode": "MIXED",
+    "agentAutoLicenseType": "",
+    "defaultLocale": "en_US",
+    "defaultSnapshotLockType": "ALL",
+    "envCompPropsOverrideEnvProps": false,
+    "deleteEnvResources": false,
+    "vcCompressionUpgradeEnabled": false,
+    "vcCompressionUpgradeCompleted": false,
+    "trustedProxyIPs": ""
+}</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_systemconfiguration_get.html" title="These properties are available on the System Settings page of the server.">List system configuration properties</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

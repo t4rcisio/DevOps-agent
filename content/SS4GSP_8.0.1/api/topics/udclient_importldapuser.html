@@ -1,0 +1,68 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content="Import a user from LDAP"><meta name="DC.subject" content="udclient commands, importLdapUser, udclient command, command-line commands"><meta name="keywords" content="udclient commands, importLdapUser, udclient command, command-line commands"><meta name="DC.relation" scheme="URI" content="../../reference/topics/cli_commands.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="udclient_importldapuser"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>importLdapUser</title></head><body id="udclient_importldapuser"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">importLdapUser</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-feafe715-871e-4094-81f6-d763351f437b">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc">Import a user from LDAP</p>
+<section class="section">
+This command adds one or more users from an LDAP realm to the server.
+</section>
+<section class="section"><h2 id="udclient_importldapuser__title__2" class="title sectiontitle">Format</h2><pre class="pre codeblock"><code>udclient <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-args...]</a> <a class="xref" href="../../reference/topics/cli_command_format.html" title="To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.">[global-flags...]</a>
+  importLdapUser [parameters]</code></pre>
+</section>
+<section class="section"><h2 id="udclient_importldapuser__title__3" class="title sectiontitle">Parameters</h2>
+<table class="table" id="udclient_importldapuser__composite_params"><caption><span class="table--title-label">Table 1. </span><span class="title">Parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="udclient_importldapuser__composite_params__entry__1">Parameter</th>
+<th class="entry" id="udclient_importldapuser__composite_params__entry__2">Type</th>
+<th class="entry" id="udclient_importldapuser__composite_params__entry__3">Required</th>
+<th class="entry" id="udclient_importldapuser__composite_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="udclient_importldapuser__composite_params__entry__1"><span class="keyword parmname">user</span></td>
+<td class="entry" headers="udclient_importldapuser__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_importldapuser__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_importldapuser__composite_params__entry__4">Name or pattern of the users to be imported. Supports wildcard character *.</td>
+</tr>
+<tr class="row">
+<td class="entry" headers="udclient_importldapuser__composite_params__entry__1"><span class="keyword parmname">authenticationRealm</span></td>
+<td class="entry" headers="udclient_importldapuser__composite_params__entry__2">string</td>
+<td class="entry" headers="udclient_importldapuser__composite_params__entry__3">true</td>
+<td class="entry" headers="udclient_importldapuser__composite_params__entry__4">Authentication realm name or ID</td>
+</tr>
+</tbody></table>
+
+</section>
+<div class="example" data-hd-audience="udclient" id="udclient_importldapuser__example_ffs_vlk_wbc"><h2 id="udclient_importldapuser__example_ffs_vlk_wbc__title__1" class="title sectiontitle">Example of importing a user with auth token</h2><pre class="pre codeblock" id="udclient_importldapuser__codeblock_gfs_vlk_wbc"><code>curl -sku 'PasswordIsAuthToken:23453425-dfgfgd-23432-sdfsf' 
+  'https://deployserver.example.com:8443/cli/user/import?user=jsmith
+  &amp;authenticationRealm=Internal Security' 
+  -X PUT</code></pre></div><div class="example" data-hd-audience="udclient"><h2 id="udclient_importldapuser__title__6" class="title sectiontitle">Example of importing users using a JSON file</h2><pre class="pre codeblock"><code>udclient <span class="ph">-username jsmith -password passwd 
+  -weburl https://deployserver.example.com:8443</span>
+      importLdapUser importUsers.json</code></pre></div><div class="example" data-hd-audience="all"><h2 id="udclient_importldapuser__title__7" class="title sectiontitle">Example JSON request</h2><pre class="pre codeblock language-json"><code>{
+        "name": "importUsers",
+        "authorizationRealm": "Internal Security",
+        "users": [
+                  "jdoe",
+                  "jsmith"
+                 ]
+}</code></pre></div><div class="example" data-hd-audience="all" id="udclient_importldapuser__example_i3h_jhk_wbc"><h2 id="udclient_importldapuser__example_i3h_jhk_wbc__title__1" class="title sectiontitle">Example response</h2><pre class="pre codeblock" id="udclient_importldapuser__codeblock_j3h_jhk_wbc"><code>{
+  "id":"18b3e4ac-13d2-9ecb-f12c-d078fe0f06e5",
+  "name":"jdoe",
+  "actualName":"John Doe",
+  "displayName":"JOHN DOE",
+  "email":"john.doe@example.org",
+  "deleted":false,
+  "deletedDate":0,
+  "authenticationRealm":"18b3e49e-987d-6595-7a67-8b6d47c8cbf8",
+  "isLockedOut":false,
+  "lastLoginDate":1697793306115,
+  "isDeletable":true,
+  "namePattern":"john.doe@example.org"
+}</code></pre></div>
+<section class="section">
+<p class="p">Related REST command: <a class="xref" href="rest_cli_user_import_put.html" title="This command adds one or more users from an LDAP realm to the server.">Import a user from LDAP</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../reference/topics/cli_commands.html" title="The following list shows the commands that are available.">CLI Commands</a></div></div></nav></article></main></body></html>

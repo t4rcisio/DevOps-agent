@@ -1,0 +1,82 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="To start the blueprint designer and its associated services, you must start the cloud discovery service, the blueprint design server, and the engine Heat services."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="start_patterns"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Starting the blueprint designer, cloud discovery service, and engine</title></head><body id="start_patterns"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Starting the blueprint designer, cloud discovery service, and engine</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-4e6e6df8-40f1-4115-be37-a11765c67144">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To start the blueprint designer and its associated services, you must start the cloud
+discovery service, the blueprint design server, and the engine Heat services.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskstart_patterns__context__1">About this task</h2></div>Depending on your system configuration, these components might be on different computers.
+Be sure to start the cloud discovery service, the blueprint design server, and the engine Heat
+services on the correct computers.</section>
+</div>
+<article class="topic task nested1" aria-labelledby="ariaid-title2" id="start_cds">
+<h2 class="title topictitle2" id="ariaid-title2">Starting the cloud discovery service</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-4e6e6df8-40f1-4115-be37-a11765c67144">Edit online</a></span></div>
+<div class="body taskbody">
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskstart_cds__steps__1">Procedure</h3></div><div class="li step p" id="start_cds__start_discovery">
+<span class="ph cmd">Start the cloud discovery service:</span>
+<ul class="ul choices">
+<li class="li choice">On Linux™ systems that manage services with the
+<span class="keyword cmdname">systemd</span> system manager, use the <span class="keyword cmdname">systemctl</span> command:
+<pre class="pre codeblock"><code>systemctl start ibm-cloud-discovery.service</code></pre><div class="note note note_note"><span class="note__title">Note:</span> If you start the cloud
+discovery service with the <span class="keyword cmdname">systemctl</span> command, you must use the
+<span class="keyword cmdname">systemctl</span> command to stop the cloud discovery service.</div></li>
+<li class="li choice">On Linux systems that do not use the
+<span class="keyword cmdname">systemd</span> system, run the following command:
+<pre class="pre codeblock"><code>cloud-discovery-service &amp;</code></pre></li>
+</ul>
+<div class="itemgroup info">On Windows™, run the following command:
+<pre class="pre codeblock"><code>C:\<var class="keyword varname">python_installation_directory</var>\Scripts\cloud-discovery-service.exe</code></pre>Use
+the location where Python is installed for
+<code class="ph codeph"><var class="keyword varname">python_installation_directory</var></code>. The default installation
+directory is <span class="ph filepath">C:\Python27</span>. By default, the command looks like this
+code:<pre class="pre codeblock"><code>C:\Python27\Scripts\cloud-discovery-service.exe</code></pre></div>
+</div></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" id="start_engine">
+<h2 class="title topictitle2" id="ariaid-title3">Starting the engine Heat services</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-4e6e6df8-40f1-4115-be37-a11765c67144">Edit online</a></span></div>
+<div class="body taskbody">
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskstart_engine__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Restart the engine database.</span>
+<div class="itemgroup info">Run the following command:<pre class="pre codeblock"><code>systemctl start mariadb.service</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Restart the RabbitMQ service.</span>
+<div class="itemgroup info">Run the following
+command:<pre class="pre codeblock"><code>systemctl start rabbitmq-server.service</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Start the Heat services.</span>
+<div class="itemgroup info">Run the following commands:<pre class="pre codeblock"><code>systemctl start openstack-heat-engine.service</code></pre>
+<pre class="pre codeblock"><code>systemctl start openstack-heat-api.service</code></pre>
+<pre class="pre codeblock"><code>systemctl start openstack-heat-api-cfn.service</code></pre>
+<pre class="pre codeblock"><code>systemctl start openstack-heat-api-cloudwatch.service</code></pre></div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">If you use the default Keystone service that is provided with the engine, start it.</span>
+<div class="itemgroup info">Run the following
+command:<pre class="pre codeblock"><code>systemctl start openstack-keystone.service</code></pre></div>
+</li></ol></section>
+</div>
+</article>
+<article class="topic task nested1" aria-labelledby="ariaid-title4" id="start_design_server">
+<h2 class="title topictitle2" id="ariaid-title4">Starting the blueprint design server</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-4e6e6df8-40f1-4115-be37-a11765c67144">Edit online</a></span></div>
+<div class="body taskbody">
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskstart_design_server__steps__1">Procedure</h3></div><div class="li step p">
+<span class="ph cmd">Start the blueprint design server: </span>
+<ul class="ul choices">
+<li class="li choice">On Linux, run the following
+command:<pre class="pre codeblock"><code><var class="keyword varname">server_installation_directory</var>/bin/server start</code></pre>Use
+the location of the blueprint design server installation for
+<code class="ph codeph"><var class="keyword varname">server_installation_directory</var></code>. The default installation
+directory is <span class="ph filepath">/opt/ibm-ucd-patterns</span>. By default, the command looks like the
+following code:<pre class="pre codeblock"><code>/opt/ibm-ucd-patterns/bin/server start</code></pre></li>
+<li class="li choice">On Windows, run the following command:
+<pre class="pre codeblock"><code>C:\<var class="keyword varname">server_installation_directory</var>\bin\start_server</code></pre>Use the
+location of the blueprint design server installation for
+<code class="ph codeph"><var class="keyword varname">server_installation_directory</var></code>. The default installation
+directory is <span class="ph filepath">C:\Program Files\ibm-ucd-patterns</span>. By default, the command looks
+like the following
+code:<pre class="pre codeblock"><code>"C:\Program Files\ibm-ucd-patterns\bin\start_server"</code></pre></li>
+</ul>
+</div></section>
+</div>
+</article>
+</article></main></body></html>

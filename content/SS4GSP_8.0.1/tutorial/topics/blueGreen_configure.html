@@ -1,0 +1,77 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Configure the resources to define the blue and green systems."><meta name="DC.relation" scheme="URI" content="../../tutorial/topics/blueGreen_abstract.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="blueGreen_configure"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring the tutorial system</title></head><body id="blueGreen_configure"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring the tutorial system</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b308b806-c6c6-42af-94c6-0b8876d40d86">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Configure the resources to define the blue and green systems.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_configure__prereq__1">Before you begin</h2></div>Before you begin the tutorial, make sure that you complete the <a class="xref" href="blueGreen_intro.html#blueGreen_intro__prereqs">Prerequisites</a>.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_configure__context__1">About this task</h2></div>Like all <span class="ph">Deploy</span> tutorials, to work through this one you need an agent that is running on a target computer system
+or systems. The target can be a cloud resource, a virtual image, or a physical computer. </section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskblueGreen_configure__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd"><a class="xref" href="blueGreen_process.html" title="Create the application process used by the blue-green deployment.">The tutorial references the application created in the
+JPetStore tutorial</a>. </span>
+<div class="itemgroup info">If you did not complete that tutorial, you can use any multi-component <span class="ph">Deploy</span> application that you have sufficient permissions to modify.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd"> While the examples in the tutorial show information for a Linux™ operating system, you can use any operating system. </span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Ensure that you have an agent installed in your environment.</span>
+<div class="itemgroup info">The way these logical environments are implemented relies on the way that <span class="ph">Deploy</span> represents target environments as resources. In the tutorial, you create a single production
+environment consisting of several nodes, and then duplicate the resources to represent the second
+system. These resources behave like separate systems, even though the resources point to the same
+physical system. For simplicity, you can use a single agent for the logical environments that you
+create in the tutorial. </div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add component tags to the JPetStore components. </span>
+<div class="itemgroup info">
+<p class="p">You can tag components while you work on the <span class="ph uicontrol">Components</span> tab, or you can
+tag components while you work in the <span class="ph uicontrol">Resources</span> tab. Make sure that you use
+the <span class="ph uicontrol">Components</span> tab because the tags that you associate with components in
+these two contexts behave differently. </p>
+<p class="p">To add tags to components, complete the following steps:</p>
+</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand">
+<span class="ph cmd">On the <span class="keyword wintitle">Components</span> page, click the <span class="ph uicontrol">Add tag</span> action
+for the JPet-Store-APP component, and then select the <kbd class="ph userinput">JPetStore</kbd> tag.</span>
+<div class="itemgroup info">If you do not have the tag, in the <span class="keyword wintitle">Add Tag</span> window, click
+<span class="ph uicontrol">Create Tag</span>, and then define the new tag.</div>
+</li>
+<li class="li substep substepexpand">
+<span class="ph cmd">Add the <kbd class="ph userinput">JPetStore</kbd> tag to the JPet-Store-WEB, and JPet-Store-DB
+components.</span>
+<div class="itemgroup info"><a class="xref" href="blueGreen_process.html#blueGreen_process" title="Create the application process used by the blue-green deployment.">Later in the tutorial, you use the tag
+in an Install Multiple Components application process step</a>. For the step to work, the tagged
+component processes must all have the same name.<div class="note note note_note"><span class="note__title">Note:</span> If you are using another multi-node
+application instead of JPetStore, add the same tag to each component used by the application.
+</div></div>
+</li>
+</ol>
+<div class="itemgroup stepresult">By using component tags, your resources and application can access all the components in
+an application with a single tag reference.</div>
+</li></ol></section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.1.0 SS4GSP_8.0.1" href="../../tutorial/topics/blueGreen_abstract.html" title="In this tutorial, you setup a deployment with two identical production environments, referred to arbitrarily as Blue and Green. One environment is always live, and the other environment is inactive and available to host an upgraded version.">Blue-green deployments</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" lang="en-us" id="blueGreen-configLoadBalancer">
+<h2 class="title topictitle2" id="ariaid-title2">Creating the load balancer component</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-b308b806-c6c6-42af-94c6-0b8876d40d86">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Create a component to abstractly represent the load balancer.</p>
+<section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskblueGreen-configLoadBalancer__context__1">About this task</h3></div>Multinode installations routinely use load balancers to rout incoming traffic to the next
+eligible node. There are many load balancers and just as many ways to configure them. For the
+tutorial, the load balancer is represented as a component within the JPetStore application.<p class="p" id="blueGreen-configLoadBalancer__componentTag">The tutorial load balancer component has an operational process called
+<code class="ph codeph">Change node port</code> that abstractly changes the active port on a node. You pass the
+port name that should be active during processing. You use the environment property
+<code class="ph codeph">environment.LBPort</code> to define the logical environment's port.</p></section>
+<section><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskblueGreen-configLoadBalancer__steps__1">Procedure</h3></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create a component and name it <kbd class="ph userinput">Load balancer</kbd> or something similar.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Create an <span class="ph uicontrol">Operational (No Version Needed)</span> process for the
+<kbd class="ph userinput">Load balancer</kbd> component and name it <code class="ph codeph">Change node port</code>, or
+something similar.</span>
+<div class="itemgroup info">You do not need versioning for the simple process that you create for the component.</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Add the <kbd class="ph userinput">Load balancer</kbd> component to the JPetSore application.</span>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskblueGreen-configLoadBalancer__result__1">Results</h3></div>The </section>
+</div>
+</article>
+</article></main></body></html>

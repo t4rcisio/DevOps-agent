@@ -1,0 +1,27 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="If you see &#34;Out of memory&#34; errors or are using the server at high capacity, increase the amount of system memory that is available to the server."><meta name="DC.relation" scheme="URI" content="../../user/topics/settings_ch.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="server_memory"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Increasing the amount of memory that is available to the server</title></head><body id="server_memory"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+  <h1 class="title topictitle1" id="ariaid-title1">Increasing the amount of memory that is available to the server</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-5f50c0bf-5543-40b1-ac25-16328985ebb3">Edit online</a></span></div>
+  
+  <div class="body taskbody"><p class="shortdesc">If you see "Out of memory" errors or are using the server at high capacity, increase
+    the amount of system memory that is available to the server.</p>
+    <section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_memory__context__1">About this task</h2></div>
+      <p class="p">For servers that are running as a service on Windows™, see the following technote: <a class="xref" href="https://www.ibm.com/support/pages/out-memory-errors-while-running-ibm-urbancode-deploy" target="_blank">Out of memory errors while running IBM UrbanCode Deploy</a>.</p>
+    </section>
+    <section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskserver_memory__steps__1">Procedure</h2></div><div class="li stepsection">To increase the memory for the server on Windows for a non-service installation, or on Linux™ or UNIX™ systems, follow these
+        steps:</div><ol class="ol steps"><li class="li step stepexpand">
+        <span class="ph cmd">Stop the server.</span>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">In the <span class="ph filepath">bin/set_env.cmd</span> file (Windows) or
+            <span class="ph filepath">bin/set_env</span> file (Linux and UNIX), increase the memory in the
+            <code class="ph codeph">JAVA_OPTS</code> parameter.</span>
+        <div class="itemgroup stepxmp">For example, the current file might have a line that begins with the following
+          code:<pre class="pre codeblock"><code>JAVA_OPTS="-Xmx2048m</code></pre>To increase the memory, change the
+          parameter that begins with the code <code class="ph codeph">-Xmx</code>. For example, to increase the
+          memory to 4 GB, use the following value: <code class="ph codeph">-Xmx4096m</code>. Be sure to include
+          the "<code class="ph codeph">m</code>" at the end of the parameter.</div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Save the file and restart the server.</span>
+      </li></ol></section>
+  </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/settings_ch.html" title="After you install IBM DevOps Deploy (Deploy), you can modify the server configuration and configure more options.">Server settings and configuration</a></div></div></nav></article></main></body></html>

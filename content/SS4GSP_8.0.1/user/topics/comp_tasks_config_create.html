@@ -1,0 +1,50 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Configuration templates are templates for files that are created during a component process. Typically, the data is for configurations for web servers, but the files can be used for any application that you deploy."><meta name="DC.relation" scheme="URI" content="../../user/topics/intro_component_processes.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="comp_tasks_config_create"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating configuration files in component processes</title></head><body id="comp_tasks_config_create"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating configuration files in component processes</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-e23e7734-6c13-489b-8757-c9d6342c2834">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Configuration templates are templates for files that are
+created during a component process. Typically, the data is for configurations
+for web servers, but the files can be used for any application that
+you deploy.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_tasks_config_create__context__1">About this task</h2></div>A configuration template contains property names and property references. For example, the
+following line can be used in a configuration
+template:<pre class="pre codeblock"><code>database.username=@DB_USER@</code></pre>When you deploy the component in an
+environment, the value of the <span class="keyword parmname">DB_USER</span> property that is defined for that
+environment is substituted for the <code class="ph codeph">@DB_USER@</code> reference.<p class="p">As an alternative to
+using configuration templates, you can also use the Create File step. In this case, you specify the
+contents of the file in the <span class="ph uicontrol">Contents</span> field and include property references in
+the usual syntax of <code class="ph codeph">${<var class="keyword varname">scope</var>/<var class="keyword varname">propertyname</var>}</code>,
+where <code class="ph codeph"><var class="keyword varname">scope</var></code> is the scope of the property and
+<code class="ph codeph"><var class="keyword varname">propertyname</var></code> is the name of the property.</p></section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_tasks_config_create__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand"><span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Components</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol"><var class="keyword varname">selected_component</var></span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Configuration File Templates</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create
+Configuration Template</span></span> to open the <span class="keyword wintitle">Create
+Configuration Template</span> window. </span>
+</li><li class="li step stepexpand"><span class="ph cmd">Type a name in the <span class="ph uicontrol">Name</span> field.</span>
+</li><li class="li step stepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Template</span> field, enter or paste the template text. </span><div class="itemgroup info">Text can be in any script. The amount of text is based on the database that <span class="ph">IBM DevOps Deploy (Deploy)</span> uses.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">Save the configuration template.</span></li><li class="li step stepexpand"><span class="ph cmd">To use the configuration template in a process, add the
+Install Template step to a component process:</span>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">In a component process, add the Install Template step.</span>
+<div class="itemgroup info">This step creates a file that is based on the configuration
+template.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the step properties, specify the name of the configuration
+template.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the step properties, select the <span class="ph uicontrol">Show Hidden
+Properties</span> check box.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Environment Property List</span> field,
+specify the properties to bring into scope.</span><div class="itemgroup stepxmp">For example,
+to bring only the environment properties into scope, specify <code class="ph codeph">${p:environment/allProperties}</code>.
+In this case, the configuration template can refer to only environment
+properties. To bring environment properties, agent properties, and
+resource properties into scope, specify the following value for the <span class="ph uicontrol">Environment
+Property List</span> field:<pre class="pre codeblock"><code>${p:environment/allProperties}, ${agent/allProperties}, ${resource/allProperties}</code></pre></div>
+</li>
+<li class="li substep substepexpand"><span class="ph cmd">Save the step and the process</span></li>
+</ol>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcomp_tasks_config_create__result__1">Results</h2></div>When you run the component process, the Install Template step creates a file that is based
+on the configuration template. The step replaces the property references with the property values.
+The default name of the file is the same as the name of the configuration template.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/intro_component_processes.html" title="A component process is a series of user-defined steps that operate on a component's artifacts. Each component has at least one process that is defined for it and can have several.">Component processes</a></div></div></nav></article></main></body></html>

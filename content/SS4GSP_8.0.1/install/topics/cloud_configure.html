@@ -1,0 +1,62 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="To create dynamic environments on a cloud system that uses virtual system patterns, you must install a script package on your cloud system."><meta name="DC.relation" scheme="URI" content="../../user/topics/integrat_ov.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="cloud_configure"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring virtual system pattern-based clouds</title></head><body id="cloud_configure"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring virtual system pattern-based clouds</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-331c91b7-5eb9-42da-ab8d-83d4967df0c5">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">To create dynamic environments on a cloud system that uses virtual system patterns, you
+    must install a script package on your cloud system.</p>
+<section class="section prereq" data-hd-otherprops="ibm"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_configure__prereq__1">Before you begin</h2></div>
+<p class="p" id="cloud_configure__permissions">You must have a user account on a cloud system. This account must have
+                permission to create script packages, to read information about virtual system
+                patterns, IP groups, cloud groups, and environment profiles, and to create and
+                delete virtual environments. See the documentation for your cloud system for more
+                information about setting up permissions. For example, for <span class="keyword">IBM® PureApplication® System</span>, refer
+                to the <a class="xref" href="https://www.ibm.com/docs/en/psww2500/2.3.3?topic=security-roles" target="_blank">Understanding security roles for PureApplication®
+                    System</a>.</p>
+<div class="p">For this type of cloud integration, the following cloud
+				systems are supported:<ul class="ul" id="cloud_configure__d557e39">
+					<li class="li"><span class="keyword">IBM Cloud Orchestrator</span> version 2.4 or later</li>
+					<li class="li">IBM SmartCloud® Orchestrator
+						versions 2.2 and 2.3</li>
+					<li class="li"><span class="keyword">IBM PureApplication System</span> version 1.0 or later</li>
+					<li class="li"><span class="keyword">IBM Workload Deployer</span>
+						version 3.1.0.6 or later</li>
+				</ul>Within these cloud systems, you can provision the virtual resources in
+				environment profiles or in cloud groups. You can also assign the virtual resources
+				to IP groups, but only when you assign the resources to an environment profile
+				first. For more information, see <a class="xref" href="../../user/topics/app_environment_create.html" title="Before you can run a deployment, you must define at least one application environment that associates components with an agent on the target host.">Creating environments</a>. You can
+				also use virtual images with no more than one virtual network card. <span class="ph">IBM DevOps Deploy (Deploy)</span> does
+				not support selecting different flavors of virtual resources or virtual nodes that
+				have a multiplicity greater than 1.</div>
+</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_configure__context__1">About this task</h2></div>The <span class="ph">Install <span class="ph">Deploy</span>
+				Agent</span> package automatically installs agents on cloud resources. When you provision an environment from
+the cloud system, this script package installs an agent on each node in the cloud resource request.
+Then, these agents contact the <span class="ph">Deploy</span> server,
+and the server adds them to the environment.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_configure__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Download and extract the file for agents on dynamic cloud environments.</span>
+<div class="itemgroup info">The file is named as <span class="ph filepath">ibm-ucd-agent-script-package.zip</span> and is available in
+                    the IBM DevOps plug-ins site at <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/#ibm-urbancode-deploy-agent-package-for-dynamic-cloud-environments" target="_blank">https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/#ibm-urbancode-deploy-agent-package-for-dynamic-cloud-environments</a> location.</div>
+</li><li class="li step stepexpand"><span class="ph cmd">In your cloud system, create a script package and upload
+the file <span class="ph filepath">ibm-ucd-agent-script-package.zip</span> to
+the script package.</span><div class="itemgroup info">The process differs slightly for different
+cloud systems.</div><div class="itemgroup stepxmp">For example, for most cloud systems,
+follow these steps:</div>
+<ol type="a" class="ol substeps">
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Catalog</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Script Packages</span></span>.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">Click <span class="ph uicontrol">New</span> <img class="image" src="../../user/images/new_script_package.gif" alt="">.</span></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Script name</span> field, specify
+the following name:</span><div class="itemgroup info"><pre class="pre codeblock"><code>Install <span class="ph">DevOps Deploy</span> Agent</code></pre></div>
+<div class="itemgroup stepresult">The new script package opens.</div></li>
+<li class="li substep substepexpand"><span class="ph cmd">In the <span class="ph uicontrol">Script package file</span> field,
+upload the file <span class="ph filepath">ibm-ucd-agent-script-package.zip</span>.</span>
+</li>
+</ol>
+<div class="itemgroup info">You do not need to specify default values for the parameters
+in this script package. The server specifies these parameters when
+you create an environment.</div></li></ol></section>
+<section class="section postreq" data-hd-otherprops="ibm"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_configure__postreq__1">What to do next</h2></div>Next, model cloud environments for this cloud. See <a class="xref" href="../../edt/topics/blueprint_edit_clouds_vsp.html" title="To model environments for clouds that use virtual system patterns (VSPs), on the server, import a virtual system pattern as a resource template and then create a blueprint that is based on the resource template.">Modeling environments for clouds that use virtual system patterns</a>.</section>
+</div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/integrat_ov.html" title="IBM DevOps Deploy (Deploy) supports integrations with other IBM products, products from others, and certain cloud systems.">Overview of integrations</a></div></div></nav></article></main></body></html>

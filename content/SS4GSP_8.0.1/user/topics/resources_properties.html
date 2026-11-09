@@ -1,0 +1,115 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="Properties can be created for most elements, including components, resources, applications, and agents. You can set and change properties in many different ways."><meta name="DC.relation" scheme="URI" content="../../user/topics/ud_properties_overview.html"><meta name="DC.relation" scheme="URI" content="../../user/topics/props_from_http.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="resources_properties"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Creating, setting, and editing properties</title></head><body id="resources_properties"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Creating, setting, and editing properties</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dafd03c9-0ea7-465e-a067-1a8280923ca6">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">Properties can be created for most elements, including components, resources,
+    applications, and agents. You can set and change properties in many different ways.</p>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskresources_properties__context__1">About this task</h2></div>A property represents a user-defined parameter. Properties are typically accessed in
+      processes. For information about using properties, see <a class="xref" href="ud_properties_using.html" title="IBM DevOps Deploy (Deploy) provides several ways to refer to properties.">Referring to properties</a>.</section>
+</div>
+  <nav role="navigation" class="related-links"><ul class="ullinks"><li class="link ulchildlink" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1"><strong><a href="../../user/topics/props_from_http.html">Retrieving property values from external files</a></strong><br>You can specify that a property takes a value from an XML or JSON file over HTTP. Then, when you run the process, the server prompts you with a list of values from that file.</li></ul><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/ud_properties_overview.html" title="Properties are variables that store information about many different elements, including components, environments, processes, and applications. You can also set global properties for the system.">Properties</a></div></div></nav><article class="topic task nested1" aria-labelledby="ariaid-title2" id="resources_properties_manual">
+    <h2 class="title topictitle2" id="ariaid-title2">Setting properties manually</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dafd03c9-0ea7-465e-a067-1a8280923ca6">Edit online</a></span></div>
+    
+    <div class="body taskbody"><p class="shortdesc">You can create and edit properties on many elements by opening the element and going
+      to its <span class="ph uicontrol">Configuration</span> tab.</p>
+      <section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskresources_properties_manual__context__1">About this task</h3></div>
+<p class="p">To edit most of the properties for an element, open the element, go to its
+            <span class="ph uicontrol">Configuration</span> tab (not the <span class="ph uicontrol">Configuration</span>
+          tab at the top of the page), and then click <span class="ph uicontrol"><var class="keyword varname">element_type</var>
+            Properties</span>. For example, to edit component properties, click the component,
+          click <span class="ph uicontrol">Configuration</span>, and then click <span class="ph uicontrol">Component
+            Properties</span>, as shown in the figure.</p>
+        <p class="p"><img class="image" id="resources_properties_manual__image_qnj_jkk_pzb" src="../images/resources_properties_a.gif"></p>
+<p class="p">However, if you created an application from a template, any environment or application properties
+that you specified are not available on the <span class="ph uicontrol">Configuration</span> tabs. <span class="ph" id="resources_properties_manual__app_template_props">You can view and edit, but not delete, these properties by clicking the
+element's <span class="ph uicontrol">Configuration</span> tab (not the <span class="ph uicontrol">Configuration</span> tab
+at the top of the page), and then clicking <span class="ph uicontrol">Basic Settings</span>.</span></p>
+<div class="p">To add a property, click <span class="ph uicontrol">Add Property</span>, and provide the information about
+the property, including its name, value, and description. You can also edit multiple properties at
+once by clicking <span class="ph uicontrol">Batch Edit</span>. Then, in batch mode, specify the properties in
+name-value pairs that are separated by line breaks, as in the following
+example:<pre class="pre codeblock"><code>Property1=Value1
+Property2=Value2
+Property3=Value3</code></pre>Escape backslash,
+equals, and colon characters (<code class="ph codeph">\</code>, <code class="ph codeph">=</code>, <code class="ph codeph">:</code>) with a
+backslash, for
+example:<pre class="pre codeblock"><code>WindowsPath=C\:\\myfolder\\myfile.txt
+PropertyWithColons=This string\: has a colon</code></pre>To create a property, put the new property and its value on a new line. To include a line
+          break in a property value, use "<code class="ph codeph">\n</code>". Be sure to click
+            <span class="ph uicontrol">Save</span> to save your changes when you are finished editing multiple
+          properties. To close batch edit mode, use the <span class="ph uicontrol">Use Table</span> command.
+          Secured values are encrypted when they are displayed in batch mode. If you modify an
+          encrypted value, the modifications are encrypted when you exit edit mode.</div>
+<div class="note note note_note"><span class="note__title">Note:</span> You can reorder the properties by moving them up or down using the row handler <img class="image" src="../images/rowHandler_icon.png" height="20" width="13" alt="row handler">. Property order can only be
+changed while sorting by index.</div>
+      </section>
+    </div>
+  </article>
+<article class="topic task nested1" aria-labelledby="ariaid-title3" id="auto_properties">
+<h2 class="title topictitle2" id="ariaid-title3">Auto-completing properties </h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dafd03c9-0ea7-465e-a067-1a8280923ca6">Edit online</a></span></div>
+<p class="shortdesc">Starting in v7.0.5, auto-completing properties were added to the script editor fields.
+      The auto-complete functionality works in application, component, and generic
+      processes.</p>
+</article>
+  <article class="topic task nested1" aria-labelledby="ariaid-title4" id="resources_properties_top_config_tab">
+    <h2 class="title topictitle2" id="ariaid-title4">Setting properties with the <span class="ph uicontrol">Configuration</span> tab</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dafd03c9-0ea7-465e-a067-1a8280923ca6">Edit online</a></span></div>
+    
+    <div class="body taskbody"><p class="shortdesc">On the top-level <span class="keyword wintitle">Configuration</span> page you can directly manage
+      properties for applications, components, and environments.</p>
+      <section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskresources_properties_top_config_tab__context__1">About this task</h3></div>
+        <p class="p">Access the <span class="keyword wintitle">Configuration</span> page by clicking the
+            <span class="ph uicontrol">Configuration</span> tab. From this page, you can add properties to
+          applications, components, and environments.</p>
+        <p class="p"><img class="image" id="resources_properties_top_config_tab__image_uzj_mmk_pzb" src="../images/configTab1.gif"><div class="draft-comment" translate="no" style="background-color: #99FF99; border: 1pt black solid;"><strong>Draft comment: </strong><br>We need to
+            provide more information about adding property. With an example, we can give context and
+            meaning behind the controls on this page.</div></p>
+      </section>
+    </div>
+  </article>
+  <article class="topic task nested1" aria-labelledby="ariaid-title5" id="resources_properties_process">
+    <h2 class="title topictitle2" id="ariaid-title5">Setting properties in processes</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dafd03c9-0ea7-465e-a067-1a8280923ca6">Edit online</a></span></div>
+    
+    <div class="body taskbody"><p class="shortdesc">Several different steps are available to create and set properties in
+      processes.</p>
+      <section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskresources_properties_process__context__1">About this task</h3></div>For example, the <a class="xref" href="https://urbancode.github.io/IBM-UCx-PLUGIN-DOCS/UCD/#ibm-urbancode-deploy-components" target="_blank">Deploy component</a> plug-in contains the Create Component Property
+        step. This step creates a component property or changes the value of an existing component
+          property.<br><img class="image" src="../images/resources_properties_b.gif" alt="Using steps to set a component property and an environment property"><br><div class="note note note_note"><span class="note__title">Note:</span> If you use these steps to change the value of a property, the new property
+          value is not available until the next process runs. Later steps in the same process use
+          the same value that the property had when the process started.</div></section>
+    </div>
+  </article>
+  <article class="topic task nested1" aria-labelledby="ariaid-title6" id="resources_properties_api">
+    <h2 class="title topictitle2" id="ariaid-title6">Setting properties with the REST API and command-line client</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dafd03c9-0ea7-465e-a067-1a8280923ca6">Edit online</a></span></div>
+    <div class="body taskbody">
+      <section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskresources_properties_api__context__1">About this task</h3></div>Several commands in the REST API and in the command-line client can set properties.
+        See <a class="xref" href="../../reference/topics/rest_api_ref_overview.html" title="You can use these REST interfaces to automate tasks.">REST API reference</a> and <a class="xref" href="../../reference/topics/cli_ch.html" title="CLI is a command-line interface that provides access to the IBM DevOps Deploy (Deploy) server. It can be used to find or set properties and to run numerous functions.">Command-line client (CLI) reference</a>.</section>
+    </div>
+  </article>
+  <article class="topic task nested1" aria-labelledby="ariaid-title7" id="resources_properties_output">
+    <h2 class="title topictitle2" id="ariaid-title7">Setting output properties</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dafd03c9-0ea7-465e-a067-1a8280923ca6">Edit online</a></span></div>
+    <div class="body taskbody">
+      <section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskresources_properties_output__context__1">About this task</h3></div>To pass properties from one step to another within a process, you can use output
+        properties. See <a class="xref" href="output_properties.html" title="Output properties are specialized properties that process steps generate. You use output properties to pass parameters to subsequent steps in a process.">Output properties</a>.</section>
+    </div>
+  </article>
+<article class="topic task nested1" aria-labelledby="ariaid-title8" id="renaming_properties">
+<h2 class="title topictitle2" id="ariaid-title8">Renaming properties</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dafd03c9-0ea7-465e-a067-1a8280923ca6">Edit online</a></span></div>
+<div class="body taskbody">
+<section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskrenaming_properties__context__1">About this task</h3></div>Properties can be renamed if the new name is not already in use. Renamed property
+references are not updated automatically.</section>
+</div>
+</article>
+  <article class="topic task nested1" aria-labelledby="ariaid-title9" data-hd-otherprops="ibm" id="resources_properties_blueprints">
+<h2 class="title topictitle2" id="ariaid-title9">Passing properties from blueprints to the resource tree</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dafd03c9-0ea7-465e-a067-1a8280923ca6">Edit online</a></span></div>
+<div class="body taskbody">
+<section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskresources_properties_blueprints__context__1">About this task</h3></div>You can pass properties from blueprints to the server. See <a class="xref" href="env_props_BDS.html" title="From the blueprint designer, you can set component environment properties and component resource properties in blueprint source code.">Passing properties from blueprints to the resource tree</a>.</section>
+</div>
+</article>
+  <article class="topic task nested1" aria-labelledby="ariaid-title10" id="resources_properties_external_files">
+    <h2 class="title topictitle2" id="ariaid-title10">Setting properties from external files</h2><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-dafd03c9-0ea7-465e-a067-1a8280923ca6">Edit online</a></span></div>
+    <div class="body taskbody">
+      <section class="section context"><div class="tasklabel"><h3 class="sectiontitle tasklabel" id="taskresources_properties_external_files__context__1">About this task</h3></div>You can retrieve property values from an external file. See <a class="xref" href="props_from_http.html" title="You can specify that a property takes a value from an XML or JSON file over HTTP. Then, when you run the process, the server prompts you with a list of values from that file.">Retrieving property values from external files</a>.</section>
+    </div>
+  </article>
+</article></main></body></html>

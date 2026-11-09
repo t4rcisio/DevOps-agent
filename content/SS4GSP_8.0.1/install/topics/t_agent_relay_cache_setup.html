@@ -1,0 +1,63 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="abstract" content="Agent relays can cache downloaded artifacts. Caching artifacts in this way improves performance because agents retrieve artifacts from agent relays instead of from the server."><meta name="description" content="Agent relays can cache downloaded artifacts. Caching artifacts in this way improves performance because agents retrieve artifacts from agent relays instead of from the server."><meta name="DC.relation" scheme="URI" content="../../user/topics/managing_data.html"><meta name="rights" content="© 2011, 2024 "><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="agent_relay_cache_setup"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Caching artifacts on agent relays</title></head><body id="agent_relay_cache_setup"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Caching artifacts on agent relays</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-ed9f93a3-e0dd-4a86-8fc2-c00b6856b085">Edit online</a></span></div>
+
+<div class="body taskbody"><div class="abstract"> <p class="shortdesc">Agent relays can cache downloaded artifacts. Caching artifacts in this way improves
+      performance because agents retrieve artifacts from agent relays instead of from the
+      server.</p>
+    <p class="p">When you enable artifact caching on an agent relay, the agent relay maintains a local
+      CodeStation repository. This repository stores cached versions of artifacts that are on the
+      server CodeStation repository. By default, the first time an agent requests an artifact, the
+      agent relay retrieves the artifact, caches it in its CodeStation repository, and provides it
+      to the agent. The next time an agent requests the artifact, the relay checks if the cached
+      artifact is up to date. Then, the agent relay updates the cached artifact if necessary and
+      provides the artifact to the agent.</p>
+    <p class="p">By default, agent relays cache only artifacts that one or more agents request. You can also
+      configure agent relays to pre-populate the cache with all artifacts with a specified status.
+      In this case, the agent relays populate the cache with artifacts that have the specified
+      status. Then, the artifacts are available immediately when agents request them.</p>
+    <p class="p">Caching artifacts improves performance if the server is a long distance from the agents. In
+      this case, caching artifacts on an agent relay that is close to the agents reduces the time
+      that it takes to copy artifacts to the agents. Caching artifacts also improves performance if
+      many agents retrieve artifacts from the server at the same time. In this case, caching the
+      artifacts transfers server load to the agent relays.</p>
+<div class="note note note_note"><span class="note__title">Note:</span> If you cache files on the relay, do not put the CodeStation
+                  cache on an NFS file system.</div> </div>
+    <section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_relay_cache_setup__prereq__1">Before you begin</h2></div>To pre-cache artifacts on agent relays, set up one or more component version statuses.
+      Component versions with these statuses are cached on agent relays before agents request the
+      component versions.</section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_relay_cache_setup__context__1">About this task</h2></div>If you did not configure agent relay artifact caching when you installed the agent relay,
+you can also configure it by modifying its properties.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskagent_relay_cache_setup__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Open the
+<span class="ph filepath">/<var class="keyword varname">agent-relay-install</var>/conf/agentrelay.properties</span> file.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Control caching with the <code class="ph codeph">agentrelay.codestation.enable_replication</code>
+property:</span>
+<ul class="ul choices">
+<li class="li choice">To enable caching, set the property to <code class="ph codeph">TRUE</code>. An example true property
+resembles this code: <code class="ph codeph">agentrelay.codestation.enable_replication=true</code>.</li>
+<li class="li choice">To disable caching set the property to <code class="ph codeph">FALSE</code>. An example false property
+            resembles this code:
+              <code class="ph codeph">agentrelay.codestation.enable_replication=false</code>.<div class="note note note_note"><span class="note__title">Note:</span> If caching is
+              enabled on an agent relay and disabled later, the cached artifacts are not deleted. To
+              delete the artifacts manually, stop the agent relay and then delete the folders
+                  <span class="ph filepath">/<var class="keyword varname">agent-relay-install</var>/var/repository/ptr</span>
+              and
+              <span class="ph filepath">/<var class="keyword varname">agent-relay-install</var>/var/repository/blob</span>.</div></li>
+</ul>
+</li><li class="li step stepexpand">
+        <span class="ph cmd">To preload artifact versions that contain certain statuses, specify the statuses in the
+            <code class="ph codeph">agentrelay.codestation.geotags</code> property.</span>
+        <div class="itemgroup info">Separate statuses with commas. If you edit a status that contains a comma, the comma
+          must be escaped.</div>
+        <div class="itemgroup stepxmp">A modified <code class="ph codeph">agentrelay.codestation.geotags</code> property might resemble
+          the following code: <code class="ph codeph">agentrelay.codestation.geotags=Hello%2c World,Production</code><p class="p">Then, ensure that the component versions that you want to
+            cache have one of these statuses.</p></div>
+      </li><li class="li step stepexpand">
+        <span class="ph cmd">Modify the cache size with the <code class="ph codeph">agentrelay.codestation.max_cache_size</code>
+          property.</span>
+      </li></ol></section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../user/topics/managing_data.html">Managing data</a></div></div></nav></article></main></body></html>

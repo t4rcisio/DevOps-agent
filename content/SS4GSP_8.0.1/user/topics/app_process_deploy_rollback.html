@@ -1,0 +1,89 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="task"><meta name="description" content="You can roll back a component to the versions that are in a snapshot. In this case, you use a Rollback Component step with the Remove Undesired Incremental Versions option."><meta name="DC.relation" scheme="URI" content="../../user/topics/app_process.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="app_process_deploy_rollback"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Rolling back to a snapshot</title></head><body id="app_process_deploy_rollback"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Rolling back to a snapshot</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-7b8e4e63-b7e6-4194-a6f2-78240c49b844">Edit online</a></span></div>
+
+<div class="body taskbody"><p class="shortdesc">You can roll back a component to the versions that are in a snapshot. In this case, you
+use a <span class="ph uicontrol">Rollback Component</span> step with the <span class="ph uicontrol">Remove Undesired
+Incremental Versions</span> option.</p>
+<section class="section prereq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_deploy_rollback__prereq__1">Before you begin</h2></div> <ul class="ul">
+<li class="li">Create a snapshot that includes the component versions to be restored. Snapshots are typically
+made for every completed deployment, especially for deployments in critical environments. See <a class="xref" href="app_snapshot_create.html#app_snapshot_create" title="To create a snapshot, you specify which version of components and processes to include in the snapshot. Typically, to create a snapshot you copy the components and processes from an environment where you deployed the application without errors.">Creating snapshots</a>.</li>
+<li class="li">Create an uninstall-type process for each component to be rolled back. For information about
+uninstalling component versions, see <a class="xref" href="app_process_deploy_uninstall.html#app_process_deploy_uninstall" title="You can uninstall components by using an Uninstall Component step in an application process.">Uninstalling components with an application process</a>. </li>
+</ul> </section>
+<section class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_deploy_rollback__context__1">About this task</h2></div>
+			<p class="p">For a video demonstration of rolling back components, see <a class="xref" href="https://youtu.be/EyZPgqExljc?si=gRofQEZW9zA0ZCgI" target="_blank">Rollback Scenarios in <span class="ph">Deploy</span></a>.</p>
+<p class="p">When you roll back to a snapshot in this way, the server runs the uninstall process for each
+component version that is not in the snapshot. The server runs the uninstall processes in the
+reverse order in which it deployed the versions, starting with the most recently deployed version
+and ending with the version that was deployed first. Only the versions in the snapshot are left on
+the environment.</p>
+<p class="p">This method is intended to uninstall incremental versions, but you can also use it to uninstall
+full versions. However, for full versions, in many cases, it is simpler to install the new full
+version over the existing full and incremental versions.</p>
+<p class="p">This method works best for component versions that are already deployed, regardless of whether
+the deployments of those versions were completed. As an alternative, you can add a step that
+immediately rolls back deployments of versions that were not completed; for that method, see <a class="xref" href="app_process_deploy_rollback_last.html" title="If an application process fails to deploy a component, you can add a rollback step to the process to reverse the deployment. In this case, you use the Replace with Last Deployed option.">Rolling back components that fail to deploy</a>.</p>
+</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_deploy_rollback__steps__1">Procedure</h2></div><div class="li stepsection">To roll back one or more components to the versions that are in a snapshot, complete
+these steps:</div><ol class="ol steps"><li class="li step stepexpand">
+<span class="ph cmd">Create an application process with a name such as "Roll back to snapshot."</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the application process, add one or more <span class="ph uicontrol">Rollback Component</span> steps,
+one for each component to roll back.</span>
+</li><li class="li step stepexpand">
+<span class="ph cmd">In the properties for each <span class="ph uicontrol">Rollback Component</span> step, specify values for
+the fields that follow.</span>
+<div class="itemgroup info">
+<div class="note note note_note"><span class="note__title">Tips:</span> 
+<ul class="ul">
+<li class="li">To specify these values, open the <span class="keyword wintitle">Edit Properties</span> window by clicking the
+edit icon <img class="image" src="../images/edit_proc_step.gif" alt="edit icon"> after you drag the steps to the process flow diagram.</li>
+<li class="li">All steps in the process must be connected in a flow from the process Start node to the Finish
+node. When you drag the first step to the process, the step is automatically connected to the Start
+and Finish nodes. When you drag another steps to the process, position the step between two steps so
+that the connection line is highlighted, and then drop the step. The step is automatically linked to
+the earlier and subsequent steps. If the connection line is not highlighted, you must manually make
+the connection from an earlier step to a subsequent step.</li>
+</ul>
+</div>
+<dl class="dl">
+
+<dt class="dt dlterm"><span class="ph uicontrol">Component</span></dt>
+<dd class="dd">Specify the component to roll back.</dd>
+
+
+<dt class="dt dlterm"><span class="ph uicontrol">Component Process</span></dt>
+<dd class="dd">Specify the uninstall process for the component.</dd>
+
+
+<dt class="dt dlterm"><span class="ph uicontrol">Rollback Type</span></dt>
+<dd class="dd">Select <span class="ph uicontrol">Remove Undesired Incremental Versions</span>.</dd>
+
+</dl>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Verify that all steps in the process are connected in the order for them to run. </span>
+<div class="itemgroup info">To change the order of the steps, remove the links between steps by clicking the delete
+connection icon <img class="image" src="../images/edit_proc_connex.gif">. Then, move the step into a new
+position and reconnect the steps in order.</div>
+<div class="itemgroup stepxmp">The following diagram shows a typical application process that includes a
+<span class="ph uicontrol">Rollback Component</span> step. This application process is designed to roll back
+the three components in the application. Two components use an <span class="ph uicontrol">Install
+Application</span> step that redeploys an earlier component version. The other component, the
+JPetStore-DB database component, uses a rollback step to roll back the incremental component
+version. This step uses the <span class="ph uicontrol">Remove Undesired Incremental Versions</span> option and
+an uninstall-type component process.<br><img class="image" src="../images/app_process_rollback_a.gif" alt="An application process that includes a Rollback Component step."><br>
+</div>
+</li><li class="li step stepexpand">
+<span class="ph cmd">Run the application process, and specify the snapshot to roll back to.</span>
+<div class="itemgroup info">If you are rolling back by redeploying an existing version, be sure to clear the
+<span class="ph uicontrol">Only Changed Versions</span> check box. Otherwise, the process does not redeploy the
+version.</div>
+</li></ol></section>
+<section class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskapp_process_deploy_rollback__result__1">Results</h2></div>The process uses the snapshot to determine which component versions to roll back. In each
+step that includes the <span class="ph uicontrol">Remove Undesired Incremental Versions</span> option, versions
+that are not in the snapshot are removed.</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_7.0.0 SS4GSP_8.0.1" href="../../user/topics/app_process.html" title="You can use application processes to deploy or to roll back components.">Application processes</a></div></div></nav></article></main></body></html>

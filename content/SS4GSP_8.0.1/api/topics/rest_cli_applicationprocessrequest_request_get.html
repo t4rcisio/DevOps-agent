@@ -1,0 +1,140 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="DC.type" content="reference"><meta name="description" content=""><meta name="DC.subject" content="REST API, applicationProcessRequest resource, /{request} GET, GET methods, /applicationProcessRequest/{request}"><meta name="keywords" content="REST API, applicationProcessRequest resource, /{request} GET, GET methods, /applicationProcessRequest/{request}"><meta name="DC.relation" scheme="URI" content="../../api/topics/rest_cli_applicationprocessrequest.html"><meta name="rights" content="© 2011, 2024 "><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="rest_cli_applicationprocessrequest_request_get"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Get an application process request's activity trace.</title></head><body id="rest_cli_applicationprocessrequest_request_get"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Get an application process request's activity trace.</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-4f3e054a-07d0-490a-91fc-cea22ccbcf4d">Edit online</a></span></div>
+
+
+<div class="body refbody"><p class="shortdesc"></p>
+<section class="section"><h2 id="rest_cli_applicationprocessrequest_request_get__title__2" class="title sectiontitle">Request</h2>
+<pre class="pre codeblock"><code>GET https://{hostname}:{port}
+    /cli/applicationProcessRequest/{request}
+Accept: {contentType}
+</code></pre><table class="table" id="rest_cli_applicationprocessrequest_request_get__url_params"><caption><span class="table--title-label">Table 1. </span><span class="title">URL parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_applicationprocessrequest_request_get__url_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_request_get__url_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_request_get__url_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_request_get__url_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_get__url_params__entry__1"><span class="keyword parmname">request</span></td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_get__url_params__entry__2">string</td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_get__url_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_get__url_params__entry__4">The ID of the application process request.</td></tr>
+</tbody></table>
+<table class="table" id="rest_cli_applicationprocessrequest_request_get__header_params"><caption><span class="table--title-label">Table 2. </span><span class="title">Header parameters</span></caption><colgroup><col><col><col><col></colgroup><thead class="thead">
+<tr class="row valign-bottom">
+<th class="entry" id="rest_cli_applicationprocessrequest_request_get__header_params__entry__1">Parameter</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_request_get__header_params__entry__2">Type</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_request_get__header_params__entry__3">Required</th>
+<th class="entry" id="rest_cli_applicationprocessrequest_request_get__header_params__entry__4">Description</th>
+</tr>
+</thead><tbody class="tbody">
+<tr class="row">
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_get__header_params__entry__1"><span class="keyword parmname">Accept</span></td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_get__header_params__entry__2"><ul class="ul">
+<li class="li"><code class="ph codeph">application/json</code></li>
+<li class="li"><code class="ph codeph">application/yaml</code></li>
+</ul>
+</td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_get__header_params__entry__3">true</td>
+<td class="entry" headers="rest_cli_applicationprocessrequest_request_get__header_params__entry__4"></td>
+</tr>
+</tbody></table>
+</section>
+<div class="example" data-hd-audience="rest"><h2 id="rest_cli_applicationprocessrequest_request_get__title__5" class="title sectiontitle">Example</h2><pre class="pre codeblock"><code>curl <span class="ph">-k -u jsmith:passwd 
+  </span> 
+  "<span class="ph">https://deployserver.example.com:8443</span>/cli/
+  applicationProcessRequest/151cd268-ef32-4e55-903b-86ee66314e1e"</code></pre></div><div class="example" data-hd-audience="all"><h2 id="rest_cli_applicationprocessrequest_request_get__title__6" class="title sectiontitle">Example response</h2><pre class="pre codeblock language-json"><code>{
+  "id": "8cbccccf-581e-4500-af41-1d0429ef2dae",
+  "type": "graph",
+  "name": "2da0c9e5-0045-45b3-a49e-6f130afa0305",
+  "state": "EXECUTING",
+  "result": "NONE",
+  "startDate": 1441394363997,
+  "duration": 9052,
+  "paused": false,
+  "workflowTraceId": "193e892f-677d-4534-9763-ff8d005a5829",
+  "children": [
+    {
+      "id": "bcbc874b-bbd9-4c6c-8890-3575373bc07f",
+      "type": "runProcess",
+      "displayName": "Run generic process",
+      "name": "MyGenericProcess",
+      "state": "EXECUTING",
+      "result": "NONE",
+      "startDate": 1441394363997,
+      "duration": 9052,
+      "workflowTraceId": "193e892f-677d-4534-9763-ff8d005a5829",
+      "childRequestId": "94c77d8d-e6d2-41fd-aa8d-61f606c438e5",
+      "graphPosition": 1
+    },
+    {
+      "id": "a9ef585b-ff08-4b25-bd4d-fe7295a8882e",
+      "type": "componentEnvironmentIterator",
+      "displayName": "Install Component 2",
+      "name": "3f13d0d7d892af1b135251d94583a9",
+      "state": "INITIALIZED",
+      "result": "NONE",
+      "duration": 1441394373049,
+      "workflowTraceId": "193e892f-677d-4534-9763-ff8d005a5829",
+      "component": {
+        "id": "92c2b418-b3f1-4a5b-bfb7-a88ff5d6c268",
+        "securityResourceId": "63a4fe6e-1a8a-4d1e-8122-4f0abca2faa4",
+        "name": "Component 2",
+        "description": "",
+        "created": 1441381387613,
+        "componentType": "STANDARD",
+        "ignoreQualifiers": 0,
+        "importAutomatically": false,
+        "useVfs": true,
+        "active": true,
+        "integrationFailed": false,
+        "deleted": false,
+        "defaultVersionType": "FULL",
+        "cleanupDaysToKeep": 0,
+        "cleanupCountToKeep": 0,
+        "tags": [],
+        "user": "admin"
+      },
+      "graphPosition": 2
+    },
+    {
+      "id": "326a0b17-360a-43cf-9645-7f58264db996",
+      "type": "componentEnvironmentIterator",
+      "displayName": "Install Component 1",
+      "name": "8eb1ec1009597252ce10c89e2b948b",
+      "state": "INITIALIZED",
+      "result": "NONE",
+      "duration": 1441394373137,
+      "workflowTraceId": "193e892f-677d-4534-9763-ff8d005a5829",
+      "component": {
+        "id": "23742526-8105-4146-bcf1-e4fce1734805",
+        "securityResourceId": "9e4cca84-83f2-42ed-b970-3003fef92dd5",
+        "name": "Component 1",
+        "description": "",
+        "created": 1441385679966,
+        "componentType": "STANDARD",
+        "ignoreQualifiers": 0,
+        "importAutomatically": false,
+        "useVfs": true,
+        "active": true,
+        "integrationFailed": false,
+        "deleted": false,
+        "defaultVersionType": "FULL",
+        "cleanupDaysToKeep": 0,
+        "cleanupCountToKeep": 0,
+        "tags": [],
+        "user": "admin"
+      },
+      "graphPosition": 3
+    }
+  ]
+}
+</code></pre></div>
+<section class="section">
+<p class="p">Related CLI command: <a class="xref" href="udclient_getapplicationprocessexecution.html" title="Get an application process request's activity trace.">getApplicationProcessExecution</a>.</p>
+</section>
+</div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" data-hd-product="SS4GSP_8.0.1" href="../../api/topics/rest_cli_applicationprocessrequest.html" title="Resources for requesting application processes.">applicationProcessRequest resource</a></div></div></nav></article></main></body></html>

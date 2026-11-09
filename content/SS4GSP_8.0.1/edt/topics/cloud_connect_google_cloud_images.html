@@ -1,0 +1,58 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="copyright" content="(C) Copyright 2026"><meta name="DC.rights.owner" content="(C) Copyright 2026"><meta name="DC.type" content="task"><meta name="description" content="You can configure a custom image to use in your Google Cloud Platform environments."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="cloud_connect_google_cloud_images"><meta name="DC.language" content="en-us"><link rel="stylesheet" type="text/css" href="../../commonltr.css"><title>Configuring Google Cloud Platform images</title></head><body id="cloud_connect_google_cloud_images"><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">Configuring Google Cloud Platform images</h1><div style="padding: .5em" class="edit-source-topic"><span class="edit-source-topic" style="font-size: 12px; vertical-align: middle"><a target="_blank" href="https://author-p132321-e1283790.adobeaemcloud.com/bin/fmdita/urlresolver?target=EDITOR&amp;uuid=GUID-271fbecd-1186-469d-a504-3f5a8bf2a2d9">Edit online</a></span></div>
+
+
+<div class="body taskbody"><p class="shortdesc">You can configure a custom image to use in your Google Cloud Platform
+environments.</p>
+<section class="section context" id="cloud_connect_google_cloud_images__context_azx_jkp_hz"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_connect_google_cloud_images__context_azx_jkp_hz">About this task</h2></div>After you configure the cloud discovery service for Google Cloud
+Platform image projects, you can access the latest version of the operating systems that Google
+Cloud offers. You can also configure custom images to use in your blueprints.</section>
+<section><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_connect_google_cloud_images__steps__1">Procedure</h2></div><ol class="ol steps"><li class="li step">
+<span class="ph cmd">Create an image disk in Google Cloud Platform.</span>
+<ol type="a" class="ol substeps" id="cloud_connect_google_cloud_images__substeps_bvv_cf4_hz">
+<li class="li substep">
+<span class="ph cmd">From the Google Cloud Platform dashboard, click <span class="ph uicontrol">Compute Engine</span>.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">Disks</span>, and then click <span class="ph uicontrol">Create disk</span>.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Provide a name and optionally provide a description.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">From the <span class="ph uicontrol">Zone</span> list, select the zone in which to use the custom
+image.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">From the <span class="ph uicontrol">Source image</span> list, select an operating system image.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Specify the size of the image disk.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">Create</span>.</span>
+</li>
+</ol>
+</li><li class="li step">
+<span class="ph cmd">Use the disk image to create a new operating system image.</span>
+<ol type="a" class="ol substeps" id="cloud_connect_google_cloud_images__substeps_xnv_cg4_hz">
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">CREATE IMAGE</span>.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Provide a name for the image.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">From the <span class="ph uicontrol">Source</span> list, select the image disk that you created.</span>
+</li>
+<li class="li substep">
+<span class="ph cmd">Click <span class="ph uicontrol">Create</span>.</span>
+</li>
+</ol>
+</li></ol></section>
+<section class="section postreq"><div class="tasklabel"><h2 class="sectiontitle tasklabel" id="taskcloud_connect_google_cloud_images__postreq__1">What to do next</h2></div>You can add the custom image to your blueprints and provision them to any available region
+in Google Cloud. See <a class="xref" href="blueprint_edit_google_cloud.html#blueprint_edit_vc" title="To model a Google Cloud Platform environment, log in with a Google Cloud cloud project and specify the Google Cloud-specific information in a blueprint.">Modeling environments for Google Cloud Platform</a>.</section>
+</div>
+</article></main></body></html>
